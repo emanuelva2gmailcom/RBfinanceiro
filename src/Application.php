@@ -47,6 +47,8 @@ class Application extends BaseApplication
         // Call parent to load bootstrap from files.
         parent::bootstrap();
 
+        $this->addPlugin('CakeLte');
+
         $this->addPlugin('Usermgmt', ['routes' => true]);
 
         if (PHP_SAPI === 'cli') {

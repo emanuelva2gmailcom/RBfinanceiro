@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace App\View;
 
 use Cake\View\View;
+use CakeLte\View\CakeLteTrait;
 
 /**
  * Application View
@@ -26,17 +27,14 @@ use Cake\View\View;
  */
 class AppView extends View
 {
-    /**
-     * Initialization hook method.
-     *
-     * Use this method to add common initialization code like loading helpers.
-     *
-     * e.g. `$this->loadHelper('Html');`
-     *
-     * @return void
-     */
+    use CakeLteTrait;
+
+    public $layout = 'CakeLte.default';
+    
     public function initialize(): void
     {
+        parent::initialize();
+        $this->initializeCakeLte($options = []);
         $this->loadHelper('Usermgmt.UserAuth');
         $this->loadHelper('Usermgmt.Tinymce');
         $this->loadHelper('Usermgmt.Ckeditor');

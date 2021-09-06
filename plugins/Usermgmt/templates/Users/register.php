@@ -1,3 +1,4 @@
+<?php $this->layout = "CakeLte.default" ?>
 <div class="card">
 	<div class="card-header text-white bg-dark">
 		<span class="card-title">
