@@ -1,10 +1,24 @@
+!/vendor/
+
+/vendor/*
+!/vendor/arodu/
+
+/vendor/arodu/*
+!vendor/arodu/cakelte/
+
+/vendor/arodu/cakelte/*
+!/vendor/arodu/cakelte/templates/
+
+/vendor/arodu/cakelte/templates/*
+!/vendor/arodu/cakelte/templates/layout/
+
 # CakePHP specific files #
 ##########################
 /config/app_local.php
 /config/.env
 /logs/*
 /tmp/*
-/vendor/*
+# /vendor/*
 
 # OS generated files #
 ######################
