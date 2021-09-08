@@ -39,7 +39,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <?= $this->element('header/main') ?>
-      teste
     </nav>
     <!-- /.navbar -->
 
