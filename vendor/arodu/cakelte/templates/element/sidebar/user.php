@@ -8,6 +8,6 @@
     <img src="<?php echo $this->Image->resize('library/'.IMG_DIR, $photo, ['class'=>'img-circle elevation-2', 'alt'=>'User Image']);?>">
   </div>
   <div class="info">
-    <a href="#" class="d-block"><?= $username ?></a>
+    <?= $this->Html->link(__($username), ['controller'=>'Users', 'action'=>'myprofile', 'plugin'=>'Usermgmt'], ['class'=>'d-block ']); ?>
   </div>
 </div>
