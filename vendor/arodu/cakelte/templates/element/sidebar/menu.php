@@ -8,10 +8,10 @@
 </li>
 
 <li class="nav-item" style="color: #E1E7E0">
-  <a href="lancamentos" class="nav-link" style="color: #E1E7E0">
+  <a href="lancamentos/add" class="nav-link" style="color: #E1E7E0">
     <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
     <p>
-      Lançamentos
+      Novo Lançamento
     </p>
   </a>
 </li>
@@ -40,7 +40,7 @@
     <li class="nav-item" style="color: #E1E7E0">
       <a href="lancamentos" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
         <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
-        <p>Lançamento</p>
+        <p>Lançamentos</p>
       </a>
     </li>
     <li class="nav-item" style="color: #E1E7E0">
