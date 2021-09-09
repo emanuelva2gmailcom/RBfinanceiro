@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -30,12 +29,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?= $this->element('layout/css') ?>
 
   <?= $this->fetch('css') ?>
+  <style>
+    footer {
+      height: auto;
+      text-align: center;
+      padding: 30px;
+      background-color: black;
+      color: white;
+      justify-content: center;
 
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .titulo {
+      font-family: Tahoma;
+    }
+
+    p {
+      font-family: helvetica;
+    }
+  </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
-    <?php if ($this->UserAuth->isLogged()) {?>
+
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <?= $this->element('header/main') ?>
@@ -78,8 +99,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.content -->
 
     </div>
-    
-
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
@@ -90,22 +109,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.control-sidebar -->
 
     <!-- Main Footer -->
-    <footer class="main-footer">
-      <?= $this->element('footer/main') ?>
-    </footer>
   </div>
-  <?php }else { ?>
-    <div class="content-header">
-      <div class="container-fluid">
-      </div>
-    </div>
-    <div class="content">
-      <div class="container-fluid">
-        <?= $this->Flash->render() ?>
-        <?= $this->fetch('content') ?>
-      </div><!-- /.container-fluid -->
-    </div>
-  <?php };?>
+  <footer>
+    <?= $this->element('footer/main') ?>
+  </footer>
   <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->
