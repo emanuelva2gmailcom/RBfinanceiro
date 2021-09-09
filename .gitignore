@@ -10,7 +10,7 @@
 !/vendor/arodu/cakelte/templates/
 
 /vendor/arodu/cakelte/templates/*
-!/vendor/arodu/cakelte/templates/layout/
+!/vendor/arodu/cakelte/templates/*
 
 # CakePHP specific files #
 ##########################
