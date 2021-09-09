@@ -31,6 +31,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?= $this->fetch('css') ?>
 
   <style>
+    footer {
+      height: auto;
+      text-align: center;
+      padding: 30px;
+      background-color: black;
+      color: white;
+      justify-content: center;
+
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .titulo {
+      font-family: Tahoma;
+    }
+
+    p {
+      font-family: helvetica;
+    }
+  </style>
+
+
+  <style>
 
 .main-header{
   background-color: #6AA4B0 ;
@@ -57,6 +82,7 @@ a {
 
 
 </style>
+
 
 </head>
 
@@ -114,6 +140,12 @@ a {
     </aside>
     <!-- /.control-sidebar -->
 
+    <!-- Main Footer -->
+  </div>
+  <footer>
+    <?= $this->element('footer/main') ?>
+  </footer>
+  <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->
 
