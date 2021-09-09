@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -31,19 +30,47 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <?= $this->fetch('css') ?>
 
+  <style>
+
+.main-header{
+  background-color: #6AA4B0 ;
+}
+
+.main-sidebar{
+  background-color: #6AA4B0 ;
+}
+
+.content-header{
+  background-color:  #2F6D80 ;
+}
+
+.content{
+  background-color: #2F6D80 ;
+}
+
+.main-footer{
+  background-color:  #6AA4B0 ;
+}
+a {
+  color: #E1E7E0;
+}
+
+
+</style>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
-    <?php if ($this->UserAuth->isLogged()) {?>
+
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-info">
       <?= $this->element('header/main') ?>
     </nav>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar sidebar-light-secondary elevation-4">
       <!-- Brand Logo -->
       <a href="<?= $this->Url->build('/') ?>" class="brand-link">
         <?= $this->Html->image($this->settings['appLogo'], ['alt' => $this->settings['appName'] . ' logo', 'class' => 'brand-image']) ?>
@@ -51,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </a>
 
       <!-- Sidebar -->
-      <div class="sidebar">
+      <div class="sidebar text-info">
         <?= $this->element('sidebar/main') ?>
       </div>
       <!-- /.sidebar -->
@@ -70,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Main content -->
       <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid" style="height: 100vh;">
           <?= $this->Flash->render() ?>
           <?= $this->fetch('content') ?>
         </div><!-- /.container-fluid -->
@@ -78,8 +105,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.content -->
 
     </div>
-    
-
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
@@ -89,24 +114,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </aside>
     <!-- /.control-sidebar -->
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-      <?= $this->element('footer/main') ?>
-    </footer>
-  </div>
-  <?php }else { ?>
-    <div class="content-header">
-      <div class="container-fluid">
-      </div>
-    </div>
-    <div class="content">
-      <div class="container-fluid">
-        <?= $this->Flash->render() ?>
-        <?= $this->fetch('content') ?>
-      </div><!-- /.container-fluid -->
-    </div>
-  <?php };?>
-  <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->
 
