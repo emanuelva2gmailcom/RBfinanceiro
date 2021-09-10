@@ -87,7 +87,7 @@ $this->assign('title', __('Fluxogrupo') );
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['controller' => 'Fluxosubgrupos', 'action' => 'view', $fluxosubgrupos->id_fluxosubgrupo], ['class'=>'btn btn-xs btn-outline-primary']) ?>
               <?= $this->Html->link(__('Editar'), ['controller' => 'Fluxosubgrupos', 'action' => 'edit', $fluxosubgrupos->id_fluxosubgrupo], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Fluxosubgrupos', 'action' => 'delete', $fluxosubgrupos->id_fluxosubgrupo], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Você tem certeza sobre deletar "{0}"?', $fluxogrupo->grupo)]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Fluxosubgrupos', 'action' => 'delete', $fluxosubgrupos->id_fluxosubgrupo], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar "{0}"?', $fluxogrupo->grupo)]) ?>
             </td>
         </tr>
         <?php endforeach; ?>
