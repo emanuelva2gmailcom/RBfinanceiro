@@ -53,11 +53,11 @@ class DrecontasController extends AppController
         if ($this->request->is('post')) {
             $dreconta = $this->Drecontas->patchEntity($dreconta, $this->request->getData());
             if ($this->Drecontas->save($dreconta)) {
-                $this->Flash->success(__('The dreconta has been saved.'));
+                $this->Flash->success(__('FLUXOGRUPO adicionado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The dreconta could not be saved. Please, try again.'));
+            $this->Flash->error(__('O fluxogrupo não foi adicionado, por favor tente novamente.'));
         }
         $dregrupos = $this->Drecontas->Dregrupos->find('list', ['limit' => 200]);
         $this->set(compact('dreconta', 'dregrupos'));
@@ -78,11 +78,11 @@ class DrecontasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dreconta = $this->Drecontas->patchEntity($dreconta, $this->request->getData());
             if ($this->Drecontas->save($dreconta)) {
-                $this->Flash->success(__('The dreconta has been saved.'));
+                $this->Flash->success(__('FLUXOGRUPO editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The dreconta could not be saved. Please, try again.'));
+            $this->Flash->error(__('O fluxogrupo não foi editado, por favor tente novamente.'));
         }
         $dregrupos = $this->Drecontas->Dregrupos->find('list', ['limit' => 200]);
         $this->set(compact('dreconta', 'dregrupos'));
