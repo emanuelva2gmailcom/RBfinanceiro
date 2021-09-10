@@ -47,7 +47,7 @@ class FluxogruposController extends AppController
     public function add()
     {
         $fluxogrupo = $this->Fluxogrupos->newEmptyEntity();
-        if ($this->request->is('post')) {
+        if ($this->request->is('get')) {
             $fluxogrupo = $this->Fluxogrupos->patchEntity($fluxogrupo, $this->request->getData());
             if ($this->Fluxogrupos->save($fluxogrupo)) {
                 $this->Flash->success(__('The fluxogrupo has been saved.'));
