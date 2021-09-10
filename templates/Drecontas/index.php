@@ -7,17 +7,6 @@
 
 <?php $this->assign('title', __('Drecontas') ); ?>
 
-<?php
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Drecontas',
-    ]
-  ])
-);
-?>
-
 <div class="card card-primary card-outline">
   <div class="card-header d-sm-flex">
     <h2 class="card-title"><!-- --></h2>
@@ -26,7 +15,7 @@ $this->assign('breadcrumb',
             'label'=>false,
             'class' => 'form-control-sm',
           ]); ?>
-      <?= $this->Html->link(__('New Dreconta'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Nova dreconta'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
@@ -36,11 +25,11 @@ $this->assign('breadcrumb',
           <tr>
               <th><?= $this->Paginator->sort('id_dreconta') ?></th>
               <th><?= $this->Paginator->sort('conta') ?></th>
-              <th><?= $this->Paginator->sort('descricao') ?></th>
+              <th><?= $this->Paginator->sort('descrição') ?></th>
               <th><?= $this->Paginator->sort('created') ?></th>
               <th><?= $this->Paginator->sort('modified') ?></th>
               <th><?= $this->Paginator->sort('dregrupo_id') ?></th>
-              <th class="actions"><?= __('Actions') ?></th>
+              <th class="actions"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
@@ -53,9 +42,9 @@ $this->assign('breadcrumb',
             <td><?= h($dreconta->modified) ?></td>
             <td><?= $dreconta->has('dregrupo') ? $this->Html->link($dreconta->dregrupo->id_dregrupo, ['controller' => 'Dregrupos', 'action' => 'view', $dreconta->dregrupo->id_dregrupo]) : '' ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('View'), ['action' => 'view', $dreconta->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Edit'), ['action' => 'edit', $dreconta->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $dreconta->id_dreconta], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $dreconta->id_dreconta)]) ?>
+              <?= $this->Html->link(__('Vizualizar'), ['action' => 'view', $dreconta->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $dreconta->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $dreconta->id_dreconta], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $dreconta->id_dreconta)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -66,7 +55,7 @@ $this->assign('breadcrumb',
 
   <div class="card-footer d-md-flex paginator">
     <div class="mr-auto" style="font-size:.8rem">
-      <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
+      <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} DRE contas de {{count}} no total')) ?>
     </div>
 
     <ul class="pagination pagination-sm">
