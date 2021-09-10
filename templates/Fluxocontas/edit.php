@@ -5,20 +5,8 @@
  */
 ?>
 
-<?php $this->assign('title', __('Edit Fluxoconta') ); ?>
+<?php $this->assign('title', __('Editar Fluxoconta') ); ?>
 
-<?php
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Fluxocontas' => ['action'=>'index'],
-      'View' => ['action'=>'view', $fluxoconta->id_fluxoconta],
-      'Edit',
-    ]
-  ])
-);
-?>
 
 
 <div class="card card-primary card-outline">
@@ -34,14 +22,14 @@ $this->assign('breadcrumb',
   <div class="card-footer d-flex">
     <div class="">
       <?= $this->Form->postLink(
-          __('Delete'),
+          __('Deletar'),
           ['action' => 'delete', $fluxoconta->id_fluxoconta],
-          ['confirm' => __('Are you sure you want to delete # {0}?', $fluxoconta->id_fluxoconta), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar # {0}?', $fluxoconta->id_fluxoconta), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">
-      <?= $this->Form->button(__('Save')) ?>
-      <?= $this->Html->link(__('Cancel'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Form->button(__('Salvar')) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
     </div>
   </div>
 
