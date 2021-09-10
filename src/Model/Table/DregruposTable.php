@@ -42,7 +42,7 @@ class DregruposTable extends Table
         parent::initialize($config);
 
         $this->setTable('dregrupos');
-        $this->setDisplayField('id_dregrupo');
+        $this->setDisplayField('grupo');
         $this->setPrimaryKey('id_dregrupo');
 
         $this->addBehavior('Timestamp');
