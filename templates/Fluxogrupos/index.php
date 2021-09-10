@@ -7,17 +7,6 @@
 
 <?php $this->assign('title', __('Fluxogrupos') ); ?>
 
-<?php
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Fluxogrupos',
-    ]
-  ])
-);
-?>
-
 <div class="card card-primary card-outline">
   <div class="card-header d-sm-flex">
     <h2 class="card-title"><!-- --></h2>
@@ -26,7 +15,7 @@ $this->assign('breadcrumb',
             'label'=>false,
             'class' => 'form-control-sm',
           ]); ?>
-      <?= $this->Html->link(__('New Fluxogrupo'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Novo'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
@@ -36,7 +25,7 @@ $this->assign('breadcrumb',
           <tr>
               <th><?= $this->Paginator->sort('id_fluxogrupo') ?></th>
               <th><?= $this->Paginator->sort('grupo') ?></th>
-              <th><?= $this->Paginator->sort('descricao') ?></th>
+              <th><?= $this->Paginator->sort('descrio') ?></th>
               <th><?= $this->Paginator->sort('created') ?></th>
               <th><?= $this->Paginator->sort('modified') ?></th>
               <th class="actions"><?= __('Actions') ?></th>
@@ -51,9 +40,9 @@ $this->assign('breadcrumb',
             <td><?= h($fluxogrupo->created) ?></td>
             <td><?= h($fluxogrupo->modified) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('View'), ['action' => 'view', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Edit'), ['action' => 'edit', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $fluxogrupo->id_fluxogrupo)]) ?>
+              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você  "{0}"?', $fluxogrupo->grupo)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -64,7 +53,7 @@ $this->assign('breadcrumb',
 
   <div class="card-footer d-md-flex paginator">
     <div class="mr-auto" style="font-size:.8rem">
-      <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
+      <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} fluxos subgrupos de {{count}} no total')) ?>
     </div>
 
     <ul class="pagination pagination-sm">
