@@ -7,16 +7,6 @@
 
 <?php
 $this->assign('title', __('Dregrupo') );
-
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Dregrupos' => ['action'=>'index'],
-      'View',
-    ]
-  ])
-);
 ?>
 
 <div class="view card card-primary card-outline">
@@ -50,14 +40,14 @@ $this->assign('breadcrumb',
   <div class="card-footer d-flex">
     <div class="">
       <?= $this->Form->postLink(
-          __('Delete'),
+          __('Deletar'),
           ['action' => 'delete',  $dregrupo->id_dregrupo],
-          ['confirm' => __('Are you sure you want to delete # {0}?',  $dregrupo->id_dregrupo), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar {0}?',  $dregrupo->id_dregrupo), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">
-      <?= $this->Html->link(__('Edit'), ['action' => 'edit',  $dregrupo->id_dregrupo], ['class' => 'btn btn-secondary']) ?>
-      <?= $this->Html->link(__('Cancel'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $dregrupo->id_dregrupo], ['class' => 'btn btn-secondary']) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
     </div>
   </div>
 </div>
@@ -65,10 +55,10 @@ $this->assign('breadcrumb',
 
 <div class="related related-drecontas view card">
   <div class="card-header d-sm-flex">
-    <h3 class="card-title"><?= __('Related Drecontas') ?></h3>
+    <h3 class="card-title"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
-      <?= $this->Html->link(__('New'), ['controller' => 'Drecontas' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
-      <?= $this->Html->link(__('List '), ['controller' => 'Drecontas' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Novo'), ['controller' => 'Drecontas' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Todos'), ['controller' => 'Drecontas' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <div class="card-body table-responsive p-0">
@@ -80,12 +70,12 @@ $this->assign('breadcrumb',
           <th><?= __('Created') ?></th>
           <th><?= __('Modified') ?></th>
           <th><?= __('Dregrupo Id') ?></th>
-          <th class="actions"><?= __('Actions') ?></th>
+          <th class="actions"><?= __('Ações') ?></th>
       </tr>
       <?php if (empty($dregrupo->drecontas)) { ?>
         <tr>
             <td colspan="7" class="text-muted">
-              Drecontas record not found!
+              Não Encontrado!
             </td>
         </tr>
       <?php }else{ ?>
@@ -98,9 +88,9 @@ $this->assign('breadcrumb',
             <td><?= h($drecontas->modified) ?></td>
             <td><?= h($drecontas->dregrupo_id) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('View'), ['controller' => 'Drecontas', 'action' => 'view', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Html->link(__('Edit'), ['controller' => 'Drecontas', 'action' => 'edit', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Form->postLink(__('Delete'), ['controller' => 'Drecontas', 'action' => 'delete', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Are you sure you want to delete # {0}?', $drecontas->id_dreconta)]) ?>
+              <?= $this->Html->link(__('Visualizar'), ['controller' => 'Drecontas', 'action' => 'view', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Html->link(__('Editar'), ['controller' => 'Drecontas', 'action' => 'edit', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Drecontas', 'action' => 'delete', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $drecontas->id_dreconta)]) ?>
             </td>
         </tr>
         <?php endforeach; ?>
