@@ -35,19 +35,19 @@ $this->assign('breadcrumb',
         </tr>
         <tr>
             <th><?= __('Fluxoconta') ?></th>
-            <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->id_fluxoconta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->id_fluxoconta]) : '' ?></td>
+            <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Fornecedore') ?></th>
-            <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->id_fornecedor, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->id_fornecedor]) : '' ?></td>
+            <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->fornecedor, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->fornecedor]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Cliente') ?></th>
-            <td><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->id_cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->id_cliente]) : '' ?></td>
+            <td><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Dreconta') ?></th>
-            <td><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->id_dreconta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->id_dreconta]) : '' ?></td>
+            <td><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->dreconta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Id Lancamento') ?></th>

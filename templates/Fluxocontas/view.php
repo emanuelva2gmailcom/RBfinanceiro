@@ -25,7 +25,7 @@ $this->assign('title', __('Fluxoconta') );
         </tr>
         <tr>
             <th><?= __('Fluxosubgrupo') ?></th>
-            <td><?= $fluxoconta->has('fluxosubgrupo') ? $this->Html->link($fluxoconta->fluxosubgrupo->id_fluxosubgrupo, ['controller' => 'Fluxosubgrupos', 'action' => 'view', $fluxoconta->fluxosubgrupo->id_fluxosubgrupo]) : '' ?></td>
+            <td><?= $fluxoconta->has('fluxosubgrupo') ? $this->Html->link($fluxoconta->fluxosubgrupo->subgrupo, ['controller' => 'Fluxosubgrupos', 'action' => 'view', $fluxoconta->fluxosubgrupo->subgrupo]) : ''?></td>
         </tr>
         <tr>
             <th><?= __('Id Fluxoconta') ?></th>
@@ -46,7 +46,7 @@ $this->assign('title', __('Fluxoconta') );
       <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $fluxoconta->id_fluxoconta],
-          ['confirm' => __('Vocề quer mesmo deletar {0}?',  $fluxoconta->conta), 'class' => 'btn btn-danger']
+          ['confirm' => __('Vocề quer mesmo deletar # {0}?',  $fluxoconta->id_fluxoconta), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">

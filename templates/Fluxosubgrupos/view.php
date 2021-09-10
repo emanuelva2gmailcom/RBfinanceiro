@@ -22,7 +22,7 @@
         </tr>
         <tr>
             <th><?= __('Fluxogrupo') ?></th>
-            <td><?= $fluxosubgrupo->has('fluxogrupo') ? $this->Html->link($fluxosubgrupo->fluxogrupo->id_fluxogrupo, ['controller' => 'Fluxogrupos', 'action' => 'view', $fluxosubgrupo->fluxogrupo->id_fluxogrupo]) : '' ?></td>
+            <td><?= $fluxosubgrupo->has('fluxogrupo') ? $this->Html->link($fluxosubgrupo->fluxogrupo->grupo, ['controller' => 'Fluxogrupos', 'action' => 'view', $fluxosubgrupo->fluxogrupo->grupo]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Id Fluxosubgrupo') ?></th>

@@ -34,7 +34,7 @@ $this->assign('breadcrumb',
       echo $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => true]);
       echo $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => true]);
       echo $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => true]);
-      echo $this->Form->control('lancamento_id');
+      echo $this->Form->control('lancamento_id',['options' => $lancamentos, 'empty' => true]);
       echo $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => true]);
     ?>
   </div>
