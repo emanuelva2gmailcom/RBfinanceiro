@@ -42,7 +42,7 @@
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você tem certeza sobre deletar "{0}"?', $fluxogrupo->grupo)]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você tem certeza sobre deletar {0}?', $fluxogrupo->grupo)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>
