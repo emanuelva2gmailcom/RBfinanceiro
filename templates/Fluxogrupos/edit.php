@@ -18,6 +18,7 @@
   </div>
 
   <div class="card-footer d-flex">
+
     <div class="">
       <!-- <?= $this->Html->link(
           __('Delete'),
@@ -25,6 +26,7 @@
           ['confirm' => __('Are you sure you want to delete # {0}?', $fluxogrupo->id_fluxogrupo), 'class' => 'btn btn-danger']
       ) ?> -->
     </div>
+    
     <div class="ml-auto">
       <?= $this->Form->button(__('Salvar')) ?>
       <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
