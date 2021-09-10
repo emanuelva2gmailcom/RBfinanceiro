@@ -22,7 +22,7 @@
       <!-- <?= $this->Html->link(
           __('Delete'),
           ['action' => 'delete', $fluxogrupo->id_fluxogrupo],
-          ['confirm' => __('Are you sure you want to delete # {0}?', $fluxogrupo->id_fluxogrupo), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar "{0}"?', $fluxogrupo->grupo), 'class' => 'btn btn-danger']
       ) ?> -->
     </div>
     <div class="ml-auto">

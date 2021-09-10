@@ -42,7 +42,7 @@
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você  "{0}"?', $fluxogrupo->grupo)]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você tem certeza sobre deletar "{0}"?', $fluxogrupo->grupo)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -53,7 +53,7 @@
 
   <div class="card-footer d-md-flex paginator">
     <div class="mr-auto" style="font-size:.8rem">
-      <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} fluxos subgrupos de {{count}} no total')) ?>
+      <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} fluxos grupos de {{count}} no total')) ?>
     </div>
 
     <ul class="pagination pagination-sm">
