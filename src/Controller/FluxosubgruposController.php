@@ -53,7 +53,11 @@ class FluxosubgruposController extends AppController
         if ($this->request->is('post')) {
             $fluxosubgrupo = $this->Fluxosubgrupos->patchEntity($fluxosubgrupo, $this->request->getData());
             if ($this->Fluxosubgrupos->save($fluxosubgrupo)) {
+
                 $this->Flash->success(__('SUBGRUPO adicionado com sucesso'));
+
+                $this->Flash->success(__('SUBGRUPO adicionado com sucesso.'));
+
 
                 return $this->redirect(['action' => 'index']);
             }
