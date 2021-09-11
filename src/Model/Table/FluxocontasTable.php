@@ -43,7 +43,7 @@ class FluxocontasTable extends Table
         parent::initialize($config);
 
         $this->setTable('fluxocontas');
-        $this->setDisplayField('id_fluxoconta');
+        $this->setDisplayField('conta');
         $this->setPrimaryKey('id_fluxoconta');
 
         $this->addBehavior('Timestamp');

@@ -43,7 +43,7 @@ class FluxosubgruposTable extends Table
         parent::initialize($config);
 
         $this->setTable('fluxosubgrupos');
-        $this->setDisplayField('id_fluxosubgrupo');
+        $this->setDisplayField('subgrupo');
         $this->setPrimaryKey('id_fluxosubgrupo');
 
         $this->addBehavior('Timestamp');

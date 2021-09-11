@@ -42,7 +42,7 @@ class FluxogruposTable extends Table
         parent::initialize($config);
 
         $this->setTable('fluxogrupos');
-        $this->setDisplayField('id_fluxogrupo');
+        $this->setDisplayField('grupo');
         $this->setPrimaryKey('id_fluxogrupo');
 
         $this->addBehavior('Timestamp');
