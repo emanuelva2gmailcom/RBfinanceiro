@@ -56,9 +56,6 @@ class FluxosubgruposController extends AppController
 
                 $this->Flash->success(__('SUBGRUPO adicionado com sucesso'));
 
-                $this->Flash->success(__('SUBGRUPO adicionado com sucesso.'));
-
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('O Subgrupo não foi adicionado, por favor tente novamente.'));
