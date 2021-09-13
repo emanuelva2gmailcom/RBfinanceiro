@@ -5,19 +5,7 @@
  */
 ?>
 
-<?php $this->assign('title', __('Add Fornecedore') ); ?>
-
-<?php
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Fornecedores' => ['action'=>'index'],
-      'Add',
-    ]
-  ])
-);
-?>
+<?php $this->assign('title', __('Adicionar Fornecedor') ); ?>
 
 
 <div class="card card-primary card-outline">
@@ -36,8 +24,8 @@ $this->assign('breadcrumb',
 
   <div class="card-footer d-flex">
     <div class="ml-auto">
-      <?= $this->Form->button(__('Save')) ?>
-      <?= $this->Html->link(__('Cancel'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Form->button(__('Salvar')) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
     </div>
   </div>
 

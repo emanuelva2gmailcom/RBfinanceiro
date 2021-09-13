@@ -59,7 +59,7 @@ $this->assign('breadcrumb',
         </tr>
         <tr>
             <th><?= __('Is Pendente') ?></th>
-            <td><?= $cliente->is_pendente ? __('Yes') : __('No'); ?></td>
+            <td><?= $cliente->is_pendente ? __('Sim') : __('Não'); ?></td>
         </tr>
     </table>
   </div>
@@ -68,7 +68,7 @@ $this->assign('breadcrumb',
       <?= $this->Form->postLink(
           __('Delete'),
           ['action' => 'delete',  $cliente->id_cliente],
-          ['confirm' => __('Are you sure you want to delete # {0}?',  $cliente->id_cliente), 'class' => 'btn btn-danger']
+          ['confirm' => __('você quer mesmo deletar o cliente {0}?',  $cliente->nome), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">

@@ -7,16 +7,7 @@
 
 <?php $this->assign('title', __('Fornecedores') ); ?>
 
-<?php
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Fornecedores',
-    ]
-  ])
-);
-?>
+
 
 <div class="card card-primary card-outline">
   <div class="card-header d-sm-flex">
@@ -26,7 +17,7 @@ $this->assign('breadcrumb',
             'label'=>false,
             'class' => 'form-control-sm',
           ]); ?>
-      <?= $this->Html->link(__('New Fornecedore'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Novo Fornecedor'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
@@ -44,7 +35,7 @@ $this->assign('breadcrumb',
               <th><?= $this->Paginator->sort('created') ?></th>
               <th><?= $this->Paginator->sort('modified') ?></th>
               <th><?= $this->Paginator->sort('is_pendente') ?></th>
-              <th class="actions"><?= __('Actions') ?></th>
+              <th class="actions"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
@@ -59,11 +50,11 @@ $this->assign('breadcrumb',
             <td><?= h($fornecedore->telefone) ?></td>
             <td><?= h($fornecedore->created) ?></td>
             <td><?= h($fornecedore->modified) ?></td>
-            <td><?= ($fornecedore->is_pendente) ? __('Yes') : __('No') ?></td>
+            <td><?= ($fornecedore->is_pendente) ? __('Sim') : __('Não') ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('View'), ['action' => 'view', $fornecedore->id_fornecedor], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Edit'), ['action' => 'edit', $fornecedore->id_fornecedor], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $fornecedore->id_fornecedor], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $fornecedore->id_fornecedor)]) ?>
+              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fornecedore->id_fornecedor], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $fornecedore->id_fornecedor], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $fornecedore->id_fornecedor], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar o fonecedor {0}?', $fornecedore->nome)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -74,7 +65,8 @@ $this->assign('breadcrumb',
 
   <div class="card-footer d-md-flex paginator">
     <div class="mr-auto" style="font-size:.8rem">
-      <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
+      <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} Fornecedores de {{count}} no total')) ?>
+    </div>
     </div>
 
     <ul class="pagination pagination-sm">

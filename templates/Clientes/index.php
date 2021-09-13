@@ -61,7 +61,7 @@ $this->assign('breadcrumb',
             <td class="actions">
               <?= $this->Html->link(__('View'), ['action' => 'view', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Edit'), ['action' => 'edit', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $cliente->id_cliente)]) ?>
+              <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar o cliente # {0}?', $cliente->nome)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>
