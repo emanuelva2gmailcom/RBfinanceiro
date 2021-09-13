@@ -5,23 +5,10 @@
  */
 ?>
 
-<?php
-$this->assign('title', __('Fluxosubgrupo') );
-
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Fluxosubgrupos' => ['action'=>'index'],
-      'View',
-    ]
-  ])
-);
-?>
 
 <div class="view card card-primary card-outline">
   <div class="card-header d-sm-flex">
-    <h2 class="card-title"><?= h($fluxosubgrupo->id_fluxosubgrupo) ?></h2>
+    <h2 class="card-title"><?= h($fluxosubgrupo->subgrupo) ?></h2>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
@@ -30,12 +17,12 @@ $this->assign('breadcrumb',
             <td><?= h($fluxosubgrupo->subgrupo) ?></td>
         </tr>
         <tr>
-            <th><?= __('Descricao') ?></th>
+            <th><?= __('Descrição') ?></th>
             <td><?= h($fluxosubgrupo->descricao) ?></td>
         </tr>
         <tr>
             <th><?= __('Fluxogrupo') ?></th>
-            <td><?= $fluxosubgrupo->has('fluxogrupo') ? $this->Html->link($fluxosubgrupo->fluxogrupo->id_fluxogrupo, ['controller' => 'Fluxogrupos', 'action' => 'view', $fluxosubgrupo->fluxogrupo->id_fluxogrupo]) : '' ?></td>
+            <td><?= $fluxosubgrupo->has('fluxogrupo') ? $this->Html->link($fluxosubgrupo->fluxogrupo->grupo, ['controller' => 'Fluxogrupos', 'action' => 'view', $fluxosubgrupo->fluxogrupo->grupo]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Id Fluxosubgrupo') ?></th>
@@ -54,14 +41,14 @@ $this->assign('breadcrumb',
   <div class="card-footer d-flex">
     <div class="">
       <?= $this->Form->postLink(
-          __('Delete'),
+          __('Deletar'),
           ['action' => 'delete',  $fluxosubgrupo->id_fluxosubgrupo],
-          ['confirm' => __('Are you sure you want to delete # {0}?',  $fluxosubgrupo->id_fluxosubgrupo), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar {0}?',  $fluxosubgrupo->subgrupo), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">
-      <?= $this->Html->link(__('Edit'), ['action' => 'edit',  $fluxosubgrupo->id_fluxosubgrupo], ['class' => 'btn btn-secondary']) ?>
-      <?= $this->Html->link(__('Cancel'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $fluxosubgrupo->id_fluxosubgrupo], ['class' => 'btn btn-secondary']) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
     </div>
   </div>
 </div>
@@ -69,10 +56,10 @@ $this->assign('breadcrumb',
 
 <div class="related related-fluxocontas view card">
   <div class="card-header d-sm-flex">
-    <h3 class="card-title"><?= __('Related Fluxocontas') ?></h3>
+    <h3 class="card-title"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
-      <?= $this->Html->link(__('New'), ['controller' => 'Fluxocontas' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
-      <?= $this->Html->link(__('List '), ['controller' => 'Fluxocontas' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Novo'), ['controller' => 'Fluxocontas' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Todos'), ['controller' => 'Fluxocontas' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <div class="card-body table-responsive p-0">
@@ -84,12 +71,12 @@ $this->assign('breadcrumb',
           <th><?= __('Created') ?></th>
           <th><?= __('Modified') ?></th>
           <th><?= __('Fluxosubgrupo Id') ?></th>
-          <th class="actions"><?= __('Actions') ?></th>
+          <th class="actions"><?= __('Ações') ?></th>
       </tr>
       <?php if (empty($fluxosubgrupo->fluxocontas)) { ?>
         <tr>
             <td colspan="7" class="text-muted">
-              Fluxocontas record not found!
+              Não Encontrado!
             </td>
         </tr>
       <?php }else{ ?>
@@ -102,9 +89,9 @@ $this->assign('breadcrumb',
             <td><?= h($fluxocontas->modified) ?></td>
             <td><?= h($fluxocontas->fluxosubgrupo_id) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('View'), ['controller' => 'Fluxocontas', 'action' => 'view', $fluxocontas->id_fluxoconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Html->link(__('Edit'), ['controller' => 'Fluxocontas', 'action' => 'edit', $fluxocontas->id_fluxoconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Form->postLink(__('Delete'), ['controller' => 'Fluxocontas', 'action' => 'delete', $fluxocontas->id_fluxoconta], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Are you sure you want to delete # {0}?', $fluxocontas->id_fluxoconta)]) ?>
+              <?= $this->Html->link(__('Visualizar'), ['controller' => 'Fluxocontas', 'action' => 'view', $fluxocontas->id_fluxoconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Html->link(__('Editar'), ['controller' => 'Fluxocontas', 'action' => 'edit', $fluxocontas->id_fluxoconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Fluxocontas', 'action' => 'delete', $fluxocontas->id_fluxoconta], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Are you sure you want to delete # {0}?', $fluxocontas->conta)]) ?>
             </td>
         </tr>
         <?php endforeach; ?>

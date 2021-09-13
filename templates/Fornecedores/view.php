@@ -6,22 +6,12 @@
 ?>
 
 <?php
-$this->assign('title', __('Fornecedore') );
-
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Fornecedores' => ['action'=>'index'],
-      'View',
-    ]
-  ])
-);
+$this->assign('title', __('Fornecedor') );
 ?>
 
 <div class="view card card-primary card-outline">
   <div class="card-header d-sm-flex">
-    <h2 class="card-title"><?= h($fornecedore->id_fornecedor) ?></h2>
+    <h2 class="card-title"><?= h($fornecedore->nome) ?></h2>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
@@ -63,21 +53,21 @@ $this->assign('breadcrumb',
         </tr>
         <tr>
             <th><?= __('Is Pendente') ?></th>
-            <td><?= $fornecedore->is_pendente ? __('Yes') : __('No'); ?></td>
+            <td><?= $fornecedore->is_pendente ? __('Sim') : __('Não'); ?></td>
         </tr>
     </table>
   </div>
   <div class="card-footer d-flex">
     <div class="">
       <?= $this->Form->postLink(
-          __('Delete'),
+          __('Deletar'),
           ['action' => 'delete',  $fornecedore->id_fornecedor],
-          ['confirm' => __('Are you sure you want to delete # {0}?',  $fornecedore->id_fornecedor), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar o fornecedor {0}?',  $fornecedore->nome), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">
-      <?= $this->Html->link(__('Edit'), ['action' => 'edit',  $fornecedore->id_fornecedor], ['class' => 'btn btn-secondary']) ?>
-      <?= $this->Html->link(__('Cancel'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $fornecedore->id_fornecedor], ['class' => 'btn btn-secondary']) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
     </div>
   </div>
 </div>

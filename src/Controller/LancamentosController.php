@@ -53,16 +53,17 @@ class LancamentosController extends AppController
         if ($this->request->is('post')) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
             if ($this->Lancamentos->save($lancamento)) {
-                $this->Flash->success(__('The lancamento has been saved.'));
+                $this->Flash->success(__('Lançamento adicionado com sucesso'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lancamento could not be saved. Please, try again.'));
+            $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
         }
         $fluxocontas = $this->Lancamentos->Fluxocontas->find('list', ['limit' => 200]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
+       
         $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas'));
     }
 
@@ -81,17 +82,18 @@ class LancamentosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
             if ($this->Lancamentos->save($lancamento)) {
-                $this->Flash->success(__('The lancamento has been saved.'));
+                $this->Flash->success(__('Lançamento editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lancamento could not be saved. Please, try again.'));
+            $this->Flash->error(__('O Lançamento não foi editado, por favor tente novamente.'));
         }
         $fluxocontas = $this->Lancamentos->Fluxocontas->find('list', ['limit' => 200]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas'));
+        $lancamentos = $this->Lancamentos->find('list', ['limit' => 200]);
+        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas','lancamentos'));
     }
 
     /**
@@ -106,9 +108,9 @@ class LancamentosController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $lancamento = $this->Lancamentos->get($id);
         if ($this->Lancamentos->delete($lancamento)) {
-            $this->Flash->success(__('The lancamento has been deleted.'));
+            $this->Flash->success(__('Lançamento deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('The lancamento could not be deleted. Please, try again.'));
+            $this->Flash->error(__('O Lançamento não foi deletado, por favor tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

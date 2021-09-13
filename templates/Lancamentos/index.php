@@ -7,16 +7,7 @@
 
 <?php $this->assign('title', __('Lancamentos') ); ?>
 
-<?php
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Lancamentos',
-    ]
-  ])
-);
-?>
+
 
 <div class="card card-primary card-outline">
   <div class="card-header d-sm-flex">
@@ -26,7 +17,7 @@ $this->assign('breadcrumb',
             'label'=>false,
             'class' => 'form-control-sm',
           ]); ?>
-      <?= $this->Html->link(__('New Lancamento'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Novo Lançamento'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
@@ -48,7 +39,7 @@ $this->assign('breadcrumb',
               <th><?= $this->Paginator->sort('cliente_id') ?></th>
               <th><?= $this->Paginator->sort('lancamento_id') ?></th>
               <th><?= $this->Paginator->sort('dreconta_id') ?></th>
-              <th class="actions"><?= __('Actions') ?></th>
+              <th class="actions"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
@@ -63,15 +54,15 @@ $this->assign('breadcrumb',
             <td><?= h($lancamento->data_vencimento) ?></td>
             <td><?= h($lancamento->created) ?></td>
             <td><?= h($lancamento->modified) ?></td>
-            <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->id_fluxoconta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->id_fluxoconta]) : '' ?></td>
-            <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->id_fornecedor, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->id_fornecedor]) : '' ?></td>
-            <td><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->id_cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->id_cliente]) : '' ?></td>
+            <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td>
+            <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->fornecedor, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->fornecedor]) : '' ?></td>
+            <td><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
             <td><?= $this->Number->format($lancamento->lancamento_id) ?></td>
-            <td><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->id_dreconta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->id_dreconta]) : '' ?></td>
+            <td><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('View'), ['action' => 'view', $lancamento->id_lancamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Edit'), ['action' => 'edit', $lancamento->id_lancamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $lancamento->id_lancamento], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $lancamento->id_lancamento)]) ?>
+              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -82,7 +73,7 @@ $this->assign('breadcrumb',
 
   <div class="card-footer d-md-flex paginator">
     <div class="mr-auto" style="font-size:.8rem">
-      <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
+      <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} lançamentos de {{count}} no total')) ?>
     </div>
 
     <ul class="pagination pagination-sm">

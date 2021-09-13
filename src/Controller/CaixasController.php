@@ -50,11 +50,11 @@ class CaixasController extends AppController
         if ($this->request->is('post')) {
             $caixa = $this->Caixas->patchEntity($caixa, $this->request->getData());
             if ($this->Caixas->save($caixa)) {
-                $this->Flash->success(__('The caixa has been saved.'));
+                $this->Flash->success(__('Caixa adicionado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The caixa could not be saved. Please, try again.'));
+            $this->Flash->error(__('Caixa não foi adicionado, por favor tente novamente.'));
         }
         $this->set(compact('caixa'));
     }
@@ -74,11 +74,11 @@ class CaixasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $caixa = $this->Caixas->patchEntity($caixa, $this->request->getData());
             if ($this->Caixas->save($caixa)) {
-                $this->Flash->success(__('The caixa has been saved.'));
+                $this->Flash->success(__('Caixa editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The caixa could not be saved. Please, try again.'));
+            $this->Flash->error(__('Caixa não foi editado, por favor tente novamente.'));
         }
         $this->set(compact('caixa'));
     }
@@ -95,9 +95,9 @@ class CaixasController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $caixa = $this->Caixas->get($id);
         if ($this->Caixas->delete($caixa)) {
-            $this->Flash->success(__('The caixa has been deleted.'));
+            $this->Flash->success(__('Caixa deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('The caixa could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Caixa não foi deletado, por favor tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

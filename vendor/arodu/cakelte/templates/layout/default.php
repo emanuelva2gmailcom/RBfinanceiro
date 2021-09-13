@@ -111,7 +111,7 @@ a {
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" >
       <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
@@ -123,6 +123,10 @@ a {
 
       <!-- Main content -->
       <div class="content" style="min-height:100vh;">
+
+      <!-- Main content --> 
+      <div class="content" style="min-height:100vh">
+
         <div class="container-fluid">
           <?= $this->Flash->render() ?>
           <?= $this->fetch('content') ?>

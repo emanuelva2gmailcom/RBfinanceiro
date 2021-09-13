@@ -7,17 +7,6 @@
 
 <?php $this->assign('title', __('Clientes') ); ?>
 
-<?php
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Clientes',
-    ]
-  ])
-);
-?>
-
 <div class="card card-primary card-outline">
   <div class="card-header d-sm-flex">
     <h2 class="card-title"><!-- --></h2>
@@ -26,7 +15,7 @@ $this->assign('breadcrumb',
             'label'=>false,
             'class' => 'form-control-sm',
           ]); ?>
-      <?= $this->Html->link(__('New Cliente'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Novo Cliente'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
@@ -43,7 +32,7 @@ $this->assign('breadcrumb',
               <th><?= $this->Paginator->sort('created') ?></th>
               <th><?= $this->Paginator->sort('modified') ?></th>
               <th><?= $this->Paginator->sort('is_pendente') ?></th>
-              <th class="actions"><?= __('Actions') ?></th>
+              <th class="actions"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
@@ -57,11 +46,13 @@ $this->assign('breadcrumb',
             <td><?= h($cliente->telefone) ?></td>
             <td><?= h($cliente->created) ?></td>
             <td><?= h($cliente->modified) ?></td>
-            <td><?= ($cliente->is_pendente) ? __('Yes') : __('No') ?></td>
+            <td><?= ($cliente->is_pendente) ? __('Sim') : __('Não') ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('View'), ['action' => 'view', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Edit'), ['action' => 'edit', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $cliente->id_cliente)]) ?>
+
+              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $cliente->nome)]) ?>
+
             </td>
           </tr>
           <?php endforeach; ?>
@@ -72,8 +63,7 @@ $this->assign('breadcrumb',
 
   <div class="card-footer d-md-flex paginator">
     <div class="mr-auto" style="font-size:.8rem">
-      <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
-    </div>
+    <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} clientes de {{count}} no total')) ?>    </div>
 
     <ul class="pagination pagination-sm">
       <?= $this->Paginator->first('<i class="fas fa-angle-double-left"></i>', ['escape'=>false]) ?>

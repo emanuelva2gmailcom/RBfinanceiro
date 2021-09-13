@@ -6,22 +6,11 @@
 ?>
 
 <?php
-$this->assign('title', __('Dreconta') );
-
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Drecontas' => ['action'=>'index'],
-      'View',
-    ]
-  ])
-);
-?>
+$this->assign('title', __('Dreconta') );?>
 
 <div class="view card card-primary card-outline">
   <div class="card-header d-sm-flex">
-    <h2 class="card-title"><?= h($dreconta->id_dreconta) ?></h2>
+    <h2 class="card-title"><?= h($dreconta->conta) ?></h2>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
@@ -30,7 +19,7 @@ $this->assign('breadcrumb',
             <td><?= h($dreconta->conta) ?></td>
         </tr>
         <tr>
-            <th><?= __('Descricao') ?></th>
+            <th><?= __('Descrição') ?></th>
             <td><?= h($dreconta->descricao) ?></td>
         </tr>
         <tr>
@@ -54,14 +43,14 @@ $this->assign('breadcrumb',
   <div class="card-footer d-flex">
     <div class="">
       <?= $this->Form->postLink(
-          __('Delete'),
+          __('Deletar'),
           ['action' => 'delete',  $dreconta->id_dreconta],
-          ['confirm' => __('Are you sure you want to delete # {0}?',  $dreconta->id_dreconta), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar "{0}"?', $dreconta->conta), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">
-      <?= $this->Html->link(__('Edit'), ['action' => 'edit',  $dreconta->id_dreconta], ['class' => 'btn btn-secondary']) ?>
-      <?= $this->Html->link(__('Cancel'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $dreconta->id_dreconta], ['class' => 'btn btn-secondary']) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
     </div>
   </div>
 </div>
@@ -69,10 +58,10 @@ $this->assign('breadcrumb',
 
 <div class="related related-lancamentos view card">
   <div class="card-header d-sm-flex">
-    <h3 class="card-title"><?= __('Related Lancamentos') ?></h3>
+    <h3 class="card-title"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
-      <?= $this->Html->link(__('New'), ['controller' => 'Lancamentos' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
-      <?= $this->Html->link(__('List '), ['controller' => 'Lancamentos' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Novo'), ['controller' => 'Lancamentos' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Todos '), ['controller' => 'Lancamentos' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <div class="card-body table-responsive p-0">
@@ -80,24 +69,24 @@ $this->assign('breadcrumb',
       <tr>
           <th><?= __('Id Lancamento') ?></th>
           <th><?= __('Tipo') ?></th>
-          <th><?= __('Descricao') ?></th>
+          <th><?= __('Descrição') ?></th>
           <th><?= __('Valor') ?></th>
-          <th><?= __('Data Emissao') ?></th>
+          <th><?= __('Data Emissão') ?></th>
           <th><?= __('Data Baixa') ?></th>
           <th><?= __('Data Vencimento') ?></th>
           <th><?= __('Created') ?></th>
           <th><?= __('Modified') ?></th>
-          <th><?= __('Fluxoconta Id') ?></th>
-          <th><?= __('Fornecedor Id') ?></th>
-          <th><?= __('Cliente Id') ?></th>
-          <th><?= __('Lancamento Id') ?></th>
-          <th><?= __('Dreconta Id') ?></th>
-          <th class="actions"><?= __('Actions') ?></th>
+          <th><?= __('Fluxoconta') ?></th>
+          <th><?= __('Fornecedor') ?></th>
+          <th><?= __('Cliente') ?></th>
+          <th><?= __('Lançamento') ?></th>
+          <th><?= __('Dreconta') ?></th>
+          <th class="actions"><?= __('Ações') ?></th>
       </tr>
       <?php if (empty($dreconta->lancamentos)) { ?>
         <tr>
             <td colspan="15" class="text-muted">
-              Lancamentos record not found!
+              Não encontrado!
             </td>
         </tr>
       <?php }else{ ?>
@@ -118,9 +107,9 @@ $this->assign('breadcrumb',
             <td><?= h($lancamentos->lancamento_id) ?></td>
             <td><?= h($lancamentos->dreconta_id) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('View'), ['controller' => 'Lancamentos', 'action' => 'view', $lancamentos->id_lancamento], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Html->link(__('Edit'), ['controller' => 'Lancamentos', 'action' => 'edit', $lancamentos->id_lancamento], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Form->postLink(__('Delete'), ['controller' => 'Lancamentos', 'action' => 'delete', $lancamentos->id_lancamento], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Are you sure you want to delete # {0}?', $lancamentos->id_lancamento)]) ?>
+              <?= $this->Html->link(__('Visualizar'), ['controller' => 'Lancamentos', 'action' => 'view', $lancamentos->id_lancamento], ['class'=>'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Html->link(__('Editar'), ['controller' => 'Lancamentos', 'action' => 'edit', $lancamentos->id_lancamento], ['class'=>'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Lancamentos', 'action' => 'delete', $lancamentos->id_lancamento], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $lancamentos->id_lancamento)]) ?>
             </td>
         </tr>
         <?php endforeach; ?>

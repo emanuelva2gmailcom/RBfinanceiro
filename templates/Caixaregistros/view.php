@@ -6,22 +6,12 @@
 ?>
 
 <?php
-$this->assign('title', __('Caixaregistro') );
-
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Caixaregistros' => ['action'=>'index'],
-      'View',
-    ]
-  ])
-);
+$this->assign('title', __('Caixa Registro') );
 ?>
 
 <div class="view card card-primary card-outline">
   <div class="card-header d-sm-flex">
-    <h2 class="card-title"><?= h($caixaregistro->id_caixaregistro) ?></h2>
+    <h2 class="card-title"><?= h($caixaregistro->caixa) ?></h2>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
@@ -31,7 +21,7 @@ $this->assign('breadcrumb',
         </tr>
         <tr>
             <th><?= __('Tipopagamento') ?></th>
-            <td><?= $caixaregistro->has('tipopagamento') ? $this->Html->link($caixaregistro->tipopagamento->id_tipopagamento, ['controller' => 'Tipopagamentos', 'action' => 'view', $caixaregistro->tipopagamento->id_tipopagamento]) : '' ?></td>
+            <td><?= $caixaregistro->has('tipopagamento') ? $this->Html->link($caixaregistro->tipopagamento->nome, ['controller' => 'Tipopagamentos', 'action' => 'view', $caixaregistro->tipopagamento->nome]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Lancamento') ?></th>
@@ -46,14 +36,14 @@ $this->assign('breadcrumb',
   <div class="card-footer d-flex">
     <div class="">
       <?= $this->Form->postLink(
-          __('Delete'),
+          __('Deletar'),
           ['action' => 'delete',  $caixaregistro->id_caixaregistro],
-          ['confirm' => __('Are you sure you want to delete # {0}?',  $caixaregistro->id_caixaregistro), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar?',  $caixaregistro->caixa), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">
-      <?= $this->Html->link(__('Edit'), ['action' => 'edit',  $caixaregistro->id_caixaregistro], ['class' => 'btn btn-secondary']) ?>
-      <?= $this->Html->link(__('Cancel'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $caixaregistro->id_caixaregistro], ['class' => 'btn btn-secondary']) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
     </div>
   </div>
 </div>

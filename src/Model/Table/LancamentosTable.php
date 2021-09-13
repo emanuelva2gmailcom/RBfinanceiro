@@ -49,7 +49,7 @@ class LancamentosTable extends Table
         parent::initialize($config);
 
         $this->setTable('lancamentos');
-        $this->setDisplayField('id_lancamento');
+        $this->setDisplayField('tipo');
         $this->setPrimaryKey('id_lancamento');
 
         $this->addBehavior('Timestamp');

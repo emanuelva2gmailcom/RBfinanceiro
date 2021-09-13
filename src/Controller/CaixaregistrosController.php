@@ -53,11 +53,11 @@ class CaixaregistrosController extends AppController
         if ($this->request->is('post')) {
             $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $this->request->getData());
             if ($this->Caixaregistros->save($caixaregistro)) {
-                $this->Flash->success(__('The caixaregistro has been saved.'));
+                $this->Flash->success(__('Caixa Registro adicionado com sucesso'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The caixaregistro could not be saved. Please, try again.'));
+            $this->Flash->error(__('Caixa Registro não foi adicionado, por favor tente novamente.'));
         }
         $caixas = $this->Caixaregistros->Caixas->find('list', ['limit' => 200]);
         $tipopagamentos = $this->Caixaregistros->Tipopagamentos->find('list', ['limit' => 200]);
@@ -80,11 +80,11 @@ class CaixaregistrosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $this->request->getData());
             if ($this->Caixaregistros->save($caixaregistro)) {
-                $this->Flash->success(__('The caixaregistro has been saved.'));
+                $this->Flash->success(__('Caixa Registro editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The caixaregistro could not be saved. Please, try again.'));
+            $this->Flash->error(__('Caixa Registro não foi editado, por favor tente novamente.'));
         }
         $caixas = $this->Caixaregistros->Caixas->find('list', ['limit' => 200]);
         $tipopagamentos = $this->Caixaregistros->Tipopagamentos->find('list', ['limit' => 200]);
@@ -104,9 +104,9 @@ class CaixaregistrosController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $caixaregistro = $this->Caixaregistros->get($id);
         if ($this->Caixaregistros->delete($caixaregistro)) {
-            $this->Flash->success(__('The caixaregistro has been deleted.'));
+            $this->Flash->success(__('Caixa Registro deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('The caixaregistro could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Caixa Registro não foi deletado, por favor tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

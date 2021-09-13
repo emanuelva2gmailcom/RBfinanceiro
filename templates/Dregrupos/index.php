@@ -16,7 +16,11 @@
             'label'=>false,
             'class' => 'form-control-sm',
           ]); ?>
+
       <?= $this->Html->link(__('Novo grupo'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+
+      <?= $this->Html->link(__('Novo Dregrupo'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+
     </div>
   </div>
   <!-- /.card-header -->
@@ -43,7 +47,11 @@
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+
               <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $dregrupo->id_dregrupo)]) ?>
+
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $dregrupo->grupo)]) ?>
+
             </td>
           </tr>
           <?php endforeach; ?>
@@ -54,7 +62,7 @@
 
   <div class="card-footer d-md-flex paginator">
     <div class="mr-auto" style="font-size:.8rem">
-      <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
+      <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} DRE grupos de {{count}} no total')) ?>
     </div>
 
     <ul class="pagination pagination-sm">

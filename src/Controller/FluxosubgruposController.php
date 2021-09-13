@@ -53,11 +53,12 @@ class FluxosubgruposController extends AppController
         if ($this->request->is('post')) {
             $fluxosubgrupo = $this->Fluxosubgrupos->patchEntity($fluxosubgrupo, $this->request->getData());
             if ($this->Fluxosubgrupos->save($fluxosubgrupo)) {
-                $this->Flash->success(__('The fluxosubgrupo has been saved.'));
+
+                $this->Flash->success(__('Subgrupo adicionado com sucesso'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fluxosubgrupo could not be saved. Please, try again.'));
+            $this->Flash->error(__('Subgrupo não foi adicionado, por favor tente novamente.'));
         }
         $fluxogrupos = $this->Fluxosubgrupos->Fluxogrupos->find('list', ['limit' => 200]);
         $this->set(compact('fluxosubgrupo', 'fluxogrupos'));
@@ -78,11 +79,11 @@ class FluxosubgruposController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fluxosubgrupo = $this->Fluxosubgrupos->patchEntity($fluxosubgrupo, $this->request->getData());
             if ($this->Fluxosubgrupos->save($fluxosubgrupo)) {
-                $this->Flash->success(__('The fluxosubgrupo has been saved.'));
+                $this->Flash->success(__('Subgrupo editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fluxosubgrupo could not be saved. Please, try again.'));
+            $this->Flash->error(__('Subgrupo não foi editado, por favor tente novamente.'));
         }
         $fluxogrupos = $this->Fluxosubgrupos->Fluxogrupos->find('list', ['limit' => 200]);
         $this->set(compact('fluxosubgrupo', 'fluxogrupos'));
@@ -100,9 +101,9 @@ class FluxosubgruposController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $fluxosubgrupo = $this->Fluxosubgrupos->get($id);
         if ($this->Fluxosubgrupos->delete($fluxosubgrupo)) {
-            $this->Flash->success(__('The fluxosubgrupo has been deleted.'));
+            $this->Flash->success(__('Subgrupo deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('The fluxosubgrupo could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Subgrupo não foi deletado, por favor tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
