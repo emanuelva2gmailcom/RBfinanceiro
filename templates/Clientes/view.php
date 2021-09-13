@@ -58,7 +58,11 @@ $this->assign('title', __('Cliente') );
       <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $cliente->id_cliente],
+
+          ['confirm' => __('você quer mesmo deletar o cliente {0}?',  $cliente->nome), 'class' => 'btn btn-danger']
+
           ['confirm' => __('Você quer mesmo deletar {0}?',  $cliente->nome), 'class' => 'btn btn-danger']
+
       ) ?>
     </div>
     <div class="ml-auto">
