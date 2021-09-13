@@ -77,7 +77,7 @@
       <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $lancamento->id_lancamento],
-          ['confirm' => __('Are you sure you want to delete # {0}?',  $lancamento->id_lancamento), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar?',  $lancamento->id_lancamento), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">

@@ -53,11 +53,11 @@ class FluxocontasController extends AppController
         if ($this->request->is('post')) {
             $fluxoconta = $this->Fluxocontas->patchEntity($fluxoconta, $this->request->getData());
             if ($this->Fluxocontas->save($fluxoconta)) {
-                $this->Flash->success(__('The fluxoconta has been saved.'));
+                $this->Flash->success(__('Conta adicionado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fluxoconta could not be saved. Please, try again.'));
+            $this->Flash->error(__('Conta não foi adicionado, tente novamente.'));
         }
         $fluxosubgrupos = $this->Fluxocontas->Fluxosubgrupos->find('list', ['limit' => 200]);
         $this->set(compact('fluxoconta', 'fluxosubgrupos'));
@@ -78,11 +78,11 @@ class FluxocontasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fluxoconta = $this->Fluxocontas->patchEntity($fluxoconta, $this->request->getData());
             if ($this->Fluxocontas->save($fluxoconta)) {
-                $this->Flash->success(__('The fluxoconta has been saved.'));
+                $this->Flash->success(__('Conta editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fluxoconta could not be saved. Please, try again.'));
+            $this->Flash->error(__('Conta não foi editado, tente novamente.'));
         }
         $fluxosubgrupos = $this->Fluxocontas->Fluxosubgrupos->find('list', ['limit' => 200]);
         $this->set(compact('fluxoconta', 'fluxosubgrupos'));
@@ -100,9 +100,9 @@ class FluxocontasController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $fluxoconta = $this->Fluxocontas->get($id);
         if ($this->Fluxocontas->delete($fluxoconta)) {
-            $this->Flash->success(__('The fluxoconta has been deleted.'));
+            $this->Flash->success(__('Conta deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('The fluxoconta could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Conta não foi deletado, tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

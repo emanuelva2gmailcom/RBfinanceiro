@@ -50,11 +50,11 @@ class FluxogruposController extends AppController
         if ($this->request->is('post')) {
             $fluxogrupo = $this->Fluxogrupos->patchEntity($fluxogrupo, $this->request->getData());
             if ($this->Fluxogrupos->save($fluxogrupo)) {
-                $this->Flash->success(__('FLUXOGRUPO adicionado com sucesso.'));
+                $this->Flash->success(__('Grupo adicionado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O fluxogrupo não foi adicionado, por favor tente novamente.'));
+            $this->Flash->error(__('Grupo não foi adicionado, por favor tente novamente.'));
         }
         $this->set(compact('fluxogrupo'));
     }
@@ -74,11 +74,11 @@ class FluxogruposController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fluxogrupo = $this->Fluxogrupos->patchEntity($fluxogrupo, $this->request->getData());
             if ($this->Fluxogrupos->save($fluxogrupo)) {
-                $this->Flash->success(__('FLUXOGRUPO editado com sucesso.'));
+                $this->Flash->success(__('Grupo editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O fluxogrupo não foi editado, por favor tente novamente.'));
+            $this->Flash->error(__('Grupo não foi editado, por favor tente novamente.'));
         }
         $this->set(compact('fluxogrupo'));
     }
@@ -95,9 +95,9 @@ class FluxogruposController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $fluxogrupo = $this->Fluxogrupos->get($id);
         if ($this->Fluxogrupos->delete($fluxogrupo)) {
-            $this->Flash->success(__('FLUXOGRUPO deletado com sucesso.'));
+            $this->Flash->success(__('Grupo deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('O fluxogrupo não foi deletado, por favor tente novamente.'));
+            $this->Flash->error(__('Grupo não foi deletado, por favor tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
