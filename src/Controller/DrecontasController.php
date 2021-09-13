@@ -53,11 +53,11 @@ class DrecontasController extends AppController
         if ($this->request->is('post')) {
             $dreconta = $this->Drecontas->patchEntity($dreconta, $this->request->getData());
             if ($this->Drecontas->save($dreconta)) {
-                $this->Flash->success(__('drecontas adicionado com sucesso.'));
+                $this->Flash->success(__('Conta adicionado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O drecontas não foi adicionado, por favor tente novamente.'));
+            $this->Flash->error(__('Conta não foi adicionado, por favor tente novamente.'));
         }
         $dregrupos = $this->Drecontas->Dregrupos->find('list', ['limit' => 200]);
         $this->set(compact('dreconta', 'dregrupos'));
@@ -78,11 +78,11 @@ class DrecontasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dreconta = $this->Drecontas->patchEntity($dreconta, $this->request->getData());
             if ($this->Drecontas->save($dreconta)) {
-                $this->Flash->success(__('drecontas editado com sucesso.'));
+                $this->Flash->success(__('Conta editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O drecontas não foi editado, por favor tente novamente.'));
+            $this->Flash->error(__('Conta não foi editado, por favor tente novamente.'));
         }
         $dregrupos = $this->Drecontas->Dregrupos->find('list', ['limit' => 200]);
         $this->set(compact('dreconta', 'dregrupos'));
@@ -100,9 +100,9 @@ class DrecontasController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $dreconta = $this->Drecontas->get($id);
         if ($this->Drecontas->delete($dreconta)) {
-            $this->Flash->success(__('The dreconta has been deleted.'));
+            $this->Flash->success(__('Conta deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('The dreconta could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Conta não foi deletado, tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
