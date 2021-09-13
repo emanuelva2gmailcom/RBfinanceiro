@@ -50,11 +50,11 @@ class TipopagamentosController extends AppController
         if ($this->request->is('post')) {
             $tipopagamento = $this->Tipopagamentos->patchEntity($tipopagamento, $this->request->getData());
             if ($this->Tipopagamentos->save($tipopagamento)) {
-                $this->Flash->success(__('The tipopagamento has been saved.'));
+                $this->Flash->success(__('Tipo de Pagamento adicionado com sucesso'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The tipopagamento could not be saved. Please, try again.'));
+            $this->Flash->error(__('Tipo de Pagamento não foi adicionado.por favor tente novamente'));
         }
         $this->set(compact('tipopagamento'));
     }
@@ -74,11 +74,11 @@ class TipopagamentosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $tipopagamento = $this->Tipopagamentos->patchEntity($tipopagamento, $this->request->getData());
             if ($this->Tipopagamentos->save($tipopagamento)) {
-                $this->Flash->success(__('The tipopagamento has been saved.'));
+                $this->Flash->success(__('Tipo de Pagamento editado com sucesso'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The tipopagamento could not be saved. Please, try again.'));
+            $this->Flash->error(__('Tipo de Pagamento não foi editado.por favor tente novamente'));
         }
         $this->set(compact('tipopagamento'));
     }
@@ -95,9 +95,9 @@ class TipopagamentosController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $tipopagamento = $this->Tipopagamentos->get($id);
         if ($this->Tipopagamentos->delete($tipopagamento)) {
-            $this->Flash->success(__('The tipopagamento has been deleted.'));
+            $this->Flash->success(__('Tipo de Pagamento deletado com sucesso'));
         } else {
-            $this->Flash->error(__('The tipopagamento could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Tipo de Pagamento não foi deletado.por favor tente novamente'));
         }
 
         return $this->redirect(['action' => 'index']);
