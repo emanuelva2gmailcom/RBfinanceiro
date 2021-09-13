@@ -6,7 +6,7 @@
   ?>
 
 
-  <?php $this->assign('title', __('Add Lancamento')); ?>
+  <?php $this->assign('title', __('Adicionar Lançamento')); ?>
 
   <?= $this->Html->css('bs-stepper.min.css'); ?>
   <?= $this->Html->script('bs-stepper.min.js'); ?>
