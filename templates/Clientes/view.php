@@ -61,7 +61,6 @@ $this->assign('title', __('Cliente') );
 
           ['confirm' => __('você quer mesmo deletar o cliente {0}?',  $cliente->nome), 'class' => 'btn btn-danger']
 
-          ['confirm' => __('Você quer mesmo deletar {0}?',  $cliente->nome), 'class' => 'btn btn-danger']
 
       ) ?>
     </div>

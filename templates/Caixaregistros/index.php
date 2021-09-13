@@ -41,7 +41,7 @@ $this->assign('title', __('Caixa Registro') );
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $caixaregistro->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $caixaregistro->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $caixaregistro->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $caixaregistro->id_caixaregistro)]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $caixaregistro->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $caixaregistro->caixa)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>

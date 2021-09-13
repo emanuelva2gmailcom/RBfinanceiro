@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php $this->assign('title', __('Tipo de Pagamentos') ); ?>
+<?php $this->assign('title', __('Tipos de Pagamentos') ); ?>
 
 
 <div class="card card-primary card-outline">

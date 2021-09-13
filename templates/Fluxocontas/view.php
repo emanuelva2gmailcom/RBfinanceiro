@@ -11,11 +11,10 @@ $this->assign('title', __('Fluxoconta') );
 
 <div class="view card card-primary card-outline">
   <div class="card-header d-sm-flex">
-    <h2 class="card-title"><?= h($fluxoconta->id_fluxoconta) ?></h2>
-  </div>
-  <div class="card-body table-responsive p-0">
-    <table class="table table-hover text-nowrap">
-        <tr>
+    <h2 class="card-title"><?= h($fluxoconta->conta) ?></h2>
+  </div>style="font-size:.8rem">
+      <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} Fluxo contas de {{count}} no total')) ?>
+    </div>
             <th><?= __('Conta') ?></th>
             <td><?= h($fluxoconta->conta) ?></td>
         </tr>
@@ -46,7 +45,7 @@ $this->assign('title', __('Fluxoconta') );
       <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $fluxoconta->id_fluxoconta],
-          ['confirm' => __('Vocề quer mesmo deletar # {0}?',  $fluxoconta->id_fluxoconta), 'class' => 'btn btn-danger']
+          ['confirm' => __('Vocề quer mesmo deletar # {0}?',  $fluxoconta->conta), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">

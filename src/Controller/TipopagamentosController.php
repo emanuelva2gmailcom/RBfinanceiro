@@ -54,7 +54,7 @@ class TipopagamentosController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Tipo de Pagamento não foi adicionado.por favor tente novamente'));
+            $this->Flash->error(__('Tipo de Pagamento não foi adicionado, tente novamente'));
         }
         $this->set(compact('tipopagamento'));
     }
@@ -78,7 +78,7 @@ class TipopagamentosController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Tipo de Pagamento não foi editado.por favor tente novamente'));
+            $this->Flash->error(__('Tipo de Pagamento não foi editado, tente novamente'));
         }
         $this->set(compact('tipopagamento'));
     }
@@ -97,7 +97,7 @@ class TipopagamentosController extends AppController
         if ($this->Tipopagamentos->delete($tipopagamento)) {
             $this->Flash->success(__('Tipo de Pagamento deletado com sucesso'));
         } else {
-            $this->Flash->error(__('Tipo de Pagamento não foi deletado.por favor tente novamente'));
+            $this->Flash->error(__('Tipo de Pagamento não foi deletado, tente novamente'));
         }
 
         return $this->redirect(['action' => 'index']);

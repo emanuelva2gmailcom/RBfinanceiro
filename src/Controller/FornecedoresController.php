@@ -54,7 +54,7 @@ class FornecedoresController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Fornecedor não foi adicionado. por favor,tente novamente.'));
+            $this->Flash->error(__('Fornecedor não foi adicionado, tente novamente.'));
         }
         $this->set(compact('fornecedore'));
     }
@@ -78,7 +78,7 @@ class FornecedoresController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Fornecedor não editado.por favor,tente novamente'));
+            $this->Flash->error(__('Fornecedor não editado, tente novamente.'));
         }
         $this->set(compact('fornecedore'));
     }
@@ -97,7 +97,7 @@ class FornecedoresController extends AppController
         if ($this->Fornecedores->delete($fornecedore)) {
             $this->Flash->success(__('Fornecedor deletado com sucesso'));
         } else {
-            $this->Flash->error(__('Fornecedor não deletado.por favor,tente novamente'));
+            $this->Flash->error(__('Fornecedor não deletado, tente novamente'));
         }
 
         return $this->redirect(['action' => 'index']);

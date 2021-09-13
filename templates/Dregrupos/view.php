@@ -42,7 +42,7 @@ $this->assign('title', __('Dregrupo') );
       <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $dregrupo->id_dregrupo],
-          ['confirm' => __('Você quer mesmo deletar {0}?',  $dregrupo->id_dregrupo), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar {0}?',  $dregrupo->grupo), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">
@@ -90,7 +90,7 @@ $this->assign('title', __('Dregrupo') );
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['controller' => 'Drecontas', 'action' => 'view', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
               <?= $this->Html->link(__('Editar'), ['controller' => 'Drecontas', 'action' => 'edit', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Drecontas', 'action' => 'delete', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $drecontas->id_dreconta)]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Drecontas', 'action' => 'delete', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $drecontas->conta)]) ?>
             </td>
         </tr>
         <?php endforeach; ?>

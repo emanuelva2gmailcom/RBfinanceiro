@@ -54,7 +54,7 @@ class CaixasController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O Caixa não foi adicionado, por favor tente novamente.'));
+            $this->Flash->error(__('Caixa não foi adicionado, por favor tente novamente.'));
         }
         $this->set(compact('caixa'));
     }
@@ -74,11 +74,11 @@ class CaixasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $caixa = $this->Caixas->patchEntity($caixa, $this->request->getData());
             if ($this->Caixas->save($caixa)) {
-                $this->Flash->success(__('O Caixa editado com sucesso.'));
+                $this->Flash->success(__('Caixa editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O Caixa não foi editado, por favor tente novamente.'));
+            $this->Flash->error(__('Caixa não foi editado, por favor tente novamente.'));
         }
         $this->set(compact('caixa'));
     }
@@ -97,7 +97,7 @@ class CaixasController extends AppController
         if ($this->Caixas->delete($caixa)) {
             $this->Flash->success(__('Caixa deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('O Caixa não foi deletado, por favor tente novamente.'));
+            $this->Flash->error(__('Caixa não foi deletado, por favor tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

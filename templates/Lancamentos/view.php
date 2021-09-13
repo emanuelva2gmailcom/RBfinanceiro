@@ -90,7 +90,7 @@
 
 <div class="related related-lancamentos view card">
   <div class="card-header d-sm-flex">
-    <h3 class="card-title"><?= __('Related Lancamentos') ?></h3>
+    <h3 class="card-title"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
       <?= $this->Html->link(__('Novos'), ['controller' => 'Lancamentos' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Lancamentos' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
@@ -152,7 +152,7 @@
 
 <div class="related related-caixaregistros view card">
   <div class="card-header d-sm-flex">
-    <h3 class="card-title"><?= __('Related Caixaregistros') ?></h3>
+    <h3 class="card-title"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Caixaregistros' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
@@ -194,7 +194,7 @@
 
 <div class="related related-comprovantes view card">
   <div class="card-header d-sm-flex">
-    <h3 class="card-title"><?= __('Related Comprovantes') ?></h3>
+    <h3 class="card-title"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Comprovantes' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Comprovantes' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
@@ -229,7 +229,7 @@
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['controller' => 'Comprovantes', 'action' => 'view', $comprovantes->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary']) ?>
               <?= $this->Html->link(__('Editar'), ['controller' => 'Comprovantes', 'action' => 'edit', $comprovantes->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Comprovantes', 'action' => 'delete', $comprovantes->id_comprovante], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Are you sure you want to delete # {0}?', $comprovantes->id_comprovante)]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Comprovantes', 'action' => 'delete', $comprovantes->id_comprovante], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Are you sure you want to delete # {0}?', $comprovantes->nome_arquivo)]) ?>
             </td>
         </tr>
         <?php endforeach; ?>

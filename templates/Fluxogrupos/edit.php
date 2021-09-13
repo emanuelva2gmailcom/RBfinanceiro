@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php $this->assign('title', __('Editar "{0}"', $fluxogrupo->grupo) ); ?>
+<?php $this->assign('title', __('Editar Fluxogrupo') ); ?>
 
 
 <div class="card card-primary card-outline">
@@ -19,13 +19,6 @@
 
   <div class="card-footer d-flex">
 
-    <div class="">
-      <!-- <?= $this->Html->link(
-          __('Delete'),
-          ['action' => 'delete', $fluxogrupo->id_fluxogrupo],
-          ['confirm' => __('Você quer mesmo deletar "{0}"?', $fluxogrupo->grupo), 'class' => 'btn btn-danger']
-      ) ?> -->
-    </div>
     
     <div class="ml-auto">
       <?= $this->Form->button(__('Salvar')) ?>

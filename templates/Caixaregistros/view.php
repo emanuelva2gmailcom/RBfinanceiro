@@ -11,7 +11,7 @@ $this->assign('title', __('Caixa Registro') );
 
 <div class="view card card-primary card-outline">
   <div class="card-header d-sm-flex">
-    <h2 class="card-title"><?= h($caixaregistro->id_caixaregistro) ?></h2>
+    <h2 class="card-title"><?= h($caixaregistro->caixa) ?></h2>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
@@ -38,7 +38,7 @@ $this->assign('title', __('Caixa Registro') );
       <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $caixaregistro->id_caixaregistro],
-          ['confirm' => __('Você quer mesmo deletar?',  $caixaregistro->id_caixaregistro), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar?',  $caixaregistro->caixa), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">

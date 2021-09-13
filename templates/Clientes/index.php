@@ -48,10 +48,6 @@
             <td><?= h($cliente->modified) ?></td>
             <td><?= ($cliente->is_pendente) ? __('Sim') : __('Não') ?></td>
             <td class="actions">
-              
-              <?= $this->Html->link(__('View'), ['action' => 'view', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Edit'), ['action' => 'edit', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar o cliente # {0}?', $cliente->nome)]) ?>
 
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

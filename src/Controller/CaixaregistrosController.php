@@ -57,7 +57,7 @@ class CaixaregistrosController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O Caixa Registro não foi adicionado, por favor tente novamente.'));
+            $this->Flash->error(__('Caixa Registro não foi adicionado, por favor tente novamente.'));
         }
         $caixas = $this->Caixaregistros->Caixas->find('list', ['limit' => 200]);
         $tipopagamentos = $this->Caixaregistros->Tipopagamentos->find('list', ['limit' => 200]);
@@ -84,7 +84,7 @@ class CaixaregistrosController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('O Caixa Registro não foi editado, por favor tente novamente.'));
+            $this->Flash->error(__('Caixa Registro não foi editado, por favor tente novamente.'));
         }
         $caixas = $this->Caixaregistros->Caixas->find('list', ['limit' => 200]);
         $tipopagamentos = $this->Caixaregistros->Tipopagamentos->find('list', ['limit' => 200]);
@@ -106,7 +106,7 @@ class CaixaregistrosController extends AppController
         if ($this->Caixaregistros->delete($caixaregistro)) {
             $this->Flash->success(__('Caixa Registro deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('O Caixa Registro não foi deletado, por favor tente novamente.'));
+            $this->Flash->error(__('Caixa Registro não foi deletado, por favor tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
