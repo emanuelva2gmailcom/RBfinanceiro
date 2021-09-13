@@ -38,7 +38,7 @@ $this->assign('title', __('Caixa Registro') );
       <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $caixaregistro->id_caixaregistro],
-          ['confirm' => __('Are you sure you want to delete # {0}?',  $caixaregistro->id_caixaregistro), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar?',  $caixaregistro->id_caixaregistro), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">
