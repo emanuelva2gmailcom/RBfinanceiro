@@ -7,6 +7,7 @@
 
 <?php $this->assign('title', __('Dregrupos') ); ?>
 
+
 <div class="card card-primary card-outline">
   <div class="card-header d-sm-flex">
     <h2 class="card-title"><!-- --></h2>
@@ -15,7 +16,11 @@
             'label'=>false,
             'class' => 'form-control-sm',
           ]); ?>
+
+      <?= $this->Html->link(__('Novo grupo'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+
       <?= $this->Html->link(__('Novo Dregrupo'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+
     </div>
   </div>
   <!-- /.card-header -->
@@ -42,7 +47,11 @@
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $dregrupo->id_dregrupo)]) ?>
+
               <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $dregrupo->grupo)]) ?>
+
             </td>
           </tr>
           <?php endforeach; ?>

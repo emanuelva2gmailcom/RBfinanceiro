@@ -50,11 +50,19 @@ class DregruposController extends AppController
         if ($this->request->is('post')) {
             $dregrupo = $this->Dregrupos->patchEntity($dregrupo, $this->request->getData());
             if ($this->Dregrupos->save($dregrupo)) {
+
+                $this->Flash->success(__('DREgrupo salvo com sucesso.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('DREgrupo não foi salvo, tente novamente'));
+
                 $this->Flash->success(__('Grupo adicionada com sucesso'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Grupo não foi adicionada, tente novamente'));
+
         }
         $this->set(compact('dregrupo'));
     }
@@ -74,11 +82,19 @@ class DregruposController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dregrupo = $this->Dregrupos->patchEntity($dregrupo, $this->request->getData());
             if ($this->Dregrupos->save($dregrupo)) {
+
+                $this->Flash->success(__('DREgrupo salvo com sucesso.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('DREgrupo não foi salvo, tente novamente'));
+
                 $this->Flash->success(__('Grupo editada com sucesso'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Grupo não foi editada, tente novamente'));
+
         }
         $this->set(compact('dregrupo'));
     }
@@ -95,9 +111,14 @@ class DregruposController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $dregrupo = $this->Dregrupos->get($id);
         if ($this->Dregrupos->delete($dregrupo)) {
-            $this->Flash->success(__('Grupo deletada com sucesso'));
+
+            $this->Flash->success(__('DREgrupo deletado com sucesso.'));
+        } else {
+            $this->Flash->error(__('DREgrupo não foi deletado, tente novamente'));
+    $this->Flash->success(__('Grupo deletada com sucesso'));
         } else {
             $this->Flash->error(__('Grupo não foi deletada, tente novamente'));
+
         }
 
         return $this->redirect(['action' => 'index']);

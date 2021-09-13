@@ -121,8 +121,12 @@ a {
 
       <!-- /.content-header -->
 
+      <!-- Main content -->
+      <div class="content" style="min-height:100vh;">
+
       <!-- Main content --> 
       <div class="content" style="min-height:100vh">
+
         <div class="container-fluid">
           <?= $this->Flash->render() ?>
           <?= $this->fetch('content') ?>
