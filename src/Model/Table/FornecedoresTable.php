@@ -40,7 +40,7 @@ class FornecedoresTable extends Table
         parent::initialize($config);
 
         $this->setTable('fornecedores');
-        $this->setDisplayField('id_fornecedor');
+        $this->setDisplayField('nome');
         $this->setPrimaryKey('id_fornecedor');
 
         $this->addBehavior('Timestamp');

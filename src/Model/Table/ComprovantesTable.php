@@ -42,7 +42,7 @@ class ComprovantesTable extends Table
         parent::initialize($config);
 
         $this->setTable('comprovantes');
-        $this->setDisplayField('id_comprovante');
+        $this->setDisplayField('nome_arquivo');
         $this->setPrimaryKey('id_comprovante');
 
         $this->addBehavior('Timestamp');

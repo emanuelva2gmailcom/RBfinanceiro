@@ -42,7 +42,7 @@ class ClientesTable extends Table
         parent::initialize($config);
 
         $this->setTable('clientes');
-        $this->setDisplayField('id_cliente');
+        $this->setDisplayField('nome');
         $this->setPrimaryKey('id_cliente');
 
         $this->addBehavior('Timestamp');

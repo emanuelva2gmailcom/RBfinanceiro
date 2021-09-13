@@ -42,7 +42,7 @@ class TipopagamentosTable extends Table
         parent::initialize($config);
 
         $this->setTable('tipopagamentos');
-        $this->setDisplayField('id_tipopagamento');
+        $this->setDisplayField('nome');
         $this->setPrimaryKey('id_tipopagamento');
 
         $this->addBehavior('Timestamp');

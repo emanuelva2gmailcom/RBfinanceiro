@@ -4,18 +4,8 @@
  * @var \App\Model\Entity\Caixaregistro[]|\Cake\Collection\CollectionInterface $caixaregistros
  */
 ?>
-
-<?php $this->assign('title', __('Caixaregistros') ); ?>
-
 <?php
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Caixaregistros',
-    ]
-  ])
-);
+$this->assign('title', __('Caixa Registro') );
 ?>
 
 <div class="card card-primary card-outline">
@@ -26,7 +16,7 @@ $this->assign('breadcrumb',
             'label'=>false,
             'class' => 'form-control-sm',
           ]); ?>
-      <?= $this->Html->link(__('New Caixaregistro'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Novo Caixa Registro'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
@@ -46,12 +36,12 @@ $this->assign('breadcrumb',
           <tr>
             <td><?= $this->Number->format($caixaregistro->id_caixaregistro) ?></td>
             <td><?= $caixaregistro->has('caixa') ? $this->Html->link($caixaregistro->caixa->id_caixa, ['controller' => 'Caixas', 'action' => 'view', $caixaregistro->caixa->id_caixa]) : '' ?></td>
-            <td><?= $caixaregistro->has('tipopagamento') ? $this->Html->link($caixaregistro->tipopagamento->id_tipopagamento, ['controller' => 'Tipopagamentos', 'action' => 'view', $caixaregistro->tipopagamento->id_tipopagamento]) : '' ?></td>
+            <td><?= $caixaregistro->has('tipopagamento') ? $this->Html->link($caixaregistro->tipopagamento->nome, ['controller' => 'Tipopagamentos', 'action' => 'view', $caixaregistro->tipopagamento->nome]) : '' ?></td>
             <td><?= $caixaregistro->has('lancamento') ? $this->Html->link($caixaregistro->lancamento->id_lancamento, ['controller' => 'Lancamentos', 'action' => 'view', $caixaregistro->lancamento->id_lancamento]) : '' ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('View'), ['action' => 'view', $caixaregistro->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Edit'), ['action' => 'edit', $caixaregistro->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $caixaregistro->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $caixaregistro->id_caixaregistro)]) ?>
+              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $caixaregistro->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $caixaregistro->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $caixaregistro->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $caixaregistro->id_caixaregistro)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -62,7 +52,7 @@ $this->assign('breadcrumb',
 
   <div class="card-footer d-md-flex paginator">
     <div class="mr-auto" style="font-size:.8rem">
-      <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
+      <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} Caixa Registro de {{count}} no total')) ?>
     </div>
 
     <ul class="pagination pagination-sm">
