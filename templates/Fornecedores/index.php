@@ -25,15 +25,14 @@
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('id_fornecedor') ?></th>
+              
               <th><?= $this->Paginator->sort('nome') ?></th>
               <th><?= $this->Paginator->sort('cnpj') ?></th>
               <th><?= $this->Paginator->sort('responsavel') ?></th>
               <th><?= $this->Paginator->sort('endereco') ?></th>
               <th><?= $this->Paginator->sort('email') ?></th>
               <th><?= $this->Paginator->sort('telefone') ?></th>
-              <th><?= $this->Paginator->sort('created') ?></th>
-              <th><?= $this->Paginator->sort('modified') ?></th>
+              
               <th><?= $this->Paginator->sort('is_pendente') ?></th>
               <th class="actions"><?= __('Ações') ?></th>
           </tr>
@@ -41,15 +40,14 @@
         <tbody>
           <?php foreach ($fornecedores as $fornecedore): ?>
           <tr>
-            <td><?= $this->Number->format($fornecedore->id_fornecedor) ?></td>
+            
             <td><?= h($fornecedore->nome) ?></td>
             <td><?= h($fornecedore->cnpj) ?></td>
             <td><?= h($fornecedore->responsavel) ?></td>
             <td><?= h($fornecedore->endereco) ?></td>
             <td><?= h($fornecedore->email) ?></td>
             <td><?= h($fornecedore->telefone) ?></td>
-            <td><?= h($fornecedore->created) ?></td>
-            <td><?= h($fornecedore->modified) ?></td>
+            
             <td><?= ($fornecedore->is_pendente) ? __('Sim') : __('Não') ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fornecedore->id_fornecedor], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

@@ -23,24 +23,18 @@
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('id_comprovante') ?></th>
               <th><?= $this->Paginator->sort('nome_arquivo') ?></th>
               <th><?= $this->Paginator->sort('tipo') ?></th>
               <th><?= $this->Paginator->sort('lancamento_id') ?></th>
-              <th><?= $this->Paginator->sort('created') ?></th>
-              <th><?= $this->Paginator->sort('modified') ?></th>
               <th class="actions"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($comprovantes as $comprovante): ?>
           <tr>
-            <td><?= $this->Number->format($comprovante->id_comprovante) ?></td>
             <td><?= h($comprovante->nome_arquivo) ?></td>
             <td><?= h($comprovante->tipo) ?></td>
             <td><?= $comprovante->has('lancamento') ? $this->Html->link($comprovante->lancamento->id_lancamento, ['controller' => 'Lancamentos', 'action' => 'view', $comprovante->lancamento->id_lancamento]) : '' ?></td>
-            <td><?= h($comprovante->created) ?></td>
-            <td><?= h($comprovante->modified) ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
@@ -58,7 +52,7 @@
     <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} Comprovantes de {{count}} no total')) ?>
     </div>
 
-    <ul class="pagination pagination-sm">
+    <ul class="pagination pagination-sm"
       <?= $this->Paginator->first('<i class="fas fa-angle-double-left"></i>', ['escape'=>false]) ?>
       <?= $this->Paginator->prev('<i class="fas fa-angle-left"></i>', ['escape'=>false]) ?>
       <?= $this->Paginator->numbers() ?>

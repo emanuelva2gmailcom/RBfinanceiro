@@ -19,8 +19,6 @@
 
       <?= $this->Html->link(__('Novo grupo'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
 
-      <?= $this->Html->link(__('Novo Dregrupo'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
-
     </div>
   </div>
   <!-- /.card-header -->
@@ -28,27 +26,25 @@
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('id_dregrupo') ?></th>
+              
               <th><?= $this->Paginator->sort('grupo') ?></th>
               <th><?= $this->Paginator->sort('descricao') ?></th>
-              <th><?= $this->Paginator->sort('created') ?></th>
-              <th><?= $this->Paginator->sort('modified') ?></th>
+              
+              
               <th class="actions"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($dregrupos as $dregrupo): ?>
           <tr>
-            <td><?= $this->Number->format($dregrupo->id_dregrupo) ?></td>
+            
             <td><?= h($dregrupo->grupo) ?></td>
             <td><?= h($dregrupo->descricao) ?></td>
-            <td><?= h($dregrupo->created) ?></td>
-            <td><?= h($dregrupo->modified) ?></td>
+            
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
 
-              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $dregrupo->id_dregrupo)]) ?>
 
               <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $dregrupo->id_dregrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $dregrupo->grupo)]) ?>
 
