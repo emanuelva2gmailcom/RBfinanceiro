@@ -24,8 +24,6 @@ $this->assign('title', __('Caixa Registro') );
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('id_caixaregistro') ?></th>
-              <th><?= $this->Paginator->sort('caixa_id') ?></th>
               <th><?= $this->Paginator->sort('tipopagamento_id') ?></th>
               <th><?= $this->Paginator->sort('lancamento_id') ?></th>
               <th class="actions"><?= __('Actions') ?></th>
@@ -34,8 +32,6 @@ $this->assign('title', __('Caixa Registro') );
         <tbody>
           <?php foreach ($caixaregistros as $caixaregistro): ?>
           <tr>
-            <td><?= $this->Number->format($caixaregistro->id_caixaregistro) ?></td>
-            <td><?= $caixaregistro->has('caixa') ? $this->Html->link($caixaregistro->caixa->id_caixa, ['controller' => 'Caixas', 'action' => 'view', $caixaregistro->caixa->id_caixa]) : '' ?></td>
             <td><?= $caixaregistro->has('tipopagamento') ? $this->Html->link($caixaregistro->tipopagamento->nome, ['controller' => 'Tipopagamentos', 'action' => 'view', $caixaregistro->tipopagamento->nome]) : '' ?></td>
             <td><?= $caixaregistro->has('lancamento') ? $this->Html->link($caixaregistro->lancamento->id_lancamento, ['controller' => 'Lancamentos', 'action' => 'view', $caixaregistro->lancamento->id_lancamento]) : '' ?></td>
             <td class="actions">

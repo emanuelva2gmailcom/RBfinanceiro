@@ -23,14 +23,11 @@
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('id_cliente') ?></th>
               <th><?= $this->Paginator->sort('nome') ?></th>
               <th><?= $this->Paginator->sort('cpf') ?></th>
               <th><?= $this->Paginator->sort('endereco') ?></th>
               <th><?= $this->Paginator->sort('email') ?></th>
               <th><?= $this->Paginator->sort('telefone') ?></th>
-              <th><?= $this->Paginator->sort('created') ?></th>
-              <th><?= $this->Paginator->sort('modified') ?></th>
               <th><?= $this->Paginator->sort('is_pendente') ?></th>
               <th class="actions"><?= __('Ações') ?></th>
           </tr>
@@ -38,14 +35,11 @@
         <tbody>
           <?php foreach ($clientes as $cliente): ?>
           <tr>
-            <td><?= $this->Number->format($cliente->id_cliente) ?></td>
             <td><?= h($cliente->nome) ?></td>
             <td><?= h($cliente->cpf) ?></td>
             <td><?= h($cliente->endereco) ?></td>
             <td><?= h($cliente->email) ?></td>
-            <td><?= h($cliente->telefone) ?></td>
-            <td><?= h($cliente->created) ?></td>
-            <td><?= h($cliente->modified) ?></td>
+            <td><?= h($cliente->telefone) ?></td>            
             <td><?= ($cliente->is_pendente) ? __('Sim') : __('Não') ?></td>
             <td class="actions">
 

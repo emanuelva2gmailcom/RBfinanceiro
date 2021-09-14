@@ -25,22 +25,16 @@
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('id_caixa') ?></th>
               <th><?= $this->Paginator->sort('data_caixa') ?></th>
               <th><?= $this->Paginator->sort('Aberto') ?></th>
-              <th><?= $this->Paginator->sort('created') ?></th>
-              <th><?= $this->Paginator->sort('modified') ?></th>
               <th class="actions"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($caixas as $caixa): ?>
           <tr>
-            <td><?= $this->Number->format($caixa->id_caixa) ?></td>
             <td><?= $this->Number->format($caixa->data_caixa) ?></td>
             <td><?= ($caixa->is_aberto) ? __('Sim') : __('Não') ?></td>
-            <td><?= h($caixa->created) ?></td>
-            <td><?= h($caixa->modified) ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

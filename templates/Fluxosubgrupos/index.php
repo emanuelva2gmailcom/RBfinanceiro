@@ -25,11 +25,11 @@
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('id_fluxosubgrupo') ?></th>
+     
               <th><?= $this->Paginator->sort('subgrupo') ?></th>
               <th><?= $this->Paginator->sort('descricao') ?></th>
-              <th><?= $this->Paginator->sort('created') ?></th>
-              <th><?= $this->Paginator->sort('modified') ?></th>
+            
+             
               <th><?= $this->Paginator->sort('fluxogrupo_id') ?></th>
               <th class="actions"><?= __('Ações') ?></th>
           </tr>
@@ -37,11 +37,11 @@
         <tbody>
           <?php foreach ($fluxosubgrupos as $fluxosubgrupo): ?>
           <tr>
-            <td><?= $this->Number->format($fluxosubgrupo->id_fluxosubgrupo) ?></td>
-            <td><?= h($fluxosubgrupo->subgrupo) ?></td>
+           
+            <td><?= h($fluxosubgrupo->subgrupo) ?></td
             <td><?= h($fluxosubgrupo->descricao) ?></td>
-            <td><?= h($fluxosubgrupo->created) ?></td>
-            <td><?= h($fluxosubgrupo->modified) ?></td>
+           
+           
             <td><?= $fluxosubgrupo->has('fluxogrupo') ? $this->Html->link($fluxosubgrupo->fluxogrupo->grupo, ['controller' => 'Fluxogrupos', 'action' => 'view', $fluxosubgrupo->fluxogrupo->grupo]) : '' ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fluxosubgrupo->id_fluxosubgrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
