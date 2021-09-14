@@ -7,8 +7,12 @@
 <?php
 $this->assign('title', __('Caixa Registro') );
 ?>
-
-<div class="card card-primary card-outline">
+<style>
+  .teste{
+    color: #E1E7F0;
+  }
+</style>
+<div class="card card-primary card-outline bg-dark">
   <div class="card-header d-sm-flex">
     <h2 class="card-title"><!-- --></h2>
     <div class="card-toolbox">
@@ -21,12 +25,12 @@ $this->assign('title', __('Caixa Registro') );
   </div>
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
-    <table class="table table-hover text-nowrap">
+    <table class="table  text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('tipopagamento_id') ?></th>
-              <th><?= $this->Paginator->sort('lancamento_id') ?></th>
-              <th class="actions"><?= __('Actions') ?></th>
+              <th class="teste"><?= ('Tipo de Pagamento') ?></th>
+              <th class="teste"><?= ('Lançamento') ?></th>
+              <th class="actions teste"><?= __('Actions') ?></th>
           </tr>
         </thead>
         <tbody>

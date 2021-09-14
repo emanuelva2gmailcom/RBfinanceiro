@@ -6,9 +6,13 @@
 ?>
 
 <?php $this->assign('title', __('Dregrupos') ); ?>
+<style>
+  .teste{
+    color: #E1E7F0;
+  }
+</style>
 
-
-<div class="card card-primary card-outline">
+<div class="card card-primary card-outline bg-dark">
   <div class="card-header d-sm-flex">
     <h2 class="card-title"><!-- --></h2>
     <div class="card-toolbox">
@@ -23,15 +27,15 @@
   </div>
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
-    <table class="table table-hover text-nowrap">
+    <table class="table text-nowrap">
         <thead>
           <tr>
               
-              <th><?= $this->Paginator->sort('grupo') ?></th>
-              <th><?= $this->Paginator->sort('descricao') ?></th>
+              <th class="teste"><?= ('Grupo') ?></th>
+              <th class="teste"><?= ('Descrição') ?></th>
               
               
-              <th class="actions"><?= __('Ações') ?></th>
+              <th class="actions teste"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
