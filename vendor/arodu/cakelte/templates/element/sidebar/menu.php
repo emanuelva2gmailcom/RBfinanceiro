@@ -12,7 +12,7 @@
 </li>
 
 <li class="nav-item" style="color: #E1E7E0">
-  <a href="<?= $this->Url->build('/lancamentos/add', ['fullBase' => true]);?>" class="nav-link" style="color: #E1E7E0">
+  <a href="/lancamentos/add" class="nav-link" style="color: #E1E7E0">
     <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
     <p>
       Novo Lançamento
@@ -37,20 +37,19 @@
       </a>
     </li>
     <li class="nav-item" style="color: #E1E7E0">
-      <a href="<?= $this->Url->build('/caixas/index', ['fullBase' => true]);?>" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
+      <a href="/caixas/index" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
         <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
         <p>Fluxo de Caixa</p>
       </a>
     </li>
     <li class="nav-item" style="color: #E1E7E0">
-      <a href="<?= $this->Url->build('/lancamentos/index', ['fullBase' => true]);?>
-                " class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
+      <a href="/lancamentos/index" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
         <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
         <p>Lançamentos</p>
       </a>
     </li>
     <li class="nav-item" style="color: #E1E7E0">
-      <a href="<?= $this->Url->build('/caixaregistros/index', ['fullBase' => true]);?>" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
+      <a href="/caixaregistro/index" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
         <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
         <p>Caixa Gerencial</p>
       </a>
