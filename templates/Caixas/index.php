@@ -37,22 +37,33 @@ $this->assign('breadcrumb',
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
+<<<<<<< HEAD
               <th><?= $this->Paginator->sort('id_caixa') ?></th>
               <th><?= $this->Paginator->sort('is_aberto') ?></th>
               <th><?= $this->Paginator->sort('created') ?></th>
               <th><?= $this->Paginator->sort('modified') ?></th>
               <th><?= $this->Paginator->sort('data_caixa') ?></th>
               <th class="actions"><?= __('Actions') ?></th>
+=======
+              <th><?= $this->Paginator->sort('data_caixa') ?></th>
+              <th><?= $this->Paginator->sort('Aberto') ?></th>
+              <th class="actions"><?= __('Ações') ?></th>
+>>>>>>> 4407e28a2abb0dff5aa88ea224631e9c88f6b8a9
           </tr>
         </thead>
         <tbody>
           <?php foreach ($caixas as $caixa): ?>
           <tr>
+<<<<<<< HEAD
             <td><?= $this->Number->format($caixa->id_caixa) ?></td>
             <td><?= ($caixa->is_aberto) ? __('Yes') : __('No') ?></td>
             <td><?= h($caixa->created) ?></td>
             <td><?= h($caixa->modified) ?></td>
             <td><?= h($caixa->data_caixa) ?></td>
+=======
+            <td><?= $this->Number->format($caixa->data_caixa) ?></td>
+            <td><?= ($caixa->is_aberto) ? __('Sim') : __('Não') ?></td>
+>>>>>>> 4407e28a2abb0dff5aa88ea224631e9c88f6b8a9
             <td class="actions">
               <?= $this->Html->link(__('View'), ['action' => 'view', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Edit'), ['action' => 'edit', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

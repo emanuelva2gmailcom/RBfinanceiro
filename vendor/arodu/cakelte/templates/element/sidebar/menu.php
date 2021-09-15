@@ -60,7 +60,7 @@
       </a>
     </li>
     <li class="nav-item" style="color: #E1E7E0">
-      <a href="/caixaregistro/index" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
+      <a href="/caixaregistros/index" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
         <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
         <p>Caixa Gerencial</p>
       </a>

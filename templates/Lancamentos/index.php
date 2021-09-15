@@ -26,19 +26,18 @@
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('id_lancamento') ?></th>
+              
               <th><?= $this->Paginator->sort('tipo') ?></th>
               <th><?= $this->Paginator->sort('descricao') ?></th>
               <th><?= $this->Paginator->sort('valor') ?></th>
               <th><?= $this->Paginator->sort('data_emissao') ?></th>
               <th><?= $this->Paginator->sort('data_baixa') ?></th>
               <th><?= $this->Paginator->sort('data_vencimento') ?></th>
-              <th><?= $this->Paginator->sort('created') ?></th>
-              <th><?= $this->Paginator->sort('modified') ?></th>
+              
               <th><?= $this->Paginator->sort('fluxoconta_id') ?></th>
               <th><?= $this->Paginator->sort('fornecedor_id') ?></th>
               <th><?= $this->Paginator->sort('cliente_id') ?></th>
-              <th><?= $this->Paginator->sort('lancamento_id') ?></th>
+             
               <th><?= $this->Paginator->sort('dreconta_id') ?></th>
               <th class="actions"><?= __('Ações') ?></th>
           </tr>
@@ -46,19 +45,17 @@
         <tbody>
           <?php foreach ($lancamentos as $lancamento): ?>
           <tr>
-            <td><?= $this->Number->format($lancamento->id_lancamento) ?></td>
+          
             <td><?= h($lancamento->tipo) ?></td>
             <td><?= h($lancamento->descricao) ?></td>
             <td><?= $this->Number->format($lancamento->valor) ?></td>
             <td><?= h($lancamento->data_emissao) ?></td>
             <td><?= h($lancamento->data_baixa) ?></td>
             <td><?= h($lancamento->data_vencimento) ?></td>
-            <td><?= h($lancamento->created) ?></td>
-            <td><?= h($lancamento->modified) ?></td>
+           
             <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td>
             <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->fornecedor, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->fornecedor]) : '' ?></td>
             <td><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
-            <td><?= $this->Number->format($lancamento->lancamento_id) ?></td>
             <td><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

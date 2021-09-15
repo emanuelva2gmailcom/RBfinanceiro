@@ -23,11 +23,11 @@
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('id_fluxoconta') ?></th>
+              
               <th><?= $this->Paginator->sort('conta') ?></th>
               <th><?= $this->Paginator->sort('descricao') ?></th>
-              <th><?= $this->Paginator->sort('created') ?></th>
-              <th><?= $this->Paginator->sort('modified') ?></th>
+              
+              
               <th><?= $this->Paginator->sort('fluxosubgrupo_id') ?></th>
               <th class="actions"><?= __('Ações') ?></th>
           </tr>
@@ -35,11 +35,11 @@
         <tbody>
           <?php foreach ($fluxocontas as $fluxoconta): ?>
           <tr>
-            <td><?= $this->Number->format($fluxoconta->id_fluxoconta) ?></td>
+            
             <td><?= h($fluxoconta->conta) ?></td>
             <td><?= h($fluxoconta->descricao) ?></td>
-            <td><?= h($fluxoconta->created) ?></td>
-            <td><?= h($fluxoconta->modified) ?></td>
+           
+            
             <td><?= $fluxoconta->has('fluxosubgrupo') ? $this->Html->link($fluxoconta->fluxosubgrupo->subgrupo, ['controller' => 'Fluxosubgrupos', 'action' => 'view', $fluxoconta->fluxosubgrupo->subgrupo]) : '' ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fluxoconta->id_fluxoconta], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

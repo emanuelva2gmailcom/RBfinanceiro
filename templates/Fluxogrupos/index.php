@@ -23,22 +23,22 @@
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('id_fluxogrupo') ?></th>
+          
               <th><?= $this->Paginator->sort('grupo') ?></th>
-              <th><?= $this->Paginator->sort('descrio') ?></th>
-              <th><?= $this->Paginator->sort('created') ?></th>
-              <th><?= $this->Paginator->sort('modified') ?></th>
+              <th><?= $this->Paginator->sort('descrição') ?></th>
+          
+          
               <th class="actions"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($fluxogrupos as $fluxogrupo): ?>
           <tr>
-            <td><?= $this->Number->format($fluxogrupo->id_fluxogrupo) ?></td>
+    
             <td><?= h($fluxogrupo->grupo) ?></td>
             <td><?= h($fluxogrupo->descricao) ?></td>
-            <td><?= h($fluxogrupo->created) ?></td>
-            <td><?= h($fluxogrupo->modified) ?></td>
+        
+        
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

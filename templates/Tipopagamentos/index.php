@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php $this->assign('title', __('Tipos de Pagamentos') ); ?>
+<?php $this->assign('title', __('Tipos de Pagamento') ); ?>
 
 
 <div class="card card-primary card-outline">
@@ -24,22 +24,20 @@
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('id_tipopagamento') ?></th>
+              
               <th><?= $this->Paginator->sort('nome') ?></th>
               <th><?= $this->Paginator->sort('descricao') ?></th>
-              <th><?= $this->Paginator->sort('created') ?></th>
-              <th><?= $this->Paginator->sort('modified') ?></th>
+              
               <th class="actions"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($tipopagamentos as $tipopagamento): ?>
           <tr>
-            <td><?= $this->Number->format($tipopagamento->id_tipopagamento) ?></td>
+            
             <td><?= h($tipopagamento->nome) ?></td>
             <td><?= h($tipopagamento->descricao) ?></td>
-            <td><?= h($tipopagamento->created) ?></td>
-            <td><?= h($tipopagamento->modified) ?></td>
+            
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $tipopagamento->id_tipopagamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $tipopagamento->id_tipopagamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
