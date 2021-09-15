@@ -35,7 +35,7 @@ class CaixasController extends AppController
         $caixa = $this->Caixas->get($id, [
             'contain' => ['Caixaregistros'],
         ]);
-
+        debug($caixa);exit;
         $this->set(compact('caixa'));
     }
 
@@ -101,5 +101,32 @@ class CaixasController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function abrir($now = null)
+    {
+        $caixas = $this->paginate($this->Caixas);
+        $data = [
+            'is_aberto' => '1',
+            'data_caixa' => $now
+        ];
+        foreach($caixas as $caixa):
+            if(($now == $caixa->data_caixa) && ($caixa->is_aberto == true)){
+                $caixa = $this->Caixas->patchEntity($caixa, ['is_aberto' => false]);
+                $this->Caixas->save($caixa);
+                $this->Flash->error(__('Caixa fechado.'));
+                return $this->redirect(['action' => 'index']);
+            }else if(($now == $caixa->data_caixa) && ($caixa->is_aberto == false)){
+                $this->Flash->error(__('Caixa já fechado.'));
+                return $this->redirect(['action' => 'index']);
+            }
+        endforeach;
+        $caixa = $this->Caixas->newEmptyEntity();
+        $caixa = $this->Caixas->patchEntity($caixa, $data);
+        if ($this->Caixas->save($caixa)) {
+            $this->Flash->success(__('Caixa aberto.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
     }
 }

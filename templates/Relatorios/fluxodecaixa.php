@@ -32,40 +32,41 @@ $this->assign('title', __('Fluxo de caixa'));
 
 <div class="container bg-white" style="width: 100%; height: 100vh; margin: 0px; padding: 0">
     <?php
+    $entradas = [];
+    $saidas = [];
+    foreach ($lancamentos as $lancamento) :
+        array_push($entradas, $lancamento->fluxosubgrupo->subgrupo);
+
+        array_push($saidas, $lancamento->conta);
+    endforeach;
     $date = ['Data', $array['comeco'], $array['final']];
-    debug($array); 
+    debug($entradas);
     ?>
     <table class="table table-hover text-nowrap">
         <thead>
             <?= $this->Html->tableHeaders(
                 $date,
-            );?>
+            ); ?>
         </thead>
         <thead>
             <?= $this->Html->tableHeaders(
                 ['Entrada'],
-            );?>
+            ); ?>
         </thead>
         <tbody>
-            <?=
-            $this->Html->tableCells([
-                ['Jul 7th, 2007'],
-                ['Jun 21st, 2007'],
-                ['Aug 1st, 2006'],
-            ]);?>
+            <?= $this->Html->tableCells([
+                $entradas,
+            ]); ?>
         </tbody>
         <thead>
             <?= $this->Html->tableHeaders(
                 ['Saida'],
-            );?>
+            ); ?>
         </thead>
         <tbody>
-            <?=
-            $this->Html->tableCells([
-                ['Jul 7th, 2007'],
-                ['Jun 21st, 2007'],
-                ['Aug 1st, 2006'],
-            ]);?>
+            <?= $this->Html->tableCells([
+                $saidas,
+            ]); ?>
         </tbody>
     </table>
 </div>

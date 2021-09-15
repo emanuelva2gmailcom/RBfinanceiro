@@ -22,6 +22,7 @@
   </div>
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
+  <?= $this->Html->link(__('abrir caixa'), ['controller' => 'Caixas','action' => 'abrir'], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
     <table class="table table-hover text-nowrap">
         <thead>
           <tr>

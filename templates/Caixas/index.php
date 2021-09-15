@@ -4,10 +4,22 @@
  * @var \App\Model\Entity\Caixa[]|\Cake\Collection\CollectionInterface $caixas
  */
 ?>
-
+<?php 
+  $data = date('Y-m-d');
+  debug('data de hoje: '.$data);
+?>
 <?php $this->assign('title', __('Caixas') ); ?>
 
-
+<?php
+$this->assign('breadcrumb',
+  $this->element('content/breadcrumb', [
+    'home' => true,
+    'breadcrumb' => [
+      'List Caixas',
+    ]
+  ])
+);
+?>
 
 <div class="card card-primary card-outline">
   <div class="card-header d-sm-flex">
@@ -17,7 +29,7 @@
             'label'=>false,
             'class' => 'form-control-sm',
           ]); ?>
-      <?= $this->Html->link(__('Nova Caixa'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('New Caixa'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
@@ -26,25 +38,25 @@
         <thead>
           <tr>
               <th><?= $this->Paginator->sort('id_caixa') ?></th>
-              <th><?= $this->Paginator->sort('data_caixa') ?></th>
-              <th><?= $this->Paginator->sort('Aberto') ?></th>
+              <th><?= $this->Paginator->sort('is_aberto') ?></th>
               <th><?= $this->Paginator->sort('created') ?></th>
               <th><?= $this->Paginator->sort('modified') ?></th>
-              <th class="actions"><?= __('Ações') ?></th>
+              <th><?= $this->Paginator->sort('data_caixa') ?></th>
+              <th class="actions"><?= __('Actions') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($caixas as $caixa): ?>
           <tr>
             <td><?= $this->Number->format($caixa->id_caixa) ?></td>
-            <td><?= $this->Number->format($caixa->data_caixa) ?></td>
-            <td><?= ($caixa->is_aberto) ? __('Sim') : __('Não') ?></td>
+            <td><?= ($caixa->is_aberto) ? __('Yes') : __('No') ?></td>
             <td><?= h($caixa->created) ?></td>
             <td><?= h($caixa->modified) ?></td>
+            <td><?= h($caixa->data_caixa) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $caixa->data_caixa)]) ?>
+              <?= $this->Html->link(__('View'), ['action' => 'view', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Edit'), ['action' => 'edit', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $caixa->id_caixa)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -55,8 +67,7 @@
 
   <div class="card-footer d-md-flex paginator">
     <div class="mr-auto" style="font-size:.8rem">
-      <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} Caixa de {{count}} no total')) ?>
-    </div>
+      <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
     </div>
 
     <ul class="pagination pagination-sm">
