@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Controller;
+use Cake\I18n\FrozenTime;
 
 /**
  * Caixaregistros Controller
@@ -11,6 +11,7 @@ namespace App\Controller;
  */
 class CaixaregistrosController extends AppController
 {
+    // use FrozenTime;
     /**
      * Index method
      *
@@ -111,4 +112,45 @@ class CaixaregistrosController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    public function darbaixa($id = null)
+    {
+        $data = [
+            'lancamento_id' => $id,
+            'tipopagamento_id' => '1',
+            'caixa_id' => $this->caixaaberto(0)
+        ];
+        $this->loadModel('Lancamentos');
+        $lancamento = $this->Lancamentos->get($id);
+        if($lancamento->data_baixa !== null) {
+            return $this->redirect(['controller' => 'lancamentos','action' => 'index']);
+        }
+        if($lancamento->tipo !== 'REALIZADO' && ($this->caixaaberto(1) == true)) {
+            $caixaregistro = $this->Caixaregistros->newEmptyEntity();
+            $lancamento->data_baixa = FrozenTime::now();
+            $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $data);
+            if (($this->Caixaregistros->save($caixaregistro)) && ($this->Lancamentos->save($lancamento))) {
+                $this->Flash->success(__('Caixa Registro adicionado com sucesso'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Caixa Registro não foi adicionado, por favor tente novamente.'));
+            debug($lancamento);exit;
+        }
+        $this->Flash->error(__('Pagamento já realizado ou Caixa Fechado.'));
+        return $this->redirect(['controller' => 'Lancamentos', 'action' => 'index']);
+    }
+    public function caixaaberto()
+    {
+        $this->loadModel('Caixas');
+        $now = date('d-m-Y');
+        $caixas = $this->paginate($this->Caixas);
+        foreach ($caixas as $caixa) :
+            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
+                return $caixa->id_caixa;
+                return $caixa->is_aberto;
+            }
+        endforeach;
+        return false;
+    }
+
 }
