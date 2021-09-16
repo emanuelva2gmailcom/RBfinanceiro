@@ -5,9 +5,19 @@
  */
 ?>
 
-<?php $this->assign('title', __('Adicionar Caixa') ); ?>
+<?php $this->assign('title', __('Add Caixa') ); ?>
 
-
+<?php
+$this->assign('breadcrumb',
+  $this->element('content/breadcrumb', [
+    'home' => true,
+    'breadcrumb' => [
+      'List Caixas' => ['action'=>'index'],
+      'Add',
+    ]
+  ])
+);
+?>
 
 
 <div class="card card-primary card-outline">
@@ -21,8 +31,8 @@
 
   <div class="card-footer d-flex">
     <div class="ml-auto">
-      <?= $this->Form->button(__('Salvar')) ?>
-      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Form->button(__('Save')) ?>
+      <?= $this->Html->link(__('Cancel'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
     </div>
   </div>
 

@@ -39,8 +39,8 @@ class CaixasFixture extends TestFixture
                 'id_caixa' => 1,
                 'data_caixa' => 1,
                 'is_aberto' => 1,
-                'created' => 1631132666,
-                'modified' => 1631132666,
+                'created' => 1631749750,
+                'modified' => 1631749750,
             ],
         ];
         parent::init();
