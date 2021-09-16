@@ -124,11 +124,13 @@ class CaixasController extends AppController
             }
         endforeach;
         $caixa = $this->Caixas->newEmptyEntity();
-        $caixa = $this->Caixas->patchEntity($caixa, $data);
+        $caixa->is_aberto = true;
+        $caixa->data_caixa = $now;
         if ($this->Caixas->save($caixa)) {
             $this->Flash->success(__('Caixa aberto.'));
 
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect(['controller' => 'Caixas', 'action' => 'index']);
         }
     }
+
 }
