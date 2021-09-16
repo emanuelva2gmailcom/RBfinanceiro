@@ -1,3 +1,9 @@
+<?php 
+
+$now = date('Y/m/d');
+
+?>
+
 <li class="nav-item" style="color: #E1E7E0">
   <a href="<?= $this->Url->build([
               'controller' => 'users',
@@ -20,6 +26,14 @@
   </a>
 </li>
 
+<li class="nav-item" style="color: #E1E7E0">
+  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="nav-link" style="color: #E1E7E0">
+    <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
+    <p>
+      Abrir Caixa
+    </p>
+  </a>
+</li>
 
 <li class="nav-item has-treeview menu-open" style="color: #E1E7E0">
   <a href="#" class="nav-link" style="color: #E1E7E0">
@@ -31,7 +45,7 @@
   </a>
   <ul class="nav nav-treeview">
     <li class="nav-item" style="color: #E1E7E0">
-      <a href="<?= $this->Url->build('/drecontas/index', ['fullBase' => true]);?>" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
+      <a href="<?= $this->Url->build('/drecontas/index', ['fullBase' => true]); ?>" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
         <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
         <p>DRE</p>
       </a>

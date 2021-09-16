@@ -6,8 +6,12 @@
 ?>
 
 <?php $this->assign('title', __('Drecontas') ); ?>
-
-<div class="card card-primary card-outline">
+<style>
+  .teste{
+    color: #E1E7F0;
+  }
+</style>
+<div class="card card-primary card-outline bg-dark">
   <div class="card-header d-sm-flex">
     <h2 class="card-title"><!-- --></h2>
     <div class="card-toolbox">
@@ -20,13 +24,13 @@
   </div>
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
-    <table class="table table-hover text-nowrap">
+    <table class="table text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('conta') ?></th>
-              <th><?= $this->Paginator->sort('descrição') ?></th>
-              <th><?= $this->Paginator->sort('dregrupo_id') ?></th>
-              <th class="actions"><?= __('Ações') ?></th>
+              <th class="teste"><?= ('Conta') ?></th>
+              <th class="teste"><?= ('Descrição') ?></th>
+              <th class="teste"><?= ('Dregrupo') ?></th>
+              <th class="actions teste"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>

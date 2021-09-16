@@ -8,8 +8,12 @@
 <?php $this->assign('title', __('Lancamentos') ); ?>
 
 
-
-<div class="card card-primary card-outline">
+<style>
+  .teste{
+    color: #E1E7F0;
+  }
+</style>
+<div class="card   card-outline bg-dark">
   <div class="card-header d-sm-flex">
     <h2 class="card-title"><!-- --></h2>
     <div class="card-toolbox">
@@ -22,23 +26,23 @@
   </div>
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
-    <table class="table table-hover text-nowrap">
+    <table class="table text-nowrap">
         <thead>
           <tr>
               
-              <th><?= $this->Paginator->sort('tipo') ?></th>
-              <th><?= $this->Paginator->sort('descricao') ?></th>
-              <th><?= $this->Paginator->sort('valor') ?></th>
-              <th><?= $this->Paginator->sort('data_emissao') ?></th>
-              <th><?= $this->Paginator->sort('data_baixa') ?></th>
-              <th><?= $this->Paginator->sort('data_vencimento') ?></th>
+              <th class="teste"><?= ('Tipo') ?></th>
+              <th class="teste"><?= ('Descricao') ?></th>
+              <th class="teste"><?= ('Valor') ?></th>
+              <th class="teste"><?= ('Data de Emissão') ?></th>
+              <th class="teste"><?= ('Data de Baixa') ?></th>
+              <th class="teste"><?= ('Data de Vencimento') ?></th>
               
-              <th><?= $this->Paginator->sort('fluxoconta_id') ?></th>
-              <th><?= $this->Paginator->sort('fornecedor_id') ?></th>
-              <th><?= $this->Paginator->sort('cliente_id') ?></th>
+              <th class="teste"><?= ('Fluxoconta') ?></th>
+              <th class="teste"><?= ('Fornecedor') ?></th>
+              <th class="teste"><?= ('Cliente') ?></th>
              
-              <th><?= $this->Paginator->sort('dreconta_id') ?></th>
-              <th class="actions"><?= __('Ações') ?></th>
+              <th class="teste"><?= ('Dreconta') ?></th>
+              <th class="actions teste"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
@@ -53,8 +57,8 @@
             <td><?= h($lancamento->data_vencimento) ?></td>
            
             <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td>
-            <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->fornecedor, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->fornecedor]) : '' ?></td>
-            <td><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
+            <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->nome]) : '' ?></td>
+            <td><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->nome]) : '' ?></td>
             <td><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

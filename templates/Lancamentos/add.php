@@ -42,7 +42,8 @@
         <div id="test-l-1" class="content bg-dark">
           <div class="panel-body">
             <div class="form-group">
-              <?= $this->Form->control('tipo', ['label' => 'Tipo', 'placeholder' => 'tipo'], ['class' => 'form-control']); ?>
+              <?= $this->Form->label('Tipo') ?>
+              <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control']); ?>
             </div>
             <div class="form-group">
               <?= $this->Form->control('descricao', ['label' => 'Descrição', 'placeholder' => 'Descrição'], ['class' => 'form-control']); ?>
@@ -52,7 +53,7 @@
             </div>
           </div>
           <div class="d-flex justify-content-end">
-          <div class="btn btn-primary " onclick="stepper1.next()">Próximo</div>
+            <div class="btn btn-primary " onclick="stepper1.next()">Próximo</div>
           </div>
         </div>
         <div id="test-l-2" class="content bg-dark">
@@ -108,27 +109,26 @@
         <?= $this->Form->end() ?>
       </div>
 
-  <script>
-    var stepper1Node = document.querySelector('#stepper1')
-    var stepper1 = new Stepper(document.querySelector('#stepper1'))
+      <script>
+        var stepper1Node = document.querySelector('#stepper1')
+        var stepper1 = new Stepper(document.querySelector('#stepper1'))
 
-    stepper1Node.addEventListener('show.bs-stepper', function(event) {
-      console.warn('show.bs-stepper', event)
-    })
-    stepper1Node.addEventListener('shown.bs-stepper', function(event) {
-      console.warn('shown.bs-stepper', event)
-    })
+        stepper1Node.addEventListener('show.bs-stepper', function(event) {
+          console.warn('show.bs-stepper', event)
+        })
+        stepper1Node.addEventListener('shown.bs-stepper', function(event) {
+          console.warn('shown.bs-stepper', event)
+        })
 
-    var stepper2 = new Stepper(document.querySelector('#stepper2'), {
-      linear: false,
-      animation: true
-    })
-    var stepper3 = new Stepper(document.querySelector('#stepper3'), {
-      animation: true
-    })
-    var stepper4 = new Stepper(document.querySelector('#stepper4'))
-  </script>
+        var stepper2 = new Stepper(document.querySelector('#stepper2'), {
+          linear: false,
+          animation: true
+        })
+        var stepper3 = new Stepper(document.querySelector('#stepper3'), {
+          animation: true
+        })
+        var stepper4 = new Stepper(document.querySelector('#stepper4'))
+      </script>
 
-  <?= $this->Form->end() ?>
-</div>
-
+      <?= $this->Form->end() ?>
+    </div>
