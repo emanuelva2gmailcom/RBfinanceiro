@@ -112,7 +112,6 @@ class CaixasController extends AppController
             'is_aberto' => '1',
             'data_caixa' => $now
         ];
-        debug($data);
         foreach ($caixas as $caixa) :
             if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
                 $caixa = $this->Caixas->patchEntity($caixa, ['is_aberto' => false]);

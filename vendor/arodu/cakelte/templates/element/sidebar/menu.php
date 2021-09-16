@@ -1,6 +1,6 @@
 <?php 
 
-$now = date('');
+$now = date('Y/m/d');
 
 ?>
 
