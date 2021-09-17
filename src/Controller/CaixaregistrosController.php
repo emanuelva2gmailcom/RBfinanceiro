@@ -114,9 +114,19 @@ class CaixaregistrosController extends AppController
     }
     public function darbaixa($id = null)
     {
+        $caixaregistro = $this->Caixaregistros->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $this->request->getData());
+            $this->efetuarbaixa($id, $this->request->getData('tipopagamento_id'));
+        }
+        $tipopagamentos = $this->Caixaregistros->Tipopagamentos->find('list', ['limit' => 200]);
+        $this->set(compact('tipopagamentos'));
+    }
+    public function efetuarbaixa($id = null, $tipopagamento = null)
+    {
         $data = [
             'lancamento_id' => $id,
-            'tipopagamento_id' => '1',
+            'tipopagamento_id' => $tipopagamento,
             'caixa_id' => $this->caixaaberto(0)
         ];
         $this->loadModel('Lancamentos');
