@@ -136,7 +136,7 @@ class CaixaregistrosController extends AppController
             $this->Flash->error(__('Caixa Registro não foi adicionado, por favor tente novamente.'));
             debug($lancamento);exit;
         }
-        $this->Flash->error(__('Pagamento já realizado ou Caixa Fechado.'));
+        $this->Flash->error(__('Caixa Fechado.'));
         return $this->redirect(['controller' => 'Lancamentos', 'action' => 'index']);
     }
     public function caixaaberto()
