@@ -52,6 +52,11 @@ class LancamentosController extends AppController
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
+            if(($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())){
+                $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
+
+                return $this->redirect(['action' => 'add']);
+            }
             if ($this->Lancamentos->save($lancamento)) {
                 $this->Flash->success(__('Lançamento adicionado com sucesso'));
 
@@ -81,6 +86,7 @@ class LancamentosController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
+            
             if ($this->Lancamentos->save($lancamento)) {
                 $this->Flash->success(__('Lançamento editado com sucesso.'));
 
