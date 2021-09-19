@@ -149,6 +149,20 @@ class CaixaregistrosController extends AppController
         }
         $this->Flash->error(__('Caixa Fechado.'));
         return $this->redirect(['controller' => 'Caixaregistros', 'action' => 'darbaixa']);
+        return $this->redirect(['controller' => 'Lancamentos', 'action' => 'index']);
+    }
+    public function caixaaberto()
+    {
+        $this->loadModel('Caixas');
+        $now = date('d-m-Y');
+        $caixas = $this->paginate($this->Caixas);
+        foreach ($caixas as $caixa) :
+            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
+                return $caixa->id_caixa;
+                return $caixa->is_aberto;
+            }
+        endforeach;
+        return false;
     }
     
 

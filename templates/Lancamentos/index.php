@@ -29,6 +29,8 @@
     </div>
   </div>
   <!-- /.card-header -->
+  <?= $this->Html->link(__('Caixa diario'), ['controller' => 'relatorios','action' => 'caixadiario'], ['class' => 'btn btn-primary btn-sm']) ?>
+
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
       <thead>
