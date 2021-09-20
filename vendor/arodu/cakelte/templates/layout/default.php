@@ -80,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark" id="cu">
+    <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
       <?= $this->element('aside/main') ?>
     </aside>
@@ -95,8 +95,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- REQUIRED SCRIPTS -->
 
-  
-
   <!-- jQuery -->
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/jquery/jquery.min.js') ?>
   <!-- Bootstrap 4 -->
@@ -105,10 +103,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?= $this->Html->script('CakeLte./AdminLTE/dist/js/adminlte.min.js') ?>
 
   <?= $this->element('layout/script') ?>
-  
-  <?= $this->fetch('script') ?>
 
-  
+  <?= $this->fetch('script') ?>
 </body>
 
 </html>
