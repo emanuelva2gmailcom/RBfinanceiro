@@ -3,11 +3,18 @@
    * @var \App\View\AppView $this
    * @var \App\Model\Entity\Lancamento $lancamento
    */
+
+  use Cake\Database\Query;
+  use Cake\Datasource\QueryInterface;
+  use phpDocumentor\Reflection\Types\Resource_;
+
   ?>
 
 
   <?php $this->assign('title', __('Adicionar Lançamento')); ?>
-
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <?= $this->Html->css('bs-stepper.min.css'); ?>
   <?= $this->Html->script('bs-stepper.min.js'); ?>
   <div class="container" style="width: 60%;min-width:80%">
@@ -43,7 +50,7 @@
           <div class="panel-body">
             <div class="form-group">
               <?= $this->Form->label('Tipo') ?>
-              <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control']); ?>
+              <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control realizado']); ?>
             </div>
             <div class="form-group">
               <?= $this->Form->control('descricao', ['label' => 'Descrição', 'placeholder' => 'Descrição'], ['class' => 'form-control']); ?>
@@ -90,7 +97,7 @@
         <div id="test-l-4" class="content bg-dark">
           <div class="panel-body">
             <div class="form-group">
-              <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => true]); ?>
+              <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => true], ['class' => 'teste']); ?>
             </div>
             <div class="form-group">
               <?= $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => true]); ?>
@@ -132,3 +139,29 @@
 
       <?= $this->Form->end() ?>
     </div>
+    <?php
+    $conn = pg_connect("host=127.0.0.1  user=postgres dbname=Indiano password=otacilio port=543")  || die ("Connection Failed");
+    $sql = "SELECT * FROM Caixas";
+    $result = pg_query($sql);
+    debug($result);
+    ?>
+    <script>
+      $(function() {
+
+        $('.realizado').change(function() {
+
+          $teste = $('.realizado').val();
+          if ($teste == 'REALIZADO') {
+            alert($teste);
+            $.ajax({
+              method: "POST",
+              url: "<?= $this->Url->build(['controller' => 'Caixas', 'action' => 'index']) ?>",
+              data: [
+                id = '10',
+              ]
+            })
+            debug(data);
+          }
+        });
+      });
+    </script>

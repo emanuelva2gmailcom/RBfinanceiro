@@ -15,21 +15,20 @@ class RelatoriosController extends AppController
         $this->loadModel('Fornecedores');
         $this->loadModel('Clientes');
         $this->paginate = [
-            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes'],
+            'contain' => ['Fluxocontas','Fornecedores','Clientes','Lancamentos'],
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
         $arrays = [];
         foreach($lancamentos as $lancamento):
             $teste =  FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
-            $grupo = $this->Fluxogrupos->get($this->Fluxosubgrupos->get($lancamento->fluxoconta->id_fluxoconta)->id_fluxosubgrupo)->grupo;
-            // debug($tteste);
+            //   $grupo = $this->Fluxogrupos->get($this->Fluxosubgrupos->get($lancamento->fluxoconta->id_fluxoconta)->id_fluxosubgrupo)->grupo;
             // debug($lancamento->data_baixa);exit;
-            if(($lancamento->data_baixa !== null) && ($lancamento->data_baixa->i18nFormat('yyyy-MM-dd') == $teste)) {
-                if($grupo == 'entrada'){
-                    $lancamento->valor = '+'.$lancamento->valor;
-                }else{
-                    $lancamento->valor = '-'.$lancamento->valor;
-                }
+            // if(($lancamento->data_baixa !== null) && ($lancamento->data_baixa->i18nFormat('yyyy-MM-dd') == $teste)) {
+            //     if($grupo == 'entrada'){
+            //         $lancamento->valor = '+'.$lancamento->valor;
+            //     }else{
+            //         $lancamento->valor = '-'.$lancamento->valor;
+            //     }
                 // debug($grupo);exit;
                 
                 if($lancamento->tipo == 'REALIZADO') {
@@ -41,7 +40,7 @@ class RelatoriosController extends AppController
                     // $this->Fluxogrupos->get($this->Fluxosubgrupos->get($lancamento->fluxoconta->id_fluxoconta)->id_fluxosubgrupo)->grupo
                     ]);
                 }
-            }
+            
         endforeach;
         $this->set(compact('arrays'));
     }
