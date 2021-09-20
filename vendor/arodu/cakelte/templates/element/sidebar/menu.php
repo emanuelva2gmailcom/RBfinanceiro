@@ -1,35 +1,85 @@
-<!-- Add icons to the links using the .nav-icon class
-     with font-awesome or any other icon font library -->
-<li class="nav-item has-treeview menu-open">
-  <a href="#" class="nav-link active">
-    <i class="nav-icon fas fa-tachometer-alt"></i>
+<?php 
+
+$now = date('d-m-Y');
+
+?>
+
+<li class="nav-item" style="color: #E1E7E0">
+  <a href="<?= $this->Url->build([
+              'controller' => 'users',
+              'action' => 'dashboard',
+              'plugin' => 'Usermgmt',
+            ]); ?>" class="nav-link" style="color: #E1E7E0">
+    <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
     <p>
-      Starter Pages
+      Home
+    </p>
+  </a>
+</li>
+
+<li class="nav-item" style="color: #E1E7E0">
+  <a href="/lancamentos/add" class="nav-link" style="color: #E1E7E0">
+    <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
+    <p>
+      Novo Lançamento
+    </p>
+  </a>
+</li>
+
+<li class="nav-item" style="color: #E1E7E0">
+  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="nav-link" style="color: #E1E7E0">
+    <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
+    <p>
+      Abrir Caixa
+    </p>
+  </a>
+</li>
+
+<li class="nav-item has-treeview menu-open" style="color: #E1E7E0">
+  <a href="#" class="nav-link" style="color: #E1E7E0">
+    <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
+    <p>
+      Relatórios
       <i class="right fas fa-angle-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview">
-    <li class="nav-item">
-      <a href="#" class="nav-link active">
-        <i class="far fa-circle nav-icon"></i>
-        <p>Active Page</p>
+    <li class="nav-item" style="color: #E1E7E0">
+      <a href="<?= $this->Url->build('/drecontas/index', ['fullBase' => true]); ?>" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
+        <p>DRE</p>
       </a>
     </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link">
-        <i class="far fa-circle nav-icon"></i>
-        <p>Inactive Page</p>
+    <li class="nav-item" style="color: #E1E7E0">
+      <a href="/caixas/index" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
+        <p>Fluxo de Caixa</p>
+      </a>
+    </li>
+    <li class="nav-item" style="color: #E1E7E0">
+      <a href="/lancamentos/index" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
+        <p>Lançamentos</p>
+      </a>
+    </li>
+    <li class="nav-item" style="color: #E1E7E0">
+      <a href="/caixaregistros/index" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
+        <p>Caixa Gerencial</p>
       </a>
     </li>
   </ul>
 </li>
 
-<li class="nav-item">
-  <a href="#" class="nav-link">
-    <i class="nav-icon fas fa-th"></i>
+<li class="nav-item" style="color: #E1E7E0">
+  <a href="<?= $this->Url->build([
+              'controller' => 'users',
+              'action' => 'dashboard',
+              'plugin' => 'Usermgmt',
+            ]); ?>" class="nav-link" style="color: #E1E7E0">
+    <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
     <p>
-      Simple Link
-      <span class="right badge badge-danger">New</span>
+      Painel
     </p>
   </a>
 </li>
