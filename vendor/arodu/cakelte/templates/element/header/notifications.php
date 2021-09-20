@@ -11,6 +11,7 @@
     <a href="/notifications/" class="dropdown-item dropdown-footer">See All Notifications</a>
   </div>
 </li>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 
@@ -44,3 +45,4 @@
   setInterval(getContent, 120 * 1000)
 
 </script>
+
