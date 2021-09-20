@@ -114,19 +114,9 @@ class CaixaregistrosController extends AppController
     }
     public function darbaixa($id = null)
     {
-        $caixaregistro = $this->Caixaregistros->newEmptyEntity();
-        if ($this->request->is('post')) {
-            // $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $this->request->getData());
-            $this->efetuarbaixa($id, $this->request->getData('tipopagamento_id'));
-        }
-        $tipopagamentos = $this->Caixaregistros->Tipopagamentos->find('list', ['limit' => 200]);
-        $this->set(compact('tipopagamentos'));
-    }
-    public function efetuarbaixa($id = null, $tipopagamento = null)
-    {
         $data = [
             'lancamento_id' => $id,
-            'tipopagamento_id' => $tipopagamento,
+            'tipopagamento_id' => '1',
             'caixa_id' => $this->caixaaberto(0)
         ];
         $this->loadModel('Lancamentos');
@@ -137,7 +127,6 @@ class CaixaregistrosController extends AppController
         if($lancamento->tipo !== 'REALIZADO' && ($this->caixaaberto(1) == true)) {
             $caixaregistro = $this->Caixaregistros->newEmptyEntity();
             $lancamento->data_baixa = FrozenTime::now();
-            $lancamento->tipo = 'REALIZADO';
             $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $data);
             if (($this->Caixaregistros->save($caixaregistro)) && ($this->Lancamentos->save($lancamento))) {
                 $this->Flash->success(__('Caixa Registro adicionado com sucesso'));
@@ -147,8 +136,7 @@ class CaixaregistrosController extends AppController
             $this->Flash->error(__('Caixa Registro não foi adicionado, por favor tente novamente.'));
             debug($lancamento);exit;
         }
-        $this->Flash->error(__('Caixa Fechado.'));
-        return $this->redirect(['controller' => 'Caixaregistros', 'action' => 'darbaixa']);
+        $this->Flash->error(__('Pagamento já realizado ou Caixa Fechado.'));
         return $this->redirect(['controller' => 'Lancamentos', 'action' => 'index']);
     }
     public function caixaaberto()
@@ -164,6 +152,5 @@ class CaixaregistrosController extends AppController
         endforeach;
         return false;
     }
-    
 
 }
