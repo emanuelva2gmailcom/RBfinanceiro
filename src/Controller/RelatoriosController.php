@@ -9,36 +9,30 @@ class RelatoriosController extends AppController
     public function caixadiario()
     {
         $this->loadModel('Lancamentos');
-        $this->loadModel('Fluxocontas');
-        $this->loadModel('Fluxosubgrupos');
-        $this->loadModel('Fluxogrupos');
-        $this->loadModel('Fornecedores');
-        $this->loadModel('Clientes');
         $this->paginate = [
-            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes'],
+            'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'],
+            'conditions' => ['data_baixa is not' => null] 
         ];
+
         $lancamentos = $this->paginate($this->Lancamentos);
+
         $arrays = [];
         foreach($lancamentos as $lancamento):
             $teste =  FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
-            $grupo = $this->Fluxogrupos->get($this->Fluxosubgrupos->get($lancamento->fluxoconta->id_fluxoconta)->id_fluxosubgrupo)->grupo;
-            // debug($tteste);
-            // debug($lancamento->data_baixa);exit;
-            if(($lancamento->data_baixa !== null) && ($lancamento->data_baixa->i18nFormat('yyyy-MM-dd') == $teste)) {
+            $grupo = $lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo;
+            if(($lancamento->data_baixa->i18nFormat('yyyy-MM-dd') == $teste)) {
                 if($grupo == 'entrada'){
                     $lancamento->valor = '+'.$lancamento->valor;
                 }else{
                     $lancamento->valor = '-'.$lancamento->valor;
                 }
-                // debug($grupo);exit;
                 
                 if($lancamento->tipo == 'REALIZADO') {
                     array_push($arrays, [$lancamento->valor, 
-                    $lancamento->fluxoconta->conta, 
-                    $lancamento->fornecedore->nome,
-                    $lancamento->cliente->nome,
+                    $lancamento->fluxoconta ? $lancamento->fluxoconta->conta : '', 
+                    $lancamento->fornecedore ? $lancamento->fornecedore->nome : '',
+                    $lancamento->cliente ? $lancamento->cliente->nome : '',
                     $lancamento->descricao,
-                    // $this->Fluxogrupos->get($this->Fluxosubgrupos->get($lancamento->fluxoconta->id_fluxoconta)->id_fluxosubgrupo)->grupo
                     ]);
                 }
             }

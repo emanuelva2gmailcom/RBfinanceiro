@@ -20,7 +20,6 @@
         <tbody>
             <?php
             foreach($arrays as $array):?>
-                <!-- debug($array); -->
                 <?=$this->Html->tableCells([
                     $array,
                 ]);?>
