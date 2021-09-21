@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\I18n\FrozenTime;
+use Cake\I18n\Time;
 
 class RelatoriosController extends AppController
 {
@@ -40,6 +41,54 @@ class RelatoriosController extends AppController
         $this->set(compact('arrays'));
     }
 
+    public function array_date($ini = null, $fim = null)
+    {
+        $resposta = [];
+        $ini = new Time($ini, 'UTC');
+        $fim = new Time($fim, 'UTC');
+        while($ini < $fim){
+            $ini->modify('+1 days');
+            array_push($resposta, $ini);
+            
+        }
+        debug($resposta);debug($ini);debug($fim);exit;
+    }
+    
+    public function gerencial()
+    {
+        $cu = false;
+        $data = [];
+        if ($this->request->is('post')) {
+            $response = $this->request->getdata();
+            $this->array_date($response['comeco'], $response['final']);
+            
+            $this->loadModel('Lancamentos');
+            $this->loadModel('Fluxocontas');
+            $this->paginate = [
+                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'], 
+            ];
+            $lancamentos = $this->paginate($this->Lancamentos);
+            
+            $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
+
+            $results = [];
+            foreach($contas as $conta):
+                $valor = 0;
+                foreach($lancamentos as $lancamento):
+                    if($conta->fluxosubgrupo->fluxogrupo->grupo == 'entrada' && $lancamento->fluxoconta->conta == $conta->conta){
+                        $valor += intval($lancamento->valor);
+                    }else if($conta->fluxosubgrupo->fluxogrupo->grupo == 'saida' && $lancamento->fluxoconta->conta == $conta->conta){
+                        $valor -= intval('-'.$lancamento->valor);
+                    }
+                endforeach;
+                array_push($results, ['conta' => $conta->conta, 'valor' => $valor, 'tipo' => $conta->fluxosubgrupo->fluxogrupo->grupo]);
+            endforeach;
+            $cu = true;
+            $this->set(compact('results', 'cu'));
+        }
+        $this->set(compact('cu'));
+    }
+
     public function dre()
     {
 
@@ -50,8 +99,4 @@ class RelatoriosController extends AppController
 
     }
 
-    public function gerencial()
-    {
-        
-    }
 }
