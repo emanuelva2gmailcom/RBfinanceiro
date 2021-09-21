@@ -43,7 +43,7 @@
           <div class="panel-body">
             <div class="form-group">
               <?= $this->Form->label('Tipo') ?>
-              <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control']); ?>
+              <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control', 'empty' => 'SELECIONE']); ?>
             </div>
             <div class="form-group">
               <?= $this->Form->control('descricao', ['label' => 'Descrição', 'placeholder' => 'Descrição'], ['class' => 'form-control']); ?>
@@ -76,10 +76,10 @@
         <div id="test-l-3" class="content bg-dark">
           <div class="panel-body">
             <div class="form-group">
-              <?= $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => true]); ?>
+              <?= $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => 'SELECIONE']); ?>
             </div>
             <div class="form-group">
-              <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => true]); ?>
+              <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => 'SELECIONE']); ?>
             </div>
           </div>
           <div class="d-flex justify-content-between">
@@ -90,10 +90,10 @@
         <div id="test-l-4" class="content bg-dark">
           <div class="panel-body">
             <div class="form-group">
-              <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => true]); ?>
+              <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
             </div>
             <div class="form-group">
-              <?= $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => true]); ?>
+              <?= $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => 'SELECIONE']); ?>
             </div>
           </div>
           <div class="d-flex justify-content-between">

@@ -5,15 +5,16 @@
  * @var \App\Model\Entity\Lancamento[]|\Cake\Collection\CollectionInterface $lancamentos
  */
 ?>
-
 <?php $this->assign('title', __('Lancamentos')); ?>
-
 
 <style>
   .teste {
     color: #E1E7F0;
   }
 </style>
+<script>
+
+</script>
 <div class="card   card-outline bg-dark">
   <div class="card-header d-sm-flex">
     <h2 class="card-title">
@@ -28,6 +29,8 @@
     </div>
   </div>
   <!-- /.card-header -->
+  <?= $this->Html->link(__('Caixa diario'), ['controller' => 'relatorios','action' => 'caixadiario'], ['class' => 'btn btn-primary btn-sm']) ?>
+
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
       <thead>
@@ -65,7 +68,8 @@
             <!-- <td><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td> -->
             <td class="actions">
               <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
-                <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
+                <!-- <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?> -->
+                <?= $this->Html->link(__('Dar baixa'),['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary']) ?>
               <?php } ?>
               <!-- <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?> -->
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
@@ -95,3 +99,4 @@
   </div>
   <!-- /.card-footer -->
 </div>
+<script> function teste(){ console.log("oi") } </script>
