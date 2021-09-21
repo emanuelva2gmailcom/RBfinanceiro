@@ -28,7 +28,15 @@ use Cake\Controller\Controller;
  */
 class AppController extends Controller
 {
-
+    /**
+     * Initialization hook method.
+     *
+     * Use this method to add common initialization code like loading components.
+     *
+     * e.g. $this->loadComponent('FormProtection');
+     *
+     * @return void
+     */
     public function initialize(): void
     {
         parent::initialize();
@@ -38,19 +46,10 @@ class AppController extends Controller
 
         $this->loadComponent('Usermgmt.UserAuth');
 
+        /*
+         * Enable the following component for recommended CakePHP form protection settings.
+         * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
+         */
         $this->loadComponent('FormProtection');
-    }
-    public function caixaaberto()
-    {
-        $this->loadModel('Caixas');
-        $now = date('d-m-Y');
-        $caixas = $this->paginate($this->Caixas);
-        foreach ($caixas as $caixa) :
-            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
-                return $caixa->id_caixa;
-                return $caixa->is_aberto;
-            }
-        endforeach;
-        return false;
     }
 }

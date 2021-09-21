@@ -137,7 +137,7 @@ a {
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark" id="cu">
+    <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
       <?= $this->element('aside/main') ?>
     </aside>
@@ -153,8 +153,6 @@ a {
 
   <!-- REQUIRED SCRIPTS -->
 
-  
-
   <!-- jQuery -->
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/jquery/jquery.min.js') ?>
   <!-- Bootstrap 4 -->
@@ -163,10 +161,8 @@ a {
   <?= $this->Html->script('CakeLte./AdminLTE/dist/js/adminlte.min.js') ?>
 
   <?= $this->element('layout/script') ?>
-  
-  <?= $this->fetch('script') ?>
 
-  
+  <?= $this->fetch('script') ?>
 </body>
 
 </html>

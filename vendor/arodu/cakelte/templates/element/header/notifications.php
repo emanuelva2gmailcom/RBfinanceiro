@@ -4,11 +4,10 @@
     <span class="badge badge-warning navbar-badge">15</span>
   </a>
   <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-    <span class="dropdown-header" id="quant">15 Notifications</span>
-    <div id="notificacoes">
-    </div>
+    <span class="dropdown-header" id="quant"></span>
+    <div id="notificacoes"></div>
     <div class="dropdown-divider"></div>
-    <a href="/notifications/" class="dropdown-item dropdown-footer">See All Notifications</a>
+    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
   </div>
 </li>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
