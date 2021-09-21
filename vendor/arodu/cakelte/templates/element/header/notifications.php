@@ -1,14 +1,14 @@
 <li class="nav-item dropdown">
   <a class="nav-link" data-toggle="dropdown" href="#">
     <i class="far fa-bell"></i>
-    <span class="badge badge-warning navbar-badge">15</span>
+    <span class="badge badge-warning navbar-badge" id="icon-quant">15</span>
   </a>
   <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
     <span class="dropdown-header" id="quant">15 Notifications</span>
     <div id="notificacoes">
     </div>
     <div class="dropdown-divider"></div>
-    <a href="/notifications/" class="dropdown-item dropdown-footer">See All Notifications</a>
+    <a href="/notifications/" class="dropdown-item dropdown-footer">Vizualizar todas as notificações</a>
   </div>
 </li>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -37,6 +37,7 @@
 
     document.getElementById('notificacoes').innerHTML = output;
     document.getElementById('quant').innerHTML = notifications.length+' notificações.'
+    document.getElementById('icon-quant').innerHTML = notifications.length
   }
 
   getContent()
