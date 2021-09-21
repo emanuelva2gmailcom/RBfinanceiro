@@ -30,19 +30,73 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <?= $this->fetch('css') ?>
 
+  <style>
+    footer {
+      height: auto;
+      text-align: center;
+      padding: 30px;
+      background-color: black;
+      color: white;
+      justify-content: center;
+
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .titulo {
+      font-family: Tahoma;
+    }
+
+    p {
+      font-family: helvetica;
+    }
+  </style>
+
+
+  <style>
+
+.main-header{
+  background-color: #6AA4B0 ;
+}
+
+.main-sidebar{
+  background-color: #6AA4B0 ;
+}
+
+.content-header{
+  background-color:  #2F6D80 ;
+}
+
+.content{
+  background-color: #2F6D80 ;
+}
+
+.main-footer{
+  background-color:  #6AA4B0 ;
+}
+a {
+  color: #E1E7E0;
+}
+
+
+</style>
+
+
 </head>
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-info">
       <?= $this->element('header/main') ?>
     </nav>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar sidebar-light-secondary elevation-4">
       <!-- Brand Logo -->
       <a href="<?= $this->Url->build('/') ?>" class="brand-link">
         <?= $this->Html->image($this->settings['appLogo'], ['alt' => $this->settings['appName'] . ' logo', 'class' => 'brand-image']) ?>
@@ -50,14 +104,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </a>
 
       <!-- Sidebar -->
-      <div class="sidebar">
+      <div class="sidebar text-info">
         <?= $this->element('sidebar/main') ?>
       </div>
       <!-- /.sidebar -->
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" >
       <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
@@ -68,7 +122,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.content-header -->
 
       <!-- Main content -->
-      <div class="content">
+      <div class="content" style="min-height:100vh;">
+
+      <!-- Main content --> 
+
         <div class="container-fluid">
           <?= $this->Flash->render() ?>
           <?= $this->fetch('content') ?>
@@ -80,22 +137,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark" id="cu">
+    <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
       <?= $this->element('aside/main') ?>
     </aside>
     <!-- /.control-sidebar -->
 
     <!-- Main Footer -->
-    <footer class="main-footer">
-      <?= $this->element('footer/main') ?>
-    </footer>
   </div>
+  
+  <footer>
+    <?= $this->element('footer/main') ?>
+  </footer>
   <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->
-
-  
 
   <!-- jQuery -->
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/jquery/jquery.min.js') ?>
@@ -105,10 +161,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?= $this->Html->script('CakeLte./AdminLTE/dist/js/adminlte.min.js') ?>
 
   <?= $this->element('layout/script') ?>
-  
-  <?= $this->fetch('script') ?>
 
-  
+  <?= $this->fetch('script') ?>
 </body>
 
 </html>
