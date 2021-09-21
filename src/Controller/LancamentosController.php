@@ -26,6 +26,46 @@ class LancamentosController extends AppController
         $this->set(compact('lancamentos'));
     }
 
+    public function previsto()
+    {
+        $lancamento = $this->Lancamentos->newEmptyEntity();
+        if ($this->request->is('post')) {
+           if(($lancamento->tipo == 'PREVISTO')) { ?>
+            <script>
+                function mudar(prev) {
+                    var display = document.getElementById(prev).style.display;
+                    if(display == "none")
+                        document.getElementById(prev).style.display = 'block';
+                    else
+                        document.getElementById(prev).style.display = 'none';
+                }
+
+                mudar();
+            </script>
+            <?php }else{ ?>
+            <script>
+                function mudar(real) {
+                    var display = document.getElementById(real).style.display;
+                    if(display == "none")
+                        document.getElementById(real).style.display = 'block';
+                    else
+                        document.getElementById(real).style.display = 'none';
+                }
+
+                mudar();
+            </script>
+            <?php }
+         }
+
+
+        $this->paginate = [
+            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
+        ];
+        $lancamentos = $this->paginate($this->Lancamentos);
+
+        $this->set(compact('lancamentos'));
+    }
+
     /**
      * View method
      *
@@ -86,7 +126,7 @@ class LancamentosController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
-            
+
             if ($this->Lancamentos->save($lancamento)) {
                 $this->Flash->success(__('Lançamento editado com sucesso.'));
 
@@ -123,3 +163,6 @@ class LancamentosController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 }
+
+
+?>
