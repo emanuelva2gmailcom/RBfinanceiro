@@ -46,45 +46,74 @@ class RelatoriosController extends AppController
         $resposta = [];
         $ini = new Time($ini, 'UTC');
         $fim = new Time($fim, 'UTC');
-        while($ini < $fim){
+        if($ini > $fim){return $this->redirect(['action' => 'index']);}
+        while($ini <= $fim){
+            array_push($resposta, $ini->i18nFormat('yyyy-MM-dd'));
             $ini->modify('+1 days');
-            array_push($resposta, $ini);
-            
         }
-        debug($resposta);debug($ini);debug($fim);exit;
+        return $resposta;
+    }
+
+    public function array_soma($array = null, $ii = null)
+    {
+        $resposta = 0;
+        for($i = $ii; $i < count($array); $i++): 
+            $resposta += $array[$i];
+        endfor; 
+        return $resposta;
     }
     
     public function gerencial()
     {
         $cu = false;
-        $data = [];
         if ($this->request->is('post')) {
-            $response = $this->request->getdata();
-            $this->array_date($response['comeco'], $response['final']);
             
+            $response = $this->request->getdata();
+            if(FrozenTime::now()->i18nFormat('yyyy-MM-dd') < $response['final']){return $this->redirect(['action' => 'index']);}
+            $datas = $this->array_date($response['comeco'], $response['final']);
+            $valores = [];
+            $saidas = [];
+            $entradas = [];
+
             $this->loadModel('Lancamentos');
             $this->loadModel('Fluxocontas');
             $this->paginate = [
                 'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'], 
+                'conditions' => ['tipo' => 'REALIZADO']
             ];
             $lancamentos = $this->paginate($this->Lancamentos);
             
             $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
-
-            $results = [];
-            foreach($contas as $conta):
-                $valor = 0;
-                foreach($lancamentos as $lancamento):
-                    if($conta->fluxosubgrupo->fluxogrupo->grupo == 'entrada' && $lancamento->fluxoconta->conta == $conta->conta){
-                        $valor += intval($lancamento->valor);
-                    }else if($conta->fluxosubgrupo->fluxogrupo->grupo == 'saida' && $lancamento->fluxoconta->conta == $conta->conta){
-                        $valor -= intval('-'.$lancamento->valor);
-                    }
+            
+            $result = [];
+                foreach($contas as $conta):
+                    $result = [];
+                    foreach($datas as $data):
+                        $valor = 0;
+                        foreach($lancamentos as $lancamento):
+                            if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
+                                $valor += intval($lancamento->valor);
+                            }
+                            else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
+                                $valor += intval('-'.$lancamento->valor);
+                            }
+                        endforeach;
+                        array_push($result, $valor);
+                    endforeach;
+                    array_unshift($result, $conta->conta);
+                    array_push($result, $this->array_soma($result, 1));
+                    array_push($valores, $result);
                 endforeach;
-                array_push($results, ['conta' => $conta->conta, 'valor' => $valor, 'tipo' => $conta->fluxosubgrupo->fluxogrupo->grupo]);
+            
+            foreach($contas as $conta):
+                if($conta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
+                    array_push($entradas, $conta->conta);
+                }else if($conta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
+                    array_push($saidas, $conta->conta);
+                }
             endforeach;
             $cu = true;
-            $this->set(compact('results', 'cu'));
+            $this->set(compact('valores', 'cu', 'saidas', 'entradas', 'datas'));
         }
         $this->set(compact('cu'));
     }
@@ -96,7 +125,61 @@ class RelatoriosController extends AppController
 
     public function fluxodecaixa()
     {
+        $cu = false;
+        if ($this->request->is('post')) {
+            
+            $response = $this->request->getdata();
+            if(FrozenTime::now()->i18nFormat('yyyy-MM-dd') < $response['final']){return $this->redirect(['action' => 'index']);}
+            $datas = $this->array_date($response['comeco'], $response['final']);
+            $valores = [];
+            $saidas = [];
+            $entradas = [];
 
+            $this->loadModel('Lancamentos');
+            $this->loadModel('Fluxocontas');
+            $this->paginate = [
+                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'], 
+                'conditions' => ['tipo' => 'REALIZADO']
+            ];
+            $lancamentos = $this->paginate($this->Lancamentos);
+            
+            $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
+            
+            $result = [];
+                foreach($contas as $conta):
+                    $result = [];
+                    foreach($datas as $data):
+                        $valor = 0;
+                        foreach($lancamentos as $lancamento):
+                            if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
+                                $valor += intval($lancamento->valor);
+                            }
+                            else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
+                                $valor += intval('-'.$lancamento->valor);
+                            }
+                        endforeach;
+                        array_push($result, $valor);
+                    endforeach;
+                    array_unshift($result, $conta->conta);
+                    array_push($result, $this->array_soma($result, 1));
+                    array_push($valores, $result);
+                endforeach;
+            
+            foreach($contas as $conta):
+                if($conta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
+                    array_push($entradas, $conta->conta);
+                }else if($conta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
+                    array_push($saidas, $conta->conta);
+                }
+            endforeach;
+            $cu = true;
+            $this->set(compact('valores', 'cu', 'saidas', 'entradas', 'datas'));
+        }
+        $this->set(compact('cu'));
     }
 
+    public function index()
+    {
+
+    }
 }
