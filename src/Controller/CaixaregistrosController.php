@@ -1,6 +1,9 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Controller;
+
 use Cake\I18n\FrozenTime;
 
 /**
@@ -114,13 +117,23 @@ class CaixaregistrosController extends AppController
     }
     public function darbaixa($id = null)
     {
+        $this->loadModel('Comprovantes');
+        $comprovantes = $this->paginate($this->Comprovantes);
         $caixaregistro = $this->Caixaregistros->newEmptyEntity();
         if ($this->request->is('post')) {
-            // $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $this->request->getData());
+            $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $this->request->getData());
+            $image = $this->request->getData('uploadfiles');
+            $name = $image->getClientFilename();
+            $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
+            if ($name)
+                $image->moveTo($targetpath);
+            $comprovantes = $this->Comprovantes->newEmptyEntity();
+            $comprovantes->img = $name;
+            $this->Comprovantes->save($comprovantes);
             $this->efetuarbaixa($id, $this->request->getData('tipopagamento_id'));
         }
         $tipopagamentos = $this->Caixaregistros->Tipopagamentos->find('list', ['limit' => 200]);
-        $this->set(compact('tipopagamentos'));
+        $this->set(compact('tipopagamentos','caixaregistro'));
     }
     public function efetuarbaixa($id = null, $tipopagamento = null)
     {
@@ -131,10 +144,10 @@ class CaixaregistrosController extends AppController
         ];
         $this->loadModel('Lancamentos');
         $lancamento = $this->Lancamentos->get($id);
-        if($lancamento->data_baixa !== null) {
-            return $this->redirect(['controller' => 'lancamentos','action' => 'index']);
+        if ($lancamento->data_baixa !== null) {
+            return $this->redirect(['controller' => 'lancamentos', 'action' => 'index']);
         }
-        if($lancamento->tipo !== 'REALIZADO' && ($this->caixaaberto(1) == true)) {
+        if ($lancamento->tipo !== 'REALIZADO' && ($this->caixaaberto(1) == true)) {
             $caixaregistro = $this->Caixaregistros->newEmptyEntity();
             $lancamento->data_baixa = FrozenTime::now();
             $lancamento->tipo = 'REALIZADO';
@@ -145,7 +158,8 @@ class CaixaregistrosController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Caixa Registro não foi adicionado, por favor tente novamente.'));
-            debug($lancamento);exit;
+            debug($lancamento);
+            exit;
         }
         $this->Flash->error(__('Caixa Fechado.'));
         return $this->redirect(['controller' => 'Caixaregistros', 'action' => 'darbaixa']);
@@ -164,6 +178,4 @@ class CaixaregistrosController extends AppController
         endforeach;
         return false;
     }
-    
-
 }

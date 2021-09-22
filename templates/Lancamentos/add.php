@@ -7,7 +7,7 @@
 
 
   <?php $this->assign('title', __('Adicionar Lançamento')); ?>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <?= $this->Html->css('bs-stepper.min.css'); ?>
   <?= $this->Html->script('bs-stepper.min.js'); ?>
   <div class="container" style="width: 60%;min-width:80%">
@@ -38,12 +38,12 @@
         </div>
       </div>
       <div class="bs-stepper-content bg-dark" style="padding: 20px;">
-        <?= $this->Form->create($lancamento,['type'=>'file']) ?>
+        <?= $this->Form->create($lancamento, ['type' => 'file']) ?>
         <div id="test-l-1" class="content bg-dark">
           <div class="panel-body">
             <div class="form-group">
               <?= $this->Form->label('Tipo') ?>
-              <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control', 'empty' => 'SELECIONE']); ?>
+              <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control tipo', 'empty' => 'SELECIONE']); ?>
             </div>
             <div class="form-group">
               <?= $this->Form->control('descricao', ['label' => 'Descrição', 'placeholder' => 'Descrição'], ['class' => 'form-control']); ?>
@@ -96,7 +96,7 @@
               <?= $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => 'SELECIONE']); ?>
             </div>
             <div class="form-group">
-              <?= $this->Form->control('uploadfiles', ['type' => 'file']); ?>
+              <?= $this->Form->control('uploadfiles', ['type' => 'file'],['class' => 'file']); ?>
             </div>
           </div>
           <div class="d-flex justify-content-between">
@@ -111,7 +111,7 @@
         </div>
         <?= $this->Form->end() ?>
       </div>
-  
+
       <script>
         var stepper1Node = document.querySelector('#stepper1')
         var stepper1 = new Stepper(document.querySelector('#stepper1'))
@@ -135,3 +135,14 @@
 
       <?= $this->Form->end() ?>
     </div>
+
+    <script>
+      $(".tipo").change(function() {
+        $tipo = $(".tipo").val();
+        if ($tipo == "PREVISTO") {
+          $(".file").addClass('d-none');
+        } else {
+          $(".file").removeClass('d-none');
+        }
+      });
+    </script>
