@@ -6,12 +6,19 @@
 ?>
 
 <?php $this->assign('title', __('Comprovantes') ); ?>
-<style>
-  .teste{
-    color: #E1E7F0;
-  }
-</style>
-<div class="card card-primary card-outline bg-dark">
+
+<?php
+$this->assign('breadcrumb',
+  $this->element('content/breadcrumb', [
+    'home' => true,
+    'breadcrumb' => [
+      'List Comprovantes',
+    ]
+  ])
+);
+?>
+
+<div class="card card-primary card-outline">
   <div class="card-header d-sm-flex">
     <h2 class="card-title"><!-- --></h2>
     <div class="card-toolbox">
@@ -19,30 +26,38 @@
             'label'=>false,
             'class' => 'form-control-sm',
           ]); ?>
-      <?= $this->Html->link(__('Novo Comprovante'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('New Comprovante'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
-    <table class="table text-nowrap">
+    <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-              <th class="teste"><?= ('Nome do Arquivo') ?></th>
-              <th class="teste"><?= ('Tipo') ?></th>
-              <th class="teste"><?= ('Lançamento') ?></th>
-              <th class="actions teste"><?= __('Ações') ?></th>
+              <th><?= $this->Paginator->sort('id_comprovante') ?></th>
+              <th><?= $this->Paginator->sort('nome_arquivo') ?></th>
+              <th><?= $this->Paginator->sort('tipo') ?></th>
+              <th><?= $this->Paginator->sort('lancamento_id') ?></th>
+              <th><?= $this->Paginator->sort('created') ?></th>
+              <th><?= $this->Paginator->sort('modified') ?></th>
+              <th><?= $this->Paginator->sort('img') ?></th>
+              <th class="actions"><?= __('Actions') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($comprovantes as $comprovante): ?>
           <tr>
+            <td><?= $this->Number->format($comprovante->id_comprovante) ?></td>
             <td><?= h($comprovante->nome_arquivo) ?></td>
             <td><?= h($comprovante->tipo) ?></td>
-            <td><?= $comprovante->has('lancamento') ? $this->Html->link($comprovante->lancamento->id_lancamento, ['controller' => 'Lancamentos', 'action' => 'view', $comprovante->lancamento->id_lancamento]) : '' ?></td>
+            <td><?= $comprovante->has('lancamento') ? $this->Html->link($comprovante->lancamento->tipo, ['controller' => 'Lancamentos', 'action' => 'view', $comprovante->lancamento->id_lancamento]) : '' ?></td>
+            <td><?= h($comprovante->created) ?></td>
+            <td><?= h($comprovante->modified) ?></td>
+            <td><?= h($comprovante->img) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $comprovante->nome_arquivo)]) ?>
+              <?= $this->Html->link(__('View'), ['action' => 'view', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Edit'), ['action' => 'edit', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $comprovante->id_comprovante)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -53,10 +68,10 @@
 
   <div class="card-footer d-md-flex paginator">
     <div class="mr-auto" style="font-size:.8rem">
-    <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} Comprovantes de {{count}} no total')) ?>
+      <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
     </div>
 
-    <ul class="pagination pagination-sm"
+    <ul class="pagination pagination-sm">
       <?= $this->Paginator->first('<i class="fas fa-angle-double-left"></i>', ['escape'=>false]) ?>
       <?= $this->Paginator->prev('<i class="fas fa-angle-left"></i>', ['escape'=>false]) ?>
       <?= $this->Paginator->numbers() ?>

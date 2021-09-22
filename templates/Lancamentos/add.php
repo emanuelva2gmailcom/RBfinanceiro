@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="bs-stepper-content bg-dark" style="padding: 20px;">
-        <?= $this->Form->create($lancamento) ?>
+        <?= $this->Form->create($lancamento,['type'=>'file']) ?>
         <div id="test-l-1" class="content bg-dark">
           <div class="panel-body">
             <div class="form-group">
@@ -95,6 +95,9 @@
             <div class="form-group">
               <?= $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => true]); ?>
             </div>
+            <div class="form-group">
+              <?= $this->Form->control('uploadfiles', ['type' => 'file']); ?>
+            </div>
           </div>
           <div class="d-flex justify-content-between">
             <div>
@@ -108,7 +111,7 @@
         </div>
         <?= $this->Form->end() ?>
       </div>
-
+  
       <script>
         var stepper1Node = document.querySelector('#stepper1')
         var stepper1 = new Stepper(document.querySelector('#stepper1'))
