@@ -102,6 +102,16 @@ class Application extends BaseApplication
             // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware
             ->add(new BodyParserMiddleware())
 
+            ->add(function($request, $response, $next) {
+                return $next($request, $response)
+                    ->withHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+                    ->withHeader('Access-Control-Allow-Methods', '*')
+                    ->withHeader('Access-Control-Allow-Credentials', 'true')
+                    ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+                    ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
+                    ->withHeader('Access-Control-Allow-Type', 'application/json');
+            })
+
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/4/en/controllers/middleware.html#cross-site-request-forgery-csrf-middleware
             ->add(new CsrfProtectionMiddleware([
