@@ -28,13 +28,13 @@ function realizado() {
         <h2 class="card-title">
             <!-- -->
         </h2>
+
         <div>
             <?= $this->Html->link(__('Previsto'), ['action' => '#'], ['class' => 'btn btn-primary', 'onclick' => 'previsto()']) ?>
         </div>
         <div style="margin-left: 50px;">
             <?= $this->Html->link(__('Realizado'), ['action' => '#'], ['class' => 'btn btn-primary', 'onclick' => 'realizado()']) ?>
         </div>
-
 
         <div class="card-toolbox">
 
@@ -76,8 +76,9 @@ function realizado() {
 
             <tbody id="prev">
                 <?php foreach ($lancamentos as $lancamento) : ?>
+                    <?php if ($lancamento->tipo == 'PREVISTO') { ?>
                     <tr>
-                        <?php if ($lancamento->tipo == 'PREVISTO') { ?>
+
                             <td><?= h($lancamento->tipo) ?></td>
                             <td><?= h($lancamento->descricao) ?></td>
                             <td><?= $this->Number->format($lancamento->valor) ?></td>
@@ -99,14 +100,16 @@ function realizado() {
                                 <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
                                 <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
                             </td>
-                        <?php } ?>
+
+                            <?php } ?>
+
                     <?php endforeach; ?>
             </tbody>
 
             <tbody id="real" style="display: none;">
                 <?php foreach ($lancamentos as $lancamento) : ?>
-                    <tr>
                     <?php if ($lancamento->tipo == 'REALIZADO') { ?>
+                    <tr>
                         <td><?= h($lancamento->tipo) ?></td>
                         <td><?= h($lancamento->descricao) ?></td>
                         <td><?= $this->Number->format($lancamento->valor) ?></td>
@@ -128,7 +131,7 @@ function realizado() {
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
                             <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
                         </td>
-                        <?php }?>
+                        <?php } ?>
                     <?php endforeach; ?>
             </tbody>
 
@@ -157,5 +160,4 @@ function realizado() {
 <script>
     function teste() {
         console.log("oi")
-    } <
-    /scrip>
+    } </script>
