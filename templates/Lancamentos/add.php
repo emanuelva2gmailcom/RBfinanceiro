@@ -67,6 +67,17 @@
                  $('.baixa').removeClass('d-none');
                }
              });
+
+             $('.flux').change(function (){
+               $test = $('.flux').val();
+               if($test === 123){
+                 $('.forn').addClass('d-none');
+                 $('.clie').removeClass('d-none');
+               }else{
+                 $('.clie').addClass('d-none');
+                 $('.forn').removeClass('d-none');
+               }
+             });
        </script>
         <div id="test-l-2" class="content bg-dark">
           <div class="panel-body">
@@ -84,11 +95,11 @@
             <div class="btn btn-primary" onclick="stepper1.previous()">Voltar</div>
             <div class="btn btn-primary" onclick="stepper1.next()">Próximo</div>
           </div>
-        </div>
+            </div>
         <div id="test-l-3" class="content bg-dark">
           <div class="panel-body">
             <div class="form-group">
-              <?= $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => 'SELECIONE']); ?>
+              <?= $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => 'SELECIONE'], ['class' => 'flux']); ?>
             </div>
             <div class="form-group">
               <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => 'SELECIONE']); ?>
@@ -101,10 +112,10 @@
         </div>
         <div id="test-l-4" class="content bg-dark">
           <div class="panel-body">
-            <div class="form-group">
+            <div class="form-group forn">
               <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
             </div>
-            <div class="form-group">
+            <div class="form-group clie">
               <?= $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => 'SELECIONE']); ?>
             </div>
           </div>
