@@ -10,9 +10,7 @@
                 <?php endforeach; ?>
                 <th scope="col">Total</th>
             </tr>
-        <tr>
-            <th scope="row">Entradas</th>
-        </tr>
+        
         </thead>
         <tbody class="text-success">
         <?php 
@@ -29,13 +27,12 @@
                 }
             endforeach;
         ?>
-        
         </tbody>
         <thead>
         <tr>
-            <th scope="row">Saídas</th>
-            <?php foreach($te as $t): ?>
-                <th><?= $t ?></th>
+            <th scope="row">Entradas</th>
+            <?php foreach($totale as $t): ?>
+                <td><?= $t ?></td>
             <?php endforeach; ?>
         </tr>
         </thead>
@@ -55,6 +52,14 @@
             endforeach;
         ?>
         </tbody>
+        <thead>
+        <tr>
+            <th scope="row">Saídas</th>
+            <?php foreach($totals as $t): ?>
+                <td><?= $t ?></td>
+            <?php endforeach; ?>
+        </tr>
+        </thead>
     </table>
 </div>
 <?php } else{?>

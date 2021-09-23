@@ -89,7 +89,7 @@ class RelatoriosController extends AppController
                 foreach($contas as $conta):
                     $result = [];
                     foreach($datas as $data):
-                        $valor = 0;
+                        $valor = null;
                         foreach($lancamentos as $lancamento):
                             if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
                                 $valor += intval($lancamento->valor);
@@ -139,12 +139,11 @@ class RelatoriosController extends AppController
             $this->loadModel('Fluxocontas');
             $this->paginate = [
                 'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'], 
-                'conditions' => ['tipo' => 'REALIZADO']
+                'conditions' => ['tipo' => 'PREVISTO']
             ];
             $lancamentos = $this->paginate($this->Lancamentos);
             
             $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
-            
             $result = [];
             
             foreach($contas as $conta):
@@ -155,25 +154,31 @@ class RelatoriosController extends AppController
                 }
             endforeach;
 
-            $teste = [];
-
-            foreach($datas as $data):
-                $teste[$data] = null;
-            endforeach;
             $totale = [];
             $totals = [];
+
+            foreach($datas as $data):
+                $totale[$data] = null;
+                $totals[$data] = null;
+            endforeach;
             foreach($contas as $conta):
                 $result = [];
                 foreach($datas as $data):
-                    $valor = 0;
+                    
+                    $valor = null;
                     foreach($lancamentos as $lancamento):
-                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
+                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
                             $valor += intval($lancamento->valor);
                         }
-                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
+                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
                             $valor += intval('-'.$lancamento->valor);
                         }
                     endforeach;
+                    if(in_array($conta->conta, $entradas)) {
+                        $totale[$data] += $valor;
+                    }else if(in_array($conta->conta, $entradas)){
+                        $totals[$data] += $valor;
+                    }
                     array_push($result, $valor);
                 endforeach;
                 
@@ -181,17 +186,8 @@ class RelatoriosController extends AppController
                 array_push($result, $this->array_soma($result, 1));
                 array_push($valores, $result);
             endforeach;
-            $te = [];
-            foreach($valores as $v):
-                $valor = 0;
-                for($i = 1; $i <= count($datas); $i++):
-                    $valor += $v[$i];
-                    // debug($index);
-                endfor;
-                array_push($te, $valor);
-            endforeach;
             $cu = true;
-            $this->set(compact('valores', 'cu', 'saidas', 'entradas', 'datas', 'te'));
+            $this->set(compact('valores', 'cu', 'saidas', 'entradas', 'datas', 'totale', 'totals'));
         }
         $this->set(compact('cu'));
     }
