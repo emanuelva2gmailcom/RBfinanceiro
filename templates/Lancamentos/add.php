@@ -67,17 +67,6 @@
                  $('.baixa').removeClass('d-none');
                }
              });
-
-             $('.flux').change(function (){
-               $test = $('.flux').val();
-               if($test === 123){
-                 $('.forn').addClass('d-none');
-                 $('.clie').removeClass('d-none');
-               }else{
-                 $('.clie').addClass('d-none');
-                 $('.forn').removeClass('d-none');
-               }
-             });
        </script>
         <div id="test-l-2" class="content bg-dark">
           <div class="panel-body">
@@ -99,7 +88,7 @@
         <div id="test-l-3" class="content bg-dark">
           <div class="panel-body">
             <div class="form-group">
-              <?= $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => 'SELECIONE'], ['class' => 'flux']); ?>
+              <?= $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => 'SELECIONE']); ?>
             </div>
             <div class="form-group">
               <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => 'SELECIONE']); ?>
