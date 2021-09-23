@@ -34,6 +34,9 @@
         <thead>
         <tr>
             <th scope="row">Saídas</th>
+            <?php foreach($te as $t): ?>
+                <th><?= $t ?></th>
+            <?php endforeach; ?>
         </tr>
         </thead>
         <tbody class="text-danger">

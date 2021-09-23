@@ -146,24 +146,6 @@ class RelatoriosController extends AppController
             $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
             
             $result = [];
-                foreach($contas as $conta):
-                    $result = [];
-                    foreach($datas as $data):
-                        $valor = 0;
-                        foreach($lancamentos as $lancamento):
-                            if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
-                                $valor += intval($lancamento->valor);
-                            }
-                            else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
-                                $valor += intval('-'.$lancamento->valor);
-                            }
-                        endforeach;
-                        array_push($result, $valor);
-                    endforeach;
-                    array_unshift($result, $conta->conta);
-                    array_push($result, $this->array_soma($result, 1));
-                    array_push($valores, $result);
-                endforeach;
             
             foreach($contas as $conta):
                 if($conta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
@@ -172,8 +154,44 @@ class RelatoriosController extends AppController
                     array_push($saidas, $conta->conta);
                 }
             endforeach;
+
+            $teste = [];
+
+            foreach($datas as $data):
+                $teste[$data] = null;
+            endforeach;
+            $totale = [];
+            $totals = [];
+            foreach($contas as $conta):
+                $result = [];
+                foreach($datas as $data):
+                    $valor = 0;
+                    foreach($lancamentos as $lancamento):
+                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
+                            $valor += intval($lancamento->valor);
+                        }
+                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
+                            $valor += intval('-'.$lancamento->valor);
+                        }
+                    endforeach;
+                    array_push($result, $valor);
+                endforeach;
+                
+                array_unshift($result, $conta->conta);
+                array_push($result, $this->array_soma($result, 1));
+                array_push($valores, $result);
+            endforeach;
+            $te = [];
+            foreach($valores as $v):
+                $valor = 0;
+                for($i = 1; $i <= count($datas); $i++):
+                    $valor += $v[$i];
+                    // debug($index);
+                endfor;
+                array_push($te, $valor);
+            endforeach;
             $cu = true;
-            $this->set(compact('valores', 'cu', 'saidas', 'entradas', 'datas'));
+            $this->set(compact('valores', 'cu', 'saidas', 'entradas', 'datas', 'te'));
         }
         $this->set(compact('cu'));
     }
