@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property int|null $lancamento_id
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
+ * @property string|null $img
  *
  * @property \App\Model\Entity\Lancamento $lancamento
  */
@@ -34,6 +35,7 @@ class Comprovante extends Entity
         'lancamento_id' => true,
         'created' => true,
         'modified' => true,
+        'img' => true,
         'lancamento' => true,
     ];
 }

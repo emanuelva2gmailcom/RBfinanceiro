@@ -6,8 +6,7 @@
 ?>
 
 <?php
-$this->assign('title', __('Comprovante') );
-?>
+$this->assign('title', __('Comprovante') );?>
 
 <div class="view card card-primary card-outline">
   <div class="card-header d-sm-flex">
@@ -25,7 +24,11 @@ $this->assign('title', __('Comprovante') );
         </tr>
         <tr>
             <th><?= __('Lancamento') ?></th>
-            <td><?= $comprovante->has('lancamento') ? $this->Html->link($comprovante->lancamento->id_lancamento, ['controller' => 'Lancamentos', 'action' => 'view', $comprovante->lancamento->id_lancamento]) : '' ?></td>
+            <td><?= $comprovante->has('lancamento') ? $this->Html->link($comprovante->lancamento->tipo, ['controller' => 'Lancamentos', 'action' => 'view', $comprovante->lancamento->id_lancamento]) : '' ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Img') ?></th>
+            <td><?= h($comprovante->img) ?></td>
         </tr>
         <tr>
             <th><?= __('Id Comprovante') ?></th>

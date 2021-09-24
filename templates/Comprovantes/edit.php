@@ -14,6 +14,7 @@
       echo $this->Form->control('nome_arquivo');
       echo $this->Form->control('tipo');
       echo $this->Form->control('lancamento_id', ['options' => $lancamentos, 'empty' => true]);
+      echo $this->Form->control('img');
     ?>
   </div>
 
