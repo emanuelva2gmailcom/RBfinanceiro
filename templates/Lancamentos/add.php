@@ -48,7 +48,6 @@
 
                           <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control tipo', 'empty' => 'SELECIONE']); ?>
 
-
                       </div>
                       <div class="form-group">
                           <?= $this->Form->control('descricao', ['label' => 'Descrição', 'placeholder' => 'Descrição'], ['class' => 'form-control']); ?>
@@ -117,7 +116,6 @@
               </div>
               <?= $this->Form->end() ?>
           </div>
-
           <script>
               var stepper1Node = document.querySelector('#stepper1')
               var stepper1 = new Stepper(document.querySelector('#stepper1'))

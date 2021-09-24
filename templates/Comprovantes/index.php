@@ -46,7 +46,7 @@
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $comprovante->id_comprovante)]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __(' Você quer mesmo deletar {0}?', $comprovante->nome_arquivo)]) ?>
             </td>
           </tr>
           <?php endforeach; ?>

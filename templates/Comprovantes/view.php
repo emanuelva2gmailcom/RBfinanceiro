@@ -6,8 +6,7 @@
 ?>
 
 <?php
-$this->assign('title', __('Comprovante') );
-?>
+$this->assign('title', __('Comprovante') );?>
 
 <div class="view card card-primary card-outline">
   <div class="card-header d-sm-flex">
