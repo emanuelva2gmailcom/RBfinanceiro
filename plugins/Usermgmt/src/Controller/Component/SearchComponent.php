@@ -152,7 +152,7 @@ class SearchComponent extends Component {
 					switch($options['type']) {
 						case 'select':
 							if(empty($options['model'])) {
-								$options['model'] = $fieldModel;
+								$options['model'] = "Usermgmt.". $fieldModel;
 							}
 
 							$workingModel = FactoryLocator::get('Table')->get($options['model']);
