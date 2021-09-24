@@ -1,10 +1,14 @@
 <?php if($show == true){ ?>
-<div class="card-body table-responsive p-0">
-    <table class="table table-bordered bg-light">
+<style>
+.table td{
+    min-width: 100px;
+}
+</style>
+<div class="card-body table-responsive">
+    <table class="table table-sm table-light rounded">
         <thead class="bg-primary">
-            <!-- <?= $this->Html->tableHeaders($datas);?> -->
             <tr>
-                <th scope="col">Data=====></th>
+                <th scope="col"></th>
                 <?php foreach($datas as $data): ?>
                     <th scope="col"><?= $data ?></th>
                 <?php endforeach; ?>
@@ -18,7 +22,7 @@
                 if(in_array($valor[0], $entradas)){
                 ?>
                     <tr>
-                        <th scope="row"><?= $valor[0] ?></th>
+                        <th scope="row" class="bg-lightblue"><?= $valor[0] ?></th>
                         <?php for($i = 1; $i < count($valor); $i++): ?>
                             <td><?= $valor[$i] ?></td>
                         <?php endfor; ?>
@@ -42,7 +46,7 @@
                 if(in_array($valor[0], $saidas)){
                 ?>
                     <tr>
-                        <th scope="row"><?= $valor[0] ?></th>
+                        <th scope="row" class="bg-lightblue"><?= $valor[0] ?></th>
                         <?php for($i = 1; $i < count($valor); $i++): ?>
                             <td><?= $valor[$i] ?></td>
                         <?php endfor; ?>
@@ -60,8 +64,8 @@
                 <?php endforeach; ?>
             </tr>
         </thead>
-        <thead class="bg-dark">
-            <tr class="bg-black">
+        <thead class="thead-light">
+            <tr>
                 <th scope="row">ENTRADAS - SAIDAS</th>
                 <?php foreach($entradas_saidas as $t): ?>
                     <td><?= $t ?></td>
@@ -81,6 +85,9 @@
             </tr>
         </thead>
     </table>
+    <div class="d-flex justify-content-start bg-light rounded-bottom" style="padding: 5px;">
+        <a href="/relatorios/fluxodecaixa" class="btn btn-none border border-primary text-primary">Voltar</a>
+    </div>
 </div>
 <?php } else{?>
     <div class="container bg-dark">

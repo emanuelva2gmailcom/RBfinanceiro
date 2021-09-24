@@ -2,9 +2,8 @@
 <div class="card-body table-responsive p-0">
     <table class="table table-bordered bg-light">
         <thead>
-            <!-- <?= $this->Html->tableHeaders($datas);?> -->
             <tr>
-                <th scope="col">Data=====></th>
+                <th scope="col"></th>
                 <?php foreach($datas as $data): ?>
                     <th scope="col"><?= $data ?></th>
                 <?php endforeach; ?>
@@ -53,6 +52,7 @@
         ?>
         </tbody>
     </table>
+    <?= $this->Html->link('Voltar', ['controller' => 'Relatorios', 'action' => 'gerencial']) ?>
 </div>
 <?php } else{?>
     <div class="container bg-dark">
