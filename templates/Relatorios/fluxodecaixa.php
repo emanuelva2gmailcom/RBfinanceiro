@@ -1,7 +1,7 @@
 <?php if($show == true){ ?>
 <div class="card-body table-responsive p-0">
     <table class="table table-bordered bg-light">
-        <thead>
+        <thead class="bg-primary">
             <!-- <?= $this->Html->tableHeaders($datas);?> -->
             <tr>
                 <th scope="col">Data=====></th>
@@ -28,13 +28,13 @@
             endforeach;
         ?>
         </tbody>
-        <thead>
-        <tr>
-            <th scope="row">Entradas</th>
-            <?php foreach($totale as $t): ?>
-                <td><?= $t ?></td>
-            <?php endforeach; ?>
-        </tr>
+        <thead class="bg-primary">
+            <tr>
+                <th scope="row">Entradas</th>
+                <?php foreach($totale as $t): ?>
+                    <td><?= $t ?></td>
+                <?php endforeach; ?>
+            </tr>
         </thead>
         <tbody class="text-danger">
         <?php 
@@ -52,13 +52,33 @@
             endforeach;
         ?>
         </tbody>
-        <thead>
-        <tr>
-            <th scope="row">Saídas</th>
-            <?php foreach($totals as $t): ?>
-                <td><?= $t ?></td>
-            <?php endforeach; ?>
-        </tr>
+        <thead class="bg-primary">
+            <tr>
+                <th scope="row">Saídas</th>
+                <?php foreach($totals as $t): ?>
+                    <td><?= $t ?></td>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+        <thead class="bg-dark">
+            <tr class="bg-black">
+                <th scope="row">ENTRADAS - SAIDAS</th>
+                <?php foreach($entradas_saidas as $t): ?>
+                    <td><?= $t ?></td>
+                <?php endforeach; ?>
+            </tr>
+            <tr>
+                <th scope="row">INICIAL</th>
+                <?php foreach($inicial as $t): ?>
+                    <td><?= $t ?></td>
+                <?php endforeach; ?>
+            </tr>
+            <tr>
+                <th scope="row">FINAL</th>
+                <?php foreach($final as $t): ?>
+                    <td><?= $t ?></td>
+                <?php endforeach; ?>
+            </tr>
         </thead>
     </table>
 </div>

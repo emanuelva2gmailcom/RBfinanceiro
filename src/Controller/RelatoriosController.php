@@ -120,7 +120,21 @@ class RelatoriosController extends AppController
 
     public function dre()
     {
+    }
 
+    public function total_before($data = null, $lancamentos = null)
+    {
+        $valor = 0;
+        $date = new Time($data, 'UTC');
+        $data = $date->modify('-1 days');
+        foreach($lancamentos as $l):
+            if($l->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada' && $data->i18nFormat('yyyy-MM-dd') == $l->data_vencimento->i18nFormat('yyyy-MM-dd')){
+                $valor += $l->valor;
+            }else if($l->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida' && $data->i18nFormat('yyyy-MM-dd') == $l->data_vencimento->i18nFormat('yyyy-MM-dd')){
+                $valor -= $l->valor;
+            }
+        endforeach;
+        return $valor;
     }
 
     public function fluxodecaixa()
@@ -134,6 +148,9 @@ class RelatoriosController extends AppController
             $valores = [];
             $saidas = [];
             $entradas = [];
+            $totale = [];
+            $totals = [];
+            $entradas_saidas = [];
 
             $this->loadModel('Lancamentos');
             $this->loadModel('Fluxocontas');
@@ -142,7 +159,8 @@ class RelatoriosController extends AppController
                 'conditions' => ['tipo' => 'PREVISTO']
             ];
             $lancamentos = $this->paginate($this->Lancamentos);
-            
+            $inicial = [$this->total_before($response['comeco'], $lancamentos)];
+            $final = [];
             $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
             $result = [];
             
@@ -154,13 +172,11 @@ class RelatoriosController extends AppController
                 }
             endforeach;
 
-            $totale = [];
-            $totals = [];
-
             foreach($datas as $data):
                 $totale[$data] = null;
                 $totals[$data] = null;
             endforeach;
+
             foreach($contas as $conta):
                 $result = [];
                 foreach($datas as $data):
@@ -176,7 +192,7 @@ class RelatoriosController extends AppController
                     endforeach;
                     if(in_array($conta->conta, $entradas)) {
                         $totale[$data] += $valor;
-                    }else if(in_array($conta->conta, $entradas)){
+                    }else if(in_array($conta->conta, $saidas)){
                         $totals[$data] += $valor;
                     }
                     array_push($result, $valor);
@@ -189,7 +205,16 @@ class RelatoriosController extends AppController
             $show = true;
             array_push($totale, array_sum($totale));
             array_push($totals, array_sum($totals));
-            $this->set(compact('valores', 'show', 'saidas', 'entradas', 'datas', 'totale', 'totals'));
+            foreach($totale as $i => $t):
+                array_push($entradas_saidas, $t + $totals[$i]);
+            endforeach;
+            foreach($entradas_saidas as $i => $es):
+                array_push($final, $es + $inicial[$i]);
+                if($i == count($entradas_saidas) - 1) {break;}
+                array_push($inicial, $final[$i]);
+            endforeach;
+            // debug([$final, $inicial]);exit;
+            $this->set(compact('valores', 'show', 'saidas', 'entradas', 'datas', 'totale', 'totals', 'entradas_saidas', 'inicial', 'final'));
         }
         $this->set(compact('show'));
     }
