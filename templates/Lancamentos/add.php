@@ -79,7 +79,7 @@
               <div id="test-l-3" class="content bg-dark">
                   <div class="panel-body">
                       <div class="form-group">
-                          <?= $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => 'SELECIONE', 'class' => 'flux']); ?>
+                          <?= $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => 'SELECIONE']); ?>
                       </div>
                       <div class="form-group">
                           <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => 'SELECIONE']); ?>
@@ -92,10 +92,10 @@
               </div>
               <div id="test-l-4" class="content bg-dark">
                   <div class="panel-body">
-                      <div class="form-group forn">
+                      <div class="form-group">
                           <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
                       </div>
-                      <div class="form-group clie">
+                      <div class="form-group">
                           <?= $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => 'SELECIONE']); ?>
                       </div>
                   </div>
@@ -146,15 +146,4 @@
             }
         });
 
-        $('.flux').change(function(){
-            $test = $('.flux :selected').text();
-            $array = $test.split(" ", 0);
-            if ($array == 'vista'){
-                $('.forn').removeClass('d-none');
-                $('.clie').addClass('d-none');
-            } else {
-                $('.forn').addClass('d-none');
-                $('.clie').removeClass('d-none');
-            }
-        });
       </script>
