@@ -65,7 +65,7 @@ class RelatoriosController extends AppController
     
     public function gerencial()
     {
-        $cu = false;
+        $show = false;
         if ($this->request->is('post')) {
             
             $response = $this->request->getdata();
@@ -110,12 +110,12 @@ class RelatoriosController extends AppController
                     array_push($entradas, $conta->conta);
                 }else if($conta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
                     array_push($saidas, $conta->conta);
-                }
+                }   
             endforeach;
-            $cu = true;
-            $this->set(compact('valores', 'cu', 'saidas', 'entradas', 'datas'));
+            $show = true;
+            $this->set(compact('valores', 'show', 'saidas', 'entradas', 'datas'));
         }
-        $this->set(compact('cu'));
+        $this->set(compact('show'));
     }
 
     public function dre()
@@ -125,7 +125,7 @@ class RelatoriosController extends AppController
 
     public function fluxodecaixa()
     {
-        $cu = false;
+        $show = false;
         if ($this->request->is('post')) {
             
             $response = $this->request->getdata();
@@ -186,10 +186,12 @@ class RelatoriosController extends AppController
                 array_push($result, $this->array_soma($result, 1));
                 array_push($valores, $result);
             endforeach;
-            $cu = true;
-            $this->set(compact('valores', 'cu', 'saidas', 'entradas', 'datas', 'totale', 'totals'));
+            $show = true;
+            array_push($totale, array_sum($totale));
+            array_push($totals, array_sum($totals));
+            $this->set(compact('valores', 'show', 'saidas', 'entradas', 'datas', 'totale', 'totals'));
         }
-        $this->set(compact('cu'));
+        $this->set(compact('show'));
     }
 
     public function index()

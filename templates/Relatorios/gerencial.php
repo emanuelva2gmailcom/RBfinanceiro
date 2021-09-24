@@ -1,4 +1,4 @@
-<?php if($cu == true){ ?>
+<?php if($show == true){ ?>
 <div class="card-body table-responsive p-0">
     <table class="table table-bordered bg-light">
         <thead>
