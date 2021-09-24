@@ -43,8 +43,6 @@ $this->assign('title', __('Dregrupo') );
           __('Deletar'),
           ['action' => 'delete',  $dregrupo->id_dregrupo],
 
-          ['confirm' => __('Você quer mesmo deletar {0}?',  $dregrupo->id_dregrupo), 'class' => 'btn btn-danger']
-
           ['confirm' => __('Você quer mesmo deletar {0}?',  $dregrupo->grupo), 'class' => 'btn btn-danger']
 
       ) ?>
