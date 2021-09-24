@@ -51,7 +51,7 @@ function realizado() {
 
 
   <div class="card-body table-responsive p-0">
-    <div id='prev'>
+    <div id='prev' style="display:none;">
         <table class="table text-nowrap">
             <thead>
                 <tr>
@@ -126,7 +126,7 @@ function realizado() {
     <!-- /.card-footer -->
   </div>
 
-  <div id='real'>
+  <div id='real' style="display:none;">
         <table class="table text-nowrap">
             <thead>
                 <tr>
@@ -178,7 +178,6 @@ function realizado() {
 
                     <?php endforeach; ?>
             </tbody>
-
         </table>
 
 
