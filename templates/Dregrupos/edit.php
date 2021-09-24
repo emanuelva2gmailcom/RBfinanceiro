@@ -20,15 +20,6 @@
   </div>
 
   <div class="card-footer d-flex">
-
-    <div class="">
-      <?= $this->Form->postLink(
-          __('Deletar'),
-          ['action' => 'delete', $dregrupo->id_dregrupo],
-          ['confirm' => __('Você quer mesmo deletar {0}?', $dregrupo->id_dregrupo), 'class' => 'btn btn-danger']
-      ) ?>
-    </div>
-
     <div class="ml-auto">
       <?= $this->Form->button(__('Salvar')) ?>
       <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>

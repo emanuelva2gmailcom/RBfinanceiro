@@ -43,8 +43,8 @@ class ComprovantesFixture extends TestFixture
                 'nome_arquivo' => 'Lorem ipsum dolor sit amet',
                 'tipo' => 'Lorem ipsum dolor sit amet',
                 'lancamento_id' => 1,
-                'created' => 1632482859,
-                'modified' => 1632482859,
+                'created' => 1632310394,
+                'modified' => 1632310394,
                 'img' => 'Lorem ipsum dolor sit amet',
             ],
         ];

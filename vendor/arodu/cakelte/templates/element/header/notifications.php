@@ -1,4 +1,4 @@
-<li class="nav-item dropdown">
+<!-- <li class="nav-item dropdown">
   <a class="nav-link" data-toggle="dropdown" href="#">
     <i class="far fa-bell"></i>
     <span class="badge badge-warning navbar-badge" id="icon-quant">15</span>
@@ -10,6 +10,9 @@
     <div class="dropdown-divider"></div>
     <a href="/notifications/" class="dropdown-item dropdown-footer">Vizualizar todas as notificações</a>
   </div>
+
+</li> -->
+
 </li>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
@@ -17,7 +20,7 @@
   function getContent()
   {
     try {
-      const response = axios.get('/notifications/getNotifications/').then(function (response) { // handle success 
+      const response = axios.get('/notifications/getNotifications/').then(function (response) { // handle success
         show(response.data); })
     } catch (error) {
       console.error(error);
@@ -45,3 +48,4 @@
   setInterval(getContent, 120 * 1000)
 
 </script>
+

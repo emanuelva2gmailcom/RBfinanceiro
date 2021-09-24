@@ -93,8 +93,6 @@ $this->assign('title', __('Dregrupo') );
               <?= $this->Html->link(__('Visualizar'), ['controller' => 'Drecontas', 'action' => 'view', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
               <?= $this->Html->link(__('Editar'), ['controller' => 'Drecontas', 'action' => 'edit', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
 
-              <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Drecontas', 'action' => 'delete', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $drecontas->id_dreconta)]) ?>
-
               <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Drecontas', 'action' => 'delete', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $drecontas->conta)]) ?>
 
             </td>
