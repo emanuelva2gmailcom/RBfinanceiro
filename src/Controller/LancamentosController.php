@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -89,15 +90,21 @@ class LancamentosController extends AppController
      */
     public function add()
     {
+        $this->loadModel('Comprovantes');
+        $comprovantes = $this->paginate($this->Comprovantes);
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
-            if(($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())){
-                $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
-
-                return $this->redirect(['action' => 'add']);
+            if (!$lancamento->getErrors()) {
+                $image = $this->request->getData('uploadfiles');
+                $name = $image->getClientFilename();
+                $targetpath = WWW_ROOT.'img/uploads/'.DS.$name;
+                if($name)
+                $image->moveTo($targetpath);
+                $comprovantes = $this->Comprovantes->newEmptyEntity();
+                $comprovantes->img = $name;
             }
-            if ($this->Lancamentos->save($lancamento)) {
+            if (($this->Comprovantes->save($comprovantes)) && ($this->Lancamentos->save($lancamento))) {
                 $this->Flash->success(__('Lançamento adicionado com sucesso'));
 
                 return $this->redirect(['action' => 'index']);
@@ -108,8 +115,8 @@ class LancamentosController extends AppController
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
-        $grupos = ['PREVISTO','REALIZADO'];
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas','grupos'));
+        $grupos = ['PREVISTO', 'REALIZADO'];
+        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'grupos'));
     }
 
     /**
@@ -139,8 +146,7 @@ class LancamentosController extends AppController
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
         $lancamentos = $this->Lancamentos->find('list', ['limit' => 200]);
-        $grupos = ['PREVISTO','REALIZADO'];
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas','lancamentos','grupos'));
+        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'lancamentos'));
     }
 
     /**

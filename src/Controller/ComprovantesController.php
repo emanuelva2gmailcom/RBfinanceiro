@@ -53,11 +53,11 @@ class ComprovantesController extends AppController
         if ($this->request->is('post')) {
             $comprovante = $this->Comprovantes->patchEntity($comprovante, $this->request->getData());
             if ($this->Comprovantes->save($comprovante)) {
-                $this->Flash->success(__('Comprovante adicionado com sucesso.'));
+                $this->Flash->success(__('The comprovante has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Comprovante não foi adicionado, tente novamente.'));
+            $this->Flash->error(__('The comprovante could not be saved. Please, try again.'));
         }
         $lancamentos = $this->Comprovantes->Lancamentos->find('list', ['limit' => 200]);
         $this->set(compact('comprovante', 'lancamentos'));
@@ -78,11 +78,11 @@ class ComprovantesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $comprovante = $this->Comprovantes->patchEntity($comprovante, $this->request->getData());
             if ($this->Comprovantes->save($comprovante)) {
-                $this->Flash->success(__('Comprovante editado com sucesso.'));
+                $this->Flash->success(__('The comprovante has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Comprovante não foi editado, tente novamente.'));
+            $this->Flash->error(__('The comprovante could not be saved. Please, try again.'));
         }
         $lancamentos = $this->Comprovantes->Lancamentos->find('list', ['limit' => 200]);
         $this->set(compact('comprovante', 'lancamentos'));
@@ -100,9 +100,9 @@ class ComprovantesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $comprovante = $this->Comprovantes->get($id);
         if ($this->Comprovantes->delete($comprovante)) {
-            $this->Flash->success(__('Comprovante deletado com sucesso.'));
+            $this->Flash->success(__('The comprovante has been deleted.'));
         } else {
-            $this->Flash->error(__('Comprovante não foi deletado, tente novamente.'));
+            $this->Flash->error(__('The comprovante could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
