@@ -72,6 +72,10 @@ class ComprovantesTable extends Table
             ->scalar('tipo')
             ->allowEmptyString('tipo');
 
+        $validator
+            ->scalar('img')
+            ->allowEmptyString('img');
+
         return $validator;
     }
 

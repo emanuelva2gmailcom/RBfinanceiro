@@ -6,19 +6,20 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Comprovante Entity
+ * Notification Entity
  *
- * @property int $id_comprovante
- * @property string|null $nome_arquivo
- * @property string|null $tipo
- * @property int|null $lancamento_id
+ * @property int $id_notification
+ * @property string|null $title
+ * @property string|null $message
+ * @property \Cake\I18n\FrozenTime|null $data
+ * @property string|null $class
  * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
- * @property string|null $img
+ * @property \Cake\I18n\FrozenTime|null $modify
+ * @property int|null $lancamento_id
  *
  * @property \App\Model\Entity\Lancamento $lancamento
  */
-class Comprovante extends Entity
+class Notification extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -30,12 +31,13 @@ class Comprovante extends Entity
      * @var array
      */
     protected $_accessible = [
-        'nome_arquivo' => true,
-        'tipo' => true,
-        'lancamento_id' => true,
+        'title' => true,
+        'message' => true,
+        'data' => true,
+        'class' => true,
         'created' => true,
-        'modified' => true,
-        'img' => true,
+        'modify' => true,
+        'lancamento_id' => true,
         'lancamento' => true,
     ];
 }

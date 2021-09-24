@@ -133,4 +133,18 @@ class CaixasController extends AppController
         }
     }
 
+    public function caixaaberto()
+    {
+        $this->loadModel('Caixas');
+        $now = date('d-m-Y');
+        $caixas = $this->paginate($this->Caixas);
+        foreach ($caixas as $caixa) :
+            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
+                return $caixa->id_caixa;
+                return $caixa->is_aberto;
+            }
+        endforeach;
+        return false;
+    }
+
 }

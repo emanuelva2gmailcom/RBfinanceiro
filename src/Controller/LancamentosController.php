@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -18,6 +19,46 @@ class LancamentosController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
+        ];
+        $lancamentos = $this->paginate($this->Lancamentos);
+
+        $this->set(compact('lancamentos'));
+    }
+
+    public function previsto()
+    {
+        $lancamento = $this->Lancamentos->newEmptyEntity();
+        if ($this->request->is('post')) {
+           if(($lancamento->tipo == 'PREVISTO')) { ?>
+            <script>
+                function mudar(prev) {
+                    var display = document.getElementById(prev).style.display;
+                    if(display == "none")
+                        document.getElementById(prev).style.display = 'block';
+                    else
+                        document.getElementById(prev).style.display = 'none';
+                }
+
+                mudar();
+            </script>
+            <?php }else{ ?>
+            <script>
+                function mudar(real) {
+                    var display = document.getElementById(real).style.display;
+                    if(display == "none")
+                        document.getElementById(real).style.display = 'block';
+                    else
+                        document.getElementById(real).style.display = 'none';
+                }
+
+                mudar();
+            </script>
+            <?php }
+         }
+
+
         $this->paginate = [
             'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
         ];
@@ -49,10 +90,21 @@ class LancamentosController extends AppController
      */
     public function add()
     {
+        $this->loadModel('Comprovantes');
+        $comprovantes = $this->paginate($this->Comprovantes);
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
-            if ($this->Lancamentos->save($lancamento)) {
+            if (!$lancamento->getErrors()) {
+                $image = $this->request->getData('uploadfiles');
+                $name = $image->getClientFilename();
+                $targetpath = WWW_ROOT.'img/uploads/'.DS.$name;
+                if($name)
+                $image->moveTo($targetpath);
+                $comprovantes = $this->Comprovantes->newEmptyEntity();
+                $comprovantes->img = $name;
+            }
+            if (($this->Comprovantes->save($comprovantes)) && ($this->Lancamentos->save($lancamento))) {
                 $this->Flash->success(__('Lançamento adicionado com sucesso'));
 
                 return $this->redirect(['action' => 'index']);
@@ -63,8 +115,8 @@ class LancamentosController extends AppController
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
-        $grupos = ['PREVISTO','REALIZADO'];
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas','grupos'));
+        $grupos = ['PREVISTO', 'REALIZADO'];
+        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'grupos'));
     }
 
     /**
@@ -81,6 +133,7 @@ class LancamentosController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
+
             if ($this->Lancamentos->save($lancamento)) {
                 $this->Flash->success(__('Lançamento editado com sucesso.'));
 
@@ -93,7 +146,7 @@ class LancamentosController extends AppController
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
         $lancamentos = $this->Lancamentos->find('list', ['limit' => 200]);
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas','lancamentos'));
+        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'lancamentos'));
     }
 
     /**
@@ -116,3 +169,6 @@ class LancamentosController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 }
+
+
+?>
