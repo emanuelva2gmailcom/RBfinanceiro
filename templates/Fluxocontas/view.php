@@ -45,7 +45,7 @@ $this->assign('title', __('Fluxoconta') );
       <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $fluxoconta->id_fluxoconta],
-          ['confirm' => __('Vocề quer mesmo deletar # {0}?',  $fluxoconta->conta), 'class' => 'btn btn-danger']
+          ['confirm' => __('Vocề quer mesmo deletar {0}?',  $fluxoconta->conta), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">

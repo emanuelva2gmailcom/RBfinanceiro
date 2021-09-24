@@ -54,11 +54,11 @@ class NotificationsController extends AppController
             $notification = $this->Notifications->patchEntity($notification, $this->request->getData());
             $notification->data->i18nFormat('yyyy-MM-dd');
             if ($this->Notifications->save($notification)) {
-                $this->Flash->success(__('The notification has been saved.'));
+                $this->Flash->success(__('Notificação adicionada com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The notification could not be saved. Please, try again.'));
+            $this->Flash->error(__('Notificação não foi adicionada, tente novamente.'));
         }
         $lancamentos = $this->Notifications->Lancamentos->find('list', ['limit' => 200]);
         $this->set(compact('notification', 'lancamentos'));
@@ -79,11 +79,11 @@ class NotificationsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $notification = $this->Notifications->patchEntity($notification, $this->request->getData());
             if ($this->Notifications->save($notification)) {
-                $this->Flash->success(__('The notification has been saved.'));
+                $this->Flash->success(__('Notificação editada com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The notification could not be saved. Please, try again.'));
+            $this->Flash->error(__('Notificação não foi editada, tente novamente.'));
         }
         $lancamentos = $this->Notifications->Lancamentos->find('list', ['limit' => 200]);
         $this->set(compact('notification', 'lancamentos'));
@@ -101,9 +101,9 @@ class NotificationsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $notification = $this->Notifications->get($id);
         if ($this->Notifications->delete($notification)) {
-            $this->Flash->success(__('The notification has been deleted.'));
+            $this->Flash->success(__('Notificação deletada com sucesso.'));
         } else {
-            $this->Flash->error(__('The notification could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Notificação não foi deletada, tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

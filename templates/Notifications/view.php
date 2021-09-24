@@ -6,17 +6,7 @@
 ?>
 
 <?php
-$this->assign('title', __('Notification') );
-
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Notifications' => ['action'=>'index'],
-      'View',
-    ]
-  ])
-);
+$this->assign('title', __('Notificação') );
 ?>
 
 <div class="view card card-primary card-outline">
@@ -62,14 +52,14 @@ $this->assign('breadcrumb',
   <div class="card-footer d-flex">
     <div class="">
       <?= $this->Form->postLink(
-          __('Delete'),
+          __('Deletar'),
           ['action' => 'delete',  $notification->id_notification],
-          ['confirm' => __('Are you sure you want to delete # {0}?',  $notification->id_notification), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar {0}?',  $notification->title), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">
-      <?= $this->Html->link(__('Edit'), ['action' => 'edit',  $notification->id_notification], ['class' => 'btn btn-secondary']) ?>
-      <?= $this->Html->link(__('Cancel'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $notification->id_notification], ['class' => 'btn btn-secondary']) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
     </div>
   </div>
 </div>

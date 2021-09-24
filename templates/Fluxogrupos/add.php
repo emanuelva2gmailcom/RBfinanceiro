@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php $this->assign('title', __('Adicionar   Fluxogrupo') ); ?>
+<?php $this->assign('title', __('Adicionar Fluxogrupo') ); ?>
 
 <div class="card card-primary card-outline">
   <?= $this->Form->create($fluxogrupo) ?>
