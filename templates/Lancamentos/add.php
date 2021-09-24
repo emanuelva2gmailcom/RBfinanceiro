@@ -79,7 +79,7 @@
               <div id="test-l-3" class="content bg-dark">
                   <div class="panel-body">
                       <div class="form-group">
-                          <?= $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => 'SELECIONE'], ['class' => 'flux']); ?>
+                          <?= $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => 'SELECIONE', 'class' => 'flux']); ?>
                       </div>
                       <div class="form-group">
                           <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => 'SELECIONE']); ?>
@@ -138,11 +138,23 @@
 
       <script>
         $('.realizado').change(function() {
-        $teste = $('.realizado').val();
-        if ($teste == 'PREVISTO') {
-            $('.baixa').addClass('d-none');
-        } else {
-            $('.baixa').removeClass('d-none');
-                      }
+            $teste = $('.realizado').val();
+            if ($teste == 'PREVISTO') {
+                $('.baixa').addClass('d-none');
+            } else {
+                $('.baixa').removeClass('d-none');
+            }
+        });
+
+        $('.flux').change(function(){
+            $test = $('.flux :selected').text();
+            $array = $test.split(" ", 0);
+            if ($array == 'vista'){
+                $('.forn').removeClass('d-none');
+                $('.clie').addClass('d-none');
+            } else {
+                $('.forn').addClass('d-none');
+                $('.clie').removeClass('d-none');
+            }
         });
       </script>
