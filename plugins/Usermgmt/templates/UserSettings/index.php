@@ -27,6 +27,6 @@
 			</div>
 		</div>
 
-		<?php echo $this->element('../UserSettings/all_user_settings');?>
+		<?php echo $this->element('Usermgmt.all_user_settings');?>
 	</div>
 </div>

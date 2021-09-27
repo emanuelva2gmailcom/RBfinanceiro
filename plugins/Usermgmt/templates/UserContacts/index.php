@@ -6,6 +6,6 @@
 	</div>
 
 	<div class="card-body p-0">
-		<?php echo $this->element('../UserContacts/all_user_contacts');?>
+		<?php echo $this->element('Usermgmt.all_user_contacts');?>
 	</div>
 </div>
