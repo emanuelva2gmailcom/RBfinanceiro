@@ -1,5 +1,4 @@
-<?php if($show == true){ ?>
-<style>
+    <style>
 tr > td{
     min-width: 100px;
 }
@@ -83,34 +82,6 @@ tr > td{
                     <td><?= $t ?></td>
                 <?php endforeach; ?>
             </tr>
-            <tr>
-                <th scope="row">INICIAL</th>
-                <?php foreach($obj['total']['inicial'] as $t): ?>
-                    <td><?= $t ?></td>
-                <?php endforeach; ?>
-            </tr>
-            <tr>
-                <th scope="row">FINAL</th>
-                <?php foreach($obj['total']['final'] as $t): ?>
-                    <td><?= $t ?></td>
-                <?php endforeach; ?>
-            </tr>
         </thead>
-        <div class="d-flex justify-content-start bg-light rounded-top" style="padding: 5px;">
-            <a href="/relatorios/fluxodecaixa" class="btn btn-none border border-primary text-primary">Voltar</a>
-        </div>
     </table>
 </div>
-<?php } else{?>
-    <div class="container bg-dark">
-    <div class="panel-body">
-        <div class="form-group">
-            <?= $this->Form->create() ?>
-                <?= $this->Form->control('comeco', ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
-                <?= $this->Form->control('final', ['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
-                <?= $this->Form->button(__('Submit', ['class' => 'btn btn-dark pull-right'])) ?>
-            <?= $this->Form->end() ?>
-        </div>
-    </div>
-</div>
-<?php } ?>

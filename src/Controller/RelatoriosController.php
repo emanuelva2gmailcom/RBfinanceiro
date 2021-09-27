@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Controller;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
+use Cake\Http\Client;
+use Cake\Http\Client\Request as ClientRequest;
 
 class RelatoriosController extends AppController
 {
@@ -63,88 +65,6 @@ class RelatoriosController extends AppController
         return $resposta;
     }
     
-    public function gerencial()
-    {
-        $show = false;
-        if ($this->request->is('post')) {
-            
-            $response = $this->request->getdata();
-            if(FrozenTime::now()->i18nFormat('yyyy-MM-dd') < $response['final']){return $this->redirect(['action' => 'index']);}
-            $datas = $this->array_date($response['comeco'], $response['final']);
-            $valores = [];
-            $saidas = [];
-            $entradas = [];
-            $totale = [];
-            $totals = [];
-            $entradas_saidas = [];
-
-            $this->loadModel('Lancamentos');
-            $this->loadModel('Fluxocontas');
-            $this->paginate = [
-                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'], 
-                'conditions' => ['tipo' => 'REALIZADO']
-            ];
-            $lancamentos = $this->paginate($this->Lancamentos);
-            $inicial = [$this->total_before($response['comeco'], $lancamentos, 'data_baixa')];
-            $final = [];
-            $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
-            $result = [];
-            
-            foreach($contas as $conta):
-                if($conta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
-                    array_push($entradas, $conta->conta);
-                }else if($conta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
-                    array_push($saidas, $conta->conta);
-                }
-            endforeach;
-
-            foreach($datas as $data):
-                $totale[$data] = null;
-                $totals[$data] = null;
-            endforeach;
-
-            foreach($contas as $conta):
-                $result = [];
-                foreach($datas as $data):
-                    
-                    $valor = null;
-                    foreach($lancamentos as $lancamento):
-                            if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
-                                $valor += intval($lancamento->valor);
-                            }
-                            else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta->conta) && ($data == $lancamento->data_baixa->i18nFormat('yyyy-MM-dd'))){
-                                $valor += intval('-'.$lancamento->valor);
-                            }
-                    endforeach;
-                    if(in_array($conta->conta, $entradas)) {
-                        $totale[$data] += $valor;
-                    }else if(in_array($conta->conta, $saidas)){
-                        $totals[$data] += $valor;
-                    }
-                    array_push($result, $valor);
-                endforeach;
-                
-                array_unshift($result, $conta->conta);
-                array_push($result, $this->array_soma($result, 1));
-                array_push($valores, $result);
-            endforeach;
-            $show = true;
-            array_push($totale, array_sum($totale));
-            array_push($totals, array_sum($totals));
-            foreach($totale as $i => $t):
-                array_push($entradas_saidas, $t + $totals[$i]);
-            endforeach; 
-            foreach($entradas_saidas as $i => $es):
-                array_push($final, $es + $inicial[$i]);
-                if($i == count($entradas_saidas) - 1) {break;}
-                array_push($inicial, $final[$i]);
-            endforeach;
-            // debug([$final, $inicial]);exit;
-            $this->set(compact('valores', 'show', 'saidas', 'entradas', 'datas', 'totale', 'totals', 'entradas_saidas', 'inicial', 'final'));
-        }
-        $this->set(compact('show'));
-    }
-
     public function dre()
     {
     }
@@ -162,6 +82,107 @@ class RelatoriosController extends AppController
             }
         endforeach;
         return $valor;
+    }
+
+    public function getRelatorio($tipo = null)
+    {
+        $obj = ['header' => [],
+                'rows' =>[
+                    'th' => [
+                        'entradas' => [],
+                        'saidas' => []
+                    ],
+                    'td' => []
+                ],
+                'total' => [
+                    'entradas' => [],
+                    'saidas' => [],
+                    'entradas-saidas' => [],
+                    'inicial' => [],
+                    'final' => []
+                ]
+            ];
+            $this->loadModel('Lancamentos');
+            $this->loadModel('Fluxocontas');
+            $this->paginate = [
+                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'], 
+                'conditions' => ['tipo' => $tipo]
+            ];
+            $lancamentos = $this->paginate($this->Lancamentos);
+            $comeco = FrozenTime::now()->i18nFormat('yyyy-MM-dd');
+            $final = null;
+            foreach($lancamentos as $lancamento):
+                if($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd') >= $comeco){
+                    $final = $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd');
+                }
+            endforeach;
+            $obj['header'] = $this->array_date($comeco, $final);
+            $obj['total']['inicial'] = [$this->total_before($comeco, $lancamentos, 'data_vencimento')];
+            $contas = [];
+            $result = [];
+            
+            foreach($lancamentos as $lancamento):
+                if(in_array($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'), $obj['header'])){
+                    if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
+                        array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
+                    }else if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
+                        array_push($obj['rows']['th']['saidas'], $lancamento->fluxoconta->conta);
+                    }
+                    if(!in_array($lancamento->fluxoconta->conta, $contas)){
+                        array_push($contas, $lancamento->fluxoconta->conta);
+                    }
+                }
+            endforeach;
+
+            foreach($obj['header'] as $data):
+                $obj['total']['entradas'][$data] = null;
+                $obj['total']['saidas'][$data] = null;
+            endforeach;
+
+            foreach($contas as $conta):
+                $result = [];
+                foreach($obj['header'] as $data):
+                    $valor = null;
+                    foreach($lancamentos as $lancamento):
+                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
+                            $valor += intval($lancamento->valor);
+                        }
+                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
+                            $valor += intval('-'.$lancamento->valor);
+                        }
+                    endforeach;
+                    if(in_array($conta, $obj['rows']['th']['entradas'])) {
+                        $obj['total']['entradas'][$data] += $valor;
+                    }else if(in_array($conta, $obj['rows']['th']['saidas'])){
+                        $obj['total']['saidas'][$data] += $valor;
+                    }
+                    array_push($result, $valor);
+                endforeach;
+                
+                array_unshift($result, $conta);
+                array_push($result, $this->array_soma($result, 1));
+                array_push($obj['rows']['td'], $result);
+            endforeach;
+            $show = true;
+            array_push($obj['total']['entradas'], array_sum($obj['total']['entradas']));
+            array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
+            foreach($obj['total']['entradas'] as $i => $t):
+                array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
+            endforeach; 
+            foreach($obj['total']['entradas-saidas'] as $i => $es):
+                array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
+                if($i == count($obj['total']['entradas-saidas']) - 1) {break;}
+                array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
+            endforeach;
+            return $obj;
+    }
+
+    public function index()
+    {
+        $fluxo = $this->getRelatorio('PREVISTO');
+        $gerencial = $this->getRelatorio('REALIZADO');
+
+        $this->set(compact('fluxo', 'gerencial'));
     }
 
     public function fluxodecaixa()
@@ -182,12 +203,13 @@ class RelatoriosController extends AppController
                     'inicial' => [],
                     'final' => []
                 ]
-                ];
+            ];
         if ($this->request->is('post')) {
             
-            $response = $this->request->getdata();
-            if(FrozenTime::now()->i18nFormat('yyyy-MM-dd') < $response['final']){return $this->redirect(['action' => 'index']);}
-            $obj['header'] = $this->array_date($response['comeco'], $response['final']);
+            $request = $this->request->getdata();
+            // debug($request);exit;
+            if(FrozenTime::now()->i18nFormat('yyyy-MM-dd') < $request['final']){return $this->redirect(['action' => 'index']);}
+            $obj['header'] = $this->array_date($request['comeco'], $request['final']);
             $this->loadModel('Lancamentos');
             $this->loadModel('Fluxocontas');
             $this->paginate = [
@@ -195,17 +217,15 @@ class RelatoriosController extends AppController
                 'conditions' => ['tipo' => 'PREVISTO']
             ];
             $lancamentos = $this->paginate($this->Lancamentos);
-            $obj['total']['inicial'] = [$this->total_before($response['comeco'], $lancamentos, 'data_vencimento')];
+            $obj['total']['inicial'] = [$this->total_before($request['comeco'], $lancamentos, 'data_vencimento')];
             $contas = [];
             $result = [];
             
             foreach($lancamentos as $lancamento):
                 if(in_array($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'), $obj['header'])){
                     if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
-                        array_push($entradas, $lancamento->fluxoconta->conta);
                         array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
                     }else if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
-                        array_push($saidas, $lancamento->fluxoconta->conta);
                         array_push($obj['rows']['th']['saidas'], $lancamento->fluxoconta->conta);
                     }
                     if(!in_array($lancamento->fluxoconta->conta, $contas)){
@@ -258,9 +278,97 @@ class RelatoriosController extends AppController
         }
         $this->set(compact('show'));
     }
-
-    public function index()
+    public function gerencial()
     {
+        $show = false;
+        $obj = ['header' => [],
+                'rows' =>[
+                    'th' => [
+                        'entradas' => [],
+                        'saidas' => []
+                    ],
+                    'td' => []
+                ],
+                'total' => [
+                    'entradas' => [],
+                    'saidas' => [],
+                    'entradas-saidas' => [],
+                    'inicial' => [],
+                    'final' => []
+                ]
+            ];
+        if ($this->request->is('post')) {
+            
+            $request = $this->request->getdata();
+            // debug($request);exit;
+            if(FrozenTime::now()->i18nFormat('yyyy-MM-dd') < $request['final']){return $this->redirect(['action' => 'index']);}
+            $obj['header'] = $this->array_date($request['comeco'], $request['final']);
+            $this->loadModel('Lancamentos');
+            $this->loadModel('Fluxocontas');
+            $this->paginate = [
+                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'], 
+                'conditions' => ['tipo' => 'REALIZADO']
+            ];
+            $lancamentos = $this->paginate($this->Lancamentos);
+            $obj['total']['inicial'] = [$this->total_before($request['comeco'], $lancamentos, 'data_vencimento')];
+            $contas = [];
+            $result = [];
+            
+            foreach($lancamentos as $lancamento):
+                if(in_array($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'), $obj['header'])){
+                    if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
+                        array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
+                    }else if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
+                        array_push($obj['rows']['th']['saidas'], $lancamento->fluxoconta->conta);
+                    }
+                    if(!in_array($lancamento->fluxoconta->conta, $contas)){
+                        array_push($contas, $lancamento->fluxoconta->conta);
+                    }
+                }
+            endforeach;
 
+            foreach($obj['header'] as $data):
+                $obj['total']['entradas'][$data] = null;
+                $obj['total']['saidas'][$data] = null;
+            endforeach;
+
+            foreach($contas as $conta):
+                $result = [];
+                foreach($obj['header'] as $data):
+                    $valor = null;
+                    foreach($lancamentos as $lancamento):
+                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
+                            $valor += intval($lancamento->valor);
+                        }
+                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
+                            $valor += intval('-'.$lancamento->valor);
+                        }
+                    endforeach;
+                    if(in_array($conta, $obj['rows']['th']['entradas'])) {
+                        $obj['total']['entradas'][$data] += $valor;
+                    }else if(in_array($conta, $obj['rows']['th']['saidas'])){
+                        $obj['total']['saidas'][$data] += $valor;
+                    }
+                    array_push($result, $valor);
+                endforeach;
+                
+                array_unshift($result, $conta);
+                array_push($result, $this->array_soma($result, 1));
+                array_push($obj['rows']['td'], $result);
+            endforeach;
+            $show = true;
+            array_push($obj['total']['entradas'], array_sum($obj['total']['entradas']));
+            array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
+            foreach($obj['total']['entradas'] as $i => $t):
+                array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
+            endforeach; 
+            foreach($obj['total']['entradas-saidas'] as $i => $es):
+                array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
+                if($i == count($obj['total']['entradas-saidas']) - 1) {break;}
+                array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
+            endforeach;
+            $this->set(compact('obj', 'show'));
+        }
+        $this->set(compact('show'));
     }
 }
