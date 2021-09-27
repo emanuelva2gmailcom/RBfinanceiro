@@ -10,6 +10,6 @@
 	</div>
 
 	<div class="card-body p-0">
-		<?php echo $this->element('../UserEmailTemplates/all_user_email_templates');?>
+		<?php echo $this->element('Usermgmt.all_user_email_templates');?>
 	</div>
 </div>

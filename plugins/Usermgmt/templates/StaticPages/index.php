@@ -10,6 +10,6 @@
 	</div>
 
 	<div class="card-body p-0">
-		<?php echo $this->element('../StaticPages/all_static_pages');?>
+		<?php echo $this->element('Usermgmt.all_static_pages');?>
 	</div>
 </div>

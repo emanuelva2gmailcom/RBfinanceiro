@@ -14,6 +14,6 @@
 	</div>
 
 	<div class="card-body p-0">
-		<?php echo $this->element('../UserEmails/all_user_emails');?>
+		<?php echo $this->element('Usermgmt.all_user_emails');?>
 	</div>
 </div>
