@@ -35,7 +35,7 @@ $now = date('d-m-Y');
   </a>
 </li>
 
-<li class="nav-item has-treeview menu-open" style="color: #E1E7E0">
+<li class="nav-item has-treeview " style="color: #E1E7E0">
   <a href="/relatorios/index" class="nav-link" style="color: #E1E7E0">
     <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
     <p>
@@ -43,7 +43,7 @@ $now = date('d-m-Y');
       <i class="right fas fa-angle-left"></i>
     </p>
   </a>
-  <ul class="nav nav-treeview">
+  <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color: #E1E7E0">
       <a href="<?= $this->Url->build('/drecontas/index', ['fullBase' => true]); ?>" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
         <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>

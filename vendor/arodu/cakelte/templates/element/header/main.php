@@ -1,7 +1,13 @@
+<script>
+  function fechar(){
+    document.getElementById('it').style.display= 'none';
+  }
+</script>
+
 <!-- Left navbar links -->
-<ul class="navbar-nav ">
+<ul class="navbar-nav " onblur="fechar() ">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button" onclick="fechar()"><i class="fas fa-bars"></i></a>
       </li>
 
       <?php echo $this->element('header/menu') ?>
@@ -9,7 +15,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu
+      <!-- Messages Dropdown Menu -->
        <?php echo $this->element('header/messages') ?>
 
       <!-- Notifications Dropdown Menu -->
