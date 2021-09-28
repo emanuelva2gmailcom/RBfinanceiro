@@ -9,6 +9,7 @@ use Cake\Http\Client\Request as ClientRequest;
 
 class RelatoriosController extends AppController
 {
+    
     public function caixadiario()
     {
         $this->loadModel('Lancamentos');
@@ -43,15 +44,15 @@ class RelatoriosController extends AppController
         $this->set(compact('arrays'));
     }
 
-    public function array_date($ini = null, $fim = null)
+    public function array_date($ini = null, $fim = null, $periodo = null)
     {
         $resposta = [];
         $ini = new Time($ini, 'UTC');
         $fim = new Time($fim, 'UTC');
         if($ini > $fim){return $this->redirect(['action' => 'index']);}
         while($ini <= $fim){
-            array_push($resposta, $ini->i18nFormat('yyyy-MM-dd'));
-            $ini->modify('+1 days');
+            array_push($resposta, $ini->i18nFormat($periodo[0]));
+            $ini->modify($periodo[1]);
         }
         return $resposta;
     }
@@ -84,7 +85,7 @@ class RelatoriosController extends AppController
         return $valor;
     }
 
-    public function getRelatorio($tipo = null)
+    public function getRelatorio($tipo = null, $date = null, $periodo = null)
     {
         $obj = ['header' => [],
                 'rows' =>[
@@ -109,20 +110,20 @@ class RelatoriosController extends AppController
                 'conditions' => ['tipo' => $tipo]
             ];
             $lancamentos = $this->paginate($this->Lancamentos);
-            $comeco = FrozenTime::now()->i18nFormat('yyyy-MM-dd');
+            $comeco = FrozenTime::now()->i18nFormat($periodo[0]);
             $final = null;
             foreach($lancamentos as $lancamento):
-                if($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd') >= $comeco){
-                    $final = $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd');
+                if($lancamento->$date->i18nFormat($periodo[0]) >= $comeco){
+                    $final = $lancamento->$date->i18nFormat($periodo[0]);
                 }
             endforeach;
-            $obj['header'] = $this->array_date($comeco, $final);
-            $obj['total']['inicial'] = [$this->total_before($comeco, $lancamentos, 'data_vencimento')];
+            $obj['header'] = $this->array_date($comeco, $final, $periodo);
+            $obj['total']['inicial'] = [$this->total_before($comeco, $lancamentos, $date)];
             $contas = [];
             $result = [];
             
             foreach($lancamentos as $lancamento):
-                if(in_array($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'), $obj['header'])){
+                if(in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])){
                     if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
                         array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
                     }else if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
@@ -144,10 +145,10 @@ class RelatoriosController extends AppController
                 foreach($obj['header'] as $data):
                     $valor = null;
                     foreach($lancamentos as $lancamento):
-                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
+                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))){
                             $valor += intval($lancamento->valor);
                         }
-                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
+                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))){
                             $valor += intval('-'.$lancamento->valor);
                         }
                     endforeach;
@@ -179,8 +180,10 @@ class RelatoriosController extends AppController
 
     public function index()
     {
-        $fluxo = $this->getRelatorio('PREVISTO');
-        $gerencial = $this->getRelatorio('REALIZADO');
+        $dia = ['yyyy-MM-dd', '+1 days'];
+        $mes = ['yyyy-MM', '+1 months'];
+        $fluxo = $this->getRelatorio('PREVISTO', 'data_vencimento', $dia);
+        $gerencial = $this->getRelatorio('REALIZADO', 'data_baixa', $mes);
 
         $this->set(compact('fluxo', 'gerencial'));
     }
@@ -204,12 +207,25 @@ class RelatoriosController extends AppController
                     'final' => []
                 ]
             ];
+        $dia = ['yyyy-MM-dd', '+1 days'];
+        $mes = ['yyyy-MM', '+1 months'];
+        $ano = ['yyyy', '+1 years'];
         if ($this->request->is('post')) {
-            
+            $periodo = null;
             $request = $this->request->getdata();
-            // debug($request);exit;
-            if(FrozenTime::now()->i18nFormat('yyyy-MM-dd') < $request['final']){return $this->redirect(['action' => 'index']);}
-            $obj['header'] = $this->array_date($request['comeco'], $request['final']);
+            switch($request['periodo']){
+                case 'mes':
+                    $periodo = $mes;
+                    break;
+                case 'ano':
+                    $periodo = $ano;
+                    break;
+                case 'dia':
+                    $periodo = $dia;
+                    break;
+            }
+            if(FrozenTime::now()->i18nFormat($periodo[0]) > $request['final']){return $this->redirect(['action' => 'index']);}
+            $obj['header'] = $this->array_date($request['comeco'], $request['final'], $periodo);
             $this->loadModel('Lancamentos');
             $this->loadModel('Fluxocontas');
             $this->paginate = [
@@ -222,7 +238,7 @@ class RelatoriosController extends AppController
             $result = [];
             
             foreach($lancamentos as $lancamento):
-                if(in_array($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'), $obj['header'])){
+                if(in_array($lancamento->data_vencimento->i18nFormat($periodo[0]), $obj['header'])){
                     if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
                         array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
                     }else if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
@@ -244,10 +260,10 @@ class RelatoriosController extends AppController
                 foreach($obj['header'] as $data):
                     $valor = null;
                     foreach($lancamentos as $lancamento):
-                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
+                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))){
                             $valor += intval($lancamento->valor);
                         }
-                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
+                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))){
                             $valor += intval('-'.$lancamento->valor);
                         }
                     endforeach;
@@ -297,12 +313,25 @@ class RelatoriosController extends AppController
                     'final' => []
                 ]
             ];
+        $dia = ['yyyy-MM-dd', '+1 days'];
+        $mes = ['yyyy-MM', '+1 months'];
+        $ano = ['yyyy', '+1 years'];
         if ($this->request->is('post')) {
-            
+            $periodo = null;
             $request = $this->request->getdata();
-            // debug($request);exit;
-            if(FrozenTime::now()->i18nFormat('yyyy-MM-dd') < $request['final']){return $this->redirect(['action' => 'index']);}
-            $obj['header'] = $this->array_date($request['comeco'], $request['final']);
+            switch($request['periodo']){
+                case 'mes':
+                    $periodo = $mes;
+                    break;
+                case 'ano':
+                    $periodo = $ano;
+                    break;
+                case 'dia':
+                    $periodo = $dia;
+                    break;
+            }
+            if(FrozenTime::now()->i18nFormat($periodo[0]) > $request['final']){return $this->redirect(['action' => 'index']);}
+            $obj['header'] = $this->array_date($request['comeco'], $request['final'], $periodo);
             $this->loadModel('Lancamentos');
             $this->loadModel('Fluxocontas');
             $this->paginate = [
@@ -310,12 +339,12 @@ class RelatoriosController extends AppController
                 'conditions' => ['tipo' => 'REALIZADO']
             ];
             $lancamentos = $this->paginate($this->Lancamentos);
-            $obj['total']['inicial'] = [$this->total_before($request['comeco'], $lancamentos, 'data_vencimento')];
+            $obj['total']['inicial'] = [$this->total_before($request['comeco'], $lancamentos, 'data_baixa')];
             $contas = [];
             $result = [];
             
             foreach($lancamentos as $lancamento):
-                if(in_array($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'), $obj['header'])){
+                if(in_array($lancamento->data_baixa->i18nFormat($periodo[0]), $obj['header'])){
                     if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
                         array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
                     }else if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
@@ -337,10 +366,10 @@ class RelatoriosController extends AppController
                 foreach($obj['header'] as $data):
                     $valor = null;
                     foreach($lancamentos as $lancamento):
-                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
+                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_baixa->i18nFormat($periodo[0]))){
                             $valor += intval($lancamento->valor);
                         }
-                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat('yyyy-MM-dd'))){
+                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_baixa->i18nFormat($periodo[0]))){
                             $valor += intval('-'.$lancamento->valor);
                         }
                     endforeach;

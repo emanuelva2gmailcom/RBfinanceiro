@@ -108,6 +108,7 @@ tr > td{
             <?= $this->Form->create() ?>
                 <?= $this->Form->control('comeco', ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
                 <?= $this->Form->control('final', ['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
+                <?= $this->Form->select('periodo',['mes'=> 'MÊS','ano' => 'ANO','dia' => 'DIA'], ['class' => 'form-control']); ?>
                 <?= $this->Form->button(__('Submit', ['class' => 'btn btn-dark pull-right'])) ?>
             <?= $this->Form->end() ?>
         </div>
