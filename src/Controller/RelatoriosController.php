@@ -49,7 +49,6 @@ class RelatoriosController extends AppController
         $resposta = [];
         $ini = new Time($ini, 'UTC');
         $fim = new Time($fim, 'UTC');
-        if($ini > $fim){return $this->redirect(['action' => 'index']);}
         while($ini <= $fim){
             array_push($resposta, $ini->i18nFormat($periodo[0]));
             $ini->modify($periodo[1]);
@@ -224,7 +223,6 @@ class RelatoriosController extends AppController
                     $periodo = $dia;
                     break;
             }
-            if(FrozenTime::now()->i18nFormat($periodo[0]) > $request['final']){return $this->redirect(['action' => 'index']);}
             $obj['header'] = $this->array_date($request['comeco'], $request['final'], $periodo);
             $this->loadModel('Lancamentos');
             $this->loadModel('Fluxocontas');
@@ -330,7 +328,6 @@ class RelatoriosController extends AppController
                     $periodo = $dia;
                     break;
             }
-            if(FrozenTime::now()->i18nFormat($periodo[0]) > $request['final']){return $this->redirect(['action' => 'index']);}
             $obj['header'] = $this->array_date($request['comeco'], $request['final'], $periodo);
             $this->loadModel('Lancamentos');
             $this->loadModel('Fluxocontas');
