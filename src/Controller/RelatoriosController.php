@@ -9,13 +9,13 @@ use Cake\Http\Client\Request as ClientRequest;
 
 class RelatoriosController extends AppController
 {
-    
+
     public function caixadiario()
     {
         $this->loadModel('Lancamentos');
         $this->paginate = [
             'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'],
-            'conditions' => ['data_baixa is not' => null] 
+            'conditions' => ['data_baixa is not' => null]
         ];
 
         $lancamentos = $this->paginate($this->Lancamentos);
@@ -30,10 +30,10 @@ class RelatoriosController extends AppController
                 }else{
                     $lancamento->valor = '-'.$lancamento->valor;
                 }
-                
+
                 if($lancamento->tipo == 'REALIZADO') {
-                    array_push($arrays, [$lancamento->valor, 
-                    $lancamento->fluxoconta ? $lancamento->fluxoconta->conta : '', 
+                    array_push($arrays, [$lancamento->valor,
+                    $lancamento->fluxoconta ? $lancamento->fluxoconta->conta : '',
                     $lancamento->fornecedore ? $lancamento->fornecedore->nome : '',
                     $lancamento->cliente ? $lancamento->cliente->nome : '',
                     $lancamento->descricao,
@@ -59,13 +59,17 @@ class RelatoriosController extends AppController
     public function array_soma($array = null, $ii = null)
     {
         $resposta = 0;
-        for($i = $ii; $i < count($array); $i++): 
+        for($i = $ii; $i < count($array); $i++):
             $resposta += $array[$i];
-        endfor; 
+        endfor;
         return $resposta;
     }
-    
+
     public function dre()
+    {
+    }
+
+    public function home()
     {
     }
 
@@ -105,7 +109,7 @@ class RelatoriosController extends AppController
             $this->loadModel('Lancamentos');
             $this->loadModel('Fluxocontas');
             $this->paginate = [
-                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'], 
+                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'],
                 'conditions' => ['tipo' => $tipo]
             ];
             $lancamentos = $this->paginate($this->Lancamentos);
@@ -120,7 +124,7 @@ class RelatoriosController extends AppController
             $obj['total']['inicial'] = [$this->total_before($comeco, $lancamentos, $date)];
             $contas = [];
             $result = [];
-            
+
             foreach($lancamentos as $lancamento):
                 if(in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])){
                     if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
@@ -158,7 +162,7 @@ class RelatoriosController extends AppController
                     }
                     array_push($result, $valor);
                 endforeach;
-                
+
                 array_unshift($result, $conta);
                 array_push($result, $this->array_soma($result, 1));
                 array_push($obj['rows']['td'], $result);
@@ -168,7 +172,7 @@ class RelatoriosController extends AppController
             array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
             foreach($obj['total']['entradas'] as $i => $t):
                 array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
-            endforeach; 
+            endforeach;
             foreach($obj['total']['entradas-saidas'] as $i => $es):
                 array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
                 if($i == count($obj['total']['entradas-saidas']) - 1) {break;}
@@ -227,14 +231,14 @@ class RelatoriosController extends AppController
             $this->loadModel('Lancamentos');
             $this->loadModel('Fluxocontas');
             $this->paginate = [
-                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'], 
+                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'],
                 'conditions' => ['tipo' => 'PREVISTO']
             ];
             $lancamentos = $this->paginate($this->Lancamentos);
             $obj['total']['inicial'] = [$this->total_before($request['comeco'], $lancamentos, 'data_vencimento')];
             $contas = [];
             $result = [];
-            
+
             foreach($lancamentos as $lancamento):
                 if(in_array($lancamento->data_vencimento->i18nFormat($periodo[0]), $obj['header'])){
                     if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
@@ -272,7 +276,7 @@ class RelatoriosController extends AppController
                     }
                     array_push($result, $valor);
                 endforeach;
-                
+
                 array_unshift($result, $conta);
                 array_push($result, $this->array_soma($result, 1));
                 array_push($obj['rows']['td'], $result);
@@ -282,7 +286,7 @@ class RelatoriosController extends AppController
             array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
             foreach($obj['total']['entradas'] as $i => $t):
                 array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
-            endforeach; 
+            endforeach;
             foreach($obj['total']['entradas-saidas'] as $i => $es):
                 array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
                 if($i == count($obj['total']['entradas-saidas']) - 1) {break;}
@@ -332,14 +336,14 @@ class RelatoriosController extends AppController
             $this->loadModel('Lancamentos');
             $this->loadModel('Fluxocontas');
             $this->paginate = [
-                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'], 
+                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'],
                 'conditions' => ['tipo' => 'REALIZADO']
             ];
             $lancamentos = $this->paginate($this->Lancamentos);
             $obj['total']['inicial'] = [$this->total_before($request['comeco'], $lancamentos, 'data_baixa')];
             $contas = [];
             $result = [];
-            
+
             foreach($lancamentos as $lancamento):
                 if(in_array($lancamento->data_baixa->i18nFormat($periodo[0]), $obj['header'])){
                     if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
@@ -377,7 +381,7 @@ class RelatoriosController extends AppController
                     }
                     array_push($result, $valor);
                 endforeach;
-                
+
                 array_unshift($result, $conta);
                 array_push($result, $this->array_soma($result, 1));
                 array_push($obj['rows']['td'], $result);
@@ -387,7 +391,7 @@ class RelatoriosController extends AppController
             array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
             foreach($obj['total']['entradas'] as $i => $t):
                 array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
-            endforeach; 
+            endforeach;
             foreach($obj['total']['entradas-saidas'] as $i => $es):
                 array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
                 if($i == count($obj['total']['entradas-saidas']) - 1) {break;}
