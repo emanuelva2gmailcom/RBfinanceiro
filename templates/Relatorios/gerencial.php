@@ -83,7 +83,7 @@ tr > td{
                     <td><?= $t ?></td>
                 <?php endforeach; ?>
             </tr>
-            <tr>
+            <!-- <tr>
                 <th scope="row">INICIAL</th>
                 <?php foreach($obj['total']['inicial'] as $t): ?>
                     <td><?= $t ?></td>
@@ -94,7 +94,7 @@ tr > td{
                 <?php foreach($obj['total']['final'] as $t): ?>
                     <td><?= $t ?></td>
                 <?php endforeach; ?>
-            </tr>
+            </tr> -->
         </thead>
         <div class="d-flex justify-content-start bg-light rounded-top" style="padding: 5px;">
             <a href="/relatorios/fluxodecaixa" class="btn btn-none border border-primary text-primary">Voltar</a>

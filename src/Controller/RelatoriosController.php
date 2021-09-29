@@ -443,12 +443,12 @@ class RelatoriosController extends AppController
             'conditions' => ['tipo' => 'REALIZADO']
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
-        $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_vencimento')];
+        $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_baixa')];
         $contas = [];
         $result = [];
 
         foreach ($lancamentos as $lancamento) :
-            if (in_array($lancamento->data_vencimento->i18nFormat($periodo[0]), $obj['header'])) {
+            if (in_array($lancamento->data_baixa->i18nFormat($periodo[0]), $obj['header'])) {
                 if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') {
                     array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
                 } else if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') {
@@ -470,9 +470,9 @@ class RelatoriosController extends AppController
             foreach ($obj['header'] as $data) :
                 $valor = 0;
                 foreach ($lancamentos as $lancamento) :
-                    if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))) {
+                    if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_baixa->i18nFormat($periodo[0]))) {
                         $valor += intval($lancamento->valor);
-                    } else if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))) {
+                    } else if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_baixa->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
                     }
                 endforeach;
