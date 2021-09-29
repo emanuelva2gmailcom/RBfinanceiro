@@ -119,15 +119,22 @@ if ($show == true) { ?>
 <?php 
 } else { ?>
     <div class="container bg-dark">
-        <div class="panel-body">
+        <div class="card-body">
             <div class="form-group">
                 <?= $this->Form->create() ?>
-                <?= $this->Form->control(0,['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
-                <?= $this->Form->control(1,['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
-                <?= $this->Form->select(2,['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'form-control']); ?>
-                <?= $this->Form->button(__('Submit', ['class' => 'btn btn-dark pull-right'])) ?>
-                <?= $this->Form->end() ?>
+                    <?= $this->Form->control(0,['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
+                    <?= $this->Form->control(1,['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
+                    <?= $this->Form->select(2,['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'form-control', 'id' => 'card']); ?>
+                    
             </div>
+        </div>
+        <div class="card-footer">
+                <?= $this->Form->button(__('Submit', ['class' => 'btn btn-dark pull-right'])) ?>
+            <?= $this->Form->end() ?>
         </div>
     </div>
 <?php } ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $('#card').select2()
+</script>
