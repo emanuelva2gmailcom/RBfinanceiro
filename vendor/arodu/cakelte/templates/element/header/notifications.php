@@ -14,17 +14,17 @@
 </li> -->
 
 </li>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 
   function getContent()
   {
-    try {
-      const response = axios.get('/notifications/getNotifications/').then(function (response) { // handle success
-        show(response.data); })
-    } catch (error) {
-      console.error(error);
-    }
+      try {
+        const response = axios.get('/notifications/getNotifications/').then(function (response) { // handle success
+          show(response.data); })
+      } catch (error) {
+        console.error(error);
+      }
   }
 
   function show(notifications)
@@ -47,5 +47,5 @@
 
   setInterval(getContent, 120 * 1000)
 
-</script>
+</script> -->
 
