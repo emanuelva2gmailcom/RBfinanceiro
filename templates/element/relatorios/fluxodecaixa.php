@@ -15,8 +15,8 @@ tr > td{
 }
 
 </style>
-<div class="container">
-    <table class="table table-sm table-bordered table-dark rounded table-responsive w-100">
+<div class="container table-responsive">
+    <table class="table table-sm table-bordered table-dark rounded">
         <thead class="bg-primary">
             <tr>
                 <th scope="col" class="mwtd"></th>

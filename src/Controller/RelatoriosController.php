@@ -45,6 +45,14 @@ class RelatoriosController extends AppController
                         $lancamento->fornecedore ? $lancamento->fornecedore->nome : '',
                         $lancamento->cliente ? $lancamento->cliente->nome : '',
                         $lancamento->descricao,
+
+                if($lancamento->tipo == 'REALIZADO') {
+                    array_push($arrays, [$lancamento->valor,
+                    $lancamento->fluxoconta ? $lancamento->fluxoconta->conta : '',
+                    $lancamento->fornecedore ? $lancamento->fornecedore->nome : '',
+                    $lancamento->cliente ? $lancamento->cliente->nome : '',
+                    $lancamento->descricao,
+
                     ]);
                 }
             }
@@ -90,13 +98,20 @@ class RelatoriosController extends AppController
     public function array_soma($array = null, $ii = null)
     {
         $resposta = 0;
+
         for ($i = $ii; $i < count($array); $i++) :
+
+        for($i = $ii; $i < count($array); $i++):
             $resposta += $array[$i];
         endfor;
         return $resposta;
     }
 
     public function dre()
+    {
+    }
+
+    public function home()
     {
     }
 
@@ -162,6 +177,41 @@ class RelatoriosController extends AppController
                 }
                 if (!in_array($lancamento->fluxoconta->conta, $contas)) {
                     array_push($contas, $lancamento->fluxoconta->conta);
+                    'saidas' => [],
+                    'entradas-saidas' => [],
+                    'inicial' => [],
+                    'final' => []
+                ]
+            ];
+            $this->loadModel('Lancamentos');
+            $this->loadModel('Fluxocontas');
+            $this->paginate = [
+                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'],
+                'conditions' => ['tipo' => $tipo]
+            ];
+            $lancamentos = $this->paginate($this->Lancamentos);
+            $comeco = FrozenTime::now()->i18nFormat($periodo[0]);
+            $final = null;
+            foreach($lancamentos as $lancamento):
+                if($lancamento->$date->i18nFormat($periodo[0]) >= $comeco){
+                    $final = $lancamento->$date->i18nFormat($periodo[0]);
+                }
+            endforeach;
+            $obj['header'] = $this->array_date($comeco, $final, $periodo);
+            $obj['total']['inicial'] = [$this->total_before($comeco, $lancamentos, $date)];
+            $contas = [];
+            $result = [];
+
+            foreach($lancamentos as $lancamento):
+                if(in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])){
+                    if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
+                        array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
+                    }else if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
+                        array_push($obj['rows']['th']['saidas'], $lancamento->fluxoconta->conta);
+                    }
+                    if(!in_array($lancamento->fluxoconta->conta, $contas)){
+                        array_push($contas, $lancamento->fluxoconta->conta);
+                    }
                 }
             }
         endforeach;
@@ -188,6 +238,20 @@ class RelatoriosController extends AppController
                     $obj['total']['saidas'][$data] += $valor;
                 }
                 array_push($result, $valor);
+                array_unshift($result, $conta);
+                array_push($result, $this->array_soma($result, 1));
+                array_push($obj['rows']['td'], $result);
+            endforeach;
+            $show = true;
+            array_push($obj['total']['entradas'], array_sum($obj['total']['entradas']));
+            array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
+            foreach($obj['total']['entradas'] as $i => $t):
+                array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
+            endforeach;
+            foreach($obj['total']['entradas-saidas'] as $i => $es):
+                array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
+                if($i == count($obj['total']['entradas-saidas']) - 1) {break;}
+                array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
             endforeach;
 
             array_unshift($result, $conta);
@@ -329,6 +393,7 @@ class RelatoriosController extends AppController
                     array_push($contas, $lancamento->fluxoconta->conta);
                 }
             }
+
         endforeach;
 
         foreach ($obj['header'] as $data) :
@@ -345,6 +410,28 @@ class RelatoriosController extends AppController
                         $valor += intval($lancamento->valor);
                     } else if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
+
+            $obj['header'] = $this->array_date($request['comeco'], $request['final'], $periodo);
+            $this->loadModel('Lancamentos');
+            $this->loadModel('Fluxocontas');
+            $this->paginate = [
+                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'],
+                'conditions' => ['tipo' => 'PREVISTO']
+            ];
+            $lancamentos = $this->paginate($this->Lancamentos);
+            $obj['total']['inicial'] = [$this->total_before($request['comeco'], $lancamentos, 'data_vencimento')];
+            $contas = [];
+            $result = [];
+
+            foreach($lancamentos as $lancamento):
+                if(in_array($lancamento->data_vencimento->i18nFormat($periodo[0]), $obj['header'])){
+                    if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
+                        array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
+                    }else if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
+                        array_push($obj['rows']['th']['saidas'], $lancamento->fluxoconta->conta);
+                    }
+                    if(!in_array($lancamento->fluxoconta->conta, $contas)){
+                        array_push($contas, $lancamento->fluxoconta->conta);
                     }
                 endforeach;
                 if (in_array($conta, $obj['rows']['th']['entradas'])) {
@@ -389,6 +476,42 @@ class RelatoriosController extends AppController
             if (in_array($valor[0], $data['rows']['th']['saidas'])) {
                 $saidas[] = $valor;
             }
+            foreach($contas as $conta):
+                $result = [];
+                foreach($obj['header'] as $data):
+                    $valor = null;
+                    foreach($lancamentos as $lancamento):
+                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))){
+                            $valor += intval($lancamento->valor);
+                        }
+                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))){
+                            $valor += intval('-'.$lancamento->valor);
+                        }
+                    endforeach;
+                    if(in_array($conta, $obj['rows']['th']['entradas'])) {
+                        $obj['total']['entradas'][$data] += $valor;
+                    }else if(in_array($conta, $obj['rows']['th']['saidas'])){
+                        $obj['total']['saidas'][$data] += $valor;
+                    }
+                    array_push($result, $valor);
+                endforeach;
+
+                array_unshift($result, $conta);
+                array_push($result, $this->array_soma($result, 1));
+                array_push($obj['rows']['td'], $result);
+            endforeach;
+            $show = true;
+            array_push($obj['total']['entradas'], array_sum($obj['total']['entradas']));
+            array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
+            foreach($obj['total']['entradas'] as $i => $t):
+                array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
+            endforeach;
+            foreach($obj['total']['entradas-saidas'] as $i => $es):
+                array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
+                if($i == count($obj['total']['entradas-saidas']) - 1) {break;}
+                array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
+            endforeach;
+            $this->set(compact('obj', 'show'));
         }
         array_unshift($entradas, $data['header']);
         array_unshift($entradas[0], 'contas');
@@ -507,6 +630,27 @@ class RelatoriosController extends AppController
                         $valor += intval($lancamento->valor);
                     } else if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_baixa->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
+            $obj['header'] = $this->array_date($request['comeco'], $request['final'], $periodo);
+            $this->loadModel('Lancamentos');
+            $this->loadModel('Fluxocontas');
+            $this->paginate = [
+                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']] , 'Fornecedores', 'Clientes'],
+                'conditions' => ['tipo' => 'REALIZADO']
+            ];
+            $lancamentos = $this->paginate($this->Lancamentos);
+            $obj['total']['inicial'] = [$this->total_before($request['comeco'], $lancamentos, 'data_baixa')];
+            $contas = [];
+            $result = [];
+
+            foreach($lancamentos as $lancamento):
+                if(in_array($lancamento->data_baixa->i18nFormat($periodo[0]), $obj['header'])){
+                    if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
+                        array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
+                    }else if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida'){
+                        array_push($obj['rows']['th']['saidas'], $lancamento->fluxoconta->conta);
+                    }
+                    if(!in_array($lancamento->fluxoconta->conta, $contas)){
+                        array_push($contas, $lancamento->fluxoconta->conta);
                     }
                 endforeach;
                 if (in_array($conta, $obj['rows']['th']['entradas'])) {
@@ -550,6 +694,43 @@ class RelatoriosController extends AppController
             if (in_array($valor[0], $data['rows']['th']['saidas'])) {
                 $saidas[] = $valor;
             }
+            foreach($contas as $conta):
+                $result = [];
+                foreach($obj['header'] as $data):
+                    $valor = null;
+                    foreach($lancamentos as $lancamento):
+                        if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_baixa->i18nFormat($periodo[0]))){
+                            $valor += intval($lancamento->valor);
+                        }
+                        else if(($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_baixa->i18nFormat($periodo[0]))){
+                            $valor += intval('-'.$lancamento->valor);
+                        }
+                    endforeach;
+                    if(in_array($conta, $obj['rows']['th']['entradas'])) {
+                        $obj['total']['entradas'][$data] += $valor;
+                    }else if(in_array($conta, $obj['rows']['th']['saidas'])){
+                        $obj['total']['saidas'][$data] += $valor;
+                    }
+                    array_push($result, $valor);
+                endforeach;
+
+                array_unshift($result, $conta);
+                array_push($result, $this->array_soma($result, 1));
+                array_push($obj['rows']['td'], $result);
+            endforeach;
+            $show = true;
+            array_push($obj['total']['entradas'], array_sum($obj['total']['entradas']));
+            array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
+            foreach($obj['total']['entradas'] as $i => $t):
+                array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
+            endforeach;
+            foreach($obj['total']['entradas-saidas'] as $i => $es):
+                array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
+                if($i == count($obj['total']['entradas-saidas']) - 1) {break;}
+                array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
+            endforeach;
+            $this->set(compact('obj', 'show'));
+
         }
         array_unshift($entradas, $data['header']);
         array_unshift($entradas[0], 'contas');

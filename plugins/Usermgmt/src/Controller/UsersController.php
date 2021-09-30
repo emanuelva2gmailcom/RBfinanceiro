@@ -148,7 +148,7 @@ class UsersController extends UsermgmtAppController {
 	 * @return void
 	 */
 	public function dashboard() {
-		/* Do here something for user */
+
 	}
 
 	/**
@@ -879,7 +879,7 @@ class UsersController extends UsermgmtAppController {
 			if($connect) {
 				$this->render('popup');
 			} else {
-				$this->redirect(['action'=>'dashboard']);
+				$this->redirect(['controller'=>'Relatorios','action'=>'home']);
 			}
 		}
 
