@@ -69,10 +69,6 @@ class RelatoriosController extends AppController
     {
     }
 
-    public function home()
-    {
-    }
-
     public function total_before($data = null, $lancamentos = null, $namedata = null)
     {
         $valor = 0;

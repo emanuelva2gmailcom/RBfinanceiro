@@ -36,6 +36,24 @@
       }
 
     </style>
+    <style>
+    .teste {
+        color: #E1E7F0;
+    }
+</style>
+<script>
+function realizado() {
+    document.getElementById('real').style.display= 'block';
+    document.getElementById('teste').style.display= 'block';
+    document.getElementById('prev').style.display= 'none';
+  }
+
+  function previsto(){
+    document.getElementById('real').style.display= 'none';
+    document.getElementById('teste').style.display= 'block';
+    document.getElementById('prev').style.display= 'block';
+  }
+</script>
 
 
   </head>
@@ -46,88 +64,70 @@
 
     <div class="col-md-5 p-lg-5 mx-auto my-5" style="color: aqua;">
         <h1 class="display-5 fw-normal" >Seja Bem-Vindo, User</h1><br>
-        <p class="lead fw-normal"> Confira abaixo o seu Caixa Diário:</p>
-        <a class="btn btn-outline-info" href="/relatorios/caixadiario">Clique Aqui</a>
     </div>
 
-    <div class="col-md-5 p-lg-5 mx-auto my-5" style="color: aqua;">
-        <h1 class="display-5 fw-normal">Não esqueça dos seus relatórios:</h1><br>
-        <a class="btn btn-outline-info" onclick="fc()">Clique Aqui para ver seu Fluxo de Caixa</a><br>
-        <div class="cai product-device shadow-sm d-none">Vai chamar uma parte dos relatórios</div><br>
-        <a class="btn btn-outline-info" onclick="cg()">Clique Aqui para ver seu Caixa Gerencial</a>
-        <div class="ger product-device product-device-2 shadow-sm d-none">a coisa que vai aparecer</div>
+    <div class="container-fluid vh-50 bg-red m-0 py-5 justify-content-center">
+  <div class="row">
+    <div class="col-4">
+      <div class="d-flex justify-content-center">
+        <div class="bd-placeholder-img rounded-circle bg-blue" style="width: 140px; height: 140px;"></div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <h2 class="text-center">Fluxo de Caixa</h2>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p class="text-center">Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p class="text-center"><?= $this->Html->link(__('Fluxodecaixa'), ['action' => 'home'], ['class' => 'btn btn-primary', 'onclick' => 'realizado()']) ?></p>
+      </div>
     </div>
-
+    <div class="col-4">
+      <div class="d-flex justify-content-center">
+        <div class="bd-placeholder-img rounded-circle bg-blue" style="width: 140px; height: 140px;"></div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <h2 class="text-center">Caixa Gerencial</h2>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p class="text-center">Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+      </div>
+      <div class="d-flex justify-content-center">
+      <?= $this->Html->link(__('Gerencial'), ['action' => '#'], ['class' => 'btn btn-primary', 'onclick' => 'previsto()']) ?>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="d-flex justify-content-center">
+        <div class="bd-placeholder-img rounded-circle bg-blue" style="width: 140px; height: 140px;"></div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <h2 class="text-center">Caixa Diário</h2>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p class="text-center">Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+      </div>
+      <div class="d-flex justify-content-center">
+      <?= $this->Html->link(__('Caixa diario'), ['controller' => 'relatorios', 'action' => 'caixadiario'], ['class' => 'btn btn-primary btn-sm']) ?>
+      </div>
+    </div>
   </div>
+</div>
+<div id="teste" class="container-fluid vh-50 bg-blue m-0 py-5 justify-content-center" style="display: none;">
 
-  <!-- <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-      <div class="my-3 py-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+  <div class="card-body table-responsive p-0">
+    <div id='prev' style="display:none;">
+        <?= $this->element('relatorios/gerencial', ['obj' => $gerencial]) ?>
     </div>
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-      <div class="my-3 p-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-    </div>
-  </div>
 
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-      <div class="my-3 p-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-    </div>
-    <div class="bg-primary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-      <div class="my-3 py-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-    </div>
-  </div>
-
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-      <div class="my-3 p-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="bg-body shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-    </div>
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-      <div class="my-3 py-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="bg-body shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    <div id='real' style="display:none;">
+        <?= $this->element('relatorios/fluxodecaixa', ['obj' => $fluxo]) ?>
     </div>
   </div>
 
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-      <div class="my-3 p-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="bg-body shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-    </div>
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-      <div class="my-3 py-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="bg-body shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-    </div>
-  </div> -->
+  </div>
+
 </main>
+
 <script>
     function fc() {
      $('.cai').removeClass('d-none');
@@ -141,7 +141,9 @@
      $('.cai').addClass('d-none');
     }
 </script>
+
 <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
 </body>
+
 </html>
