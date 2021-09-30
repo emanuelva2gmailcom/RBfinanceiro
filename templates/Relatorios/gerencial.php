@@ -71,7 +71,7 @@ tr > td{
         <thead class="bg-primary">
             <tr>
                 <th scope="row" class="mwtd">Saídas</th>
-                <?php foreach($obj['total']['entradas'] as $t): ?>
+                <?php foreach($obj['total']['saidas'] as $t): ?>
                     <td><?= $t ?></td>
                 <?php endforeach; ?>
             </tr>
@@ -97,7 +97,7 @@ tr > td{
             </tr>
         </thead>
         <div class="d-flex justify-content-start bg-light rounded-top" style="padding: 5px;">
-            <a href="/relatorios/fluxodecaixa" class="btn btn-none border border-primary text-primary">Voltar</a>
+            <a href="/relatorios/gerencial" class="btn btn-none border border-primary text-primary">Voltar</a>
         </div>
     </table>
 </div>
