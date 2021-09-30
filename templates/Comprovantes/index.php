@@ -7,7 +7,7 @@
 
 <?php $this->assign('title', __('Comprovantes') ); ?>
 
-<div class="card card-primary card-outline">
+<div class="card card-primary card-outline ">
   <div class="card-header d-sm-flex">
     <h2 class="card-title"><!-- --></h2>
     <div class="card-toolbox">
