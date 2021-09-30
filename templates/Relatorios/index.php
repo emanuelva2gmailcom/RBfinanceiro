@@ -78,18 +78,11 @@ function realizado() {
 
   <div class="card-body table-responsive p-0">
     <div id='prev' style="display:none;">
-
-    <?= $this->element('relatorios/gerencial', ['obj' => $gerencial]) ?>
-    <a href="/relatorios/exportRelatorioGerencial" style="font-size: 30px;margin-left:30px;color:green"><i class="fas fa-file-excel"></i></a>
-  </div>
-
         <?= $this->element('relatorios/gerencial', ['obj' => $gerencial]) ?>
     </div>
 
-
     <div id='real' style="display:none;">
         <?= $this->element('relatorios/fluxodecaixa', ['obj' => $fluxo]) ?>
-        <a href="/relatorios/exportRelatorioFluxoCx/" style="font-size: 30px;margin-left:30px;color:green"><i class="fas fa-file-excel"></i></a>
     </div>
   </div>
 

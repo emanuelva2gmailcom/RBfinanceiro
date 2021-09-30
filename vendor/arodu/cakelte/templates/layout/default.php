@@ -14,7 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <?= $this->Html->meta('icon') ?>
   <?= $this->fetch('meta') ?>
-  <?= $this->Html->css('CakeLte./AdminLTE/plugins/select2/css/select2.min.css'); ?>
+
   <!-- Font Awesome Icons -->
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/fontawesome-free/css/all.min.css') ?>
   <!-- icheck bootstrap -->
@@ -150,8 +150,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- REQUIRED SCRIPTS -->
 
-  
-  <?= $this->Html->script('CakeLte./AdminLTE/plugins/select2/js/select2.min.js'); ?>
 
 
   <!-- jQuery -->
