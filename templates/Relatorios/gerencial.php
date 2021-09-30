@@ -102,16 +102,33 @@ tr > td{
     </table>
 </div>
 <?php } else{?>
-    <div class="container bg-dark">
-    <div class="panel-body">
-        <div class="form-group">
-            <?= $this->Form->create() ?>
-                <?= $this->Form->control('comeco', ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
-                <?= $this->Form->control('final', ['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
-                <?= $this->Form->select('periodo',['mes'=> 'MÊS','ano' => 'ANO','dia' => 'DIA'], ['class' => 'form-control']); ?>
+    <div class="container-sm d-flex justify-content-center p-5">
+    <div class="card-sm bg-light shadow" style="width: 25rem;">
+        <div class="card-body">
+            <h2 class="card-subtitle border-bottom border-primary text-center">Pesquisa de Caixa Gerencial Avançado</h2>
+            <hr>
+            <div class="form-group">
+                <?= $this->Form->create() ?>
+                    <?= $this->Form->control(0,['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
+                    <?= $this->Form->control(1,['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
+                    <label>Periodo</label>
+                    <?= $this->Form->select(2,['mes'=> 'mês','ano' => 'ano','dia' => 'dia'], ['class' => 'form-control select2bs4']); ?>
+                        <!-- <label>Periodo</label>
+                        <select name=2 class="form-control select2bs4">
+                            <option value="mes" selected="selected">mês</option>
+                            <option value="ano">ano</option>
+                            <option value="dia">dia</option>
+                        </select> -->
+                </div>
+            </div>
+            <div class="d-flex justify-content-end card-footer">
                 <?= $this->Form->button(__('Submit', ['class' => 'btn btn-dark pull-right'])) ?>
-            <?= $this->Form->end() ?>
+                <?= $this->Form->end() ?>
+            </div>
         </div>
     </div>
 </div>
 <?php } ?>
+<script>
+    $('.select2bs4').select2({theme: 'bootstrap4'})
+</script>
