@@ -83,7 +83,7 @@ tr > td{
                     <td><?= $t ?></td>
                 <?php endforeach; ?>
             </tr>
-            <tr>
+            <!-- <tr>
                 <th scope="row">INICIAL</th>
                 <?php foreach($obj['total']['inicial'] as $t): ?>
                     <td><?= $t ?></td>
@@ -94,10 +94,12 @@ tr > td{
                 <?php foreach($obj['total']['final'] as $t): ?>
                     <td><?= $t ?></td>
                 <?php endforeach; ?>
-            </tr>
+            </tr> -->
         </thead>
         <div class="d-flex justify-content-start bg-light rounded-top" style="padding: 5px;">
             <a href="/relatorios/fluxodecaixa" class="btn btn-none border border-primary text-primary">Voltar</a>
+            <a href=<?= "/relatorios/exportGerencial/".implode(",", $request)?> style="font-size: 30px;margin-left:30px;color:green"><i class="fas fa-file-excel"></i></a>
+
         </div>
     </table>
 </div>
@@ -106,9 +108,9 @@ tr > td{
     <div class="panel-body">
         <div class="form-group">
             <?= $this->Form->create() ?>
-                <?= $this->Form->control('comeco', ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
-                <?= $this->Form->control('final', ['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
-                <?= $this->Form->select('periodo',['mes'=> 'MÊS','ano' => 'ANO','dia' => 'DIA'], ['class' => 'form-control']); ?>
+                <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
+                <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
+                <?= $this->Form->select(2,['mes'=> 'MÊS','ano' => 'ANO','dia' => 'DIA'], ['class' => 'form-control']); ?>
                 <?= $this->Form->button(__('Submit', ['class' => 'btn btn-dark pull-right'])) ?>
             <?= $this->Form->end() ?>
         </div>
