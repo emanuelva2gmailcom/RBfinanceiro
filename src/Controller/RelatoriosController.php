@@ -403,13 +403,11 @@ class RelatoriosController extends AppController
         array_unshift($entradas, $data['header']);
         array_unshift($entradas[0], 'contas');
         array_push($entradas[0], 'total');
+
         array_push($entradas, $data['total']['entradas']);
-        // debug($entradas);
-        // exit;
         array_unshift($entradas[2], 'Entradas');
+
         array_push($saidas, $data['total']['saidas']);
-
-
         array_unshift($saidas[1], 'Saidas');
 
         array_push($saidas, $data['total']['entradas-saidas']);
