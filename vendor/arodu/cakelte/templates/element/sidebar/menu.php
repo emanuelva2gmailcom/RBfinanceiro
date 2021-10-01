@@ -27,7 +27,7 @@ function caixa(is)
 </script>
 
 <li class="nav-item" style="color: #59CBFF;">
-<a href="/relatorios/index" class="nav-link" style="color: #59CBFF;">
+<a href="/relatorios/#" class="nav-link" style="color: #59CBFF;">
     <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
       Home
@@ -62,12 +62,7 @@ function caixa(is)
     </p>
   </a>
   <ul class="nav nav-treeview" id="it">
-    <li class="nav-item" style="color: #59CBFF;">
-      <a href="/relatorios/index" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Sobre</p>
-      </a>
-    </li>
+
     <li class="nav-item" style="color: #59CBFF;">
       <a href="<?= $this->Url->build('/relatorios/dre', ['fullBase' => true]); ?>" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
         <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>

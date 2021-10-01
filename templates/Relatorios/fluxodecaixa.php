@@ -17,7 +17,7 @@ tr > td{
 
 </style>
 <div class="container">
-    <table class="table table-sm table-bordered table-dark rounded table-responsive w-100">
+    <table class="table table-bordered table-dark rounded table-responsive w-100">
         <thead class="bg-primary">
             <tr>
                 <th scope="col" class="mwtd"></th>
@@ -26,10 +26,10 @@ tr > td{
                 <?php endforeach; ?>
                 <th scope="col">Total</th>
             </tr>
-        
+
         </thead>
         <tbody class="text-success">
-        <?php 
+        <?php
             foreach($obj['rows']['td'] as $valor):
                 if(in_array($valor[0], $obj['rows']['th']['entradas'])){
                 ?>
@@ -39,7 +39,7 @@ tr > td{
                             <td><?= $valor[$i] ?></td>
                         <?php endfor; ?>
                     </tr>
-                <?php 
+                <?php
                 }
             endforeach;
         ?>
@@ -53,7 +53,7 @@ tr > td{
             </tr>
         </thead>
         <tbody class="text-danger">
-        <?php 
+        <?php
             foreach($obj['rows']['td'] as $valor):
                 if(in_array($valor[0], $obj['rows']['th']['saidas'])){
                 ?>
@@ -63,7 +63,7 @@ tr > td{
                             <td><?= $valor[$i] ?></td>
                         <?php endfor; ?>
                     </tr>
-                <?php 
+                <?php
                 }
             endforeach;
         ?>
@@ -76,7 +76,7 @@ tr > td{
                 <?php endforeach; ?>
             </tr>
         </thead>
-        <thead class="thead-dark">
+        <thead class="thead-light ">
             <tr>
                 <th scope="row">ENTRADAS - SAIDAS</th>
                 <?php foreach($obj['total']['entradas-saidas'] as $t): ?>
@@ -101,7 +101,7 @@ tr > td{
         </div>
     </table>
 </div>
-<?php 
+<?php
 } else { ?>
 <div class="container-sm d-flex justify-content-center p-5">
     <div class="card-sm bg-light shadow" style="width: 25rem;">
@@ -131,5 +131,5 @@ tr > td{
 </div>
 <?php } ?>
 <script>
-    $('.select2bs4').select2({theme: 'bootstrap4'})
+    $('.select2bs4').select2({theme: 'bootstrap4'});
 </script>

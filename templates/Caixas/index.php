@@ -13,7 +13,7 @@
 
 
 
-<div style="height: 100vh;" class="container-fluid d-flex align-items-center justify-content-center p-5">
+<div  class="container-fluid d-flex align-items-center justify-content-center p-5">
  <div style="border: green solid 2px; border-radius: 20px;" class="card card-outline container bg-white ">
   <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h2 class="card-title"><!-- --></h2>
@@ -21,8 +21,9 @@
       <?= $this->Paginator->limitControl([], null, [
             'label'=>false,
             'class' => 'form-control-sm',
+            'style' => 'color: #029BE1; border: 2px solid green;',
           ]); ?>
-      <?= $this->Html->link(__('Novo Caixa'), ['action' => 'add'], ['class' => 'btn btn-success btn-sm']) ?>
+      <?= $this->Html->link(__('Novo Caixa'), ['action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->

@@ -41,8 +41,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       height: auto;
       text-align: center;
       padding: 30px;
-      background-color: black;
-      color: white;
+      background-color: #59CBFF;
+      color: #2E2E2F;
       justify-content: center;
 
     }
