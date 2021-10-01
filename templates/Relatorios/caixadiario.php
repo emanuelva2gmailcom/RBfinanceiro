@@ -13,6 +13,8 @@
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
+    <a href="/relatorios/exportCaixaDiario" style="font-size: 30px;margin-left:30px;color:green"><i class="fas fa-file-excel"></i></a>
+
         <thead>
             <?= $this->Html->tableHeaders(
                 ['Valor','Conta', 'Fornecedor', 'Cliente', 'Descrição'])?>
