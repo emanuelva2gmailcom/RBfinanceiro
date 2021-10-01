@@ -71,7 +71,7 @@ function realizado() {
         <h2 class="text-center text-green">Fluxo de Caixa</h2>
       </div>
       <div class="d-flex justify-content-center">
-        <p class="text-center text-cyan">Aqui você observa ...</p>
+        <p class="text-center text-cyan">Aqui você observa os registros das entradas e saídas da empresa</p>
       </div>
       <div class="d-flex justify-content-center">
         <p class="text-center"><?= $this->Html->link(__('Fluxodecaixa'), ['action' => '#'], ['class' => 'btn btn-info', 'onclick' => 'realizado()']) ?></p>
@@ -85,7 +85,7 @@ function realizado() {
         <h2 class="text-center text-green">Caixa Gerencial</h2>
       </div>
       <div class="d-flex justify-content-center">
-        <p class="text-center text-cyan">Aqui você observa ...</p>
+        <p class="text-center text-cyan">Aqui você observa o controle de seu fluxo de caixa</p>
       </div>
       <div class="d-flex justify-content-center">
       <?= $this->Html->link(__('Gerencial'), ['action' => '#'], ['class' => 'btn btn-info', 'onclick' => 'previsto()']) ?>
@@ -99,7 +99,7 @@ function realizado() {
         <h2 class="text-center text-green">Caixa Diário</h2>
       </div>
       <div class="d-flex justify-content-center">
-        <p class="text-center text-cyan">Aqui você irá direto ...</p>
+        <p class="text-center text-cyan">Aqui você irá direto para o acompanhamento diário das entradas e saídas de acordo com sua abertura de atividades até seu fechamento</p>
       </div>
       <div class="d-flex justify-content-center">
       <?= $this->Html->link(__('Caixa Diário'), ['controller' => 'relatorios', 'action' => 'caixadiario'], ['class' => 'btn btn-info']) ?>
