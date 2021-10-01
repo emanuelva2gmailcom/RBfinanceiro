@@ -6,7 +6,7 @@
 ?>
 <style>
     .nm a{
-        color: #00B209;
+        color: green;
     }
 </style>
 <?php $this->assign('title', __('Caixas') ); ?>
@@ -14,7 +14,7 @@
 
 
 <div style="height: 100vh;" class="container-fluid d-flex align-items-center justify-content-center p-5">
- <div style="border: #00B209 solid 2px; border-radius: 20px;" class="card card-outline container bg-white ">
+ <div style="border: green solid 2px; border-radius: 20px;" class="card card-outline container bg-white ">
   <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h2 class="card-title"><!-- --></h2>
     <div class="card-toolbox">
@@ -29,7 +29,7 @@
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
         <thead class="nm">
-          <tr style="color: #00B209;">
+          <tr style="color: green;">
               <th><?= $this->Paginator->sort('id_caixa') ?></th>
               <th><?= $this->Paginator->sort('data_caixa') ?></th>
               <th><?= $this->Paginator->sort('is_aberto') ?></th>
@@ -58,7 +58,7 @@
   </div>
   <!-- /.card-body -->
 
-  <div class="card-footer d-md-flex paginator" style="color: #00B209;">
+  <div class="card-footer d-md-flex paginator" style="color: green;">
     <div class="mr-auto" style="font-size:.8rem">
     <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} Caixas de {{count}} no total')) ?>
     </div>
