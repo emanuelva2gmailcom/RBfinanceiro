@@ -385,19 +385,31 @@ class RelatoriosController extends AppController
         foreach ($data['rows']['td'] as $valor) {
             if (in_array($valor[0], $data['rows']['th']['entradas'])) {
                 $entradas[] = $valor;
+                // debug($entradas);
+                // debug('entradas');
             }
             if (in_array($valor[0], $data['rows']['th']['saidas'])) {
                 $saidas[] = $valor;
+                // debug($saidas);
+                // debug('saidas');
             }
+        }
+        if ($entradas == null) {
+            $entradas = [[ ]];
+        }
+        if ($saidas == null) {
+            $saidas = [[ ]];
         }
         array_unshift($entradas, $data['header']);
         array_unshift($entradas[0], 'contas');
         array_push($entradas[0], 'total');
         array_push($entradas, $data['total']['entradas']);
-
-        array_unshift($entradas[1], 'Entradas');
-        
+        // debug($entradas);
+        // exit;
+        array_unshift($entradas[2], 'Entradas');
         array_push($saidas, $data['total']['saidas']);
+
+
         array_unshift($saidas[1], 'Saidas');
 
         array_push($saidas, $data['total']['entradas-saidas']);
