@@ -395,10 +395,10 @@ class RelatoriosController extends AppController
             }
         }
         if ($entradas == null) {
-            $entradas = [[ ]];
+            $entradas = [[]];
         }
         if ($saidas == null) {
-            $saidas = [[ ]];
+            $saidas = [[]];
         }
         array_unshift($entradas, $data['header']);
         array_unshift($entradas[0], 'contas');
@@ -561,14 +561,22 @@ class RelatoriosController extends AppController
                 $saidas[] = $valor;
             }
         }
+        if ($entradas == null) {
+            $entradas = [[ ]];
+        }
+        if ($saidas == null) {
+            $saidas = [[ ]];
+        }
         array_unshift($entradas, $data['header']);
         array_unshift($entradas[0], 'contas');
-
+        
         array_push($entradas[0], 'total');
-
+        
         array_push($entradas, $data['total']['entradas']);
-        array_unshift($entradas[3], 'Entradas');
-
+        array_unshift($entradas[2], 'Entradas');
+        // debug($entradas);
+        // exit;
+        
         array_push($saidas, $data['total']['saidas']);
         array_unshift($saidas[1], 'Saidas');
 
