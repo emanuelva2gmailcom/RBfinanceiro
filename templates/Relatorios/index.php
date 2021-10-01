@@ -60,54 +60,54 @@ function realizado() {
   <body>
 
 <main>
-  <div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-gray" style="min-height: 100vh;">
-    <div class="container-fluid vh-50 bg-red m-0 py-5 justify-content-center">
+  <div class="position-relative overflow-hidden p-3 p-md-5 text-center" style="min-height: 100vh;">
+    <div class="container-fluid vh-50 m-0 py-5 justify-content-center">
   <div class="row">
     <div class="col-4">
       <div class="d-flex justify-content-center">
-        <div class="bd-placeholder-img rounded-circle bg-blue" style="width: 140px; height: 140px;"></div>
+        <div class="bd-placeholder-img rounded-circle" style="width: 140px; height: 140px; background-color: #029BE1;"></div>
       </div>
       <div class="d-flex justify-content-center">
-        <h2 class="text-center">Fluxo de Caixa</h2>
+        <h2 class="text-center text-green">Fluxo de Caixa</h2>
       </div>
       <div class="d-flex justify-content-center">
-        <p class="text-center">Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+        <p class="text-center text-cyan">Aqui você observa ...</p>
       </div>
       <div class="d-flex justify-content-center">
-        <p class="text-center"><?= $this->Html->link(__('Fluxodecaixa'), ['action' => '#'], ['class' => 'btn btn-primary', 'onclick' => 'realizado()']) ?></p>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="d-flex justify-content-center">
-        <div class="bd-placeholder-img rounded-circle bg-blue" style="width: 140px; height: 140px;"></div>
-      </div>
-      <div class="d-flex justify-content-center">
-        <h2 class="text-center">Caixa Gerencial</h2>
-      </div>
-      <div class="d-flex justify-content-center">
-        <p class="text-center">Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-      </div>
-      <div class="d-flex justify-content-center">
-      <?= $this->Html->link(__('Gerencial'), ['action' => '#'], ['class' => 'btn btn-primary', 'onclick' => 'previsto()']) ?>
+        <p class="text-center"><?= $this->Html->link(__('Fluxodecaixa'), ['action' => '#'], ['class' => 'btn btn-info', 'onclick' => 'realizado()']) ?></p>
       </div>
     </div>
     <div class="col-4">
       <div class="d-flex justify-content-center">
-        <div class="bd-placeholder-img rounded-circle bg-blue" style="width: 140px; height: 140px;"></div>
+        <div class="bd-placeholder-img rounded-circle" style="width: 140px; height: 140px;  background-color: #029BE1;"></div>
       </div>
       <div class="d-flex justify-content-center">
-        <h2 class="text-center">Caixa Diário</h2>
+        <h2 class="text-center text-green">Caixa Gerencial</h2>
       </div>
       <div class="d-flex justify-content-center">
-        <p class="text-center">Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+        <p class="text-center text-cyan">Aqui você observa ...</p>
       </div>
       <div class="d-flex justify-content-center">
-      <?= $this->Html->link(__('Caixa diario'), ['controller' => 'relatorios', 'action' => 'caixadiario'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Gerencial'), ['action' => '#'], ['class' => 'btn btn-info', 'onclick' => 'previsto()']) ?>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="d-flex justify-content-center">
+        <div class="bd-placeholder-img rounded-circle" style="width: 140px; height: 140px; background-color: #029BE1;"></div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <h2 class="text-center text-green">Caixa Diário</h2>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p class="text-center text-cyan">Aqui você irá direto ...</p>
+      </div>
+      <div class="d-flex justify-content-center">
+      <?= $this->Html->link(__('Caixa Diário'), ['controller' => 'relatorios', 'action' => 'caixadiario'], ['class' => 'btn btn-info']) ?>
       </div>
     </div>
   </div>
 </div>
-<div id="teste" class="container-fluid vh-50 bg-blue m-0 py-5 justify-content-center" style="display: none;">
+<div id="teste" class="container-fluid vh-50 m-0 py-5 justify-content-center" style="display: none; background-color: #029BE1; border-radius: 20px;">
 
   <div class="card-body table-responsive p-0">
     <div id='prev' style="display:none;">
