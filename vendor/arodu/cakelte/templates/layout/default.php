@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title><?= strip_tags($this->settings['appName']) . ' | ' . $this->fetch('title') ?></title>
+  <!-- <title><?= strip_tags($this->settings['appName']) . ' | ' . $this->fetch('title') ?></title> -->
 
   <?= $this->Html->meta('icon') ?>
   <?= $this->fetch('meta') ?>
@@ -56,34 +56,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
   <style>
+    .main-header {
+      background-color: #6AA4B0;
+    }
 
-.main-header{
-  background-color: #6AA4B0 ;
-}
+    .main-sidebar {
+      background-color: #6AA4B0;
+    }
 
-.main-sidebar{
-  background-color: #6AA4B0 ;
-}
+    .content-header {
+      background-color: #2F6D80;
+    }
 
-.content-header{
-  background-color:  #2F6D80 ;
-}
+    .content {
+      background-color: #2F6D80;
+    }
 
-.content{
-  background-color: #2F6D80 ;
-}
+    .main-footer {
+      background-color: #6AA4B0;
+    }
 
-.main-footer{
-  background-color:  #6AA4B0 ;
-}
-a {
-  color: #E1E7E0;
-}
+    a {
+      color: #E1E7E0;
+    }
+  </style>
 
-
-</style>
-
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script>
+    $('.teste').blur(function() {
+      alert('teste');
+    })
+  </script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -104,32 +107,26 @@ a {
       </a>
 
       <!-- Sidebar -->
-      <div class="sidebar text-info">
+      <div class="sidebar text-info teste">
         <?= $this->element('sidebar/main') ?>
       </div>
       <!-- /.sidebar -->
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" >
+    <div class="content-wrapper">
       <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <?= $this->element('content/header') ?>
-        </div><!-- /.container-fluid -->
-      </div>
+   
 
       <!-- /.content-header -->
 
       <!-- Main content -->
-      <div class="content" style="min-height:100vh;">
+      <div class="content" style="padding: 0px; margin: 0px; min-height:100vh;">
 
-      <!-- Main content --> 
+        <!-- Main content -->
 
-        <div class="container-fluid">
-          <?= $this->Flash->render() ?>
-          <?= $this->fetch('content') ?>
-        </div><!-- /.container-fluid -->
+        <?= $this->Flash->render() ?>
+        <?= $this->fetch('content') ?>
       </div>
       <!-- /.content -->
 
@@ -145,7 +142,7 @@ a {
 
     <!-- Main Footer -->
   </div>
-  
+
   <footer>
     <?= $this->element('footer/main') ?>
   </footer>
@@ -155,6 +152,8 @@ a {
 
   
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/select2/js/select2.min.js'); ?>
+
+
   <!-- jQuery -->
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/jquery/jquery.min.js') ?>
   <!-- Bootstrap 4 -->
@@ -163,10 +162,10 @@ a {
   <?= $this->Html->script('CakeLte./AdminLTE/dist/js/adminlte.min.js') ?>
 
   <?= $this->element('layout/script') ?>
-  
+
   <?= $this->fetch('script') ?>
 
-  
+
 </body>
 
 </html>

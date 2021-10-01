@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?= strip_tags($this->settings['appName']) . ' | ' . $this->fetch('title') ?></title>
+  <!-- <title><?= strip_tags($this->settings['appName']) . ' | ' . $this->fetch('title') ?></title> -->
 
   <?= $this->Html->meta('icon') ?>
   <?= $this->fetch('meta') ?>
