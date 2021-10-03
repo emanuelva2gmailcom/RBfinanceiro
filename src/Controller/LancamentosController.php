@@ -95,6 +95,11 @@ class LancamentosController extends AppController
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
+            if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
+                $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
+
+                return $this->redirect(['action' => 'add']);
+            }
             if (!$lancamento->getErrors()) {
                 $image = $this->request->getData('uploadfiles');
                 $name = $image->getClientFilename();
