@@ -31,32 +31,32 @@ class LancamentosController extends AppController
     {
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
-           if(($lancamento->tipo == 'PREVISTO')) { ?>
-            <script>
-                function mudar(prev) {
-                    var display = document.getElementById(prev).style.display;
-                    if(display == "none")
-                        document.getElementById(prev).style.display = 'block';
-                    else
-                        document.getElementById(prev).style.display = 'none';
-                }
+            if (($lancamento->tipo == 'PREVISTO')) { ?>
+                <script>
+                    function mudar(prev) {
+                        var display = document.getElementById(prev).style.display;
+                        if (display == "none")
+                            document.getElementById(prev).style.display = 'block';
+                        else
+                            document.getElementById(prev).style.display = 'none';
+                    }
 
-                mudar();
-            </script>
-            <?php }else{ ?>
-            <script>
-                function mudar(real) {
-                    var display = document.getElementById(real).style.display;
-                    if(display == "none")
-                        document.getElementById(real).style.display = 'block';
-                    else
-                        document.getElementById(real).style.display = 'none';
-                }
+                    mudar();
+                </script>
+            <?php } else { ?>
+                <script>
+                    function mudar(real) {
+                        var display = document.getElementById(real).style.display;
+                        if (display == "none")
+                            document.getElementById(real).style.display = 'block';
+                        else
+                            document.getElementById(real).style.display = 'none';
+                    }
 
-                mudar();
-            </script>
-            <?php }
-         }
+                    mudar();
+                </script>
+<?php }
+        }
 
 
         $this->paginate = [
@@ -90,39 +90,62 @@ class LancamentosController extends AppController
      */
     public function add()
     {
+        $this->paginate = [
+            'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
+
+        ];
         $this->loadModel('Comprovantes');
-        $comprovantes = $this->paginate($this->Comprovantes);
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
             if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
                 $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
-
+                
                 return $this->redirect(['action' => 'add']);
             }
-            if (!$lancamento->getErrors()) {
-                $image = $this->request->getData('uploadfiles');
-                $name = $image->getClientFilename();
-                $targetpath = WWW_ROOT.'img/uploads/'.DS.$name;
-                if($name)
-                $image->moveTo($targetpath);
-                $comprovantes = $this->Comprovantes->newEmptyEntity();
-                $comprovantes->img = $name;
-            }
+            
+            $image = $this->request->getData('uploadfiles');
+            $name = $image->getClientFilename();
+            $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
+            if ($name)
+            $image->moveTo($targetpath);
+            $comprovantes = $this->Comprovantes->newEmptyEntity();
+            $comprovantes->img = $name;
             if (($this->Comprovantes->save($comprovantes)) && ($this->Lancamentos->save($lancamento))) {
                 $this->Flash->success(__('Lançamento adicionado com sucesso'));
-
+                
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
         }
-        $fluxocontas = $this->Lancamentos->Fluxocontas->find('list', ['limit' => 200]);
+        
+        $fluxocontas = $this->Lancamentos->Fluxocontas->find('all');
+        $fluxosubgrupos = $this->Lancamentos->Fluxocontas->Fluxosubgrupos->find('all');
+        $fluxogrupos = $this->Lancamentos->Fluxocontas->Fluxosubgrupos->Fluxogrupos->find('all');
+        $array = [];
+
+        foreach ($fluxocontas as $fluxoconta) :
+
+            foreach ($fluxosubgrupos as $fluxosubgrupo) :
+
+                foreach ($fluxogrupos as $fluxogrupo) :
+
+                    if (($fluxoconta->fluxosubgrupo_id == $fluxosubgrupo->id_fluxosubgrupo) && ($fluxosubgrupo->fluxogrupo_id == $fluxogrupo->id_fluxogrupo)) {
+                        array_push($array,  $fluxogrupo->grupo . ' de ' . $fluxosubgrupo->subgrupo . " " . $fluxoconta->conta);
+                    }
+                endforeach;
+
+            endforeach;
+
+        endforeach;
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'grupos'));
+        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'grupos','array'));
     }
+
+    
 
     /**
      * Edit method
