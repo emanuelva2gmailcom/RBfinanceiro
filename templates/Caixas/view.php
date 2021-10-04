@@ -20,15 +20,15 @@ $this->assign('title', __('Caixas') ); ?>
         </tr>
         <tr>
             <th><?= __('Data Caixa') ?></th>
-            <td><?= $this->Number->format($caixa->data_caixa) ?></td>
+            <td><?= h($caixa->data_caixa) ?></td>
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
-            <td><?= h($caixa->created) ?></td>
+            <td><?= h($caixa->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Modified') ?></th>
-            <td><?= h($caixa->modified) ?></td>
+            <td><?= h($caixa->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Is Aberto') ?></th>

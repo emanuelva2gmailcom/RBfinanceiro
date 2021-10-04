@@ -879,8 +879,8 @@ class UsersController extends UsermgmtAppController {
 			if($connect) {
 				$this->render('popup');
 			} else {
-                $this->redirect('/dashboard');
-            }
+				$this->redirect('/dashboard');
+			}
 		}
 
 		if($connect == 'fb') {

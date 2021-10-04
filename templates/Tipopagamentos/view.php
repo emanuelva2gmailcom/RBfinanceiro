@@ -29,11 +29,11 @@ $this->assign('title', __('Tipopagamento') );
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
-            <td><?= h($tipopagamento->created) ?></td>
+            <td><?= h($tipopagamento->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Modified') ?></th>
-            <td><?= h($tipopagamento->modified) ?></td>
+            <td><?= h($tipopagamento->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
     </table>
   </div>

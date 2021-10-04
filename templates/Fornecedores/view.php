@@ -45,11 +45,11 @@ $this->assign('title', __('Fornecedor') );
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
-            <td><?= h($fornecedore->created) ?></td>
+            <td><?= h($fornecedore->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Modified') ?></th>
-            <td><?= h($fornecedore->modified) ?></td>
+            <td><?= h($fornecedore->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Is Pendente') ?></th>

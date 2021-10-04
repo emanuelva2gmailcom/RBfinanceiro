@@ -40,8 +40,8 @@
             <td><?= h($comprovante->nome_arquivo) ?></td>
             <td><?= h($comprovante->tipo) ?></td>
             <td><?= $comprovante->has('lancamento') ? $this->Html->link($comprovante->lancamento->tipo, ['controller' => 'Lancamentos', 'action' => 'view', $comprovante->lancamento->id_lancamento]) : '' ?></td>
-            <td><?= h($comprovante->created) ?></td>
-            <td><?= h($comprovante->modified) ?></td>
+            <td><?= h($comprovante->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($comprovante->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td><?= h($comprovante->img) ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $comprovante->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

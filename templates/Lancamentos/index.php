@@ -71,13 +71,16 @@ function realizado() {
                 <?php foreach ($lancamentos as $lancamento) : ?>
                     <?php if ($lancamento->tipo == 'PREVISTO') { ?>
                     <tr style="color: #029BE1;">
-
                             <td><?= h($lancamento->tipo) ?></td>
                             <td><?= h($lancamento->descricao) ?></td>
                             <td><?= $this->Number->format($lancamento->valor) ?></td>
-                            <td><?= h($lancamento->data_emissao) ?></td>
+                            <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                         <?php if(empty($lancamento->data_baixa)){ ?>
                             <td><?= h($lancamento->data_baixa) ?></td>
-                            <td><?= h($lancamento->data_vencimento) ?></td>
+                         <?php }else{?>
+                            <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                         <?php } ?>
+                            <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
 
                             <!-- <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td> -->
                             <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->nome]) : '' ?></td>
@@ -150,9 +153,9 @@ function realizado() {
                             <td><?= h($lancamento->tipo) ?></td>
                             <td><?= h($lancamento->descricao) ?></td>
                             <td><?= $this->Number->format($lancamento->valor) ?></td>
-                            <td><?= h($lancamento->data_emissao) ?></td>
-                            <td><?= h($lancamento->data_baixa) ?></td>
-                            <td><?= h($lancamento->data_vencimento) ?></td>
+                            <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                            <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                            <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
 
                             <!-- <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td> -->
                             <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->nome]) : '' ?></td>

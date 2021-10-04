@@ -52,23 +52,23 @@
         </tr>
         <tr>
             <th><?= __('Data Emissao') ?></th>
-            <td><?= h($lancamento->data_emissao) ?></td>
+            <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Data Baixa') ?></th>
-            <td><?= h($lancamento->data_baixa) ?></td>
+            <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Data Vencimento') ?></th>
-            <td><?= h($lancamento->data_vencimento) ?></td>
+            <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
-            <td><?= h($lancamento->created) ?></td>
+            <td><?= h($lancamento->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Modified') ?></th>
-            <td><?= h($lancamento->modified) ?></td>
+            <td><?= h($lancamento->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
     </table>
   </div>
@@ -128,11 +128,11 @@
             <td><?= h($lancamentos->tipo) ?></td>
             <td><?= h($lancamentos->descricao) ?></td>
             <td><?= h($lancamentos->valor) ?></td>
-            <td><?= h($lancamentos->data_emissao) ?></td>
-            <td><?= h($lancamentos->data_baixa) ?></td>
-            <td><?= h($lancamentos->data_vencimento) ?></td>
-            <td><?= h($lancamentos->created) ?></td>
-            <td><?= h($lancamentos->modified) ?></td>
+            <td><?= h($lancamentos->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamentos->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamentos->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamentos->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamentos->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td><?= h($lancamentos->fluxoconta_id) ?></td>
             <td><?= h($lancamentos->fornecedor_id) ?></td>
             <td><?= h($lancamentos->cliente_id) ?></td>
@@ -224,8 +224,8 @@
             <td><?= h($comprovantes->nome_arquivo) ?></td>
             <td><?= h($comprovantes->tipo) ?></td>
             <td><?= h($comprovantes->lancamento_id) ?></td>
-            <td><?= h($comprovantes->created) ?></td>
-            <td><?= h($comprovantes->modified) ?></td>
+            <td><?= h($comprovantes->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($comprovantes->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['controller' => 'Comprovantes', 'action' => 'view', $comprovantes->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary']) ?>
               <?= $this->Html->link(__('Editar'), ['controller' => 'Comprovantes', 'action' => 'edit', $comprovantes->id_comprovante], ['class'=>'btn btn-xs btn-outline-primary']) ?>

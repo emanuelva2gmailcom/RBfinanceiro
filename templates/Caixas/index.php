@@ -43,10 +43,10 @@
           <?php foreach ($caixas as $caixa): ?>
           <tr style="color: #029BE1;">
             <td><?= $this->Number->format($caixa->id_caixa) ?></td>
-            <td><?= ($caixa->data_caixa) ?></td>
+            <td><?= h($caixa->data_caixa) ?></td>
             <td><?= ($caixa->is_aberto) ? __('Sim') : __('Não') ?></td>
-            <td><?= h($caixa->created) ?></td>
-            <td><?= h($caixa->modified) ?></td>
+            <td><?= h($caixa->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($caixa->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-info', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-success', 'escape'=>false]) ?>

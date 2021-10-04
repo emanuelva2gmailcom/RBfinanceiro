@@ -29,11 +29,11 @@ $this->assign('title', __('Dregrupo') );
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
-            <td><?= h($dregrupo->created) ?></td>
+            <td><?= h($dregrupo->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Modified') ?></th>
-            <td><?= h($dregrupo->modified) ?></td>
+            <td><?= h($dregrupo->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
     </table>
   </div>
@@ -86,8 +86,8 @@ $this->assign('title', __('Dregrupo') );
             <td><?= h($drecontas->id_dreconta) ?></td>
             <td><?= h($drecontas->conta) ?></td>
             <td><?= h($drecontas->descricao) ?></td>
-            <td><?= h($drecontas->created) ?></td>
-            <td><?= h($drecontas->modified) ?></td>
+            <td><?= h($drecontas->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($drecontas->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td><?= h($drecontas->dregrupo_id) ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['controller' => 'Drecontas', 'action' => 'view', $drecontas->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>
