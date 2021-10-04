@@ -3,7 +3,6 @@
 $now = date('d-m-Y');
 
 ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 try {
@@ -27,82 +26,70 @@ function caixa(is)
 }
 </script>
 
-<li class="nav-item" style="color: #E1E7E0">
-<a href="/relatorios/home" class="nav-link" style="color: #E1E7E0">
-    <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
+<li class="nav-item" style="color: #59CBFF;">
+<a href="/relatorios/#" class="nav-link" style="color: #59CBFF;">
+    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
       Home
     </p>
   </a>
 </li>
 
-<li class="nav-item" style="color: #E1E7E0">
-  <a href="/lancamentos/add" class="nav-link" style="color: #E1E7E0">
-    <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
+<li class="nav-item" style="color: #59CBFF;">
+  <a href="/lancamentos/add" class="nav-link" style="color: #59CBFF;">
+    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
       Novo Lançamento
     </p>
   </a>
 </li>
 
-<li class="nav-item" style="color: #E1E7E0">
-  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #E1E7E0" >
-    <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
+<li class="nav-item" style="color: #59CBFF;">
+  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
+    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p id="caixa">
       Abrir Caixa
     </p>
   </a>
 </li>
 
-<li class="nav-item has-treeview " style="color: #E1E7E0">
-  <a href="/relatorios/index" class="nav-link" style="color: #E1E7E0">
-    <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
+<li class="nav-item has-treeview " style="color: #59CBFF;">
+  <a href="/relatorios/index" class="nav-link" style="color: #59CBFF;">
+    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
       Relatórios
       <i class="right fas fa-angle-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview" id="it">
-    <li class="nav-item" style="color: #E1E7E0">
-      <a href="/relatorios/index" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
-        <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
-        <p>Sobre</p>
-      </a>
-    </li>
-    <li class="nav-item" style="color: #E1E7E0">
-      <a href="<?= $this->Url->build('/relatorios/dre', ['fullBase' => true]); ?>" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
-        <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
-        <p>DRE</p>
-      </a>
-    </li>
-    <li class="nav-item" style="color: #E1E7E0">
-      <a href="/relatorios/fluxodecaixa" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
-        <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
+    <li class="nav-item" style="color: #59CBFF;">
+      <a href="/relatorios/fluxodecaixa" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
         <p>Fluxo de Caixa</p>
       </a>
     </li>
-    <li class="nav-item" style="color: #E1E7E0">
-      <a href="/lancamentos/index" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
-        <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
+    <li class="nav-item" style="color: #59CBFF;">
+      <a href="/lancamentos/index" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
         <p>Lançamentos</p>
       </a>
     </li>
-    <li class="nav-item" style="color: #E1E7E0">
-      <a href="/relatorios/gerencial" class="nav-link" style="color: #E1E7E0; margin-left: 25px;">
-        <i class="far fa-circle nav-icon" style="color: #E1E7E0"></i>
+    <li class="nav-item" style="color: #59CBFF;">
+      <a href="/relatorios/gerencial" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
         <p>Caixa Gerencial</p>
       </a>
     </li>
   </ul>
 </li>
 
-<li class="nav-item" style="color: #E1E7E0">
+<li class="nav-item" style="color: #59CBFF;">
   <a href="<?= $this->Url->build([
               'controller' => 'users',
               'action' => 'dashboard',
               'plugin' => 'Usermgmt',
-            ]); ?>" class="nav-link" style="color: #E1E7E0">
-    <i class="nav-icon fas fa-th" style="color: #E1E7E0"></i>
+            ]); ?>" class="nav-link" style="color: #59CBFF;">
+    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
       Painel
     </p>

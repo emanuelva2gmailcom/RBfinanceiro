@@ -41,11 +41,11 @@ $this->assign('title', __('Cliente') );
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
-            <td><?= h($cliente->created) ?></td>
+            <td><?= h($cliente->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Modified') ?></th>
-            <td><?= h($cliente->modified) ?></td>
+            <td><?= h($cliente->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Is Pendente') ?></th>

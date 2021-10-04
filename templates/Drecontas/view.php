@@ -32,11 +32,11 @@ $this->assign('title', __('Dreconta') );?>
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
-            <td><?= h($dreconta->created) ?></td>
+            <td><?= h($dreconta->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Modified') ?></th>
-            <td><?= h($dreconta->modified) ?></td>
+            <td><?= h($dreconta->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
     </table>
   </div>
@@ -96,11 +96,11 @@ $this->assign('title', __('Dreconta') );?>
             <td><?= h($lancamentos->tipo) ?></td>
             <td><?= h($lancamentos->descricao) ?></td>
             <td><?= h($lancamentos->valor) ?></td>
-            <td><?= h($lancamentos->data_emissao) ?></td>
-            <td><?= h($lancamentos->data_baixa) ?></td>
-            <td><?= h($lancamentos->data_vencimento) ?></td>
-            <td><?= h($lancamentos->created) ?></td>
-            <td><?= h($lancamentos->modified) ?></td>
+            <td><?= h($lancamentos->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamentos->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamentos->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamentos->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamentos->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td><?= h($lancamentos->fluxoconta_id) ?></td>
             <td><?= h($lancamentos->fornecedor_id) ?></td>
             <td><?= h($lancamentos->cliente_id) ?></td>

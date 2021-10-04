@@ -40,10 +40,10 @@
             <td><?= $this->Number->format($notification->id_notification) ?></td>
             <td><?= h($notification->title) ?></td>
             <td><?= h($notification->message) ?></td>
-            <td><?= h($notification->data) ?></td>
+            <td><?= h($notification->data->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td><?= h($notification->class) ?></td>
-            <td><?= h($notification->created) ?></td>
-            <td><?= h($notification->modify) ?></td>
+            <td><?= h($notification->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($notification->modify->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td><?= $notification->has('lancamento') ? $this->Html->link($notification->lancamento->tipo, ['controller' => 'Lancamentos', 'action' => 'view', $notification->lancamento->id_lancamento]) : '' ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $notification->id_notification], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

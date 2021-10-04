@@ -16,8 +16,8 @@ tr > td{
 
 </style>
 <div class="container table-responsive">
-    <table class="table table-sm table-bordered table-dark rounded ">
-        <thead class="bg-primary">
+    <table class="table table-sm table-bordered table-white rounded">
+        <thead class="bg-info">
             <tr>
                 <th scope="col" class="mwtd"></th>
                 <?php foreach($obj['header'] as $data): ?>
@@ -25,10 +25,10 @@ tr > td{
                 <?php endforeach; ?>
                 <th scope="col">Total</th>
             </tr>
-        
+
         </thead>
         <tbody class="text-success">
-        <?php 
+        <?php
             foreach($obj['rows']['td'] as $valor):
                 if(in_array($valor[0], $obj['rows']['th']['entradas'])){
                 ?>
@@ -38,12 +38,12 @@ tr > td{
                             <td><?= $valor[$i] ?></td>
                         <?php endfor; ?>
                     </tr>
-                <?php 
+                <?php
                 }
             endforeach;
         ?>
         </tbody>
-        <thead class="bg-primary">
+        <thead class="bg-info">
             <tr>
                 <th scope="row" class="mwtd"><p class="text-nw">Entradas</p></th>
                 <?php foreach($obj['total']['entradas'] as $t): ?>
@@ -52,7 +52,7 @@ tr > td{
             </tr>
         </thead>
         <tbody class="text-danger">
-        <?php 
+        <?php
             foreach($obj['rows']['td'] as $valor):
                 if(in_array($valor[0], $obj['rows']['th']['saidas'])){
                 ?>
@@ -62,12 +62,12 @@ tr > td{
                             <td><?= $valor[$i] ?></td>
                         <?php endfor; ?>
                     </tr>
-                <?php 
+                <?php
                 }
             endforeach;
         ?>
         </tbody>
-        <thead class="bg-primary">
+        <thead class="bg-info">
             <tr>
                 <th scope="row" class="mwtd">Saídas</th>
                 <?php foreach($obj['total']['entradas'] as $t): ?>
@@ -75,11 +75,11 @@ tr > td{
                 <?php endforeach; ?>
             </tr>
         </thead>
-        <thead class="thead-dark">
+        <thead class="thead-light">
             <tr>
-                <th scope="row">ENTRADAS - SAIDAS</th>
+                <th style="color: #17a2b8;" scope="row">ENTRADAS - SAIDAS</th>
                 <?php foreach($obj['total']['entradas-saidas'] as $t): ?>
-                    <td><?= $t ?></td>
+                    <td class="bg-info"><?= $t ?></td>
                 <?php endforeach; ?>
             </tr>
         </thead>

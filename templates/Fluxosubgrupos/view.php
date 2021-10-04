@@ -30,11 +30,11 @@
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
-            <td><?= h($fluxosubgrupo->created) ?></td>
+            <td><?= h($fluxosubgrupo->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Modified') ?></th>
-            <td><?= h($fluxosubgrupo->modified) ?></td>
+            <td><?= h($fluxosubgrupo->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
     </table>
   </div>
@@ -85,8 +85,8 @@
             <td><?= h($fluxocontas->id_fluxoconta) ?></td>
             <td><?= h($fluxocontas->conta) ?></td>
             <td><?= h($fluxocontas->descricao) ?></td>
-            <td><?= h($fluxocontas->created) ?></td>
-            <td><?= h($fluxocontas->modified) ?></td>
+            <td><?= h($fluxocontas->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($fluxocontas->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td><?= h($fluxocontas->fluxosubgrupo_id) ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['controller' => 'Fluxocontas', 'action' => 'view', $fluxocontas->id_fluxoconta], ['class'=>'btn btn-xs btn-outline-primary']) ?>

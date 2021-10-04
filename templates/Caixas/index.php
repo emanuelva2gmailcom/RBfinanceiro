@@ -4,25 +4,33 @@
  * @var \App\Model\Entity\Caixa[]|\Cake\Collection\CollectionInterface $caixas
  */
 ?>
-
+<style>
+    .nm a{
+        color: green;
+    }
+</style>
 <?php $this->assign('title', __('Caixas') ); ?>
 
-<div class="card card-primary card-outline bg-dark">
-  <div class="card-header d-sm-flex">
+
+
+<div  class="container-fluid d-flex align-items-center justify-content-center p-5">
+ <div style="border: green solid 2px; border-radius: 20px;" class="card card-outline container bg-white ">
+  <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h2 class="card-title"><!-- --></h2>
     <div class="card-toolbox">
       <?= $this->Paginator->limitControl([], null, [
             'label'=>false,
             'class' => 'form-control-sm',
+            'style' => 'color: #029BE1; border: 2px solid green;',
           ]); ?>
-      <?= $this->Html->link(__('Novo Caixa'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Novo Caixa'), ['action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
-    <table class="table  text-nowrap">
-        <thead>
-          <tr>
+    <table class="table text-nowrap">
+        <thead class="nm">
+          <tr style="color: green;">
               <th><?= $this->Paginator->sort('id_caixa') ?></th>
               <th><?= $this->Paginator->sort('data_caixa') ?></th>
               <th><?= $this->Paginator->sort('is_aberto') ?></th>
@@ -33,15 +41,15 @@
         </thead>
         <tbody>
           <?php foreach ($caixas as $caixa): ?>
-          <tr>
+          <tr style="color: #029BE1;">
             <td><?= $this->Number->format($caixa->id_caixa) ?></td>
-            <td><?= ($caixa->data_caixa) ?></td>
+            <td><?= h($caixa->data_caixa) ?></td>
             <td><?= ($caixa->is_aberto) ? __('Sim') : __('Não') ?></td>
-            <td><?= h($caixa->created) ?></td>
-            <td><?= h($caixa->modified) ?></td>
+            <td><?= h($caixa->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($caixa->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-info', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-success', 'escape'=>false]) ?>
               <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $caixa->id_caixa], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $caixa->id_caixa)]) ?>
             </td>
           </tr>
@@ -51,7 +59,7 @@
   </div>
   <!-- /.card-body -->
 
-  <div class="card-footer d-md-flex paginator">
+  <div class="card-footer d-md-flex paginator" style="color: green;">
     <div class="mr-auto" style="font-size:.8rem">
     <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} Caixas de {{count}} no total')) ?>
     </div>
@@ -66,4 +74,5 @@
 
   </div>
   <!-- /.card-footer -->
+ </div>
 </div>
