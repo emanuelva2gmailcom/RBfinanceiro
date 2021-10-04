@@ -110,7 +110,7 @@
                       </div>
                       <div>
                           <div style="background-color: green; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
-                          <?= $this->Form->button(__('Salvar', ['class' => 'btn  pull-right']), ['confirm' => 'Quer mesmo salvar esse lançamento?']) ?>
+                          <?= $this->Form->button(__('Salvar', ['class' => 'btn pull-right']), ['confirm' => 'Quer mesmo salvar esse lançamento?']) ?>
                       </div>
                   </div>
               </div>
