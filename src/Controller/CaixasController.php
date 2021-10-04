@@ -136,7 +136,7 @@ class CaixasController extends AppController
     public function caixaaberto()
     {
         $this->loadModel('Caixas');
-        $now = date('d-m-Y');
+        $now = date('d-m-Y');   
         $caixas = $this->paginate($this->Caixas);
         foreach ($caixas as $caixa) :
             if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
@@ -146,5 +146,63 @@ class CaixasController extends AppController
         endforeach;
         return false;
     }
+
+    public function getCaixaaberto()
+    {
+        $resposta = null;
+        $this->loadModel('Caixas');
+        $now = date('d-m-Y');
+        $caixas = $this->paginate($this->Caixas);
+        foreach ($caixas as $caixa) :
+            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
+                $resposta = $caixa->is_aberto;
+            }
+        endforeach;
+        if($resposta == null){
+            $resposta = false;
+        }
+        $this->response = $this->response;
+        $this->response = $this->response
+            ->withHeader('Access-Control-Allow-Origin','*')
+            ->withHeader('Access-Control-Allow-Methods', '*')
+            ->withHeader('Access-Control-Allow-Credentials', 'true')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+            ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
+            ->withHeader('Access-Control-Allow-Type', 'application/json');
+        $this->response = $this->response->withType('application/json')
+            ->withStringBody(json_encode($resposta));
+        return $this->response;
+    }
+
+
+    public function caixaaberto2()
+    {
+        $this->loadModel('Caixas');
+        $now = date('d-m-Y');
+        $caixas = $this->paginate($this->Caixas);
+        foreach ($caixas as $caixa) :
+            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
+                return $caixa->is_aberto;
+            }
+                
+        endforeach;
+        return false;
+    }
+
+    public function getAberto()
+    {
+        $this->response = $this->response;
+        $this->response = $this->response
+            ->withHeader('Access-Control-Allow-Origin','*')
+            ->withHeader('Access-Control-Allow-Methods', '*')
+            ->withHeader('Access-Control-Allow-Credentials', 'true')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+            ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
+            ->withHeader('Access-Control-Allow-Type', 'application/json');
+        $this->response = $this->response->withType('application/json')
+            ->withStringBody(json_encode($this->caixaaberto2()));
+        return $this->response;
+    }
+
 
 }

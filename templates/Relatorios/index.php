@@ -1,68 +1,32 @@
-<?php
-
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Lancamento[]|\Cake\Collection\CollectionInterface $lancamentos
- */
-?>
-<?php $this->assign('title', __('Lancamentos')); ?>
-
-<style>
-    .teste {
-        color: #E1E7F0;
-    }
-</style>
-<script>
-function realizado() {
-    document.getElementById('real').style.display= 'block';
-    document.getElementById('prev').style.display= 'none';
-  }
-
-  function previsto(){
-    document.getElementById('real').style.display= 'none';
-    document.getElementById('prev').style.display= 'block';
-  }
-</script>
-<div class="card   card-outline bg-dark">
-    <div class="card-header d-sm-flex">
-        <h2 class="card-title">
-            <!-- -->
-        </h2>
-
-        <div>
-            <?= $this->Html->link(__('Gerencial'), ['action' => '#'], ['class' => 'btn btn-primary', 'onclick' => 'previsto()']) ?>
+<div class="card">
+    <div class="card-header">
+    <h3 class="card-title">Responsive Hover Table</h3>
+    <div class="card-tools">
+        <div class="input-group input-group-sm" style="width: 150px;">
+        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
         </div>
-        <div style="margin-left: 25px;">
-            <?= $this->Html->link(__('Fluxodecaixa'), ['action' => '#'], ['class' => 'btn btn-primary', 'onclick' => 'realizado()']) ?>
-        </div>
-
-        <div class="card-toolbox">
-
-            <?= $this->Paginator->limitControl([], null, [
-                'label' => false,
-                'class' => 'form-control-sm',
-            ]); ?>
-            <?= $this->Html->link(__('Novo Lançamento'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
         </div>
     </div>
-
+    </div>
     <!-- /.card-header -->
-    <?= $this->Html->link(__('Caixa diario'), ['controller' => 'relatorios', 'action' => 'caixadiario'], ['class' => 'btn btn-primary btn-sm']) ?>
-
-
-  <div class="card-body table-responsive p-0">
-    <div id='prev' style="display:none;">
-    <?= $this->element('relatorios/gerencial', ['obj' => $gerencial]) ?>
-    <a href="/relatorios/exportRelatorioGerencial" style="font-size: 30px;margin-left:30px;color:green"><i class="fas fa-file-excel"></i></a>
-
-  </div>
-
-    <div id='real' style="display:none;">
-        <?= $this->element('relatorios/fluxodecaixa', ['obj' => $fluxo]) ?>
-        <a href="/relatorios/exportRelatorioFluxoCx/" style="font-size: 30px;margin-left:30px;color:green"><i class="fas fa-file-excel"></i></a>
-
+    <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+        <thead>
+            <?= $this->Html->tableHeaders(
+                ['Valor','Conta', 'Fornecedor', 'Cliente', 'Descrição'])?>
+        </thead>
+        <tbody>
+            <?php
+            foreach($arrays as $array):?>
+                <?=$this->Html->tableCells([
+                    $array,
+                ]);?>
+            <?php endforeach;
+            ?>
+        </tbody>
+    </table>
     </div>
-    <!-- /.card-footer -->
-  </div>
-
+    <!-- /.card-body -->
 </div>
