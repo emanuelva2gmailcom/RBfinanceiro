@@ -97,7 +97,12 @@ tr > td{
             </tr>
         </thead>
         <div class="d-flex justify-content-start bg-light rounded-top" style="padding: 5px;">
+
             <a href="/relatorios/gerencial" class="btn btn-none border border-primary text-primary">Voltar</a>
+
+            <a href=<?= "/relatorios/exportGerencial/".implode(",", $request)?> style="font-size: 30px;margin-left:30px;color:green"><i class="fas fa-file-excel"></i></a>
+
+
         </div>
     </table>
 </div>
@@ -109,10 +114,10 @@ tr > td{
         <hr class="border-info">
             <div class="form-group">
                 <?= $this->Form->create() ?>
-                    <?= $this->Form->control(0,['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
-                    <?= $this->Form->control(1,['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
+                <?= $this->Form->control(0,'comeco', ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
+                <?= $this->Form->control(1,'final', ['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
                     <label>Periodo</label><br>
-                    <?= $this->Form->select(2,['mes'=> 'mês','ano' => 'ano','dia' => 'dia'], ['class' => 'form-control select2bs4']); ?>
+                    <?= $this->Form->select(2,['mes'=> 'MÊS','ano' => 'ANO','dia' => 'DIA'], ['class' => 'form-control select2bs4']); ?>
                         <!-- <label>Periodo</label>
                         <select name=2 class="form-control select2bs4">
                             <option value="mes" selected="selected">mês</option>

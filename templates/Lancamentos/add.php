@@ -45,9 +45,8 @@
                   <div class="panel-body text-info">
                       <div class="form-group " >
                           <?= $this->Form->label('Tipo') ?>
-
-                          <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'tipo form-control', 'empty' => 'SELECIONE']); ?>
-
+                          <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control tipo', 'empty' => 'SELECIONE']); ?>
+                          <span class="span text-red"></span>
                       </div>
                       <div class="form-group">
                           <?= $this->Form->control('descricao', ['label' => 'Descrição', 'placeholder' => 'Descrição'], ['class' => 'form-control']); ?>
@@ -57,7 +56,8 @@
                       </div>
                   </div>
                   <div class="d-flex justify-content-end">
-                      <div style="background-color: green; color: white;" class="btn" onclick="stepper1.next()">Próximo</div>
+                      <div style="background-color: green; color: white;" id="proximo" class="btn" onclick="stepper1.next()">Próximo</div>
+
                   </div>
               </div>
 
@@ -142,6 +142,7 @@
 
 
       <script>
+      
           $(".tipo").change(function() {
               $tipo = $(".tipo").val();
               if ($tipo == "PREVISTO") {
@@ -152,6 +153,7 @@
                   $('.baixa').removeClass('d-none');
               }
           });
+
 
           $('.conta').change(function() {
               $tipo = $(".conta option:selected").text();
@@ -165,4 +167,23 @@
               }
           });
 
+          
+          $('.tipo').change(function() {
+              $tipo = $('.tipo').val();
+              try {
+                  const response = axios.get('/caixas/getAberto').then(function(response) {
+                      if ((response.data !== true) && ($tipo !== 'PREVISTO')) {
+                          $('.span').text('Caixa Fechado');
+                          $('#proximo').removeAttr('onclick')
+                      } else {
+                          $('.span').text(' ');
+                          $('#proximo').attr('onclick','stepper1.next()');
+                      }
+                  })
+              } catch (error) {
+                  console.log(error);
+              }
+
+          })
       </script>
+
