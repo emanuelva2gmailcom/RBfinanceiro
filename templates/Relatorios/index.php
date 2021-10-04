@@ -107,7 +107,7 @@ function realizado() {
     </div>
   </div>
 </div>
-<div id="teste" class="container-fluid vh-50 m-0 py-5 justify-content-center" style="display: none; background-color: #029BE1; border-radius: 20px;">
+<div id="teste" class="container-fluid vh-50 m-0 py-5 justify-content-center" style="display: none; background-color: green; border-radius: 20px;">
 
   <div class="card-body table-responsive p-0">
     <div id='prev' style="display:none;">

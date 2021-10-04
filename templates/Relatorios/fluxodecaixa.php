@@ -15,6 +15,8 @@ tr > td{
     min-width: 150px;
 }
 
+
+
 </style>
 <div class="container">
     <table class="table table-bordered table-dark rounded table-responsive w-100">
@@ -104,15 +106,15 @@ tr > td{
 <?php
 } else { ?>
 <div class="container-sm d-flex justify-content-center p-5">
-    <div class="card-sm bg-light shadow" style="width: 25rem;">
+    <div style="border: green 2px solid;border-radius: 20px;" class="card-sm bg-white shadow" style="width: 32rem;">
         <div class="card-body">
-            <h2 class="card-subtitle border-bottom border-primary text-center">Pesquisa de Fluxo de Caixa Avançado</h2>
-            <hr>
+            <h2 style="font-size: 30px; color: green;" class="card-subtitle text-center">Pesquisa de Fluxo de Caixa Avançado</h2>
+            <hr class="border-info">
             <div class="form-group">
                 <?= $this->Form->create() ?>
                     <?= $this->Form->control(0,['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
                     <?= $this->Form->control(1,['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
-                    <label>Periodo</label>
+                    <label>Periodo</label><br>
                     <?= $this->Form->select(2,['mes'=> 'mês','ano' => 'ano','dia' => 'dia'], ['class' => 'form-control select2bs4']); ?>
                         <!-- <label>Periodo</label>
                         <select name=2 class="form-control select2bs4">
@@ -123,7 +125,7 @@ tr > td{
                 </div>
             </div>
             <div class="d-flex justify-content-end card-footer">
-                <?= $this->Form->button(__('Submit', ['class' => 'btn btn-dark pull-right'])) ?>
+                <?= $this->Form->button(__('Pesquisar', ['class' => 'btn btn-dark pull-right'])) ?>
                 <?= $this->Form->end() ?>
             </div>
         </div>

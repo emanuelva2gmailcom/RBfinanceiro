@@ -26,10 +26,10 @@ tr > td{
                 <?php endforeach; ?>
                 <th scope="col">Total</th>
             </tr>
-        
+
         </thead>
         <tbody class="text-success">
-        <?php 
+        <?php
             foreach($obj['rows']['td'] as $valor):
                 if(in_array($valor[0], $obj['rows']['th']['entradas'])){
                 ?>
@@ -39,7 +39,7 @@ tr > td{
                             <td><?= $valor[$i] ?></td>
                         <?php endfor; ?>
                     </tr>
-                <?php 
+                <?php
                 }
             endforeach;
         ?>
@@ -53,7 +53,7 @@ tr > td{
             </tr>
         </thead>
         <tbody class="text-danger">
-        <?php 
+        <?php
             foreach($obj['rows']['td'] as $valor):
                 if(in_array($valor[0], $obj['rows']['th']['saidas'])){
                 ?>
@@ -63,7 +63,7 @@ tr > td{
                             <td><?= $valor[$i] ?></td>
                         <?php endfor; ?>
                     </tr>
-                <?php 
+                <?php
                 }
             endforeach;
         ?>
@@ -103,15 +103,15 @@ tr > td{
 </div>
 <?php } else{?>
     <div class="container-sm d-flex justify-content-center p-5">
-    <div class="card-sm bg-light shadow" style="width: 25rem;">
+    <div style="border: green 2px solid;border-radius: 20px;" class="card-sm bg-white shadow" style="width: 32rem;">
         <div class="card-body">
-            <h2 class="card-subtitle border-bottom border-primary text-center">Pesquisa de Caixa Gerencial Avançado</h2>
-            <hr>
+        <h2 style="font-size: 30px; color: green;" class="card-subtitle text-center">Pesquisa de Caixa Gerencial Avançado</h2>
+        <hr class="border-info">
             <div class="form-group">
                 <?= $this->Form->create() ?>
                     <?= $this->Form->control(0,['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
                     <?= $this->Form->control(1,['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
-                    <label>Periodo</label>
+                    <label>Periodo</label><br>
                     <?= $this->Form->select(2,['mes'=> 'mês','ano' => 'ano','dia' => 'dia'], ['class' => 'form-control select2bs4']); ?>
                         <!-- <label>Periodo</label>
                         <select name=2 class="form-control select2bs4">

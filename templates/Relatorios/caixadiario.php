@@ -5,9 +5,9 @@
     <div class="card-header" >
     <div class="card-tools">
         <div class="input-group input-group-sm">
-        <input type="text" name="table_search" class="form-control float-right" placeholder="">
+        <input type="text" name="table_search" class="border border-info form-control float-right" placeholder="Pesquisar">
         <div class="input-group-append">
-            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+            <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
         </div>
         </div>
     </div>
