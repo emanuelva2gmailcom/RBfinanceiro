@@ -17,6 +17,74 @@ class LancamentosController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
+
+
+    public function getPainel()
+    {
+        $obj = [
+            'entrada' => [
+                'entradas' => [],
+                'total' => 0
+            ],
+            'saida' => [
+                'saidas' => [],
+                'total' => 0
+            ], 
+            'total' => 0
+        ];
+        $this->paginate = [
+            'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes', 'Drecontas'],
+        ];
+        $lancamentos = $this->paginate($this->Lancamentos);
+        foreach($lancamentos as $lancamento):
+            if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
+                array_push($obj['entrada']['entradas'], $lancamento);
+                $obj['entrada']['total'] += $lancamento->valor;
+                $obj['total'] += $lancamento->valor;
+            }else{
+                array_push($obj['saida']['saidas'], $lancamento);
+                $obj['saida']['total'] -= $lancamento->valor;
+                $obj['total'] -= $lancamento->valor;
+            }
+        endforeach;
+        $this->response = $this->response;
+        $this->response = $this->response
+            ->withHeader('Access-Control-Allow-Origin','*')
+            ->withHeader('Access-Control-Allow-Methods', '*')
+            ->withHeader('Access-Control-Allow-Credentials', 'true')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+            ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
+            ->withHeader('Access-Control-Allow-Type', 'application/json');
+        $this->response = $this->response->withType('application/json')
+            ->withStringBody(json_encode($obj));
+        return $this->response;
+    }
+
+    public function painel()
+    {
+
+        $obj = [
+        ];
+        $total = 0;
+        $this->paginate = [
+            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
+        ];
+        $this->loadModel('Fluxocontas');
+        $contas = $this->Fluxocontas->find('all',['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
+        $lancamentos = $this->paginate($this->Lancamentos);
+        foreach($contas as $c):
+            $valor = 0;
+            foreach($lancamentos as $l):
+                if($c->conta == $l->fluxoconta->conta){
+                    $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $valor += $l->valor : $valor -= $l->valor;
+                }
+            endforeach;
+            $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
+            array_push($obj, [$c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
+        endforeach;
+        $this->set(compact('obj', 'total'));
+    }
+
     public function index()
     {
         $this->paginate = [
