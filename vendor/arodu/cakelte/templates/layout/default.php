@@ -15,6 +15,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?= $this->Html->meta('icon') ?>
   <?= $this->fetch('meta') ?>
 
+  <!-- ChartJS -->
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/chart.js/Chart.js') ?>
+  <?= $this->Html->css('CakeLte./AdminLTE/plugins/chart.js/Chart.css') ?>
+
   <!-- Font Awesome Icons -->
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/fontawesome-free/css/all.min.css') ?>
   <!-- icheck bootstrap -->
@@ -100,11 +104,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-light-secondary elevation-4" style="color: #ACD9FF;">
+    <aside class="main-sidebar sidebar-secondary elevation-4" style="color: #ACD9FF;">
       <!-- Brand Logo -->
-      <a href="<?= $this->Url->build('/') ?>" class="brand-link">
-        <!-- <?= $this->Html->image($this->settings['appLogo'], ['alt' => $this->settings['appName'] . ' logo', 'class' => 'brand-image']) ?>
-        <span class="brand-text font-weight-light"><?= $this->settings['appName'] ?></span> -->
+      <a href="<?= $this->Url->build('/') ?>" class="brand-link bg-white">
+        <?= $this->Html->image('logo2.png') ?>
       </a>
 
       <!-- Sidebar -->

@@ -6,9 +6,9 @@
 <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:  #E1E7E0; overflow: auto;">
   <div class="image">
      <img src="<?php echo $this->Image->resize('library/'.IMG_DIR, $photo, ['class'=>'img-circle elevation-2', 'alt'=>'User Image']);?>">
-  
+
   </div>
   <div class="info">
-    <?= $this->Html->link(__($username), ['controller'=>'Users', 'action'=>'myprofile', 'plugin'=>'Usermgmt'], ['class'=>'d-block ']); ?>
+    <?= $this->Html->link(__($username), ['controller'=>'Users', 'action'=>'myprofile', 'plugin'=>'Usermgmt'], ['class'=>'d-block text-info']); ?>
   </div>
 </div>
