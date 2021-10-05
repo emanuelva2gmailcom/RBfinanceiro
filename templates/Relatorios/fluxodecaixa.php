@@ -1,21 +1,22 @@
-<?php if($show == true){ ?>
-<style>
-tr > td{
-    min-width: 100px;
-}
+<?php 
+// debug(implode(",", $request));exit;
+if ($show == true) { ?>
+    <style>
+        tr>td {
+            min-width: 100px;
+        }
 
-.text-nw{
-    padding: 0px;
-    margin: 0px;
-    white-space: nowrap;
-    overflow: auto;
-}
+        .text-nw {
+            padding: 0px;
+            margin: 0px;
+            white-space: nowrap;
+            overflow: auto;
+        }
 
-.mwtd{
-    min-width: 150px;
-}
-
-
+        .mwtd {
+            min-width: 150px;
+        }
+    </style>
 
 </style>
 <div class="container">
@@ -100,6 +101,8 @@ tr > td{
         </thead>
         <div class="d-flex justify-content-start bg-light rounded-top" style="padding: 5px;">
             <a href="/relatorios/fluxodecaixa" class="btn btn-none border border-primary text-primary">Voltar</a>
+            <a href=<?= "/relatorios/exportFluxoDeCaixa/".implode(",", $request)?> style="font-size: 30px;margin-left:30px;color:green"><i class="fas fa-file-excel"></i></a>
+
         </div>
     </table>
 </div>
@@ -114,24 +117,17 @@ tr > td{
                 <?= $this->Form->create() ?>
                     <?= $this->Form->control(0,['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
                     <?= $this->Form->control(1,['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
-                    <label>Periodo</label><br>
-                    <?= $this->Form->select(2,['mes'=> 'mês','ano' => 'ano','dia' => 'dia'], ['class' => 'form-control select2bs4']); ?>
-                        <!-- <label>Periodo</label>
-                        <select name=2 class="form-control select2bs4">
-                            <option value="mes" selected="selected">mês</option>
-                            <option value="ano">ano</option>
-                            <option value="dia">dia</option>
-                        </select> -->
-                </div>
-            </div>
-            <div class="d-flex justify-content-end card-footer">
-                <?= $this->Form->button(__('Pesquisar', ['class' => 'btn btn-dark pull-right'])) ?>
-                <?= $this->Form->end() ?>
+                    <?= $this->Form->select(2,['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'form-control', 'id' => 'card']); ?>
+                    
             </div>
         </div>
+        <div class="card-footer">
+                <?= $this->Form->button(__('Submit', ['class' => 'btn btn-dark pull-right'])) ?>
+            <?= $this->Form->end() ?>
+        </div>
     </div>
-</div>
 <?php } ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
-    $('.select2bs4').select2({theme: 'bootstrap4'});
+    $('#card').select2()
 </script>

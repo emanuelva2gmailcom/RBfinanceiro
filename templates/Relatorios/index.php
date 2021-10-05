@@ -1,3 +1,4 @@
+
 <html lang="en"><head>
     <meta charset="utf-8">
 
@@ -104,9 +105,11 @@ function realizado() {
       <div class="d-flex justify-content-center">
       <?= $this->Html->link(__('Caixa Diário'), ['controller' => 'relatorios', 'action' => 'caixadiario'], ['class' => 'btn btn-info']) ?>
       </div>
+
     </div>
-  </div>
+    <!-- /.card-body -->
 </div>
+
 <div id="teste" class="container-fluid vh-50 m-0 py-5 justify-content-center" style="display: none; background-color: green; border-radius: 20px;">
 
   <div class="card-body table-responsive p-0">
@@ -142,3 +145,4 @@ function realizado() {
 </body>
 
 </html>
+
