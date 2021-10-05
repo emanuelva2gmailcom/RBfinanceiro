@@ -1,8 +1,9 @@
 <?php
 
 declare(strict_types=1);
-
 namespace App\Controller;
+use Cake\I18n\FrozenTime;
+use Cake\I18n\Time;
 
 /**
  * Lancamentos Controller
@@ -18,9 +19,21 @@ class LancamentosController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      */
 
-
     public function getPainel()
     {
+        if($this->request->is('post')){
+            $this->response = $this->response;
+            $this->response = $this->response
+                ->withHeader('Access-Control-Allow-Origin','*')
+                ->withHeader('Access-Control-Allow-Methods', '*')
+                ->withHeader('Access-Control-Allow-Credentials', 'true')
+                ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+                ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
+                ->withHeader('Access-Control-Allow-Type', 'application/json');
+            $this->response = $this->response->withType('application/json')
+                ->withStringBody(json_encode('cu'));
+            return $this->response;
+        }
         $obj = [
             'entrada' => [
                 'entradas' => [],
@@ -60,29 +73,81 @@ class LancamentosController extends AppController
         return $this->response;
     }
 
+    public function getTablePainel($request = null)
+    {
+        $query = "tipo = 'REALIZADO' or tipo = 'PREVISTO'";
+        if($request != null){
+            switch ($request['tipo']) {
+                case 'REALIZADO':
+                    $query = "tipo = 'REALIZADO'";
+                    break;
+                
+                case 'PREVISTO':
+                    $query = "tipo = 'PREVISTO'";
+                    break;
+    
+                default:
+                    # code...
+                    break;
+            }
+            // debug($query);exit;
+            $request['mes'] = new Time($request['mes'], 'UTC');
+            $obj = [
+            ];
+            $total = 0;
+            $this->loadModel('Fluxocontas');
+            $contas = $this->Fluxocontas->find('all',['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
+            $lancamentos = $this->Lancamentos->find('all', ['contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
+            'conditions' => [$query]]);
+            foreach($contas as $c):
+                $valor = 0;
+                foreach($lancamentos as $l):
+                    if($c->conta == $l->fluxoconta->conta && $l->created->i18nFormat('yyyy-MM') == $request['mes']->i18nFormat('yyyy-MM')){
+                        // debug($l->created->i18nFormat('yyyy-MM') == $request['mes']->i18nFormat('yyyy-MM'));
+                        $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $valor += $l->valor : $valor -= $l->valor;
+                    }
+                endforeach;
+                $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
+                array_push($obj, [$c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
+            endforeach;
+            return [$obj, $total];
+        } else{
+            $obj = [
+            ];
+            $total = 0;
+            $this->loadModel('Fluxocontas');
+            $contas = $this->Fluxocontas->find('all',['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
+            $lancamentos = $this->Lancamentos->find('all', ['contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
+            'conditions' => [$query]]);
+            foreach($contas as $c):
+                $valor = 0;
+                foreach($lancamentos as $l):
+                    if($c->conta == $l->fluxoconta->conta){
+                        $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $valor += $l->valor : $valor -= $l->valor;
+                    }
+                endforeach;
+                $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
+                array_push($obj, [$c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
+            endforeach;
+            return [$obj, $total];
+        }
+    }
+
     public function painel()
     {
-
-        $obj = [
-        ];
-        $total = 0;
-        $this->paginate = [
-            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
-        ];
-        $this->loadModel('Fluxocontas');
-        $contas = $this->Fluxocontas->find('all',['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
-        $lancamentos = $this->paginate($this->Lancamentos);
-        foreach($contas as $c):
-            $valor = 0;
-            foreach($lancamentos as $l):
-                if($c->conta == $l->fluxoconta->conta){
-                    $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $valor += $l->valor : $valor -= $l->valor;
-                }
-            endforeach;
-            $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
-            array_push($obj, [$c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
-        endforeach;
-        $this->set(compact('obj', 'total'));
+        if($this->request->is('post')){
+            
+            $obj = $this->getTablePainel($this->request->getData())[0];
+            $total = $this->getTablePainel($this->request->getData())[1];
+            // debug($obj);exit;
+            $this->set(compact('obj', 'total'));
+        }
+        if($this->request->is('get')){
+            $obj = $this->getTablePainel()[0];
+            $total = $this->getTablePainel()[1];
+    
+            $this->set(compact('obj', 'total'));
+        }
     }
 
     public function index()
@@ -95,45 +160,6 @@ class LancamentosController extends AppController
         $this->set(compact('lancamentos'));
     }
 
-    public function previsto()
-    {
-        $lancamento = $this->Lancamentos->newEmptyEntity();
-        if ($this->request->is('post')) {
-            if (($lancamento->tipo == 'PREVISTO')) { ?>
-                <script>
-                    function mudar(prev) {
-                        var display = document.getElementById(prev).style.display;
-                        if (display == "none")
-                            document.getElementById(prev).style.display = 'block';
-                        else
-                            document.getElementById(prev).style.display = 'none';
-                    }
-
-                    mudar();
-                </script>
-            <?php } else { ?>
-                <script>
-                    function mudar(real) {
-                        var display = document.getElementById(real).style.display;
-                        if (display == "none")
-                            document.getElementById(real).style.display = 'block';
-                        else
-                            document.getElementById(real).style.display = 'none';
-                    }
-
-                    mudar();
-                </script>
-<?php }
-        }
-
-
-        $this->paginate = [
-            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
-        ];
-        $lancamentos = $this->paginate($this->Lancamentos);
-
-        $this->set(compact('lancamentos'));
-    }
 
     /**
      * View method
@@ -158,7 +184,6 @@ class LancamentosController extends AppController
      */
     public function add()
     {
-      
         $this->loadModel('Comprovantes');
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {

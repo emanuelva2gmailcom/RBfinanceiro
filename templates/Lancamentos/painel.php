@@ -10,6 +10,13 @@
             <h3 class="card-title">Donut Chart</h3>
         </div>
         <div class="card-body">
+            <div class="content">
+                <?= $this->Form->create() ?>
+                    <?= $this->Form->control('mes', ['class' => 'form-control', 'id' => 'card', 'type' => 'month']); ?>
+                    <?= $this->Form->select('tipo', ['REALIZADO' => 'Realizado', 'PREVISTO' => 'Previsto'], ['class' => 'form-control', 'id' => 'card']); ?>
+                    <?= $this->Form->button(__('Submit', ['class' => 'btn btn-dark pull-right'])) ?>
+                <?= $this->Form->end() ?>
+            </div>
             <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
             <table class="table text-nowrap">
                 <thead>
@@ -24,7 +31,6 @@
                 <tbody>
                     <?php foreach ($obj as $lancamento) : ?>
                         <tr>
-
                             <td><?= h($lancamento[0]) ?></td>
                             <td><?= h($lancamento[1]) ?></td>
                             <td><?= h($lancamento[2]) ?></td>
