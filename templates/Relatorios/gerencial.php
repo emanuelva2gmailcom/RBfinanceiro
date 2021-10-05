@@ -88,18 +88,6 @@
                         <td><?= $t ?></td>
                     <?php endforeach; ?>
                 </tr>
-                <tr>
-                    <th scope="row">INICIAL</th>
-                    <?php foreach ($obj['total']['inicial'] as $t) : ?>
-                        <td><?= $t ?></td>
-                    <?php endforeach; ?>
-                </tr>
-                <tr>
-                    <th scope="row">FINAL</th>
-                    <?php foreach ($obj['total']['final'] as $t) : ?>
-                        <td><?= $t ?></td>
-                    <?php endforeach; ?>
-                </tr>
             </thead>
             <div class="d-flex justify-content-start bg-light rounded-top" style="padding: 5px;">
 

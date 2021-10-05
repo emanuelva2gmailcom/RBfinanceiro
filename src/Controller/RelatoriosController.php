@@ -309,11 +309,10 @@ class RelatoriosController extends AppController
         $obj['header'] = $this->array_date($request[0], $request[1], $periodo);
         $this->loadModel('Lancamentos');
         $this->loadModel('Fluxocontas');
-        $this->paginate = [
+        $lancamentos = $this->Lancamentos->find('all', [
             'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['tipo' => 'PREVISTO']
-        ];
-        $lancamentos = $this->paginate($this->Lancamentos);
+            'conditions' => ['tipo' => 'REALIZADO']
+        ]);
         $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_vencimento')];
         $contas = [];
         $result = [];
@@ -385,13 +384,10 @@ class RelatoriosController extends AppController
         foreach ($data['rows']['td'] as $valor) {
             if (in_array($valor[0], $data['rows']['th']['entradas'])) {
                 $entradas[] = $valor;
-                // debug($entradas);
-                // debug('entradas');
             }
             if (in_array($valor[0], $data['rows']['th']['saidas'])) {
                 $saidas[] = $valor;
-                // debug($saidas);
-                // debug('saidas');
+
             }
         }
         if ($entradas == null) {
@@ -405,19 +401,19 @@ class RelatoriosController extends AppController
         array_push($entradas[0], 'total');
 
         array_push($entradas, $data['total']['entradas']);
-        array_unshift($entradas[2], 'Entradas');
+        array_unshift($entradas[array_key_last($entradas)], 'Entradas');
 
         array_push($saidas, $data['total']['saidas']);
-        array_unshift($saidas[1], 'Saidas');
+        array_unshift($saidas[array_key_last($saidas)], 'Saidas');
 
         array_push($saidas, $data['total']['entradas-saidas']);
-        array_unshift($saidas[2], 'Entradas - Saidas');
+        array_unshift($saidas[array_key_last($saidas)], 'Entradas - Saidas');
 
         array_push($saidas, $data['total']['inicial']);
-        array_unshift($saidas[3], 'Inicial');
+        array_unshift($saidas[array_key_last($saidas)], 'Inicial');
 
         array_push($saidas, $data['total']['final']);
-        array_unshift($saidas[4], 'Final');
+        array_unshift($saidas[array_key_last($saidas)], 'Final');
 
 
         $serialize = ['entradas', 'saidas'];
@@ -481,11 +477,10 @@ class RelatoriosController extends AppController
         $obj['header'] = $this->array_date($request[0], $request[1], $periodo);
         $this->loadModel('Lancamentos');
         $this->loadModel('Fluxocontas');
-        $this->paginate = [
+        $lancamentos = $this->Lancamentos->find('all', [
             'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
             'conditions' => ['tipo' => 'REALIZADO']
-        ];
-        $lancamentos = $this->paginate($this->Lancamentos);
+        ]);
         $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_baixa')];
         $contas = [];
         $result = [];
@@ -562,26 +557,24 @@ class RelatoriosController extends AppController
             }
         }
         if ($entradas == null) {
-            $entradas = [[ ]];
+            $entradas = [[]];
         }
         if ($saidas == null) {
-            $saidas = [[ ]];
+            $saidas = [[]];
         }
         array_unshift($entradas, $data['header']);
         array_unshift($entradas[0], 'contas');
-        
+
         array_push($entradas[0], 'total');
-        
+
         array_push($entradas, $data['total']['entradas']);
-        array_unshift($entradas[2], 'Entradas');
-        // debug($entradas);
-        // exit;
-        
+        array_unshift($entradas[array_key_last($entradas)], 'Entradas');
+
         array_push($saidas, $data['total']['saidas']);
-        array_unshift($saidas[1], 'Saidas');
+        array_unshift($saidas[array_key_last($saidas)], 'Saidas');
 
         array_push($saidas, $data['total']['entradas-saidas']);
-        array_unshift($saidas[2], 'Entradas - Saidas');
+        array_unshift($saidas[array_key_last($saidas)], 'Entradas - Saidas');
 
         $serialize = ['entradas', 'saidas'];
 

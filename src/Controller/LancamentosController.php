@@ -158,10 +158,7 @@ class LancamentosController extends AppController
      */
     public function add()
     {
-        $this->paginate = [
-            'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
-
-        ];
+      
         $this->loadModel('Comprovantes');
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
@@ -187,30 +184,12 @@ class LancamentosController extends AppController
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
         }
         
-        $fluxocontas = $this->Lancamentos->Fluxocontas->find('all');
-        $fluxosubgrupos = $this->Lancamentos->Fluxocontas->Fluxosubgrupos->find('all');
-        $fluxogrupos = $this->Lancamentos->Fluxocontas->Fluxosubgrupos->Fluxogrupos->find('all');
-        $array = [];
-
-        foreach ($fluxocontas as $fluxoconta) :
-
-            foreach ($fluxosubgrupos as $fluxosubgrupo) :
-
-                foreach ($fluxogrupos as $fluxogrupo) :
-
-                    if (($fluxoconta->fluxosubgrupo_id == $fluxosubgrupo->id_fluxosubgrupo) && ($fluxosubgrupo->fluxogrupo_id == $fluxogrupo->id_fluxogrupo)) {
-                        array_push($array,  $fluxogrupo->grupo . ' de ' . $fluxosubgrupo->subgrupo . " " . $fluxoconta->conta);
-                    }
-                endforeach;
-
-            endforeach;
-
-        endforeach;
+        $fluxocontas = $this->Lancamentos->Fluxocontas->find('list', ['limit' => 200]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'grupos','array'));
+        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'grupos','fluxocontas'));
     }
 
     
