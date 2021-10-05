@@ -17,7 +17,6 @@ if ($show == true) { ?>
             min-width: 150px;
         }
     </style>
-    <?php
 
 </style>
 <div class="container">
@@ -114,7 +113,6 @@ if ($show == true) { ?>
         <div class="card-body">
             <h2 style="font-size: 30px; color: green;" class="card-subtitle text-center">Pesquisa de Fluxo de Caixa Avançado</h2>
             <hr class="border-info">
-,
             <div class="form-group">
                 <?= $this->Form->create() ?>
                     <?= $this->Form->control(0,['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
