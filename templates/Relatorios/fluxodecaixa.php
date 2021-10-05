@@ -1,4 +1,4 @@
-<?php 
+<?php
 // debug(implode(",", $request));exit;
 if ($show == true) { ?>
     <style>
@@ -16,12 +16,17 @@ if ($show == true) { ?>
         .mwtd {
             min-width: 150px;
         }
+
+
     </style>
 
 </style>
-<div class="container">
-    <table class="table table-bordered table-dark rounded table-responsive w-100">
-        <thead class="bg-primary">
+<div class="container p-5">
+  <div class="oi bg-white" style="border: 2px solid green; border-radius: 20px;">
+    <?= $this->Html->link(__('Voltar'), ['action' => 'fluxodecaixa'], ['class' => 'btn btn-info btn-sm ']) ?>
+    <a href=<?= "/relatorios/exportFluxoDeCaixa/".implode(",", $request)?> style="font-size: 30px;margin-left:30px;color:green"><i class="fas fa-file-excel"></i></a>
+    <table class="table table-bordered table-white rounded table-responsive w-100 p-2">
+        <thead class="bg-info">
             <tr>
                 <th scope="col" class="mwtd"></th>
                 <?php foreach($obj['header'] as $data): ?>
@@ -99,13 +104,10 @@ if ($show == true) { ?>
                 <?php endforeach; ?>
             </tr>
         </thead>
-        <div class="d-flex justify-content-start bg-light rounded-top" style="padding: 5px;">
-            <a href="/relatorios/fluxodecaixa" class="btn btn-none border border-primary text-primary">Voltar</a>
-            <a href=<?= "/relatorios/exportFluxoDeCaixa/".implode(",", $request)?> style="font-size: 30px;margin-left:30px;color:green"><i class="fas fa-file-excel"></i></a>
 
-        </div>
     </table>
-</div>
+    </div>
+    </div>
 <?php
 } else { ?>
 <div class="container-sm d-flex justify-content-center p-5">
@@ -115,10 +117,11 @@ if ($show == true) { ?>
             <hr class="border-info">
             <div class="form-group">
                 <?= $this->Form->create() ?>
-                    <?= $this->Form->control(0,['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
-                    <?= $this->Form->control(1,['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
-                    <?= $this->Form->select(2,['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'form-control', 'id' => 'card']); ?>
-                    
+                    <?= $this->Form->control(0,['label'=> 'Começo', 'type' => 'date'], ['class' => 'form-control text-white']); ?>
+                    <?= $this->Form->control(1,['label' => 'Final', 'type' => 'date'], ['class' => 'la form-control']); ?>
+                    <label>Período</label><br>
+                    <?= $this->Form->select(2, ['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'form-control select2bs4']); ?>
+
             </div>
         </div>
         <div class="card-footer">
@@ -127,7 +130,8 @@ if ($show == true) { ?>
         </div>
     </div>
 <?php } ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
-    $('#card').select2()
+    $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    })
 </script>
