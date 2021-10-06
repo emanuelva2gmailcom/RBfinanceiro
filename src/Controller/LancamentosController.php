@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Entity\Lancamento;
+use Cake\I18n\FrozenTime;
 /**
  * Lancamentos Controller
  *
@@ -91,49 +93,11 @@ class LancamentosController extends AppController
             'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
+        $now = FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
 
-        $this->set(compact('lancamentos'));
+        $this->set(compact('lancamentos', 'now'));
     }
 
-    public function previsto()
-    {
-        $lancamento = $this->Lancamentos->newEmptyEntity();
-        if ($this->request->is('post')) {
-           if(($lancamento->tipo == 'PREVISTO')) { ?>
-            <script>
-                function mudar(prev) {
-                    var display = document.getElementById(prev).style.display;
-                    if(display == "none")
-                        document.getElementById(prev).style.display = 'block';
-                    else
-                        document.getElementById(prev).style.display = 'none';
-                }
-
-                mudar();
-            </script>
-            <?php }else{ ?>
-            <script>
-                function mudar(real) {
-                    var display = document.getElementById(real).style.display;
-                    if(display == "none")
-                        document.getElementById(real).style.display = 'block';
-                    else
-                        document.getElementById(real).style.display = 'none';
-                }
-
-                mudar();
-            </script>
-            <?php }
-         }
-
-
-        $this->paginate = [
-            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
-        ];
-        $lancamentos = $this->paginate($this->Lancamentos);
-
-        $this->set(compact('lancamentos'));
-    }
 
     /**
      * View method
@@ -185,6 +149,34 @@ class LancamentosController extends AppController
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
         $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'grupos'));
+    }
+
+    public function renovar($id = null)
+    {
+        $lancamento = $this->Lancamentos->get($id, [
+            'contain' => [],
+        ]);
+        $this->loadModel('Comprovantes');
+        $comprovantes = $this->paginate($this->Comprovantes);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $lancamento2 = $this->Lancamentos->newEmptyEntity();
+            $lancamento2 = $this->Lancamentos->patchEntity($lancamento2, $this->request->getData());
+            $lancamento2->lancamento_id = $lancamento->id_lancamento;
+            
+            // debug($lancamento2);exit;
+            if ($this->Lancamentos->save($lancamento2)) {
+                $this->Flash->success(__('Lançamento editado com sucesso.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('O Lançamento não foi editado, por favor tente novamente.'));
+        }
+        $fluxocontas = $this->Lancamentos->Fluxocontas->find('list', ['limit' => 200]);
+        $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
+        $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
+        $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
+        $lancamentos = $this->Lancamentos->find('list', ['limit' => 200]);
+        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'lancamentos'));
     }
 
     /**
