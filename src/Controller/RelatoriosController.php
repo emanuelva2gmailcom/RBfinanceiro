@@ -41,9 +41,9 @@ class RelatoriosController extends AppController
                 if ($lancamento->tipo == 'REALIZADO') {
                     array_push($arrays, [
                         $lancamento->valor,
-                        $lancamento->fluxoconta ? $lancamento->fluxoconta->conta : '',
-                        $lancamento->fornecedore ? $lancamento->fornecedore->nome : '',
-                        $lancamento->cliente ? $lancamento->cliente->nome : '',
+                        $lancamento->fluxoconta ? $lancamento->fluxoconta->conta : ' ',
+                        $lancamento->fornecedore ? $lancamento->fornecedore->nome : ' ',
+                        $lancamento->cliente ? $lancamento->cliente->nome : ' ',
                         $lancamento->descricao,
                     ]);
                 }
@@ -167,14 +167,14 @@ class RelatoriosController extends AppController
         endforeach;
 
         foreach ($obj['header'] as $data) :
-            $obj['total']['entradas'][$data] = null;
-            $obj['total']['saidas'][$data] = null;
+            $obj['total']['entradas'][$data] = 0;
+            $obj['total']['saidas'][$data] = 0;
         endforeach;
 
         foreach ($contas as $conta) :
             $result = [];
             foreach ($obj['header'] as $data) :
-                $valor = null;
+                $valor = 0;
                 foreach ($lancamentos as $lancamento) :
                     if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval($lancamento->valor);
@@ -224,17 +224,46 @@ class RelatoriosController extends AppController
     {
         $mes = ['yyyy-MM', '+1 months'];
         $data = $this->getRelatorio('REALIZADO', 'data_baixa', $mes);
-        $data2 = $data['rows']['td'];
-        array_unshift($data['header'], 'contas');
-        array_push($data['header'], 'total');
-        $this->setResponse($this->getResponse()->withDownload('Relatorio_Gerencial.csv'));
-        $header = ['Valor', 'Conta', 'Fornecedor', 'Cliente', 'Descrição'];
-        $this->set(compact('data2'));
+
+        $entradas = [];
+        $saidas = [];
+
+        foreach ($data['rows']['td'] as $valor) {
+            if (in_array($valor[0], $data['rows']['th']['entradas'])) {
+                $entradas[] = $valor;
+            }
+            if (in_array($valor[0], $data['rows']['th']['saidas'])) {
+                $saidas[] = $valor;
+            }
+        }
+        if ($entradas == null) {
+            $entradas = [[]];
+        }
+        if ($saidas == null) {
+            $saidas = [[]];
+        }
+        array_unshift($entradas, $data['header']);
+        array_unshift($entradas[0], 'contas');
+
+        array_push($entradas[0], 'total');
+
+        array_push($entradas, $data['total']['entradas']);
+        array_unshift($entradas[array_key_last($entradas)], 'Entradas');
+
+        array_push($saidas, $data['total']['saidas']);
+        array_unshift($saidas[array_key_last($saidas)], 'Saidas');
+
+        array_push($saidas, $data['total']['entradas-saidas']);
+        array_unshift($saidas[array_key_last($saidas)], 'Entradas - Saidas');
+
+        $serialize = ['entradas', 'saidas'];
+
+        $this->setResponse($this->getResponse()->withDownload('Gerencial.csv'));
+        $this->set(compact('entradas', 'saidas'));
         $this->viewBuilder()
             ->setClassName('CsvView.Csv')
             ->setOptions([
-                'serialize' => 'data2',
-                'header' => $data['header'],
+                'serialize' => $serialize,
             ]);
     }
 
@@ -242,17 +271,51 @@ class RelatoriosController extends AppController
     {
         $dia = ['yyyy-MM-dd', '+1 days'];
         $data = $this->getRelatorio('PREVISTO', 'data_vencimento', $dia);
-        $data2 = $data['rows']['td'];
-        array_unshift($data['header'], 'contas');
-        array_push($data['header'], 'total');
-        $this->setResponse($this->getResponse()->withDownload('Relatorio_Fluxo_De_Caixa.csv'));
-        $header = ['Valor', 'Conta', 'Fornecedor', 'Cliente', 'Descrição'];
-        $this->set(compact('data2'));
+        $entradas = [];
+        $saidas = [];
+
+        foreach ($data['rows']['td'] as $valor) {
+            if (in_array($valor[0], $data['rows']['th']['entradas'])) {
+                $entradas[] = $valor;
+            }
+            if (in_array($valor[0], $data['rows']['th']['saidas'])) {
+                $saidas[] = $valor;
+            }
+        }
+        if ($entradas == null) {
+            $entradas = [[]];
+        }
+        if ($saidas == null) {
+            $saidas = [[]];
+        }
+        array_unshift($entradas, $data['header']);
+        array_unshift($entradas[0], 'contas');
+        array_push($entradas[0], 'total');
+
+        array_push($entradas, $data['total']['entradas']);
+        array_unshift($entradas[array_key_last($entradas)], 'Entradas');
+
+        array_push($saidas, $data['total']['saidas']);
+        array_unshift($saidas[array_key_last($saidas)], 'Saidas');
+
+        array_push($saidas, $data['total']['entradas-saidas']);
+        array_unshift($saidas[array_key_last($saidas)], 'Entradas - Saidas');
+
+        array_push($saidas, $data['total']['inicial']);
+        array_unshift($saidas[array_key_last($saidas)], 'Inicial');
+
+        array_push($saidas, $data['total']['final']);
+        array_unshift($saidas[array_key_last($saidas)], 'Final');
+
+
+        $serialize = ['entradas', 'saidas'];
+
+        $this->setResponse($this->getResponse()->withDownload('Fluxo De Caixa.csv'));
+        $this->set(compact('entradas', 'saidas'));
         $this->viewBuilder()
             ->setClassName('CsvView.Csv')
             ->setOptions([
-                'serialize' => 'data2',
-                'header' => $data['header'],
+                'serialize' => $serialize,
             ]);
     }
 
@@ -311,7 +374,7 @@ class RelatoriosController extends AppController
         $this->loadModel('Fluxocontas');
         $lancamentos = $this->Lancamentos->find('all', [
             'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['tipo' => 'REALIZADO']
+            'conditions' => ['tipo' => 'PREVISTO']
         ]);
         $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_vencimento')];
         $contas = [];
@@ -387,7 +450,6 @@ class RelatoriosController extends AppController
             }
             if (in_array($valor[0], $data['rows']['th']['saidas'])) {
                 $saidas[] = $valor;
-
             }
         }
         if ($entradas == null) {
@@ -418,7 +480,7 @@ class RelatoriosController extends AppController
 
         $serialize = ['entradas', 'saidas'];
 
-        $this->setResponse($this->getResponse()->withDownload('Fluxo_De_Caixa.csv'));
+        $this->setResponse($this->getResponse()->withDownload('Fluxo De Caixa.csv'));
         $this->set(compact('entradas', 'saidas'));
         $this->viewBuilder()
             ->setClassName('CsvView.Csv')

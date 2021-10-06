@@ -155,17 +155,17 @@
           });
 
 
-          $('.conta').change(function() {
-              $tipo = $(".conta option:selected").text();
-              $word_one = $tipo.split(' ')[0]
-              if ($word_one == 'entrada') {
-                  $('.fornecedor').addClass('d-none')
-                  $('.cliente').removeClass('d-none')
-              } else {
-                  $('.cliente').addClass('d-none')
-                  $('.fornecedor').removeClass('d-none')
-              }
-          });
+        //   $('.conta').change(function() {
+        //       $tipo = $(".conta option:selected").text();
+        //       $word_one = $tipo.split(' ')[0]
+        //       if ($word_one == 'entrada') {
+        //           $('.fornecedor').addClass('d-none')
+        //           $('.cliente').removeClass('d-none')
+        //       } else {
+        //           $('.cliente').addClass('d-none')
+        //           $('.fornecedor').removeClass('d-none')
+        //       }
+        //   });
 
           
           $('.tipo').change(function() {

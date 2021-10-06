@@ -58,7 +58,7 @@
                             <th class="teste"><?= ('Data de Baixa') ?></th>
                             <th class="teste"><?= ('Data de Vencimento') ?></th>
 
-                            <!-- <th class="teste"><?= ('Fluxoconta') ?></th> -->
+                            <th class="teste"><?= ('Fluxoconta') ?></th>
                             <th class="teste"><?= ('Fornecedor') ?></th>
                             <!-- <th class="teste"><?= ('Cliente') ?></th> -->
                             <!--
@@ -82,7 +82,7 @@
                                     <?php } ?>
                                     <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
 
-                                    <!-- <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td> -->
+                                    <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td>
                                     <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->nome]) : '' ?></td>
                                     <!-- <td><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->nome]) : '' ?></td> -->
                                     <!-- <td><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td> -->
