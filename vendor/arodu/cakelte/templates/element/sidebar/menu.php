@@ -54,7 +54,7 @@ function caixa(is)
 </li>
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
-  <a href="/relatorios/index" class="nav-link" style="color: #59CBFF;">
+  <a class="nav-link" style="color: #59CBFF;">
     <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
       Relatórios
