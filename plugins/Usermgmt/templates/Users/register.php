@@ -1,12 +1,7 @@
 <?php $this->layout = "CakeLte.login" ?>
 
 <div class="card">
-	<div class="card-body register-card-body">
-		<p class="login-box-msg"><?= __('Register a new membership') ?></p>
-		<span class="card-title text-center">
-			<?php echo $this->Html->link(__('Sign In', true), ['controller' => 'Users', 'action' => 'login', 'plugin' => 'Usermgmt'], ['class' => 'btn btn-secondary btn-sm']); ?>
-		</span>
-
+	<div class="card-body register-card-body bg-info">
 		<?php echo $this->element('Usermgmt.ajax_validation', ['formId' => 'registerForm', 'submitButtonId' => 'registerSubmitBtn']); ?>
 		<?php echo $this->Form->create($userEntity, ['id' => 'registerForm', 'novalidate' => true]); ?>
 
@@ -24,23 +19,23 @@
 			'label' => false,
 			'placeholder' => __('Username'),
 			'class' => 'form-control',
-			'append' => '<i class="fas fa-user"></i>'
+			'append' => '<i class="text-white fas fa-user"></i>'
 		]); ?>
 
 		<?= $this->Form->control('Users.first_name', [
 			'type' => 'text',
-			'placeholder' => __('First Name'),
+			'placeholder' => __('Nome'),
 			'label' => false,
 			'class' => 'form-control',
-			'append' => '<i class="fas fa-user"></i>'
+			'append' => '<i class="text-white fas fa-user"></i>'
 		]); ?>
 
 		<?= $this->Form->control('Users.last_name', [
 			'type' => 'text',
-			'placeholder' => __('Last Name'),
+			'placeholder' => __('Sobrenome'),
 			'label' => false,
 			'class' => 'form-control',
-			'append' => '<i class="fas fa-user"></i>'
+			'append' => '<i class="text-white fas fa-user"></i>'
 		]); ?>
 
 
@@ -49,44 +44,42 @@
 			'label' => false,
 			'placeholder' => __('Email'),
 			'class' => 'form-control',
-			'append' => '<i class="fas fa-envelope"></i>'
+			'append' => '<i class="text-white fas fa-envelope"></i>'
 		]); ?>
 
 
 		<?= $this->Form->control('Users.password', [
 			'type' => 'password',
 			'label' => false,
-			'placeholder' => __('Password'),
+			'placeholder' => __('Senha'),
 			'class' => 'form-control',
-			'append' => '<i class="fas fa-lock"></i>'
+			'append' => '<i class="text-white fas fa-lock"></i>'
 		]) ?>
 
 		<?= $this->Form->control('Users.cpassword', [
 			'type' => 'password',
 			'label' => false,
 			'class' => 'form-control',
-			'placeholder' => __('Confirm Password'),
-			'append' => '<i class="fas fa-lock"></i>'
+			'placeholder' => __('Confirmar senha'),
+			'append' => '<i class="text-white fas fa-lock"></i>'
 		]) ?>
 
-		<div class="row">
-			<div class="col-8">
+			<div>
 				<?= $this->Form->control('agree_terms', [
-					'label' => 'I agree to the <a href="#">terms</a>',
+					'label' => 'Eu concordo com todos os termos',
 					'type' => 'checkbox',
 					'custom' => true,
 					'escape' => false
 				]) ?>
 			</div>
-			<div class="col-4">
-				<?= $this->Form->Submit(__('Register'), ['class' => 'btn btn-primary btn-block', 'id' => 'registerSubmitBtn']); ?>
+			<div class="d-flex justify-content-between">
+			    <?php echo $this->Html->link(__('Voltar', true), ['controller' => 'Users', 'action' => 'login', 'plugin' => 'Usermgmt'], ['class' => 'btn btn-light text-info btn-sm']); ?>
+				<?= $this->Form->Submit(__('Registrar'), ['class' => 'btn btn-light text-info btn-sm', 'id' => 'registerSubmitBtn']); ?>
 			</div>
-
-		</div>
 
 		<?= $this->Form->end() ?>
 
-		<div class="social-auth-links text-center mb-3">
+		<!-- <div class="social-auth-links text-center mb-3">
 			<p>- OR -</p>
 			<?php
 			echo $this->Html->link(
@@ -102,7 +95,7 @@
 				['class' => 'btn btn-block btn-danger', 'escape' => false]
 			);
 			?>
-		</div>
+		</div> -->
 		<!-- /.social-auth-links -->
 	</div>
 	<!-- /.register-card-body -->
