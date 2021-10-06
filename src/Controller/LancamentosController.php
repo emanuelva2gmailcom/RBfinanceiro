@@ -32,14 +32,6 @@ class LancamentosController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function post()
-    {
-        $this->request->allowMethod(['post', 'put']);
-        $a = $this->request->getData();
-        $this->response = $this->response->withType('application/json')
-            ->withStringBody(json_encode($a));
-        return $this->response;
-    }
     public function getPainel($lancamentos)
     {
         
@@ -194,8 +186,9 @@ class LancamentosController extends AppController
             'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
+        $now = FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
 
-        $this->set(compact('lancamentos'));
+        $this->set(compact('lancamentos', 'now'));
     }
 
 
