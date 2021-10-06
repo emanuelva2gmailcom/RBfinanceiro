@@ -120,7 +120,7 @@ class CaixasController extends AppController
                 return $this->redirect(['action' => 'index']);
             } else if (($now == $caixa->data_caixa) && ($caixa->is_aberto == false)) {
                 $this->Flash->error(__('Caixa já fechado.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect($this->referer());
             }
         endforeach;
         $caixa = $this->Caixas->newEmptyEntity();
@@ -129,7 +129,7 @@ class CaixasController extends AppController
         if ($this->Caixas->save($caixa)) {
             $this->Flash->success(__('Caixa aberto.'));
 
-            return $this->redirect(['controller' => 'Caixas', 'action' => 'index']);
+            return $this->redirect($this->referer());
         }
     }
 
