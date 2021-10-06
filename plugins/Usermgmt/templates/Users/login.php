@@ -60,7 +60,7 @@
 			<?php }; ?>
 			<!-- /.col -->
 			<div class="col-4">
-				<?= $this->Form->Submit(__('Entrar'), ['type'=>'submit', 'class'=>'btn btn-light text-info btn-block', 'id'=>'loginSubmitBtn']);?><br>
+				<?= $this->Form->Submit(__('Entrar'), ['type'=>'submit', 'class'=>'btn btn-light text-info btn-sm ml-5', 'id'=>'loginSubmitBtn']);?><br>
 			</div>
 		</div>
 		<!-- /.col -->
