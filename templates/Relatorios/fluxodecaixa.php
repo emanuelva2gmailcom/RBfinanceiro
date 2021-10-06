@@ -27,14 +27,12 @@ if ($show == true) { ?>
 </style>
 <div class="container-fluid d-flex align-items-center justify-content-center p-5">
 <div class="container p-5 bg-white" style="border: 2px solid green; border-radius: 20px;">
-  <div>
-    <?= $this->Html->link(__('Voltar'), ['action' => 'fluxodecaixa'], ['class' => 'btn btn-outline-info btn-sm mb-2'], ['style' => 'color: green']) ?>
-    <a href=<?= "/relatorios/exportFluxoDeCaixa/".implode(",", $request)?> style="font-size: 30px;margin-left:92%;color:green"><i class="fas fa-file-excel"></i></a>
-  </div>
+  <div  style="margin-left: 95%;">
+    <?= $this->Html->link(__('Voltar'), ['action' => 'fluxodecaixa'], ['class' => 'btn btn-outline-info btn-sm mb-2'], ['style' => 'color: green']) ?>  </div>
     <table class="table table-bordered rounded table-responsive w-100 mt-2">
         <thead class="bg-info">
             <tr>
-                <th scope="col" class="mwtd"></th>
+            <th scope="col"><a href= "/relatorios/exportRelatorioFluxoCx/" style="font-size: 30px;color: white;"><i class="fas fa-file-excel"></i></a></th>
                 <?php foreach($obj['header'] as $data): ?>
                     <th scope="col"><?= $data ?></th>
                 <?php endforeach; ?>

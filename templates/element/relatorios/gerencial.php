@@ -19,7 +19,7 @@ tr > td{
     <table class="table table-sm table-bordered table-white rounded">
         <thead class="bg-info">
             <tr>
-                <th scope="col" class="mwtd"></th>
+            <th scope="col"><a href= "/relatorios/exportRelatorioGerencial/" style="font-size: 30px;color: white;"><i class="fas fa-file-excel"></i></a></th>
                 <?php foreach($obj['header'] as $data): ?>
                     <th scope="col"><?= $data ?></th>
                 <?php endforeach; ?>
