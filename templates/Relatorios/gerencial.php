@@ -15,90 +15,99 @@
             min-width: 150px;
         }
     </style>
-    <div class="container">
-        <table class="table table-sm table-bordered table-dark rounded table-responsive w-100">
-            <thead class="bg-primary">
-                <tr>
-                    <th scope="col" class="mwtd"></th>
-                    <?php foreach ($obj['header'] as $data) : ?>
-                        <th scope="col"><?= $data ?></th>
-                    <?php endforeach; ?>
-                    <th scope="col">Total</th>
-                </tr>
+    <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+<div class="container p-5 bg-white" style="border: 2px solid green; border-radius: 20px;">
+  <div>
+    <?= $this->Html->link(__('Voltar'), ['action' => 'fluxodecaixa'], ['class' => 'btn btn-outline-info btn-sm mb-2'], ['style' => 'color: green']) ?>
+    <a href=<?= "/relatorios/exportFluxoDeCaixa/".implode(",", $request)?> style="font-size: 30px;margin-left:92%;color:green"><i class="fas fa-file-excel"></i></a>
+  </div>
+    <table class="table table-bordered rounded table-responsive w-100 mt-2">
+        <thead class="bg-info">
+            <tr>
+                <th scope="col" class="mwtd"></th>
+                <?php foreach($obj['header'] as $data): ?>
+                    <th scope="col"><?= $data ?></th>
+                <?php endforeach; ?>
+                <th scope="col">Total</th>
+            </tr>
 
-            </thead>
-            <tbody class="text-success">
-                <?php
-                foreach ($obj['rows']['td'] as $valor) :
-                    if (in_array($valor[0], $obj['rows']['th']['entradas'])) {
+        </thead>
+        <tbody class="text-success">
+        <?php
+            foreach($obj['rows']['td'] as $valor):
+                if(in_array($valor[0], $obj['rows']['th']['entradas'])){
                 ?>
-                        <tr>
-                            <th scope="row" class="bg-lightblue">
-                                <p class="text-nw"><?= $valor[0] ?></p>
-                            </th>
-                            <?php for ($i = 1; $i < count($valor); $i++) : ?>
-                                <td><?= $valor[$i] ?></td>
-                            <?php endfor; ?>
-                        </tr>
+                    <tr>
+                        <th scope="row" class="bg-info"><p class="text-nw"><?= $valor[0] ?></p></th>
+                        <?php for($i = 1; $i < count($valor); $i++): ?>
+                            <td><?= $valor[$i] ?></td>
+                        <?php endfor; ?>
+                    </tr>
                 <?php
-                    }
-                endforeach;
+                }
+            endforeach;
+        ?>
+        </tbody>
+        <thead >
+            <tr>
+                <th scope="row" class="bg-info"><p class="text-nw">Entradas</p></th>
+                <?php foreach($obj['total']['entradas'] as $t):
+                    if($t<0){?>
+                      <td class="text-danger"><?= $t ?></td>
+                <?php }else if($t>0){?>
+                    <td class="text-success"><?= $t ?></td>
+                <?php }else{ ?>
+                    <td class="text-info"><?= $t ?></td>
+                <?php } endforeach; ?>
+            </tr>
+        </thead>
+        <tbody class="text-danger">
+        <?php
+            foreach($obj['rows']['td'] as $valor):
+                if(in_array($valor[0], $obj['rows']['th']['saidas'])){
                 ?>
-            </tbody>
-            <thead class="bg-primary">
-                <tr>
-                    <th scope="row" class="mwtd">
-                        <p class="text-nw">Entradas</p>
-                    </th>
-                    <?php foreach ($obj['total']['entradas'] as $t) : ?>
-                        <td><?= $t ?></td>
-                    <?php endforeach; ?>
-                </tr>
-            </thead>
-            <tbody class="text-danger">
+                    <tr>
+                        <th scope="row" class="bg-info"><p class="text-nw"><?= $valor[0] ?></p></th>
+                        <?php for($i = 1; $i < count($valor); $i++): ?>
+                            <td><?= $valor[$i] ?></td>
+                        <?php endfor; ?>
+                    </tr>
                 <?php
-                foreach ($obj['rows']['td'] as $valor) :
-                    if (in_array($valor[0], $obj['rows']['th']['saidas'])) {
-                ?>
-                        <tr>
-                            <th scope="row" class="bg-lightblue">
-                                <p class="text-nw"><?= $valor[0] ?></p>
-                            </th>
-                            <?php for ($i = 1; $i < count($valor); $i++) : ?>
-                                <td><?= $valor[$i] ?></td>
-                            <?php endfor; ?>
-                        </tr>
-                <?php
-                    }
-                endforeach;
-                ?>
-            </tbody>
-            <thead class="bg-primary">
-                <tr>
-                    <th scope="row" class="mwtd">Saídas</th>
-                    <?php foreach ($obj['total']['saidas'] as $t) : ?>
-                        <td><?= $t ?></td>
-                    <?php endforeach; ?>
-                </tr>
-            </thead>
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="row">ENTRADAS - SAIDAS</th>
-                    <?php foreach ($obj['total']['entradas-saidas'] as $t) : ?>
-                        <td><?= $t ?></td>
-                    <?php endforeach; ?>
-                </tr>
-            </thead>
-            <div class="d-flex justify-content-start bg-light rounded-top" style="padding: 5px;">
+                }
+            endforeach;
+        ?>
+        </tbody>
+        <thead >
+            <tr>
+                <th scope="row" class="bg-info">Saídas</th>
+                <?php foreach($obj['total']['entradas'] as $t):
+                    if($t<0){?>
+                      <td class="text-danger"><?= $t ?></td>
+                <?php }else if($t>0){?>
+                    <td class="text-success"><?= $t ?></td>
+                <?php }else{ ?>
+                    <td class="text-info"><?= $t ?></td>
+                <?php } endforeach; ?>
+            </tr>
+        </thead>
+        <thead class="thead-light">
+            <tr>
+                <th style="color: #17a2b8;" scope="row">ENTRADAS - SAIDAS</th>
+                <?php foreach($obj['total']['entradas-saidas'] as $t):
+                    if($t<0){?>
+                      <td class="text-danger"><?= $t ?></td>
+                <?php }else if($t>0){?>
+                    <td class="text-success"><?= $t ?></td>
+                <?php }else{ ?>
+                    <td class="text-info"><?= $t ?></td>
+                <?php } endforeach; ?>
+            </tr>
+            
+        </thead>
 
-                <a href="/relatorios/gerencial" class="btn btn-none border border-primary text-primary">Voltar</a>
-
-                <a href=<?= "/relatorios/exportGerencial/" . implode(",", $request) ?> style="font-size: 30px;margin-left:30px;color:green"><i class="fas fa-file-excel"></i></a>
-
-
-            </div>
-        </table>
+    </table>
     </div>
+</div>
 <?php } else { ?>
     <div class="container-sm d-flex justify-content-center p-5">
         <div style="border: green 2px solid;border-radius: 20px;" class="card-sm bg-white shadow" style="width: 32rem;">

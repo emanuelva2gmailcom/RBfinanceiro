@@ -84,14 +84,11 @@ function caixa(is)
 </li>
 
 <li class="nav-item" style="color: #59CBFF;">
-  <a href="<?= $this->Url->build([
-              'controller' => 'users',
-              'action' => 'dashboard',
-              'plugin' => 'Usermgmt',
-            ]); ?>" class="nav-link" style="color: #59CBFF;">
+  <a href="/lancamentos/painel" class="nav-link" style="color: #59CBFF;">
     <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
-      Painel
+    Painel
     </p>
   </a>
 </li>
+
