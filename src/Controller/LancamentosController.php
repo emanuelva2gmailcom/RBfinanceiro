@@ -1,11 +1,12 @@
 <?php
 
 declare(strict_types=1);
-
 namespace App\Controller;
-
-use App\Model\Entity\Lancamento;
 use Cake\I18n\FrozenTime;
+use Cake\I18n\Time;
+use Cake\Event\EventInterface;
+use Cake\Core\Configure;
+
 /**
  * Lancamentos Controller
  *
@@ -14,16 +15,35 @@ use Cake\I18n\FrozenTime;
  */
 class LancamentosController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->loadComponent('FormProtection');
+    }
+
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+
+        $this->FormProtection->setConfig('unlockedActions', ['post', 'getTablePainel']);
+    }
     /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-
-
-    public function getPainel()
+    public function post()
     {
-        $obj = [
+        $this->request->allowMethod(['post', 'put']);
+        $a = $this->request->getData();
+        $this->response = $this->response->withType('application/json')
+            ->withStringBody(json_encode($a));
+        return $this->response;
+    }
+    public function getPainel($lancamentos)
+    {
+        
+        $totals = [
             'entrada' => [
                 'entradas' => [],
                 'total' => 0
@@ -34,57 +54,138 @@ class LancamentosController extends AppController
             ], 
             'total' => 0
         ];
-        $this->paginate = [
-            'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes', 'Drecontas'],
-        ];
-        $lancamentos = $this->paginate($this->Lancamentos);
         foreach($lancamentos as $lancamento):
             if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
-                array_push($obj['entrada']['entradas'], $lancamento);
-                $obj['entrada']['total'] += $lancamento->valor;
-                $obj['total'] += $lancamento->valor;
+                // array_push($totals['entrada']['entradas'], $lancamento);
+                $totals['entrada']['total'] += $lancamento->valor;
+                $totals['total'] += $lancamento->valor;
             }else{
-                array_push($obj['saida']['saidas'], $lancamento);
-                $obj['saida']['total'] -= $lancamento->valor;
-                $obj['total'] -= $lancamento->valor;
+                // array_push($totals['saida']['saidas'], $lancamento);
+                $totals['saida']['total'] -= $lancamento->valor;
+                $totals['total'] -= $lancamento->valor;
             }
         endforeach;
-        $this->response = $this->response;
-        $this->response = $this->response
-            ->withHeader('Access-Control-Allow-Origin','*')
-            ->withHeader('Access-Control-Allow-Methods', '*')
-            ->withHeader('Access-Control-Allow-Credentials', 'true')
-            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With')
-            ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
-            ->withHeader('Access-Control-Allow-Type', 'application/json');
-        $this->response = $this->response->withType('application/json')
-            ->withStringBody(json_encode($obj));
-        return $this->response;
+        
+        return $totals;
     }
 
-    public function painel()
+    public function getTablePainel()
     {
-
+        $query = "tipo = 'REALIZADO' or tipo = 'PREVISTO'";
+        $totals = [
+            'entrada' => 0,
+            'saida' => 0,
+            'total' => 0
+        ];
+        if($this->request->is('post')){
+            $request = $this->request->getData();
+            switch ($request[0]) {
+                case 'REALIZADO':
+                    $query = "tipo = 'REALIZADO'";
+                    break;
+                
+                case 'PREVISTO':
+                    $query = "tipo = 'PREVISTO'";
+                    break;
+    
+                default:
+                    # code...
+                    break;
+            }
+            $request[1] = new Time($request[1], 'UTC');
+            $obj = [
+            ];
+            $total = 0;
+            $this->loadModel('Fluxocontas');
+            $contas = $this->Fluxocontas->find('all',['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
+            $lancamentos = $this->Lancamentos->find('all', ['contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
+            'conditions' => [$query]]);
+            foreach($contas as $c):
+                $valor = 0;
+                foreach($lancamentos as $l):
+                    
+                    // if($l->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
+                    //     $totals['entrada'] += $l->valor;
+                    //     $totals['total'] += $l->valor;
+                    // }else{
+                    //     $totals['saida'] -= $l->valor;
+                    //     $totals['total'] -= $l->valor;
+                    // }
+                    if($c->conta == $l->fluxoconta->conta && $l->created->i18nFormat('yyyy-MM') == $request[1]->i18nFormat('yyyy-MM')){
+                        // debug($l->created->i18nFormat('yyyy-MM') == $request[1]->i18nFormat('yyyy-MM'));
+                        $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $valor += $l->valor : $valor -= $l->valor;
+                        switch ($c->fluxosubgrupo->fluxogrupo->grupo) {
+                            case 'entrada':
+                                # code...
+                                $totals['entrada'] += $l->valor;
+                                $totals['total'] += $l->valor;
+                                break;
+                            
+                            case 'saida':
+                                # code...
+                                $totals['saida'] -= $l->valor;
+                                $totals['total'] -= $l->valor;
+                                break;
+                        }
+                    }
+                endforeach;
+                $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
+                array_push($obj, [$c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
+            endforeach;
+            $this->response = $this->response->withType('application/json')
+            ->withStringBody(json_encode([$obj, $total, $totals]));
+            return $this->response;
+        } 
         $obj = [
         ];
         $total = 0;
-        $this->paginate = [
-            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
-        ];
         $this->loadModel('Fluxocontas');
         $contas = $this->Fluxocontas->find('all',['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
-        $lancamentos = $this->paginate($this->Lancamentos);
+        $lancamentos = $this->Lancamentos->find('all', ['contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
+        'conditions' => [$query]]);
         foreach($contas as $c):
             $valor = 0;
             foreach($lancamentos as $l):
                 if($c->conta == $l->fluxoconta->conta){
                     $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $valor += $l->valor : $valor -= $l->valor;
                 }
+                switch ($c->fluxosubgrupo->fluxogrupo->grupo) {
+                    case 'entrada':
+                        # code...
+                        $totals['entrada'] += $l->valor;
+                        $totals['total'] += $l->valor;
+                        break;
+                    
+                    case 'saida':
+                        # code...
+                        $totals['saida'] -= $l->valor;
+                        $totals['total'] -= $l->valor;
+                        break;
+                }
             endforeach;
             $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
             array_push($obj, [$c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
         endforeach;
-        $this->set(compact('obj', 'total'));
+        $this->response = $this->response->withType('application/json')
+        ->withStringBody(json_encode([$obj, $total, $totals]));
+        return $this->response;
+    }
+
+    public function painel()
+    {
+        // if($this->request->is('post')){
+            
+        //     $obj = $this->getTablePainel($this->request->getData())[0];
+        //     $total = $this->getTablePainel($this->request->getData())[1];
+        //     // debug($obj);exit;
+        //     $this->set(compact('obj', 'total'));
+        // }
+        // if($this->request->is('get')){
+        //     $obj = $this->getTablePainel()[0];
+        //     $total = $this->getTablePainel()[1];
+    
+        //     $this->set(compact('obj', 'total'));
+        // }
     }
 
     public function index()
@@ -93,9 +194,8 @@ class LancamentosController extends AppController
             'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
-        $now = FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
 
-        $this->set(compact('lancamentos', 'now'));
+        $this->set(compact('lancamentos'));
     }
 
 
@@ -123,32 +223,36 @@ class LancamentosController extends AppController
     public function add()
     {
         $this->loadModel('Comprovantes');
-        $comprovantes = $this->paginate($this->Comprovantes);
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
-            if (!$lancamento->getErrors()) {
-                $image = $this->request->getData('uploadfiles');
-                $name = $image->getClientFilename();
-                $targetpath = WWW_ROOT.'img/uploads/'.DS.$name;
-                if($name)
-                $image->moveTo($targetpath);
-                $comprovantes = $this->Comprovantes->newEmptyEntity();
-                $comprovantes->img = $name;
+            if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
+                $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
+                
+                return $this->redirect(['action' => 'add']);
             }
+            
+            $image = $this->request->getData('uploadfiles');
+            $name = $image->getClientFilename();
+            $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
+            if ($name)
+            $image->moveTo($targetpath);
+            $comprovantes = $this->Comprovantes->newEmptyEntity();
+            $comprovantes->img = $name;
             if (($this->Comprovantes->save($comprovantes)) && ($this->Lancamentos->save($lancamento))) {
                 $this->Flash->success(__('Lançamento adicionado com sucesso'));
-
+                
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
         }
+        
         $fluxocontas = $this->Lancamentos->Fluxocontas->find('list', ['limit' => 200]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'grupos'));
+        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'grupos','fluxocontas'));
     }
 
     public function renovar($id = null)

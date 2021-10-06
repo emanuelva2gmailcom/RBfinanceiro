@@ -879,7 +879,7 @@ class UsersController extends UsermgmtAppController {
 			if($connect) {
 				$this->render('popup');
 			} else {
-				$this->redirect(['controller'=>'Relatorios','action'=>'home']);
+				$this->redirect('/dashboard');
 			}
 		}
 

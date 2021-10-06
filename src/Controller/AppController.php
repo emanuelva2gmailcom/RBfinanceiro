@@ -44,7 +44,7 @@ class AppController extends Controller
     {
         $this->loadModel('Caixas');
         $now = date('d-m-Y');
-        $caixas = $this->paginate($this->Caixas);
+        $caixas = $this->Caixas->find('all');
         foreach ($caixas as $caixa) :
             if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
                 return $caixa->id_caixa;

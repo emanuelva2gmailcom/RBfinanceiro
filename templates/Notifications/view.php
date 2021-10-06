@@ -37,15 +37,15 @@ $this->assign('title', __('Notificação') );
         </tr>
         <tr>
             <th><?= __('Data') ?></th>
-            <td><?= h($notification->data) ?></td>
+            <td><?= h($notification->data->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
-            <td><?= h($notification->created) ?></td>
+            <td><?= h($notification->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Modify') ?></th>
-            <td><?= h($notification->modify) ?></td>
+            <td><?= h($notification->modify->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
     </table>
   </div>

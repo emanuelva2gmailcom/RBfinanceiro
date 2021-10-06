@@ -23,15 +23,21 @@
   <?= $this->Html->css('CakeLte.style') ?>
 
   <?= $this->fetch('css') ?>
+  <style>
+    img{
+      max-width: 90%;
+      padding-bottom: 0%;
+
+    }
+  </style>
 </head>
 
 <body class="hold-transition login-page">
-  <div class="login-box">
+  <div class="login-box" style="margin-top: 0%;">
 
     <div class="login-logo">
-      <a href="<?= $this->Url->build('/') ?>" class="">
-        <?= $this->Html->image($this->settings['appLogo'], ['alt' => $this->settings['appName'] . ' logo', 'class' => 'brand-image bg-dark img-circle elevation-3']) ?>
-        <span class="brand-text font-weight-light"><?= $this->settings['appName'] ?></span>
+    <a href="<?= $this->Url->build('/') ?>" class="brand-link">
+        <?= $this->Html->image('logo2.png') ?>
       </a>
     </div>
     <!-- /.login-logo -->

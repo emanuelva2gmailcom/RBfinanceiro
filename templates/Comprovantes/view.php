@@ -36,11 +36,11 @@ $this->assign('title', __('Comprovante') );?>
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
-            <td><?= h($comprovante->created) ?></td>
+            <td><?= h($comprovante->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th><?= __('Modified') ?></th>
-            <td><?= h($comprovante->modified) ?></td>
+            <td><?= h($comprovante->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
     </table>
   </div>

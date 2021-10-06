@@ -15,12 +15,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?= $this->Html->meta('icon') ?>
   <?= $this->fetch('meta') ?>
 
+  <!-- ChartJS -->
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/chart.js/Chart.js') ?>
+  <?= $this->Html->css('CakeLte./AdminLTE/plugins/chart.js/Chart.css') ?>
+
   <!-- Font Awesome Icons -->
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/fontawesome-free/css/all.min.css') ?>
   <!-- icheck bootstrap -->
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css') ?>
   <!-- Theme style -->
   <?= $this->Html->css('CakeLte./AdminLTE/dist/css/adminlte.min.css') ?>
+  <?= $this->Html->css('CakeLte./AdminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') ?>
+  <!-- Jquery -->
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/jquery/jquery.min.js') ?>
+  <!-- Select2 -->
+  <?= $this->Html->css('CakeLte./AdminLTE/plugins/select2/css/select2.min.css'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/select2/js/select2.min.js'); ?>
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -35,8 +45,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       height: auto;
       text-align: center;
       padding: 30px;
-      background-color: black;
-      color: white;
+      background-color: #59CBFF;
+      color: #2E2E2F;
       justify-content: center;
 
     }
@@ -57,11 +67,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <style>
     .main-header {
-      background-color: #6AA4B0;
+      background-color: #59CBFF;
     }
 
     .main-sidebar {
-      background-color: #6AA4B0;
+      background-color:#2E2E2F ;
     }
 
     .content-header {
@@ -69,7 +79,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
 
     .content {
-      background-color: #2F6D80;
+      background-color: #DBDBDB;
     }
 
     .main-footer {
@@ -77,16 +87,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
 
     a {
-      color: #E1E7E0;
+      color: #2E2E2F;
     }
   </style>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script>
-    $('.teste').blur(function() {
-      alert('teste');
-    })
-  </script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -99,11 +104,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-light-secondary elevation-4">
+    <aside class="main-sidebar sidebar-secondary elevation-4" style="color: #ACD9FF;">
       <!-- Brand Logo -->
-      <a href="<?= $this->Url->build('/') ?>" class="brand-link">
-        <?= $this->Html->image($this->settings['appLogo'], ['alt' => $this->settings['appName'] . ' logo', 'class' => 'brand-image']) ?>
-        <span class="brand-text font-weight-light"><?= $this->settings['appName'] ?></span>
+      <a href="<?= $this->Url->build('/') ?>" class="brand-link bg-white">
+        <?= $this->Html->image('logo2.png') ?>
       </a>
 
       <!-- Sidebar -->
@@ -116,7 +120,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
-   
+
 
       <!-- /.content-header -->
 
@@ -152,8 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-  <!-- jQuery -->
-  <?= $this->Html->script('CakeLte./AdminLTE/plugins/jquery/jquery.min.js') ?>
+
   <!-- Bootstrap 4 -->
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>
   <!-- AdminLTE App -->
