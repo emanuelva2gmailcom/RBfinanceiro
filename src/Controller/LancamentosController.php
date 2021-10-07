@@ -256,11 +256,23 @@ class LancamentosController extends AppController
         $this->loadModel('Comprovantes');
         $comprovantes = $this->paginate($this->Comprovantes);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $lancamento2 = $this->Lancamentos->newEmptyEntity();
-            $lancamento2 = $this->Lancamentos->patchEntity($lancamento2, $this->request->getData());
-            $lancamento2->lancamento_id = $lancamento->id_lancamento;
             
-            // debug($lancamento2);exit;
+            $lancamento2 = $this->Lancamentos->newEmptyEntity();
+            // debug([$lancamento2]);exit;
+            $lancamento2->tipo = $lancamento->tipo;
+            $lancamento2->descricao = $this->request->getData()['descricao'];
+            $lancamento2->valor = $this->request->getData()['valor'];
+            $lancamento2->data_emissao = $lancamento->data_emissao;
+            $lancamento2->data_baixa = $lancamento->data_baixa;
+            $lancamento2->data_vencimento = $this->request->getData()['data_vencimento'];
+            $lancamento2->created = $lancamento->created;
+            $lancamento2->modified = $lancamento->modified;
+            $lancamento2->fluxoconta_id = $lancamento->fluxoconta_id;
+            $lancamento2->fornecedor_id = $lancamento->fornecedor_id;
+            $lancamento2->cliente_id = $lancamento->cliente_id;
+            $lancamento2->lancamento_id = $lancamento->id_lancamento;
+            $lancamento2->dreconta_id = $lancamento->dreconta_id;
+            
             if ($this->Lancamentos->save($lancamento2)) {
                 $this->Flash->success(__('Lançamento editado com sucesso.'));
 
