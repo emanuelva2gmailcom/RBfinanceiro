@@ -15,10 +15,9 @@
     <?= $this->Form->create($lancamento) ?>
     <div class="card-body">
         <?php
-        echo $this->Form->control('descricao');
         echo $this->Form->control('valor');
+        echo $this->Form->control('descricao');
         echo $this->Form->control('data_vencimento');
-        echo $this->Form->control('lancamento_id', ['options' => $lancamentos, 'empty' => true]);
         ?>
     </div>
 
