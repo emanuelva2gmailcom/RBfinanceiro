@@ -56,7 +56,7 @@
                       </div>
                   </div>
                   <div class="d-flex justify-content-end">
-                      <div style="background-color: green; color: white;" id="proximo" class="btn" onclick="stepper1.next()">Próximo</div>
+                      <div style="background-color: #274472; color: white;" id="proximo" class="btn" onclick="stepper1.next()">Próximo</div>
 
                   </div>
               </div>
@@ -74,8 +74,8 @@
                       </div>
                   </div>
                   <div class="d-flex justify-content-between">
-                      <div style="background-color: green; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
-                      <div style="background-color: green; color: white;" class="btn" onclick="stepper1.next()">Próximo</div>
+                      <div style="background-color: #274472; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
+                      <div style="background-color: #274472; color: white;" class="btn" onclick="stepper1.next()">Próximo</div>
                   </div>
               </div>
               <div id="test-l-3" class="content bg-white">
@@ -88,8 +88,8 @@
                       </div>
                   </div>
                   <div class="d-flex justify-content-between">
-                      <div style="background-color: green; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
-                      <div style="background-color: green; color: white;" class="btn" onclick="stepper1.next()">Próximo</div>
+                      <div style="background-color: #274472; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
+                      <div style="background-color: #274472; color: white;" class="btn" onclick="stepper1.next()">Próximo</div>
                   </div>
               </div>
               <div id="test-l-4" class="content bg-white">
@@ -109,7 +109,7 @@
                           <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn text-white btn-info']) ?>
                       </div>
                       <div>
-                          <div style="background-color: green; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
+                          <div style="background-color: #274472; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
                           <?= $this->Form->button(__('Salvar', ['class' => 'btn pull-right']), ['confirm' => 'Quer mesmo salvar esse lançamento?']) ?>
                       </div>
                   </div>
@@ -142,7 +142,7 @@
 
 
       <script>
-      
+
           $(".tipo").change(function() {
               $tipo = $(".tipo").val();
               if ($tipo == "PREVISTO") {
@@ -167,7 +167,7 @@
         //       }
         //   });
 
-          
+
           $('.tipo').change(function() {
               $tipo = $('.tipo').val();
               try {
