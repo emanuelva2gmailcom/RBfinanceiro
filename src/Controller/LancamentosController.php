@@ -187,7 +187,8 @@ class LancamentosController extends AppController
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
         $now = FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
-
+        // exit;
+        $this->isrenovado();
         $this->set(compact('lancamentos', 'now'));
     }
 

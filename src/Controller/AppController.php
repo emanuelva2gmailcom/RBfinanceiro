@@ -17,6 +17,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\I18n\FrozenTime;
+use Cake\I18n\Time;
 
 /**
  * Application Controller
@@ -52,5 +54,23 @@ class AppController extends Controller
             }
         endforeach;
         return false;
+    }
+
+    public function isrenovado()
+    {
+        $renovados = [];
+        $this->loadModel('Lancamentos');
+        $lancamentos = $this->Lancamentos->find('all');
+        foreach($lancamentos as $l):
+            foreach($lancamentos as $lancamento):
+                debug([$l->id_lancamento == $lancamento->lancamento_id]);
+                if($lancamento->lancamento_id == $l->id_lancamento){
+                    array_push($renovados, $l->id_lancamento);
+                }
+            endforeach;
+        endforeach;
+        // debug($renovados);
+        exit;
+        // return false;
     }
 }
