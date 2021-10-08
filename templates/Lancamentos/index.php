@@ -25,10 +25,12 @@
         <div class="card-header d-sm-flex" style="padding-top: 50px;">
 
             <div>
-                <?= $this->Html->link(__('Previsto'), ['action' => '#'], ['class' => 'btn btn-info btn-sm', 'onclick' => 'previsto()']) ?>
+            <?= $this->Form->button(__('Previsto'), ['class' => 'btn btn-info btn-sm', 'onclick' => 'previsto()']) ?>
+
+
             </div>
             <div style="margin-left: 25px;">
-                <?= $this->Html->link(__('Realizado'), ['action' => '#'], ['class' => 'btn btn-info btn-sm', 'onclick' => 'realizado()']) ?>
+            <?= $this->Form->button(__('Realizado'), ['class' => 'btn btn-info btn-sm', 'onclick' => 'realizado()']) ?>
             </div>
 
             <div class="card-toolbox">

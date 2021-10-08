@@ -35,13 +35,52 @@ function caixa(is)
   </a>
 </li>
 
-<li class="nav-item" style="color: #59CBFF;">
-  <a href="/lancamentos/add" class="nav-link" style="color: #59CBFF;">
+<li class="nav-item has-treeview " style="color: #59CBFF;">
+  <a class="nav-link" style="color: #59CBFF;">
     <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
-      Novo Lançamento
+      Lançamentos
+      <i class="right fas fa-angle-left"></i>
     </p>
   </a>
+  <ul class="nav nav-treeview" id="it">
+    <li class="nav-item" style="color: #59CBFF;">
+      <a href="/lancamentos/add" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <p>Novo Lançamento</p>
+      </a>
+    </li>
+    <li class="nav-item" style="color: #59CBFF;">
+      <a href="/lancamentos/index" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <p>Seus Lançamentos</p>
+      </a>
+    </li>
+  </ul>
+</li>
+
+<li class="nav-item has-treeview " style="color: #59CBFF;">
+  <a class="nav-link" style="color: #59CBFF;">
+    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <p>
+      Contas
+      <i class="right fas fa-angle-left"></i>
+    </p>
+  </a>
+  <ul class="nav nav-treeview" id="it">
+    <li class="nav-item" style="color: #59CBFF;">
+      <a href="/fluxocontas/add" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <p>Nova conta</p>
+      </a>
+    </li>
+    <li class="nav-item" style="color: #59CBFF;">
+      <a href="/fluxocontas/index" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <p>Suas contas</p>
+      </a>
+    </li>
+  </ul>
 </li>
 
 <li class="nav-item" style="color: #59CBFF;">
@@ -63,21 +102,27 @@ function caixa(is)
   </a>
   <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color: #59CBFF;">
-      <a href="/relatorios/fluxodecaixa" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
+      <a href="/caixas/index" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
         <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Fluxo de Caixa</p>
+        <p>Caixa</p>
       </a>
     </li>
     <li class="nav-item" style="color: #59CBFF;">
-      <a href="/lancamentos/index" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
+      <a href="/relatorios/caixadiario" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
         <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Lançamentos</p>
+        <p>Caixa Diário</p>
       </a>
     </li>
     <li class="nav-item" style="color: #59CBFF;">
       <a href="/relatorios/gerencial" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
         <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
         <p>Caixa Gerencial</p>
+      </a>
+    </li>
+    <li class="nav-item" style="color: #59CBFF;">
+      <a href="/relatorios/fluxodecaixa" class="nav-link" style="color: #59CBFF;; margin-left: 25px;">
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <p>Fluxo de Caixa</p>
       </a>
     </li>
   </ul>
