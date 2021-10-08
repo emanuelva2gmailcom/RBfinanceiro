@@ -32,14 +32,6 @@ class LancamentosController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function post()
-    {
-        $this->request->allowMethod(['post', 'put']);
-        $a = $this->request->getData();
-        $this->response = $this->response->withType('application/json')
-            ->withStringBody(json_encode($a));
-        return $this->response;
-    }
     public function getPainel($lancamentos)
     {
         
@@ -194,8 +186,9 @@ class LancamentosController extends AppController
             'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
+        $now = FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
 
-        $this->set(compact('lancamentos'));
+        $this->set(compact('lancamentos', 'now'));
     }
 
 
@@ -255,7 +248,45 @@ class LancamentosController extends AppController
         $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'grupos','fluxocontas'));
     }
 
-    
+    public function renovar($id = null)
+    {
+        $lancamento = $this->Lancamentos->get($id, [
+            'contain' => [],
+        ]);
+        $this->loadModel('Comprovantes');
+        $comprovantes = $this->paginate($this->Comprovantes);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            
+            $lancamento2 = $this->Lancamentos->newEmptyEntity();
+            // debug([$lancamento2]);exit;
+            $lancamento2->tipo = $lancamento->tipo;
+            $lancamento2->descricao = $this->request->getData()['descricao'];
+            $lancamento2->valor = $this->request->getData()['valor'];
+            $lancamento2->data_emissao = $lancamento->data_emissao;
+            $lancamento2->data_baixa = $lancamento->data_baixa;
+            $lancamento2->data_vencimento = $this->request->getData()['data_vencimento'];
+            $lancamento2->created = $lancamento->created;
+            $lancamento2->modified = $lancamento->modified;
+            $lancamento2->fluxoconta_id = $lancamento->fluxoconta_id;
+            $lancamento2->fornecedor_id = $lancamento->fornecedor_id;
+            $lancamento2->cliente_id = $lancamento->cliente_id;
+            $lancamento2->lancamento_id = $lancamento->id_lancamento;
+            $lancamento2->dreconta_id = $lancamento->dreconta_id;
+            
+            if ($this->Lancamentos->save($lancamento2)) {
+                $this->Flash->success(__('Lançamento editado com sucesso.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('O Lançamento não foi editado, por favor tente novamente.'));
+        }
+        $fluxocontas = $this->Lancamentos->Fluxocontas->find('list', ['limit' => 200]);
+        $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
+        $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
+        $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
+        $lancamentos = $this->Lancamentos->find('list', ['limit' => 200]);
+        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'lancamentos'));
+    }
 
     /**
      * Edit method
