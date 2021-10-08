@@ -1,7 +1,7 @@
 <?php $this->layout = "CakeLte.login" ?>
 
-<div class="card">
-	<div class="card-body register-card-body bg-info">
+<div class="card" style="border-radius: 20px;">
+	<div class="card-body register-card-body bg-info" style="border-radius: 20px;">
 		<?php echo $this->element('Usermgmt.ajax_validation', ['formId' => 'registerForm', 'submitButtonId' => 'registerSubmitBtn']); ?>
 		<?php echo $this->Form->create($userEntity, ['id' => 'registerForm', 'novalidate' => true]); ?>
 
