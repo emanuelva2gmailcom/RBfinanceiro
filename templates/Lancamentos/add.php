@@ -142,7 +142,7 @@
 
 
       <script>
-      
+
           $(".tipo").change(function() {
               $tipo = $(".tipo").val();
               if ($tipo == "PREVISTO") {
@@ -167,7 +167,7 @@
         //       }
         //   });
 
-          
+
           $('.tipo').change(function() {
               $tipo = $('.tipo').val();
               try {
