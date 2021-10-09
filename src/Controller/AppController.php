@@ -56,21 +56,16 @@ class AppController extends Controller
         return false;
     }
 
-    public function isrenovado()
+    public function getrenovado()
     {
-        $renovados = [];
+        $renovados = null;
         $this->loadModel('Lancamentos');
         $lancamentos = $this->Lancamentos->find('all');
-        foreach($lancamentos as $l):
-            foreach($lancamentos as $lancamento):
-                debug([$l->id_lancamento == $lancamento->lancamento_id]);
-                if($lancamento->lancamento_id == $l->id_lancamento){
-                    array_push($renovados, $l->id_lancamento);
-                }
-            endforeach;
+        foreach($lancamentos as $lancamento):
+            $renovados != null ? $renovados .= $lancamento->lancamento_id.',': $renovados .= $lancamento->lancamento_id; 
         endforeach;
         // debug($renovados);
-        exit;
-        // return false;
+        // exit;
+        return $renovados;
     }
 }
