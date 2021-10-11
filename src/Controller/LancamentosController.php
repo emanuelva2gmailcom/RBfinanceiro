@@ -186,13 +186,30 @@ class LancamentosController extends AppController
 
     public function index()
     {
+        $testes = $this->Lancamentos->find('all', [
+            'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
+            'conditions' => ['tipo' => 'PREVISTO']
+        ]);
+        $renovados = null;
+        $previstos = [];
+        foreach ($testes as $lancamento) {
+            if ($lancamento->lancamento_id !== null) {
+                $renovados = $lancamento->lancamento_id;
+            }
+            if ($lancamento->id_lancamento !== $renovados) {
+                
+                $previstos[] = $lancamento;
+            } 
+        }
+        // debug($previstos);
+        // exit;
         $this->paginate = [
             'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
         $now = FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
 
-        $this->set(compact('lancamentos', 'now'));
+        $this->set(compact('lancamentos', 'now','previstos'));
     }
 
 
@@ -218,7 +235,7 @@ class LancamentosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
 
-  
+
     public function add()
     {
 
@@ -251,12 +268,12 @@ class LancamentosController extends AppController
         }
 
 
-        
+
         $contas = $this->Lancamentos->Fluxocontas->find('list', [
             'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
             'valueField' => function ($d) {
-                   return  $d->fluxosubgrupo->fluxogrupo->grupo. ' de ' . 
-                    $d->fluxosubgrupo->subgrupo . '     ' . 
+                return  $d->fluxosubgrupo->fluxogrupo->grupo . ' de ' .
+                    $d->fluxosubgrupo->subgrupo . '     ' .
                     $d->conta;
             }
         ]);

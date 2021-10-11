@@ -379,8 +379,12 @@ class RelatoriosController extends AppController
         $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_vencimento')];
         $contas = [];
         $result = [];
-
+        $testes = [];
+        $testes2 = [];
         foreach ($lancamentos as $lancamento) :
+            if ($lancamento->lancamento_id !== null) {
+                $testes[] = $lancamento->lancamento_id;
+            }
             if (in_array($lancamento->data_vencimento->i18nFormat($periodo[0]), $obj['header'])) {
                 if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') {
                     array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
@@ -392,7 +396,83 @@ class RelatoriosController extends AppController
                 }
             }
         endforeach;
+        foreach ($lancamentos as $lancamento) {
+           
 
+            foreach ($testes as $teste) {
+                if ($lancamento->id_lancamento !== $teste) {
+                    // debug($lancamento->id_lancamento . ' + ' . $teste);
+                    // debug($lancamento);
+                }
+                // debug($teste);
+            }
+        }
+        // $array = [
+        //     ["755", "20", "E", "274"],
+        //     ["756", "20", "E", "274"],
+        //     ["455", "30", "E", "159"],
+        //     ["757", "20", "E", "274"],
+        //     ["456", "30", "E", "159"],
+        //     ["269", "20", "E", "160"]
+        // ];
+
+        // Atenção à função "filter(fc)", cuja função-parâmetro "fc", nesse caso, é anônima:
+        $array_filtrado = array_filter($testes2, function ($arr) {
+
+            // Para cada array filho ("arr"), verifica se ele é igual a ["757", "20", "E", "274"]:
+            $igual = $arr;
+            // ($arr[0] == "757") &&
+            // ($arr[1] == "20") &&
+            // ($arr[2] == "E") &&
+            // ($arr[3] == "274");
+
+            // Se for igual, exclui do resultado (return false):
+            return $igual;
+        });
+
+        // debug($array_filtrado);
+        // $array_filtrado2 = array_filter($testes2, function ($ar) {
+        //     $lancamentos = $this->Lancamentos->find('all', [
+        //         'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
+        //         'conditions' => ['tipo' => 'PREVISTO']
+        //     ]);
+        //     foreach ($lancamentos as $lancamento) {
+        //         if ($lancamento->lancamento_id !== null) {
+        //             $testes = $lancamento->lancamento_id;
+        //         }
+        //         if($lancamento->id_lancamento == $testes){
+        //         }else{
+                    
+        //             debug($lancamento);
+        //         }
+        //     }
+        //     exit;
+        //     foreach($testes as $teste){
+        //         // debug($ar->tipo);
+        //         // debug($teste);
+
+        //     }
+
+        // });
+        
+        $lancamentos = $this->Lancamentos->find('all', [
+            'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
+            'conditions' => ['tipo' => 'PREVISTO']
+        ]);
+        foreach ($lancamentos as $lancamento) {
+            if ($lancamento->lancamento_id !== null) {
+                $testes = $lancamento->lancamento_id;
+            }
+            if($lancamento->id_lancamento == $testes){
+            }else{
+                
+                $testes2[] = $lancamento;
+            }
+        }
+        debug($testes2);
+        exit;
+        // debug($array_filtrado2);
+        exit;
         foreach ($obj['header'] as $data) :
             $obj['total']['entradas'][$data] = 0;
             $obj['total']['saidas'][$data] = 0;
