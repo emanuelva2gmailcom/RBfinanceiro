@@ -2,28 +2,57 @@
 
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <style>
+        .btn{
+            background-color: white;
+            color: #17a2b8;
+            border: 1px solid white;
+        }
+
+        .btn:hover{
+             background-color: #17a2b8;
+             color: white;
+             border: 1px solid white;
+        }
+
+        .btn:focus{
+            background-color: white;
+            color: #17a2b8;
+            border: 1px solid white;
+        }
+
+        .month label{
+            color: white;
+        }
+
+    </style>
 </head>
 
 <body onload="onload()">
-    <div class="card card-danger" id="cu">
-        <div class="card-header">
-            <h3 class="card-title">Donut Chart</h3>
-        </div>
+ <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+    <div class="card container bg-info" style="border-radius: 20px;">
         <div class="card-body">
-            <div class="content">
-                <?= $this->Form->create([], ['id' => 'form']) ?>
-                <?= $this->Form->control('mes', ['class' => 'form-control mes', 'type' => 'month']); ?>
-                <?= $this->Form->select('tipo', ['REALIZADO' => 'Realizado', 'PREVISTO' => 'Previsto'], ['class' => 'form-control tipo', 'id' => 'card']); ?>
-                <?= $this->Form->button(__('Submit', ['class' => 'btn btn-dark pull-right'])) ?>
-                <?= $this->Form->end() ?>
+            <?= $this->Form->create([], ['id' => 'form']) ?>
+            <div class="d-flex flex-row justify-content-center align-items-center content bg-info mb-3 p-3" style="border-radius: 20px;">
+                <div class="col-4 px-4">
+                  <?= $this->Form->control('Mês', ['class' => 'form-control mes', 'type' => 'month',]); ?>
+                </div>
+                <div class="col-4 px-4">
+                    <label style="color: white;">Tipo</label>
+                    <?= $this->Form->select('tipo', ['REALIZADO' => 'Realizado', 'PREVISTO' => 'Previsto'], ['class' => 'form-control tipo mb-3', 'id' => 'card']); ?>
+                </div>
+                <div class="col-2 px-5 mt-3">
+                    <?= $this->Form->button(__('Calcular'), ) ?>
+                </div>
             </div>
-            <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+            <?= $this->Form->end() ?>
+            <canvas class="bg-white mb-3 p-2" id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; border-radius: 20px;"></canvas>
             <table class="table text-nowrap">
                 <thead>
                     <tr>
-                        <th class="teste"><?= ('Grupo FC') ?></th>
-                        <th class="teste"><?= ('Conta FC') ?></th>
-                        <th class="teste"><?= ('total') ?></th>
+                        <th class="teste"><?= ('Grupo do Fluxo de Caixa') ?></th>
+                        <th class="teste"><?= ('Conta do Fluxo de Caixa') ?></th>
+                        <th class="teste"><?= ('Valor') ?></th>
                     </tr>
                 </thead>
 
@@ -36,6 +65,7 @@
         </div>
         <!-- /.card-body -->
     </div>
+ </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         function show(data) {
@@ -48,7 +78,7 @@
                         </tr>`
             }
             output += `<tr>
-                        <th>total</th>
+                        <th>Total</th>
                         <th> </th>
                         <th>${data[1]}</th>
                     </tr>`
@@ -61,11 +91,12 @@
             labels: [
                 'Entradas',
                 'Saidas',
-                'Total'
+                'Total',
             ],
             datasets: [{
                 data: [],
-                backgroundColor: ['#f56954', '#00a65a', '#FF9FFF'],
+                backgroundColor: ['#00a65a', '#DC4731', '#79A9F5']
+
             }]
         }
         let donutOptions = {

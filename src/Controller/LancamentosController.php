@@ -1,7 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Controller;
+
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\Event\EventInterface;
@@ -34,7 +36,7 @@ class LancamentosController extends AppController
      */
     public function getPainel($lancamentos)
     {
-        
+
         $totals = [
             'entrada' => [
                 'entradas' => [],
@@ -43,21 +45,21 @@ class LancamentosController extends AppController
             'saida' => [
                 'saidas' => [],
                 'total' => 0
-            ], 
+            ],
             'total' => 0
         ];
-        foreach($lancamentos as $lancamento):
-            if($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
+        foreach ($lancamentos as $lancamento) :
+            if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') {
                 // array_push($totals['entrada']['entradas'], $lancamento);
                 $totals['entrada']['total'] += $lancamento->valor;
                 $totals['total'] += $lancamento->valor;
-            }else{
+            } else {
                 // array_push($totals['saida']['saidas'], $lancamento);
                 $totals['saida']['total'] -= $lancamento->valor;
                 $totals['total'] -= $lancamento->valor;
             }
         endforeach;
-        
+
         return $totals;
     }
 
@@ -70,34 +72,36 @@ class LancamentosController extends AppController
             'saida' => 0,
             'total' => 0
         ];
-        if($this->request->is('post')){
+        if ($this->request->is('post')) {
             $request = $this->request->getData();
             switch ($request[0]) {
                 case 'REALIZADO':
                     $query = "tipo = 'REALIZADO'";
                     break;
-                
+
                 case 'PREVISTO':
                     $query = "tipo = 'PREVISTO'";
                     break;
-    
+
                 default:
                     # code...
                     break;
             }
             $request[1] = new Time($request[1], 'UTC');
-            $obj = [
-            ];
+            $obj = [];
             $total = 0;
             $this->loadModel('Fluxocontas');
-            $contas = $this->Fluxocontas->find('all',['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
-            $lancamentos = $this->Lancamentos->find('all', ['contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
-            'conditions' => [$query.$renovados['and']]]);
-            foreach($contas as $c):
+            $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
+            $lancamentos = $this->Lancamentos->find('all', [
+                'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
+                'conditions' => [$query.$renovados['and']]
+            ]);
+            foreach ($contas as $c) :
                 $valor = 0;
-                foreach($lancamentos as $l):
-                    
-                    if($c->conta == $l->fluxoconta->conta && $l->created->i18nFormat('yyyy-MM') == $request[1]->i18nFormat('yyyy-MM')){
+                foreach ($lancamentos as $l) :
+
+                    if ($c->conta == $l->fluxoconta->conta && $l->created->i18nFormat('yyyy-MM') == $request[1]->i18nFormat('yyyy-MM')) {
+                        // debug($l->created->i18nFormat('yyyy-MM') == $request[1]->i18nFormat('yyyy-MM'));
                         $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $valor += $l->valor : $valor -= $l->valor;
                         switch ($c->fluxosubgrupo->fluxogrupo->grupo) {
                             case 'entrada':
@@ -105,7 +109,7 @@ class LancamentosController extends AppController
                                 $totals['entrada'] += $l->valor;
                                 $totals['total'] += $l->valor;
                                 break;
-                            
+
                             case 'saida':
                                 # code...
                                 $totals['saida'] -= $l->valor;
@@ -118,20 +122,21 @@ class LancamentosController extends AppController
                 array_push($obj, [$c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
             endforeach;
             $this->response = $this->response->withType('application/json')
-            ->withStringBody(json_encode([$obj, $total, $totals]));
+                ->withStringBody(json_encode([$obj, $total, $totals]));
             return $this->response;
-        } 
-        $obj = [
-        ];
+        }
+        $obj = [];
         $total = 0;
         $this->loadModel('Fluxocontas');
-        $contas = $this->Fluxocontas->find('all',['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
-        $lancamentos = $this->Lancamentos->find('all', ['contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
-        'conditions' => [$query]]);
-        foreach($contas as $c):
+        $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
+        $lancamentos = $this->Lancamentos->find('all', [
+            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
+            'conditions' => [$query.$renovados['and']]
+        ]);
+        foreach ($contas as $c) :
             $valor = 0;
-            foreach($lancamentos as $l):
-                if($c->conta == $l->fluxoconta->conta){
+            foreach ($lancamentos as $l) :
+                if ($c->conta == $l->fluxoconta->conta) {
                     $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $valor += $l->valor : $valor -= $l->valor;
                 }
                 switch ($c->fluxosubgrupo->fluxogrupo->grupo) {
@@ -139,7 +144,7 @@ class LancamentosController extends AppController
                         $totals['entrada'] += $l->valor;
                         $totals['total'] += $l->valor;
                         break;
-                    
+
                     case 'saida':
                         $totals['saida'] -= $l->valor;
                         $totals['total'] -= $l->valor;
@@ -150,7 +155,7 @@ class LancamentosController extends AppController
             array_push($obj, [$c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
         endforeach;
         $this->response = $this->response->withType('application/json')
-        ->withStringBody(json_encode([$obj, $total, $totals]));
+            ->withStringBody(json_encode([$obj, $total, $totals]));
         return $this->response;
     }
 
@@ -193,39 +198,54 @@ class LancamentosController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
+
+  
     public function add()
     {
+
+        $this->paginate = [
+            'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
+        ];
         $this->loadModel('Comprovantes');
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
             if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
                 $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
-                
+
                 return $this->redirect(['action' => 'add']);
             }
-            
+
             $image = $this->request->getData('uploadfiles');
             $name = $image->getClientFilename();
             $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
             if ($name)
-            $image->moveTo($targetpath);
+                $image->moveTo($targetpath);
             $comprovantes = $this->Comprovantes->newEmptyEntity();
             $comprovantes->img = $name;
             if (($this->Comprovantes->save($comprovantes)) && ($this->Lancamentos->save($lancamento))) {
                 $this->Flash->success(__('Lançamento adicionado com sucesso'));
-                
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
         }
+
+
         
-        $fluxocontas = $this->Lancamentos->Fluxocontas->find('list', ['limit' => 200]);
+        $contas = $this->Lancamentos->Fluxocontas->find('list', [
+            'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
+            'valueField' => function ($d) {
+                   return  $d->fluxosubgrupo->fluxogrupo->grupo. ' de ' . 
+                    $d->fluxosubgrupo->subgrupo . '     ' . 
+                    $d->conta;
+            }
+        ]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'grupos','fluxocontas'));
+        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'drecontas', 'grupos', 'contas'));
     }
 
     public function renovar($id = null)
@@ -236,7 +256,7 @@ class LancamentosController extends AppController
         $this->loadModel('Comprovantes');
         $comprovantes = $this->paginate($this->Comprovantes);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            
+
             $lancamento2 = $this->Lancamentos->newEmptyEntity();
             // debug([$lancamento2]);exit;
             $lancamento2->tipo = $lancamento->tipo;
@@ -252,7 +272,7 @@ class LancamentosController extends AppController
             $lancamento2->cliente_id = $lancamento->cliente_id;
             $lancamento2->lancamento_id = $lancamento->id_lancamento;
             $lancamento2->dreconta_id = $lancamento->dreconta_id;
-            
+
             if ($this->Lancamentos->save($lancamento2)) {
                 $this->Flash->success(__('Lançamento editado com sucesso.'));
 
@@ -318,6 +338,3 @@ class LancamentosController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 }
-
-
-?>

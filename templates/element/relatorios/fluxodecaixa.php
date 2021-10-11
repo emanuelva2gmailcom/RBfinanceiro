@@ -26,7 +26,7 @@ tr > td{
             </tr>
 
         </thead>
-        <tbody class="text-success">
+        <tbody>
         <?php
             foreach($obj['rows']['td'] as $valor):
                 if(in_array($valor[0], $obj['rows']['th']['entradas'])){
@@ -55,7 +55,7 @@ tr > td{
                 <?php } endforeach; ?>
             </tr>
         </thead>
-        <tbody class="text-danger">
+        <tbody >
         <?php
             foreach($obj['rows']['td'] as $valor):
                 if(in_array($valor[0], $obj['rows']['th']['saidas'])){
@@ -86,7 +86,7 @@ tr > td{
         </thead>
         <thead class="thead-light">
             <tr>
-                <th style="color: #17a2b8;" scope="row">ENTRADAS - SAIDAS</th>
+                <th style="color: #17a2b8;" scope="row">Entradas-Saídas</th>
                 <?php foreach($obj['total']['entradas-saidas'] as $t):
                     if($t<0){?>
                       <td class="text-danger"><?= $t ?></td>
@@ -97,7 +97,7 @@ tr > td{
                 <?php } endforeach; ?>
             </tr>
             <tr>
-                <th style="color: #17a2b8;" scope="row">INICIAL</th>
+                <th style="color: #17a2b8;" scope="row">Inicial</th>
                 <?php foreach($obj['total']['inicial'] as $t):
                     if($t<0){?>
                       <td class="text-danger"><?= $t ?></td>
@@ -108,7 +108,7 @@ tr > td{
                 <?php } endforeach; ?>
             </tr>
             <tr>
-                <th style="color: #17a2b8;" scope="row">FINAL</th>
+                <th style="color: #17a2b8;" scope="row">Final</th>
                 <?php foreach($obj['total']['final'] as $t):
                     if($t<0){?>
                       <td class="text-danger"><?= $t ?></td>

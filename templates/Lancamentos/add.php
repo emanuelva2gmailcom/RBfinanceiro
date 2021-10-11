@@ -81,7 +81,7 @@
               <div id="test-l-3" class="content bg-white">
                   <div class="panel-body text-info">
                       <div class="form-group">
-                          <?= $this->Form->control('fluxoconta_id', ['options' => $fluxocontas, 'empty' => 'SELECIONE', 'class' => 'conta']); ?>
+                          <?= $this->Form->control('fluxoconta_id', ['options' => $contas, 'empty' => 'SELECIONE', 'class' => 'conta']); ?>
                       </div>
                       <div class="form-group">
                           <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => 'SELECIONE']); ?>
@@ -142,7 +142,7 @@
 
 
       <script>
-      
+
           $(".tipo").change(function() {
               $tipo = $(".tipo").val();
               if ($tipo == "PREVISTO") {
@@ -155,19 +155,19 @@
           });
 
 
-        //   $('.conta').change(function() {
-        //       $tipo = $(".conta option:selected").text();
-        //       $word_one = $tipo.split(' ')[0]
-        //       if ($word_one == 'entrada') {
-        //           $('.fornecedor').addClass('d-none')
-        //           $('.cliente').removeClass('d-none')
-        //       } else {
-        //           $('.cliente').addClass('d-none')
-        //           $('.fornecedor').removeClass('d-none')
-        //       }
-        //   });
+          $('.conta').change(function() {
+              $tipo = $(".conta option:selected").text();
+              $word_one = $tipo.split(' ')[0]
+              if ($word_one == 'entrada') {
+                  $('.fornecedor').addClass('d-none')
+                  $('.cliente').removeClass('d-none')
+              } else {
+                  $('.cliente').addClass('d-none')
+                  $('.fornecedor').removeClass('d-none')
+              }
+          });
 
-          
+
           $('.tipo').change(function() {
               $tipo = $('.tipo').val();
               try {

@@ -8,8 +8,8 @@
 	}
 </style>
 
-<div class="card" style="margin-top: 0%;">
-	<div class="card-body login-card-body bg-info text-white">
+<div class="card" style="margin-top: 0%; border-radius: 20px;">
+	<div class="card-body login-card-body bg-info text-white" style="border-radius: 20px;">
 
 
 		<?= $this->Form->create() ?>
@@ -87,12 +87,12 @@
 		</div> -->
 		<!-- /.social-auth-links -->
 
-		<p class="mb-1">
+		<!-- <p class="mb-1">
 			<?= $this->Html->link(__('Esqueceu a senha? Redefina aqui'), '/forgotPassword');?>
 		</p>
 		<p class="mb-1">
 			<?= $this->Html->link(__('Verifique o seu email aqui'), '/emailVerification');?>
-		</p>
+		</p> -->
 		<?php
 		if(SITE_REGISTRATION) {?>
 			<p class="mb-1">
