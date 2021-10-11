@@ -12,29 +12,29 @@ $this->assign('title', __('Caixas') ); ?>
 
  <div style="border: green solid 2px; border-radius: 20px;" class="card card-outline container bg-white ">
 
-  <div class="card-header d-sm-flex" style="padding-top: 50px;">
+  <div class="card-header d-sm-flex" style="padding-top: 50px; color: green;">
     <h2 class="card-title"><?= h($caixa->id_caixa) ?></h2>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
         <tr>
-            <th><?= __('Id Caixa') ?></th>
+            <th style="color: green;" ><?= __('Id Caixa') ?></th>
             <td><?= $this->Number->format($caixa->id_caixa) ?></td>
         </tr>
         <tr>
-            <th><?= __('Data Caixa') ?></th>
+            <th style="color: green;" ><?= __('Data Caixa') ?></th>
             <td><?= h($caixa->data_caixa) ?></td>
         </tr>
         <tr>
-            <th><?= __('Created') ?></th>
+            <th style="color: green;"><?= __('Created') ?></th>
             <td><?= h($caixa->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th><?= __('Modified') ?></th>
+            <th style="color: green;"><?= __('Modified') ?></th>
             <td><?= h($caixa->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th><?= __('Is Aberto') ?></th>
+            <th style="color: green;"><?= __('Is Aberto') ?></th>
             <td><?= $caixa->is_aberto ? __('Sim') : __('Não'); ?></td>
         </tr>
     </table>
@@ -60,7 +60,7 @@ $this->assign('title', __('Caixas') ); ?>
 <div style="border: green solid 2px; border-radius: 20px;"  class="related related-caixaregistros view card container bg-white">
   
   <div class="card-header d-sm-flex" style="padding-top: 50px;">
-    <h3 class="card-title"><?= __('Relacionados') ?></h3>
+    <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
       <?= $this->Html->link(__('Todos'), ['controller' => 'Caixaregistros' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
@@ -68,7 +68,7 @@ $this->assign('title', __('Caixas') ); ?>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
-      <tr>
+      <tr style="color: green;">
           <th><?= __('Id Caixaregistro') ?></th>
           <th><?= __('Caixa Id') ?></th>
           <th><?= __('Tipopagamento Id') ?></th>
