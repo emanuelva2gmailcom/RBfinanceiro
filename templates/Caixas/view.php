@@ -8,8 +8,11 @@
 <?php
 $this->assign('title', __('Caixas') ); ?>
 
-<div class="view card card-primary card-outline">
-  <div class="card-header d-sm-flex">
+<div  class="container-fluid d-flex align-items-center justify-content-center p-5">
+
+ <div style="border: green solid 2px; border-radius: 20px;" class="card card-outline container bg-white ">
+
+  <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h2 class="card-title"><?= h($caixa->id_caixa) ?></h2>
   </div>
   <div class="card-body table-responsive p-0">
@@ -49,6 +52,7 @@ $this->assign('title', __('Caixas') ); ?>
       <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
     </div>
   </div>
+     </div>
 </div>
 
 
