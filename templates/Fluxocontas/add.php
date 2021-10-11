@@ -42,7 +42,7 @@
     ?>
   </div>
 
-  <div class="card-footer bg-white d-flex justify-content-between"  style="border-radius: 20px;">
+  <div class="card-footer bg-white d-flex justify-content-between"  style="border-radius: 0px 0px 20px 20px;">
     <div class="d-flex">
       <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
 
