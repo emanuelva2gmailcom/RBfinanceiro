@@ -19,23 +19,23 @@ $this->assign('title', __('Caixas') ); ?>
     <table class="table text-nowrap">
         <tr>
             <th style="color: green;" ><?= __('Id Caixa') ?></th>
-            <td><?= $this->Number->format($caixa->id_caixa) ?></td>
+            <td class="text-info" ><?= $this->Number->format($caixa->id_caixa) ?></td>
         </tr>
         <tr>
             <th style="color: green;" ><?= __('Data Caixa') ?></th>
-            <td><?= h($caixa->data_caixa) ?></td>
+            <td class="text-info" ><?= h($caixa->data_caixa) ?></td>
         </tr>
         <tr>
             <th style="color: green;"><?= __('Created') ?></th>
-            <td><?= h($caixa->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td class="text-info"><?= h($caixa->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th style="color: green;"><?= __('Modified') ?></th>
-            <td><?= h($caixa->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td class="text-info"><?= h($caixa->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
             <th style="color: green;"><?= __('Is Aberto') ?></th>
-            <td><?= $caixa->is_aberto ? __('Sim') : __('Não'); ?></td>
+            <td class="text-info"><?= $caixa->is_aberto ? __('Sim') : __('Não'); ?></td>
         </tr>
     </table>
   </div>
@@ -62,8 +62,8 @@ $this->assign('title', __('Caixas') ); ?>
   <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
-      <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
-      <?= $this->Html->link(__('Todos'), ['controller' => 'Caixaregistros' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros' , 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
+      <?= $this->Html->link(__('Todos'), ['controller' => 'Caixaregistros' , 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
     </div>
   </div>
   <div class="card-body table-responsive p-0">
@@ -77,17 +77,17 @@ $this->assign('title', __('Caixas') ); ?>
       </tr>
       <?php if (empty($caixa->caixaregistros)) { ?>
         <tr>
-            <td colspan="5" class="text-muted">
+            <td colspan="5" class="text-muted text-info">
               Não encontrado!
             </td>
         </tr>
       <?php }else{ ?>
         <?php foreach ($caixa->caixaregistros as $caixaregistros) : ?>
         <tr>
-            <td><?= h($caixaregistros->id_caixaregistro) ?></td>
-            <td><?= h($caixaregistros->caixa_id) ?></td>
-            <td><?= h($caixaregistros->tipopagamento_id) ?></td>
-            <td><?= h($caixaregistros->lancamento_id) ?></td>
+            <td class="text-info" ><?= h($caixaregistros->id_caixaregistro) ?></td>
+            <td class="text-info><?= h($caixaregistros->caixa_id) ?></td>
+            <td class="text-info><?= h($caixaregistros->tipopagamento_id) ?></td>
+            <td class="text-info><?= h($caixaregistros->lancamento_id) ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['controller' => 'Caixaregistros', 'action' => 'view', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary']) ?>
               <?= $this->Html->link(__('Editar'), ['controller' => 'Caixaregistros', 'action' => 'edit', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary']) ?>
