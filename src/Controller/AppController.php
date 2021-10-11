@@ -58,14 +58,30 @@ class AppController extends Controller
 
     public function getrenovado()
     {
-        $renovados = null;
+        $renovados = [];
+        $resposta = [
+            'and' => 'AND ',
+            'or' => 'OR ',
+            'simple' => ''
+        ];
         $this->loadModel('Lancamentos');
         $lancamentos = $this->Lancamentos->find('all');
         foreach($lancamentos as $lancamento):
-            $renovados != null ? $renovados .= $lancamento->lancamento_id.',': $renovados .= $lancamento->lancamento_id; 
+            $lancamento->lancamento_id != null ? array_push($renovados, $lancamento->lancamento_id) : '';
         endforeach;
-        // debug($renovados);
-        // exit;
-        return $renovados;
+        switch ($renovados != null) {
+            case true:
+                $resposta['simple'] .= "id_lancamento NOT IN(".implode(',', $renovados).")";
+                $resposta['and'] .= "id_lancamento NOT IN(".implode(',', $renovados).")";
+                $resposta['or'] .= "id_lancamento NOT IN(".implode(',', $renovados).")";
+                break;
+            
+            case false:
+                $resposta['simple'] = "";
+                $resposta['and'] = "";
+                $resposta['or'] = "";
+                break;
+        }
+        return $resposta;
     }
 }

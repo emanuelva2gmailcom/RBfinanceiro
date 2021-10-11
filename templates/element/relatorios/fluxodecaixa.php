@@ -13,7 +13,6 @@ tr > td{
 .mwtd{
     min-width: 150px;
 }
-
 </style>
 <div class="container table-responsive">
     <table class="table table-sm table-bordered table-white rounded">
