@@ -65,6 +65,7 @@ class LancamentosController extends AppController
 
     public function getTablePainel()
     {
+        $renovados = $this->getrenovado();
         $query = "tipo = 'REALIZADO' or tipo = 'PREVISTO'";
         $totals = [
             'entrada' => 0,
@@ -93,19 +94,12 @@ class LancamentosController extends AppController
             $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
             $lancamentos = $this->Lancamentos->find('all', [
                 'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
-                'conditions' => [$query]
+                'conditions' => [$query.$renovados['and']]
             ]);
             foreach ($contas as $c) :
                 $valor = 0;
                 foreach ($lancamentos as $l) :
 
-                    // if($l->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada'){
-                    //     $totals['entrada'] += $l->valor;
-                    //     $totals['total'] += $l->valor;
-                    // }else{
-                    //     $totals['saida'] -= $l->valor;
-                    //     $totals['total'] -= $l->valor;
-                    // }
                     if ($c->conta == $l->fluxoconta->conta && $l->created->i18nFormat('yyyy-MM') == $request[1]->i18nFormat('yyyy-MM')) {
                         // debug($l->created->i18nFormat('yyyy-MM') == $request[1]->i18nFormat('yyyy-MM'));
                         $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $valor += $l->valor : $valor -= $l->valor;
@@ -137,7 +131,7 @@ class LancamentosController extends AppController
         $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
         $lancamentos = $this->Lancamentos->find('all', [
             'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
-            'conditions' => [$query]
+            'conditions' => [$query.$renovados['and']]
         ]);
         foreach ($contas as $c) :
             $valor = 0;
@@ -147,13 +141,11 @@ class LancamentosController extends AppController
                 }
                 switch ($c->fluxosubgrupo->fluxogrupo->grupo) {
                     case 'entrada':
-                        # code...
                         $totals['entrada'] += $l->valor;
                         $totals['total'] += $l->valor;
                         break;
 
                     case 'saida':
-                        # code...
                         $totals['saida'] -= $l->valor;
                         $totals['total'] -= $l->valor;
                         break;
@@ -169,29 +161,18 @@ class LancamentosController extends AppController
 
     public function painel()
     {
-        // if($this->request->is('post')){
-
-        //     $obj = $this->getTablePainel($this->request->getData())[0];
-        //     $total = $this->getTablePainel($this->request->getData())[1];
-        //     // debug($obj);exit;
-        //     $this->set(compact('obj', 'total'));
-        // }
-        // if($this->request->is('get')){
-        //     $obj = $this->getTablePainel()[0];
-        //     $total = $this->getTablePainel()[1];
-
-        //     $this->set(compact('obj', 'total'));
-        // }
     }
 
     public function index()
     {
+        $renovados = $this->getrenovado();
         $this->paginate = [
             'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
+            'conditions' => [$renovados['simple']]
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
         $now = FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
-
+        // exit;
         $this->set(compact('lancamentos', 'now'));
     }
 
@@ -218,7 +199,7 @@ class LancamentosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
 
-  
+
     public function add()
     {
 
@@ -251,12 +232,12 @@ class LancamentosController extends AppController
         }
 
 
-        
+
         $contas = $this->Lancamentos->Fluxocontas->find('list', [
             'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
             'valueField' => function ($d) {
-                   return  $d->fluxosubgrupo->fluxogrupo->grupo. ' de ' . 
-                    $d->fluxosubgrupo->subgrupo . '     ' . 
+                return  $d->fluxosubgrupo->fluxogrupo->grupo . ' de ' .
+                    $d->fluxosubgrupo->subgrupo . '     ' .
                     $d->conta;
             }
         ]);
