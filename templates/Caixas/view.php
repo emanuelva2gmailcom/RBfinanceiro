@@ -55,9 +55,11 @@ $this->assign('title', __('Caixas') ); ?>
      </div>
 </div>
 
+<div  class="container-fluid d-flex align-items-center justify-content-center p-5">
 
-<div class="related related-caixaregistros view card">
-  <div class="card-header d-sm-flex">
+<div style="border: green solid 2px; border-radius: 20px;"  class="related related-caixaregistros view card container bg-white">
+  
+  <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h3 class="card-title"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
@@ -97,4 +99,5 @@ $this->assign('title', __('Caixas') ); ?>
     </table>
   </div>
 </div>
+    </div>
 
