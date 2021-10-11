@@ -77,7 +77,7 @@ $this->assign('title', __('Caixas') ); ?>
       </tr>
       <?php if (empty($caixa->caixaregistros)) { ?>
         <tr>
-            <td colspan="5" class="text-muted text-info">
+            <td colspan="5" class=" text-info">
               Não encontrado!
             </td>
         </tr>
