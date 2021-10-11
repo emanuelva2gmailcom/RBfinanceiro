@@ -19,10 +19,11 @@ class RelatoriosController extends AppController
 
     public function getCaixaDiario()
     {
+        $renovados = $this->getrenovado();
         $this->loadModel('Lancamentos');
         $this->paginate = [
             'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['data_baixa is not' => null]
+            'conditions' => ['data_baixa is not' => null], $renovados['simple']
         ];
 
         $lancamentos = $this->paginate($this->Lancamentos);
@@ -56,11 +57,12 @@ class RelatoriosController extends AppController
 
     public function exportCaixaDiario()
     {
+        $renovados = $this->getrenovado();
         $data = $this->getCaixaDiario();
         $this->loadModel('Lancamentos');
         $this->paginate = [
             'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['data_baixa is not' => null]
+            'conditions' => ['data_baixa is not' => null], $renovados['simple']
         ];
 
         $lancamentos = $this->paginate($this->Lancamentos);
@@ -117,6 +119,7 @@ class RelatoriosController extends AppController
 
     public function getRelatorio($tipo = null, $date = null, $periodo = null)
     {
+        $renovados = $this->getrenovado();
         $obj = [
             'header' => [],
             'rows' => [
@@ -138,7 +141,7 @@ class RelatoriosController extends AppController
         $this->loadModel('Fluxocontas');
         $this->paginate = [
             'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['tipo' => $tipo]
+            'conditions' => ['tipo' => $tipo, $renovados['simple']]
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
         $comeco = FrozenTime::now()->i18nFormat($periodo[0]);
@@ -332,6 +335,7 @@ class RelatoriosController extends AppController
 
     public function getFluxoDeCaixa($data = null)
     {
+        $renovados = $this->getrenovado();
         $show = false;
         $obj = [
             'header' => [],
@@ -374,7 +378,7 @@ class RelatoriosController extends AppController
         $this->loadModel('Fluxocontas');
         $lancamentos = $this->Lancamentos->find('all', [
             'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['tipo' => 'PREVISTO']
+            'conditions' => ['tipo' => 'PREVISTO', $renovados['simple']]
         ]);
         $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_vencimento')];
         $contas = [];
@@ -503,6 +507,7 @@ class RelatoriosController extends AppController
 
     public function getGerencial($data = null)
     {
+        $renovados = $this->getrenovado();
         $show = false;
         $obj = [
             'header' => [],
@@ -545,7 +550,7 @@ class RelatoriosController extends AppController
         $this->loadModel('Fluxocontas');
         $lancamentos = $this->Lancamentos->find('all', [
             'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['tipo' => 'REALIZADO']
+            'conditions' => ['tipo' => 'REALIZADO', $renovados['simple']]
         ]);
         $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_baixa')];
         $contas = [];

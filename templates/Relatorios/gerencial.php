@@ -79,7 +79,7 @@
         <thead >
             <tr>
                 <th scope="row" class="bg-info">Saídas</th>
-                <?php foreach($obj['total']['entradas'] as $t):
+                <?php foreach($obj['total']['saidas'] as $t):
                     if($t<0){?>
                       <td class="text-danger"><?= $t ?></td>
                 <?php }else if($t>0){?>
