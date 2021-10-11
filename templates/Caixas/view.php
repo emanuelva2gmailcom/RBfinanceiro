@@ -40,16 +40,16 @@ $this->assign('title', __('Caixas') ); ?>
     </table>
   </div>
   <div class="card-footer d-flex">
-    <div class="">
+    <div style="padding-top: 50px;" >
       <?= $this->Form->postLink(
           __('Delete'),
           ['action' => 'delete',  $caixa->id_caixa],
-          ['confirm' => __('Você quer mesmo deletar {0}?',  $caixa->id_caixa), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar {0}?',  $caixa->id_caixa), 'class' => 'btn btn-sm btn-outline-danger']
       ) ?>
     </div>
     <div class="ml-auto">
-      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $caixa->id_caixa], ['class' => 'btn btn-secondary']) ?>
-      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $caixa->id_caixa], ['class' => 'btn btn-sm btn-outline-success']) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-sm btn-outline-info']) ?>
     </div>
   </div>
      </div>
@@ -89,8 +89,8 @@ $this->assign('title', __('Caixas') ); ?>
             <td class="text-info><?= h($caixaregistros->tipopagamento_id) ?></td>
             <td class="text-info><?= h($caixaregistros->lancamento_id) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('Visualizar'), ['controller' => 'Caixaregistros', 'action' => 'view', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Html->link(__('Editar'), ['controller' => 'Caixaregistros', 'action' => 'edit', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Html->link(__('Visualizar'), ['controller' => 'Caixaregistros', 'action' => 'view', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-info']) ?>
+              <?= $this->Html->link(__('Editar'), ['controller' => 'Caixaregistros', 'action' => 'edit', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-success']) ?>
               <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Caixaregistros', 'action' => 'delete', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $caixaregistros->id_caixaregistro)]) ?>
             </td>
         </tr>
