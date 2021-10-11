@@ -70,34 +70,34 @@
                     </thead>
 
                     <tbody>
-                        <?php foreach ($lancamentos as $lancamento) : ?>
-                            <?php if ($lancamento->tipo == 'PREVISTO') { ?>
+                        <?php foreach ($previstos as $previsto) : ?>
+                            <?php if ($previsto->tipo == 'PREVISTO') { ?>
                                 <tr style="color: #029BE1;">
-                                    <td><?= h($lancamento->tipo) ?></td>
-                                    <td><?= h($lancamento->descricao) ?></td>
-                                    <td><?= $this->Number->format($lancamento->valor) ?></td>
-                                    <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-                                    <?php if (empty($lancamento->data_baixa)) { ?>
-                                        <td><?= h($lancamento->data_baixa) ?></td>
+                                    <td><?= h($previsto->tipo) ?></td>
+                                    <td><?= h($previsto->descricao) ?></td>
+                                    <td><?= $this->Number->format($previsto->valor) ?></td>
+                                    <td><?= h($previsto->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                                    <?php if (empty($previsto->data_baixa)) { ?>
+                                        <td><?= h($previsto->data_baixa) ?></td>
                                     <?php } else { ?>
-                                        <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                                        <td><?= h($previsto->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                                     <?php } ?>
-                                    <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                                    <td><?= h($previsto->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
 
-                                    <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td>
-                                    <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->nome]) : '' ?></td>
-                                    <!-- <td><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->nome]) : '' ?></td> -->
-                                    <!-- <td><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td> -->
+                                    <td><?= $previsto->has('fluxoconta') ? $this->Html->link($previsto->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $previsto->fluxoconta->conta]) : '' ?></td>
+                                    <td><?= $previsto->has('fornecedore') ? $this->Html->link($previsto->fornecedore->nome, ['controller' => 'Fornecedores', 'action' => 'view', $previsto->fornecedore->nome]) : '' ?></td>
+                                    <!-- <td><?= $previsto->has('cliente') ? $this->Html->link($previsto->cliente->nome, ['controller' => 'Clientes', 'action' => 'view', $previsto->cliente->nome]) : '' ?></td> -->
+                                    <!-- <td><?= $previsto->has('dreconta') ? $this->Html->link($previsto->dreconta->conta, ['controller' => 'Drecontas', 'action' => 'view', $previsto->dreconta->conta]) : '' ?></td> -->
                                     <td class="actions">
-                                        <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
-                                            <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-secondary']) ?>
+                                        <?php if (($previsto->tipo == "PREVISTO") && ($previsto->data_baixa == null)) { ?>
+                                            <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $previsto->id_lancamento], ['class' => 'btn btn-xs btn-outline-secondary']) ?>
                                         <?php } ?>
-                                        <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd', 'UTC') < $now)) { ?>
-                                            <?= $this->Html->link(__('Renovar'), ['controller' => 'Lancamentos', 'action' => 'renovar', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary']) ?>
+                                        <?php if (($previsto->tipo == "PREVISTO") && ($previsto->data_vencimento->i18nFormat('yyyy-MM-dd', 'UTC') < $now)) { ?>
+                                            <?= $this->Html->link(__('Renovar'), ['controller' => 'lancamentos', 'action' => 'renovar', $previsto->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary']) ?>
                                         <?php } ?>
-                                        <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-info', 'escape' => false]) ?>
-                                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-success', 'escape' => false]) ?>
-                                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
+                                        <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $previsto->id_lancamento], ['class' => 'btn btn-xs btn-outline-info', 'escape' => false]) ?>
+                                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $previsto->id_lancamento], ['class' => 'btn btn-xs btn-outline-success', 'escape' => false]) ?>
+                                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $previsto->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $previsto->tipo)]) ?>
                                     </td>
 
                                 <?php } ?>

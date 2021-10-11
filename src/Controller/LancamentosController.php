@@ -199,7 +199,7 @@ class LancamentosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
 
-  
+
     public function add()
     {
 
@@ -232,12 +232,12 @@ class LancamentosController extends AppController
         }
 
 
-        
+
         $contas = $this->Lancamentos->Fluxocontas->find('list', [
             'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
             'valueField' => function ($d) {
-                   return  $d->fluxosubgrupo->fluxogrupo->grupo. ' de ' . 
-                    $d->fluxosubgrupo->subgrupo . '     ' . 
+                return  $d->fluxosubgrupo->fluxogrupo->grupo . ' de ' .
+                    $d->fluxosubgrupo->subgrupo . '     ' .
                     $d->conta;
             }
         ]);

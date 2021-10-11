@@ -379,8 +379,12 @@ class RelatoriosController extends AppController
         $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_vencimento')];
         $contas = [];
         $result = [];
-
+        $testes = [];
+        $testes2 = [];
         foreach ($lancamentos as $lancamento) :
+            if ($lancamento->lancamento_id !== null) {
+                $testes[] = $lancamento->lancamento_id;
+            }
             if (in_array($lancamento->data_vencimento->i18nFormat($periodo[0]), $obj['header'])) {
                 if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') {
                     array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
