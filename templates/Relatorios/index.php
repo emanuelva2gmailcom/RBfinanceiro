@@ -44,7 +44,7 @@
        .tes img{
             width: 125px;
             height: 125px;
-            margin-top: 2%;
+            margin-top: 4%;
         } 
 
     </style>
@@ -100,7 +100,7 @@
                     </li>
                     <li class="col-4 nav-item">
                         <div class="d-flex justify-content-center">
-                            <div class="tes bd-placeholder-img rounded-circle" style="width: 140px; height: 140px; background-color: white;"> <?= $this->Html->image('caixa-eletronico.png') ?> </div>
+                            <div class="tes bd-placeholder-img rounded-circle" style="width: 140px; height: 140px; background-color: white;"> <?= $this->Html->image('caixa-registradora (1).png') ?> </div>
                         </div>
                         <div class="d-flex justify-content-center">
                             <h2 class="text-center text-green">Caixa Diário</h2>
