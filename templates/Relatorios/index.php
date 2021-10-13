@@ -44,6 +44,7 @@
        .tes img{
             width: 135px;
             height: 135px;
+            margin-top: 1%;
         } 
 
     </style>
