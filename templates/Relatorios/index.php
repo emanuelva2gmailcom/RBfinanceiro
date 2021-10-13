@@ -42,8 +42,8 @@
         }
         
        .tes img{
-            width: 135px;
-            height: 135px;
+            width: 125px;
+            height: 125px;
             margin-top: 2%;
         } 
 
