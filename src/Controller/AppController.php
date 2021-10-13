@@ -17,6 +17,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\I18n\FrozenTime;
+use Cake\I18n\Time;
 
 /**
  * Application Controller
@@ -52,5 +54,34 @@ class AppController extends Controller
             }
         endforeach;
         return false;
+    }
+
+    public function getrenovado()
+    {
+        $renovados = [];
+        $resposta = [
+            'and' => 'AND ',
+            'or' => 'OR ',
+            'simple' => ''
+        ];
+        $this->loadModel('Lancamentos');
+        $lancamentos = $this->Lancamentos->find('all');
+        foreach($lancamentos as $lancamento):
+            $lancamento->lancamento_id != null ? array_push($renovados, $lancamento->lancamento_id) : '';
+        endforeach;
+        switch ($renovados != null) {
+            case true:
+                $resposta['simple'] .= "id_lancamento NOT IN(".implode(',', $renovados).")";
+                $resposta['and'] .= "id_lancamento NOT IN(".implode(',', $renovados).")";
+                $resposta['or'] .= "id_lancamento NOT IN(".implode(',', $renovados).")";
+                break;
+            
+            case false:
+                $resposta['simple'] = "";
+                $resposta['and'] = "";
+                $resposta['or'] = "";
+                break;
+        }
+        return $resposta;
     }
 }

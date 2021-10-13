@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Fluxoconta $fluxoconta
@@ -6,7 +7,7 @@
 ?>
 
 <?php
-$this->assign('title', __('Fluxoconta') );
+$this->assign('title', __('Fluxoconta'));
 ?>
 <style>
 
@@ -28,6 +29,7 @@ $this->assign('title', __('Fluxoconta') );
     <h2 class="card-title"><?= h($fluxoconta->conta) ?></h2>
   </div>
   <div class="card-body table-responsive p-0">
+
     <table class="table text-nowrap">
         <tr>
             <th style="color: green;"><?= __('Conta') ?></th>
@@ -53,17 +55,20 @@ $this->assign('title', __('Fluxoconta') );
             <th style="color: green;"><?= __('Modified') ?></th>
             <td class="text-info"><?= h($fluxoconta->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
+
     </table>
   </div>
   <div class="card-footer bg-white" style="border-radius: 20px;">
     <div style="padding-top: 20px;" class="d-flex justify-content-end">
       <?= $this->Form->postLink(
+
           __('Deletar'),
           ['action' => 'delete',  $fluxoconta->id_fluxoconta],
           ['confirm' => __('Vocề quer mesmo deletar {0}?',  $fluxoconta->conta), 'class' => 'del btn btn-sm btn-outline-danger']
       ) ?>
       <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $fluxoconta->id_fluxoconta], ['class' => 'edi btn btn-sm btn-outline-success']) ?>
       <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-sm btn-outline-info']) ?>
+
     </div>
   </div>
 </div>
@@ -77,13 +82,16 @@ $this->assign('title', __('Fluxoconta') );
   <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
+
       <?= $this->Html->link(__('Novo'), ['controller' => 'Lancamentos', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Lancamentos', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
-    </div>
+
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
+
       <tr style="color: green;">
+
         <th><?= __('Id Lancamento') ?></th>
         <th><?= __('Tipo') ?></th>
         <th><?= __('Descricao') ?></th>
@@ -102,7 +110,9 @@ $this->assign('title', __('Fluxoconta') );
       </tr>
       <?php if (empty($lancamento->lancamentos)) { ?>
         <tr>
+
           <td colspan="15" class="text-info">
+
             Não Encontrado!
           </td>
         </tr>
@@ -130,6 +140,7 @@ $this->assign('title', __('Fluxoconta') );
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['controller' => 'Lancamentos', 'action' => 'view', $lancamentos->id_lancamento], ['class' => 'btn btn-xs btn-outline-info']) ?>
               <?= $this->Html->link(__('Editar'), ['controller' => 'Lancamentos', 'action' => 'edit', $lancamentos->id_lancamento], ['class' => 'btn btn-xs btn-outline-success']) ?>
+
               <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Lancamentos', 'action' => 'delete', $lancamentos->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $lancamentos->id_lancamento)]) ?>
             </td>
           </tr>
@@ -137,6 +148,8 @@ $this->assign('title', __('Fluxoconta') );
       <?php } ?>
     </table>
   </div>
+
 </div>
 </div>
+
 
