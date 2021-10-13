@@ -82,7 +82,7 @@
                     </li>
                     <li class="col-4 nav-item">
                         <div class="d-flex justify-content-center">
-                            <div class="bd-placeholder-img rounded-circle" style="width: 140px; height: 140px;  background-color: #029BE1;"> <?= $this->Html->image('logo2.png') ?></div>
+                            <div class="bd-placeholder-img rounded-circle" style="width: 140px; height: 140px;  background-color: white;"> <?= $this->Html->image('deposit-box.png') ?></div>
                         </div>
                         <div class="d-flex justify-content-center">
                             <h2 class="text-center text-green">Caixa Gerencial</h2>
