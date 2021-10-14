@@ -7,28 +7,36 @@
 
 <?php $this->assign('title', __('Subgrupos') ); ?>
 <style>
-  .teste{
-    color: #E1E7F0;
-  }
+ 
+  .tr1 a{
+
+        color: #029BE1;
+
+    }
+
 </style>
 
 
-<div class="card card-primary card-outline bg-dark">
-  <div class="card-header d-sm-flex">
+<div class="container-fluid d-flex align-items-center justify-content-center p-5">
+
+    <div class="card container card-outline bg-white" style="border: green solid 2px; border-radius: 20px;">
+
+        <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h2 class="card-title"><!-- --></h2>
     <div class="card-toolbox">
       <?= $this->Paginator->limitControl([], null, [
             'label'=>false,
             'class' => 'form-control-sm',
+            'style' => 'color: #029BE1; border: 2px solid green;',
           ]); ?>
-      <?= $this->Html->link(__('Novo Subgrupo'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('Novo Subgrupo'), ['action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
         <thead>
-          <tr>
+          <tr style="color: green;">
      
               <th class="teste"><?= ('Subgrupo') ?></th>
               <th class="teste"><?= ('Descrição') ?></th>
@@ -40,16 +48,16 @@
         </thead>
         <tbody>
           <?php foreach ($fluxosubgrupos as $fluxosubgrupo): ?>
-          <tr>
+          <TR style="color: #029BE1;">
            
             <td><?= h($fluxosubgrupo->subgrupo) ?></td>
             <td><?= h($fluxosubgrupo->descricao) ?></td>
            
            
-            <td><?= $fluxosubgrupo->has('fluxogrupo') ? $this->Html->link($fluxosubgrupo->fluxogrupo->grupo, ['controller' => 'Fluxogrupos', 'action' => 'view', $fluxosubgrupo->fluxogrupo->grupo]) : '' ?></td>
+            <td class="tr1" ><?= $fluxosubgrupo->has('fluxogrupo') ? $this->Html->link($fluxosubgrupo->fluxogrupo->grupo, ['controller' => 'Fluxogrupos', 'action' => 'view', $fluxosubgrupo->fluxogrupo->grupo]) : '' ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fluxosubgrupo->id_fluxosubgrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $fluxosubgrupo->id_fluxosubgrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fluxosubgrupo->id_fluxosubgrupo], ['class'=>'btn btn-xs btn-outline-info', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $fluxosubgrupo->id_fluxosubgrupo], ['class'=>'btn btn-xs btn-outline-success', 'escape'=>false]) ?>
               <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $fluxosubgrupo->id_fluxosubgrupo], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?',  $fluxosubgrupo->subgrupo)]) ?>
             </td>
           </tr>
@@ -59,7 +67,8 @@
   </div>
   <!-- /.card-body -->
 
-  <div class="card-footer d-md-flex paginator">
+  <div class="card-footer d-md-flex paginator" style="color: green;" >
+
     <div class="mr-auto" style="font-size:.8rem">
       <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} fluxos subgrupos de {{count}} no total')) ?>
     </div>
