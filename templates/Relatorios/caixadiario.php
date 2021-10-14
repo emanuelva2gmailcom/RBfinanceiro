@@ -21,7 +21,7 @@
             <?= $this->Html->tableHeaders(
                 ['Valor','Conta', 'Fornecedor', 'Cliente', 'Descrição'])?>
         </thead>
-        <tbody>
+        <tbody class="text-info">
             <?php
             foreach($arrays as $array):?>
                 <?=$this->Html->tableCells([
