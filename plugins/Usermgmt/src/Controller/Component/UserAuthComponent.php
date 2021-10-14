@@ -195,7 +195,7 @@ class UserAuthComponent extends Component {
 
 			$this->controller->Auth->setConfig('unauthorizedRedirect', ['controller'=>'Users', 'action'=>'accessDenied', 'plugin'=>'Usermgmt', 'prefix'=>false]);
 
-			$this->controller->Auth->setConfig('loginRedirect', LOGIN_REDIRECT_URL);
+			$this->controller->Auth->setConfig('loginRedirect', ['controller'=>'Relatorios', 'action'=>'index', 'plugin'=>false, 'prefix'=>false]);
 
 			$this->controller->Auth->setConfig('logoutRedirect', LOGOUT_REDIRECT_URL);
 		}
