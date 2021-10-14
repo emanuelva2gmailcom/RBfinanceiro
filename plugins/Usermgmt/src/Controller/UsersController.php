@@ -1300,95 +1300,61 @@ class UsersController extends UsermgmtAppController
 	 */
 	public function register()
 	{
-		$userId = $this->UserAuth->getUserId();
 
-		if ($userId) {
-			$this->redirect(['action' => 'dashboard']);
-		}
+		$this->loadModel('Usermgmt.UserDetails');
+		$this->loadModel('Usermgmt.UserGroups');
 
-		if (SITE_REGISTRATION) {
-			$this->loadModel('Usermgmt.UserGroups');
+		$userEntity = $this->Users->newEmptyEntity();
 
-			$userGroups = $this->UserGroups->getGroupsForRegistration();
+		if ($this->getRequest()->is('post')) {
+			$formdata = $this->getRequest()->getData();
 
-			$userEntity = $this->Users->newEmptyEntity();
+			if (is_array($formdata['Users']['user_group_id'])) {
+				sort($formdata['Users']['user_group_id']);
+				$formdata['Users']['user_group_id'] = implode(',', $formdata['Users']['user_group_id']);
+			}
 
-			if ($this->getRequest()->is('post')) {
-				$formdata = $this->getRequest()->getData();
+			$userEntity = $this->Users->patchEntity($userEntity, $formdata, ['validate' => 'forAddUser', 'associated' => ['UserDetails' => ['validate' => 'forAddUser']]]);
 
-				if ($this->getRequest()->is('post') && $this->UserAuth->canUseRecaptha('registration') && !$this->getRequest()->is('ajax')) {
-					$formdata['Users']['captcha'] = (isset($formdata['g-recaptcha-response'])) ? $formdata['g-recaptcha-response'] : "";
-				}
+			$errors = $userEntity->getErrors();
 
-				$userEntity = $this->Users->patchEntity($userEntity, $formdata, ['validate' => 'forRegister']);
-
-				$errors = $userEntity->getErrors();
-
-				if ($this->getRequest()->is('ajax')) {
-					if (empty($errors)) {
-						$response = ['error' => 0, 'message' => 'success'];
-					} else {
-						$response = ['error' => 1, 'message' => 'failure'];
-						$response['data']['Users'] = $errors;
-					}
-					echo json_encode($response);
-					exit;
+			if ($this->getRequest()->is('ajax')) {
+				if (empty($errors)) {
+					$response = ['error' => 0, 'message' => 'success'];
 				} else {
-					if (empty($errors)) {
-						if (!isset($formdata['Users']['user_group_id'])) {
-							$userEntity['user_group_id'] = DEFAULT_GROUP_ID;
-						} else if (!isset($userGroups[$formdata['Users']['user_group_id']])) {
-							$userEntity['user_group_id'] = DEFAULT_GROUP_ID;
-						}
+					$response = ['error' => 1, 'message' => 'failure'];
+					$response['data']['Users'] = $errors;
+				}
+				echo json_encode($response);
+				exit;
+			} else {
+				if (empty($errors)) {
+					$userEntity['is_active'] = 1;
+					$userEntity['is_email_verified'] = 1;
+					$userEntity['created_by'] = $this->UserAuth->getUserId();
+					$userEntity['password'] = $this->UserAuth->makeHashedPassword($userEntity['password']);
 
-						if (!EMAIL_VERIFICATION) {
-							$userEntity['is_email_verified'] = 1;
-						}
-
-						$userEntity['is_active'] = 1;
-						$userEntity['ip_address'] = $this->getRequest()->clientIp();
-						$userEntity['password'] = $this->UserAuth->makeHashedPassword($userEntity['password']);
-
-						if ($this->Users->save($userEntity, ['validate' => false])) {
-							$userId = $userEntity['id'];
-
-							$this->loadModel('Usermgmt.UserDetails');
-
+					if ($this->Users->save($userEntity, ['validate' => false])) {
+						if (!isset($userEntity['user_detail']['id'])) {
 							$userDetailEntity = $this->UserDetails->newEmptyEntity();
-							$userDetailEntity['user_id'] = $userId;
+							$userDetailEntity['user_id'] = $userEntity['id'];
 
 							$this->UserDetails->save($userDetailEntity, ['validate' => false]);
-
-							if (EMAIL_VERIFICATION) {
-								$this->EmailHandler->sendVerificationEmail($userEntity);
-							}
-
-							if (SEND_REGISTRATION_MAIL) {
-								$this->EmailHandler->sendRegistrationEmail($userEntity);
-							}
-
-							if (isset($userEntity['is_active']) && $userEntity['is_active'] && !EMAIL_VERIFICATION) {
-								$user = $this->Users->getUserById($userId);
-								$user = $user->toArray();
-
-								$this->UserAuth->login($user);
-								$this->redirect($this->Auth->redirectUrl());
-							} else {
-								$this->Flash->success(__('Your account has been created. You should receive an e-mail shortly to authenticate your account. Once validated you will be able to login.'));
-								$this->redirect(['action' => 'login']);
-							}
-						} else {
-							$this->Flash->error(__('Unable to register user, please try again'));
 						}
+
+						$this->Flash->success(__('The user has been added successfully'));
+						$this->redirect(['action' => 'index']);
+					} else {
+						$this->Flash->error(__('Unable to save user, please try again'));
 					}
 				}
 			}
-
-			$this->set(compact('userGroups', 'userEntity'));
-		} else {
-			$this->Flash->info(__('Sorry new registration is currently disabled, please try again later'));
-			$this->redirect(['action' => 'login']);
 		}
+
+		$userGroups = $this->UserGroups->getGroupsForRegistration();
+	
+
+		$this->set(compact('userGroups', 'userEntity'));
 	}
 
 	/**
@@ -1401,10 +1367,8 @@ class UsersController extends UsermgmtAppController
 	{
 		$userId = $this->UserAuth->getUserId();
 		$user = $this->Users->getUserById($userId);
-		$teste = $this->UserAuth->getUser();
-		$teste['photo'] = $user['photo'];
-		// debug($teste);
-		// exit;
+		$_SESSION['Auth']['User']['photo'] = $user['photo'];
+	
 		if (!empty($user)) {
 			$this->loadModel('Usermgmt.UserGroups');
 
@@ -1426,29 +1390,28 @@ class UsersController extends UsermgmtAppController
 	public function editProfile()
 	{
 		$userId = $this->UserAuth->getUserId();
-
 		if (!empty($userId)) {
 			$userEntity = $this->Users->getUserById($userId);
-
+			
 			if (!empty($userEntity)) {
 				$this->loadModel('Usermgmt.UserDetails');
-
+				
 				if ($this->getRequest()->is(['post', 'put'])) {
 					$existing_email = $userEntity['email'];
 					$existing_photo = $userEntity['photo'];
-
+					
 					$formdata = $this->getRequest()->getData();
-
+					
 					if (!ALLOW_CHANGE_USERNAME && !empty($userEntity['username'])) {
 						unset($formdata['Users']['username']);
 					}
-
+					
 					if (!empty($formdata['Users']['bday'])) {
 						$formdata['Users']['bday'] = date('Y-m-d', strtotime($formdata['Users']['bday']));
 					}
-
+					
 					$userEntity = $this->Users->patchEntity($userEntity, $formdata, ['validate' => 'forEditProfile', 'associated' => ['UserDetails' => ['validate' => 'forEditProfile']]]);
-
+			
 					$errors = $userEntity->getErrors();
 
 					if ($this->getRequest()->is('ajax')) {
