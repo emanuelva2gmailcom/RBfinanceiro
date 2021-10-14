@@ -40,12 +40,12 @@
         img{
             border-radius: 70px;
         }
-        
+
        .tes img{
             width: 125px;
             height: 125px;
             margin-top: 5%;
-        } 
+        }
 
     </style>
     <style>
@@ -84,7 +84,7 @@
                         <div class="d-flex justify-content-center" style="height: 100px;">
                             <p class="text-center text-cyan">Aqui você observa os registros das entradas e saídas da empresa</p>
                         </div>
-                        <a class="nav-link bg-info w-50" style="margin-left: 25%;" href="#tab_2" data-toggle="tab">Fluxo de caixa</a>
+                        <a class="nav-link bg-info w-50" style="margin-left: 25%;" href="#tab_2" data-toggle="tab">Fluxo de Caixa</a>
                     </li>
                     <li class="col-4 nav-item">
                         <div class="d-flex justify-content-center">
@@ -96,7 +96,7 @@
                         <div class="d-flex justify-content-center" style="height: 100px;">
                             <p class="text-center text-cyan">Aqui você observa o controle de seu fluxo de caixa</p>
                         </div>
-                        <a class="nav-link bg-info w-50" style="margin-left: 25%;" href="#tab_1" data-toggle="tab">Caixa gerencial</a>
+                        <a class="nav-link bg-info w-50" style="margin-left: 25%;" href="#tab_1" data-toggle="tab">Caixa Gerencial</a>
                     </li>
                     <li class="col-4 nav-item">
                         <div class="d-flex justify-content-center">

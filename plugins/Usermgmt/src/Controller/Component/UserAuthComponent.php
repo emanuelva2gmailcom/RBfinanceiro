@@ -582,6 +582,7 @@ class UserAuthComponent extends Component {
 	 */
 	public function getUser() {
 		return $this->session->read('Auth');
+		$_SESSION = 'yyy';
 	}
 
 	/**

@@ -19,14 +19,14 @@ tr > td{
         <thead class="bg-info">
             <tr>
                 <th scope="col"><a href= "/relatorios/exportRelatorioFluxoCx/" style="font-size: 30px;color: white;"><i class="fas fa-file-excel"></i></a></th>
-                <?php foreach($obj['header'] as $data): ?>
+                <?php foreach($obj['header'] as $data):?>
                     <th scope="col"><?= $data ?></th>
                 <?php endforeach; ?>
                 <th scope="col">Total</th>
             </tr>
 
         </thead>
-        <tbody>
+        <tbody class="text-success">
         <?php
             foreach($obj['rows']['td'] as $valor):
                 if(in_array($valor[0], $obj['rows']['th']['entradas'])){
@@ -55,7 +55,7 @@ tr > td{
                 <?php } endforeach; ?>
             </tr>
         </thead>
-        <tbody >
+        <tbody class="text-danger">
         <?php
             foreach($obj['rows']['td'] as $valor):
                 if(in_array($valor[0], $obj['rows']['th']['saidas'])){

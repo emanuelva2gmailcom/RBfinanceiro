@@ -207,6 +207,7 @@ class LancamentosController extends AppController
             'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
         ];
         $this->loadModel('Comprovantes');
+      
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
