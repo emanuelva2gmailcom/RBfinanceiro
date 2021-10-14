@@ -80,12 +80,11 @@
               </div>
               <div id="test-l-3" class="content bg-white">
                   <div class="panel-body text-info">
+      
                       <div class="form-group">
                           <?= $this->Form->control('fluxoconta_id', ['options' => $contas, 'empty' => 'SELECIONE', 'class' => 'conta']); ?>
                       </div>
-                      <div class="form-group">
-                          <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => 'SELECIONE']); ?>
-                      </div>
+                   
                   </div>
                   <div class="d-flex justify-content-between">
                       <div style="background-color: green; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
