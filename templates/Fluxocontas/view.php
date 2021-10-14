@@ -19,6 +19,10 @@ $this->assign('title', __('Fluxoconta'));
     margin-right: 2%;
 }
 
+.tr1 a{
+        color: #029BE1;
+    }
+
 </style>
 
 <div  class="container-fluid d-flex align-items-center justify-content-center p-5">
@@ -41,7 +45,7 @@ $this->assign('title', __('Fluxoconta'));
         </tr>
         <tr>
             <th style="color: green;"><?= __('Fluxosubgrupo') ?></th>
-            <td class="text-info"><?= $fluxoconta->has('fluxosubgrupo') ? $this->Html->link($fluxoconta->fluxosubgrupo->subgrupo, ['controller' => 'Fluxosubgrupos', 'action' => 'view', $fluxoconta->fluxosubgrupo->subgrupo]) : ''?></td>
+            <td class="tr1"><?= $fluxoconta->has('fluxosubgrupo') ? $this->Html->link($fluxoconta->fluxosubgrupo->subgrupo, ['controller' => 'Fluxosubgrupos', 'action' => 'view', $fluxoconta->fluxosubgrupo->subgrupo]) : ''?></td>
         </tr>
         <tr>
             <th style="color: green;"><?= __('Id Fluxoconta') ?></th>
@@ -86,6 +90,7 @@ $this->assign('title', __('Fluxoconta'));
       <?= $this->Html->link(__('Novo'), ['controller' => 'Lancamentos', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Lancamentos', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
 
+  </div>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
