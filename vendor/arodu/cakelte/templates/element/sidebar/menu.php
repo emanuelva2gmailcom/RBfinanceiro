@@ -26,6 +26,24 @@ function caixa(is)
 }
 </script>
 
+
+
+<li class="nav-item" style="color: #59CBFF;">
+
+  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
+
+<i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+
+    <p id="caixa">
+
+      Abrir Caixa
+
+    </p>
+
+  </a>
+
+</li>
+
 <li class="nav-item" style="color: #59CBFF;">
 <a href="/relatorios/#" class="nav-link" style="color: #59CBFF;">
     <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
@@ -63,22 +81,80 @@ function caixa(is)
   <a class="nav-link" style="color: #59CBFF;">
     <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
-      Contas
+      Plano de Contas
       <i class="right fas fa-angle-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color: #59CBFF;">
-      <a href="/fluxocontas/add" class="nav-link" style="color: #59CBFF;; ">
+      <a class="nav-link" style="color: #59CBFF;; ">
         <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Nova conta</p>
+        <p>Contas</p>
       </a>
+        <ul class="nav nav-treeview" id="it">
+
+          <li class="nav-item" style="color: #59CBFF;">
+
+          <a href="/fluxocontas/add" class="nav-link" style="color: #59CBFF;; ">
+
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+
+        <p>Adicionar</p>
+
+      </a>
+
+        
+
     </li>
+
     <li class="nav-item" style="color: #59CBFF;">
+
       <a href="/fluxocontas/index" class="nav-link" style="color: #59CBFF;; ">
+
         <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Suas contas</p>
+
+        <p>Disponíveis</p>
+
       </a>
+
+    </li>
+
+  </ul>
+  </li>
+    <li class="nav-item" style="color: #59CBFF;">
+      <a class="nav-link" style="color: #59CBFF;; ">
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <p>Subgrupos</p>
+      </a>
+        <ul class="nav nav-treeview" id="it">
+
+    <li class="nav-item" style="color: #59CBFF;">
+
+      <a href="/fluxosubgrupos/add" class="nav-link" style="color: #59CBFF;; ">
+
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+
+        <p>Adicionar</p>
+
+      </a>
+
+        
+
+    </li>
+
+    <li class="nav-item" style="color: #59CBFF;">
+
+      <a href="/fluxosubgrupos/index" class="nav-link" style="color: #59CBFF;; ">
+
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+
+        <p>Disponíveis</p>
+
+      </a>
+
+    </li>
+
+  </ul>
     </li>
   </ul>
 </li>
@@ -131,14 +207,6 @@ function caixa(is)
   </ul>
 </li>
 
-<li class="nav-item" style="color: #59CBFF;">
-  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
-    <p id="caixa">
-      Abrir Caixa
-    </p>
-  </a>
-</li>
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
