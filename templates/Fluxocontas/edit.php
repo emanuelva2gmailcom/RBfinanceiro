@@ -55,20 +55,21 @@
     ?>
   </div>
 
-  <div class="card-footer bg-white d-flex justify-content-between"  style="border-radius: 0px 0px 20px 20px;">
+  <div class="card-footer bg-white d-flex"  style="border-radius: 0px 0px 20px 20px;">
 
-    <div class="d-flex">
-      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+<div class="mr-auto p-2">
 
-    </div>
+    <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
 
-    <div class="d-flex" style="margin-left: 87%;">
+</div>
 
-        <?= $this->Form->button(__('Salvar')) ?>
+<div class="p-2" >
 
-    </div>
+    <?= $this->Form->button(__('Salvar')) ?>
 
-  </div>
-    
+</div>
+
+</div>
+
   <?= $this->Form->end() ?>
 </div>
