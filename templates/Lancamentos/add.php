@@ -43,7 +43,7 @@
               <?= $this->Form->create($lancamento, ['type' => 'file']) ?>
               <div id="test-l-1" class="content bg-white">
                   <div class="panel-body text-info">
-                      <div class="form-group " >
+                      <div class="form-group ">
                           <?= $this->Form->label('Tipo') ?>
                           <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control tipo', 'empty' => 'SELECIONE']); ?>
                           <span class="span text-red"></span>
@@ -81,7 +81,20 @@
               <div id="test-l-3" class="content bg-white">
                   <div class="panel-body text-info">
                       <div class="form-group">
-                          <?= $this->Form->control('fluxoconta_id', ['options' => $contas, 'empty' => 'SELECIONE', 'class' => 'conta']); ?>
+                          <?= $this->Form->control('fluxogrupo_id', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']); ?>
+                      </div>
+
+                      <div class="form-group tudo">
+                          <?= $this->Form->control('fluxoconta_id', ['options' => $tudo, 'empty' => 'SELECIONE', 'class' => 'conta']); ?>
+                      </div>
+
+
+                      <div class="form-group  d-none  entradas">
+                          <?= $this->Form->control('fluxoconta_id', ['options' => $entradas, 'empty' => 'SELECIONE', 'class' => 'conta']); ?>
+                      </div>
+
+                      <div class="form-group  d-none   saidas">
+                          <?= $this->Form->control('fluxoconta_id', ['options' => $saidas, 'empty' => 'SELECIONE', 'class' => 'conta']); ?>
                       </div>
                       <div class="form-group">
                           <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => 'SELECIONE']); ?>
@@ -137,53 +150,68 @@
               var stepper4 = new Stepper(document.querySelector('#stepper4'))
           </script>
 
-    </div>
+      </div>
   </div>
 
 
-      <script>
+  <script>
+      $(".tipo").change(function() {
+          $tipo = $(".tipo").val();
+          if ($tipo == "PREVISTO") {
+              $(".file").addClass('d-none');
+              $('.baixa').addClass('d-none');
+          } else {
+              $(".file").removeClass('d-none');
+              $('.baixa').removeClass('d-none');
+          }
+      });
 
-          $(".tipo").change(function() {
-              $tipo = $(".tipo").val();
-              if ($tipo == "PREVISTO") {
-                  $(".file").addClass('d-none');
-                  $('.baixa').addClass('d-none');
-              } else {
-                  $(".file").removeClass('d-none');
-                  $('.baixa').removeClass('d-none');
-              }
-          });
+      $('.grupo').change(function() {
+          $grupo = $(".grupo option:selected").text();
+          if ($grupo == 'saida') {
+              $('.entradas').addClass('d-none');
+              $('.tudo').addClass('d-none');
+              $('.saidas').removeClass('d-none')
+          } else if($grupo == 'entrada') {
+              $('.saidas').addClass('d-none');
+              $('.tudo').addClass('d-none');
+              $('.entradas').removeClass('d-none')
+          }else{
+            $('.saidas').addClass('d-none');
+              $('.entradas').addClass('d-none');
+              $('.tudo').removeClass('d-none')
+          }
+      });
 
 
-          $('.conta').change(function() {
-              $tipo = $(".conta option:selected").text();
-              $word_one = $tipo.split(' ')[0]
-              if ($word_one == 'entrada') {
-                  $('.fornecedor').addClass('d-none')
-                  $('.cliente').removeClass('d-none')
-              } else {
-                  $('.cliente').addClass('d-none')
-                  $('.fornecedor').removeClass('d-none')
-              }
-          });
+      $('.conta').change(function() {
+          $tipo = $(".conta option:selected").text();
+          $word_one = $tipo.split(' ')[0]
+          if ($word_one == 'entrada') {
+              $('.fornecedor').addClass('d-none')
+              $('.cliente').removeClass('d-none')
+          } else {
+              $('.cliente').addClass('d-none')
+              $('.fornecedor').removeClass('d-none')
+          }
+      });
 
 
-          $('.tipo').change(function() {
-              $tipo = $('.tipo').val();
-              try {
-                  const response = axios.get('/caixas/getAberto').then(function(response) {
-                      if ((response.data !== true) && ($tipo !== 'PREVISTO')) {
-                          $('.span').text('Caixa Fechado');
-                          $('#proximo').removeAttr('onclick')
-                      } else {
-                          $('.span').text(' ');
-                          $('#proximo').attr('onclick','stepper1.next()');
-                      }
-                  })
-              } catch (error) {
-                  console.log(error);
-              }
+      $('.tipo').change(function() {
+          $tipo = $('.tipo').val();
+          try {
+              const response = axios.get('/caixas/getAberto').then(function(response) {
+                  if ((response.data !== true) && ($tipo !== 'PREVISTO')) {
+                      $('.span').text('Caixa Fechado');
+                      $('#proximo').removeAttr('onclick')
+                  } else {
+                      $('.span').text(' ');
+                      $('#proximo').attr('onclick', 'stepper1.next()');
+                  }
+              })
+          } catch (error) {
+              console.log(error);
+          }
 
-          })
-      </script>
-
+      })
+  </script>
