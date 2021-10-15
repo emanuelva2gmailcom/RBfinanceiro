@@ -123,7 +123,7 @@ function caixa(is)
   </li>
     <li class="nav-item" style="color: #59CBFF;">
       <a class="nav-link" style="color: #59CBFF;; ">
-        <i class="fa fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <i class="fas fa-user-friends nav-icon" style="color: #59CBFF;"></i>
         <p>Subgrupos</p>
       </a>
         <ul class="nav nav-treeview" id="it">
@@ -225,7 +225,7 @@ function caixa(is)
     </li>
     <li class="nav-item" style="color: #59CBFF;">
       <a href="/relatorios/caixadiario" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <i class="fas fa-cash-register nav-icon" style="color: #59CBFF;"></i>
         <p>Caixa Diário</p>
       </a>
     </li>
