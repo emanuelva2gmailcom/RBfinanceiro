@@ -1,7 +1,7 @@
 <?php
 
 $now = date('d-m-Y');
-
+$teste = null;
 ?>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
@@ -19,9 +19,11 @@ function caixa(is)
     console.log(is);
     $('.caixa').addClass('bg-red')
     document.getElementById('caixa').innerHTML = 'Fechar Caixa'
+    $teste = 'off.png'
   }else{
     $('.caixa').addClass('bg-green')
     document.getElementById('caixa').innerHTML = 'Abrir Caixa'
+    document.getElementById('caixa').atr
   }
 }
 </script>
@@ -133,10 +135,13 @@ function caixa(is)
 
 <li class="nav-item" style="color: #59CBFF;">
   <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
-    <p id="caixa">
+    <!-- <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i> -->
+    <!-- <p id="caixa">
       Abrir Caixa
-    </p>
+    </p> -->
+    <i class="bi bi-toggle-off"></i>
+  <!-- <img src="off.png" alt="" id=""> -->
+    <!-- <?= $this->Html->image($teste,)?> -->
   </a>
 </li>
 
