@@ -30,7 +30,7 @@ if ($show == true) { ?>
             <table class="table table-bordered rounded table-responsive w-100 mt-2">
                 <thead class="bg-info">
                     <tr>
-                        <th scope="col"><a href="/relatorios/exportRelatorioFluxoCx/" style="font-size: 30px;color: white;"><i class="fas fa-file-excel"></i></a></th>
+                        <th scope="col"><a href=<?= "/relatorios/exportFluxoDeCaixa/".implode(",", $request)?> style="font-size: 30px;color: white;"><i class="fas fa-file-excel"></i></a></th>
                         <?php foreach ($obj['header'] as $data) : ?>
                             <th scope="col"><?= $data ?></th>
                         <?php endforeach; ?>
