@@ -15,6 +15,10 @@
         margin-right: 2%;
     }
 
+    .tr1 a{
+        color: #029BE1;
+    }
+
 </style>
 
 
@@ -37,19 +41,19 @@
       </tr>
       <tr>
         <th style="color: green;"> <?= __('Fluxoconta') ?></th>
-        <td class="text-info"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td>
+        <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td>
       </tr>
       <tr>
         <th style="color: green;"><?= __('Fornecedor') ?></th>
-        <td class="text-info"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->fornecedor, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->fornecedor]) : '' ?></td>
+        <td class="tr1"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->fornecedor, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->fornecedor]) : '' ?></td>
       </tr>
       <tr>
         <th style="color: green;"><?= __('Cliente') ?></th>
-        <td class="text-info"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
+        <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
       </tr>
       <tr>
         <th style="color: green;"><?= __('Dreconta') ?></th>
-        <td class="text-info"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->dreconta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
+        <td class="tr1"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->dreconta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
       </tr>
       <tr>
         <th style="color: green;"><?= __('Id Lancamento') ?></th>
