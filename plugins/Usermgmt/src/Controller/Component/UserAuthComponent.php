@@ -373,7 +373,7 @@ class UserAuthComponent extends Component {
 
 		if(!$allowMultipleLogin) {
 			$useragent = $this->getUserActivityCookie();
-			$last_action = time() - (abs(LOGIN_IDLE_TIME) * 60);
+			$last_action = time() - (abs($userId) * 60);
 
 			$activityTable = FactoryLocator::get('Table')->get('Usermgmt.UserActivities');
 
@@ -582,6 +582,7 @@ class UserAuthComponent extends Component {
 	 */
 	public function getUser() {
 		return $this->session->read('Auth');
+		$_SESSION = 'yyy';
 	}
 
 	/**
