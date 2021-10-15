@@ -132,7 +132,7 @@ function caixa(is)
 
       <a href="/fluxosubgrupos/add" class="nav-link" style="color: #59CBFF;; ">
 
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <i class="fas fa-user-plus nav-icon" style="color: #59CBFF;"></i>
 
         <p>Adicionar</p>
 
@@ -146,7 +146,7 @@ function caixa(is)
 
       <a href="/fluxosubgrupos/index" class="nav-link" style="color: #59CBFF;; ">
 
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <i class="fas fa-users nav-icon" style="color: #59CBFF;"></i>
 
         <p>Disponíveis</p>
 
@@ -246,7 +246,7 @@ function caixa(is)
 
 <li class="nav-item" style="color: #59CBFF;">
   <a href="/lancamentos/painel" class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-chart-line" style="color: #59CBFF;"></i>
     <p>
     Painel
     </p>
