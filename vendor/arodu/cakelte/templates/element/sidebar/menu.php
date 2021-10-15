@@ -46,7 +46,7 @@ function caixa(is)
 
 <li class="nav-item" style="color: #59CBFF;">
 <a href="/relatorios/#" class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-home" style="color: #59CBFF;"></i>
     <p>
       Home
     </p>
@@ -55,7 +55,7 @@ function caixa(is)
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-rocket" style="color: #59CBFF;"></i>
     <p>
       Lançamentos
       <i class="right fas fa-angle-left"></i>
@@ -88,7 +88,7 @@ function caixa(is)
   <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color: #59CBFF;">
       <a class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <i class="fas fa-circle nav-icon" style="color: #59CBFF;"></i>
         <p>Contas</p>
       </a>
         <ul class="nav nav-treeview" id="it">
@@ -103,7 +103,7 @@ function caixa(is)
 
       </a>
 
-        
+
 
     </li>
 
@@ -123,7 +123,7 @@ function caixa(is)
   </li>
     <li class="nav-item" style="color: #59CBFF;">
       <a class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <i class="fa fa-circle nav-icon" style="color: #59CBFF;"></i>
         <p>Subgrupos</p>
       </a>
         <ul class="nav nav-treeview" id="it">
@@ -138,7 +138,7 @@ function caixa(is)
 
       </a>
 
-        
+
 
     </li>
 
