@@ -156,14 +156,13 @@ class CaixaregistrosController extends AppController
             if (($this->Caixaregistros->save($caixaregistro)) && ($this->Lancamentos->save($lancamento))) {
                 $this->Flash->success(__('Caixa Registro adicionado com sucesso'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Lancamentos', 'action' => 'index']);
             }
             $this->Flash->error(__('Caixa Registro não foi adicionado, por favor tente novamente.'));
             debug($lancamento);
             exit;
         }
         $this->Flash->error(__('Caixa Fechado.'));
-        return $this->redirect(['controller' => 'Caixaregistros', 'action' => 'darbaixa']);
         return $this->redirect(['controller' => 'Lancamentos', 'action' => 'index']);
     }
     public function caixaaberto()

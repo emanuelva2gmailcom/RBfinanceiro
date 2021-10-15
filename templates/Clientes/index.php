@@ -7,6 +7,12 @@
 
 <?php $this->assign('title', __('Clientes') ); ?>
 
+<style>
+    .nm a{
+        color: green;
+    }
+</style>
+
 <div class="container-fluid d-flex align-items-center justify-content-center p-5">
     <div class="card container card-outline bg-white" style="border: green solid 2px; border-radius: 20px;">
         <div class="card-header d-sm-flex" style="padding-top: 50px;">
@@ -22,14 +28,14 @@
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
-        <thead>
+        <thead class="nm">
         <tr style="color: green;">
-              <th class="teste"><?= ('Nome') ?></th>
-              <th class="teste"><?= ('CPF') ?></th>
-              <th class="teste"><?= ('Endereço') ?></th>
-              <th class="teste"><?= ('E-mail') ?></th>
-              <th class="teste"><?= ('Telefone') ?></th>
-              <th class="teste"><?= ('Is_Pendente') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Nome') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('CPF') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Endereço') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('E-mail') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Telefone') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Is_Pendente') ?></th>
               <th class="actions teste"><?= __('Ações') ?></th>
           </tr>
         </thead>

@@ -18,12 +18,12 @@
     <div class="container-fluid d-flex align-items-center justify-content-center p-5">
 <div class="container p-5 bg-white" style="border: 2px solid green; border-radius: 20px;">
   <div style="margin-left: 95%;">
-    <?= $this->Html->link(__('Voltar'), ['action' => 'fluxodecaixa'], ['class' => 'btn btn-outline-info btn-sm mb-2'], ['style' => 'color: green;']) ?>
+    <?= $this->Html->link(__('Voltar'), ['action' => 'gerencial'], ['class' => 'btn btn-outline-info btn-sm mb-2'], ['style' => 'color: green;']) ?>
   </div>
     <table class="table table-bordered rounded table-responsive w-100 mt-2">
         <thead class="bg-info">
             <tr>
-            <th scope="col"><a href= "/relatorios/exportRelatorioGerencial/" style="font-size: 30px;color: white;"><i class="fas fa-file-excel"></i></a></th>
+            <th scope="col"><a href=<?= "/relatorios/exportGerencial/".implode(",", $request)?> style="font-size: 30px;color: white;"><i class="fas fa-file-excel"></i></a></th>
                 <?php foreach($obj['header'] as $data): ?>
                     <th scope="col"><?= $data ?></th>
                 <?php endforeach; ?>
