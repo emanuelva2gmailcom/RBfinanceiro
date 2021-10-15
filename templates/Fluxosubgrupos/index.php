@@ -7,11 +7,15 @@
 
 <?php $this->assign('title', __('Subgrupos') ); ?>
 <style>
- 
+
   .tr1 a{
 
         color: #029BE1;
 
+    }
+
+    .nm a{
+        color: green;
     }
 
 </style>
@@ -35,25 +39,25 @@
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
-        <thead>
+        <thead class="nm">
           <tr style="color: green;">
-     
-              <th class="teste"><?= ('Subgrupo') ?></th>
-              <th class="teste"><?= ('Descrição') ?></th>
-            
-             
-              <th class="teste"><?= ('Fluxogrupo') ?></th>
+
+              <th class="teste"><?= $this->Paginator->sort('Subgrupo') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Descrição') ?></th>
+
+
+              <th class="teste"><?= $this->Paginator->sort('Fluxogrupo') ?></th>
               <th class="actions teste"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($fluxosubgrupos as $fluxosubgrupo): ?>
           <TR style="color: #029BE1;">
-           
+
             <td><?= h($fluxosubgrupo->subgrupo) ?></td>
             <td><?= h($fluxosubgrupo->descricao) ?></td>
-           
-           
+
+
             <td class="tr1" ><?= $fluxosubgrupo->has('fluxogrupo') ? $this->Html->link($fluxosubgrupo->fluxogrupo->grupo, ['controller' => 'Fluxogrupos', 'action' => 'view', $fluxosubgrupo->fluxogrupo->grupo]) : '' ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fluxosubgrupo->id_fluxosubgrupo], ['class'=>'btn btn-xs btn-outline-info', 'escape'=>false]) ?>

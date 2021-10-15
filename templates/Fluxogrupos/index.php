@@ -27,22 +27,22 @@
     <table class="table text-nowrap">
         <thead>
           <tr>
-          
+
               <th class="teste"><?= ('Grupo') ?></th>
               <th class="teste"><?= ('Descrição') ?></th>
-          
-          
+
+
               <th class="actions teste"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($fluxogrupos as $fluxogrupo): ?>
           <tr>
-    
+
             <td><?= h($fluxogrupo->grupo) ?></td>
             <td><?= h($fluxogrupo->descricao) ?></td>
-        
-        
+
+
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $fluxogrupo->id_fluxogrupo], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

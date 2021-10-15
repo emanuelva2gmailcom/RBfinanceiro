@@ -12,6 +12,10 @@
         color: #029BE1;
 
     }
+
+    .nm a{
+        color: green;
+    }
 </style>
 <div class="container-fluid d-flex align-items-center justify-content-center p-5">
     <div class="card container card-outline bg-white" style="border: green solid 2px; border-radius: 20px;">
@@ -28,14 +32,14 @@
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
-        <thead>
+        <thead class="nm">
          <tr style="color: green;">
 
-              <th class="teste"><?= ('Conta') ?></th>
-              <th class="teste"><?= ('Descrição') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Conta') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Descrição') ?></th>
 
 
-              <th class="teste"><?= ('Fluxosubgrupo') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Fluxosubgrupo') ?></th>
               <th class="actions teste"><?= __('Ações') ?></th>
           </tr>
         </thead>

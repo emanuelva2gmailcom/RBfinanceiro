@@ -28,6 +28,10 @@
         color: #029BE1;
     }
 
+    .nm a{
+        color: green;
+    }
+
 </style>
 
 <div class="container-fluid d-flex align-items-center justify-content-center p-5">
@@ -60,21 +64,21 @@
         <div class="card-body table-responsive p-0">
             <div id='prev' style="display:none;">
                 <table class="table text-nowrap">
-                    <thead>
+                    <thead class="nm">
                         <tr style="color: green;">
 
-                            <th class="teste"><?= ('Tipo') ?></th>
-                            <th class="teste"><?= ('Descricao') ?></th>
-                            <th class="teste"><?= ('Valor') ?></th>
-                            <th class="teste"><?= ('Data de Emissão') ?></th>
-                            <th class="teste"><?= ('Data de Baixa') ?></th>
-                            <th class="teste"><?= ('Data de Vencimento') ?></th>
+                            <th class="teste"><?= $this->Paginator->sort('Tipo') ?></th>
+                            <th class="teste"><?= $this->Paginator->sort('Descricao') ?></th>
+                            <th class="teste"><?= $this->Paginator->sort('Valor') ?></th>
+                            <th class="teste"><?= $this->Paginator->sort('Data de Emissão') ?></th>
+                            <th class="teste"><?= $this->Paginator->sort('Data de Baixa') ?></th>
+                            <th class="teste"><?= $this->Paginator->sort('Data de Vencimento') ?></th>
 
-                            <th class="teste"><?= ('Fluxoconta') ?></th>
-                            <th class="teste"><?= ('Fornecedor') ?></th>
-                            <!-- <th class="teste"><?= ('Cliente') ?></th> -->
+                            <th class="teste"><?= $this->Paginator->sort('Fluxoconta') ?></th>
+                            <th class="teste"><?= $this->Paginator->sort('Fornecedor') ?></th>
+                            <!-- <th class="teste"><?= $this->Paginator->sort('Cliente') ?></th> -->
                             <!--
-          <th class="teste"><?= ('Dreconta') ?></th> -->
+          <th class="teste"><?= $this->Paginator->sort('Dreconta') ?></th> -->
                             <th class="actions teste"><?= __('Ações') ?></th>
                         </tr>
                     </thead>
@@ -141,21 +145,21 @@
 
         <div id='real' style="display:none;">
             <table class="table text-nowrap">
-                <thead>
+                <thead class="nm">
                     <tr style="color: green;">
 
-                        <th class="teste"><?= ('Tipo') ?></th>
-                        <th class="teste"><?= ('Descricao') ?></th>
-                        <th class="teste"><?= ('Valor') ?></th>
-                        <th class="teste"><?= ('Data de Emissão') ?></th>
-                        <th class="teste"><?= ('Data de Baixa') ?></th>
-                        <th class="teste"><?= ('Data de Vencimento') ?></th>
+                        <th class="teste"><?= $this->Paginator->sort('Tipo') ?></th>
+                        <th class="teste"><?= $this->Paginator->sort('Descricao') ?></th>
+                        <th class="teste"><?= $this->Paginator->sort('Valor') ?></th>
+                        <th class="teste"><?= $this->Paginator->sort('Data de Emissão') ?></th>
+                        <th class="teste"><?= $this->Paginator->sort('Data de Baixa') ?></th>
+                        <th class="teste"><?= $this->Paginator->sort('Data de Vencimento') ?></th>
 
-                        <th class="teste"><?= ('Fluxoconta') ?></th>
-                        <th class="teste"><?= ('Fornecedor') ?></th>
-                        <!-- <th class="teste"><?= ('Cliente') ?></th> -->
+                        <th class="teste"><?= $this->Paginator->sort('Fluxoconta') ?></th>
+                        <th class="teste"><?= $this->Paginator->sort('Fornecedor') ?></th>
+                        <!-- <th class="teste"><?= $this->Paginator->sort('Cliente') ?></th> -->
                         <!--
-          <th class="teste"><?= ('Dreconta') ?></th> -->
+          <th class="teste"><?= $this->Paginator->sort('Dreconta') ?></th> -->
                         <th class="actions teste"><?= __('Ações') ?></th>
                     </tr>
                 </thead>
