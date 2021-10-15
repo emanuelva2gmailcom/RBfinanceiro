@@ -43,7 +43,7 @@
 
 
 
-<div class="container p-5" style="width: 60%;min-width:80%;border-radius: 20px;">
+<div class="container p-5" style="width: 40%;min-width:80%;border-radius: 20px;">
 
 <div class="card bg-info" style="border-radius: 20px;">
   <?= $this->Form->create($fluxosubgrupo) ?>
@@ -55,15 +55,15 @@
     ?>
   </div>
 
-  <div class="card-footer bg-white d-flex justify-content-between"  style="border-radius: 0px 0px 20px 20px;">
+  <div class="card-footer bg-white d-flex"  style="border-radius: 0px 0px 20px 20px;">
 
-    <div class="d-flex">
+    <div class="mr-auto p-2">
 
         <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
 
     </div>
 
-    <div class="d-flex" style="margin-left: 87%;">
+    <div class="p-2" >
 
         <?= $this->Form->button(__('Salvar')) ?>
 
