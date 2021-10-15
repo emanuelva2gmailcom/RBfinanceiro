@@ -32,7 +32,7 @@ function caixa(is)
 
   <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
 
-<i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+<i class="nav-icon fas fa-power-off" style="color: #59CBFF;"></i>
 
     <p id="caixa">
 
@@ -161,7 +161,7 @@ function caixa(is)
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-user-tie" style="color: #59CBFF;"></i>
     <p>
       Fornecedores
       <i class="right fas fa-angle-left"></i>
@@ -170,14 +170,14 @@ function caixa(is)
   <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color: #59CBFF;">
       <a href="/fornecedores/add" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Novo Fornecedor</p>
+        <i class="fas fa-user-plus nav-icon" style="color: #59CBFF;"></i>
+        <p>Adicionar</p>
       </a>
     </li>
     <li class="nav-item" style="color: #59CBFF;">
       <a href="/fornecedores/index" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Seus Fornecedores</p>
+        <i class="fas fa-users nav-icon" style="color: #59CBFF;"></i>
+        <p>Disponíveis</p>
       </a>
     </li>
   </ul>
@@ -185,7 +185,7 @@ function caixa(is)
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-user" style="color: #59CBFF;"></i>
     <p>
       Clientes
       <i class="right fas fa-angle-left"></i>
@@ -194,14 +194,14 @@ function caixa(is)
   <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color: #59CBFF;">
       <a href="/clientes/add" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Novo Cliente</p>
+        <i class="fas fa-user-plus nav-icon" style="color: #59CBFF;"></i>
+        <p>Adicionar</p>
       </a>
     </li>
     <li class="nav-item" style="color: #59CBFF;">
       <a href="/clientes/index" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Seus Clientes</p>
+        <i class="fas fa-users nav-icon" style="color: #59CBFF;"></i>
+        <p>Disponíveis</p>
       </a>
     </li>
   </ul>
