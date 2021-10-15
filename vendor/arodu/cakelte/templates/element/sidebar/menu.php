@@ -19,31 +19,28 @@ function caixa(is)
     console.log(is);
     $('.caixa').addClass('bg-red')
     document.getElementById('caixa').innerHTML = 'Fechar Caixa'
-    $teste = 'off.png'
+    document.getElementsByClassName('teste').src = 'fc.png';
+    // $teste = 'off.png'
   }else{
     $('.caixa').addClass('bg-green')
     document.getElementById('caixa').innerHTML = 'Abrir Caixa'
-    document.getElementById('caixa').atr
+    document.getElementsByClassName('teste').src = 'off.png';
+    
   }
 }
+
 </script>
 
 
 
 <li class="nav-item" style="color: #59CBFF;">
-
   <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
-
-<i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
-
-    <p id="caixa">
-
+<!-- <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i> -->
+    <!-- <p id="caixa">
       Abrir Caixa
-
-    </p>
-
+    </p> -->
+    <?= $this->Html->Image('off.png',['class' => 'teste']) ?>
   </a>
-
 </li>
 
 <li class="nav-item" style="color: #59CBFF;">
@@ -207,18 +204,6 @@ function caixa(is)
       </a>
     </li>
   </ul>
-</li>
-
-<li class="nav-item" style="color: #59CBFF;">
-  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
-    <!-- <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i> -->
-    <!-- <p id="caixa">
-      Abrir Caixa
-    </p> -->
-    <i class="bi bi-toggle-off"></i>
-  <!-- <img src="off.png" alt="" id=""> -->
-    <!-- <?= $this->Html->image($teste,)?> -->
-  </a>
 </li>
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
