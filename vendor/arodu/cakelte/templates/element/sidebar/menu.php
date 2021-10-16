@@ -17,14 +17,12 @@ function caixa(is)
 {
   if(is == true){
     console.log(is);
-    $('.caixa').addClass('bg-red')
-    document.getElementById('caixa').innerHTML = 'Fechar Caixa'
-    document.getElementsByClassName('teste').src = 'fc.png';
-    // $teste = 'off.png'
-  }else{
     $('.caixa').addClass('bg-green')
-    document.getElementById('caixa').innerHTML = 'Abrir Caixa'
-    document.getElementsByClassName('teste').src = 'off.png';
+    document.getElementById('teste').src = '/img/on2x.png';
+
+  }else{
+    $('.caixa').addClass('bg-red')
+    document.getElementById('teste').src = '/img/off2x.png';
     
   }
 }
@@ -32,14 +30,9 @@ function caixa(is)
 </script>
 
 
-
 <li class="nav-item" style="color: #59CBFF;">
   <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
-<!-- <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i> -->
-    <!-- <p id="caixa">
-      Abrir Caixa
-    </p> -->
-    <?= $this->Html->Image('off.png',['class' => 'teste']) ?>
+    <?= $this->Html->Image('off2x.png',['id' => 'teste']) ?>
   </a>
 </li>
 
