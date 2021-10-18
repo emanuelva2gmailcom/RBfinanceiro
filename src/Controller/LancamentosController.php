@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Entity\Lancamento;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\Event\EventInterface;
@@ -189,7 +190,17 @@ class LancamentosController extends AppController
         $lancamento = $this->Lancamentos->get($id, [
             'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas', 'Lancamentos', 'Caixaregistros', 'Comprovantes'],
         ]);
-
+        $lancamento->lancamentos = $this->Lancamentos->get($lancamento->lancamento_id, [
+            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas', 'Caixaregistros', 'Comprovantes'],
+        ]);
+        $lancamento->lancamentos = [];
+        for($id = $lancamento->lancamento_id; $id != null; $id){
+            array_push($lancamento->lancamentos, $this->Lancamentos->get($id, [
+                'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas', 'Caixaregistros', 'Comprovantes'],
+            ]));
+            $id = $lancamento->lancamentos[array_key_last($lancamento->lancamentos)]->lancamento_id;
+        }
+        // debug($lancamento->lancamentos);exit;
         $this->set(compact('lancamento'));
     }
 
