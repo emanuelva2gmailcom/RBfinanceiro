@@ -138,7 +138,7 @@ class CaixasController extends AppController
     public function caixaaberto()
     {
         $this->loadModel('Caixas');
-        $now = date('d-m-Y');   
+        $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
         $caixas = $this->paginate($this->Caixas);
         foreach ($caixas as $caixa) :
             if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
@@ -153,7 +153,7 @@ class CaixasController extends AppController
     {
         $resposta = null;
         $this->loadModel('Caixas');
-        $now = date('d-m-Y');
+        $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
         $caixas = $this->paginate($this->Caixas);
         foreach ($caixas as $caixa) :
             if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
@@ -180,7 +180,7 @@ class CaixasController extends AppController
     public function caixaaberto2()
     {
         $this->loadModel('Caixas');
-        $now = date('d-m-Y');
+        $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
         $caixas = $this->paginate($this->Caixas);
         foreach ($caixas as $caixa) :
             if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
