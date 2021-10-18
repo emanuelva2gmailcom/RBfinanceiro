@@ -12,11 +12,11 @@
   }
 
     .del{
-        margin-right: 80%;
+        margin-right: 78%;
     }
 
     .edi{
-        margin-right: 3%;
+        margin-right: 2%;
     }
 
     .tr1 a{
@@ -113,24 +113,23 @@
     </div>
   </div>
 </div>
-
-<div class="testee container-fluid d-flex align-items-center justify-content-center p-5" data-dados="<?= 'cuuu' ?>>
+<div class="testee container-fluid d-flex align-items-center justify-content-center p-5">
   <div class=" row">
   <div class="col-12">
     <!-- Custom Tabs -->
-    <div class="card">
+    <div class="card" style="border: green solid 2px; border-radius: 20px;" class="related related-caixaregistros view card container bg-white">
       <div class="card-header d-flex p-0">
-        <h3 class="card-title p-3">Histórico do lançamento</h3>
+        <h3 class="card-title p-3" style="color: green;">Histórico do lançamento</h3>
         <ul class="nav nav-pills ml-auto p-2" id="tab_header">
-          <li class="nav-item"><a class="nav-link active" href="#inicio" data-toggle="tab">Intro</a></li>
+          <li class="nav-item"><a class="btn btn-info btn-sm active" href="#inicio" data-toggle="tab">Começo</a></li>
           <?php foreach ($lancamento->lancamentos as $l) : ?>
-            <li class="nav-item"><a class="nav-link" href="#tab_<?= $l->id_lancamento ?>" data-toggle="tab"><?= $l->id_lancamento ?></a></li>
+            <li class="nav-item"><a class="btn btn-info btn-sm" href="#tab_<?= $l->id_lancamento ?>" data-toggle="tab"><?= $l->id_lancamento ?></a></li>
           <?php endforeach ?>
         </ul>
       </div><!-- /.card-header -->
       <div class="card-body">
         <div class="tab-content">
-          <div class="tab-pane active" id="inicio">
+          <div class="tab-pane text-info active" id="inicio">
             Clique nos numerais acima para ver os lançamentos anteriores a esse
           </div>
           <?php foreach ($lancamento->lancamentos as $l) : ?>
@@ -144,7 +143,7 @@
   </div>
   <!-- /.col -->
 </div>
-
+<!-- aefawegfawegfaewgfawgargargargagra -->
 </div>
 
 <div class="container-fluid d-flex align-items-center justify-content-center p-5">
