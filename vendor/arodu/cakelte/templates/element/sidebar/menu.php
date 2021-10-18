@@ -5,39 +5,38 @@ $teste = null;
 ?>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-try {
-  const response = axios.get('/caixas/getCaixaaberto/').then(function (response) { // handle success
-    caixa(response.data)
-  })
-} catch (error) {
-  console.error(error);
-}
-
-function caixa(is)
-{
-  if(is == true){
-    console.log(is);
-    $('.caixa').addClass('bg-green')
-    document.getElementById('teste').src = '/img/on2x.png';
-
-  }else{
-    $('.caixa').addClass('bg-red')
-    document.getElementById('teste').src = '/img/off2x.png';
-    
+  try {
+    const response = axios.get('/caixas/getCaixaaberto/').then(function(response) { // handle success
+      caixa(response.data)
+    })
+  } catch (error) {
+    console.error(error);
   }
-}
 
+  function caixa(is) {
+    if (is == true) {
+      console.log(is);
+      document.getElementById('customSwitch3').checked = true;
+
+    } else {
+      document.getElementById('customSwitch3').checked = false;
+
+    }
+  }
 </script>
 
 
 <li class="nav-item" style="color: #59CBFF;">
-  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
-    <?= $this->Html->Image('off2x.png',['id' => 'teste']) ?>
+  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link " style="color: #59CBFF; z-index: 2000">
+    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+      <input type="checkbox" class="custom-control-input" id="customSwitch3" disabled>
+      <label class="custom-control-label" for="customSwitch3" style="color: #59CBFF;"></label>
+    </div>
   </a>
 </li>
 
 <li class="nav-item" style="color: #59CBFF;">
-<a href="/relatorios/#" class="nav-link" style="color: #59CBFF;">
+  <a href="/relatorios/#" class="nav-link" style="color: #59CBFF;">
     <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
       Home
@@ -83,70 +82,70 @@ function caixa(is)
         <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
         <p>Contas</p>
       </a>
-        <ul class="nav nav-treeview" id="it">
+      <ul class="nav nav-treeview" id="it">
 
-          <li class="nav-item" style="color: #59CBFF;">
+        <li class="nav-item" style="color: #59CBFF;">
 
           <a href="/fluxocontas/add" class="nav-link" style="color: #59CBFF;; ">
 
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+            <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
 
-        <p>Adicionar</p>
+            <p>Adicionar</p>
 
-      </a>
+          </a>
 
-        
 
+
+        </li>
+
+        <li class="nav-item" style="color: #59CBFF;">
+
+          <a href="/fluxocontas/index" class="nav-link" style="color: #59CBFF;; ">
+
+            <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+
+            <p>Disponíveis</p>
+
+          </a>
+
+        </li>
+
+      </ul>
     </li>
-
-    <li class="nav-item" style="color: #59CBFF;">
-
-      <a href="/fluxocontas/index" class="nav-link" style="color: #59CBFF;; ">
-
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-
-        <p>Disponíveis</p>
-
-      </a>
-
-    </li>
-
-  </ul>
-  </li>
     <li class="nav-item" style="color: #59CBFF;">
       <a class="nav-link" style="color: #59CBFF;; ">
         <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
         <p>Subgrupos</p>
       </a>
-        <ul class="nav nav-treeview" id="it">
+      <ul class="nav nav-treeview" id="it">
 
-    <li class="nav-item" style="color: #59CBFF;">
+        <li class="nav-item" style="color: #59CBFF;">
 
-      <a href="/fluxosubgrupos/add" class="nav-link" style="color: #59CBFF;; ">
+          <a href="/fluxosubgrupos/add" class="nav-link" style="color: #59CBFF;; ">
 
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+            <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
 
-        <p>Adicionar</p>
+            <p>Adicionar</p>
 
-      </a>
+          </a>
 
-        
 
-    </li>
 
-    <li class="nav-item" style="color: #59CBFF;">
+        </li>
 
-      <a href="/fluxosubgrupos/index" class="nav-link" style="color: #59CBFF;; ">
+        <li class="nav-item" style="color: #59CBFF;">
 
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+          <a href="/fluxosubgrupos/index" class="nav-link" style="color: #59CBFF;; ">
 
-        <p>Disponíveis</p>
+            <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
 
-      </a>
+            <p>Disponíveis</p>
 
-    </li>
+          </a>
 
-  </ul>
+        </li>
+
+      </ul>
     </li>
   </ul>
 </li>
@@ -239,8 +238,7 @@ function caixa(is)
   <a href="/lancamentos/painel" class="nav-link" style="color: #59CBFF;">
     <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
-    Painel
+      Painel
     </p>
   </a>
 </li>
-
