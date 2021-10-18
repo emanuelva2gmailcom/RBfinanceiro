@@ -8,16 +8,12 @@
 <style>
 
 .del{
+        margin-right: 80%;
+    }
 
-    margin-right: 82%;
-
-}
-
-.edi{
-
-    margin-right: 2%;
-
-}
+    .edi{
+        margin-right: 3%;
+    }
     .tr1 a{
 
         color: #029BE1;
