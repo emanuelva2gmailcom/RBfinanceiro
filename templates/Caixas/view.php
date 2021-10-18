@@ -7,12 +7,12 @@
 
 <style>
 
-    .del{
-        margin-right: 82%;
+.del{
+        margin-right: 80%;
     }
 
     .edi{
-        margin-right: 2%;
+        margin-right: 3%;
     }
 
 </style>

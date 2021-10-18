@@ -125,7 +125,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.content-header -->
 
       <!-- Main content -->
-      <div class="content" style="padding: 0px; margin: 0px; min-height:120vh;">
+      <div class="content" style="padding: 0%; margin: 0%; min-height:140vh;">
 
         <!-- Main content -->
 

@@ -36,8 +36,8 @@ $teste = null;
 </li>
 
 <li class="nav-item" style="color: #59CBFF;">
-  <a href="/relatorios/#" class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+<a href="/relatorios/#" class="nav-link" style="color: #59CBFF;">
+    <i class="nav-icon fas fa-home" style="color: #59CBFF;"></i>
     <p>
       Home
     </p>
@@ -46,22 +46,22 @@ $teste = null;
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-rocket" style="color: #59CBFF;"></i>
     <p>
       Lançamentos
-      <i class="right fas fa-angle-left"></i>
+      <i class="right far fa-caret-square-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview" id="it">
-    <li class="nav-item" style="color: #59CBFF;">
-      <a href="/lancamentos/add" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+    <li class="nav-item" style="color:#FFFFFF;">
+      <a href="/lancamentos/add" class="nav-link" style="color:#FFFFFF;; ">
+        <i class="fas fa-check nav-icon" style="color:#FFFFFF;"></i>
         <p>Novo Lançamento</p>
       </a>
     </li>
-    <li class="nav-item" style="color: #59CBFF;">
-      <a href="/lancamentos/index" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+    <li class="nav-item" style="color:#FFFFFF;">
+      <a href="/lancamentos/index" class="nav-link" style="color:#FFFFFF;; ">
+        <i class="fab fa-rocketchat nav-icon" style="color:#FFFFFF;"></i>
         <p>Seus Lançamentos</p>
       </a>
     </li>
@@ -70,105 +70,77 @@ $teste = null;
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-file-invoice-dollar" style="color: #59CBFF;"></i>
     <p>
       Plano de Contas
-      <i class="right fas fa-angle-left"></i>
+      <i class="right far fa-caret-square-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview" id="it">
-    <li class="nav-item" style="color: #59CBFF;">
-      <a class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-money-check-alt nav-icon" style="color: #FFFFFF;"></i>
         <p>Contas</p>
+        <i class="right far fa-caret-square-left"></i>
       </a>
-      <ul class="nav nav-treeview" id="it">
-
-        <li class="nav-item" style="color: #59CBFF;">
-
-          <a href="/fluxocontas/add" class="nav-link" style="color: #59CBFF;; ">
-
-            <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-
-            <p>Adicionar</p>
-
-          </a>
-
-
-
-        </li>
-
-        <li class="nav-item" style="color: #59CBFF;">
-
-          <a href="/fluxocontas/index" class="nav-link" style="color: #59CBFF;; ">
-
-            <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-
-            <p>Disponíveis</p>
-
-          </a>
-
-        </li>
-
-      </ul>
+        <ul class="nav nav-treeview" id="it">
+        <li class="nav-item" style="color: #B5BDB7;">
+          <a href="/fluxocontas/add" class="nav-link" style="color: #B5BDB7;; ">
+        <i class="fas fa-donate nav-icon" style="color: #B5BDB7;"></i>
+        <p>Adicionar</p>
+      </a>
     </li>
-    <li class="nav-item" style="color: #59CBFF;">
-      <a class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Subgrupos</p>
+    <li class="nav-item" style="color: #B5BDB7;">
+      <a href="/fluxocontas/index" class="nav-link" style="color: #B5BDB7;; ">
+        <i class="fas fa-hand-holding-usd nav-icon" style="color: #B5BDB7;"></i>
+        <p>Disponíveis</p>
       </a>
-      <ul class="nav nav-treeview" id="it">
-
-        <li class="nav-item" style="color: #59CBFF;">
-
-          <a href="/fluxosubgrupos/add" class="nav-link" style="color: #59CBFF;; ">
-
-            <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-
-            <p>Adicionar</p>
-
-          </a>
-
-
-
-        </li>
-
-        <li class="nav-item" style="color: #59CBFF;">
-
-          <a href="/fluxosubgrupos/index" class="nav-link" style="color: #59CBFF;; ">
-
-            <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-
-            <p>Disponíveis</p>
-
-          </a>
-
-        </li>
-
-      </ul>
+    </li>
+  </ul>
+  </li>
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-user-friends nav-icon" style="color: #FFFFFF;"></i>
+        <p>Subgrupos</p>
+        <i class="right far fa-caret-square-left"></i>
+      </a>
+        <ul class="nav nav-treeview" id="it">
+    <li class="nav-item" style="color: #B5BDB7;">
+      <a href="/fluxosubgrupos/add" class="nav-link" style="color: #B5BDB7;; ">
+        <i class="fas fa-user-plus nav-icon" style="color: #B5BDB7;"></i>
+        <p>Adicionar</p>
+      </a>
+    </li>
+    <li class="nav-item" style="color: #B5BDB7;">
+      <a href="/fluxosubgrupos/index" class="nav-link" style="color: #B5BDB7;; ">
+        <i class="fas fa-users nav-icon" style="color: #B5BDB7;"></i>
+      <p>Disponíveis</p>
+      </a>
+    </li>
+  </ul>
     </li>
   </ul>
 </li>
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-user-tie" style="color: #59CBFF;"></i>
     <p>
       Fornecedores
-      <i class="right fas fa-angle-left"></i>
+      <i class="right far fa-caret-square-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview" id="it">
-    <li class="nav-item" style="color: #59CBFF;">
-      <a href="/fornecedores/add" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Novo Fornecedor</p>
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a href="/fornecedores/add" class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-user-plus nav-icon" style="color: #FFFFFF;"></i>
+        <p>Adicionar</p>
       </a>
     </li>
-    <li class="nav-item" style="color: #59CBFF;">
-      <a href="/fornecedores/index" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Seus Fornecedores</p>
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a href="/fornecedores/index" class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-users nav-icon" style="color: #FFFFFF;"></i>
+        <p>Disponíveis</p>
       </a>
     </li>
   </ul>
@@ -176,23 +148,23 @@ $teste = null;
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-user" style="color: #59CBFF;"></i>
     <p>
       Clientes
-      <i class="right fas fa-angle-left"></i>
+      <i class="right far fa-caret-square-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview" id="it">
-    <li class="nav-item" style="color: #59CBFF;">
-      <a href="/clientes/add" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Novo Cliente</p>
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a href="/clientes/add" class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-user-plus nav-icon" style="color: #FFFFFF;"></i>
+        <p>Adicionar</p>
       </a>
     </li>
-    <li class="nav-item" style="color: #59CBFF;">
-      <a href="/clientes/index" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Seus Clientes</p>
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a href="/clientes/index" class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-users nav-icon" style="color: #FFFFFF;"></i>
+        <p>Disponíveis</p>
       </a>
     </li>
   </ul>
@@ -200,34 +172,34 @@ $teste = null;
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-tasks" style="color: #59CBFF;"></i>
     <p>
       Relatórios
-      <i class="right fas fa-angle-left"></i>
+      <i class="right far fa-caret-square-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview" id="it">
-    <li class="nav-item" style="color: #59CBFF;">
-      <a href="/caixas/index" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a href="/caixas/index" class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-dollar-sign nav-icon" style="color: #FFFFFF;"></i>
         <p>Caixa</p>
       </a>
     </li>
-    <li class="nav-item" style="color: #59CBFF;">
-      <a href="/relatorios/caixadiario" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a href="/relatorios/caixadiario" class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-cash-register nav-icon" style="color: #FFFFFF;"></i>
         <p>Caixa Diário</p>
       </a>
     </li>
-    <li class="nav-item" style="color: #59CBFF;">
-      <a href="/relatorios/gerencial" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a href="/relatorios/gerencial" class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-sitemap nav-icon" style="color: #FFFFFF;"></i>
         <p>Caixa Gerencial</p>
       </a>
     </li>
-    <li class="nav-item" style="color: #59CBFF;">
-      <a href="/relatorios/fluxodecaixa" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a href="/relatorios/fluxodecaixa" class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-sync-alt nav-icon" style="color: #FFFFFF;"></i>
         <p>Fluxo de Caixa</p>
       </a>
     </li>
@@ -236,7 +208,7 @@ $teste = null;
 
 <li class="nav-item" style="color: #59CBFF;">
   <a href="/lancamentos/painel" class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon far fa-chart-bar" style="color: #59CBFF;"></i>
     <p>
       Painel
     </p>

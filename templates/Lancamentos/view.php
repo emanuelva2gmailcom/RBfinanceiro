@@ -11,9 +11,17 @@
     margin-right: 82%;
   }
 
-  .edi {
-    margin-right: 2%;
-  }
+    .del{
+        margin-right: 80%;
+    }
+
+    .edi{
+        margin-right: 3%;
+    }
+
+    .tr1 a{
+        color: #029BE1;
+    }
 
   .tr1 a {
     color: #029BE1;
