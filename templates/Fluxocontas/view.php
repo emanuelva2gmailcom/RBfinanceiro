@@ -9,65 +9,94 @@
 <?php
 $this->assign('title', __('Fluxoconta'));
 ?>
+<style>
 
-<div class="view card card-primary card-outline">
-  <div class="card-header d-sm-flex">
+.del{
+    margin-right: 82%;
+}
+
+.edi{
+    margin-right: 2%;
+}
+
+.tr1 a{
+        color: #029BE1;
+    }
+
+</style>
+
+<div  class="container-fluid d-flex align-items-center justify-content-center p-5">
+
+ <div style="border: green solid 2px; border-radius: 20px;" class="card card-outline container bg-white ">
+
+  <div class="card-header d-sm-flex" style="padding-top: 50px; color: green;">
     <h2 class="card-title"><?= h($fluxoconta->conta) ?></h2>
   </div>
   <div class="card-body table-responsive p-0">
-    <table class="table table-hover text-nowrap">
-      <th><?= __('Conta') ?></th>
-      <td><?= h($fluxoconta->conta) ?></td>
-      </tr>
-      <tr>
-        <th><?= __('Descricao') ?></th>
-        <td><?= h($fluxoconta->descricao) ?></td>
-      </tr>
-      <tr>
-        <th><?= __('Fluxosubgrupo') ?></th>
-        <td><?= $fluxoconta->has('fluxosubgrupo') ? $this->Html->link($fluxoconta->fluxosubgrupo->subgrupo, ['controller' => 'Fluxosubgrupos', 'action' => 'view', $fluxoconta->fluxosubgrupo->subgrupo]) : '' ?></td>
-      </tr>
-      <tr>
-        <th><?= __('Id Fluxoconta') ?></th>
-        <td><?= $this->Number->format($fluxoconta->id_fluxoconta) ?></td>
-      </tr>
-      <tr>
-        <th><?= __('Created') ?></th>
-        <td><?= h($fluxoconta->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-      </tr>
-      <tr>
-        <th><?= __('Modified') ?></th>
-        <td><?= h($fluxoconta->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-      </tr>
+
+    <table class="table text-nowrap">
+        <tr>
+            <th style="color: green;"><?= __('Conta') ?></th>
+            <td class="text-info"><?= h($fluxoconta->conta) ?></td>
+        </tr>
+        <tr>
+            <th style="color: green;"><?= __('Descricao') ?></th>
+            <td class="text-info"><?= h($fluxoconta->descricao) ?></td>
+        </tr>
+        <tr>
+            <th style="color: green;"><?= __('Fluxosubgrupo') ?></th>
+            <td class="tr1"><?= $fluxoconta->has('fluxosubgrupo') ? $this->Html->link($fluxoconta->fluxosubgrupo->subgrupo, ['controller' => 'Fluxosubgrupos', 'action' => 'view', $fluxoconta->fluxosubgrupo->subgrupo]) : ''?></td>
+        </tr>
+        <tr>
+            <th style="color: green;"><?= __('Id Fluxoconta') ?></th>
+            <td class="text-info"><?= $this->Number->format($fluxoconta->id_fluxoconta) ?></td>
+        </tr>
+        <tr>
+            <th style="color: green;"><?= __('Created') ?></th>
+            <td class="text-info"><?= h($fluxoconta->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+        </tr>
+        <tr>
+            <th style="color: green;"><?= __('Modified') ?></th>
+            <td class="text-info"><?= h($fluxoconta->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+        </tr>
+
     </table>
   </div>
-  <div class="card-footer d-flex">
-    <div class="">
+  <div class="card-footer bg-white" style="border-radius: 20px;">
+    <div style="padding-top: 20px;" class="d-flex justify-content-end">
       <?= $this->Form->postLink(
-        __('Deletar'),
-        ['action' => 'delete',  $fluxoconta->id_fluxoconta],
-        ['confirm' => __('Vocề quer mesmo deletar {0}?',  $fluxoconta->conta), 'class' => 'btn btn-danger']
+
+          __('Deletar'),
+          ['action' => 'delete',  $fluxoconta->id_fluxoconta],
+          ['confirm' => __('Vocề quer mesmo deletar {0}?',  $fluxoconta->conta), 'class' => 'del btn btn-sm btn-outline-danger']
       ) ?>
-    </div>
-    <div class="ml-auto">
-      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $fluxoconta->id_fluxoconta], ['class' => 'btn btn-secondary']) ?>
-      <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-default']) ?>
+      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $fluxoconta->id_fluxoconta], ['class' => 'edi btn btn-sm btn-outline-success']) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-sm btn-outline-info']) ?>
+
     </div>
   </div>
 </div>
+</div>
 
 
-<div class="related related-lancamentos view card">
-  <div class="card-header d-sm-flex">
-    <h3 class="card-title"><?= __('Relacionados') ?></h3>
+<div  class="container-fluid d-flex align-items-center justify-content-center p-5">
+
+<div style="border: green solid 2px; border-radius: 20px;"  class="related related-caixaregistros view card container bg-white">
+
+  <div class="card-header d-sm-flex" style="padding-top: 50px;">
+    <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
-      <?= $this->Html->link(__('Novo'), ['controller' => 'Lancamentos', 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
-      <?= $this->Html->link(__('Todos'), ['controller' => 'Lancamentos', 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
-    </div>
+
+      <?= $this->Html->link(__('Novo'), ['controller' => 'Lancamentos', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
+      <?= $this->Html->link(__('Todos '), ['controller' => 'Lancamentos', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
+
+  </div>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
-      <tr>
+
+      <tr style="color: green;">
+
         <th><?= __('Id Lancamento') ?></th>
         <th><?= __('Tipo') ?></th>
         <th><?= __('Descricao') ?></th>
@@ -84,32 +113,39 @@ $this->assign('title', __('Fluxoconta'));
         <th><?= __('Dreconta Id') ?></th>
         <th class="actions"><?= __('Ações') ?></th>
       </tr>
-      <?php if (empty($fluxoconta->lancamentos)) { ?>
+      <?php if (empty($lancamento->lancamentos)) { ?>
         <tr>
-          <td colspan="15" class="text-muted">
+
+          <td colspan="15" class="text-info">
+
             Não Encontrado!
           </td>
         </tr>
       <?php } else { ?>
-        <?php foreach ($fluxoconta->lancamentos as $lancamentos) : ?>
+        <?php foreach ($lancamento->lancamentos as $lancamentos) : ?>
           <tr>
-            <td><?= h($lancamentos->id_lancamento) ?></td>
-            <td><?= h($lancamentos->tipo) ?></td>
-            <td><?= h($lancamentos->descricao) ?></td>
-            <td><?= h($lancamentos->valor) ?></td>
-            <td><?= h($lancamentos->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-            <td><?= h($lancamentos->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-            <td><?= h($lancamentos->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-            <td><?= h($lancamentos->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-            <td><?= h($lancamentos->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-            <td><?= h($lancamentos->fluxoconta_id) ?></td>
-            <td><?= h($lancamentos->fornecedor_id) ?></td>
-            <td><?= h($lancamentos->cliente_id) ?></td>
-            <td><?= h($lancamentos->lancamento_id) ?></td>
-            <td><?= h($lancamentos->dreconta_id) ?></td>
+            <td class="text-info"><?= h($lancamentos->id_lancamento) ?></td>
+            <td class="text-info"><?= h($lancamentos->tipo) ?></td>
+            <td class="text-info"><?= h($lancamentos->descricao) ?></td>
+            <td class="text-info"><?= h($lancamentos->valor) ?></td>
+            <td class="text-info"><?= h($lancamentos->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <?php if (empty($lancamento->data_baixa)) { ?>
+          <td class="text-info"><?= h($lancamento->data_baixa) ?></td>
+        <?php } else { ?>
+          <td class="text-info"><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+        <?php } ?>
+            <td class="text-info"><?= h($lancamentos->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td class="text-info"><?= h($lancamentos->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td class="text-info"><?= h($lancamentos->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td class="text-info"><?= h($lancamentos->fluxoconta_id) ?></td>
+            <td class="text-info"><?= h($lancamentos->fornecedor_id) ?></td>
+            <td class="text-info"><?= h($lancamentos->cliente_id) ?></td>
+            <td class="text-info"><?= h($lancamentos->lancamento_id) ?></td>
+            <td class="text-info"><?= h($lancamentos->dreconta_id) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('Visualizar'), ['controller' => 'Lancamentos', 'action' => 'view', $lancamentos->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Html->link(__('Editar'), ['controller' => 'Lancamentos', 'action' => 'edit', $lancamentos->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Html->link(__('Visualizar'), ['controller' => 'Lancamentos', 'action' => 'view', $lancamentos->id_lancamento], ['class' => 'btn btn-xs btn-outline-info']) ?>
+              <?= $this->Html->link(__('Editar'), ['controller' => 'Lancamentos', 'action' => 'edit', $lancamentos->id_lancamento], ['class' => 'btn btn-xs btn-outline-success']) ?>
+
               <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Lancamentos', 'action' => 'delete', $lancamentos->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $lancamentos->id_lancamento)]) ?>
             </td>
           </tr>
@@ -117,4 +153,8 @@ $this->assign('title', __('Fluxoconta'));
       <?php } ?>
     </table>
   </div>
+
 </div>
+</div>
+
+

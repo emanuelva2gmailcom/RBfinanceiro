@@ -36,6 +36,17 @@
                 font-size: 3.5rem;
             }
         }
+
+        img{
+            border-radius: 70px;
+        }
+
+       .tes img{
+            width: 125px;
+            height: 125px;
+            margin-top: 5%;
+        }
+
     </style>
     <style>
 
@@ -65,7 +76,7 @@
                 <ul class="row nav nav-pills">
                     <li class="col-4 nav-item">
                         <div class="d-flex justify-content-center">
-                            <div class="bd-placeholder-img rounded-circle" style="width: 140px; height: 140px; background-color: #029BE1;"><img src="/webroot/fc.jpg"></div>
+                            <div class="bd-placeholder-img rounded-circle" style="width: 140px; height: 140px;"> <?= $this->Html->image('fc.jpg') ?></div>
                         </div>
                         <div class="d-flex justify-content-center">
                             <h2 class="text-center text-green">Fluxo de Caixa</h2>
@@ -73,11 +84,11 @@
                         <div class="d-flex justify-content-center" style="height: 100px;">
                             <p class="text-center text-cyan">Aqui você observa os registros das entradas e saídas da empresa</p>
                         </div>
-                        <a class="nav-link bg-info w-50" style="margin-left: 25%;" href="#tab_2" data-toggle="tab">Fluxo de caixa</a>
+                        <a class="nav-link bg-info w-50" style="margin-left: 25%;" href="#tab_2" data-toggle="tab">Fluxo de Caixa</a>
                     </li>
                     <li class="col-4 nav-item">
                         <div class="d-flex justify-content-center">
-                            <div class="bd-placeholder-img rounded-circle" style="width: 140px; height: 140px;  background-color: #029BE1;"></div>
+                            <div class="bd-placeholder-img rounded-circle" style="width: 140px; height: 140px;  background-color: white;"> <?= $this->Html->image('deposit-box.png') ?></div>
                         </div>
                         <div class="d-flex justify-content-center">
                             <h2 class="text-center text-green">Caixa Gerencial</h2>
@@ -85,11 +96,11 @@
                         <div class="d-flex justify-content-center" style="height: 100px;">
                             <p class="text-center text-cyan">Aqui você observa o controle de seu fluxo de caixa</p>
                         </div>
-                        <a class="nav-link bg-info w-50" style="margin-left: 25%;" href="#tab_1" data-toggle="tab">Caixa gerencial</a>
+                        <a class="nav-link bg-info w-50" style="margin-left: 25%;" href="#tab_1" data-toggle="tab">Caixa Gerencial</a>
                     </li>
                     <li class="col-4 nav-item">
                         <div class="d-flex justify-content-center">
-                            <div class="bd-placeholder-img rounded-circle" style="width: 140px; height: 140px; background-color: #029BE1;"></div>
+                            <div class="tes bd-placeholder-img rounded-circle" style="width: 140px; height: 140px; background-color: white;"> <?= $this->Html->image('caixa-registradora (1).png') ?> </div>
                         </div>
                         <div class="d-flex justify-content-center">
                             <h2 class="text-center text-green">Caixa Diário</h2>

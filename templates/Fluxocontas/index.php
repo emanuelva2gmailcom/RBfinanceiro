@@ -7,7 +7,15 @@
 
 <?php $this->assign('title', __('Fluxocontas') ); ?>
 <style>
-  
+  .tr1 a{
+
+        color: #029BE1;
+
+    }
+
+    .nm a{
+        color: green;
+    }
 </style>
 <div class="container-fluid d-flex align-items-center justify-content-center p-5">
     <div class="card container card-outline bg-white" style="border: green solid 2px; border-radius: 20px;">
@@ -24,14 +32,14 @@
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
-        <thead>
+        <thead class="nm">
          <tr style="color: green;">
 
-              <th class="teste"><?= ('Conta') ?></th>
-              <th class="teste"><?= ('Descrição') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Conta') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Descrição') ?></th>
 
 
-              <th class="teste"><?= ('Fluxosubgrupo') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Fluxosubgrupo') ?></th>
               <th class="actions teste"><?= __('Ações') ?></th>
           </tr>
         </thead>
@@ -43,7 +51,7 @@
             <td><?= h($fluxoconta->descricao) ?></td>
 
 
-            <td><?= $fluxoconta->has('fluxosubgrupo') ? $this->Html->link($fluxoconta->fluxosubgrupo->subgrupo, ['controller' => 'Fluxosubgrupos', 'action' => 'view', $fluxoconta->fluxosubgrupo->subgrupo]) : '' ?></td>
+            <td class="tr1" ><?= $fluxoconta->has('fluxosubgrupo') ? $this->Html->link($fluxoconta->fluxosubgrupo->subgrupo, ['controller' => 'Fluxosubgrupos', 'action' => 'view', $fluxoconta->fluxosubgrupo->subgrupo]) : '' ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $fluxoconta->id_fluxoconta], ['class'=>'btn btn-xs btn-outline-info', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $fluxoconta->id_fluxoconta], ['class'=>'btn btn-xs btn-outline-success', 'escape'=>false]) ?>

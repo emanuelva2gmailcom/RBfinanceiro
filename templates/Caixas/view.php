@@ -5,6 +5,18 @@
  */
 ?>
 
+<style>
+
+    .del{
+        margin-right: 82%;
+    }
+
+    .edi{
+        margin-right: 2%;
+    }
+
+</style>
+
 <?php
 $this->assign('title', __('Caixas') ); ?>
 
@@ -39,17 +51,15 @@ $this->assign('title', __('Caixas') ); ?>
         </tr>
     </table>
   </div>
-  <div class="card-footer d-flex">
-    <div class="">
+  <div class="card-footer bg-white" style="border-radius: 20px;">
+    <div style="padding-top: 20px;" class="d-flex justify-content-end">
       <?= $this->Form->postLink(
           __('Delete'),
           ['action' => 'delete',  $caixa->id_caixa],
-          ['confirm' => __('Você quer mesmo deletar {0}?',  $caixa->id_caixa), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar {0}?',  $caixa->id_caixa), 'class' => 'del btn btn-sm btn-outline-danger']
       ) ?>
-    </div>
-    <div class="ml-auto">
-      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $caixa->id_caixa], ['class' => 'btn btn-secondary']) ?>
-      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $caixa->id_caixa], ['class' => 'edi btn btn-sm btn-outline-success']) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-sm btn-outline-info']) ?>
     </div>
   </div>
      </div>
@@ -58,7 +68,7 @@ $this->assign('title', __('Caixas') ); ?>
 <div  class="container-fluid d-flex align-items-center justify-content-center p-5">
 
 <div style="border: green solid 2px; border-radius: 20px;"  class="related related-caixaregistros view card container bg-white">
-  
+
   <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
     <div class="card-toolbox">
@@ -77,7 +87,7 @@ $this->assign('title', __('Caixas') ); ?>
       </tr>
       <?php if (empty($caixa->caixaregistros)) { ?>
         <tr>
-            <td colspan="5" class="text-muted text-info">
+            <td colspan="5" class="text-info">
               Não encontrado!
             </td>
         </tr>
@@ -85,12 +95,12 @@ $this->assign('title', __('Caixas') ); ?>
         <?php foreach ($caixa->caixaregistros as $caixaregistros) : ?>
         <tr>
             <td class="text-info" ><?= h($caixaregistros->id_caixaregistro) ?></td>
-            <td class="text-info><?= h($caixaregistros->caixa_id) ?></td>
-            <td class="text-info><?= h($caixaregistros->tipopagamento_id) ?></td>
-            <td class="text-info><?= h($caixaregistros->lancamento_id) ?></td>
+            <td class="text-info"><?= h($caixaregistros->caixa_id) ?></td>
+            <td class="text-info"><?= h($caixaregistros->tipopagamento_id) ?></td>
+            <td class="text-info"><?= h($caixaregistros->lancamento_id) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('Visualizar'), ['controller' => 'Caixaregistros', 'action' => 'view', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Html->link(__('Editar'), ['controller' => 'Caixaregistros', 'action' => 'edit', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Html->link(__('Visualizar'), ['controller' => 'Caixaregistros', 'action' => 'view', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-info']) ?>
+              <?= $this->Html->link(__('Editar'), ['controller' => 'Caixaregistros', 'action' => 'edit', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-success']) ?>
               <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Caixaregistros', 'action' => 'delete', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $caixaregistros->id_caixaregistro)]) ?>
             </td>
         </tr>

@@ -26,9 +26,27 @@ function caixa(is)
 }
 </script>
 
+
+
+<li class="nav-item" style="color: #59CBFF;">
+
+  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
+
+<i class="nav-icon fas fa-power-off" style="color: #59CBFF;"></i>
+
+    <p id="caixa">
+
+      Abrir Caixa
+
+    </p>
+
+  </a>
+
+</li>
+
 <li class="nav-item" style="color: #59CBFF;">
 <a href="/relatorios/#" class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-home" style="color: #59CBFF;"></i>
     <p>
       Home
     </p>
@@ -37,7 +55,7 @@ function caixa(is)
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-rocket" style="color: #59CBFF;"></i>
     <p>
       Lançamentos
       <i class="right fas fa-angle-left"></i>
@@ -63,29 +81,87 @@ function caixa(is)
   <a class="nav-link" style="color: #59CBFF;">
     <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
     <p>
-      Contas
+      Plano de Contas
       <i class="right fas fa-angle-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color: #59CBFF;">
-      <a href="/fluxocontas/add" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Nova conta</p>
+      <a class="nav-link" style="color: #59CBFF;; ">
+        <i class="fas fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <p>Contas</p>
       </a>
+        <ul class="nav nav-treeview" id="it">
+
+          <li class="nav-item" style="color: #59CBFF;">
+
+          <a href="/fluxocontas/add" class="nav-link" style="color: #59CBFF;; ">
+
+        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+
+        <p>Adicionar</p>
+
+      </a>
+
+
+
     </li>
+
     <li class="nav-item" style="color: #59CBFF;">
+
       <a href="/fluxocontas/index" class="nav-link" style="color: #59CBFF;; ">
+
         <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Suas contas</p>
+
+        <p>Disponíveis</p>
+
       </a>
+
+    </li>
+
+  </ul>
+  </li>
+    <li class="nav-item" style="color: #59CBFF;">
+      <a class="nav-link" style="color: #59CBFF;; ">
+        <i class="fas fa-user-friends nav-icon" style="color: #59CBFF;"></i>
+        <p>Subgrupos</p>
+      </a>
+        <ul class="nav nav-treeview" id="it">
+
+    <li class="nav-item" style="color: #59CBFF;">
+
+      <a href="/fluxosubgrupos/add" class="nav-link" style="color: #59CBFF;; ">
+
+        <i class="fas fa-user-plus nav-icon" style="color: #59CBFF;"></i>
+
+        <p>Adicionar</p>
+
+      </a>
+
+
+
+    </li>
+
+    <li class="nav-item" style="color: #59CBFF;">
+
+      <a href="/fluxosubgrupos/index" class="nav-link" style="color: #59CBFF;; ">
+
+        <i class="fas fa-users nav-icon" style="color: #59CBFF;"></i>
+
+        <p>Disponíveis</p>
+
+      </a>
+
+    </li>
+
+  </ul>
     </li>
   </ul>
 </li>
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-user-tie" style="color: #59CBFF;"></i>
     <p>
       Fornecedores
       <i class="right fas fa-angle-left"></i>
@@ -94,14 +170,14 @@ function caixa(is)
   <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color: #59CBFF;">
       <a href="/fornecedores/add" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Novo Fornecedor</p>
+        <i class="fas fa-user-plus nav-icon" style="color: #59CBFF;"></i>
+        <p>Adicionar</p>
       </a>
     </li>
     <li class="nav-item" style="color: #59CBFF;">
       <a href="/fornecedores/index" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Seus Fornecedores</p>
+        <i class="fas fa-users nav-icon" style="color: #59CBFF;"></i>
+        <p>Disponíveis</p>
       </a>
     </li>
   </ul>
@@ -109,7 +185,7 @@ function caixa(is)
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-user" style="color: #59CBFF;"></i>
     <p>
       Clientes
       <i class="right fas fa-angle-left"></i>
@@ -118,27 +194,19 @@ function caixa(is)
   <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color: #59CBFF;">
       <a href="/clientes/add" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Novo Cliente</p>
+        <i class="fas fa-user-plus nav-icon" style="color: #59CBFF;"></i>
+        <p>Adicionar</p>
       </a>
     </li>
     <li class="nav-item" style="color: #59CBFF;">
       <a href="/clientes/index" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
-        <p>Seus Clientes</p>
+        <i class="fas fa-users nav-icon" style="color: #59CBFF;"></i>
+        <p>Disponíveis</p>
       </a>
     </li>
   </ul>
 </li>
 
-<li class="nav-item" style="color: #59CBFF;">
-  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
-    <p id="caixa">
-      Abrir Caixa
-    </p>
-  </a>
-</li>
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
@@ -157,7 +225,7 @@ function caixa(is)
     </li>
     <li class="nav-item" style="color: #59CBFF;">
       <a href="/relatorios/caixadiario" class="nav-link" style="color: #59CBFF;; ">
-        <i class="far fa-circle nav-icon" style="color: #59CBFF;"></i>
+        <i class="fas fa-cash-register nav-icon" style="color: #59CBFF;"></i>
         <p>Caixa Diário</p>
       </a>
     </li>
@@ -178,7 +246,7 @@ function caixa(is)
 
 <li class="nav-item" style="color: #59CBFF;">
   <a href="/lancamentos/painel" class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-th" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-chart-line" style="color: #59CBFF;"></i>
     <p>
     Painel
     </p>
