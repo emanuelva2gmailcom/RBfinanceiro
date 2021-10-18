@@ -1,47 +1,38 @@
 <?php
 
 $now = date('d-m-Y');
-
+$teste = null;
 ?>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-try {
-  const response = axios.get('/caixas/getCaixaaberto/').then(function (response) { // handle success
-    caixa(response.data)
-  })
-} catch (error) {
-  console.error(error);
-}
-
-function caixa(is)
-{
-  if(is == true){
-    console.log(is);
-    $('.caixa').addClass('bg-red')
-    document.getElementById('caixa').innerHTML = 'Fechar Caixa'
-  }else{
-    $('.caixa').addClass('bg-green')
-    document.getElementById('caixa').innerHTML = 'Abrir Caixa'
+  try {
+    const response = axios.get('/caixas/getCaixaaberto/').then(function(response) { // handle success
+      caixa(response.data)
+    })
+  } catch (error) {
+    console.error(error);
   }
-}
+
+  function caixa(is) {
+    if (is == true) {
+      console.log(is);
+      document.getElementById('customSwitch3').checked = true;
+
+    } else {
+      document.getElementById('customSwitch3').checked = false;
+
+    }
+  }
 </script>
 
 
-
 <li class="nav-item" style="color: #59CBFF;">
-
-  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link" style="color: #59CBFF;" >
-
-<i class="nav-icon fas fa-power-off" style="color: #59CBFF;"></i>
-
-    <p id="caixa">
-
-      Abrir Caixa
-
-    </p>
-
+  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link " style="color: #59CBFF; z-index: 2000">
+    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+      <input type="checkbox" class="custom-control-input" id="customSwitch3" disabled>
+      <label class="custom-control-label" for="customSwitch3" style="color: #59CBFF;"></label>
+    </div>
   </a>
-
 </li>
 
 <li class="nav-item" style="color: #59CBFF;">
@@ -179,7 +170,6 @@ function caixa(is)
   </ul>
 </li>
 
-
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
     <i class="nav-icon fas fa-tasks" style="color: #59CBFF;"></i>
@@ -220,8 +210,7 @@ function caixa(is)
   <a href="/lancamentos/painel" class="nav-link" style="color: #59CBFF;">
     <i class="nav-icon far fa-chart-bar" style="color: #59CBFF;"></i>
     <p>
-    Painel
+      Painel
     </p>
   </a>
 </li>
-
