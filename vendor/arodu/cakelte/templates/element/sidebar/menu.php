@@ -1,9 +1,4 @@
-<?php
-
-$now = date('d-m-Y');
-$teste = null;
-?>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   try {
     const response = axios.get('/caixas/getCaixaaberto/').then(function(response) { // handle success
@@ -30,9 +25,50 @@ $teste = null;
   <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link " style="color: #59CBFF; z-index: 2000">
     <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
       <input type="checkbox" class="custom-control-input" id="customSwitch3" disabled>
-      <label class="custom-control-label" for="customSwitch3" style="color: #59CBFF;"></label>
+      <label class="custom-control-label" for="customSwitch3" style="color: #59CBFF;">Abrir </label>
     </div>
   </a>
+</li> -->
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+try {
+  const response = axios.get('/caixas/getCaixaaberto/').then(function (response) { // handle success
+    caixa(response.data)
+  })
+} catch (error) {
+  console.error(error);
+}
+
+function caixa(is)
+{
+  if(is == true){
+    console.log(is);
+    $('.caixa').addClass('bg-red')
+    document.getElementById('caixa').innerHTML = 'Fechar Caixa'
+  }else{
+    $('.caixa').addClass('bg-green')
+    document.getElementById('caixa').innerHTML = 'Abrir Caixa'
+  }
+}
+</script>
+
+
+
+<li class="nav-item" style="color: #59CBFF;">
+
+  <a href="<?php echo '/caixas/abrir/'; ?>" class="caixa nav-link" style="color: #59CBFF;" >
+
+<i class="nav-icon fas fa-power-off" style="color: #59CBFF;"></i>
+
+    <p id="caixa">
+
+      Abrir Caixa
+
+    </p>
+
+  </a>
+
 </li>
 
 <li class="nav-item" style="color: #59CBFF;">
