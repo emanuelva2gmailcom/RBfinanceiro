@@ -8,11 +8,11 @@
 <style>
 
     .del{
-        margin-right: 82%;
+        margin-right: 80%;
     }
 
     .edi{
-        margin-right: 2%;
+        margin-right: 3%;
     }
 
     .tr1 a{
