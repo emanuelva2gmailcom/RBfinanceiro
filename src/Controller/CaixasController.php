@@ -105,8 +105,9 @@ class CaixasController extends AppController
     }
 
 
-    public function abrir($now = null)
+    public function abrir()
     {
+        $now = date('d-m-Y');
         $caixas = $this->paginate($this->Caixas);
         $data = [
             'is_aberto' => '1',
