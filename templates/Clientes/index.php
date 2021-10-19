@@ -1,3 +1,131 @@
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Todos os lançamentos</h3>
+  </div>
+  <div class="card-body">
+    <table id="example1" class="table table-bordered table-striped">
+      <thead class="nm">
+        <tr style="color: green;">
+
+          <th><?= __('Nome') ?></th>
+              <th><?= __('CPF') ?></th>
+              <th><?= __('Endereço') ?></th>
+              <th><?= __('E-mail') ?></th>
+              <th><?= __('Telefone') ?></th>
+              <th><?= __('Is_Pendente') ?></th>
+          <th><?= __('Ações') ?></th>
+        </tr>
+      </thead>
+      <tbody>
+      <?php foreach ($clientes as $cliente): ?>
+            <tr style="color: #029BE1;">
+
+            <td><?= h($cliente->nome) ?></td>
+            <td><?= h($cliente->cpf) ?></td>
+            <td><?= h($cliente->endereco) ?></td>
+            <td><?= h($cliente->email) ?></td>
+            <td><?= h($cliente->telefone) ?></td>
+            <td><?= ($cliente->is_pendente) ? __('Sim') : __('Não') ?></td>
+            <td class="actions">
+            <div class="btn-group">
+              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-info', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-success', 'escape'=>false]) ?>
+              <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $cliente->id_cliente], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar {0}?', $cliente->nome)]) ?>
+            </div>
+            </td>
+          </tr>
+          <?php endforeach; ?>
+      </tbody>
+      <tfoot>
+        <tr style="color: green;">
+
+          <th><?= __('Nome') ?></th>
+              <th><?= __('CPF') ?></th>
+              <th><?= __('Endereço') ?></th>
+              <th><?= __('E-mail') ?></th>
+              <th><?= __('Telefone') ?></th>
+              <th><?= __('Is_Pendente') ?></th>
+          <th><?= __('Ações') ?></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<script>
+  $(function() {
+    $("#example1").DataTable({
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      columns: [{
+          data: 'Nome'
+        },
+        {
+          data: 'CPF'
+        },
+        {
+          data: 'Endereço'
+        },
+        {
+          data: 'E-mail'
+        },
+        {
+          data: 'Telefone'
+        },
+        {
+          data: 'Is_Pendente'
+        },
+        {
+          data: 'Ações',
+          render: function(data, type, row) {
+            return type === 'export' ?
+              null :
+              data;
+          }
+        }
+      ],
+      buttons: [{
+          extend: 'copyHtml5',
+
+          exportOptions: {
+            orthogonal: 'export',
+            columns: function(column, data, node) {
+              if (column > 7) {
+                return false;
+              }
+              return true;
+            },
+          }
+        },
+        {
+          extend: 'excelHtml5',
+          exportOptions: {
+            orthogonal: 'export',
+            columns: function(column, data, node) {
+              if (column > 7) {
+                return false;
+              }
+              return true;
+            },
+          }
+        },
+        {
+          extend: 'pdfHtml5',
+          exportOptions: {
+            orthogonal: 'export',
+            columns: function(column, data, node) {
+              if (column > 7) {
+                return false;
+              }
+              return true;
+            },
+          }
+        }
+      ]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  });
+</script>
+
 <?php
 /**
  * @var \App\View\AppView $this
