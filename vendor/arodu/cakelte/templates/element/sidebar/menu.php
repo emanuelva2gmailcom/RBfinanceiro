@@ -53,9 +53,10 @@ function caixa(is)
   </a>
 </li>
 
+
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-rocket" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-space-shuttle" style="color: #59CBFF;"></i>
     <p>
       Lançamentos
       <i class="right far fa-caret-square-left"></i>
@@ -64,15 +65,53 @@ function caixa(is)
   <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color:#FFFFFF;">
       <a href="/lancamentos/add" class="nav-link" style="color:#FFFFFF;; ">
-        <i class="fas fa-check nav-icon" style="color:#FFFFFF;"></i>
-        <p>Novo Lançamento</p>
+      <i class="fas fa-rocket nav-icon" style="color:#FFFFFF;"></i>
+      <p>Novo Lançamento</p>
+    </a>
+  </li>
+  <li class="nav-item" style="color:#FFFFFF;">
+    <a href="/lancamentos/index" class="nav-link" style="color:#FFFFFF;; ">
+    <i class="fab fa-rocketchat nav-icon" style="color:#FFFFFF;"></i>
+    <p>Seus Lançamentos</p>
+  </a>
+</li>
+</ul>
+</li>
+
+<li class="nav-item has-treeview " style="color: #59CBFF;">
+  <a class="nav-link" style="color: #59CBFF;">
+    <i class="nav-icon fas fa-boxes" style="color: #59CBFF;"></i>
+    <p>
+      Caixas
+      <i class="right far fa-caret-square-left"></i>
+    </p>
+  </a>
+  <ul class="nav nav-treeview" id="it">
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a href="/caixas/index" class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-box-open nav-icon" style="color: #FFFFFF;"></i>
+        <p>Abertos e Fechados</p>
       </a>
     </li>
-    <li class="nav-item" style="color:#FFFFFF;">
-      <a href="/lancamentos/index" class="nav-link" style="color:#FFFFFF;; ">
-        <i class="fab fa-rocketchat nav-icon" style="color:#FFFFFF;"></i>
-        <p>Seus Lançamentos</p>
+    <li class="nav-item" style="color: #FFFFFF;">
+      <a class="nav-link" style="color: #FFFFFF;; ">
+        <i class="fas fa-money-check nav-icon" style="color: #FFFFFF;"></i>
+        <p>Tipos de Pagamentos</p>
       </a>
+      <ul class="nav nav-treeview" id="it">
+    <li class="nav-item" style="color: #B5BDB7;">
+      <a href="/tipopagamentos/add" class="nav-link" style="color: #B5BDB7;; ">
+        <i class="fas fa-dollar-sign nav-icon" style="color: #B5BDB7;"></i>
+        <p>Adicionar</p>
+      </a>
+    </li>
+    <li class="nav-item" style="color: #B5BDB7;">
+      <a href="/tipopagamentos/index" class="nav-link" style="color: #B5BDB7;; ">
+        <i class="fas fa-wallet nav-icon" style="color: #B5BDB7;"></i>
+        <p>Disponiveis</p>
+      </a>
+    </li>
+  </ul>
     </li>
   </ul>
 </li>
@@ -182,19 +221,13 @@ function caixa(is)
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-tasks" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-clipboard-list" style="color: #59CBFF;"></i>
     <p>
       Relatórios
       <i class="right far fa-caret-square-left"></i>
     </p>
   </a>
   <ul class="nav nav-treeview" id="it">
-    <li class="nav-item" style="color: #FFFFFF;">
-      <a href="/caixas/index" class="nav-link" style="color: #FFFFFF;; ">
-        <i class="fas fa-dollar-sign nav-icon" style="color: #FFFFFF;"></i>
-        <p>Caixa</p>
-      </a>
-    </li>
     <li class="nav-item" style="color: #FFFFFF;">
       <a href="/relatorios/caixadiario" class="nav-link" style="color: #FFFFFF;; ">
         <i class="fas fa-cash-register nav-icon" style="color: #FFFFFF;"></i>
