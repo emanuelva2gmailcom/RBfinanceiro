@@ -433,14 +433,18 @@ class RelatoriosController extends AppController
         array_push($obj['total']['entradas'], array_sum($obj['total']['entradas']));
         array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
         foreach ($obj['total']['entradas'] as $i => $t) :
-            array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
+            if ($i != array_key_last($obj['total']['entradas'])) {
+                array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
+            }
         endforeach;
         foreach ($obj['total']['entradas-saidas'] as $i => $es) :
             array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
-            if ($i == count($obj['total']['entradas-saidas']) - 1) {
-                break;
+            if ($i != array_key_last($obj['total']['entradas-saidas'])) {
+                if ($i == count($obj['total']['entradas-saidas']) - 1) {
+                    break;
+                }
+                array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
             }
-            array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
         endforeach;
         return [$show, $obj, $request];
     }
