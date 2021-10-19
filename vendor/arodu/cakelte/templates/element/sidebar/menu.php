@@ -56,7 +56,7 @@ function caixa(is)
 
 <li class="nav-item has-treeview " style="color: #59CBFF;">
   <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-space-shuttle" style="color: #59CBFF;"></i>
+    <i class="nav-icon fas fa-rocket" style="color: #59CBFF;"></i>
     <p>
       Lançamentos
       <i class="right far fa-caret-square-left"></i>
@@ -65,7 +65,7 @@ function caixa(is)
   <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color:#FFFFFF;">
       <a href="/lancamentos/add" class="nav-link" style="color:#FFFFFF;; ">
-      <i class="fas fa-rocket nav-icon" style="color:#FFFFFF;"></i>
+      <i class="fas fa-check nav-icon" style="color:#FFFFFF;"></i>
       <p>Novo Lançamento</p>
     </a>
   </li>
