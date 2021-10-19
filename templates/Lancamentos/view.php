@@ -114,10 +114,10 @@
 
   <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-    <div class="card-toolbox">
+    <!-- <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Lancamentos', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Lancamentos', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
-    </div>
+    </div> -->
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
@@ -184,10 +184,10 @@
 
   <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-    <div class="card-toolbox">
+    <!-- <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Caixaregistros', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
-    </div>
+    </div> -->
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
@@ -230,10 +230,10 @@
 
   <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-    <div class="card-toolbox">
+    <!-- <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Comprovantes', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Comprovantes', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
-    </div>
+    </div> -->
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
