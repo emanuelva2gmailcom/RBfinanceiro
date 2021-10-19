@@ -1,4 +1,4 @@
-<div class="card">
+<!-- <div class="card">
   <div class="card-header">
     <h3 class="card-title">Todos os lançamentos</h3>
   </div>
@@ -124,7 +124,7 @@
       ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
-</script>
+</script> -->
 
 <?php
 /**

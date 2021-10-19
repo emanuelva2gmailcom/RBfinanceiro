@@ -1,4 +1,4 @@
-<div class="card">
+<!-- <div class="card">
   <div class="card-header">
     <h3 class="card-title">Todos os lançamentos</h3>
   </div>
@@ -10,6 +10,7 @@
           <th><?= __('Nome') ?></th>
           <th><?= __('CNPJ') ?></th>
           <th><?= __('Responsável') ?></th>
+          <th><?= __('Endereço') ?></th>
           <th><?= __('E-mail') ?></th>
           <th><?= __('Telefone') ?></th>
           <th><?= __('Is_Pendente') ?></th>
@@ -43,6 +44,7 @@
 
           <th><?= __('Nome') ?></th>
           <th><?= __('CNPJ') ?></th>
+          <th><?= __('Responsável') ?></th>
           <th><?= __('Endereço') ?></th>
           <th><?= __('E-mail') ?></th>
           <th><?= __('Telefone') ?></th>
@@ -64,6 +66,9 @@
         },
         {
           data: 'CNPJ'
+        },
+        {
+          data: 'Responsável'
         },
         {
           data: 'Endereço'
@@ -126,7 +131,7 @@
       ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
-</script>
+</script> -->
 <?php
 /**
  * @var \App\View\AppView $this
