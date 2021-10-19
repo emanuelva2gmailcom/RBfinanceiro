@@ -20,7 +20,6 @@
             'label'=>false,
             'class' => 'form-control-sm',
           ]); ?>
-      <?= $this->Html->link(__('Novo Tipo de Pagamento'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
@@ -28,20 +27,20 @@
     <table class="table text-nowrap">
         <thead>
           <tr>
-              
+
               <th class="teste"><?= ('Nome') ?></th>
               <th class="teste"><?= ('Descricao') ?></th>
-              
+
               <th class="actions teste"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($tipopagamentos as $tipopagamento): ?>
           <tr>
-            
+
             <td><?= h($tipopagamento->nome) ?></td>
             <td><?= h($tipopagamento->descricao) ?></td>
-            
+
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $tipopagamento->id_tipopagamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $tipopagamento->id_tipopagamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>

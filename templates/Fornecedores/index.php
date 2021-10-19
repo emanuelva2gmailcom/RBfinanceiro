@@ -24,7 +24,6 @@
             'class' => 'form-control-sm',
             'style' => 'color: #029BE1; border: 2px solid green;',
           ]); ?>
-      <?= $this->Html->link(__('Novo Fornecedor'), ['action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
