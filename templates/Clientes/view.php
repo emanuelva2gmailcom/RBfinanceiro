@@ -12,11 +12,11 @@ $this->assign('title', __('Cliente') );
 <style>
 
 .del{
-        margin-right: 80%;
+        margin-right: 78%;
     }
 
     .edi{
-        margin-right: 3%;
+        margin-right: 2%;
     }
 
 </style>
