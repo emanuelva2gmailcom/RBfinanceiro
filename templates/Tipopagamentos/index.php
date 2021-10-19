@@ -7,44 +7,50 @@
 
 <?php $this->assign('title', __('Tipos de Pagamento') ); ?>
 <style>
-  .teste{
-    color: #E1E7F0;
-  }
+  .tr1 a{
+
+        color: #029BE1;
+
+    }
+
+    .nm a{
+        color: green;
+    }
 </style>
 
-<div class="card card-primary card-outline bg-dark">
-  <div class="card-header d-sm-flex">
-    <h2 class="card-title"><!-- --></h2>
+<div class="container-fluid d-flex align-items-center justify-content-center p-5">
+    <div class="card container card-outline bg-white" style="border: green solid 2px; border-radius: 20px;">
+        <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <div class="card-toolbox">
       <?= $this->Paginator->limitControl([], null, [
             'label'=>false,
             'class' => 'form-control-sm',
+            'style' => 'color: #029BE1; border: 2px solid green;',
           ]); ?>
-      <?= $this->Html->link(__('Novo Tipo de Pagamento'), ['action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
-        <thead>
-          <tr>
-              
-              <th class="teste"><?= ('Nome') ?></th>
-              <th class="teste"><?= ('Descricao') ?></th>
-              
+        <thead class="nm">
+          <tr style="color:green;">
+
+              <th class="teste"><?= $this->Paginator->sort('Nome') ?></th>
+              <th class="teste"><?= $this->Paginator->sort('Descricao') ?></th>
+
               <th class="actions teste"><?= __('Ações') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($tipopagamentos as $tipopagamento): ?>
-          <tr>
-            
+            <tr style="color: #029BE1;">
+
             <td><?= h($tipopagamento->nome) ?></td>
             <td><?= h($tipopagamento->descricao) ?></td>
-            
+
             <td class="actions">
-              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $tipopagamento->id_tipopagamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
-              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $tipopagamento->id_tipopagamento], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $tipopagamento->id_tipopagamento], ['class'=>'btn btn-xs btn-outline-info', 'escape'=>false]) ?>
+              <?= $this->Html->link(__('Editar'), ['action' => 'edit', $tipopagamento->id_tipopagamento], ['class'=>'btn btn-xs btn-outline-success', 'escape'=>false]) ?>
               <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $tipopagamento->id_tipopagamento], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Você quer mesmo deletar o tipo de pagamento {0}?', $tipopagamento->nome)]) ?>
             </td>
           </tr>
@@ -54,7 +60,7 @@
   </div>
   <!-- /.card-body -->
 
-  <div class="card-footer d-md-flex paginator">
+  <div class="card-footer d-md-flex paginator" style="color: green;">
     <div class="mr-auto" style="font-size:.8rem">
       <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} Tipos de Pagamentos de {{count}} no total')) ?>
     </div>

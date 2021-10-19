@@ -45,7 +45,7 @@ class AppController extends Controller
     public function caixaaberto()
     {
         $this->loadModel('Caixas');
-        $now = date('d-m-Y');
+        $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
         $caixas = $this->Caixas->find('all');
         foreach ($caixas as $caixa) :
             if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {

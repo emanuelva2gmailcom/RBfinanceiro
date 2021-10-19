@@ -9,61 +9,81 @@
 $this->assign('title', __('Tipopagamento') );
 ?>
 
-<div class="view card card-primary card-outline">
-  <div class="card-header d-sm-flex">
+<style>
+
+.del{
+        margin-right: 80%;
+    }
+
+    .edi{
+        margin-right: 3%;
+    }
+
+.tr1 a{
+        color: #029BE1;
+    }
+
+</style>
+
+<div  class="container-fluid d-flex align-items-center justify-content-center p-5">
+
+ <div style="border: green solid 2px; border-radius: 20px;" class="card card-outline container bg-white ">
+
+  <div class="card-header d-sm-flex" style="padding-top: 50px; color: green;">
     <h2 class="card-title"><?= h($tipopagamento->nome) ?></h2>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
         <tr>
-            <th><?= __('Nome') ?></th>
-            <td><?= h($tipopagamento->nome) ?></td>
+            <th style="color: green;"><?= __('Nome') ?></th>
+            <td class="text-info"><?= h($tipopagamento->nome) ?></td>
         </tr>
         <tr>
-            <th><?= __('Descricao') ?></th>
-            <td><?= h($tipopagamento->descricao) ?></td>
+            <th style="color: green;"><?= __('Descricao') ?></th>
+            <td class="text-info"><?= h($tipopagamento->descricao) ?></td>
         </tr>
         <tr>
-            <th><?= __('Id Tipopagamento') ?></th>
-            <td><?= $this->Number->format($tipopagamento->id_tipopagamento) ?></td>
+            <th style="color: green;"><?= __('Id Tipopagamento') ?></th>
+            <td class="text-info"><?= $this->Number->format($tipopagamento->id_tipopagamento) ?></td>
         </tr>
         <tr>
-            <th><?= __('Created') ?></th>
-            <td><?= h($tipopagamento->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <th style="color: green;"><?= __('Created') ?></th>
+            <td class="text-info"><?= h($tipopagamento->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th><?= __('Modified') ?></th>
-            <td><?= h($tipopagamento->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <th style="color: green;"><?= __('Modified') ?></th>
+            <td class="text-info"><?= h($tipopagamento->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
     </table>
   </div>
-  <div class="card-footer d-flex">
-    <div class="">
+  <div class="card-footer bg-white" style="border-radius: 20px;">
+    <div style="padding-top: 20px;" class="d-flex justify-content-end">
       <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $tipopagamento->id_tipopagamento],
-          ['confirm' => __('Você quer mesmo deletar {0}?',  $tipopagamento->nome), 'class' => 'btn btn-danger']
+          ['confirm' => __('Você quer mesmo deletar {0}?',  $tipopagamento->nome), 'class' => 'del btn btn-sm btn-outline-danger']
       ) ?>
-    </div>
-    <div class="ml-auto">
-      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $tipopagamento->id_tipopagamento], ['class' => 'btn btn-secondary']) ?>
-      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+      <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $tipopagamento->id_tipopagamento], ['class' => 'edi btn btn-sm btn-outline-success']) ?>
+      <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-sm btn-outline-info']) ?>
     </div>
   </div>
 </div>
+</div>
 
+<div  class="container-fluid d-flex align-items-center justify-content-center p-5">
 
-<div class="related related-caixaregistros view card">
-  <div class="card-header d-sm-flex">
-    <h3 class="card-title"><?= __('Related Caixaregistros') ?></h3>
-    <div class="card-toolbox">
+<div style="border: green solid 2px; border-radius: 20px;"  class="related related-caixaregistros view card container bg-white">
+
+  <div class="card-header d-sm-flex" style="padding-top: 50px;">
+    <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
+    <!-- <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
       <?= $this->Html->link(__('Todos'), ['controller' => 'Caixaregistros' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
-    </div>
+    </div> -->
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
-      <tr>
+      <tr style="color:green;">
           <th><?= __('Id Caixaregistro') ?></th>
           <th><?= __('Caixa Id') ?></th>
           <th><?= __('Tipopagamento Id') ?></th>
@@ -72,20 +92,20 @@ $this->assign('title', __('Tipopagamento') );
       </tr>
       <?php if (empty($tipopagamento->caixaregistros)) { ?>
         <tr>
-            <td colspan="5" class="text-muted">
+            <td colspan="5" class="text-info">
               Não encontrado!
             </td>
         </tr>
       <?php }else{ ?>
         <?php foreach ($tipopagamento->caixaregistros as $caixaregistros) : ?>
         <tr>
-            <td><?= h($caixaregistros->id_caixaregistro) ?></td>
-            <td><?= h($caixaregistros->caixa_id) ?></td>
-            <td><?= h($caixaregistros->tipopagamento_id) ?></td>
-            <td><?= h($caixaregistros->lancamento_id) ?></td>
+            <td class="text-info"><?= h($caixaregistros->id_caixaregistro) ?></td>
+            <td class="text-info"><?= h($caixaregistros->caixa_id) ?></td>
+            <td class="text-info"><?= h($caixaregistros->tipopagamento_id) ?></td>
+            <td class="text-info"><?= h($caixaregistros->lancamento_id) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('Visualizar'), ['controller' => 'Caixaregistros', 'action' => 'view', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Html->link(__('Editar'), ['controller' => 'Caixaregistros', 'action' => 'edit', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Html->link(__('Visualizar'), ['controller' => 'Caixaregistros', 'action' => 'view', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-info']) ?>
+              <?= $this->Html->link(__('Editar'), ['controller' => 'Caixaregistros', 'action' => 'edit', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-success']) ?>
               <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Caixaregistros', 'action' => 'delete', $caixaregistros->id_caixaregistro], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $caixaregistros->id_caixaregistro)]) ?>
             </td>
         </tr>
@@ -93,5 +113,6 @@ $this->assign('title', __('Tipopagamento') );
       <?php } ?>
     </table>
   </div>
+</div>
 </div>
 

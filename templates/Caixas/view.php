@@ -8,11 +8,11 @@
 <style>
 
 .del{
-        margin-right: 80%;
+        margin-right: 78%;
     }
 
     .edi{
-        margin-right: 3%;
+        margin-right: 2%;
     }
 
 </style>
@@ -71,10 +71,10 @@ $this->assign('title', __('Caixas') ); ?>
 
   <div class="card-header d-sm-flex" style="padding-top: 50px;">
     <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-    <div class="card-toolbox">
+    <!-- <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros' , 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
       <?= $this->Html->link(__('Todos'), ['controller' => 'Caixaregistros' , 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
-    </div>
+    </div> -->
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
