@@ -113,6 +113,7 @@
     </div>
   </div>
 </div>
+
 <div class="testee container-fluid d-flex align-items-center justify-content-center p-5">
   <div class=" row">
   <div class="col-12">
@@ -143,28 +144,33 @@
   </div>
   <!-- /.col -->
 </div>
-<!-- aefawegfawegfaewgfawgargargargagra -->
 </div>
 
 <div class="container-fluid d-flex align-items-center justify-content-center p-5">
 
   <div style="border: green solid 2px; border-radius: 20px;" class="related related-caixaregistros view card container bg-white">
 
-    <div class="card-header d-sm-flex" style="padding-top: 50px;">
-      <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-      <div class="card-toolbox">
-        <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
-        <?= $this->Html->link(__('Todos '), ['controller' => 'Caixaregistros', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
-      </div>
-    </div>
-    <div class="card-body table-responsive p-0">
-      <table class="table table-hover text-nowrap">
-        <tr style="color: green;">
-          <th><?= __('Id Caixaregistro') ?></th>
-          <th><?= __('Caixa Id') ?></th>
-          <th><?= __('Tipopagamento Id') ?></th>
-          <th><?= __('Lancamento Id') ?></th>
-          <th class="actions"><?= __('Ações') ?></th>
+  <div class="card-header d-sm-flex" style="padding-top: 50px;">
+    <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
+    <!-- <div class="card-toolbox">
+      <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
+      <?= $this->Html->link(__('Todos '), ['controller' => 'Caixaregistros', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
+    </div> -->
+  </div>
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+      <tr style="color: green;">
+        <th><?= __('Id Caixaregistro') ?></th>
+        <th><?= __('Caixa Id') ?></th>
+        <th><?= __('Tipopagamento Id') ?></th>
+        <th><?= __('Lancamento Id') ?></th>
+        <th class="actions"><?= __('Ações') ?></th>
+      </tr>
+      <?php if (empty($lancamento->caixaregistros)) { ?>
+        <tr>
+          <td colspan="5" class="text-info">
+            Não Encontrado!
+          </td>
         </tr>
         <?php if (empty($lancamento->caixaregistros)) { ?>
           <tr>
@@ -196,23 +202,29 @@
 
   <div style="border: green solid 2px; border-radius: 20px;" class="related related-caixaregistros view card container bg-white">
 
-    <div class="card-header d-sm-flex" style="padding-top: 50px;">
-      <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-      <div class="card-toolbox">
-        <?= $this->Html->link(__('Novo'), ['controller' => 'Comprovantes', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
-        <?= $this->Html->link(__('Todos '), ['controller' => 'Comprovantes', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
-      </div>
-    </div>
-    <div class="card-body table-responsive p-0">
-      <table class="table table-hover text-nowrap">
-        <tr style="color: green;">
-          <th><?= __('Id Comprovante') ?></th>
-          <th><?= __('Nome Arquivo') ?></th>
-          <th><?= __('Tipo') ?></th>
-          <th><?= __('Lancamento Id') ?></th>
-          <th><?= __('Created') ?></th>
-          <th><?= __('Modified') ?></th>
-          <th class="actions"><?= __('Ações') ?></th>
+  <div class="card-header d-sm-flex" style="padding-top: 50px;">
+    <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
+    <!-- <div class="card-toolbox">
+      <?= $this->Html->link(__('Novo'), ['controller' => 'Comprovantes', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
+      <?= $this->Html->link(__('Todos '), ['controller' => 'Comprovantes', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
+    </div> -->
+  </div>
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+     <tr style="color: green;">
+        <th><?= __('Id Comprovante') ?></th>
+        <th><?= __('Nome Arquivo') ?></th>
+        <th><?= __('Tipo') ?></th>
+        <th><?= __('Lancamento Id') ?></th>
+        <th><?= __('Created') ?></th>
+        <th><?= __('Modified') ?></th>
+        <th class="actions"><?= __('Ações') ?></th>
+      </tr>
+      <?php if (empty($lancamento->comprovantes)) { ?>
+        <tr>
+          <td colspan="7" class="text-info">
+            Não Encontrado!
+          </td>
         </tr>
         <?php if (empty($lancamento->comprovantes)) { ?>
           <tr>
