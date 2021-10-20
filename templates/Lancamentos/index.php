@@ -186,7 +186,7 @@
                 </table>
 
 
-                <!-- /.card-body -->
+
 
                 <div class="card-footer d-md-flex paginator" style="color: green;">
                     <div class="mr-auto" style="font-size:.8rem">
@@ -204,37 +204,37 @@
 
                 </div>
             </div>
-            <!-- /.card-footer -->
+
             <div id='real' style="display:none;">
                 <table class="table text-nowrap">
                     <thead class="nm">
                         <tr style="color: green;">
-    
+
                             <th class="teste"><?= $this->Paginator->sort('Tipo') ?></th>
                             <th class="teste"><?= $this->Paginator->sort('Descricao') ?></th>
                             <th class="teste"><?= $this->Paginator->sort('Valor') ?></th>
                             <th class="teste"><?= $this->Paginator->sort('Data de Emissão') ?></th>
                             <th class="teste"><?= $this->Paginator->sort('Data de Baixa') ?></th>
                             <th class="teste"><?= $this->Paginator->sort('Data de Vencimento') ?></th>
-    
+
                             <th class="teste"><?= $this->Paginator->sort('Fluxoconta') ?></th>
                             <th class="teste"><?= $this->Paginator->sort('Fornecedor') ?></th>
                             <th class="actions teste"><?= __('Ações') ?></th>
                         </tr>
                     </thead>
-    
+
                     <tbody>
                         <?php foreach ($lancamentos as $lancamento) : ?>
                             <?php if ($lancamento->tipo == 'REALIZADO') { ?>
                                 <tr style="color: #029BE1;">
-    
+
                                     <td><?= h($lancamento->tipo) ?></td>
                                     <td><?= h($lancamento->descricao) ?></td>
                                     <td><?= $this->Number->format($lancamento->valor) ?></td>
                                     <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                                     <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                                     <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-    
+
                                     <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
                                     <td class="tr1"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
                                     <!-- <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td> -->
@@ -247,21 +247,21 @@
                                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-success', 'escape' => false]) ?>
                                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
                                     </td>
-    
+
                                 <?php } ?>
-    
+
                             <?php endforeach; ?>
                     </tbody>
                 </table>
-    
-    
-                <!-- /.card-body -->
-    
+
+
+
+
                 <div class="card-footer d-md-flex paginator" style="color: green;">
                     <div class="mr-auto" style="font-size:.8rem">
                         <?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} lançamentos de {{count}} no total')) ?>
                     </div>
-    
+
                     <ul class="pagination pagination-sm">
                         <?= $this->Paginator->first('<i class="fas fa-angle-double-left"></i>', ['escape' => false]) ?>
                         <?= $this->Paginator->prev('<i class="fas fa-angle-left"></i>', ['escape' => false]) ?>
@@ -269,12 +269,12 @@
                         <?= $this->Paginator->next('<i class="fas fa-angle-right"></i>', ['escape' => false]) ?>
                         <?= $this->Paginator->last('<i class="fas fa-angle-double-right"></i>', ['escape' => false]) ?>
                     </ul>
-    
+
                 </div>
             </div>
         </div>
 
-        <!-- /.card-footer -->
+
     </div>
 
 </div>
