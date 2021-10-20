@@ -45,12 +45,13 @@
             width: 125px;
             height: 125px;
             margin-top: 5%;
+
         }
 
-    </style>
-    <style>
 
-    </style>
+</style>
+
+
     <script>
         function realizado() {
             document.getElementById('real').style.display = 'block';
@@ -70,10 +71,62 @@
 
 <body>
 
-    <main>
-        <div class="position-relative overflow-hidden p-3 p-md-5 text-center" style="min-height: 100vh;">
+
+         <div class="position-relative overflow-hidden p-3 p-md-5 text-center" style="min-height: 100vh;">
             <div class="container-fluid vh-50 m-0 py-5 justify-content-center">
-                <ul class="row nav nav-pills">
+
+            <div class="row">
+              <div class="col-md-12 col-lg-6 col-xl-4" >
+                <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px green;">
+                <div class="card-header bg-white" style="border-radius: 20px 20px 0px 0px ;">
+                    <div class="m-auto h-75 w-75">
+                        <?= $this->Html->image('fct.jpg') ?>
+                    </div>
+                </div>
+                <div class="card-body bg-white d-flex flex-column justify-content-end">
+                    <h5 class="card-title text-info" style="width: 50%;margin-left: 25%;">Fluxo de Caixa</h5>
+                    <p class="card-text pb-2 pt-1" style="color:green;font-size: 14px;">Aqui você visualiza os registros das entradas <br> e saídas da empresa</p>
+                </div>
+                <div class="card-footer bg-white" style="border-radius: 0px 0px 20px 20px;">
+                   <a href="/relatorios/fluxodecaixa"> <p class="text-info"> Visualizar <i class="fas fa-arrow-circle-right" class="text-info"></i></p></a>
+                </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-6 col-xl-4">
+              <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px green;">
+              <div class="card-header bg-white" style="border-radius: 20px;">
+                    <div class="m-auto h-75 w-75">
+                        <?= $this->Html->image('cgt.jpg') ?>
+                    </div>
+                </div>
+                <div class="card-body bg-white d-flex flex-column justify-content-end" style="border-radius: 20px;">
+                    <h5 class="card-title text-info" style="width: 50%;margin-left: 25%;">Caixa Gerencial</h5>
+                    <p class="card-text pb-2 pt-1" style="color:green;font-size: 14px;">Aqui você verifica o controle de seu <br> fluxo de caixa</p>
+                </div>
+                <div class="card-footer bg-white" style="border-radius: 0px 0px 20px 20px;">
+                <a href="/relatorios/gerencial"> <p class="text-info"> Verificar <i class="fas fa-arrow-circle-right" class="text-info"></i></p></a>
+                </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-6 col-xl-4">
+              <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px green;">
+              <div class="card-header bg-white" style="border-radius: 20px;">
+                    <div class="m-auto h-75 w-75">
+                        <?= $this->Html->image('cdt.jpg') ?>
+                    </div>
+                </div>
+                <div class="card-body bg-white d-flex flex-column justify-content-end" style="border-radius: 20px;">
+                    <h5 class="card-title text-info" style="width: 50%;margin-left: 25%;">Caixa Diário</h5>
+                    <p class="card-text pb-2 pt-1" style="color:green;font-size: 14px;">Aqui você irá direto para o acompanhamento diário das entradas <br> e saídas de acordo com sua abertura de atividades até seu fechamento</p>
+                </div>
+                <div class="card-footer bg-white" style="border-radius: 0px 0px 20px 20px;">
+                <a href="/relatorios/caixadiario"> <p class="text-info"> Acompanhar <i class="fas fa-arrow-circle-right" class="text-info"></i></p></a>
+                </div>
+                </div>
+
+          </div>
+        </div>
+                <!-- <ul class="row nav nav-pills">
                     <li class="col-4 nav-item">
                         <div class="d-flex justify-content-center">
                             <div class="bd-placeholder-img rounded-circle" style="width: 140px; height: 140px;"> <?= $this->Html->image('fc.jpg') ?></div>
@@ -118,18 +171,17 @@
                         <div class="tab-pane active" id="tab_1">
                             <?= $this->element('relatorios/gerencial', ['obj' => $gerencial]) ?>
                         </div>
-                        <!-- /.tab-pane -->
+                         /.tab-pane
                         <div class="tab-pane" id="tab_2">
                             <?= $this->element('relatorios/fluxodecaixa', ['obj' => $fluxo]) ?>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
-    </main>
 
-    <script>
+    <!-- <script>
         function fc() {
             $('.cai').removeClass('d-none');
             $('.cai').removeClass('d-sm-block');
@@ -141,7 +193,7 @@
             $('.ger').removeClass('d-sm-block');
             $('.cai').addClass('d-none');
         }
-    </script>
+    </script> -->
 
     <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
