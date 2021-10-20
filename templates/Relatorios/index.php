@@ -123,7 +123,6 @@
                 <a href="/relatorios/caixadiario"> <p class="text-info"> Acompanhar <i class="fas fa-arrow-circle-right" class="text-info"></i></p></a>
                 </div>
                 </div>
-
           </div>
         </div>
                 <!-- <ul class="row nav nav-pills">
