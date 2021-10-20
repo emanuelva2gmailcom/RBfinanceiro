@@ -374,7 +374,6 @@ class LancamentosController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
         $lancamento = $this->Lancamentos->get($id);
         if ($this->Lancamentos->delete($lancamento)) {
             $this->Flash->success(__('Lançamento deletado com sucesso.'));
