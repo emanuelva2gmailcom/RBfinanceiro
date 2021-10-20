@@ -28,12 +28,54 @@
     .nm a {
         color: green;
     }
+
+    .buttons-copy{
+        background-color: #17a2b8;
+        color: white;
+        border: 1px solid #17a2b8;
+        opacity: 0.7;
+    }
+
+    .buttons-copy:hover{
+        background-color: white;
+        color: #17a2b8;
+        border: 1px solid #17a2b8;
+        opacity: 0.7;
+    }
+
+    .buttons-excel{
+        background-color: green;
+        color: white;
+        border: 1px solid green;
+        opacity: 0.7;
+    }
+
+    .buttons-excel:hover{
+        background-color: white;
+        color: green;
+        border: 1px solid green;
+        opacity: 0.7;
+    }
+
+    .buttons-pdf{
+        background-color: black;
+        color: white;
+        border: 1px solid black;
+        opacity: 0.7;
+    }
+
+    .buttons-pdf:hover{
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+        opacity: 0.7;
+    }
+
+
 </style>
 
-<!-- <div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Todos os lançamentos</h3>
-    </div>
+<div class="card ">
+
     <div class="card-body">
         <table id="example1" class="table table-bordered table-striped">
             <thead class="nm">
@@ -50,6 +92,7 @@
                     <th><?= __('Ações') ?></th>
                 </tr>
             </thead>
+
             <tbody>
                 <?php foreach ($lancamentos as $lancamento) : ?>
                         <tr style="color: #029BE1;">
@@ -64,19 +107,19 @@
                             <?php } ?>
                             <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
 
-                            <td><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
-                            <td><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
+                            <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
+                            <td class="tr1"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
                             <td class="actions">
                                 <div class="btn-group">
-                                    <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-info ', 'escape' => false]) ?>
-                                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-success ', 'escape' => false]) ?>
-                                    <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger ', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
                                     <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
                                         <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-dark ']) ?>
                                     <?php } ?>
                                     <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd', 'UTC') < $now) && ($lancamento->data_baixa == null)) { ?>
                                         <?= $this->Html->link(__('Renovar'), ['controller' => 'Lancamentos', 'action' => 'renovar', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-secondary ']) ?>
                                     <?php } ?>
+                                    <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-info ', 'escape' => false]) ?>
+                                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-success ', 'escape' => false]) ?>
+                                    <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger ', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
                                 </div>
 
                             </td>
@@ -84,7 +127,7 @@
 
                     <?php endforeach; ?>
             </tbody>
-            <tfoot>
+            <!-- <tfoot>
                 <tr style="color: green;">
 
                     <th><?= __('Tipo') ?></th>
@@ -98,12 +141,13 @@
                     <th><?= __('Fornecedor') ?></th>
                     <th><?= __('Ações') ?></th>
                 </tr>
-            </tfoot>
+            </tfoot> -->
         </table>
-    </div>
-</div> -->
 
-<div class="container-fluid d-flex align-items-center justify-content-center p-5">
+    </div>
+</div>
+
+<!-- <div class="container-fluid d-flex align-items-center justify-content-center p-5">
     <div class="card container card-outline bg-white" style="border: green solid 2px; border-radius: 20px;">
         <div class="card-header d-sm-flex" style="padding-top: 50px;">
 
@@ -164,8 +208,8 @@
 
                                     <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
                                     <td class="tr1"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
-                                    <!-- <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td> -->
-                                    <!-- <td class="tr1"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->dreconta->conta]) : '' ?></td> -->
+                                    <!-- <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
+                                    <!-- <td class="tr1"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->dreconta->conta]) : '' ?></td>
                                     <td class="actions">
                                         <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
                                             <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-dark']) ?>
@@ -237,8 +281,8 @@
 
                                     <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
                                     <td class="tr1"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
-                                    <!-- <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td> -->
-                                    <!-- <td class="tr1"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->dreconta->conta]) : '' ?></td> -->
+                                    <!-- <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
+                                    <!-- <td class="tr1"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->dreconta->conta]) : '' ?></td>
                                     <td class="actions">
                                         <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
                                             <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-primary']) ?>
@@ -278,7 +322,7 @@
     </div>
 
 </div>
-</div>
+</div>-->
 <script>
     $(function() {
         $("#example1").DataTable({
@@ -320,6 +364,7 @@
             ],
             buttons: [{
                     extend: 'copyHtml5',
+                    text: 'Copiar',
 
                     exportOptions: {
                         orthogonal: 'export',
