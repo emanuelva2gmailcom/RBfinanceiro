@@ -29,6 +29,30 @@
         color: green;
     }
 
+    .dataTables_info{
+        color: green;
+    }
+
+    .dataTables_empty{
+        color: #17a2b8;
+    }
+
+    .dataTables_filter input:focus {
+      color: #17a2b8;
+      border: green solid 2px;
+
+    }
+    .dataTables_filter input{
+      color: #17a2b8;
+      border: green solid 2px;
+
+    }
+
+    .dataTables_filter label{
+      color: #17a2b8;
+
+    }
+
     .buttons-copy{
         background-color: #17a2b8;
         color: white;
@@ -74,7 +98,7 @@
 
 </style>
 
-<div class="card ">
+<div class="card">
 
     <div class="card-body">
         <table id="example1" class="table table-bordered table-striped">
@@ -329,6 +353,21 @@
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
+            "language": {
+                "emptyTable":     "Nenhum registro disponível na tabela",
+                "zeroRecords":    "Nenhum registro encontrado",
+                "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
+                "infoEmpty":      "Mostrando 0 de 0 dos 0 lançamentos",
+                "infoFiltered":   "(filtrado do total de _MAX_ lançamentos)",
+                "search": "Procurar:",
+                "paginate": {
+                    "first":      "Primeiro",
+                    "last":       "Último",
+                    "next":       "Próximo",
+                    "previous":   "Depois"
+    },
+             },
+
             columns: [{
                     data: 'Tipo'
                 },
