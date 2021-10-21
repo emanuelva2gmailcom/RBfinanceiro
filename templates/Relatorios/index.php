@@ -72,18 +72,18 @@
 <body>
 
 
-         <div class="position-relative overflow-hidden p-3 p-md-5 text-center" style="min-height: 100vh;">
+         <div class="position-relative overflow-hidden p-3 p-md-5 text-center" >
             <div class="container-fluid vh-50 m-0 py-5 justify-content-center">
 
             <div class="row">
-              <div class="col-md-12 col-lg-6 col-xl-4" >
+              <div class="col-md-12 col-lg-6 col-xl-4">
                 <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px green;">
                 <div class="card-header bg-white" style="border-radius: 20px 20px 0px 0px ;">
                     <div class="m-auto h-75 w-75">
                         <?= $this->Html->image('fct.jpg') ?>
                     </div>
                 </div>
-                <div class="card-body bg-white d-flex flex-column justify-content-end">
+                <div class="card-body bg-white d-flex flex-column justify-content-end" style="border-radius: 20px;">
                     <h5 class="card-title text-info" style="width: 50%;margin-left: 25%;">Fluxo de Caixa</h5>
                     <p class="card-text pb-2 pt-1" style="color:green;font-size: 14px;">Aqui você visualiza os registros das entradas <br> e saídas da empresa</p>
                 </div>
@@ -94,7 +94,7 @@
               </div>
               <div class="col-md-12 col-lg-6 col-xl-4">
               <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px green;">
-              <div class="card-header bg-white" style="border-radius: 20px;">
+              <div class="card-header bg-white" style="border-radius: 20px 20px 0px 0px ;">
                     <div class="m-auto h-75 w-75">
                         <?= $this->Html->image('cgt.jpg') ?>
                     </div>
@@ -110,7 +110,7 @@
               </div>
               <div class="col-md-12 col-lg-6 col-xl-4">
               <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px green;">
-              <div class="card-header bg-white" style="border-radius: 20px;">
+              <div class="card-header bg-white" style="border-radius: 20px 20px 0px 0px ;">
                     <div class="m-auto h-75 w-75">
                         <?= $this->Html->image('cdt.jpg') ?>
                     </div>
