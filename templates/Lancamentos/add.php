@@ -8,13 +8,52 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+<style>
+    @media (max-width: 620px) {
+
+        .card {
+            position: absolute;
+            margin-left: -77px;
+            min-width: 90%;
+        }
+
+        .tipo {
+
+            min-width: 275px;
+        }
+
+        .line {
+            min-width: 2px;
+            min-height: 2px;
+            margin: 0px;
+        }
+    }
+
+    @media (max-width: 370px) {
+
+        .line {
+            display: none;
+
+        }
+
+        .bs-stepper-header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .poxa,.grupo{
+            width: 275px;
+        }
+
+    }
+</style>
 
 <?php $this->assign('title', __('Adicionar Lançamento')); ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <?= $this->Html->css('bs-stepper.min.css'); ?>
 <?= $this->Html->script('bs-stepper.min.js'); ?>
 <div class="container p-5" style="width: 60%;min-width:80%;">
-    <div id="stepper1" class="bs-stepper ">
+    <div id="stepper1" class="bs-stepper card">
         <div class="bs-stepper-header bg-info" style="margin: 0px;">
             <div class="step" data-target="#test-l-1">
                 <button type="button" class="btn step-trigger">
@@ -65,13 +104,13 @@
             <div id="test-l-2" class="content bg-white">
                 <div class="panel-body text-info">
                     <div class="form-group">
-                        <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão', 'placeholder' => 'Data de Emissão'], ['class' => 'border border-success text-info form-control']); ?>
+                        <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão', 'placeholder' => 'dd/mm/yyyy'], ['class' => 'border border-success text-info form-control poxa']); ?>
                     </div>
                     <div class="form-group baixa">
-                        <?= $this->Form->control('data_baixa', ['label' => 'Data de Baixa', 'placeholder' => 'Data de Baixa'], ['class' => 'border border-success text-info form-control']); ?>
+                        <?= $this->Form->control('data_baixa', ['label' => 'Data de Baixa', 'placeholder' => 'Data de Baixa'], ['class' => 'border border-success text-info form-control poxa']); ?>
                     </div>
                     <div class="form-group">
-                        <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento', 'placeholder' => 'Data de Vecimento'], ['class' => 'border border-success text-info form-control']); ?>
+                        <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento', 'placeholder' => 'Data de Vecimento'], ['class' => 'border border-success text-info form-control poxa']); ?>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -142,7 +181,7 @@
                         <?= $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => 'SELECIONE']); ?>
                     </div>
                     <div class="form-group">
-                        <?= $this->Form->control('uploadfiles', ['type' => 'file'], ['class' => 'file']); ?>
+                        <?= $this->Form->control('Comprovante', ['type' => 'file'], ['class' => 'file']); ?>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -252,9 +291,10 @@
         }
 
     });
+
     $('.saidas').change(function() {
         $tipo = $(".saidas option:selected").text();
-        if ($tipo.indexOf('FORNECEDOR') != -1) {
+        if ($tipo.indexOf('Fornecedor') != -1) {
             $('.cliente').addClass('d-none')
             $('.fornecedor').removeClass('d-none');
 
@@ -283,15 +323,16 @@
 
     })
 
-    $('.grupo').ready(function() {
-        $teste = $('.grupo').val();
-        if ($teste == 0) {
-            // alert($teste)
+
+    function grupo($grupo){
+        $grupo = $grupo;
+        if ($grupo == 0) {
+
             $('#teste').removeAttr('onclick')
             $('.todos').prop('disabled', true);
 
             $('#teste').click(function() {
-                if ($teste == 0) {
+                if ($grupo == 0) {
                     $('.s-grupo').text('Campo Obrigatório')
                 } else {
                     $('.s-grupo').text(' ')
@@ -300,27 +341,18 @@
         } else {
             $('.s-grupo').text(' ')
         }
-        // alert($teste);
+     
 
+    }
+
+    $('.grupo').ready(function() {
+        $grupo = $('.grupo').val();
+       teste($grupo)
     })
 
-   
-    $('.grupo').on('ready change', function() {
-        $teste = $('.grupo').val();
-        if ($teste == 0) {
-            // alert($teste)
-            $('#teste').removeAttr('onclick')
-            $('.todos').prop('disabled', true);
 
-            $('#teste').click(function() {
-                if ($teste == 0) {
-                    $('.s-grupo').text('Campo Obrigatório')
-                } else {
-                    $('.s-grupo').text(' ')
-                }
-            })
-        } else {
-            $('.s-grupo').text(' ')
-        }
+    $('.grupo').change(function() {
+        $grupo = $('.grupo').val();
+        teste($grupo)
     })
 </script>

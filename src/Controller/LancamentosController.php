@@ -233,7 +233,7 @@ class LancamentosController extends AppController
                 return $this->redirect(['action' => 'add']);
             }
 
-            $image = $this->request->getData('uploadfiles');
+            $image = $this->request->getData('Comprovante');
             $name = $image->getClientFilename();
             $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
             if ($name)
