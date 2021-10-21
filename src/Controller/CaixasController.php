@@ -119,7 +119,7 @@ class CaixasController extends AppController
                 $caixa = $this->Caixas->patchEntity($caixa, ['is_aberto' => false]);
                 $this->Caixas->save($caixa);
                 $this->Flash->error(__('Caixa fechado.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect($this->referer());
             } else if (($now == $caixa->data_caixa) && ($caixa->is_aberto == false)) {
                 $this->Flash->error(__('Caixa já fechado.'));
                 return $this->redirect($this->referer());
