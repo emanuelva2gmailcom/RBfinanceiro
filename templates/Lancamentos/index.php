@@ -118,7 +118,9 @@
             </thead>
 
             <tbody>
-                <?php foreach ($lancamentos as $lancamento) : ?>
+                <?php foreach ($lancamentos as $lancamento) : 
+                    // debug($lancamento->id_lancamento);
+                    ?>
                         <tr style="color: #029BE1;">
                             <td><?= h($lancamento->tipo) ?></td>
                             <td><?= h($lancamento->descricao) ?></td>
@@ -143,7 +145,7 @@
                                     <?php } ?>
                                     <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-info ', 'escape' => false]) ?>
                                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-success ', 'escape' => false]) ?>
-                                    <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger ', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
+                                    <?= $this->Html->link(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger ', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
                                 </div>
 
                             </td>
