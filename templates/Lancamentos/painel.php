@@ -137,7 +137,6 @@
         }
 
         const csrf = document.querySelector("#form").querySelectorAll('input[name ="_csrfToken"]')[0].value;
-        console.log(csrf)
         $("button").click(function(event) {
             event.preventDefault();
             $tipo = $(".tipo").val()

@@ -326,25 +326,25 @@ class RelatoriosController extends AppController
 
     public function fluxodecaixa()
     {
-        $show = null;
-        if ($this->request->is('post')) {
-
-            $show = $this->getFluxoDeCaixa($this->request->getData())[0];
-            $obj = $this->getFluxoDeCaixa($this->request->getData())[1];
-            $request = $this->getFluxoDeCaixa($this->request->getData())[2];
-            $this->set(compact('obj', 'show', 'request'));
-        }
-        $dia = ['yyyy-MM-dd', '+1 days'];
-        $fluxo = $this->getRelatorio('PREVISTO', 'data_vencimento', $dia);
-
-        $this->set(compact('fluxo', 'show'));
+            // $show = $this->getFluxoDeCaixa($this->request->getData())[0];
+            // $obj = $this->getFluxoDeCaixa($this->request->getData())[1];
+            // $request = $this->getFluxoDeCaixa($this->request->getData())[2];
+            // // debug($obj);exit;
+            // $this->set(compact('obj', 'show'));
     }
 
 
-    public function getFluxoDeCaixa($data = null)
+    public function getFluxoDeCaixa()
     {
-        $renovados = $this->getrenovado();
+        $data = $this->request->getData();
         $show = false;
+        if($this->request->is('get')){
+            $dia = ['yyyy-MM-dd', '+1 days'];
+            $this->response = $this->response->withType('application/json')
+                ->withStringBody(json_encode([true, $this->getRelatorio('PREVISTO', 'data_vencimento', $dia), null]));
+            return $this->response;
+        }
+        $renovados = $this->getrenovado();
         $obj = [
             'header' => [],
             'rows' => [
@@ -367,9 +367,6 @@ class RelatoriosController extends AppController
         $ano = ['yyyy', '+1 years'];
         $periodo = null;
         $request = $data;
-        if (empty($data)) {
-            return [$show, $obj, $request];
-        }
         switch ($request[2]) {
             case 'mes':
                 $periodo = $mes;
@@ -454,7 +451,9 @@ class RelatoriosController extends AppController
                 array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
             }
         endforeach;
-        return [$show, $obj, $request];
+        $this->response = $this->response->withType('application/json')
+            ->withStringBody(json_encode([$show, $obj, $request]));
+        return $this->response;
     }
 
 
