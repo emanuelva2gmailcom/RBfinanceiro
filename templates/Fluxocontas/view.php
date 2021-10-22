@@ -153,7 +153,6 @@ $this->assign('title', __('Fluxoconta'));
       <?php } ?>
     </table>
   </div>
-
 </div>
 </div>
 
