@@ -21,12 +21,12 @@ class RelatoriosController extends AppController
     {
         $renovados = $this->getrenovado();
         $this->loadModel('Lancamentos');
-        $this->paginate = [
+       $lancamentos = $this->Lancamentos->find('all', [
             'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
             'conditions' => ['data_baixa is not' => null], $renovados['simple']
-        ];
+        ]);
 
-        $lancamentos = $this->paginate($this->Lancamentos);
+        // $lancamentos = $this->paginate($this->Lancamentos);
 
         $arrays = [];
         foreach ($lancamentos as $lancamento) :
