@@ -3,70 +3,70 @@
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
     <style>
-        .btn{
+        .btn {
             background-color: white;
             color: #17a2b8;
             border: 1px solid white;
         }
 
-        .btn:hover{
-             background-color: #17a2b8;
-             color: white;
-             border: 1px solid white;
+        .btn:hover {
+            background-color: #17a2b8;
+            color: white;
+            border: 1px solid white;
         }
 
-        .btn:focus{
+        .btn:focus {
             background-color: white;
             color: #17a2b8;
             border: 1px solid white;
         }
 
-        .month label{
+        .month label {
             color: white;
         }
-
     </style>
 </head>
 
 <body onload="onload()">
- <div class="container-fluid d-flex align-items-center justify-content-center p-5">
-    <div class="card container bg-info" style="border-radius: 20px;">
-        <div class="card-body">
-            <?= $this->Form->create([], ['id' => 'form']) ?>
-            <div class="d-flex flex-row justify-content-center align-items-center content bg-info mb-3 p-3" style="border-radius: 20px;">
-                <div class="col-4 px-4">
-                  <?= $this->Form->control('Mês', ['class' => 'form-control mes', 'type' => 'month',]); ?>
+    <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+        <div class="card container bg-info" style="border-radius: 20px;">
+            <div class="card-body">
+                <?= $this->Form->create([], ['id' => 'form']) ?>
+                <div class="d-flex flex-row justify-content-center align-items-center content bg-info mb-3 p-3" style="border-radius: 20px;">
+                    <div class="col-4 px-4">
+                        <?= $this->Form->control('Mês', ['class' => 'form-control mes', 'type' => 'month',]); ?>
+                    </div>
+                    <div class="col-4 px-4">
+                        <label style="color: white;">Tipo</label>
+                        <?= $this->Form->select('tipo', ['REALIZADO' => 'Realizado', 'PREVISTO' => 'Previsto'], ['class' => 'form-control tipo mb-3', 'id' => 'card']); ?>
+                    </div>
+                    <div class="col-2 px-5 mt-3">
+                        <?= $this->Form->button(__('Calcular'),) ?>
+                    </div>
                 </div>
-                <div class="col-4 px-4">
-                    <label style="color: white;">Tipo</label>
-                    <?= $this->Form->select('tipo', ['REALIZADO' => 'Realizado', 'PREVISTO' => 'Previsto'], ['class' => 'form-control tipo mb-3', 'id' => 'card']); ?>
-                </div>
-                <div class="col-2 px-5 mt-3">
-                    <?= $this->Form->button(__('Calcular'), ) ?>
-                </div>
+                <?= $this->Form->end() ?>
+                <canvas class="bg-white mb-3 p-2" id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; border-radius: 20px;"></canvas>
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="teste"><?= ('Grupo do Fluxo de Caixa') ?></th>
+                            <th class="teste"><?= ('Conta do Fluxo de Caixa') ?></th>
+                            <th class="teste"><?= ('Valor') ?></th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="table-body">
+
+
+                    </tbody>
+
+                </table>
             </div>
-            <?= $this->Form->end() ?>
-            <canvas class="bg-white mb-3 p-2" id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; border-radius: 20px;"></canvas>
-            <table class="table text-nowrap">
-                <thead>
-                    <tr>
-                        <th class="teste"><?= ('Grupo do Fluxo de Caixa') ?></th>
-                        <th class="teste"><?= ('Conta do Fluxo de Caixa') ?></th>
-                        <th class="teste"><?= ('Valor') ?></th>
-                    </tr>
-                </thead>
-
-                <tbody id="table-body">
-
-
-                </tbody>
-
-            </table>
+            <!-- /.card-body -->
         </div>
-        <!-- /.card-body -->
     </div>
- </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script>
         function show(data) {
             let output = ''
@@ -87,6 +87,7 @@
         }
 
         let donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+
         let donutData = {
             labels: [
                 'Entradas',
@@ -102,6 +103,27 @@
         let donutOptions = {
             maintainAspectRatio: false,
             responsive: true,
+            tooltips: {
+                enabled: true,
+                mode: 'label',
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var indice = tooltipItem.index;
+                        return data.datasets[0].data[indice];
+                    }
+                }
+            },
+            plugins: {
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        let sum = ctx.dataset._meta[0].total;
+                        let percentage = (value * 100 / sum).toFixed(2) + "%";
+                        return percentage;
+                    },
+                    color: '#fff',
+                }
+            }
+
         }
         let donutChart = new Chart(donutChartCanvas, {
             type: 'doughnut',
@@ -115,7 +137,6 @@
         }
 
         const csrf = document.querySelector("#form").querySelectorAll('input[name ="_csrfToken"]')[0].value;
-        console.log(csrf)
         $("button").click(function(event) {
             event.preventDefault();
             $tipo = $(".tipo").val()

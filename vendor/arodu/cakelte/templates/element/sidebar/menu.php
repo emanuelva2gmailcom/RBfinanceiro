@@ -123,7 +123,8 @@ function caixa(is)
     <li class="nav-item" style="color: #FFFFFF;">
       <a class="nav-link" style="color: #FFFFFF;; ">
         <i class="fas fa-money-check nav-icon" style="color: #FFFFFF;"></i>
-        <p>Tipos de Pagamentos</p>
+        <p>Pagamentos</p>
+        <i class="right far fa-caret-square-left"></i>
       </a>
       <ul class="nav nav-treeview" id="it">
     <li class="nav-item" style="color: #B5BDB7;">

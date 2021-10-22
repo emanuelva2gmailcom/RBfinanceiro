@@ -11,17 +11,17 @@
     margin-right: 82%;
   }
 
-    .del{
-        margin-right: 78%;
-    }
+  .del {
+    margin-right: 78%;
+  }
 
-    .edi{
-        margin-right: 2%;
-    }
+  .edi {
+    margin-right: 2%;
+  }
 
-    .tr1 a{
-        color: #029BE1;
-    }
+  .tr1 a {
+    color: #029BE1;
+  }
 
   .tr1 a {
     color: #029BE1;
@@ -116,57 +116,56 @@
 
 <div class="testee container-fluid d-flex align-items-center justify-content-center p-5">
   <div class=" row">
-  <div class="col-12">
-    <!-- Custom Tabs -->
-    <div class="card" style="border: green solid 2px; border-radius: 20px;" class="related related-caixaregistros view card container bg-white">
-      <div class="card-header d-flex p-0">
-        <h3 class="card-title p-3" style="color: green;">Histórico do lançamento</h3>
-        <ul class="nav nav-pills ml-auto p-2" id="tab_header">
-          <li class="nav-item"><a class="btn btn-info btn-sm active" href="#inicio" data-toggle="tab">Começo</a></li>
-          <?php foreach ($lancamento->lancamentos as $l) : ?>
-            <li class="nav-item"><a class="btn btn-info btn-sm" href="#tab_<?= $l->id_lancamento ?>" data-toggle="tab"><?= $l->id_lancamento ?></a></li>
-          <?php endforeach ?>
-        </ul>
-      </div><!-- /.card-header -->
-      <div class="card-body">
-        <div class="tab-content">
-          <div class="tab-pane text-info active" id="inicio">
-            Clique nos numerais acima para ver os lançamentos anteriores a esse
+    <div class="col-12">
+      <!-- Custom Tabs -->
+      <div class="card" style="border: green solid 2px; border-radius: 20px;" class="related related-caixaregistros view card container bg-white">
+        <div class="card-header d-flex p-0">
+          <h3 class="card-title p-3" style="color: green;">Histórico do lançamento</h3>
+          <ul class="nav nav-pills ml-auto p-2" id="tab_header">
+            <li class="nav-item"><a class="btn btn-info btn-sm active" href="#inicio" data-toggle="tab">Começo</a></li>
+            <?php foreach ($lancamento->lancamentos as $l) : ?>
+              <li class="nav-item"><a class="btn btn-info btn-sm" href="#tab_<?= $l->id_lancamento ?>" data-toggle="tab"><?= $l->id_lancamento ?></a></li>
+            <?php endforeach ?>
+          </ul>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane text-info active" id="inicio">
+              Clique nos numerais acima para ver os lançamentos anteriores a esse
+            </div>
+            <?php foreach ($lancamento->lancamentos as $l) : ?>
+              <?= $this->element('lancamentos/card', ['lancamento' => $l]) ?>
+            <?php endforeach ?>
           </div>
-          <?php foreach ($lancamento->lancamentos as $l) : ?>
-            <?= $this->element('lancamentos/card', ['lancamento' => $l]) ?>
-          <?php endforeach ?>
-        </div>
-        <!-- /.tab-content -->
-      </div><!-- /.card-body -->
+          <!-- /.tab-content -->
+        </div><!-- /.card-body -->
+      </div>
+      <!-- ./card -->
     </div>
-    <!-- ./card -->
+    <!-- /.col -->
   </div>
-  <!-- /.col -->
-</div>
 </div>
 
 <div class="container-fluid d-flex align-items-center justify-content-center p-5">
 
   <div style="border: green solid 2px; border-radius: 20px;" class="related related-caixaregistros view card container bg-white">
 
-  <div class="card-header d-sm-flex" style="padding-top: 50px;">
-    <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-    <!-- <div class="card-toolbox">
+    <div class="card-header d-sm-flex" style="padding-top: 50px;">
+      <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
+      <!-- <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Caixaregistros', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
     </div> -->
-  </div>
-  <div class="card-body table-responsive p-0">
-    <table class="table table-hover text-nowrap">
-      <tr style="color: green;">
-        <th><?= __('Id Caixaregistro') ?></th>
-        <th><?= __('Caixa Id') ?></th>
-        <th><?= __('Tipopagamento Id') ?></th>
-        <th><?= __('Lancamento Id') ?></th>
-        <th class="actions"><?= __('Ações') ?></th>
-      </tr>
-     
+    </div>
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <tr style="color: green;">
+          <th><?= __('Id Caixaregistro') ?></th>
+          <th><?= __('Caixa Id') ?></th>
+          <th><?= __('Tipopagamento Id') ?></th>
+          <th><?= __('Lancamento Id') ?></th>
+          <th class="actions"><?= __('Ações') ?></th>
+        </tr>
         <?php if (empty($lancamento->caixaregistros)) { ?>
           <tr>
             <td colspan="5" class="text-info">
@@ -197,25 +196,24 @@
 
   <div style="border: green solid 2px; border-radius: 20px;" class="related related-caixaregistros view card container bg-white">
 
-  <div class="card-header d-sm-flex" style="padding-top: 50px;">
-    <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-    <!-- <div class="card-toolbox">
+    <div class="card-header d-sm-flex" style="padding-top: 50px;">
+      <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
+      <!-- <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Comprovantes', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Comprovantes', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
     </div> -->
-  </div>
-  <div class="card-body table-responsive p-0">
-    <table class="table table-hover text-nowrap">
-     <tr style="color: green;">
-        <th><?= __('Id Comprovante') ?></th>
-        <th><?= __('Nome Arquivo') ?></th>
-        <th><?= __('Tipo') ?></th>
-        <th><?= __('Lancamento Id') ?></th>
-        <th><?= __('Created') ?></th>
-        <th><?= __('Modified') ?></th>
-        <th class="actions"><?= __('Ações') ?></th>
-      </tr>
-  
+    </div>
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <tr style="color: green;">
+          <th><?= __('Id Comprovante') ?></th>
+          <th><?= __('Nome Arquivo') ?></th>
+          <th><?= __('Tipo') ?></th>
+          <th><?= __('Lancamento Id') ?></th>
+          <th><?= __('Created') ?></th>
+          <th><?= __('Modified') ?></th>
+          <th class="actions"><?= __('Ações') ?></th>
+        </tr>
         <?php if (empty($lancamento->comprovantes)) { ?>
           <tr>
             <td colspan="7" class="text-info">

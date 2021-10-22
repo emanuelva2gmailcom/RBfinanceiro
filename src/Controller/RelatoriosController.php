@@ -215,12 +215,12 @@ class RelatoriosController extends AppController
 
     public function index()
     {
-        $dia = ['yyyy-MM-dd', '+1 days'];
-        $mes = ['yyyy-MM', '+1 months'];
-        $fluxo = $this->getRelatorio('PREVISTO', 'data_vencimento', $dia);
-        $gerencial = $this->getRelatorio('REALIZADO', 'data_baixa', $mes);
+        // $dia = ['yyyy-MM-dd', '+1 days'];
+        // $mes = ['yyyy-MM', '+1 months'];
+        // $fluxo = $this->getRelatorio('PREVISTO', 'data_vencimento', $dia);
+        // $gerencial = $this->getRelatorio('REALIZADO', 'data_baixa', $mes);
 
-        $this->set(compact('fluxo', 'gerencial'));
+        // $this->set(compact('fluxo', 'gerencial'));
     }
 
     public function exportRelatorioGerencial()
@@ -326,17 +326,25 @@ class RelatoriosController extends AppController
 
     public function fluxodecaixa()
     {
-        $show = $this->getFluxoDeCaixa($this->request->getData())[0];
-        $obj = $this->getFluxoDeCaixa($this->request->getData())[1];
-        $request = $this->getFluxoDeCaixa($this->request->getData())[2];
-        $this->set(compact('obj', 'show', 'request'));
+            // $show = $this->getFluxoDeCaixa($this->request->getData())[0];
+            // $obj = $this->getFluxoDeCaixa($this->request->getData())[1];
+            // $request = $this->getFluxoDeCaixa($this->request->getData())[2];
+            // // debug($obj);exit;
+            // $this->set(compact('obj', 'show'));
     }
 
 
-    public function getFluxoDeCaixa($data = null)
+    public function getFluxoDeCaixa()
     {
-        $renovados = $this->getrenovado();
+        $data = $this->request->getData();
         $show = false;
+        if($this->request->is('get')){
+            $dia = ['yyyy-MM-dd', '+1 days'];
+            $this->response = $this->response->withType('application/json')
+                ->withStringBody(json_encode([true, $this->getRelatorio('PREVISTO', 'data_vencimento', $dia), null]));
+            return $this->response;
+        }
+        $renovados = $this->getrenovado();
         $obj = [
             'header' => [],
             'rows' => [
@@ -359,9 +367,6 @@ class RelatoriosController extends AppController
         $ano = ['yyyy', '+1 years'];
         $periodo = null;
         $request = $data;
-        if (empty($data)) {
-            return [$show, $obj, $request];
-        }
         switch ($request[2]) {
             case 'mes':
                 $periodo = $mes;
@@ -433,16 +438,22 @@ class RelatoriosController extends AppController
         array_push($obj['total']['entradas'], array_sum($obj['total']['entradas']));
         array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
         foreach ($obj['total']['entradas'] as $i => $t) :
-            array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
+            if ($i != array_key_last($obj['total']['entradas'])) {
+                array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
+            }
         endforeach;
         foreach ($obj['total']['entradas-saidas'] as $i => $es) :
             array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
-            if ($i == count($obj['total']['entradas-saidas']) - 1) {
-                break;
+            if ($i != array_key_last($obj['total']['entradas-saidas'])) {
+                if ($i == count($obj['total']['entradas-saidas']) - 1) {
+                    break;
+                }
+                array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
             }
-            array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
         endforeach;
-        return [$show, $obj, $request];
+        $this->response = $this->response->withType('application/json')
+            ->withStringBody(json_encode([$show, $obj, $request]));
+        return $this->response;
     }
 
 
@@ -499,10 +510,17 @@ class RelatoriosController extends AppController
 
     public function gerencial()
     {
-        $show = $this->getGerencial($this->request->getData())[0];
-        $obj = $this->getGerencial($this->request->getData())[1];
-        $request = $this->getGerencial($this->request->getData())[2];
-        $this->set(compact('obj', 'show', 'request'));
+        $show = null;
+        if ($this->request->is('post')) {
+            $show = $this->getGerencial($this->request->getData())[0];
+            $obj = $this->getGerencial($this->request->getData())[1];
+            $request = $this->getGerencial($this->request->getData())[2];
+            $this->set(compact('obj', 'show', 'request'));
+        }
+
+        $mes = ['yyyy-MM', '+1 months'];
+        $gerencial = $this->getRelatorio('REALIZADO', 'data_baixa', $mes);
+        $this->set(compact('gerencial', 'show'));
     }
 
     public function getGerencial($data = null)

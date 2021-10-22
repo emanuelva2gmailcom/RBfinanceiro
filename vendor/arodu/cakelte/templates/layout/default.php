@@ -15,9 +15,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?= $this->Html->meta('icon') ?>
   <?= $this->fetch('meta') ?>
 
+  <!-- Jquery -->
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/jquery/jquery.min.js') ?>
   <!-- ChartJS -->
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/chart.js/Chart.js') ?>
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/chart.js/Chart.css') ?>
+
+  <!-- Tabledate -->
+  <?= $this->Html->css('CakeLte./AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>
+  <?= $this->Html->css('CakeLte./AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') ?>
+  <?= $this->Html->css('CakeLte./AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables/jquery.dataTables.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/jszip/jszip.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/pdfmake/pdfmake.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/pdfmake/vfs_fonts.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js'); ?>
 
   <!-- Font Awesome Icons -->
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/fontawesome-free/css/all.min.css') ?>
@@ -26,8 +46,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Theme style -->
   <?= $this->Html->css('CakeLte./AdminLTE/dist/css/adminlte.min.css') ?>
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') ?>
-  <!-- Jquery -->
-  <?= $this->Html->script('CakeLte./AdminLTE/plugins/jquery/jquery.min.js') ?>
   <!-- Select2 -->
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/select2/css/select2.min.css'); ?>
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/select2/js/select2.min.js'); ?>
@@ -71,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
 
     .main-sidebar {
-      background-color:#2E2E2F ;
+      background-color: #2E2E2F;
     }
 
     .content-header {
@@ -125,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.content-header -->
 
       <!-- Main content -->
-      <div class="content" style="padding: 0%; margin: 0%; min-height:140vh;">
+      <div class="content" style="padding: 0%; margin: 0%; min-height:150vh;">
 
         <!-- Main content -->
 
