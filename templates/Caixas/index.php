@@ -111,7 +111,6 @@
             <td class="actions">
               <div class="btn-group">
                 <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $caixa->id_caixa], ['class' => 'btn btn-xs btn-outline-info', 'escape' => false]) ?>
-                <?= $this->Html->link(__('Editar'), ['action' => 'edit', $caixa->id_caixa], ['class' => 'btn btn-xs btn-outline-success', 'escape' => false]) ?>
                 <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $caixa->id_caixa], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $caixa->id_caixa)]) ?>
               </div>
             </td>
