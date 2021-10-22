@@ -43,33 +43,26 @@
 
 
 
-<div class="container p-5" style="width: 60%;min-width:80%;border-radius: 20px;">
+<div class="container d-flex justify-content-center">
 
-<div class="card bg-info" style="border-radius: 20px;">
+<div class="card card-danger m-5" style="border-radius: 20px; width: 80%">
+    <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
   <?= $this->Form->create($fluxoconta) ?>
-  <div class="card-body text-white">
-    <?php
-      echo $this->Form->control('conta');
-      echo $this->Form->control('descricao');
-      echo $this->Form->control('fluxosubgrupo_id', ['options' => $fluxosubgrupos, 'empty' => true]);
-    ?>
+
+    <?= $this->Form->control('conta', ['class' => 'form-control']); ?>
+    <?= $this->Form->control('descricao', ['class' => 'form-control']); ?>
+    <?= $this->Form->control('fluxosubgrupo_id', ['options' => $fluxosubgrupos, 'empty' => true], ['class' => 'form-control']); ?>
   </div>
 
-  <div class="card-footer bg-white d-flex"  style="border-radius: 0px 0px 20px 20px;">
-
-<div class="mr-auto p-2">
-
-    <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
-
-</div>
-
-<div class="p-2" >
-
-    <?= $this->Form->button(__('Salvar')) ?>
-
-</div>
-
-</div>
+  <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">
+      <div class="mr-auto p-2">
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-default']) ?>
+      </div>
+      <div class="p-2">
+        <?= $this->Form->button(__('Salvar')) ?>
+      </div>
+    </div>
 
   <?= $this->Form->end() ?>
+</div>
 </div>
