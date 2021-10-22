@@ -10,7 +10,6 @@
 
 <style>
     @media (max-width: 620px) {
-
         .card {
             position: absolute;
             margin-left: -77px;
@@ -349,7 +348,6 @@
         $grupo = $('.grupo').val();
        teste($grupo)
     })
-
 
     $('.grupo').change(function() {
         $grupo = $('.grupo').val();
