@@ -235,16 +235,29 @@ class LancamentosController extends AppController
 
             $image = $this->request->getData('Comprovante');
             $name = $image->getClientFilename();
+            $tipo = explode('.', $name);
+            $nome = $tipo[0];
+            $tipo = end($tipo);
             $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
             if ($name)
                 $image->moveTo($targetpath);
             $comprovantes = $this->Comprovantes->newEmptyEntity();
             $comprovantes->img = $name;
-            if (($this->Comprovantes->save($comprovantes)) && ($this->Lancamentos->save($lancamento))) {
+            $comprovantes->tipo = $tipo;
+            $comprovantes->nome_arquivo = $nome;
+            if (($this->Lancamentos->save($lancamento))) {
+                $comprovantes->lancamento_id = $lancamento->id_lancamento;
+            }
+            if ($lancamento->tipo == 'REALIZADO') {
+                if (($this->Comprovantes->save($comprovantes))) {
+                    $this->Flash->success(__('Lançamento adicionado com sucesso'));
+                    return $this->redirect(['action' => 'index']);
+                }
+            } else {
                 $this->Flash->success(__('Lançamento adicionado com sucesso'));
-
                 return $this->redirect(['action' => 'index']);
             }
+
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
         }
 

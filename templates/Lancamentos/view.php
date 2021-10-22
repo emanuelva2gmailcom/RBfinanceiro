@@ -166,12 +166,7 @@
         <th><?= __('Lancamento Id') ?></th>
         <th class="actions"><?= __('Ações') ?></th>
       </tr>
-      <?php if (empty($lancamento->caixaregistros)) { ?>
-        <tr>
-          <td colspan="5" class="text-info">
-            Não Encontrado!
-          </td>
-        </tr>
+     
         <?php if (empty($lancamento->caixaregistros)) { ?>
           <tr>
             <td colspan="5" class="text-info">
@@ -220,12 +215,7 @@
         <th><?= __('Modified') ?></th>
         <th class="actions"><?= __('Ações') ?></th>
       </tr>
-      <?php if (empty($lancamento->comprovantes)) { ?>
-        <tr>
-          <td colspan="7" class="text-info">
-            Não Encontrado!
-          </td>
-        </tr>
+  
         <?php if (empty($lancamento->comprovantes)) { ?>
           <tr>
             <td colspan="7" class="text-info">

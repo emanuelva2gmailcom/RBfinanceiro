@@ -40,7 +40,8 @@
             justify-content: space-between;
         }
 
-        .poxa,.grupo{
+        .poxa,
+        .grupo {
             width: 275px;
         }
 
@@ -323,34 +324,30 @@
     })
 
 
-    function grupo($grupo){
+    function grupo($grupo) {
         $grupo = $grupo;
         if ($grupo == 0) {
-
             $('#teste').removeAttr('onclick')
             $('.todos').prop('disabled', true);
-
-            $('#teste').click(function() {
+        } 
+        
+        $('#teste').click(function() {
                 if ($grupo == 0) {
                     $('.s-grupo').text('Campo Obrigatório')
                 } else {
                     $('.s-grupo').text(' ')
                 }
             })
-        } else {
-            $('.s-grupo').text(' ')
-        }
-     
-
     }
 
     $('.grupo').ready(function() {
         $grupo = $('.grupo').val();
-       teste($grupo)
-    })
+        grupo($grupo)
+    })  
 
     $('.grupo').change(function() {
         $grupo = $('.grupo').val();
-        teste($grupo)
+        // alert($grupo)
+        grupo($grupo)
     })
 </script>
