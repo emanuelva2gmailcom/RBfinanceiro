@@ -1,3 +1,14 @@
+<style>
+    @media (max-width: 620px) {
+    .card {
+      position: absolute;
+      margin-top: 80%;
+      min-width: 90%;
+    }
+
+  }
+</style>
+
 <div  class="container-fluid d-flex align-items-center justify-content-center p-5">
 <div class="card card-outline container  p-5 " style="border: green solid 2px; border-radius: 20px;" >
 
