@@ -38,13 +38,13 @@
     <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
   <?= $this->Form->create($fornecedore) ?>
 
-    <?= $this->Form->control('nome', ['class' => 'form-control']); ?>
-    <?= $this->Form->control('cnpj', ['class' => 'form-control']); ?>
-    <?= $this->Form->control('responsavel', ['class' => 'form-control']); ?>
-    <?= $this->Form->control('endereco', ['class' => 'form-control']); ?>
-    <?= $this->Form->control('email', ['class' => 'form-control']); ?>
-    <?= $this->Form->control('telefone', ['class' => 'form-control']); ?>
-    <?= $this->Form->control('is_pendente', ['custom' => true], ['class' => 'form-control']); ?>
+    <?= $this->Form->control('Nome', ['class' => 'form-control']); ?>
+    <?= $this->Form->control('CNPJ', ['class' => 'form-control']); ?>
+    <?= $this->Form->control('Responsável', ['class' => 'form-control']); ?>
+    <?= $this->Form->control('Endereço', ['class' => 'form-control']); ?>
+    <?= $this->Form->control('E-mail', ['class' => 'form-control']); ?>
+    <?= $this->Form->control('Telefone', ['class' => 'form-control']); ?>
+    <?= $this->Form->control('Pendente?', ['custom' => true], ['class' => 'form-control']); ?>
   </div>
 
   <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">
