@@ -42,19 +42,19 @@
             <td class="text-info"><?= h($fluxosubgrupo->descricao) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Fluxogrupo') ?></th>
+            <th style="color: green;"><?= __('Grupo') ?></th>
             <td class="tr1" ><?= $fluxosubgrupo->has('fluxogrupo') ? $this->Html->link($fluxosubgrupo->fluxogrupo->grupo, ['controller' => 'Fluxogrupos', 'action' => 'view', $fluxosubgrupo->fluxogrupo->grupo]) : '' ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Id Fluxosubgrupo') ?></th>
+            <th style="color: green;"><?= __('N° do Subgrupo') ?></th>
             <td class="text-info"><?= $this->Number->format($fluxosubgrupo->id_fluxosubgrupo) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Created') ?></th>
+            <th style="color: green;"><?= __('Criado') ?></th>
             <td class="text-info"><?= h($fluxosubgrupo->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Modified') ?></th>
+            <th style="color: green;"><?= __('Modificado') ?></th>
             <td class="text-info"><?= h($fluxosubgrupo->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
     </table>
@@ -91,12 +91,12 @@
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
       <tr style="color: green;">
-          <th><?= __('Id Fluxoconta') ?></th>
+          <th><?= __('N° da Conta') ?></th>
           <th><?= __('Conta') ?></th>
-          <th><?= __('Descricao') ?></th>
-          <th><?= __('Created') ?></th>
-          <th><?= __('Modified') ?></th>
-          <th><?= __('Fluxosubgrupo Id') ?></th>
+          <th><?= __('Descrição') ?></th>
+          <th><?= __('Criado') ?></th>
+          <th><?= __('Modificado') ?></th>
+          <th><?= __('Subgrupo') ?></th>
           <th class="actions"><?= __('Ações') ?></th>
       </tr>
       <?php if (empty($fluxosubgrupo->fluxocontas)) { ?>
