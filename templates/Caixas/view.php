@@ -30,23 +30,23 @@ $this->assign('title', __('Caixas') ); ?>
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
         <tr>
-            <th style="color: green;" ><?= __('Id Caixa') ?></th>
+            <th style="color: green;" ><?= __('N° de Caixa') ?></th>
             <td class="text-info" ><?= $this->Number->format($caixa->id_caixa) ?></td>
         </tr>
         <tr>
-            <th style="color: green;" ><?= __('Data Caixa') ?></th>
+            <th style="color: green;" ><?= __('Data do Caixa') ?></th>
             <td class="text-info" ><?= h($caixa->data_caixa) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Created') ?></th>
+            <th style="color: green;"><?= __('Criado') ?></th>
             <td class="text-info"><?= h($caixa->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Modified') ?></th>
+            <th style="color: green;"><?= __('Modificado') ?></th>
             <td class="text-info"><?= h($caixa->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Is Aberto') ?></th>
+            <th style="color: green;"><?= __('Aberto') ?></th>
             <td class="text-info"><?= $caixa->is_aberto ? __('Sim') : __('Não'); ?></td>
         </tr>
     </table>
@@ -79,10 +79,10 @@ $this->assign('title', __('Caixas') ); ?>
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
       <tr style="color: green;">
-          <th><?= __('Id Caixaregistro') ?></th>
-          <th><?= __('Caixa Id') ?></th>
-          <th><?= __('Tipopagamento Id') ?></th>
-          <th><?= __('Lancamento Id') ?></th>
+          <th><?= __('N° do Caixa Registro') ?></th>
+          <th><?= __('Caixa') ?></th>
+          <th><?= __('Tipo de Pagamento') ?></th>
+          <th><?= __('Lançamento') ?></th>
           <th class="actions"><?= __('Ações') ?></th>
       </tr>
       <?php if (empty($caixa->caixaregistros)) { ?>
