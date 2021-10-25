@@ -38,10 +38,10 @@
     <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
   <?= $this->Form->create($caixaregistro,['type' => 'file']) ?>
 
-    <?= $this->Form->control('tipopagamento_id', ['options' => $tipopagamentos], ['class' => 'form-control']); ?>
+    <?= $this->Form->control('Tipo de Pagamento', ['options' => $tipopagamentos], ['class' => 'form-control']); ?>
     
     <div class="form-group">
-      <?= $this->Form->control('uploadfiles', ['type' => 'file']); ?>
+      <?= $this->Form->control('Upar Arquivos', ['type' => 'file']); ?>
     </div>
     </div>
 
