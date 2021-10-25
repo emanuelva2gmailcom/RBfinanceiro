@@ -7,17 +7,7 @@
 ?>
 
 <style>
-  .del {
-    margin-right: 82%;
-  }
 
-  .del {
-    margin-right: 78%;
-  }
-
-  .edi {
-    margin-right: 2%;
-  }
 
   .tr1 a {
     color: #029BE1;
@@ -43,11 +33,11 @@
           <td class="text-info"><?= h($lancamento->tipo) ?></td>
         </tr>
         <tr>
-          <th style="color: green;"><?= __('Descricao') ?></th>
+          <th style="color: green;"><?= __('Descrição') ?></th>
           <td class="text-info"><?= h($lancamento->descricao) ?></td>
         </tr>
         <tr>
-          <th style="color: green;"> <?= __('Fluxoconta') ?></th>
+          <th style="color: green;"> <?= __('Conta') ?></th>
           <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td>
         </tr>
         <tr>
@@ -58,12 +48,12 @@
           <th style="color: green;"><?= __('Cliente') ?></th>
           <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
         </tr>
-        <tr>
+        <!-- <tr>
           <th style="color: green;"><?= __('Dreconta') ?></th>
           <td class="tr1"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->dreconta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
-        </tr>
+        </tr> -->
         <tr>
-          <th style="color: green;"><?= __('Id Lancamento') ?></th>
+          <th style="color: green;"><?= __('N° de Lançamento') ?></th>
           <td class="text-info"><?= $this->Number->format($lancamento->id_lancamento) ?></td>
         </tr>
         <tr>
@@ -71,15 +61,15 @@
           <td class="text-info"><?= $this->Number->format($lancamento->valor) ?></td>
         </tr>
         <tr>
-          <th style="color: green;"><?= __('Lancamento Id') ?></th>
+          <th style="color: green;"><?= __('Lançamento') ?></th>
           <td class="text-info"><?= $this->Number->format($lancamento->lancamento_id) ?></td>
         </tr>
         <tr>
-          <th style="color: green;"><?= __('Data Emissao') ?></th>
+          <th style="color: green;"><?= __('Data de Emissão') ?></th>
           <td class="text-info"><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-          <th style="color: green;"><?= __('Data Baixa') ?></th>
+          <th style="color: green;"><?= __('Data de Baixa') ?></th>
           <?php if (empty($lancamento->data_baixa)) { ?>
             <td class="text-info"><?= h($lancamento->data_baixa) ?></td>
           <?php } else { ?>
@@ -87,28 +77,31 @@
           <?php } ?>
         </tr>
         <tr>
-          <th style="color: green;"><?= __('Data Vencimento') ?></th>
+          <th style="color: green;"><?= __('Data de Vencimento') ?></th>
           <td class="text-info"><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-          <th style="color: green;"><?= __('Created') ?></th>
+          <th style="color: green;"><?= __('Criado') ?></th>
           <td class="text-info"><?= h($lancamento->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-          <th style="color: green;"><?= __('Modified') ?></th>
+          <th style="color: green;"><?= __('Modificado') ?></th>
           <td class="text-info"><?= h($lancamento->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
       </table>
     </div>
     <div class="card-footer bg-white" style="border-radius: 20px;">
-      <div style="padding-top: 20px;" class="d-flex justify-content-end">
+      <div style="padding-top: 20px;" class="d-flex mr-auto justify-content-around">
+
         <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $lancamento->id_lancamento],
-          ['confirm' => __('Você quer mesmo deletar?',  $lancamento->id_lancamento), 'class' => 'del btn btn-sm btn-outline-danger']
+          ['confirm' => __('Você quer mesmo deletar?',  $lancamento->id_lancamento), 'class' => 'btn btn-sm btn-outline-danger']
         ) ?>
-        <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $lancamento->id_lancamento], ['class' => 'edi btn btn-sm btn-outline-success']) ?>
-        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-sm btn-outline-info']) ?>
+
+          <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $lancamento->id_lancamento], ['class' => ' btn btn-sm btn-outline-success']) ?>
+          <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-sm btn-outline-info']) ?>
+
       </div>
     </div>
   </div>
@@ -160,10 +153,10 @@
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
         <tr style="color: green;">
-          <th><?= __('Id Caixaregistro') ?></th>
-          <th><?= __('Caixa Id') ?></th>
-          <th><?= __('Tipopagamento Id') ?></th>
-          <th><?= __('Lancamento Id') ?></th>
+          <th><?= __('N° de Caixa Registro') ?></th>
+          <th><?= __('Caixa') ?></th>
+          <th><?= __('Tipo de Pagamento') ?></th>
+          <th><?= __('Lançamento') ?></th>
           <th class="actions"><?= __('Ações') ?></th>
         </tr>
         <?php if (empty($lancamento->caixaregistros)) { ?>
@@ -206,12 +199,12 @@
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
         <tr style="color: green;">
-          <th><?= __('Id Comprovante') ?></th>
-          <th><?= __('Nome Arquivo') ?></th>
+          <th><?= __('N° de Comprovante') ?></th>
+          <th><?= __('Nome do Arquivo') ?></th>
           <th><?= __('Tipo') ?></th>
-          <th><?= __('Lancamento Id') ?></th>
-          <th><?= __('Created') ?></th>
-          <th><?= __('Modified') ?></th>
+          <th><?= __('Lançamento') ?></th>
+          <th><?= __('Criado') ?></th>
+          <th><?= __('Modificado') ?></th>
           <th class="actions"><?= __('Ações') ?></th>
         </tr>
         <?php if (empty($lancamento->comprovantes)) { ?>

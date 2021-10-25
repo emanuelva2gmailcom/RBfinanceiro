@@ -106,19 +106,20 @@
                 <tr style="color: green;">
 
                     <th><?= __('Tipo') ?></th>
-                    <th><?= __('Descricao') ?></th>
+                    <th><?= __('Descrição') ?></th>
                     <th><?= __('Valor') ?></th>
                     <th><?= __('Data de Emissão') ?></th>
                     <th><?= __('Data de Baixa') ?></th>
                     <th><?= __('Data de Vencimento') ?></th>
-                    <th><?= __('Fluxoconta') ?></th>
+                    <th><?= __('Conta') ?></th>
                     <th><?= __('Fornecedor') ?></th>
+                    <th><?= __('Cliente') ?></th>
                     <th><?= __('Ações') ?></th>
                 </tr>
             </thead>
 
             <tbody>
-                <?php foreach ($lancamentos as $lancamento) : 
+                <?php foreach ($lancamentos as $lancamento) :
                     // debug($lancamento->id_lancamento);
                     ?>
                         <tr style="color: #029BE1;">
@@ -135,6 +136,7 @@
 
                             <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
                             <td class="tr1"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
+                            <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
                             <td class="actions">
                                 <div class="btn-group">
                                     <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
@@ -394,6 +396,10 @@
                 {
                     data: 'Fornecedor'
                 },
+                {
+                    data: 'Cliente'
+                },
+
                 {
                     data: 'Ações',
                     render: function(data, type, row) {
