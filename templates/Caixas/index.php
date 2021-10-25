@@ -94,7 +94,7 @@
 
           <th><?= __('N° de Caixa') ?></th>
           <th><?= __('Data do Caixa') ?></th>
-          <th><?= __('Aberto?') ?></th>
+          <th><?= __('Aberto') ?></th>
           <th><?= __('Criado') ?></th>
           <th><?= __('Modificado') ?></th>
           <th><?= __('Ações') ?></th>
