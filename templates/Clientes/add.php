@@ -39,7 +39,7 @@
     <?= $this->Form->control('Nome', ['class' => 'form-control']); ?>
     <?= $this->Form->control('CPF',  ['class' => 'form-control']); ?>
     <?= $this->Form->control('Endereço',  ['class' => 'form-control']); ?>
-    <?= $this->Form->control('Email',  ['class' => 'form-control']); ?>
+    <?= $this->Form->control('E-mail',  ['class' => 'form-control']); ?>
     <?= $this->Form->control('Telefone',  ['class' => 'form-control']); ?>
     <?= $this->Form->control('Pendente?', ['custom' => true],  ['class' => 'form-control']); ?>
 
