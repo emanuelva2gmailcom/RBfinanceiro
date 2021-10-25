@@ -7,17 +7,7 @@
 ?>
 
 <style>
-  .del {
-    margin-right: 82%;
-  }
 
-  .del {
-    margin-right: 78%;
-  }
-
-  .edi {
-    margin-right: 2%;
-  }
 
   .tr1 a {
     color: #029BE1;
@@ -101,14 +91,17 @@
       </table>
     </div>
     <div class="card-footer bg-white" style="border-radius: 20px;">
-      <div style="padding-top: 20px;" class="d-flex justify-content-end">
+      <div style="padding-top: 20px;" class="d-flex mr-auto justify-content-around">
+
         <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $lancamento->id_lancamento],
-          ['confirm' => __('Você quer mesmo deletar?',  $lancamento->id_lancamento), 'class' => 'del btn btn-sm btn-outline-danger']
+          ['confirm' => __('Você quer mesmo deletar?',  $lancamento->id_lancamento), 'class' => 'btn btn-sm btn-outline-danger']
         ) ?>
-        <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $lancamento->id_lancamento], ['class' => 'edi btn btn-sm btn-outline-success']) ?>
-        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-sm btn-outline-info']) ?>
+
+          <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $lancamento->id_lancamento], ['class' => ' btn btn-sm btn-outline-success']) ?>
+          <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-sm btn-outline-info']) ?>
+
       </div>
     </div>
   </div>

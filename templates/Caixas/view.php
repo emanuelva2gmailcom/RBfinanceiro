@@ -52,7 +52,7 @@ $this->assign('title', __('Caixas') ); ?>
     </table>
   </div>
   <div class="card-footer bg-white" style="border-radius: 20px;">
-    <div style="padding-top: 20px;" class="d-flex justify-content-end">
+    <div style="padding-top: 20px;" class="d-flex  mr-auto justify-content-around">
       <?= $this->Form->postLink(
           __('Delete'),
           ['action' => 'delete',  $caixa->id_caixa],
