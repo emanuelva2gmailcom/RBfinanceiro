@@ -1520,11 +1520,11 @@ class UsersController extends UsermgmtAppController
 
 					$this->LoginTokens->deleteAll(['user_id' => $userId]);
 
-					if (SEND_PASSWORD_CHANGE_MAIL) {
-						$userEntity = $this->Users->find()->where(['Users.id' => $userId])->first();
+					// if (SEND_PASSWORD_CHANGE_MAIL) {
+					// 	$userEntity = $this->Users->find()->where(['Users.id' => $userId])->first();
 
-						$this->EmailHandler->sendChangePasswordEmail($userEntity);
-					}
+					// 	$this->EmailHandler->sendChangePasswordEmail($userEntity);
+					// }
 
 					$this->getRequest()->getSession()->delete('Auth.SocialChangePassword');
 
