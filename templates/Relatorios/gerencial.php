@@ -1,6 +1,6 @@
 <?php if ($show == true) { ?>
     <style>
-        tr>td {
+        tr >td {
             min-width: 100px;
         }
 
@@ -165,6 +165,17 @@
     </div>
     </div>
 <?php } ?>
+<style>
+    @media (max-width: 620px) {
+        .card-sm{
+            position: absolute;
+            /* margin-left: 0px; */
+            min-width: 90%;
+        }
+   
+        
+    }
+</style>
 <script>
     $('.select2bs4').select2({
         theme: 'bootstrap4'

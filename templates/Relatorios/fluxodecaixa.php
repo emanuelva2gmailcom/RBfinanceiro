@@ -91,3 +91,14 @@
                     // }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');;
                 });
             </script>
+            <style>
+                @media (max-width: 620px) {
+                    .card-sm {
+                        position: absolute;
+                        /* margin-left: 0px; */
+                        min-width: 90%;
+                    }
+
+
+                }
+            </style>

@@ -1,8 +1,8 @@
-<div class="card">
+<!-- <div class="card">
     <div class="card-header">
         <h3 class="card-title">DataTable with default features</h3>
     </div>
-    <!-- /.card-header -->
+
     <div class="card-body">
         <table id="example1" class="table table-sm table-bordered table-striped table-responsive">
             <thead class="bg-info">
@@ -122,8 +122,7 @@
             </tbody>
         </table>
     </div>
-</div>
-<!-- <style>
+</div><style>
     tr>td {
         min-width: 100px;
     }
@@ -273,4 +272,4 @@
             </tr>
         </thead>
     </table>
-</div> -->
+</div> 

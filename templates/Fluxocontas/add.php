@@ -26,6 +26,15 @@
     color: white;
     border: 1px solid green;
   }
+
+  @media (max-width: 620px) {
+    .card {
+      position: absolute;
+      margin-left: -77px;
+      min-width: 90%;
+    }
+
+  }
 </style>
 
 <div class="container d-flex justify-content-center">
@@ -34,9 +43,9 @@
     <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
       <?= $this->Form->create($fluxoconta) ?>
 
-          <?= $this->Form->control('conta', ['class' => 'form-control']); ?>
-          <?= $this->Form->control('descricao', ['class' => 'form-control']); ?>
-          <?= $this->Form->control('fluxosubgrupo_id', ['options' => $fluxosubgrupos, 'empty' => true], ['class' => 'form-control']); ?>
+      <?= $this->Form->control('conta', ['class' => 'form-control']); ?>
+      <?= $this->Form->control('descricao', ['class' => 'form-control']); ?>
+      <?= $this->Form->control('fluxosubgrupo_id', ['options' => $fluxosubgrupos, 'empty' => true], ['class' => 'form-control']); ?>
 
     </div>
     <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">
