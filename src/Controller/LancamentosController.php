@@ -75,55 +75,8 @@ class LancamentosController extends AppController
         ];
         if ($this->request->is('post')) {
             $request = $this->request->getData();
-            switch ($request[0]) {
-                case 'REALIZADO':
-                    $query = "tipo = 'REALIZADO'";
-                    break;
-
-                case 'PREVISTO':
-                    $query = "tipo = 'PREVISTO'";
-                    break;
-
-                default:
-                    # code...
-                    break;
-            }
-            $request[1] = new Time($request[1], 'UTC');
-            $obj = [];
-            $total = 0;
-            $this->loadModel('Fluxocontas');
-            $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
-            $lancamentos = $this->Lancamentos->find('all', [
-                'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
-                'conditions' => [$query . $renovados['and']]
-            ]);
-            foreach ($contas as $c) :
-                $valor = 0;
-                foreach ($lancamentos as $l) :
-
-                    if ($c->conta == $l->fluxoconta->conta && $l->created->i18nFormat('yyyy-MM') == $request[1]->i18nFormat('yyyy-MM')) {
-                        // debug($l->created->i18nFormat('yyyy-MM') == $request[1]->i18nFormat('yyyy-MM'));
-                        $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $valor += $l->valor : $valor -= $l->valor;
-                        switch ($c->fluxosubgrupo->fluxogrupo->grupo) {
-                            case 'entrada':
-                                # code...
-                                $totals['entrada'] += $l->valor;
-                                $totals['total'] += $l->valor;
-                                break;
-
-                            case 'saida':
-                                # code...
-                                $totals['saida'] -= $l->valor;
-                                $totals['total'] -= $l->valor;
-                                break;
-                        }
-                    }
-                endforeach;
-                $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
-                array_push($obj, [$c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
-            endforeach;
             $this->response = $this->response->withType('application/json')
-                ->withStringBody(json_encode([$obj, $total, $totals]));
+                ->withStringBody(json_encode([$request]));
             return $this->response;
         }
         $obj = [];

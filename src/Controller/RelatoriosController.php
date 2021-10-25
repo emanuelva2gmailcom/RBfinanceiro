@@ -8,9 +8,17 @@ use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\Http\Client;
 use Cake\Http\Client\Request as ClientRequest;
+use Cake\Event\EventInterface;
+use Cake\Core\Configure;
 
 class RelatoriosController extends AppController
 {
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+
+        $this->FormProtection->setConfig('unlockedActions', ['post', 'getFluxoDeCaixa']);
+    }
 
     public function caixadiario()
     {
@@ -326,9 +334,9 @@ class RelatoriosController extends AppController
 
     public function fluxodecaixa()
     {
-        if($this->request->is('post')){
+        // if($this->request->is('post')){
             // debug($this->request->getData());exit;
-        }
+        // }
         // $show = $this->getFluxoDeCaixa($this->request->getData())[0];
         // $obj = $this->getFluxoDeCaixa($this->request->getData())[1];
         // $request = $this->getFluxoDeCaixa($this->request->getData())[2];
