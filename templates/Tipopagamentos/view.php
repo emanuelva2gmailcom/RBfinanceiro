@@ -39,19 +39,19 @@ $this->assign('title', __('Tipopagamento') );
             <td class="text-info"><?= h($tipopagamento->nome) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Descricao') ?></th>
+            <th style="color: green;"><?= __('Descrição') ?></th>
             <td class="text-info"><?= h($tipopagamento->descricao) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Id Tipopagamento') ?></th>
+            <th style="color: green;"><?= __('N° do Tipo de Pagamento') ?></th>
             <td class="text-info"><?= $this->Number->format($tipopagamento->id_tipopagamento) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Created') ?></th>
+            <th style="color: green;"><?= __('Criado') ?></th>
             <td class="text-info"><?= h($tipopagamento->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Modified') ?></th>
+            <th style="color: green;"><?= __('Modificado') ?></th>
             <td class="text-info"><?= h($tipopagamento->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
     </table>
@@ -84,10 +84,10 @@ $this->assign('title', __('Tipopagamento') );
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
       <tr style="color:green;">
-          <th><?= __('Id Caixaregistro') ?></th>
-          <th><?= __('Caixa Id') ?></th>
-          <th><?= __('Tipopagamento Id') ?></th>
-          <th><?= __('Lancamento Id') ?></th>
+          <th><?= __('N° de Caixa Registro') ?></th>
+          <th><?= __('Caixa') ?></th>
+          <th><?= __('Tipo de Pagamento') ?></th>
+          <th><?= __('Lançamento') ?></th>
           <th class="actions"><?= __('Actions') ?></th>
       </tr>
       <?php if (empty($tipopagamento->caixaregistros)) { ?>
