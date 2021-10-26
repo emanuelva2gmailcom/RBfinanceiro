@@ -245,7 +245,7 @@ return [
         'gmail' => [
             'className' => 'Smtp',
             'host' => 'ssl://smtp.gmail.com',
-            'port' => 465,
+            'port' =>  465,
             'timeout' => 30,
             'username' => 'teste.emanuelvanobre@gmail.com',
             'password' => '996927472',

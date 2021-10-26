@@ -135,21 +135,20 @@ class UserEmailsController extends UsermgmtAppController
 	{
 		$confirmRender = false;
 		$userEmailEntity = $this->UserEmails->newEmptyEntity();
-		
+
 		$this->loadModel('Usermgmt.UserEmailTemplates');
 		$this->loadModel('Usermgmt.UserEmailSignatures');
 		$this->loadModel('Usermgmt.Users');
-		
+
 		if ($this->getRequest()->is('post')) {
+
 			$formdata = $this->getRequest()->getData();
-			
+
 			$confirm = null;
 			if (isset($formdata['confirmEmail'])) {
 				$confirm = 'confirm';
 			}
-			
-			debug($formdata);
-			exit;
+
 			if (isset($formdata['UserEmails']['type'])) {
 				if ($formdata['UserEmails']['type'] == 'USERS') {
 					unset($formdata['UserEmails']['user_group_id']);
@@ -473,33 +472,35 @@ class UserEmailsController extends UsermgmtAppController
 	private function sendAndSaveUserEmail($data, $users)
 	{
 		$data['sent_by'] = $this->UserAuth->getUserId();
-
 		if (!empty($data['user_group_id'])) {
 			sort($data['user_group_id']);
 			$data['user_group_id'] = implode(',', $data['user_group_id']);
 		}
-
+		
 		$data['message'] = $data['modified_message'];
-
+		
 		if ($this->UserEmails->save($data, ['validate' => false])) {
 			$fromEmailConfig = $data['from_email'];
 			$fromNameConfig = $data['from_name'];
-
-			$emailObj = new Mailer('default');
+			
+			$emailObj = new Mailer();
+			$emailObj->setTransport('gmail');
 			$emailObj->setFrom([$fromEmailConfig => $fromNameConfig]);
 			$emailObj->setSender([$fromEmailConfig => $fromNameConfig]);
 			$emailObj->setSubject($data['subject']);
 			$emailObj->setEmailFormat('both');
-
+			
 			$totalSentEmails = $totalEmails = 0;
 			$sentEmails = [];
-
+			
 			$this->loadModel('Usermgmt.UserEmailRecipients');
-
+			
 			foreach ($users as $user) {
+				// debug($user);
+				// exit;
 				if (!isset($sentEmails[$user['email']])) {
 					$totalEmails++;
-
+					
 					$emailObj->setTo($user['email']);
 
 					$userEmailRecipient = $this->UserEmailRecipients->newEmptyEntity();
@@ -512,17 +513,17 @@ class UserEmailsController extends UsermgmtAppController
 						}
 					} catch (Exception $ex) {
 					}
-
+					
 					$userEmailRecipient['user_email_id'] = $data['id'];
 					$userEmailRecipient['user_id'] = $user['id'];
 					$userEmailRecipient['email_address'] = $user['email'];
 
 					$this->UserEmailRecipients->save($userEmailRecipient, ['validate' => false]);
-
+					
 					$sentEmails[$user['email']] = $user['email'];
 				}
 			}
-
+			
 			if (!empty($data['cc_to'])) {
 				$data['cc_to'] = array_filter(array_map('trim', explode(',', strtolower($data['cc_to']))));
 
