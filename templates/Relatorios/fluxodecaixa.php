@@ -106,7 +106,7 @@
         border: 1px solid green;
     }
 
-    @media (width: 320px) {
+    /* @media (max-width: 320px) {
     .teste  {
       width: 316px;
       margin-left: -16%;
@@ -122,7 +122,7 @@
 
   }
 
-  @media (width: 370px) {
+  @media (width: 0px) {
     .teste  {
       width: 316px;
       margin-left: -16%;
@@ -136,7 +136,7 @@
        font-size: 14px;
     }
 
-  }
+  } */
 
 
 </style>
@@ -145,7 +145,7 @@
        <div class="card">
            <div class="card-header">
                <div class="card-body">
-                   <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
+                   <?= $this->Form->create([], ['id' => 'form']) ?>
                    <div class="teste d-flex flex-row justify-content-center align-items-center content bg-info mb-3 p-3" style="border-radius: 20px;">
                        <div class="col-3 px-3">
                            <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control text-white']); ?>
