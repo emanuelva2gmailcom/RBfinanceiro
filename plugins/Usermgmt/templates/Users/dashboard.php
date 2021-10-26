@@ -76,61 +76,61 @@
 					echo $this->Html->link(__('Permissões de Subgrupos'), ['controller'=>'UserGroupPermissions', 'action'=>'subgroups', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
 				}
 
-				// echo "<hr/>";
+				echo "<hr/>";
 
-				// echo "<h4><span class='badge badge-primary'>".__('Comunicação por E-mail')."</span></h4><br/>";
+				echo "<h4><span class='badge badge-primary'>".__('Comunicação por E-mail')."</span></h4><br/>";
 				
-				// if($this->UserAuth->HP('UserEmails', 'send', 'Usermgmt')) {
-				// 	echo $this->Html->link(__('Enviar E-mail'), ['controller'=>'UserEmails', 'action'=>'send', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
-				// }
+				if($this->UserAuth->HP('UserEmails', 'send', 'Usermgmt')) {
+					echo $this->Html->link(__('Enviar E-mail'), ['controller'=>'UserEmails', 'action'=>'send', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
+				}
 
-				// if($this->UserAuth->HP('UserEmails', 'index', 'Usermgmt')) {
-				// 	echo $this->Html->link(__('Ver E-mails enviados'), ['controller'=>'UserEmails', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
-				// }
+				if($this->UserAuth->HP('UserEmails', 'index', 'Usermgmt')) {
+					echo $this->Html->link(__('Ver E-mails enviados'), ['controller'=>'UserEmails', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
+				}
 
-				// if($this->UserAuth->HP('ScheduledEmails', 'index', 'Usermgmt')) {
-				// 	echo $this->Html->link(__('E-mails Programados'), ['controller'=>'ScheduledEmails', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
-				// }
+				if($this->UserAuth->HP('ScheduledEmails', 'index', 'Usermgmt')) {
+					echo $this->Html->link(__('E-mails Programados'), ['controller'=>'ScheduledEmails', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
+				}
 
-				// if($this->UserAuth->HP('UserContacts', 'index', 'Usermgmt')) {
-				// 	echo $this->Html->link(__('Consultas de Contato'), ['controller'=>'UserContacts', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
-				// }
+				if($this->UserAuth->HP('UserContacts', 'index', 'Usermgmt')) {
+					echo $this->Html->link(__('Consultas de Contato'), ['controller'=>'UserContacts', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
+				}
 
-				// if($this->UserAuth->HP('UserEmailTemplates', 'index', 'Usermgmt')) {
-				// 	echo $this->Html->link(__('Modelos de E-mail'), ['controller'=>'UserEmailTemplates', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
-				// }
+				if($this->UserAuth->HP('UserEmailTemplates', 'index', 'Usermgmt')) {
+					echo $this->Html->link(__('Modelos de E-mail'), ['controller'=>'UserEmailTemplates', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
+				}
 
-				// if($this->UserAuth->HP('UserEmailSignatures', 'index', 'Usermgmt')) {
-				// 	echo $this->Html->link(__('Assinaturas de E-mail'), ['controller'=>'UserEmailSignatures', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
-				// }
+				if($this->UserAuth->HP('UserEmailSignatures', 'index', 'Usermgmt')) {
+					echo $this->Html->link(__('Assinaturas de E-mail'), ['controller'=>'UserEmailSignatures', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
+				}
 
-				// echo "<hr/>";
+				echo "<hr/>";
 
-				// echo "<h4><span class='badge badge-primary'>".__('Gerenciamento de Páginas Estáticas')."</span></h4><br/>";
+				echo "<h4><span class='badge badge-primary'>".__('Gerenciamento de Páginas Estáticas')."</span></h4><br/>";
 				
-				// if($this->UserAuth->HP('StaticPages', 'add', 'Usermgmt')) {
-				// 	echo $this->Html->link(__('Adicionar Página'), ['controller'=>'StaticPages', 'action'=>'add', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
-				// }
+				if($this->UserAuth->HP('StaticPages', 'add', 'Usermgmt')) {
+					echo $this->Html->link(__('Adicionar Página'), ['controller'=>'StaticPages', 'action'=>'add', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
+				}
 				
-				// if($this->UserAuth->HP('StaticPages', 'index', 'Usermgmt')) {
-				// 	echo $this->Html->link(__('Todas as Páginas'), ['controller'=>'StaticPages', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
-				// }
+				if($this->UserAuth->HP('StaticPages', 'index', 'Usermgmt')) {
+					echo $this->Html->link(__('Todas as Páginas'), ['controller'=>'StaticPages', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
+				}
 				
-				// echo "<hr/>";
+				echo "<hr/>";
 
-				// echo "<h4><span class='badge badge-primary'>".__('Configurações de Administrador')."</span></h4><br/>";
+				echo "<h4><span class='badge badge-primary'>".__('Configurações de Administrador')."</span></h4><br/>";
 				
-				// if($this->UserAuth->HP('UserSettings', 'index', 'Usermgmt')) {
-				// 	echo $this->Html->link(__('Todas as Configurações'), ['controller'=>'UserSettings', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
-				// }
+				if($this->UserAuth->HP('UserSettings', 'index', 'Usermgmt')) {
+					echo $this->Html->link(__('Todas as Configurações'), ['controller'=>'UserSettings', 'action'=>'index', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
+				}
 				
-				// if($this->UserAuth->HP('UserSettings', 'cakelog', 'Usermgmt')) {
-				// 	echo $this->Html->link(__('Cake Logs'), ['controller'=>'UserSettings', 'action'=>'cakelog', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
-				// }
+				if($this->UserAuth->HP('UserSettings', 'cakelog', 'Usermgmt')) {
+					echo $this->Html->link(__('Cake Logs'), ['controller'=>'UserSettings', 'action'=>'cakelog', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
+				}
 				
-				// if($this->UserAuth->HP('Users', 'deleteCache', 'Usermgmt')) {
-				// 	echo $this->Html->link(__('Excluir Cache'), ['controller'=>'Users', 'action'=>'deleteCache', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
-				// }
+				if($this->UserAuth->HP('Users', 'deleteCache', 'Usermgmt')) {
+					echo $this->Html->link(__('Excluir Cache'), ['controller'=>'Users', 'action'=>'deleteCache', 'plugin'=>'Usermgmt'], ['class'=>'btn btn-secondary btn-sm mr-2 mb-2']);
+				}
 			}
 		}?>
 	</div>

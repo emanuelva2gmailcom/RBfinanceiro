@@ -225,16 +225,34 @@ return [
      */
     'EmailTransport' => [
         'default' => [
+            'className' => MailTransport::class,
+            /*
+             * The keys host, port, timeout, username, password, client and tls
+             * are used in SMTP transports
+             */
+            'host' => 'localhost',
+            'port' => 25,
+            'timeout' => 30,
+            /*
+             * It is recommended to set these options through your environment or app_local.php
+             */
+            //'username' => null,
+            //'password' => null,
+            'client' => null,
+            'tls' => false,
+            'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
+        ],
+        'gmail' => [
             'className' => 'Smtp',
             'host' => 'ssl://smtp.gmail.com',
             'port' => 465,
             'timeout' => 30,
-            // 'username' => null,
-            // 'password' => null,
+            'username' => 'teste.emanuelvanobre@gmail.com',
+            'password' => '996927472',
             'client' => null,
             'tls' => null,
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
-        ],
+        ]
     ],
 
     /*
@@ -246,16 +264,12 @@ return [
      * easier. Each profile accepts a number of keys. See `Cake\Mailer\Email`
      * for more information.
      */
+
     'Email' => [
-        'default' => [
-            'transport' => 'default',
-            // 'from' => 'you@localhost',
-            /*
-             * Will by default be set to config value of App.encoding, if that exists otherwise to UTF-8.
-             */
-            //'charset' => 'utf-8',
-            //'headerCharset' => 'utf-8',
-        ],
+        'defualt' => [
+            'transport' => 'gmail',
+            'from' => 'teste.emanuelvanobre@gmail.com',
+        ]
     ],
 
     /*
