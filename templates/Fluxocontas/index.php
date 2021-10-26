@@ -8,6 +8,15 @@
 
 <?php $this->assign('title', __('Fluxocontas')); ?>
 <style>
+
+li{
+        color: #17a2b8;
+    }
+
+    li a{
+        color: #17a2b8;
+    }
+
     .tr1 a {
         color: #029BE1;
     }

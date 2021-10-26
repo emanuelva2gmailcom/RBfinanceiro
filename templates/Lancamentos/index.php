@@ -95,6 +95,14 @@
         opacity: 0.7;
     }
 
+    li{
+        color: #17a2b8;
+    }
+
+    li a{
+        color: #17a2b8;
+    }
+
 
 </style>
 
