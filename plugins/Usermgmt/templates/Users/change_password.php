@@ -1,7 +1,7 @@
 <div class="card">
 	<div class="card-header text-white bg-dark">
 		<span class="card-title">
-			<?php echo __('Change Password');?>
+			<?php echo __('Mudar Senha');?>
 		</span>
 	</div>
 
@@ -11,7 +11,7 @@
 		<?php
 		if(!$this->request->getSession()->check('Auth.SocialChangePassword')) {?>
 			<div class="row form-group">
-				<label class="col-md-2 col-form-label required"><?php echo __('Old Password');?></label>
+				<label class="col-md-2 col-form-label required"><?php echo __('Senha Antiga');?></label>
 				<div class="col-md-4">
 					<?php echo $this->Form->control('Users.oldpassword', ['type'=>'password', 'label'=>false, 'class'=>'form-control']);?>
 				</div>
@@ -20,14 +20,14 @@
 		}?>
 
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label required"><?php echo __('New Password');?></label>
+			<label class="col-md-2 col-form-label required"><?php echo __('Nova Senha');?></label>
 			<div class="col-md-4">
 				<?php echo $this->Form->control('Users.password', ['type'=>'password', 'label'=>false, 'class'=>'form-control']);?>
 			</div>
 		</div>
 
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label required"><?php echo __('Confirm Password');?></label>
+			<label class="col-md-2 col-form-label required"><?php echo __('Confirme a Senha');?></label>
 			<div class="col-md-4">
 				<?php echo $this->Form->control('Users.cpassword', ['type'=>'password', 'label'=>false, 'class'=>'form-control']);?>
 			</div>
@@ -35,7 +35,7 @@
 
 		<div class="row form-group border-top pt-3">
 			<div class="col">
-				<?php echo $this->Form->Submit(__('Change Password'), ['class'=>'btn btn-primary', 'id'=>'changePasswordSubmitBtn']);?>
+				<?php echo $this->Form->Submit(__('Mudar Senha'), ['class'=>'btn btn-primary', 'id'=>'changePasswordSubmitBtn']);?>
 			</div>
 		</div>
 

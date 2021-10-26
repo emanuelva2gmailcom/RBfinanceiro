@@ -1,11 +1,11 @@
 <div class="card">
 	<div class="card-header text-white bg-dark">
 		<span class="card-title">
-			<?php echo __('All User Groups');?>
+			<?php echo __('Todos os Grupos do Usuário');?>
 		</span>
 
 		<span class="card-title float-right">
-			<?php echo $this->Html->link(__('Add User Group', true), ['action'=>'add'], ['class'=>'btn btn-secondary btn-sm']);?>
+			<?php echo $this->Html->link(__('Adicionar Grupo do Usuário', true), ['action'=>'add'], ['class'=>'btn btn-secondary btn-sm']);?>
 		</span>
 	</div>
 

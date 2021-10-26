@@ -33,19 +33,19 @@ $this->Paginator->setTemplates([
 			if(!empty($firstP)) {
 				echo $firstP;
 			} else {
-				echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".__('First')."</a></li>";
+				echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".__('Primerio')."</a></li>";
 			}
 
 			if($this->Paginator->hasPrev()) {
 				echo $this->Paginator->prev(__('Previous'));
 			} else {
-				echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".__('Previous')."</a></li>";
+				echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".__('Anterior')."</a></li>";
 			}
 
 			if($this->Paginator->hasNext()) {
 				echo $this->Paginator->next(__('Next'));
 			} else {
-				echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".__('Next')."</a></li>";
+				echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".__('Proximo')."</a></li>";
 			}
 
 			$lastP = $this->Paginator->last(__('Last'));
@@ -53,7 +53,7 @@ $this->Paginator->setTemplates([
 			if(!empty($lastP)) {
 				echo $lastP;
 			} else {
-				echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".__('Last')."</a></li>";
+				echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".__('Último')."</a></li>";
 			}
 		echo "</div>";
 
@@ -64,7 +64,7 @@ $this->Paginator->setTemplates([
 		echo "<div class='pagination-info pr-3 mb-3 d-inline-block'>";
 			echo "<li class='page-item disabled d-inline-block'><a class='page-link' href='#'>".$this->Paginator->counter($paginationText.' {{count}}')."</a></li>";
 
-			echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".$this->Paginator->counter(__('Page').' {{page}} '.__('of').' {{pages}}')."</a></li>";
+			echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".$this->Paginator->counter(__('Página').' {{page}} '.__('de').' {{pages}}')."</a></li>";
 
 		echo "</div>";?>
 	</ul>

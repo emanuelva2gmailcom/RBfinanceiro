@@ -21,10 +21,11 @@ if(isset($updateDivId) && $useAjax) {?>
 		$(function(){
 			$(document).on("mouseenter", "table tr th a", function() {
 				$(this).attr('title', 'Click to sort records');
+				// console.log('AAAA')
 			});
 
 			$($updateDivId+' .psorting a, '+$updateDivId+' .pagination a').click(function(e) {
-				e.preventDefault();
+				// e.preventDefault();
 				var url = $(this).attr('href');
 
 				if(url) {
@@ -42,13 +43,16 @@ if(isset($updateDivId) && $useAjax) {?>
 
 							if(window.history.pushState) {
 								window.history.pushState({},"", url);
+						
+
 							}
 						},
 						complete: function (data, textStatus) {
 							$("#loader_modal").modal('hide');
+
 						},
 						error: function(jqXHR, textStatus, errorThrown) {
-							alert(errorThrown)
+							// alert(errorThrown)
 						}
 					});
 				}

@@ -121,6 +121,7 @@ echo "<div class='usermgmtSearchForm clearfix border-bottom pt-2'>";
 			//&lt;![CDATA[
 			$(document).ready(function () {
 				$("#<?php echo $searchFormId;?>").bind("submit", function (event) {
+					console.log($searchFormId);
 					$.ajax({
 						type: "POST",
 						url: "<?php echo $targetUrl;?>",
@@ -296,7 +297,7 @@ echo "<div class='usermgmtSearchForm clearfix border-bottom pt-2'>";
 					});
 				});";
 		$jq .= "</script>";
-		
+				
 		echo $jq;
 
 		echo '<style type="text/css">
@@ -308,14 +309,14 @@ echo "<div class='usermgmtSearchForm clearfix border-bottom pt-2'>";
 	}
 
 	echo "<div class='float-right px-2 pb-1 mt-2'>";
-		echo "<div class='d-inline-block ml-2 align-top'>".$this->Form->submit(__('Search'), ['class'=>'btn btn-primary btn-sm searchSubmitBtn'])."</div>";
+		echo "<div class='d-inline-block ml-2 align-top'>".$this->Form->submit(__('Pesquisar'), ['class'=>'btn btn-primary btn-sm searchSubmitBtn'])."</div>";
 		
 		if($clear) {
 			if($formType == 'POST') {
 				$this->Form->unlockField('search_clear');
 			}
 
-			echo "<div class='d-inline-block ml-2 align-top'>".$this->Form->hidden('search_clear', ['class'=>'searchClearInput', 'value'=>0])."<button type='button' class='btn btn-danger btn-sm searchClearBtn'>".__('Clear')."</button></div>";
+			echo "<div class='d-inline-block ml-2 align-top'>".$this->Form->hidden('search_clear', ['class'=>'searchClearInput', 'value'=>0])."<button type='button' class='btn btn-danger btn-sm searchClearBtn'>".__('Limpar')."</button></div>";
 		}
 
 		if(!empty($pagingAttributes)) {
