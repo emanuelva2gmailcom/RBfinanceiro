@@ -92,8 +92,8 @@
         <tr style="color: green;">
 
           <th><?= __('Conta') ?></th>
-          <th><?= __('Descricao') ?></th>
-          <th><?= __('Fluxosubgrupo') ?></th>
+          <th><?= __('Descrição') ?></th>
+          <th><?= __('Subgrupo') ?></th>
           <th><?= __('Ações') ?></th>
         </tr>
       </thead>
