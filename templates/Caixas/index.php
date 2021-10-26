@@ -92,11 +92,11 @@
       <thead class="nm">
         <tr style="color: green;">
 
-          <th><?= __('id_caixa') ?></th>
-          <th><?= __('data_caixa') ?></th>
-          <th><?= __('is_aberto') ?></th>
-          <th><?= __('created') ?></th>
-          <th><?= __('modified') ?></th>
+          <th><?= __('N° de Caixa') ?></th>
+          <th><?= __('Data do Caixa') ?></th>
+          <th><?= __('Aberto') ?></th>
+          <th><?= __('Criado') ?></th>
+          <th><?= __('Modificado') ?></th>
           <th><?= __('Ações') ?></th>
         </tr>
       </thead>

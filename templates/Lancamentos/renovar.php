@@ -49,9 +49,9 @@
     <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
     <?= $this->Form->create($lancamento) ?>
 
-        <?= $this->Form->control('valor', ['class' => 'form-control']); ?>
-        <?= $this->Form->control('descricao', ['class' => 'form-control']); ?>
-        <?= $this->Form->control('data_vencimento', ['class' => 'form-control']);?>
+        <?= $this->Form->control('Valor', ['class' => 'form-control']); ?>
+        <?= $this->Form->control('Descrição', ['class' => 'form-control']); ?>
+        <?= $this->Form->control('Data de Vencimento', ['class' => 'form-control']);?>
 
     </div>
 

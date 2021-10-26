@@ -97,7 +97,7 @@
               <th><?= __('Endereço') ?></th>
               <th><?= __('E-mail') ?></th>
               <th><?= __('Telefone') ?></th>
-              <th><?= __('Is_Pendente') ?></th>
+              <th><?= __('Pendente') ?></th>
           <th><?= __('Ações') ?></th>
         </tr>
       </thead>

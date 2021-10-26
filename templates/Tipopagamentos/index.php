@@ -92,7 +92,7 @@
         <tr style="color: green;">
 
           <th><?= __('Nome') ?></th>
-          <th><?= __('Descricao') ?></th>
+          <th><?= __('Descrição') ?></th>
           <th><?= __('Ações') ?></th>
         </tr>
       </thead>

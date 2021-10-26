@@ -35,19 +35,19 @@ $this->assign('title', __('Fornecedor') );
             <td class="text-info"><?= h($fornecedore->nome) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Cnpj') ?></th>
+            <th style="color: green;"><?= __('CNPJ') ?></th>
             <td class="text-info"><?= h($fornecedore->cnpj) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Responsavel') ?></th>
+            <th style="color: green;"><?= __('Responsável') ?></th>
             <td class="text-info"><?= h($fornecedore->responsavel) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Endereco') ?></th>
+            <th style="color: green;"><?= __('Endereço') ?></th>
             <td class="text-info"><?= h($fornecedore->endereco) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Email') ?></th>
+            <th style="color: green;"><?= __('E-mail') ?></th>
             <td class="text-info"><?= h($fornecedore->email) ?></td>
         </tr>
         <tr>
@@ -55,19 +55,19 @@ $this->assign('title', __('Fornecedor') );
             <td class="text-info"><?= h($fornecedore->telefone) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Id Fornecedor') ?></th>
+            <th style="color: green;"><?= __('N° do Fornecedor') ?></th>
             <td class="text-info"><?= $this->Number->format($fornecedore->id_fornecedor) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Created') ?></th>
+            <th style="color: green;"><?= __('Criado') ?></th>
             <td class="text-info"><?= h($fornecedore->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Modified') ?></th>
+            <th style="color: green;"><?= __('Modificado') ?></th>
             <td class="text-info"><?= h($fornecedore->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Is Pendente') ?></th>
+            <th style="color: green;"><?= __('Pendente') ?></th>
             <td class="text-info"><?= $fornecedore->is_pendente ? __('Sim') : __('Não'); ?></td>
         </tr>
     </table>

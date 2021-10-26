@@ -35,8 +35,8 @@
   <?= $this->Form->create($caixa) ?>
   <div class="card-body text-white">
     <?php
-      echo $this->Form->control('data_caixa');
-      echo $this->Form->control('is_aberto', ['custom' => true]);
+      echo $this->Form->control('Data do Caixa');
+      echo $this->Form->control('Aberto?', ['custom' => true]);
     ?>
   </div>
 
