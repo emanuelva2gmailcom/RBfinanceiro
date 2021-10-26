@@ -31,19 +31,27 @@
     <div class="container-fluid d-flex align-items-center justify-content-center p-5">
         <div class="card container bg-info" style="border-radius: 20px;">
             <div class="card-body">
-                <?= $this->Form->create([], ['id' => 'form']) ?>
-                <div class="d-flex flex-row justify-content-center align-items-center content bg-info mb-3 p-3" style="border-radius: 20px;">
-                    <div class="col-4 px-4">
-                        <?= $this->Form->control('Mês', ['class' => 'form-control mes', 'type' => 'month',]); ?>
-                    </div>
-                    <div class="col-4 px-4">
+                <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
+                <div class="col-md-6">
+                    <?= $this->Form->control('Mês', ['class' => 'form-control mes', 'type' => 'month',]); ?>
+                    <!-- /.form-group -->
+                    <!-- /.form-group -->
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
                         <label style="color: white;">Tipo</label>
                         <?= $this->Form->select('tipo', ['REALIZADO' => 'Realizado', 'PREVISTO' => 'Previsto'], ['class' => 'form-control tipo mb-3', 'id' => 'card']); ?>
                     </div>
-                    <div class="col-2 px-5 mt-3">
-                        <?= $this->Form->button(__('Calcular'),) ?>
+
+                </div>
+                <!-- /.col -->
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label style="color: white;">Enviar</label>
+                        <?= $this->Form->button(__('Calcular'), ['class' => 'form-control']) ?>
                     </div>
                 </div>
+                <!-- /.col -->
                 <?= $this->Form->end() ?>
                 <canvas class="bg-white mb-3 p-2" id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; border-radius: 20px;"></canvas>
                 <table class="table text-nowrap">
