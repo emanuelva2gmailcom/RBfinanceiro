@@ -27,7 +27,7 @@
     </style>
 </head>
 
-<body onload="onload()">
+<body>
     <div class="container-fluid d-flex align-items-center justify-content-center p-5">
         <div class="card container bg-info" style="border-radius: 20px;">
             <div class="card-body">
@@ -54,21 +54,18 @@
                 <!-- /.col -->
                 <?= $this->Form->end() ?>
                 <canvas class="bg-white mb-3 p-2" id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; border-radius: 20px;"></canvas>
-                <table class="table text-nowrap">
-                    <thead>
-                        <tr>
-                            <th class="teste"><?= ('Grupo do Fluxo de Caixa') ?></th>
-                            <th class="teste"><?= ('Conta do Fluxo de Caixa') ?></th>
-                            <th class="teste"><?= ('Valor') ?></th>
-                        </tr>
-                    </thead>
+                <div class="table table-responsive">
 
-                    <tbody id="table-body">
-
-
-                    </tbody>
-
-                </table>
+                    <table class="table text-nowrap" id="example">
+                        <thead>
+                            <tr>
+                                <th><?= ('Grupo do Fluxo de Caixa') ?></th>
+                                <th><?= ('Conta do Fluxo de Caixa') ?></th>
+                                <th><?= ('Valor') ?></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
             <!-- /.card-body -->
         </div>
@@ -77,21 +74,53 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script>
         function show(data) {
-            let output = ''
-            for (let d of data[0]) {
-                output += `<tr>
-                            <td>${d[0]}</td>
-                            <td>${d[1]}</td>
-                            <td>${d[2]}</td>
-                        </tr>`
-            }
-            output += `<tr>
-                        <th>Total</th>
-                        <th> </th>
-                        <th>${data[1]}</th>
-                    </tr>`
+            var t = $('#example').DataTable({
+                "columnDefs": [{
+                    "defaultContent": "-",
+                    "targets": "_all"
+                }],
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+                "language": {
+                    "emptyTable": "Nenhum registro disponível na tabela",
+                    "zeroRecords": "Nenhum registro encontrado",
+                    "info": "Mostrando _START_ de _END_ das _TOTAL_ contas",
+                    "infoEmpty": "Mostrando 0 de 0 dos 0 fornecedores",
+                    "infoFiltered": "(filtrado do total de _MAX_ fornecedores)",
+                    "search": "Procurar:",
+                    "paginate": {
+                        "first": "Primeiro",
+                        "last": "Último",
+                        "next": "Próximo",
+                        "previous": "Depois"
+                    },
+                }
+            });
+            console.log(data[0]) 
+            t.clear() 
+            t.rows.add(data[0])
+            t.row.add(['Total', '', data[1]]) 
+            t.draw()
+            // let output = ''
+            // for (let d of data[0]) {
+            //     output += `<tr>
+            //                 <td>${d[0]}</td>
+            //                 <td>${d[1]}</td>
+            //                 <td>${d[2]}</td>
+            //             </tr>`
+            // }
+            // output += `<tr>
+            //             <th>Total</th>
+            //             <th> </th>
+            //             <th>${data[1]}</th>
+            //         </tr>`
 
-            document.getElementById('table-body').innerHTML = output;
+            // document.getElementById('table-body').innerHTML = output;
         }
 
         let donutChartCanvas = $('#donutChart').get(0).getContext('2d')
