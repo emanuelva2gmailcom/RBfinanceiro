@@ -19,9 +19,7 @@
         color: green;
     }
 
-    td {
-        color: #17a2b8;
-    }
+    td {}
 
     .dataTables_info {
         color: green;
@@ -145,24 +143,30 @@
 <div class="card">
     <div class="card-header">
         <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
-            <div class="col-md-3">
-                <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control text-white']); ?>
-            </div>
-            <div class="col-md-3">
-                <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'date'], ['class' => 'la form-control']); ?>
-            </div>
-            <div class="col-md-3">
-                <label>Período</label>
-                <?= $this->Form->select(2, ['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'periodo form-control select2bs4']); ?>
-            </div>
-            <div class="col-md-3">
-                <label>Enviar</label>
-                <?= $this->Form->button(__('Enviar'), ['class' => 'form-control']) ?>
-            </div>
+        <div class="col-md-3">
+            <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control text-white']); ?>
+        </div>
+        <div class="col-md-3">
+            <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'date'], ['class' => 'la form-control']); ?>
+        </div>
+        <div class="col-md-3">
+            <label>Período</label>
+            <?= $this->Form->select(2, ['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'periodo form-control select2bs4']); ?>
+        </div>
+        <div class="col-md-3">
+            <label>Enviar</label>
+            <?= $this->Form->button(__('Enviar'), ['class' => 'form-control']) ?>
+        </div>
         <?= $this->Form->end() ?>
     </div>
-    <div class="card-2 card-body">
-        <table id="example" class="table table-sm table-bordered table-striped table-responsive">
+    <div class="card-2 card-body table-responsive">
+        <table id="example" class="table table-sm table-bordered table-striped" style="width:100%">
+            <thead class="text-green">
+
+            </thead>
+            <tbody class="text-info">
+
+            </tbody>
         </table>
     </div>
 </div>
@@ -176,27 +180,36 @@
         response = []
         data.total.entradas.push(data.total.entradas[0])
         data.total.entradas[0] = 'Entradas'
-        response.push(data.total.entradas)
+        $($('#example').DataTable().row.add(data.total.entradas).draw()
+            .node()).addClass('bg-success');
+        // response.push(data.total.entradas)
         data.rows.td.map(function(d) {
             if (data.rows.th['entradas'].includes(d[0])) {
-                response.push(d)
+                // response.push(d)
+                $($('#example').DataTable().row.add(d).draw()
+                    .node()).addClass('text-success');
             }
         })
         data.total.saidas.push(data.total.saidas[0])
         data.total.saidas[0] = 'Saidas'
-        response.push(data.total.saidas)
+        $($('#example').DataTable().row.add(data.total.saidas).draw()
+            .node()).addClass('bg-danger');
         data.rows.td.map(function(d) {
             if (data.rows.th['saidas'].includes(d[0])) {
-                response.push(d)
+                $($('#example').DataTable().row.add(d).draw()
+                    .node()).addClass('text-danger');
             }
         })
         data.total['entradas-saidas'].unshift('Entradas - Saídas')
         data.total.inicial.unshift('Saldo Inicial')
         data.total.final.unshift('Saldo Final')
-        response.push(data.total['entradas-saidas'])
-        response.push(data.total.inicial)
-        response.push(data.total.final)
-        return response
+        $($('#example').DataTable().row.add(data.total['entradas-saidas']).draw()
+            .node()).addClass('bg-info');
+        $($('#example').DataTable().row.add(data.total.inicial).draw()
+            .node()).addClass('bg-info');
+        $($('#example').DataTable().row.add(data.total.final).draw()
+            .node()).addClass('bg-info');
+        // return response
     }
 
 
@@ -208,23 +221,26 @@
         data['header'].map(function(dat) {
             columns.push({
                 title: dat,
+                // "width": "100px"
             })
         })
+
+
         //    $("#thead").html(inner)
         //    dataa =
         $("#example").DataTable({
-            "data": datase(data),
+            // "data": datase(data),
             "columns": columns,
             "columnDefs": [{
                 "defaultContent": "-",
-                "targets": "_all"
+                "targets": "_all",
             }],
             "paging": true,
             "lengthChange": false,
             "searching": true,
             "ordering": false,
             "info": true,
-            "autoWidth": false,
+            // "autoWidth": false,
             "responsive": true,
             "language": {
                 "emptyTable": "Nenhum registro disponível na tabela",
@@ -242,7 +258,7 @@
             },
             "buttons": ["copy", "excel", "pdf"]
         }).buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
-        //    console.log('fez')
+        datase(data)
     }
     $(function() {
         $("button").click(async function(event) {

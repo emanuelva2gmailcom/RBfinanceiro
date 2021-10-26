@@ -19,10 +19,6 @@
         color: green;
     }
 
-    td {
-        color: #17a2b8;
-    }
-
     .dataTables_info {
         color: green;
     }
@@ -125,27 +121,36 @@
         response = []
         data.total.entradas.push(data.total.entradas[0])
         data.total.entradas[0] = 'Entradas'
-        response.push(data.total.entradas)
+        $($('#example').DataTable().row.add(data.total.entradas).draw()
+            .node()).addClass('bg-success');
+        // response.push(data.total.entradas)
         data.rows.td.map(function(d) {
             if (data.rows.th['entradas'].includes(d[0])) {
-                response.push(d)
+                // response.push(d)
+                $($('#example').DataTable().row.add(d).draw()
+                    .node()).addClass('text-success');
             }
         })
         data.total.saidas.push(data.total.saidas[0])
         data.total.saidas[0] = 'Saidas'
-        response.push(data.total.saidas)
+        $($('#example').DataTable().row.add(data.total.saidas).draw()
+            .node()).addClass('bg-danger');
         data.rows.td.map(function(d) {
             if (data.rows.th['saidas'].includes(d[0])) {
-                response.push(d)
+                $($('#example').DataTable().row.add(d).draw()
+                    .node()).addClass('text-danger');
             }
         })
         data.total['entradas-saidas'].unshift('Entradas - Saídas')
         data.total.inicial.unshift('Saldo Inicial')
         data.total.final.unshift('Saldo Final')
-        response.push(data.total['entradas-saidas'])
-        response.push(data.total.inicial)
-        response.push(data.total.final)
-        return response
+        $($('#example').DataTable().row.add(data.total['entradas-saidas']).draw()
+            .node()).addClass('bg-info');
+        $($('#example').DataTable().row.add(data.total.inicial).draw()
+            .node()).addClass('bg-info');
+        $($('#example').DataTable().row.add(data.total.final).draw()
+            .node()).addClass('bg-info');
+        // return response
     }
 
 
@@ -153,17 +158,18 @@
         data['header'].unshift('Index')
         data['header'].push('Total')
         columns = []
+        //    inner = ''
         data['header'].map(function(dat) {
             columns.push({
                 title: dat,
-                createdRow: function(row, data, dataIndex) {
-                    $(row).find('td:eq(0)')
-                        .addClass(' bg-info ');
-                }
             })
-        });
+        })
+
+
+        //    $("#thead").html(inner)
+        //    dataa =
         $("#example").DataTable({
-            "data": datase(data),
+            // "data": datase(data),
             "columns": columns,
             "columnDefs": [{
                 "defaultContent": "-",
@@ -192,7 +198,7 @@
             },
             "buttons": ["copy", "excel", "pdf"]
         }).buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
-        //    console.log('fez')
+        datase(data)
     }
     $(function() {
         $("button").click(async function(event) {
