@@ -1,172 +1,138 @@
-<?php if ($show == true) { ?>
-    <style>
-        tr>td {
-            min-width: 100px;
-        }
+<div class="card">
+           <div class="card-header">
+               <div class="card-body">
+                   <?= $this->Form->create([], ['id' => 'form']) ?>
+                   <div class="d-flex flex-row justify-content-center align-items-center content bg-info mb-3 p-3" style="border-radius: 20px;">
+                       <div class="col-3 px-4">
+                           <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control text-white']); ?>
+                       </div>
+                       <div class="col-3 px-4">
+                           <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'date'], ['class' => 'la form-control']); ?>
+                       </div>
+                       <div class="col-3 px-4">
+                           <label>Período</label>
+                           <?= $this->Form->select(2, ['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'periodo form-control select2bs4']); ?>
+                       </div>
+                       <div class="col-3 px-5 mt-3">
+                           <?= $this->Form->button(__('Calcular'),) ?>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div class="card-body">
+               <table id="example" class="table table-sm table-bordered table-striped table-responsive">
+               </table>
+           </div>
+       </div>
+       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+       <script>
+           $('.select2bs4').select2({
+               theme: 'bootstrap4'
+           })
 
-        .text-nw {
-            padding: 0px;
-            margin: 0px;
-            white-space: nowrap;
-            overflow: auto;
+           function datase(data) {
+               response = []
+               data.total.entradas.push(data.total.entradas[0])
+               data.total.entradas[0] = 'Entradas'
+               response.push(data.total.entradas)
+               data.rows.td.map(function(d) {
+                   if (data.rows.th['entradas'].includes(d[0])) {
+                       response.push(d)
+                   }
+               })
+               data.total.saidas.push(data.total.saidas[0])
+               data.total.saidas[0] = 'Saidas'
+               response.push(data.total.saidas)
+               data.rows.td.map(function(d) {
+                   if (data.rows.th['saidas'].includes(d[0])) {
+                       response.push(d)
+                   }
+               })
+               data.total['entradas-saidas'].unshift('Entradas - Saídas')
+               data.total.inicial.unshift('Saldo Inicial')
+               data.total.final.unshift('Saldo Final')
+               response.push(data.total['entradas-saidas'])
+               response.push(data.total.inicial)
+               response.push(data.total.final)
+               return response
+           }
 
-        }
 
-        .text-nr {
-            padding: 0px;
-            margin: 0px;
-            white-space: nowrap;
-            overflow: auto;
-            color: #17a2b8;
-            font-size: 15px;
-        }
+           function formatador(data) {
+               data['header'].unshift('Index')
+               data['header'].push('Total')
+               columns = []
+               //    inner = ''
+               data['header'].map(function(dat) {
+                   columns.push({
+                       title: dat,
+                   })
+               })
+               //    $("#thead").html(inner)
+               //    dataa = 
+               $("#example").DataTable({
+                   "data": datase(data),
+                   "columns": columns,
+                   "columnDefs": [{
+                       "defaultContent": "-",
+                       "targets": "_all"
+                   }],
+                   "paging": true,
+                   "lengthChange": false,
+                   "searching": true,
+                   "ordering": false,
+                   "info": true,
+                   "autoWidth": false,
+                   "responsive": true,
+                   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+               }).buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+               //    console.log('fez')
+           }
+           $(function() {
+               $("button").click(async function(event) {
+                   event.preventDefault();
+                   const csrf = document.querySelector("#form").querySelectorAll('input[name ="_csrfToken"]')[0].value;
+                   $comeco = $("#0").val()
+                   $final = $("#1").val()
+                   $periodo = $(".periodo").val()
+                   console.log([$comeco, $final, $periodo])
+                   try {
+                       const response = axios.post('/relatorios/getGerencial/', [$comeco, $final, $periodo], {
+                           headers: {
+                               "X-CSRF-Token": csrf
+                           }
+                       }).then(function(response) { // handle success
+                           $("#example").DataTable().destroy();
+                           $("#example").empty()
+                           formatador(response.data[1])
+                       })
+                   } catch (error) {
+                       console.error(error);
+                   }
+               })
+               try {
+                   const response = axios.get('/relatorios/getGerencial/').then(function(response) { // handle success
+                       formatador(response.data[1])
+                   })
+               } catch (error) {
+                   console.error(error);
+               }
 
-
-
-        .mwtd {
-            min-width: 150px;
-        }
-    </style>
-    <div class="container-fluid d-flex align-items-center justify-content-center p-5">
-        <div class="container p-5 bg-white" style="border: 2px solid green; border-radius: 20px;">
-            <div style="margin-left: 95%;">
-                <?= $this->Html->link(__('Voltar'), ['action' => 'gerencial'], ['class' => 'btn btn-outline-info btn-sm mb-2'], ['style' => 'color: green;']) ?>
-            </div>
-            <table class="table table-bordered rounded table-responsive w-100 mt-2">
-                <thead class="bg-info">
-                    <tr>
-                        <th scope="col"><a href=<?= "/relatorios/exportGerencial/" . implode(",", $request) ?> style="font-size: 30px;color: white;"><i class="fas fa-file-excel"></i></a></th>
-                        <?php foreach ($obj['header'] as $data) : ?>
-                            <th scope="col"><?= $data ?></th>
-                        <?php endforeach; ?>
-                        <th scope="col">Total</th>
-                    </tr>
-
-                </thead>
-                <thead>
-                    <tr>
-                        <th scope="row" class="bg-info">
-                            <p class="text-nw">Entradas: </p>
-                        </th>
-                        <?php foreach ($obj['total']['entradas'] as $t) :
-                            if ($t < 0) { ?>
-                                <td class="text-danger"><?= $t ?></td>
-                            <?php } else if ($t > 0) { ?>
-                                <td class="text-success"><?= $t ?></td>
-                            <?php } else { ?>
-                                <td class="text-info"><?= $t ?></td>
-                        <?php }
-                        endforeach; ?>
-                    </tr>
-                </thead>
-                <tbody class="text-success">
-                    <?php
-                    foreach ($obj['rows']['td'] as $valor) :
-                        if (in_array($valor[0], $obj['rows']['th']['entradas'])) {
-                    ?>
-                            <tr>
-                                <th scope="row" class="bg-white">
-                                    <p class="text-nr"><i class="fas fa-angle-right"></i> <?= $valor[0] ?></p>
-                                </th>
-                                <?php for ($i = 1; $i < count($valor); $i++) : ?>
-                                    <td><?= $valor[$i] ?></td>
-                                <?php endfor; ?>
-                            </tr>
-                    <?php
-                        }
-                    endforeach;
-                    ?>
-                </tbody>
-                <thead>
-                    <tr>
-                        <th scope="row" class="bg-info">
-                            <p class="text-nw">Saídas: </p>
-                        </th>
-                        <?php foreach ($obj['total']['saidas'] as $t) :
-                            if ($t < 0) { ?>
-                                <td class="text-danger"><?= $t ?></td>
-                            <?php } else if ($t > 0) { ?>
-                                <td class="text-success"><?= $t ?></td>
-                            <?php } else { ?>
-                                <td class="text-info"><?= $t ?></td>
-                        <?php }
-                        endforeach; ?>
-                    </tr>
-                </thead>
-                <tbody class="text-danger">
-                    <?php
-                    foreach ($obj['rows']['td'] as $valor) :
-                        if (in_array($valor[0], $obj['rows']['th']['saidas'])) {
-                    ?>
-                            <tr>
-                                <th scope="row" class="bg-white">
-                                    <p class="text-nr"><i class="fas fa-angle-right"></i> <?= $valor[0] ?></p>
-                                </th>
-                                <?php for ($i = 1; $i < count($valor); $i++) : ?>
-                                    <td><?= $valor[$i] ?></td>
-                                <?php endfor; ?>
-                            </tr>
-                    <?php
-                        }
-                    endforeach;
-                    ?>
-                </tbody>
-                <thead class="thead-light">
-                    <tr>
-                        <th class="bg-info" style="color: white;" scope="row">
-                            <p class="text-nw"> Saldo Atual <br> (Entradas - Saídas) </p>
-                        </th>
-                        <?php foreach ($obj['total']['entradas-saidas'] as $t) :
-                            if ($t < 0) { ?>
-                                <td class="text-danger"><?= $t ?></td>
-                            <?php } else if ($t > 0) { ?>
-                                <td class="text-success"><?= $t ?></td>
-                            <?php } else { ?>
-                                <td class="text-info"><?= $t ?></td>
-                        <?php }
-                        endforeach; ?>
-                    </tr>
-
-                </thead>
-
-            </table>
-        </div>
-    </div>
-<?php } else { ?>
-    <div class="container-fluid d-flex align-items-center justify-content-center p-5">
-        <div class="container p-5 bg-white" style="border: 2px solid green; border-radius: 20px;">
-            <?= $this->element('relatorios/gerencial', ['obj' => $gerencial]) ?>
-        </div>
-    </div>
-    <div class="container-sm d-flex justify-content-center p-5">
-        <div style="border: green 2px solid;border-radius: 20px;" class="card-sm bg-white shadow" style="width: 32rem;">
-            <div class="card-body">
-                <h2 style="font-size: 30px; color: green;" class="card-subtitle text-center">Pesquisa de Caixa Gerencial Avançado</h2>
-                <hr class="border-info">
-                <div class="form-group">
-                    <?= $this->Form->create() ?>
-                    <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
-                    <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
-                    <label>Periodo</label><br>
-                    <?= $this->Form->select(2, ['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'form-control select2bs4']); ?>
-                    <!-- <label>Periodo</label>
-                        <select name=2 class="form-control select2bs4">
-                            <option value="mes" selected="selected">mês</option>
-                            <option value="ano">ano</option>
-                            <option value="dia">dia</option>
-                        </select> -->
-                </div>
-            </div>
-            <div class="d-flex justify-content-end card-footer">
-                <?= $this->Form->button(__('Submit', ['class' => 'btn btn-dark pull-right'])) ?>
-                <?= $this->Form->end() ?>
-            </div>
-        </div>
-    </div>
-    </div>
-<?php } ?>
-<script>
-    $('.select2bs4').select2({
-        theme: 'bootstrap4'
-    })
-</script>
+               // $(".table").DataTable({
+               //     "paging": true,
+               //     "lengthChange": false,
+               //     "searching": true,
+               //     "ordering": false,
+               //     "info": true,
+               //     "autoWidth": false,
+               //     "responsive": true,
+               //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+               // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');;
+               // $("").DataTable({
+               //     "ordering": false,
+               //     "autoWidth": false,
+               //     "responsive": true,
+               //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+               // }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');;
+           });
+       </script>
