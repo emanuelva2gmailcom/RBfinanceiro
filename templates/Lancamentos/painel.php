@@ -58,11 +58,11 @@
 
                     <table class="table text-nowrap" id="example">
                         <thead>
-                            <tr>
+                            <!-- <tr>
                                 <th><?= ('Grupo do Fluxo de Caixa') ?></th>
                                 <th><?= ('Conta do Fluxo de Caixa') ?></th>
                                 <th><?= ('Valor') ?></th>
-                            </tr>
+                            </tr> -->
                         </thead>
                     </table>
                 </div>
@@ -74,7 +74,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script>
         function show(data) {
-            var t = $('#example').DataTable({
+
+            $('#example').DataTable({
+                "columns" : [
+                    {title : 'Grupo do Fluxo de Caixa'},
+                    {title : 'Conta do Fluxo de Caixa'},
+                    {title : 'Valor'},
+                ],
                 "columnDefs": [{
                     "defaultContent": "-",
                     "targets": "_all"
@@ -82,6 +88,7 @@
                 "paging": true,
                 "lengthChange": false,
                 "searching": true,
+                "destroy": true,
                 "ordering": true,
                 "info": true,
                 "autoWidth": false,
@@ -101,26 +108,13 @@
                     },
                 }
             });
+            var t = $('#example').DataTable()
             console.log(data[0]) 
             t.clear() 
             t.rows.add(data[0])
+            t.draw()
             t.row.add(['Total', '', data[1]]) 
             t.draw()
-            // let output = ''
-            // for (let d of data[0]) {
-            //     output += `<tr>
-            //                 <td>${d[0]}</td>
-            //                 <td>${d[1]}</td>
-            //                 <td>${d[2]}</td>
-            //             </tr>`
-            // }
-            // output += `<tr>
-            //             <th>Total</th>
-            //             <th> </th>
-            //             <th>${data[1]}</th>
-            //         </tr>`
-
-            // document.getElementById('table-body').innerHTML = output;
         }
 
         let donutChartCanvas = $('#donutChart').get(0).getContext('2d')
