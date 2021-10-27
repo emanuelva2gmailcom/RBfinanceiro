@@ -106,8 +106,14 @@
         </div>
         <?= $this->Form->end() ?>
     </div>
-    <div class="card-body">
-        <table id="example" class="table table-sm table-bordered table-striped table-responsive">
+    <div class="card-2 card-body table-responsive">
+        <table id="example" class="table table-sm table-bordered table-striped">
+        <thead class="text-green">
+
+            </thead>
+            <tbody class="text-info">
+
+            </tbody>
         </table>
     </div>
 </div>
@@ -150,7 +156,6 @@
             .node()).addClass('bg-info');
         $($('#example').DataTable().row.add(data.total.final).draw()
             .node()).addClass('bg-info');
-        // return response
     }
 
 
@@ -159,29 +164,36 @@
         data['header'].push('Total')
         columns = []
         //    inner = ''
-        data['header'].map(function(dat) {
-            columns.push({
-                title: dat,
-            })
+        data['header'].map(function(dat, key) {
+            if (key == 0) {
+                columns.push({
+                    title: dat,
+                    data: key,
+                    width: "150px"
+                })
+            } else {
+                columns.push({
+                    title: dat,
+                    data: key,
+                    width: "100px"
+                })
+            }
         })
 
 
-        //    $("#thead").html(inner)
-        //    dataa =
         $("#example").DataTable({
-            // "data": datase(data),
             "columns": columns,
             "columnDefs": [{
                 "defaultContent": "-",
-                "targets": "_all"
+                "targets": "_all",
+
             }],
             "paging": true,
             "lengthChange": false,
             "searching": true,
             "ordering": false,
             "info": true,
-            "autoWidth": false,
-            "responsive": true,
+            "scrollX": true,
             "language": {
                 "emptyTable": "Nenhum registro disponível na tabela",
                 "zeroRecords": "Nenhum registro encontrado",
