@@ -40,18 +40,27 @@
 
     }
 
+    @media (max-width: 620px) {
+    .card {
+      position: absolute;
+      margin-left: -77px;
+      min-width: 90%;
+    }
+
+  }
+
 </style>
 
 
 <div class="container d-flex justify-content-center">
 
-<div class="card card-danger m-5" style="border-radius: 20px; width: 80%">
+  <div class="card card-danger m-5" style="border-radius: 20px; width: 80%">
     <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
     <?= $this->Form->create($lancamento) ?>
 
-        <?= $this->Form->control('Valor', ['class' => 'form-control']); ?>
-        <?= $this->Form->control('Descrição', ['class' => 'form-control']); ?>
-        <?= $this->Form->control('Data de Vencimento', ['class' => 'form-control']);?>
+        <?= $this->Form->control('valor', ['label' => 'Valor'], ['class' => 'form-control']); ?>
+        <?= $this->Form->control('descricao', ['label' => 'Descrição'], ['class' => 'form-control']); ?>
+        <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento'], ['class' => 'form-control']); ?>
 
     </div>
 

@@ -58,10 +58,12 @@
     <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
       <?= $this->Form->create($fluxosubgrupo) ?>
 
-    <?= $this->Form->control('Subgrupo', ['class' => 'form-control']); ?>
-    <?= $this->Form->control('Descrição',['label' => 'Descrição'], ['class' => 'form-control']); ?>
-    <?= $this->Form->control('Grupo', ['options' => $fluxogrupos, 'empty' => true], ['class' => 'form-control']); ?>
-  </div>
+      <?= $this->Form->control('subgrupo', ['label' => 'Subgrupo'], ['class' => 'form-control']); ?>
+      <?= $this->Form->control('descricao', ['label' => 'Descrição'], ['label' => 'Descrição'], ['class' => 'form-control']); ?>
+      <?= $this->Form->control('fluxogrupo_id', ['label' => 'Grupo'], ['options' => $fluxogrupos, 'empty' => true], ['class' => 'form-control']); ?>
+      
+    </div>
+
 
     <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">
       <div class="mr-auto p-2">

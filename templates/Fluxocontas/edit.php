@@ -49,9 +49,12 @@
     <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
   <?= $this->Form->create($fluxoconta) ?>
 
-    <?= $this->Form->control('Conta', ['class' => 'form-control']); ?>
-    <?= $this->Form->control('Descrição', ['class' => 'form-control']); ?>
-    <?= $this->Form->control('Subgrupo', ['options' => $fluxosubgrupos, 'empty' => true], ['class' => 'form-control']); ?>
+  <?= $this->Form->control('conta', ['label' => 'Conta'], ['class' => 'form-control']); ?>
+
+<?= $this->Form->control('descricao', ['label' => 'Descrição'], ['class' => 'form-control']); ?>
+
+<?= $this->Form->control('fluxosubgrupo_id', ['label' => 'Subgrupo'], ['options' => $fluxosubgrupos, 'empty' => true], ['class' => 'form-control']); ?>
+
   </div>
 
   <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">

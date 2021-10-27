@@ -175,10 +175,10 @@
             <div id="test-l-4" class="content bg-white">
                 <div class="panel-body text-info">
                     <div class="fornecedor form-group">
-                        <?= $this->Form->control('Fornecedor', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
+                        <?= $this->Form->control('fornecedor_id', ['label' => 'Fornecedor'], ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
                     </div>
                     <div class="cliente form-group">
-                        <?= $this->Form->control('Cliente', ['options' => $clientes, 'empty' => 'SELECIONE']); ?>
+                        <?= $this->Form->control('cliente_id', ['label' => 'Cliente'], ['options' => $clientes, 'empty' => 'SELECIONE']); ?>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->control('Comprovante', ['type' => 'file'], ['class' => 'file']); ?>
@@ -291,7 +291,7 @@
         }
 
     });
-    
+
 
     $('.saidas').change(function() {
         $tipo = $(".saidas option:selected").text();

@@ -44,9 +44,9 @@
   <div class="card card-danger m-5" style="border-radius: 20px; width: 80%">
     <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
       <?= $this->Form->create($tipopagamento) ?>
+      <?= $this->Form->control('nome', ['label' => 'Nome'], ['class' => 'form-control']); ?>
+      <?= $this->Form->control('descricao', ['label' => 'Descrição'], ['class' => 'form-control']); ?>
 
-      <?= $this->Form->control('Nome', ['class' => 'form-control']); ?>
-      <?= $this->Form->control('Descrição', ['class' => 'form-control']); ?>
     </div>
 
     <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">

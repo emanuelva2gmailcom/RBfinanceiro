@@ -53,15 +53,16 @@
 
    <?= $this->Form->label('Tipo'); ?>
    <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control']); ?>
-   <?= $this->Form->control('Descrição', ['class' => 'form-control']); ?>
-   <?= $this->Form->control('Valor', ['class' => 'form-control']); ?>
-   <?= $this->Form->control('Data de Emissão', ['class' => 'form-control']); ?>
-   <?= $this->Form->control('Data de Baixa', ['class' => 'form-control']); ?>
-   <?= $this->Form->control('Data de Vencimento', ['class' => 'form-control']); ?>
-   <?= $this->Form->control('Conta', ['options' => $fluxocontas, 'empty' => true], ['class' => 'form-control']); ?>
-   <?= $this->Form->control('Fornecedor', ['options' => $fornecedores, 'empty' => true], ['class' => 'form-control']); ?>
-   <?= $this->Form->control('Cliente_', ['options' => $clientes, 'empty' => true], ['class' => 'form-control']); ?>
-   <?= $this->Form->control('Lançamento', ['options' => $lancamentos, 'empty' => true], ['class' => 'form-control']); ?>
+   <?= $this->Form->control('descricao', ['label' => 'Descrição'], ['class' => 'form-control']); ?>
+   <?= $this->Form->control('valor', ['label' => 'Valor'], ['class' => 'form-control']); ?>
+   <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão'], ['class' => 'form-control']); ?>
+   <?= $this->Form->control('data_baixa', ['label' => 'Data de Baixa'], ['class' => 'form-control']); ?>
+   <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento'], ['class' => 'form-control']); ?>
+   <?= $this->Form->control('fluxoconta_id', ['label' => 'Conta'], ['options' => $fluxocontas, 'empty' => true], ['class' => 'form-control']); ?>
+   <?= $this->Form->control('fornecedor_id', ['label' => 'Fornecedor'], ['options' => $fornecedores, 'empty' => true], ['class' => 'form-control']); ?>
+   <?= $this->Form->control('cliente_id', ['label' => 'Cliente'], ['options' => $clientes, 'empty' => true], ['class' => 'form-control']); ?>
+   <?= $this->Form->control('lancamento_id', ['label' => 'Lançamento'], ['options' => $lancamentos, 'empty' => true], ['class' => 'form-control']); ?>
+
    <!-- <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => true], ['class' => 'form-control']); ?> -->
 
   </div>
