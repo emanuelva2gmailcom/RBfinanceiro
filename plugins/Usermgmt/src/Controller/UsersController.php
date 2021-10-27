@@ -42,8 +42,8 @@ class UsersController extends UsermgmtAppController
 			'Usermgmt.Users' => [
 				'Users' => [
 					'type' => 'text',
-					'label' => 'Search',
-					'tagline' => 'Search by name, username, email',
+					'label' => 'Pesquisar',
+					'tagline' => 'Pesquise por nome, nome de usuário, e-mail',
 					'condition' => 'multiple',
 					'searchFields' => ['Users.first_name', 'Users.last_name', 'Users.username', 'Users.email'],
 					'searchFunc' => ['plugin' => 'Usermgmt', 'controller' => 'Autocomplete', 'function' => 'userIndexSearch'],
@@ -52,38 +52,38 @@ class UsersController extends UsermgmtAppController
 				'Users.id' => [
 					'type' => 'text',
 					'condition' => '=',
-					'label' => 'User Id',
+					'label' => 'Por Id do Usuário',
 					'inputOptions' => ['style' => 'width:50px;'],
 					'searchSuggestion' => true
 				],
 				'Users.user_group_id' => [
 					'type' => 'select',
 					'condition' => 'comma',
-					'label' => 'Group',
+					'label' => 'Grupo',
 					'model' => 'Usermgmt.UserGroups',
 					'selector' => 'getUserGroups'
 				],
 				'Users.is_email_verified' => [
 					'type' => 'select',
-					'label' => 'Email Verified',
-					'options' => ['' => 'Select', '0' => 'No', '1' => 'Yes']
+					'label' => 'Email Verificado',
+					'options' => ['' => 'Select', '0' => 'Não', '1' => 'Sim']
 				],
 				'Users.is_active' => [
 					'type' => 'select',
 					'label' => 'Status',
-					'options' => ['' => 'Select', '1' => 'Active', '0' => 'Inactive']
+					'options' => ['' => 'Select', '1' => 'Ativo', '0' => 'Inativo']
 				],
 				'Users.created1' => [
 					'type' => 'text',
 					'condition' => '>=',
-					'label' => 'From',
+					'label' => 'De',
 					'searchField' => 'created',
 					'inputOptions' => ['style' => 'width:120px;', 'class' => 'datepicker']
 				],
 				'Users.created2' => [
 					'type' => 'text',
 					'condition' => '<=',
-					'label' => 'To',
+					'label' => 'Para',
 					'searchField' => 'created',
 					'inputOptions' => ['style' => 'width:120px;', 'class' => 'datepicker']
 				]
@@ -93,7 +93,7 @@ class UsersController extends UsermgmtAppController
 			'Usermgmt.UserActivities' => [
 				'UserActivities' => [
 					'type' => 'text',
-					'label' => 'Search',
+					'label' => 'Pesquisar',
 					'tagline' => 'Search by name, email, ip address',
 					'condition' => 'multiple',
 					'searchFields' => ['Users.first_name', 'Users.last_name', 'Users.email', 'UserActivities.ip_address'],

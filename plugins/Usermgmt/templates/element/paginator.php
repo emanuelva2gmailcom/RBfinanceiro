@@ -21,11 +21,11 @@ if(isset($updateDivId) && $useAjax) {?>
 		$(function(){
 			$(document).on("mouseenter", "table tr th a", function() {
 				$(this).attr('title', 'Click to sort records');
-				// console.log('AAAA')
+				
 			});
 
 			$($updateDivId+' .psorting a, '+$updateDivId+' .pagination a').click(function(e) {
-				// e.preventDefault();
+				e.preventDefault();
 				var url = $(this).attr('href');
 
 				if(url) {

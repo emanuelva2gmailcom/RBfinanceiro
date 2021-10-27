@@ -35,7 +35,7 @@
 		</div>
 
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label"><?php echo __('LÚltimo nome');?></label>
+			<label class="col-md-2 col-form-label"><?php echo __('Último nome');?></label>
 			<div class="col-md-4">
 				<?php echo $this->Form->control('Users.last_name', ['type'=>'text', 'label'=>false, 'class'=>'form-control']);?>
 			</div>

@@ -1,11 +1,11 @@
 <div class="card">
 	<div class="card-header text-white bg-dark">
 		<span class="card-title">
-			<?php echo __('Send Email');?>
+			<?php echo __('Enviar email');?>
 		</span>
 
 		<span class="card-title float-right">
-			<?php echo $this->Html->link(__('Back', true), ['action'=>'index'], ['class'=>'btn btn-secondary btn-sm']);?>
+			<?php echo $this->Html->link(__('Voltar', true), ['action'=>'index'], ['class'=>'btn btn-secondary btn-sm']);?>
 		</span>
 	</div>
 
