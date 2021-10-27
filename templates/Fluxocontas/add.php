@@ -49,6 +49,7 @@
 
       <?= $this->Form->control('fluxosubgrupo_id', ['label' => 'Subgrupo'], ['options' => $fluxosubgrupos, 'empty' => true], ['class' => 'form-control']); ?>
 
+
     </div>
     <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">
       <div class="mr-auto p-2">

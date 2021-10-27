@@ -40,11 +40,11 @@ $this->assign('title', __('Cliente') );
             <td class="text-info"> <?= h($cliente->cpf) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"> <?= __('Endereco') ?></th>
+            <th style="color: green;"> <?= __('Endereço') ?></th>
             <td class="text-info"><?= h($cliente->endereco) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Email') ?></th>
+            <th style="color: green;"><?= __('E-mail') ?></th>
             <td class="text-info"><?= h($cliente->email) ?></td>
         </tr>
         <tr>
@@ -52,25 +52,25 @@ $this->assign('title', __('Cliente') );
             <td class="text-info"><?= h($cliente->telefone) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Id Cliente') ?></th>
+            <th style="color: green;"><?= __('N° do Cliente') ?></th>
             <td class="text-info"><?= $this->Number->format($cliente->id_cliente) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Created') ?></th>
+            <th style="color: green;"><?= __('Criado') ?></th>
             <td class="text-info"><?= h($cliente->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Modified') ?></th>
+            <th style="color: green;"><?= __('Modificado') ?></th>
             <td class="text-info"><?= h($cliente->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Is Pendente') ?></th>
+            <th style="color: green;"><?= __('Pendente') ?></th>
             <td class="text-info"><?= $cliente->is_pendente ? __('Sim') : __('Não'); ?></td>
         </tr>
     </table>
   </div>
   <div class="card-footer bg-white" style="border-radius: 20px;">
-    <div style="padding-top: 20px;" class="d-flex justify-content-end">
+    <div style="padding-top: 20px;" class="d-flex  mr-auto justify-content-around">
       <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $cliente->id_cliente],
@@ -97,20 +97,20 @@ $this->assign('title', __('Cliente') );
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
       <tr style="color: green;">
-        <th><?= __('Id Lancamento') ?></th>
+        <th><?= __('N° do Lançamento') ?></th>
         <th><?= __('Tipo') ?></th>
-        <th><?= __('Descricao') ?></th>
+        <th><?= __('Descrição') ?></th>
         <th><?= __('Valor') ?></th>
-        <th><?= __('Data Emissao') ?></th>
-        <th><?= __('Data Baixa') ?></th>
-        <th><?= __('Data Vencimento') ?></th>
-        <th><?= __('Created') ?></th>
-        <th><?= __('Modified') ?></th>
-        <th><?= __('Fluxoconta Id') ?></th>
-        <th><?= __('Fornecedor Id') ?></th>
-        <th><?= __('Cliente Id') ?></th>
-        <th><?= __('Lancamento Id') ?></th>
-        <th><?= __('Dreconta Id') ?></th>
+        <th><?= __('Data de Emissão') ?></th>
+        <th><?= __('Data de Baixa') ?></th>
+        <th><?= __('Data de Vencimento') ?></th>
+        <th><?= __('Criado') ?></th>
+        <th><?= __('Modificado') ?></th>
+        <th><?= __('Conta') ?></th>
+        <th><?= __('Fornecedor') ?></th>
+        <th><?= __('Cliente') ?></th>
+        <th><?= __('Lançamento') ?></th>
+      <!-- <th><?= __('Dreconta Id') ?></th> -->
         <th class="actions"><?= __('Ações') ?></th>
       </tr>
       <?php if (empty($lancamento->lancamentos)) { ?>

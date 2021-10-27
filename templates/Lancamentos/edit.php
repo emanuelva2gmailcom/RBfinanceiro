@@ -62,6 +62,7 @@
    <?= $this->Form->control('fornecedor_id', ['label' => 'Fornecedor'], ['options' => $fornecedores, 'empty' => true], ['class' => 'form-control']); ?>
    <?= $this->Form->control('cliente_id', ['label' => 'Cliente'], ['options' => $clientes, 'empty' => true], ['class' => 'form-control']); ?>
    <?= $this->Form->control('lancamento_id', ['label' => 'Lançamento'], ['options' => $lancamentos, 'empty' => true], ['class' => 'form-control']); ?>
+
    <!-- <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => true], ['class' => 'form-control']); ?> -->
 
   </div>

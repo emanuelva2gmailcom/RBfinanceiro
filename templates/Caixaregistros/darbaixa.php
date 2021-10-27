@@ -37,6 +37,7 @@
       min-width: 90%;
     }
 
+
   }
 
 </style>
@@ -66,3 +67,4 @@
   <?= $this->Form->end() ?>
 </div>
 </div>
+

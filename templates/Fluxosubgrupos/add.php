@@ -64,6 +64,7 @@
       
     </div>
 
+
     <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">
       <div class="mr-auto p-2">
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-default']) ?>

@@ -281,7 +281,7 @@
 
     $('.entradas').change(function() {
         $tipo = $(".entradas option:selected").text();
-        if ($tipo.indexOf('Cliente') != -1) {
+        if ($tipo.indexOf('cliente') != -1) {
             $('.cliente').removeClass('d-none')
             $('.fornecedor').addClass('d-none');
 
@@ -295,7 +295,9 @@
 
     $('.saidas').change(function() {
         $tipo = $(".saidas option:selected").text();
-        if ($tipo.indexOf('FORNECEDOR') != -1) {
+
+        if ($tipo.indexOf('fornecedor') != -1) {
+
             $('.cliente').addClass('d-none')
             $('.fornecedor').removeClass('d-none');
 
