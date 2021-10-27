@@ -1,11 +1,11 @@
 <div class="card">
 	<div class="card-header text-white bg-dark">
 		<span class="card-title">
-			<?php echo __('Send Email');?>
+			<?php echo __('Enviar email');?>
 		</span>
 
 		<span class="card-title float-right">
-			<?php echo $this->Html->link(__('Back', true), ['action'=>'index'], ['class'=>'btn btn-secondary btn-sm']);?>
+			<?php echo $this->Html->link(__('Voltar', true), ['action'=>'index'], ['class'=>'btn btn-secondary btn-sm']);?>
 		</span>
 	</div>
 
@@ -28,87 +28,87 @@
 		?>
 		
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label required"><?php echo __('Type');?></label>
+			<label class="col-md-2 col-form-label required"><?php echo __('Modelo');?></label>
 			<div class="col-md-5">
-				<?php echo $this->Form->control('UserEmails.type', ['type'=>'radio', 'options'=>['USERS'=>'Selected Users', 'GROUPS'=>'Group Users', 'MANUAL'=>'Manual Emails'], 'label'=>false, 'legend'=>false, 'default'=>'USERS', 'autocomplete'=>'off', 'class'=>'mx-2']);?>
+				<?php echo $this->Form->control('UserEmails.type', ['type'=>'radio', 'options' => [ 'USERS'=> 'Selected Users', 'GROUPS'=>'Group Users', 'MANUAL'=>'Manual Emails'], 'label'=>false, 'legend'=>false, 'default'=>'USERS', 'autocomplete'=>'off']);?>
 			</div>
 		</div>
 		
 		<div class="row form-group" id="userSearch" style="display:<?php echo $userSearch;?>">
-			<label class="col-md-2 col-form-label required"><?php echo __('Select User(s)');?></label>
+			<label class="col-md-2 col-form-label required"><?php echo __('Selecione o(s) Usuário(s)');?></label>
 			<div class="col-md-5">
 				<?php echo $this->Form->control('UserEmails.user_id', ['type'=>'select', 'multiple'=>true, 'options'=>$sel_users, 'label'=>false, 'autocomplete'=>'off', 'data-placeholder'=>'Select User(s)', 'class'=>'form-control user_id_input']);?>
 			</div>
 		</div>
 		
 		<div class="row form-group" id="groupSearch" style="display:<?php echo $groupSearch;?>">
-			<label class="col-md-2 col-form-label required"><?php echo __('Select Groups(s)');?></label>
+			<label class="col-md-2 col-form-label required"><?php echo __('Selecione o grupo(s)');?></label>
 			<div class="col-md-5">
 				<?php echo $this->Form->control('UserEmails.user_group_id', ['type'=>'select', 'multiple'=>true, 'options'=>$groups, 'label'=>false, 'autocomplete'=>'off', 'data-placeholder'=>'Select Group(s)', 'class'=>'form-control user_group_id_input']);?>
 			</div>
 		</div>
 		
 		<div class="row form-group" id="manualEmail" style="display:<?php echo $manualEmail;?>">
-			<label class="col-md-2 col-form-label required"><?php echo __('To Email(s)');?></label>
+			<label class="col-md-2 col-form-label required"><?php echo __('Para E-mail(s)');?></label>
 			<div class="col-md-5">
 				<?php echo $this->Form->control('UserEmails.to_email', ['type'=>'textarea', 'label'=>false, 'class'=>'form-control']);?>
-				<span class="tagline"><?php echo __('multiple emails comma separated');?></span>
+				<span class="tagline"><?php echo __('Vários e-mails separados por vírgulas');?></span>
 			</div>
 		</div>
 		
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label"><?php echo __('CC To');?></label>
+			<label class="col-md-2 col-form-label"><?php echo __('CC para');?></label>
 			<div class="col-md-5">
 				<?php echo $this->Form->control('UserEmails.cc_to', ['type'=>'text', 'label'=>false, 'class'=>'form-control']);?>
-				<span class="tagline"><?php echo __('multiple emails comma separated');?></span>
+				<span class="tagline"><?php echo __('Vários e-mails separados por vírgulas');?></span>
 			</div>
 		</div>
 		
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label required"><?php echo __('From Name');?></label>
+			<label class="col-md-2 col-form-label required"><?php echo __('De nome');?></label>
 			<div class="col-md-5">
 				<?php echo $this->Form->control('UserEmails.from_name', ['type'=>'text', 'label'=>false, 'class'=>'form-control']);?>
 			</div>
 		</div>
 		
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label required"><?php echo __('From Email');?></label>
+			<label class="col-md-2 col-form-label required"><?php echo __('Do E-mail');?></label>
 			<div class="col-md-5">
 				<?php echo $this->Form->control('UserEmails.from_email', ['type'=>'text', 'label'=>false, 'class'=>'form-control']);?>
 			</div>
 		</div>
 		
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label required"><?php echo __('Subject');?></label>
+			<label class="col-md-2 col-form-label required"><?php echo __('Sujeito');?></label>
 			<div class="col-md-5">
 				<?php echo $this->Form->control('UserEmails.subject', ['type'=>'text', 'label'=>false, 'class'=>'form-control']);?>
 			</div>
 		</div>
 		
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label"><?php echo __('Select Template');?></label>
+			<label class="col-md-2 col-form-label"><?php echo __('Selecione o modelo');?></label>
 			<div class="col-md-5">
 				<?php echo $this->Form->control('UserEmails.template', ['type'=>'select', 'options'=>$templates, 'label'=>false, 'autocomplete'=>'off', 'class'=>'form-control']);?>
 			</div>
 		</div>
 
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label"><?php echo __('Select Signature');?></label>
+			<label class="col-md-2 col-form-label"><?php echo __('Selecione a assinatura');?></label>
 			<div class="col-md-5">
 				<?php echo $this->Form->control('UserEmails.signature', ['type'=>'select', 'options'=>$signatures, 'label'=>false, 'autocomplete'=>'off', 'class'=>'form-control']);?>
 			</div>
 		</div>
 
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label"><?php echo __('Schedule Date');?></label>
+			<label class="col-md-2 col-form-label"><?php echo __('Data da Programação');?></label>
 			<div class="col-md-5">
 				<?php echo $this->Form->control('UserEmails.schedule_date', ['type'=>'text', 'label'=>false, 'class'=>'form-control datetimepicker', 'autocomplete'=>'off']);?>
-				<span class="form-text"><?php echo __('If you enter schedule date, emails will not be send right now. You need to setup cron job to send scheduled emails. Please refer to documentation for cron job setup.');?></span>
+				<span class="form-text"><?php echo __('Se você inserir a data programada, os e-mails não serão enviados agora. Você precisa configurar o cron job para enviar e-mails agendados. Consulte a documentação para configuração do cron job.');?></span>
 			</div>
 		</div>
 
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label required"><?php echo __('Message');?></label>
+			<label class="col-md-2 col-form-label required"><?php echo __('Mensagem');?></label>
 			<div class="col-md-8">
 				<?php
 				if(strtoupper(DEFAULT_HTML_EDITOR) == 'TINYMCE') {

@@ -24,15 +24,26 @@
         .month label {
             color: white;
         }
+
+        @media (max-width: 620px) {
+            .teste {
+                /* position: absolute; */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+
+        }   
     </style>
 </head>
 
 <body onload="onload()">
-    <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+    <div class="container-fluid  p-5">
         <div class="card container bg-info" style="border-radius: 20px;">
             <div class="card-body">
                 <?= $this->Form->create([], ['id' => 'form']) ?>
-                <div class="d-flex flex-row justify-content-center align-items-center content bg-info mb-3 p-3" style="border-radius: 20px;">
+                <div class="teste d-flex flex-row justify-content-center align-items-center content bg-info mb-3 p-3" style="border-radius: 20px;">
                     <div class="col-4 px-4">
                         <?= $this->Form->control('Mês', ['class' => 'form-control mes', 'type' => 'month',]); ?>
                     </div>

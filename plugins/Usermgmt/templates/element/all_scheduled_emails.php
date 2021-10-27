@@ -8,25 +8,25 @@
 				<tr>
 					<th><?php echo __('#');?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('ScheduledEmails.type', __('Type'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('ScheduledEmails.type', __('Modelo'));?></th>
 
-					<th><?php echo __('Groups(s)');?></th>
+					<th><?php echo __('Grupo(s)');?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('ScheduledEmails.from_name', __('From Name'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('ScheduledEmails.from_name', __('De nome'));?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('ScheduledEmails.from_email', __('From Email'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('ScheduledEmails.from_email', __('Do E-mail'));?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('ScheduledEmails.subject', __('Subject'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('ScheduledEmails.subject', __('Sujeito'));?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('Users.first_name', __('Scheduled By'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('Users.first_name', __('Enviado por'));?></th>
 
 					<th><?php echo __('Status');?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('ScheduledEmails.schedule_date', __('Scheduled Date'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('ScheduledEmails.schedule_date', __('Data enviada'));?></th>
 
 					<th class="psorting"><?php echo $this->Paginator->sort('ScheduledEmails.created', __('Created'));?></th>
 
-					<th><?php echo __('Action');?></th>
+					<th><?php echo __('Ação');?></th>
 				</tr>
 			</thead>
 
@@ -110,7 +110,7 @@
 						echo "</tr>";
 					}
 				} else {
-					echo "<tr><td colspan=11><br/>".__('No Records Available')."</td></tr>";
+					echo "<tr><td colspan=11><br/>".__('Nenhum registro disponível')."</td></tr>";
 				}?>
 			</tbody>
 		</table>
@@ -118,6 +118,6 @@
 
 	<?php
 	if(!empty($scheduledEmails)) {
-		echo $this->element('Usermgmt.pagination', ['paginationText'=>__('Number of Emails')]);
+		echo $this->element('Usermgmt.pagination', ['paginationText'=>__('Número de Emails')]);
 	}?>
 </div>

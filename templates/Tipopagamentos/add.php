@@ -1,33 +1,41 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Tipopagamento $tipopagamento
  */
 ?>
 
-<?php $this->assign('title', __('Adicionar Tipo de Pagamento') ); ?>
+<?php $this->assign('title', __('Adicionar Tipo de Pagamento')); ?>
 
 <style>
+  .btn {
+    background-color: green;
+    color: white;
+    border: 1px solid green;
+  }
 
+  .btn:hover {
+    background-color: white;
+    color: green;
+    border: 1px solid green;
+  }
 
-    .btn{
-        background-color: green;
-        color: white;
-        border: 1px solid green;
+  .btn:focus {
+    background-color: green;
+    color: white;
+    border: 1px solid green;
+  }
+
+  @media (max-width: 620px) {
+    .card {
+      position: absolute;
+      margin-left: -77px;
+      min-width: 90%;
+      height: 300px;
     }
 
-    .btn:hover{
-        background-color: white;
-        color: green;
-        border: 1px solid green;
-    }
-
-    .btn:focus{
-        background-color: green;
-        color: white;
-        border: 1px solid green;
-    }
-
+  }
 </style>
 
 
@@ -39,10 +47,10 @@
 
       <?= $this->Form->control('nome', ['class' => 'form-control']); ?>
       <?= $this->Form->control('descricao', ['class' => 'form-control']); ?>
-  </div>
+    </div>
 
 
-  <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">
+    <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">
       <div class="mr-auto p-2">
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-default']) ?>
       </div>
@@ -50,6 +58,6 @@
         <?= $this->Form->button(__('Salvar')) ?>
       </div>
     </div>
-  <?= $this->Form->end() ?>
-</div>
+    <?= $this->Form->end() ?>
+  </div>
 </div>

@@ -8,19 +8,19 @@
 				<tr>
 					<th><?php echo __('#');?></th>
 
-					<th><?php echo __('Name');?></th>
+					<th><?php echo __('Nome');?></th>
 
-					<th><?php echo __('Email');?></th>
+					<th><?php echo __('E-mail');?></th>
 
-					<th><?php echo __('Last URL');?></th>
+					<th><?php echo __('Última URL');?></th>
 
-					<th><?php echo __('Browser');?></th>
+					<th><?php echo __('Navegador');?></th>
 
-					<th><?php echo __('Ip Address');?></th>
+					<th><?php echo __('Endereço de IP');?></th>
 
-					<th><?php echo __('Last Action');?></th>
+					<th><?php echo __('Última Ação');?></th>
 
-					<th><?php echo __('Action');?></th>
+					<th><?php echo __('Ação');?></th>
 				</tr>
 			</thead>
 

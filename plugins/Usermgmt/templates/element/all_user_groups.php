@@ -8,19 +8,19 @@
 				<tr>
 					<th><?php echo __('#');?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('UserGroups.id', __('Group Id'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('UserGroups.id', __('Id do Grupo'));?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('UserGroups.name', __('Group Name'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('UserGroups.name', __('Nome do grupo'));?></th>
 
-					<th><?php echo __('Parent Group');?></th>
+					<th><?php echo __('Grupo Matriz');?></th>
 
-					<th><?php echo __('Description');?></th>
+					<th><?php echo __('Descrição');?></th>
 
-					<th><?php echo __('New Registration Allowed?');?></th>
+					<th><?php echo __('Novo registro permitido?');?></th>
 
-					<th><?php echo __('Created');?></th>
+					<th><?php echo __('Criado');?></th>
 
-					<th><?php echo __('Action');?></th>
+					<th><?php echo __('	Ação');?></th>
 				</tr>
 			</thead>
 
@@ -49,10 +49,10 @@
 
 							echo "<td>";
 								if($row['is_registration_allowed']) {
-									echo "<span class='badge badge-success'>".__('Yes')."</span>";
+									echo "<span class='badge badge-success'>".__('Sim')."</span>";
 								}
 								else {
-									echo "<span class='badge badge-danger'>".__('No')."</span>";
+									echo "<span class='badge badge-danger'>".__('Não')."</span>";
 								}
 							echo"</td>";
 
@@ -63,7 +63,7 @@
 									echo "<button class='btn btn-dark btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>".__('Action')."</button>";
 									
 									echo "<div class='dropdown-menu dropdown-menu-right'>";
-										echo $this->Html->link(__('Edit Group'), ['controller'=>'UserGroups', 'action'=>'edit', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
+										echo $this->Html->link(__('Editar Grupo'), ['controller'=>'UserGroups', 'action'=>'edit', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
 
 										if($row['id'] != ADMIN_GROUP_ID) {
 											echo $this->Form->postLink(__('Delete Group'), ['controller'=>'UserGroups', 'action'=>'delete', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item', 'confirm'=>__('Are you sure you want to delete this group? Delete it your own risk')]);
@@ -74,7 +74,7 @@
 						echo "</tr>";
 					}
 				} else {
-					echo "<tr><td colspan=8><br/>".__('No Records Available')."</td></tr>";
+					echo "<tr><td colspan=8><br/>".__('Nenhum registro disponível')."</td></tr>";
 				}?>
 			</tbody>
 		</table>
