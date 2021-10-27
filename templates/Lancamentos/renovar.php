@@ -43,27 +43,33 @@
 </style>
 
 
-<div class="container d-flex justify-content-center">
+<div class="container p-5" style="width: 60%;min-width:80%;border-radius: 20px;">
 
-<div class="card card-danger m-5" style="border-radius: 20px; width: 80%">
-    <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
+<div class="card bg-info" style="border-radius: 20px;">
     <?= $this->Form->create($lancamento) ?>
+     <div class="card-body text-white">
+        <?php
+        echo $this->Form->control('valor');
+        echo $this->Form->control('descricao');
+        echo $this->Form->control('data_vencimento');
+        ?>
+    </div>
 
-        <?= $this->Form->control('Valor', ['class' => 'form-control']); ?>
-        <?= $this->Form->control('Descrição', ['class' => 'form-control']); ?>
-        <?= $this->Form->control('Data de Vencimento', ['class' => 'form-control']);?>
+    <div class="card-footer bg-white d-flex justify-content-between"  style="border-radius: 0px 0px 20px 20px;">
+
+    <div class="d-flex">
+
+        <?= $this->Html->link(__('Cancelar'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
 
     </div>
 
-    <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">
-      <div class="mr-auto p-2">
-        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-default']) ?>
-      </div>
-      <div class="p-2">
+    <div class="d-flex" style="margin-left: 87%;">
+
         <?= $this->Form->button(__('Salvar')) ?>
-      </div>
+
     </div>
+
+  </div>
 
     <?= $this->Form->end() ?>
-</div>
 </div>

@@ -35,19 +35,19 @@ $this->assign('title', __('Fornecedor') );
             <td class="text-info"><?= h($fornecedore->nome) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('CNPJ') ?></th>
+            <th style="color: green;"><?= __('Cnpj') ?></th>
             <td class="text-info"><?= h($fornecedore->cnpj) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Responsável') ?></th>
+            <th style="color: green;"><?= __('Responsavel') ?></th>
             <td class="text-info"><?= h($fornecedore->responsavel) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Endereço') ?></th>
+            <th style="color: green;"><?= __('Endereco') ?></th>
             <td class="text-info"><?= h($fornecedore->endereco) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('E-mail') ?></th>
+            <th style="color: green;"><?= __('Email') ?></th>
             <td class="text-info"><?= h($fornecedore->email) ?></td>
         </tr>
         <tr>
@@ -55,25 +55,25 @@ $this->assign('title', __('Fornecedor') );
             <td class="text-info"><?= h($fornecedore->telefone) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('N° do Fornecedor') ?></th>
+            <th style="color: green;"><?= __('Id Fornecedor') ?></th>
             <td class="text-info"><?= $this->Number->format($fornecedore->id_fornecedor) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Criado') ?></th>
+            <th style="color: green;"><?= __('Created') ?></th>
             <td class="text-info"><?= h($fornecedore->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Modificado') ?></th>
+            <th style="color: green;"><?= __('Modified') ?></th>
             <td class="text-info"><?= h($fornecedore->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Pendente') ?></th>
+            <th style="color: green;"><?= __('Is Pendente') ?></th>
             <td class="text-info"><?= $fornecedore->is_pendente ? __('Sim') : __('Não'); ?></td>
         </tr>
     </table>
   </div>
   <div class="card-footer bg-white" style="border-radius: 20px;">
-    <div style="padding-top: 20px;" class="d-flex  mr-auto justify-content-around">
+    <div style="padding-top: 20px;" class="d-flex justify-content-end">
       <?= $this->Form->postLink(
           __('Deletar'),
           ['action' => 'delete',  $fornecedore->id_fornecedor],

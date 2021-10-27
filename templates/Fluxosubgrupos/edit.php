@@ -49,9 +49,9 @@
     
   <?= $this->Form->create($fluxosubgrupo) ?>
 
-    <?= $this->Form->control('Subgrupo', ['class' => 'form-control']); ?>
-      <?= $this->Form->control('Descrição', ['class' => 'form-control']); ?>
-      <?= $this->Form->control('Grupo', ['options' => $fluxogrupos, 'empty' => true], ['class' => 'form-control']); ?>
+    <?= $this->Form->control('subgrupo', ['class' => 'form-control']); ?>
+      <?= $this->Form->control('descricao', ['class' => 'form-control']); ?>
+      <?= $this->Form->control('fluxogrupo_id', ['options' => $fluxogrupos, 'empty' => true], ['class' => 'form-control']); ?>
 
   </div>
 
