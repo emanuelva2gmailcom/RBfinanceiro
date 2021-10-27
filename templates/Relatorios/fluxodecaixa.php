@@ -19,8 +19,6 @@
         color: green;
     }
 
-    td {}
-
     .dataTables_info {
         color: green;
     }
@@ -190,9 +188,9 @@
     function datase(data) {
         response = []
         data.total.entradas.push(data.total.entradas[0])
-        data.total.entradas[0] = 'Entradas'
+        data.total.entradas[0] = 'Entradas:'
         $($('#example').DataTable().row.add(data.total.entradas).draw()
-            .node()).addClass('bg-success');
+            .node()).addClass('bg-info');
         // response.push(data.total.entradas)
         data.rows.td.map(function(d) {
             if (data.rows.th['entradas'].includes(d[0])) {
@@ -202,9 +200,9 @@
             }
         })
         data.total.saidas.push(data.total.saidas[0])
-        data.total.saidas[0] = 'Saidas'
+        data.total.saidas[0] = 'Saidas:'
         $($('#example').DataTable().row.add(data.total.saidas).draw()
-            .node()).addClass('bg-danger');
+            .node()).addClass('bg-info');
         data.rows.td.map(function(d) {
             if (data.rows.th['saidas'].includes(d[0])) {
                 $($('#example').DataTable().row.add(d).draw()
