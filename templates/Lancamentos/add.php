@@ -175,10 +175,10 @@
             <div id="test-l-4" class="content bg-white">
                 <div class="panel-body text-info">
                     <div class="fornecedor form-group">
-                        <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
+                        <?= $this->Form->control('Fornecedor', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
                     </div>
                     <div class="cliente form-group">
-                        <?= $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => 'SELECIONE']); ?>
+                        <?= $this->Form->control('Cliente', ['options' => $clientes, 'empty' => 'SELECIONE']); ?>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->control('Comprovante', ['type' => 'file'], ['class' => 'file']); ?>
@@ -281,7 +281,7 @@
 
     $('.entradas').change(function() {
         $tipo = $(".entradas option:selected").text();
-        if ($tipo.indexOf('Cliente') != -1) {
+        if ($tipo.indexOf('cliente') != -1) {
             $('.cliente').removeClass('d-none')
             $('.fornecedor').addClass('d-none');
 
@@ -295,7 +295,9 @@
 
     $('.saidas').change(function() {
         $tipo = $(".saidas option:selected").text();
-        if ($tipo.indexOf('FORNECEDOR') != -1) {
+
+        if ($tipo.indexOf('fornecedor') != -1) {
+
             $('.cliente').addClass('d-none')
             $('.fornecedor').removeClass('d-none');
 
@@ -330,8 +332,8 @@
         if ($grupo == 0) {
             $('#teste').removeAttr('onclick')
             $('.todos').prop('disabled', true);
-        } 
-        
+        }
+
         $('#teste').click(function() {
                 if ($grupo == 0) {
                     $('.s-grupo').text('Campo Obrigatório')
@@ -344,7 +346,7 @@
     $('.grupo').ready(function() {
         $grupo = $('.grupo').val();
         grupo($grupo)
-    })  
+    })
 
     $('.grupo').change(function() {
         $grupo = $('.grupo').val();

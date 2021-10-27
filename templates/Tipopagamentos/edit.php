@@ -47,8 +47,8 @@
     <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
   <?= $this->Form->create($tipopagamento) ?>
 
-    <?= $this->Form->control('nome', ['class' => 'form-control']); ?>
-    <?= $this->Form->control('descricao', ['class' => 'form-control']); ?>
+    <?= $this->Form->control('Nome', ['class' => 'form-control']); ?>
+    <?= $this->Form->control('Descrição', ['class' => 'form-control']); ?>
 
   </div>
 
