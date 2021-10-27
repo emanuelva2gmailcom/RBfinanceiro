@@ -213,7 +213,6 @@ class LancamentosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
 
-
     public function add()
     {
 
@@ -260,7 +259,6 @@ class LancamentosController extends AppController
 
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
         }
-
 
         $entradas = $this->Lancamentos->Fluxocontas->find('list', [
             'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
