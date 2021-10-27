@@ -222,13 +222,13 @@
                 columns.push({
                     title: dat,
                     data: key,
-                    width: "150px"
+                    width: "200px"
                 })
             } else {
                 columns.push({
                     title: dat,
                     data: key,
-                    width: "100px"
+                    width: "150px"
                 })
             }
         })
