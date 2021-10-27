@@ -30,29 +30,29 @@ $this->assign('title', __('Caixas') ); ?>
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
         <tr>
-            <th style="color: green;" ><?= __('N° de Caixa') ?></th>
+            <th style="color: green;" ><?= __('Id Caixa') ?></th>
             <td class="text-info" ><?= $this->Number->format($caixa->id_caixa) ?></td>
         </tr>
         <tr>
-            <th style="color: green;" ><?= __('Data do Caixa') ?></th>
+            <th style="color: green;" ><?= __('Data Caixa') ?></th>
             <td class="text-info" ><?= h($caixa->data_caixa) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Criado') ?></th>
+            <th style="color: green;"><?= __('Created') ?></th>
             <td class="text-info"><?= h($caixa->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Modificado') ?></th>
+            <th style="color: green;"><?= __('Modified') ?></th>
             <td class="text-info"><?= h($caixa->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Aberto') ?></th>
+            <th style="color: green;"><?= __('Is Aberto') ?></th>
             <td class="text-info"><?= $caixa->is_aberto ? __('Sim') : __('Não'); ?></td>
         </tr>
     </table>
   </div>
   <div class="card-footer bg-white" style="border-radius: 20px;">
-    <div style="padding-top: 20px;" class="d-flex  mr-auto justify-content-around">
+    <div style="padding-top: 20px;" class="d-flex justify-content-end">
       <?= $this->Form->postLink(
           __('Delete'),
           ['action' => 'delete',  $caixa->id_caixa],
@@ -79,10 +79,10 @@ $this->assign('title', __('Caixas') ); ?>
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
       <tr style="color: green;">
-          <th><?= __('N° do Caixa Registro') ?></th>
-          <th><?= __('Caixa') ?></th>
-          <th><?= __('Tipo de Pagamento') ?></th>
-          <th><?= __('Lançamento') ?></th>
+          <th><?= __('Id Caixaregistro') ?></th>
+          <th><?= __('Caixa Id') ?></th>
+          <th><?= __('Tipopagamento Id') ?></th>
+          <th><?= __('Lancamento Id') ?></th>
           <th class="actions"><?= __('Ações') ?></th>
       </tr>
       <?php if (empty($caixa->caixaregistros)) { ?>

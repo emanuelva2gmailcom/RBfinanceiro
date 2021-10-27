@@ -40,30 +40,30 @@ $this->assign('title', __('Fluxoconta'));
             <td class="text-info"><?= h($fluxoconta->conta) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Descrição') ?></th>
+            <th style="color: green;"><?= __('Descricao') ?></th>
             <td class="text-info"><?= h($fluxoconta->descricao) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Subgrupo') ?></th>
+            <th style="color: green;"><?= __('Fluxosubgrupo') ?></th>
             <td class="tr1"><?= $fluxoconta->has('fluxosubgrupo') ? $this->Html->link($fluxoconta->fluxosubgrupo->subgrupo, ['controller' => 'Fluxosubgrupos', 'action' => 'view', $fluxoconta->fluxosubgrupo->subgrupo]) : ''?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('N° da Conta') ?></th>
+            <th style="color: green;"><?= __('Id Fluxoconta') ?></th>
             <td class="text-info"><?= $this->Number->format($fluxoconta->id_fluxoconta) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Criado') ?></th>
+            <th style="color: green;"><?= __('Created') ?></th>
             <td class="text-info"><?= h($fluxoconta->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
         <tr>
-            <th style="color: green;"><?= __('Modificado') ?></th>
+            <th style="color: green;"><?= __('Modified') ?></th>
             <td class="text-info"><?= h($fluxoconta->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
         </tr>
 
     </table>
   </div>
   <div class="card-footer bg-white" style="border-radius: 20px;">
-    <div style="padding-top: 20px;" class="d-flex  mr-auto justify-content-around">
+    <div style="padding-top: 20px;" class="d-flex justify-content-end">
       <?= $this->Form->postLink(
 
           __('Deletar'),
@@ -97,20 +97,20 @@ $this->assign('title', __('Fluxoconta'));
 
       <tr style="color: green;">
 
-        <th><?= __('N° do Lançamento') ?></th>
+        <th><?= __('Id Lancamento') ?></th>
         <th><?= __('Tipo') ?></th>
-        <th><?= __('Descrição') ?></th>
+        <th><?= __('Descricao') ?></th>
         <th><?= __('Valor') ?></th>
-        <th><?= __('Data de Emissão') ?></th>
-        <th><?= __('Data de Baixa') ?></th>
-        <th><?= __('Data de Vencimento') ?></th>
-        <th><?= __('Criado') ?></th>
-        <th><?= __('Modificado') ?></th>
-        <th><?= __('Conta') ?></th>
-        <th><?= __('Fornecedor') ?></th>
-        <th><?= __('Cliente') ?></th>
-        <th><?= __('Lançamento') ?></th>
-        <!-- <th><?= __('Dreconta Id') ?></th> -->
+        <th><?= __('Data Emissao') ?></th>
+        <th><?= __('Data Baixa') ?></th>
+        <th><?= __('Data Vencimento') ?></th>
+        <th><?= __('Created') ?></th>
+        <th><?= __('Modified') ?></th>
+        <th><?= __('Fluxoconta Id') ?></th>
+        <th><?= __('Fornecedor Id') ?></th>
+        <th><?= __('Cliente Id') ?></th>
+        <th><?= __('Lancamento Id') ?></th>
+        <th><?= __('Dreconta Id') ?></th>
         <th class="actions"><?= __('Ações') ?></th>
       </tr>
       <?php if (empty($lancamento->lancamentos)) { ?>

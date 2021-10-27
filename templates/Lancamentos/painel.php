@@ -26,55 +26,52 @@
         }
 
         @media (max-width: 620px) {
-    .card {
-      position: absolute;
-      margin-top: 950px;
-      min-width: 90%;
-    }
+            .teste {
+                /* position: absolute; */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
 
-  }
+
+        }   
     </style>
 </head>
 
-<body>
-    <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+<body onload="onload()">
+    <div class="container-fluid  p-5">
         <div class="card container bg-info" style="border-radius: 20px;">
             <div class="card-body">
-                <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
-                <div class="col-md-6">
-                    <?= $this->Form->control('Mês', ['class' => 'form-control mes', 'type' => 'month',]); ?>
-                    <!-- /.form-group -->
-                    <!-- /.form-group -->
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
+                <?= $this->Form->create([], ['id' => 'form']) ?>
+                <div class="teste d-flex flex-row justify-content-center align-items-center content bg-info mb-3 p-3" style="border-radius: 20px;">
+                    <div class="col-4 px-4">
+                        <?= $this->Form->control('Mês', ['class' => 'form-control mes', 'type' => 'month',]); ?>
+                    </div>
+                    <div class="col-4 px-4">
                         <label style="color: white;">Tipo</label>
                         <?= $this->Form->select('tipo', ['REALIZADO' => 'Realizado', 'PREVISTO' => 'Previsto'], ['class' => 'form-control tipo mb-3', 'id' => 'card']); ?>
                     </div>
-
-                </div>
-                <!-- /.col -->
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label style="color: white;">Enviar</label>
-                        <?= $this->Form->button(__('Calcular'), ['class' => 'form-control']) ?>
+                    <div class="col-2 px-5 mt-3">
+                        <?= $this->Form->button(__('Calcular'),) ?>
                     </div>
                 </div>
-                <!-- /.col -->
                 <?= $this->Form->end() ?>
                 <canvas class="bg-white mb-3 p-2" id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; border-radius: 20px;"></canvas>
-                <div class="table table-responsive">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="teste"><?= ('Grupo do Fluxo de Caixa') ?></th>
+                            <th class="teste"><?= ('Conta do Fluxo de Caixa') ?></th>
+                            <th class="teste"><?= ('Valor') ?></th>
+                        </tr>
+                    </thead>
 
-                    <table class="table text-nowrap" id="example">
-                        <thead>
-                            <!-- <tr>
-                                <th><?= ('Grupo do Fluxo de Caixa') ?></th>
-                                <th><?= ('Conta do Fluxo de Caixa') ?></th>
-                                <th><?= ('Valor') ?></th>
-                            </tr> -->
-                        </thead>
-                    </table>
-                </div>
+                    <tbody id="table-body">
+
+
+                    </tbody>
+
+                </table>
             </div>
             <!-- /.card-body -->
         </div>
@@ -83,47 +80,21 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script>
         function show(data) {
+            let output = ''
+            for (let d of data[0]) {
+                output += `<tr>
+                            <td>${d[0]}</td>
+                            <td>${d[1]}</td>
+                            <td>${d[2]}</td>
+                        </tr>`
+            }
+            output += `<tr>
+                        <th>Total</th>
+                        <th> </th>
+                        <th>${data[1]}</th>
+                    </tr>`
 
-            $('#example').DataTable({
-                "columns" : [
-                    {title : 'Grupo do Fluxo de Caixa'},
-                    {title : 'Conta do Fluxo de Caixa'},
-                    {title : 'Valor'},
-                ],
-                "columnDefs": [{
-                    "defaultContent": "-",
-                    "targets": "_all"
-                }],
-                "paging": true,
-                "lengthChange": false,
-                "searching": true,
-                "destroy": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-                "language": {
-                    "emptyTable": "Nenhum registro disponível na tabela",
-                    "zeroRecords": "Nenhum registro encontrado",
-                    "info": "Mostrando _START_ de _END_ das _TOTAL_ contas",
-                    "infoEmpty": "Mostrando 0 de 0 dos 0 fornecedores",
-                    "infoFiltered": "(filtrado do total de _MAX_ fornecedores)",
-                    "search": "Procurar:",
-                    "paginate": {
-                        "first": "Primeiro",
-                        "last": "Último",
-                        "next": "Próximo",
-                        "previous": "Depois"
-                    },
-                }
-            });
-            var t = $('#example').DataTable()
-            console.log(data[0])
-            t.clear()
-            t.rows.add(data[0])
-            t.draw()
-            t.row.add(['Total', '', data[1]])
-            t.draw()
+            document.getElementById('table-body').innerHTML = output;
         }
 
         let donutChartCanvas = $('#donutChart').get(0).getContext('2d')

@@ -29,6 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js'); ?>
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js'); ?>
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js'); ?>
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js'); ?>
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/jszip/jszip.min.js'); ?>
@@ -37,6 +38,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js'); ?>
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js'); ?>
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js'); ?>
+
   <!-- Font Awesome Icons -->
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/fontawesome-free/css/all.min.css') ?>
   <!-- icheck bootstrap -->
