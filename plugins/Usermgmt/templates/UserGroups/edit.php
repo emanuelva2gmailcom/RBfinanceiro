@@ -14,7 +14,7 @@
 		<?php echo $this->Form->create($userGroupEntity, ['id'=>'editUserGroupForm', 'novalidate'=>true]);?>
 
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label required"><?php echo __('Group Name');?></label>
+			<label class="col-md-2 col-form-label required"><?php echo __('Nome do Grupo');?></label>
 			<div class="col-md-4">
 				<?php echo $this->Form->control('UserGroups.name', ['type'=>'text', 'label'=>false, 'class'=>'form-control']);?>
 				<span class="tagline"><?php echo __('for ex. Business User');?></span>
@@ -22,21 +22,21 @@
 		</div>
 
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label"><?php echo __('Parent Group');?></label>
+			<label class="col-md-2 col-form-label"><?php echo __('Grupo Matriz');?></label>
 			<div class="col-md-4">
 				<?php echo $this->Form->control('UserGroups.parent_id', ['type'=>'select', 'options'=>$parentGroups, 'label'=>false, 'class'=>'form-control']);?>
 			</div>
 		</div>
 
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label"><?php echo __('Description');?></label>
+			<label class="col-md-2 col-form-label"><?php echo __('Descrição');?></label>
 			<div class="col-md-4">
 				<?php echo $this->Form->control('UserGroups.description', ['type'=>'textarea', 'label'=>false, 'class'=>'form-control']);?>
 			</div>
 		</div>
 
 		<div class="row form-group">
-			<label class="col-md-2 col-form-label"><?php echo __('New Registration Allowed?');?></label>
+			<label class="col-md-2 col-form-label"><?php echo __('Novo Registro Permitido?');?></label>
 			<div class="col-md-1">
 				<?php echo $this->Form->control('UserGroups.is_registration_allowed', ['type'=>'checkbox', 'label'=>false, 'autocomplete'=>'off', 'class'=>'ml-0']);?>
 			</div>
@@ -44,7 +44,7 @@
 
 		<div class="row form-group border-top pt-3">
 			<div class="col">
-				<?php echo $this->Form->Submit(__('Save'), ['class'=>'btn btn-primary', 'id'=>'editUserGroupSubmitBtn']);?>
+				<?php echo $this->Form->Submit(__('Salvar'), ['class'=>'btn btn-primary', 'id'=>'editUserGroupSubmitBtn']);?>
 			</div>
 		</div>
 

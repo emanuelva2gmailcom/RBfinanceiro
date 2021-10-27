@@ -105,7 +105,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
     a {
       color: #2E2E2F;
     }
-  </style>
+
+    
+  @media (max-width : 620px) {
+    .footer {
+      position: absolute;
+      margin-top: 350px;
+      min-width: 80%;
+      /* background-color: gainsboro; */
+    }
+    body{
+      background-color: #DBDBDB;
+    }
+  }
+</style>
+
+  
 
 
 </head>
@@ -162,10 +177,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Main Footer -->
   </div>
-
-  <footer>
+  <footer class="footer">
     <?= $this->element('footer/main') ?>
   </footer>
+
   <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->

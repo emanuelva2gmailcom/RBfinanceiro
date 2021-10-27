@@ -1,11 +1,11 @@
 <div class="card">
 	<div class="card-header text-white bg-dark">
 		<span class="card-title">
-			<?php echo __('All Users');?>
+			<?php echo __('Todos os usuários');?>
 		</span>
 
 		<span class="card-title float-right">
-			<?php echo $this->Html->link(__('Add User', true), ['action'=>'addUser'], ['class'=>'btn btn-secondary btn-sm']);?>
+			<?php echo $this->Html->link(__('Adicionar Usuário', true), ['action'=>'addUser'], ['class'=>'btn btn-secondary btn-sm']);?>
 		</span>
 	</div>
 

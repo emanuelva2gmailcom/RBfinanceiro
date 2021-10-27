@@ -16,12 +16,41 @@
   .tr1 a {
     color: #029BE1;
   }
+
+  @media (max-width: 620px) {
+    .x-tudo{
+      position: absolute;
+      min-height: 100%;
+    }
+     .card-1 {
+      position: absolute;
+      margin-top: 800px;
+      min-width: 70%;
+    }
+ 
+    .card-2 {
+      position: absolute;
+      margin-top: 1700px;
+      min-width: 70%;
+    }
+    .card-3 { 
+      position: absolute;
+      margin-top: 1900px;
+      min-width: 70%; 
+    }
+    .card-4 { 
+      position: absolute;
+      margin-top: 2200px;
+      min-width: 70%; 
+    }
+
+    
+  }
 </style>
 
-
-<div class="container-fluid d-flex align-items-center justify-content-center p-5">
-
-  <div style="border: green solid 2px; border-radius: 20px;" class="card card-outline container bg-white ">
+<div class="x-tudo container">
+  <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+    <div style="border: green solid 2px; border-radius: 20px;" class="card card-1 card-outline container bg-white ">
 
     <div class="card-header d-sm-flex" style="padding-top: 50px; color: green;">
       <h2 class="card-title"><?= h($lancamento->id_lancamento) ?></h2>
@@ -101,51 +130,49 @@
 
           <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $lancamento->id_lancamento], ['class' => ' btn btn-sm btn-outline-success']) ?>
           <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-sm btn-outline-info']) ?>
-
       </div>
     </div>
   </div>
-</div>
 
-<div class="testee container-fluid d-flex align-items-center justify-content-center p-5">
-  <div class=" row">
-    <div class="col-12">
-      <!-- Custom Tabs -->
-      <div class="card" style="border: green solid 2px; border-radius: 20px;" class="related related-caixaregistros view card container bg-white">
-        <div class="card-header d-flex p-0">
-          <h3 class="card-title p-3" style="color: green;">Histórico do lançamento</h3>
-          <ul class="nav nav-pills ml-auto p-2" id="tab_header">
-            <li class="nav-item"><a class="btn btn-info btn-sm active" href="#inicio" data-toggle="tab">Começo</a></li>
-            <?php foreach ($lancamento->lancamentos as $l) : ?>
-              <li class="nav-item"><a class="btn btn-info btn-sm" href="#tab_<?= $l->id_lancamento ?>" data-toggle="tab"><?= $l->id_lancamento ?></a></li>
-            <?php endforeach ?>
-          </ul>
-        </div><!-- /.card-header -->
-        <div class="card-body">
-          <div class="tab-content">
-            <div class="tab-pane text-info active" id="inicio">
-              Clique nos numerais acima para ver os lançamentos anteriores a esse
+  <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+    <div class=" row card-2">
+      <div class="col-12">
+        <!-- Custom Tabs -->
+        <div class="card " style="border: green solid 2px; border-radius: 20px;" class="related related-caixaregistros view card container bg-white">
+          <div class="card-header d-flex p-0">
+            <h3 class="card-title p-3" style="color: green;">Histórico do lançamento</h3>
+            <ul class="nav nav-pills ml-auto p-2" id="tab_header">
+              <li class="nav-item"><a class="btn btn-info btn-sm active" href="#inicio" data-toggle="tab">Começo</a></li>
+              <?php foreach ($lancamento->lancamentos as $l) : ?>
+                <li class="nav-item"><a class="btn btn-info btn-sm" href="#tab_<?= $l->id_lancamento ?>" data-toggle="tab"><?= $l->id_lancamento ?></a></li>
+              <?php endforeach ?>
+            </ul>
+          </div><!-- /.card-header -->
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane text-info active" id="inicio">
+                Clique nos numerais acima para ver os lançamentos anteriores a esse
+              </div>
+              <?php foreach ($lancamento->lancamentos as $l) : ?>
+                <?= $this->element('lancamentos/card', ['lancamento' => $l]) ?>
+              <?php endforeach ?>
             </div>
-            <?php foreach ($lancamento->lancamentos as $l) : ?>
-              <?= $this->element('lancamentos/card', ['lancamento' => $l]) ?>
-            <?php endforeach ?>
-          </div>
-          <!-- /.tab-content -->
-        </div><!-- /.card-body -->
+            <!-- /.tab-content -->
+          </div><!-- /.card-body -->
+        </div>
+        <!-- ./card -->
       </div>
-      <!-- ./card -->
+      <!-- /.col -->
     </div>
-    <!-- /.col -->
   </div>
-</div>
 
-<div class="container-fluid d-flex align-items-center justify-content-center p-5">
+  <div class="container-fluid d-flex align-items-center justify-content-center p-5">
 
-  <div style="border: green solid 2px; border-radius: 20px;" class="related related-caixaregistros view card container bg-white">
+    <div style="border: green solid 2px; border-radius: 20px;" class="related card-3 related-caixaregistros view card container bg-white">
 
-    <div class="card-header d-sm-flex" style="padding-top: 50px;">
-      <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-      <!-- <div class="card-toolbox">
+      <div class="card-header d-sm-flex" style="padding-top: 50px;">
+        <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
+        <!-- <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Caixaregistros', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
     </div> -->
@@ -165,33 +192,39 @@
               Não Encontrado!
             </td>
           </tr>
-        <?php } else { ?>
-          <?php foreach ($lancamento->caixaregistros as $caixaregistros) : ?>
+          <?php if (empty($lancamento->caixaregistros)) { ?>
             <tr>
-              <td class="text-info"><?= h($caixaregistros->id_caixaregistro) ?></td>
-              <td class="text-info"><?= h($caixaregistros->caixa_id) ?></td>
-              <td class="text-info"><?= h($caixaregistros->tipopagamento_id) ?></td>
-              <td class="text-info"><?= h($caixaregistros->lancamento_id) ?></td>
-              <td class="actions">
-                <?= $this->Html->link(__('Visualizar'), ['controller' => 'Caixaregistros', 'action' => 'view', $caixaregistros->id_caixaregistro], ['class' => 'btn btn-xs btn-outline-info']) ?>
-                <?= $this->Html->link(__('Editar'), ['controller' => 'Caixaregistros', 'action' => 'edit', $caixaregistros->id_caixaregistro], ['class' => 'btn btn-xs btn-outline-success']) ?>
-                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Caixaregistros', 'action' => 'delete', $caixaregistros->id_caixaregistro], ['class' => 'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $caixaregistros->id_caixaregistro)]) ?>
+              <td colspan="5" class="text-info">
+                Não Encontrado!
               </td>
             </tr>
-          <?php endforeach; ?>
-        <?php } ?>
-      </table>
+          <?php } else { ?>
+            <?php foreach ($lancamento->caixaregistros as $caixaregistros) : ?>
+              <tr>
+                <td class="text-info"><?= h($caixaregistros->id_caixaregistro) ?></td>
+                <td class="text-info"><?= h($caixaregistros->caixa_id) ?></td>
+                <td class="text-info"><?= h($caixaregistros->tipopagamento_id) ?></td>
+                <td class="text-info"><?= h($caixaregistros->lancamento_id) ?></td>
+                <td class="actions">
+                  <?= $this->Html->link(__('Visualizar'), ['controller' => 'Caixaregistros', 'action' => 'view', $caixaregistros->id_caixaregistro], ['class' => 'btn btn-xs btn-outline-info']) ?>
+                  <?= $this->Html->link(__('Editar'), ['controller' => 'Caixaregistros', 'action' => 'edit', $caixaregistros->id_caixaregistro], ['class' => 'btn btn-xs btn-outline-success']) ?>
+                  <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Caixaregistros', 'action' => 'delete', $caixaregistros->id_caixaregistro], ['class' => 'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $caixaregistros->id_caixaregistro)]) ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          <?php } ?>
+        </table>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container-fluid d-flex align-items-center justify-content-center p-5">
+  <div class="container-fluid d-flex align-items-center justify-content-center p-5">
 
-  <div style="border: green solid 2px; border-radius: 20px;" class="related related-caixaregistros view card container bg-white">
+    <div style="border: green solid 2px; border-radius: 20px;" class="related card-4 related-caixaregistros view card container bg-white">
 
-    <div class="card-header d-sm-flex" style="padding-top: 50px;">
-      <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-      <!-- <div class="card-toolbox">
+      <div class="card-header d-sm-flex" style="padding-top: 50px;">
+        <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
+        <!-- <div class="card-toolbox">
       <?= $this->Html->link(__('Novo'), ['controller' => 'Comprovantes', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
       <?= $this->Html->link(__('Todos '), ['controller' => 'Comprovantes', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
     </div> -->
@@ -213,24 +246,32 @@
               Não Encontrado!
             </td>
           </tr>
-        <?php } else { ?>
-          <?php foreach ($lancamento->comprovantes as $comprovantes) : ?>
+          <?php if (empty($lancamento->comprovantes)) { ?>
             <tr>
-              <td class="text-info"><?= h($comprovantes->id_comprovante) ?></td>
-              <td class="text-info"><?= h($comprovantes->nome_arquivo) ?></td>
-              <td class="text-info"><?= h($comprovantes->tipo) ?></td>
-              <td class="text-info"><?= h($comprovantes->lancamento_id) ?></td>
-              <td class="text-info"><?= h($comprovantes->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-              <td class="text-info"><?= h($comprovantes->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-              <td class="actions">
-                <?= $this->Html->link(__('Visualizar'), ['controller' => 'Comprovantes', 'action' => 'view', $comprovantes->id_comprovante], ['class' => 'btn btn-xs btn-outline-info']) ?>
-                <?= $this->Html->link(__('Editar'), ['controller' => 'Comprovantes', 'action' => 'edit', $comprovantes->id_comprovante], ['class' => 'btn btn-xs btn-outline-success']) ?>
-                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Comprovantes', 'action' => 'delete', $comprovantes->id_comprovante], ['class' => 'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $comprovantes->nome_arquivo)]) ?>
+              <td colspan="7" class="text-info">
+                Não Encontrado!
               </td>
             </tr>
-          <?php endforeach; ?>
-        <?php } ?>
-      </table>
+          <?php } else { ?>
+            <?php foreach ($lancamento->comprovantes as $comprovantes) : ?>
+              <tr>
+                <td class="text-info"><?= h($comprovantes->id_comprovante) ?></td>
+                <td class="text-info"><?= h($comprovantes->nome_arquivo) ?></td>
+                <td class="text-info"><?= h($comprovantes->tipo) ?></td>
+                <td class="text-info"><?= h($comprovantes->lancamento_id) ?></td>
+                <td class="text-info"><?= h($comprovantes->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                <td class="text-info"><?= h($comprovantes->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                <td class="actions">
+                  <?= $this->Html->link(__('Visualizar'), ['controller' => 'Comprovantes', 'action' => 'view', $comprovantes->id_comprovante], ['class' => 'btn btn-xs btn-outline-info']) ?>
+                  <?= $this->Html->link(__('Editar'), ['controller' => 'Comprovantes', 'action' => 'edit', $comprovantes->id_comprovante], ['class' => 'btn btn-xs btn-outline-success']) ?>
+                  <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Comprovantes', 'action' => 'delete', $comprovantes->id_comprovante], ['class' => 'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $comprovantes->nome_arquivo)]) ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          <?php } ?>
+        </table>
+      </div>
     </div>
   </div>
+
 </div>

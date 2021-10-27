@@ -8,23 +8,23 @@
 				<tr>
 					<th><?php echo __('#');?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('Users.id', __('User Id'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('Users.id', __('ID do Usuário'));?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('Users.first_name', __('Name'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('Users.first_name', __('Nome'));?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('Users.username', __('Username'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('Users.username', __('Nome do Usuário'));?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('Users.email', __('Email'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('Users.email', __('E-mail'));?></th>
 
-					<th><?php echo __('Groups(s)');?></th>
+					<th><?php echo __('Grupo(s)');?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('Users.is_email_verified', __('Email Verified'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('Users.is_email_verified', __('E-mail Verificado'));?></th>
 
 					<th class="psorting"><?php echo $this->Paginator->sort('Users.is_active', __('Status'));?></th>
 
-					<th class="psorting"><?php echo $this->Paginator->sort('Users.created', __('Created'));?></th>
+					<th class="psorting"><?php echo $this->Paginator->sort('Users.created', __('Criado'));?></th>
 
-					<th><?php echo __('Action');?></th>
+					<th><?php echo __('Ações');?></th>
 				</tr>
 			</thead>
 
@@ -51,17 +51,17 @@
 							
 							echo "<td>";
 								if($row['is_email_verified']) {
-									echo "<span class='badge badge-success'>".__('Yes')."</span>";
+									echo "<span class='badge badge-success'>".__('Sim')."</span>";
 								} else {
-									echo "<span class='badge badge-danger'>".__('No')."</span>";
+									echo "<span class='badge badge-danger'>".__('Não')."</span>";
 								}
 							echo"</td>";
 
 							echo "<td>";
 								if($row['is_active']) {
-									echo "<span class='badge badge-success'>".__('Active')."</span>";
+									echo "<span class='badge badge-success'>".__('Ativo')."</span>";
 								} else {
-									echo "<span class='badge badge-danger'>".__('Inactive')."</span>";
+									echo "<span class='badge badge-danger'>".__('Inativo')."</span>";
 								}
 							echo"</td>";
 							
@@ -69,39 +69,39 @@
 							
 							echo "<td>";
 								echo "<div class='dropdown'>";
-									echo "<button class='btn btn-dark btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>".__('Action')."</button>";
+									echo "<button class='btn btn-dark btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>".__('Ações')."</button>";
 									
 									echo "<div class='dropdown-menu dropdown-menu-right'>";
-										echo $this->Html->link(__('View User'), ['controller'=>'Users', 'action'=>'viewUser', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
+										echo $this->Html->link(__('Exibir Usuário'), ['controller'=>'Users', 'action'=>'viewUser', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
 
-										echo $this->Html->link(__('Edit User'), ['controller'=>'Users', 'action'=>'editUser', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
+										echo $this->Html->link(__('Editar Usuário'), ['controller'=>'Users', 'action'=>'editUser', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
 
-										echo $this->Html->link(__('Change Password'), ['controller'=>'Users', 'action'=>'changeUserPassword', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
+										echo $this->Html->link(__('Mudar Senha'), ['controller'=>'Users', 'action'=>'changeUserPassword', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
 
 										if($row['id'] != 1 && strtolower($row['username']) != 'admin') {
 											if($row['is_active']) {
-												echo $this->Form->postLink(__('Inactivate'), ['controller'=>'Users', 'action'=>'setInactive', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item', 'confirm'=>__('Are you sure you want to inactivate this user?')]);
+												echo $this->Form->postLink(__('Inativar'), ['controller'=>'Users', 'action'=>'setInactive', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item', 'confirm'=>__('Are you sure you want to inactivate this user?')]);
 											} else {
-												echo $this->Form->postLink(__('Activate'), ['controller'=>'Users', 'action'=>'setActive', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item', 'confirm'=>__('Are you sure you want to activate this user?')]);
+												echo $this->Form->postLink(__('Ativar'), ['controller'=>'Users', 'action'=>'setActive', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item', 'confirm'=>__('Are you sure you want to activate this user?')]);
 											}
 											
 											if(!$row['is_email_verified']) {
-												echo $this->Form->postLink(__('Verify Email'), ['action'=>'verifyEmail', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item', 'confirm'=>__('Are you sure you want to verify email of this user?')]);
+												echo $this->Form->postLink(__('Verificar E-mail'), ['action'=>'verifyEmail', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item', 'confirm'=>__('Are you sure you want to verify email of this user?')]);
 											}
 											
-											echo $this->Form->postLink(__('Delete User'), ['controller'=>'Users', 'action'=>'deleteUser', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item', 'confirm'=>__('Are you sure you want to delete this user?')]);
+											echo $this->Form->postLink(__('Deletar Usuário'), ['controller'=>'Users', 'action'=>'deleteUser', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item', 'confirm'=>__('Are you sure you want to delete this user?')]);
 										}
 										
-										echo $this->Html->link(__('View Permissions'), ['controller'=>'UserGroupPermissions', 'action'=>'user', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
+										echo $this->Html->link(__('Exibir  Permissões'), ['controller'=>'UserGroupPermissions', 'action'=>'user', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
 										
-										echo $this->Html->link(__('Send Email'), ['controller'=>'UserEmails', 'action'=>'sendToUser', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
+										echo $this->Html->link(__('Enviar E-mail'), ['controller'=>'UserEmails', 'action'=>'sendToUser', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);
 									echo "</div>";
 								echo "</div>";
 							echo "</td>";
 						echo "</tr>";
 					}
 				} else {
-					echo "<tr><td colspan=10><br/>".__('No Records Available')."</td></tr>";
+					echo "<tr><td colspan=10><br/>".__('Nenhum registro disponível')."</td></tr>";
 				}?>
 			</tbody>
 		</table>
@@ -109,7 +109,7 @@
 
 	<?php
 	if(!empty($users)) {
-		echo $this->element('Usermgmt.pagination', ['paginationText'=>__('Number of Users')]);
+		echo $this->element('Usermgmt.pagination', ['paginationText'=>__('Número de usuários')]);
 	}?>
 
 	<script type="text/javascript">

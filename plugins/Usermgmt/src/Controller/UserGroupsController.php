@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -17,14 +18,15 @@ namespace Usermgmt\Controller;
 use Usermgmt\Controller\UsermgmtAppController;
 use Cake\Event\EventInterface;
 
-class UserGroupsController extends UsermgmtAppController {
+class UserGroupsController extends UsermgmtAppController
+{
 	/**
 	 * This controller uses following default pagination values
 	 *
 	 * @var array
 	 */
 	public $paginate = [
-		'limit'=>25
+		'limit' => 25
 	];
 
 	/**
@@ -34,20 +36,20 @@ class UserGroupsController extends UsermgmtAppController {
 	 * @var array
 	 */
 	public $searchFields = [
-		'index'=>[
-			'Usermgmt.UserGroups'=>[
-				'UserGroups'=>[
-					'type'=>'text',
-					'label'=>'Search',
-					'tagline'=>'Search by group name, description',
-					'condition'=>'multiple',
-					'searchFields'=>['UserGroups.name', 'UserGroups.description'],
-					'inputOptions'=>['style'=>'width:200px;']
+		'index' => [
+			'Usermgmt.UserGroups' => [
+				'UserGroups' => [
+					'type' => 'text',
+					'label' => 'Search',
+					'tagline' => 'Search by group name, description',
+					'condition' => 'multiple',
+					'searchFields' => ['UserGroups.name', 'UserGroups.description'],
+					'inputOptions' => ['style' => 'width:200px;']
 				],
-				'UserGroups.is_registration_allowed'=>[
-					'type'=>'select',
-					'label'=>'Registration Allowed',
-					'options'=>[''=>'Select', '1'=>'Yes', '0'=>'No']
+				'UserGroups.is_registration_allowed' => [
+					'type' => 'select',
+					'label' => 'Registration Allowed',
+					'options' => ['' => 'Select', '1' => 'Yes', '0' => 'No']
 				]
 			]
 		]
@@ -60,7 +62,8 @@ class UserGroupsController extends UsermgmtAppController {
 	 *
 	 * @return void
 	 */
-	public function initialize(): void {
+	public function initialize(): void
+	{
 		parent::initialize();
 
 		$this->loadComponent('Usermgmt.Search');
@@ -72,14 +75,15 @@ class UserGroupsController extends UsermgmtAppController {
 	 *
 	 * @return void
 	 */
-	public function beforeFilter(EventInterface $event) {
+	public function beforeFilter(EventInterface $event)
+	{
 		parent::beforeFilter($event);
 
 		$this->loadModel('Usermgmt.UserGroups');
 
 		$action = $this->getRequest()->getParam('action');
 
-		if(isset($this->FormProtection) && $this->getRequest()->is('ajax')) {
+		if (isset($this->FormProtection) && $this->getRequest()->is('ajax')) {
 			$this->FormProtection->setConfig('unlockedActions', [$action]);
 		}
 	}
@@ -90,11 +94,12 @@ class UserGroupsController extends UsermgmtAppController {
 	 * @access public
 	 * @return void
 	 */
-	public function index() {
+	public function index()
+	{
 		$cond = [];
 		$cond = $this->Search->applySearch($cond);
 
-		$this->paginate = ['limit'=>10, 'conditions'=>$cond, 'order'=>['UserGroups.id'=>'ASC']];
+		$this->paginate = ['limit' => 10, 'conditions' => $cond, 'order' => ['UserGroups.id' => 'ASC']];
 
 		$userGroups = $this->paginate($this->UserGroups)->toArray();
 
@@ -102,7 +107,7 @@ class UserGroupsController extends UsermgmtAppController {
 
 		$this->set(compact('allGroups', 'userGroups'));
 
-		if($this->getRequest()->is('ajax')) {
+		if ($this->getRequest()->is('ajax')) {
 			$this->viewBuilder()->setLayout('ajax');
 			$this->render('/UserGroups/all_user_groups');
 		}
@@ -114,28 +119,33 @@ class UserGroupsController extends UsermgmtAppController {
 	 * @access public
 	 * @return void
 	 */
-	public function add() {
+	public function add()
+	{
 		$userGroupEntity = $this->UserGroups->newEmptyEntity();
 
-		if($this->getRequest()->is('post')) {
-			$userGroupEntity = $this->UserGroups->patchEntity($userGroupEntity, $this->getRequest()->getData(), ['validate'=>'forAdd']);
+		if ($this->getRequest()->is('post')) {
+			
+			$userGroupEntity = $this->UserGroups->patchEntity($userGroupEntity, $this->getRequest()->getData(), ['validate' => 'forAdd']);
 
+		
 			$errors = $userGroupEntity->getErrors();
-
-			if($this->getRequest()->is('ajax')) {
-				if(empty($errors)) {
-					$response = ['error'=>0, 'message'=>'success'];
+			
+			if ($this->getRequest()->is('ajax')) {
+				if (empty($errors)) {
+					$response = ['error' => 0, 'message' => 'success'];
 				} else {
-					$response = ['error'=>1, 'message'=>'failure'];
+					$response = ['error' => 1, 'message' => 'failure'];
 					$response['data']['UserGroups'] = $errors;
 				}
-				echo json_encode($response);exit;
+				echo json_encode($response);
+				exit;
 			} else {
-				if(empty($errors)) {
-					if($this->UserGroups->save($userGroupEntity, ['validate'=>false])) {
+				if (empty($errors)) {
+					
+					if ($this->UserGroups->save($userGroupEntity, ['validate' => false])) {
 						$this->Flash->success(__('The group has been added successfully'));
 
-						$this->redirect(['action'=>'index']);
+						$this->redirect(['action' => 'index']);
 					} else {
 						$this->Flash->error(__('Unable to add group, please try again'));
 					}
@@ -155,30 +165,32 @@ class UserGroupsController extends UsermgmtAppController {
 	 * @param integer $userGroupId user group id
 	 * @return void
 	 */
-	public function edit($userGroupId=null) {
-		if($userGroupId) {
-			$userGroupEntity = $this->UserGroups->find()->where(['UserGroups.id'=>$userGroupId])->first();
+	public function edit($userGroupId = null)
+	{
+		if ($userGroupId) {
+			$userGroupEntity = $this->UserGroups->find()->where(['UserGroups.id' => $userGroupId])->first();
 
-			if(!empty($userGroupEntity)) {
-				if($this->getRequest()->is(['put', 'post'])) {
-					$userGroupEntity = $this->UserGroups->patchEntity($userGroupEntity, $this->getRequest()->getData(), ['validate'=>'forAdd']);
+			if (!empty($userGroupEntity)) {
+				if ($this->getRequest()->is(['put', 'post'])) {
+					$userGroupEntity = $this->UserGroups->patchEntity($userGroupEntity, $this->getRequest()->getData(), ['validate' => 'forAdd']);
 
 					$errors = $userGroupEntity->getErrors();
 
-					if($this->getRequest()->is('ajax')) {
-						if(empty($errors)) {
-							$response = ['error'=>0, 'message'=>'success'];
+					if ($this->getRequest()->is('ajax')) {
+						if (empty($errors)) {
+							$response = ['error' => 0, 'message' => 'success'];
 						} else {
-							$response = ['error'=>1, 'message'=>'failure'];
+							$response = ['error' => 1, 'message' => 'failure'];
 							$response['data']['UserGroups'] = $errors;
 						}
-						echo json_encode($response);exit;
+						echo json_encode($response);
+						exit;
 					} else {
-						if(empty($errors)) {
-							if($this->UserGroups->save($userGroupEntity, ['validate'=>false])) {
+						if (empty($errors)) {
+							if ($this->UserGroups->save($userGroupEntity, ['validate' => false])) {
 								$this->Flash->success(__('The group has been updated successfully'));
 
-								$this->redirect(['action'=>'index', '?'=>['page'=>$this->UserAuth->getPageNumber()]]);
+								$this->redirect(['action' => 'index', '?' => ['page' => $this->UserAuth->getPageNumber()]]);
 							} else {
 								$this->Flash->error(__('Unable to update group, please try again.'));
 							}
@@ -191,11 +203,11 @@ class UserGroupsController extends UsermgmtAppController {
 				$this->set(compact('userGroupEntity', 'parentGroups'));
 			} else {
 				$this->Flash->error(__('Invalid group id'));
-				$this->redirect(['action'=>'index']);
+				$this->redirect(['action' => 'index']);
 			}
 		} else {
 			$this->Flash->error(__('Missing group id'));
-			$this->redirect(['action'=>'index']);
+			$this->redirect(['action' => 'index']);
 		}
 	}
 
@@ -206,20 +218,20 @@ class UserGroupsController extends UsermgmtAppController {
 	 * @param integer $userGroupId user group id
 	 * @return void
 	 */
-	public function delete($userGroupId=null) {
-		if(!empty($userGroupId)) {
-			$userGroup = $this->UserGroups->find()->where(['UserGroups.id'=>$userGroupId])->first();
+	public function delete($userGroupId = null)
+	{
+		if (!empty($userGroupId)) {
+			$userGroup = $this->UserGroups->find()->where(['UserGroups.id' => $userGroupId])->first();
 
-			if(!empty($userGroup)) {
-				if($this->getRequest()->is('post')) {
+			if (!empty($userGroup)) {
+				if ($this->getRequest()->is('post')) {
 					$this->loadModel('Usermgmt.Users');
 
-					if($this->Users->isUserAssociatedWithGroup($userGroupId)) {
+					if ($this->Users->isUserAssociatedWithGroup($userGroupId)) {
 						$this->Flash->warning(__('Sorry some users are associated with this group, You cannot delete this group'));
-					}
-					else {
-						if(!$this->UserGroups->exists(['UserGroups.parent_id'=>$userGroupId])) {
-							if($this->UserGroups->delete($userGroup)) {
+					} else {
+						if (!$this->UserGroups->exists(['UserGroups.parent_id' => $userGroupId])) {
+							if ($this->UserGroups->delete($userGroup)) {
 								$this->Flash->success(__('Selected group has been deleted successfully'));
 							} else {
 								$this->Flash->warning(__('Selected group could not be deleted, please try again'));
@@ -236,6 +248,6 @@ class UserGroupsController extends UsermgmtAppController {
 			$this->Flash->error(__('Missing User Group Id'));
 		}
 
-		$this->redirect(['action'=>'index', '?'=>['page'=>$this->UserAuth->getPageNumber()]]);
+		$this->redirect(['action' => 'index', '?' => ['page' => $this->UserAuth->getPageNumber()]]);
 	}
 }

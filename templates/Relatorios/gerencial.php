@@ -1,3 +1,4 @@
+
 <?php
 
 /**
@@ -158,8 +159,10 @@
             </tbody>
         </table>
     </div>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script>
     $('.select2bs4').select2({
         theme: 'bootstrap4'

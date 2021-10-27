@@ -291,10 +291,13 @@
         }
 
     });
+    
 
     $('.saidas').change(function() {
         $tipo = $(".saidas option:selected").text();
+
         if ($tipo.indexOf('fornecedor') != -1) {
+
             $('.cliente').addClass('d-none')
             $('.fornecedor').removeClass('d-none');
 
@@ -347,7 +350,6 @@
 
     $('.grupo').change(function() {
         $grupo = $('.grupo').val();
-        // alert($grupo)
         grupo($grupo)
     })
 </script>
