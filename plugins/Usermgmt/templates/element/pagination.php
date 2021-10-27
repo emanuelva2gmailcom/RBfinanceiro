@@ -28,7 +28,7 @@ $this->Paginator->setTemplates([
 	<ul class="pagination" style="display:block;">
 		<?php
 		echo "<div class='pagination-navigation pr-3 mb-3 d-inline-block'>";
-			$firstP = $this->Paginator->first(__('First'));
+			$firstP = $this->Paginator->first(__('Primeiro'));
 			
 			if(!empty($firstP)) {
 				echo $firstP;
@@ -37,18 +37,18 @@ $this->Paginator->setTemplates([
 			}
 
 			if($this->Paginator->hasPrev()) {
-				echo $this->Paginator->prev(__('Previous'));
+				echo $this->Paginator->prev(__('Anterior'));
 			} else {
 				echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".__('Anterior')."</a></li>";
 			}
 
 			if($this->Paginator->hasNext()) {
-				echo $this->Paginator->next(__('Next'));
+				echo $this->Paginator->next(__('Próximo'));
 			} else {
-				echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".__('Proximo')."</a></li>";
+				echo "<li class='page-item d-inline-block disabled'><a class='page-link' href='#'>".__('Próximo')."</a></li>";
 			}
 
-			$lastP = $this->Paginator->last(__('Last'));
+			$lastP = $this->Paginator->last(__('Último'));
 			
 			if(!empty($lastP)) {
 				echo $lastP;
