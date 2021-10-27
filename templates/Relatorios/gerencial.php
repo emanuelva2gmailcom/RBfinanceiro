@@ -58,28 +58,70 @@
         opacity: 0.7;
     }
 
-    .buttons-excel {
+    .buttons-print {
+        background-color: #0099CC;
+        color: white;
+        border: 1px solid #0099CC;
+        opacity: 0.7;
+    }
+
+    .buttons-print:hover {
+        background-color: white;
+        color: #0099CC;
+        border: 1px solid #0099CC;
+        opacity: 0.7;
+    }
+
+    .buttons-csv {
         background-color: green;
         color: white;
         border: 1px solid green;
         opacity: 0.7;
     }
 
-    .buttons-excel:hover {
+    .buttons-csv:hover {
         background-color: white;
         color: green;
         border: 1px solid green;
         opacity: 0.7;
     }
 
+    .buttons-excel {
+        background-color: #006400;
+        color: white;
+        border: 1px solid #006400;
+        opacity: 0.7;
+    }
+
+    .buttons-excel:hover {
+        background-color: white;
+        color: #006400;
+        border: 1px solid #006400;
+        opacity: 0.7;
+    }
+
     .buttons-pdf {
+        background-color: #4b4b4b;
+        color: white;
+        border: 1px solid #4b4b4b;
+        opacity: 0.7;
+    }
+
+    .buttons-pdf:hover {
+        background-color: white;
+        color: #4b4b4b;
+        border: 1px solid #4b4b4b;
+        opacity: 0.7;
+    }
+
+    .buttons-collection {
         background-color: black;
         color: white;
         border: 1px solid black;
         opacity: 0.7;
     }
 
-    .buttons-pdf:hover {
+    .buttons-collection:hover {
         background-color: white;
         color: black;
         border: 1px solid black;
@@ -197,9 +239,9 @@
             "language": {
                 "emptyTable": "Nenhum registro disponível na tabela",
                 "zeroRecords": "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ fornecedores",
-                "infoEmpty": "Mostrando 0 de 0 dos 0 fornecedores",
-                "infoFiltered": "(filtrado do total de _MAX_ fornecedores)",
+                "info": "Mostrando _START_ de _END_ dos _TOTAL_ caixas gerenciais",
+                "infoEmpty": "Mostrando 0 de 0 dos 0 caixas gerenciais",
+                "infoFiltered": "(filtrado do total de _MAX_ caixas gerenciais)",
                 "search": "Procurar:",
                 "paginate": {
                     "first": "Primeiro",
@@ -208,7 +250,26 @@
                     "previous": "Depois"
                 },
             },
-            "buttons": ["copy", "excel", "pdf"]
+            "buttons": [{
+              extend: 'copyHtml5',
+              text: 'Copiar',
+
+              exportOptions: {
+                orthogonal: 'export',
+                columns: function(column, data, node) {
+                  if (column > 7) {
+                    return false;
+                  }
+                  return true;
+                },
+              }
+            }, "print", "csvHtml5", "excelHtml5", "pdfHtml5",
+            {
+              extend: 'collection',
+              text: 'Mostrar Colunas',
+              buttons: [ 'columnsVisibility' ],
+              visibility: true
+            }, ]
         }).buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
         datase(data)
     }

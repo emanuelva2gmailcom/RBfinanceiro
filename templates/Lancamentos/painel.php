@@ -24,6 +24,15 @@
         .month label {
             color: white;
         }
+
+        @media (max-width: 620px) {
+    .card {
+      position: absolute;
+      margin-top: 950px;
+      min-width: 90%;
+    }
+
+  }
     </style>
 </head>
 
@@ -109,11 +118,11 @@
                 }
             });
             var t = $('#example').DataTable()
-            console.log(data[0]) 
-            t.clear() 
+            console.log(data[0])
+            t.clear()
             t.rows.add(data[0])
             t.draw()
-            t.row.add(['Total', '', data[1]]) 
+            t.row.add(['Total', '', data[1]])
             t.draw()
         }
 

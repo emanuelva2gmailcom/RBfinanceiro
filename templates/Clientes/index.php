@@ -50,42 +50,84 @@ li{
 
     }
 
-    .buttons-copy{
+    .buttons-copy {
         background-color: #17a2b8;
         color: white;
         border: 1px solid #17a2b8;
         opacity: 0.7;
     }
 
-    .buttons-copy:hover{
+    .buttons-copy:hover {
         background-color: white;
         color: #17a2b8;
         border: 1px solid #17a2b8;
         opacity: 0.7;
     }
 
-    .buttons-excel{
+    .buttons-print {
+        background-color: #0099CC;
+        color: white;
+        border: 1px solid #0099CC;
+        opacity: 0.7;
+    }
+
+    .buttons-print:hover {
+        background-color: white;
+        color: #0099CC;
+        border: 1px solid #0099CC;
+        opacity: 0.7;
+    }
+
+    .buttons-csv {
         background-color: green;
         color: white;
         border: 1px solid green;
         opacity: 0.7;
     }
 
-    .buttons-excel:hover{
+    .buttons-csv:hover {
         background-color: white;
         color: green;
         border: 1px solid green;
         opacity: 0.7;
     }
 
-    .buttons-pdf{
+    .buttons-excel {
+        background-color: #006400;
+        color: white;
+        border: 1px solid #006400;
+        opacity: 0.7;
+    }
+
+    .buttons-excel:hover {
+        background-color: white;
+        color: #006400;
+        border: 1px solid #006400;
+        opacity: 0.7;
+    }
+
+    .buttons-pdf {
+        background-color: #4b4b4b;
+        color: white;
+        border: 1px solid #4b4b4b;
+        opacity: 0.7;
+    }
+
+    .buttons-pdf:hover {
+        background-color: white;
+        color: #4b4b4b;
+        border: 1px solid #4b4b4b;
+        opacity: 0.7;
+    }
+
+    .buttons-collection {
         background-color: black;
         color: white;
         border: 1px solid black;
         opacity: 0.7;
     }
 
-    .buttons-pdf:hover{
+    .buttons-collection:hover {
         background-color: white;
         color: black;
         border: 1px solid black;
@@ -194,44 +236,50 @@ li{
         }
       ],
       buttons: [{
-          extend: 'copyHtml5',
-          text: 'Copiar',
+                    extend: 'copyHtml5',
+                    text: 'Copiar',
 
-          exportOptions: {
-            orthogonal: 'export',
-            columns: function(column, data, node) {
-              if (column > 7) {
-                return false;
-              }
-              return true;
+                    exportOptions: {
+                        orthogonal: 'export',
+                        columns: function(column, data, node) {
+                            if (column > 7) {
+                                return false;
+                            }
+                            return true;
+                        },
+                    }
+                }, "print", "csvHtml5",
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        orthogonal: 'export',
+                        columns: function(column, data, node) {
+                            if (column > 7) {
+                                return false;
+                            }
+                            return true;
+                        },
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        orthogonal: 'export',
+                        columns: function(column, data, node) {
+                            if (column > 7) {
+                                return false;
+                            }
+                            return true;
+                        },
+                    }
+                },
+                {
+              extend: 'collection',
+              text: 'Mostrar Colunas',
+              buttons: [ 'columnsVisibility' ],
+              visibility: true
             },
-          }
-        },
-        {
-          extend: 'excelHtml5',
-          exportOptions: {
-            orthogonal: 'export',
-            columns: function(column, data, node) {
-              if (column > 7) {
-                return false;
-              }
-              return true;
-            },
-          }
-        },
-        {
-          extend: 'pdfHtml5',
-          exportOptions: {
-            orthogonal: 'export',
-            columns: function(column, data, node) {
-              if (column > 7) {
-                return false;
-              }
-              return true;
-            },
-          }
-        }
-      ]
+            ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
 </script>
