@@ -281,7 +281,7 @@
 
     $('.entradas').change(function() {
         $tipo = $(".entradas option:selected").text();
-        if ($tipo.indexOf('cliente') != -1) {
+        if ($tipo.indexOf('Cliente') != -1) {
             $('.cliente').removeClass('d-none')
             $('.fornecedor').addClass('d-none');
 
@@ -296,7 +296,7 @@
     $('.saidas').change(function() {
         $tipo = $(".saidas option:selected").text();
 
-        if ($tipo.indexOf('fornecedor') != -1) {
+        if ($tipo.indexOf('Fornecedor') != -1) {
 
             $('.cliente').addClass('d-none')
             $('.fornecedor').removeClass('d-none');
@@ -311,7 +311,7 @@
     $('.tipo').change(function() {
         $tipo = $('.tipo').val();
         try {
-            const response = axios.get('/caixas/getAberto').then(function(response) {
+            const response = axios.get('/caixas/getCaixaaberto').then(function(response) {
                 if ((response.data !== true) && ($tipo !== 'PREVISTO')) {
                     $('.span').text('Caixa Fechado');
                     $('#proximo').removeAttr('onclick')
