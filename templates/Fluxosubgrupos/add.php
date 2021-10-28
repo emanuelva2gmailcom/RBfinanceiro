@@ -60,7 +60,7 @@
 
       <?= $this->Form->control('subgrupo', ['label' => 'Subgrupo'], ['class' => 'form-control']); ?>
       <?= $this->Form->control('descricao', ['label' => 'Descrição'], ['label' => 'Descrição'], ['class' => 'form-control']); ?>
-      <?= $this->Form->control('fluxogrupo_id', ['label' => 'Grupo'], ['options' => $fluxogrupos, 'empty' => true], ['class' => 'form-control']); ?>
+      <?= $this->Form->control('fluxogrupo_id', ['options' => $fluxogrupos, 'empty' => true], ['label' => 'Grupo'], ['class' => 'form-control']); ?>
       
     </div>
 

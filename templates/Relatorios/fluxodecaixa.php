@@ -169,7 +169,7 @@
         <?= $this->Form->end() ?>
     </div>
     <div class="card-2 card-body table-responsive">
-        <table id="example" class="table table-sm table-bordered table-striped">
+        <table id="example" class="table table-sm table-bordered table-striped" style="width: 100%;">
             <thead class="text-green">
 
             </thead>
@@ -267,7 +267,7 @@
                     "first": "Primeiro",
                     "last": "Último",
                     "next": "Próximo",
-                    "previous": "Depois"
+                    "previous": "Anterior"
                 },
             },
             "buttons": [{

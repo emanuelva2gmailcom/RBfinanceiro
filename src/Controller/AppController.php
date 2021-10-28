@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,6 +15,7 @@ declare(strict_types=1);
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
@@ -55,7 +57,19 @@ class AppController extends Controller
         endforeach;
         return false;
     }
+    public function caixaaberto2()
+    {
+        $this->loadModel('Caixas');
+        $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
+        $caixas = $this->Caixas->find('all');
+        foreach ($caixas as $caixa) :
+            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
+                return $caixa->is_aberto;
+            }
 
+        endforeach;
+        return false;
+    }
     public function getrenovado()
     {
         $renovados = [];
@@ -66,16 +80,16 @@ class AppController extends Controller
         ];
         $this->loadModel('Lancamentos');
         $lancamentos = $this->Lancamentos->find('all');
-        foreach($lancamentos as $lancamento):
+        foreach ($lancamentos as $lancamento) :
             $lancamento->lancamento_id != null ? array_push($renovados, $lancamento->lancamento_id) : '';
         endforeach;
         switch ($renovados != null) {
             case true:
-                $resposta['simple'] .= "id_lancamento NOT IN(".implode(',', $renovados).")";
-                $resposta['and'] .= "id_lancamento NOT IN(".implode(',', $renovados).")";
-                $resposta['or'] .= "id_lancamento NOT IN(".implode(',', $renovados).")";
+                $resposta['simple'] .= "id_lancamento NOT IN(" . implode(',', $renovados) . ")";
+                $resposta['and'] .= "id_lancamento NOT IN(" . implode(',', $renovados) . ")";
+                $resposta['or'] .= "id_lancamento NOT IN(" . implode(',', $renovados) . ")";
                 break;
-            
+
             case false:
                 $resposta['simple'] = "";
                 $resposta['and'] = "";

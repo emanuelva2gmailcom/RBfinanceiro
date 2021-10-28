@@ -51,13 +51,13 @@
     <?= $this->Form->control('tipopagamento_id', ['label' => 'Tipo de Pagamento'], ['options' => $tipopagamentos], ['class' => 'form-control']); ?>
 
     <div class="form-group">
-      <?= $this->Form->control('uploadfiles', ['label' => 'Upar Arquivos'], ['type' => 'file']); ?>
+      <?= $this->Form->control('Comprovante',['type' => 'file']); ?>
     </div>
   </div>
 
   <div class="card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">
       <div class="mr-auto p-2">
-        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-default']) ?>
+        <?= $this->Html->link(__('Cancelar'), ['controller' => 'Lancamentos','action' => 'index'], ['class' => 'btn btn-default']) ?>
       </div>
       <div class="p-2">
         <?= $this->Form->button(__('Salvar')) ?>

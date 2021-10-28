@@ -225,7 +225,7 @@ class LancamentosController extends AppController
         if ($this->request->is('post')) {
 
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
-            
+
             if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
                 $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
 
@@ -264,8 +264,11 @@ class LancamentosController extends AppController
             'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
             'conditions' => ['Fluxogrupos.grupo' => 'entrada'],
             'valueField' => function ($d) {
+                if ($d->fluxosubgrupo->subgrupo == 'Entrada') {
+                    return $d->conta;
+                }
                 return $d->fluxosubgrupo->fluxogrupo->grupo . ' de ' .
-                    $d->fluxosubgrupo->subgrupo . '     ' .
+                    $d->fluxosubgrupo->subgrupo . ' ' .
                     $d->conta;
             }
 
@@ -275,17 +278,19 @@ class LancamentosController extends AppController
             'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
             'conditions' => ['Fluxogrupos.grupo' => 'saida'],
             'valueField' => function ($d) {
+                if ($d->fluxosubgrupo->subgrupo == 'Saida') {
+                    return $d->conta;
+                }
                 return  $d->fluxosubgrupo->fluxogrupo->grupo . ' de ' .
-                    $d->fluxosubgrupo->subgrupo . '     ' .
+                    $d->fluxosubgrupo->subgrupo . ' ' .
                     $d->conta;
             }
         ]);
-
         $todos = $this->Lancamentos->Fluxocontas->find('list', [
             'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
             'valueField' => function ($d) {
                 return  $d->fluxosubgrupo->fluxogrupo->grupo . ' de ' .
-                    $d->fluxosubgrupo->subgrupo . '     ' .
+                    $d->fluxosubgrupo->subgrupo . ' ' .
                     $d->conta;
             }
         ]);
@@ -306,7 +311,6 @@ class LancamentosController extends AppController
         $this->loadModel('Comprovantes');
         $comprovantes = $this->paginate($this->Comprovantes);
         if ($this->request->is(['patch', 'post', 'put'])) {
-
             $lancamento2 = $this->Lancamentos->newEmptyEntity();
             // debug([$lancamento2]);exit;
             $lancamento2->tipo = $lancamento->tipo;
@@ -322,7 +326,9 @@ class LancamentosController extends AppController
             $lancamento2->cliente_id = $lancamento->cliente_id;
             $lancamento2->lancamento_id = $lancamento->id_lancamento;
             $lancamento2->dreconta_id = $lancamento->dreconta_id;
-
+            // debug($this->Lancamentos->save($lancamento2));
+            // exit;
+            
             if ($this->Lancamentos->save($lancamento2)) {
                 $this->Flash->success(__('Lançamento editado com sucesso.'));
 

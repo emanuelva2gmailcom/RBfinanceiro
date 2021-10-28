@@ -197,7 +197,7 @@ li{
                     "first":      "Primeiro",
                     "last":       "Último",
                     "next":       "Próximo",
-                    "previous":   "Depois"
+                    "previous":   "Anterior"
     },
 },
       columns: [{

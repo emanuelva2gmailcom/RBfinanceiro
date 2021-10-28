@@ -140,8 +140,10 @@ class CaixaregistrosController extends AppController
         if ($lancamento->data_baixa !== null) {
             return $this->redirect(['controller' => 'lancamentos', 'action' => 'index']);
         }
-        if ($lancamento->tipo !== 'REALIZADO' && ($this->caixaaberto(1) == true)) {
-            $image = $this->request->getData('uploadfiles');
+        // debug($this->caixaaberto(1));
+        // exit;
+        if ($lancamento->tipo !== 'REALIZADO' && ($this->caixaaberto2() == true)) {
+            $image = $this->request->getData('Comprovante');
             $name = $image->getClientFilename();
             $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
             if ($name)
@@ -159,23 +161,10 @@ class CaixaregistrosController extends AppController
                 return $this->redirect(['controller' => 'Lancamentos', 'action' => 'index']);
             }
             $this->Flash->error(__('Caixa Registro não foi adicionado, por favor tente novamente.'));
-            debug($lancamento);
-            exit;
+            
         }
         $this->Flash->error(__('Caixa Fechado.'));
         return $this->redirect(['controller' => 'Lancamentos', 'action' => 'index']);
     }
-    public function caixaaberto()
-    {
-        $this->loadModel('Caixas');
-        $now = date('d-m-Y');
-        $caixas = $this->paginate($this->Caixas);
-        foreach ($caixas as $caixa) :
-            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
-                return $caixa->id_caixa;
-                return $caixa->is_aberto;
-            }
-        endforeach;
-        return false;
-    }
+  
 }

@@ -23,7 +23,7 @@
 					</tr>
 
 					<tr>
-						<td class="text-right"><strong><?php echo __('Groupo(s)');?>:</strong></td>
+						<td class="text-right"><strong><?php echo __('Grupo(s)');?>:</strong></td>
 						<td><?php echo $user['user_group_name'];?></td>
 					</tr>
 

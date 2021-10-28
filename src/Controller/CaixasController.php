@@ -139,13 +139,15 @@ class CaixasController extends AppController
     {
         $this->loadModel('Caixas');
         $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
-        $caixas = $this->paginate($this->Caixas);
+        $caixas = $this->Caixas->find('all');
         foreach ($caixas as $caixa) :
+            debug($caixa);
             if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
                 return $caixa->id_caixa;
                 return $caixa->is_aberto;
             }
         endforeach;
+        exit;
         return false;
     }
 
