@@ -43,6 +43,7 @@
 
   <div class="card card-danger m-5" style="border-radius: 20px; width: 80%">
     <div class="card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
+    <?= $this->Form->create($fornecedore) ?>
 
       <?= $this->Form->control('nome', ['label' => 'Nome'], ['class' => 'form-control']); ?>
       <?= $this->Form->control('cnpj', ['label' => 'CNPJ'], ['class' => 'form-control']); ?>

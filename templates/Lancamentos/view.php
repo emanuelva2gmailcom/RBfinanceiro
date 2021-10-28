@@ -27,24 +27,24 @@
       margin-top: 800px;
       min-width: 70%;
     }
- 
+
     .card-2 {
       position: absolute;
       margin-top: 1700px;
       min-width: 70%;
     }
-    .card-3 { 
+    .card-3 {
       position: absolute;
       margin-top: 1900px;
-      min-width: 70%; 
+      min-width: 70%;
     }
-    .card-4 { 
+    .card-4 {
       position: absolute;
       margin-top: 2200px;
-      min-width: 70%; 
+      min-width: 70%;
     }
 
-    
+
   }
 </style>
 
