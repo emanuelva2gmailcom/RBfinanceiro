@@ -160,10 +160,14 @@ class LancamentosController extends AppController
         return $this->response;
     }
 
+    public function painel(){
+
+    }
+
     public function index()
     {
         $renovados = $this->getrenovado();
-     
+
         $lancamentos = $this->paginate($this->Lancamentos);
         $lancamentos = $this->Lancamentos->find('all' ,['conditions' => [$renovados['simple']],'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas']]);
 
