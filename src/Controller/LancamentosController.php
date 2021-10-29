@@ -160,20 +160,15 @@ class LancamentosController extends AppController
         return $this->response;
     }
 
-    public function painel()
-    {
-    }
-
     public function index()
     {
         $renovados = $this->getrenovado();
-        $this->paginate = [
-            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
-            'conditions' => [$renovados['simple']]
-        ];
+     
         $lancamentos = $this->paginate($this->Lancamentos);
+        $lancamentos = $this->Lancamentos->find('all' ,['conditions' => [$renovados['simple']],'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas']]);
+
         $now = FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
-        // exit;
+
         $this->set(compact('lancamentos', 'now'));
     }
 
@@ -223,7 +218,8 @@ class LancamentosController extends AppController
 
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
-
+            // debug($this->request->getData());
+            // exit;
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
 
             if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
@@ -328,7 +324,7 @@ class LancamentosController extends AppController
             $lancamento2->dreconta_id = $lancamento->dreconta_id;
             // debug($this->Lancamentos->save($lancamento2));
             // exit;
-            
+
             if ($this->Lancamentos->save($lancamento2)) {
                 $this->Flash->success(__('Lançamento editado com sucesso.'));
 

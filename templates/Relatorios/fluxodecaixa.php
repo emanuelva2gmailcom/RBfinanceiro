@@ -252,6 +252,7 @@
             }],
             "paging": true,
             "lengthChange": false,
+            "pageLength": 100,
             "searching": true,
             "ordering": false,
             "info": true,

@@ -107,17 +107,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
 
     
-  @media (max-width : 620px) {
+  /* @media (max-width : 620px) {
     .footer {
       position: absolute;
-      margin-top: 350px;
+     margin-top: 800px;
       min-width: 80%;
-      /* background-color: gainsboro; */
+      background-color: gainsboro;
     }
     body{
       background-color: #DBDBDB;
     }
-  }
+  } */
 </style>
 
   

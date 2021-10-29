@@ -46,6 +46,13 @@
         }
 
     }
+    .grupo{
+      text-transform: uppercase;
+}   
+
+.entradas,.saidas{
+    text-transform: capitalize;
+}
 </style>
 
 <?php $this->assign('title', __('Adicionar Lançamento')); ?>

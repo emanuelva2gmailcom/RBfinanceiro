@@ -26,40 +26,22 @@
   .tr1 a {
     color: #029BE1;
   }
-
+  
+  .views{
+   padding: 50px 50px 50px 50px ;
+  }
   @media (max-width: 620px) {
-    .x-tudo{
-      position: absolute;
-      min-height: 100%;
-    }
-     .card-1 {
-      position: absolute;
-      margin-top: 800px;
-      min-width: 70%;
-    }
- 
-    .card-2 {
-      position: absolute;
-      margin-top: 1700px;
-      min-width: 70%;
-    }
-    .card-3 { 
-      position: absolute;
-      margin-top: 1900px;
-      min-width: 70%; 
-    }
-    .card-4 { 
-      position: absolute;
-      margin-top: 2200px;
-      min-width: 70%; 
-    }
+    .views{
+   padding: 0px;
+   padding-top: 50px;
+  }
 
     
   }
 </style>
 
 <div class="x-tudo container">
-  <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+  <div class="views container-fluid d-flex align-items-center justify-content-center">
     <div style="border: green solid 2px; border-radius: 20px;" class="card card-1 card-outline container bg-white ">
 
       <div class="card-header d-sm-flex" style="padding-top: 50px; color: green;">
@@ -130,20 +112,20 @@
         </table>
       </div>
       <div class="card-footer bg-white" style="border-radius: 20px;">
-        <div style="padding-top: 20px;" class="d-flex justify-content-end">
+        <div style="padding-top: 20px;" class="d-flex bd-highlight mb-3">
           <?= $this->Form->postLink(
             __('Deletar'),
             ['action' => 'delete',  $lancamento->id_lancamento],
-            ['confirm' => __('Você quer mesmo deletar?',  $lancamento->id_lancamento), 'class' => 'del btn btn-sm btn-outline-danger']
+            ['confirm' => __('Você quer mesmo deletar?',  $lancamento->id_lancamento), 'class' => 'del btn btn-sm btn-outline-danger mr-auto p-2 bd-highlight']
           ) ?>
-          <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $lancamento->id_lancamento], ['class' => 'edi btn btn-sm btn-outline-success']) ?>
-          <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-sm btn-outline-info']) ?>
+          <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $lancamento->id_lancamento], ['class' => 'edi btn btn-sm btn-outline-success p-2 bd-highlight']) ?>
+          <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-sm btn-outline-info p-2 bd-highligh']) ?>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+  <div class="container-fluid d-flex align-items-center justify-content-center views">
     <div class="row card-2  card-outline container">
       <div class="col-12">
         <!-- Custom Tabs -->
@@ -175,7 +157,7 @@
     </div>
   </div>
 
-  <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+  <div class="container-fluid d-flex align-items-center justify-content-center views">
 
     <div style="border: green solid 2px; border-radius: 20px;" class="related card-3 related-caixaregistros view card container bg-white">
 
@@ -221,7 +203,7 @@
     </div>
   </div>
 
-  <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+  <div class="container-fluid d-flex align-items-center justify-content-center views">
 
     <div style="border: green solid 2px; border-radius: 20px;" class="related card-4 related-caixaregistros view card container bg-white">
 
