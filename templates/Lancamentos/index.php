@@ -53,6 +53,20 @@
 
     }
 
+    .but {
+        background-color: #EFCC00;
+        color: white;
+        border: 1px solid #EFCC00;
+        opacity: 0.7;
+    }
+
+    .but:hover {
+        background-color: white;
+        color: #EFCC00;
+        border: 1px solid #EFCC00;
+        opacity: 0.7;
+    }
+
     .buttons-copy {
         background-color: #17a2b8;
         color: white;
@@ -145,11 +159,14 @@
         color: #17a2b8;
     }
 
+    .nl{
+        float: left;
+    }
+
 
 </style>
 
 <div class="card">
-
     <div class="card-body">
         <table id="example1" class="table table-bordered table-striped">
             <thead class="nm">
@@ -205,7 +222,7 @@
 
                     <?php endforeach; ?>
             </tbody>
-      
+
         </table>
 
     </div>
@@ -271,6 +288,15 @@
                 }
             ],
             buttons: [{
+
+              text: 'Adicionar',
+              className: 'but',
+              action: function(){
+                  window.location.href = '/lancamentos/add'
+              }
+
+            },
+            {
                     extend: 'copyHtml5',
                     text: 'Copiar',
 

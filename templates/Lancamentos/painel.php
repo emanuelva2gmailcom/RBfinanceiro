@@ -28,7 +28,7 @@
         @media (max-width: 620px) {
     .card {
       position: absolute;
-      margin-top: 950px;
+      margin-top: 970px;
       min-width: 90%;
     }
 

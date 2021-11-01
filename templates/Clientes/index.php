@@ -134,6 +134,20 @@ li{
         opacity: 0.7;
     }
 
+    .but {
+        background-color: #EFCC00;
+        color: white;
+        border: 1px solid #EFCC00;
+        opacity: 0.7;
+    }
+
+    .but:hover {
+        background-color: white;
+        color: #EFCC00;
+        border: 1px solid #EFCC00;
+        opacity: 0.7;
+    }
+
 
 </style>
 
@@ -236,6 +250,15 @@ li{
         }
       ],
       buttons: [{
+
+                text: 'Adicionar',
+                className: 'but',
+                action: function(){
+                     window.location.href = '/clientes/add'
+                }
+
+},
+{
                     extend: 'copyHtml5',
                     text: 'Copiar',
 
