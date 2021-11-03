@@ -114,9 +114,9 @@ class NotificationsController extends AppController
         $notifications = $this->Notifications->find('all');
         foreach($notifications as $notification):
         $notification->data = $notification->data->i18nFormat('yyyy-MM-dd');
-        // debug($a);
+
         endforeach;
-        // exit;
+   
         $this->response = $this->response;
         $this->response = $this->response
             ->withHeader('Access-Control-Allow-Origin','*')
@@ -128,6 +128,6 @@ class NotificationsController extends AppController
         $this->response = $this->response->withType('application/json')
             ->withStringBody(json_encode($notifications));
         return $this->response;
-        // debug($this->response);exit;
+
     }
 }

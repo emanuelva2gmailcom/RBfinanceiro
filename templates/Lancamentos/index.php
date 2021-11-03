@@ -187,7 +187,7 @@
 
             <tbody>
                 <?php foreach ($lancamentos as $lancamento) :
-                    // debug($lancamento->id_lancamento);
+            
                     ?>
                         <tr style="color: #029BE1;">
                             <td><?= h($lancamento->tipo) ?></td>

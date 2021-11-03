@@ -115,6 +115,7 @@ class CaixaregistrosController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
     public function darbaixa($id = null)
     {
 
@@ -126,6 +127,7 @@ class CaixaregistrosController extends AppController
         $tipopagamentos = $this->Caixaregistros->Tipopagamentos->find('list', ['limit' => 200]);
         $this->set(compact('tipopagamentos', 'caixaregistro'));
     }
+
     public function efetuarbaixa($id = null, $tipopagamento = null)
     {
         $data = [
@@ -140,8 +142,7 @@ class CaixaregistrosController extends AppController
         if ($lancamento->data_baixa !== null) {
             return $this->redirect(['controller' => 'lancamentos', 'action' => 'index']);
         }
-        // debug($this->caixaaberto(1));
-        // exit;
+       
         if ($lancamento->tipo !== 'REALIZADO' && ($this->caixaaberto2() == true)) {
             $image = $this->request->getData('Comprovante');
             $name = $image->getClientFilename();

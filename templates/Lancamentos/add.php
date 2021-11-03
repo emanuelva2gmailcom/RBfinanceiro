@@ -46,13 +46,15 @@
         }
 
     }
-    .grupo{
-      text-transform: uppercase;
-}   
 
-.entradas,.saidas{
-    text-transform: capitalize;
-}
+    .grupo {
+        text-transform: uppercase;
+    }
+
+    .entradas,
+    .saidas {
+        text-transform: capitalize;
+    }
 </style>
 
 <?php $this->assign('title', __('Adicionar Lançamento')); ?>
@@ -222,23 +224,28 @@
                 animation: true
             })
             var stepper4 = new Stepper(document.querySelector('#stepper4'))
-        </script>
+            </script>
 
-    </div>
+</div>
 </div>
 
 
 <script>
-    $(".tipo").change(function() {
-        $tipo = $(".tipo").val();
-        if ($tipo == "PREVISTO") {
-            $(".file").addClass('d-none');
-            $('.baixa').addClass('d-none');
-        } else {
-            $(".file").removeClass('d-none');
-            $('.baixa').removeClass('d-none');
+    function grupo($grupo) {
+        $grupo = $grupo;
+        if ($grupo == 0) {
+            $('#teste').removeAttr('onclick')
+            $('.todos').prop('disabled', true);
         }
-    });
+    
+        $('#teste').click(function() {
+            if ($grupo == 0) {
+                $('.s-grupo').text('Campo Obrigatório')
+            } else {
+                $('.s-grupo').text(' ')
+            }
+        })
+    }
 
     $('.grupo').change(function() {
         $grupo = $(".grupo option:selected").text();
@@ -284,7 +291,16 @@
         }
 
     });
+    
+    $('.grupo').ready(function() {
+        $grupo = $('.grupo').val();
+        grupo($grupo)
+    })
 
+    $('.grupo').change(function() {
+        $grupo = $('.grupo').val();
+        grupo($grupo)
+    })
 
     $('.entradas').change(function() {
         $tipo = $(".entradas option:selected").text();
@@ -330,33 +346,14 @@
         } catch (error) {
             console.log(error);
         }
-
-    })
-
-
-    function grupo($grupo) {
-        $grupo = $grupo;
-        if ($grupo == 0) {
-            $('#teste').removeAttr('onclick')
-            $('.todos').prop('disabled', true);
+        if ($tipo == "PREVISTO") {
+            $(".file").addClass('d-none');
+            $('.baixa').addClass('d-none');
+        } else {
+            $(".file").removeClass('d-none');
+            $('.baixa').removeClass('d-none');
         }
-
-        $('#teste').click(function() {
-                if ($grupo == 0) {
-                    $('.s-grupo').text('Campo Obrigatório')
-                } else {
-                    $('.s-grupo').text(' ')
-                }
-            })
-    }
-
-    $('.grupo').ready(function() {
-        $grupo = $('.grupo').val();
-        grupo($grupo)
     })
 
-    $('.grupo').change(function() {
-        $grupo = $('.grupo').val();
-        grupo($grupo)
-    })
+
 </script>

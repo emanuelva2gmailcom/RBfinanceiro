@@ -34,7 +34,6 @@ class RelatoriosController extends AppController
             'conditions' => ['data_baixa is not' => null], $renovados['simple']
         ]);
 
-        // $lancamentos = $this->paginate($this->Lancamentos);
 
         $arrays = [];
         foreach ($lancamentos as $lancamento) :
@@ -227,125 +226,15 @@ class RelatoriosController extends AppController
 
     public function index()
     {
-        // $dia = ['yyyy-MM-dd', '+1 days'];
-        // $mes = ['yyyy-MM', '+1 months'];
-        // $fluxo = $this->getRelatorio('PREVISTO', 'data_vencimento', $dia);
-        // $gerencial = $this->getRelatorio('REALIZADO', 'data_baixa', $mes);
 
-        // $this->set(compact('fluxo', 'gerencial'));
     }
 
-    public function exportRelatorioGerencial()
-    {
-        $mes = ['yyyy-MM', '+1 months'];
-        $data = $this->getRelatorio('REALIZADO', 'data_baixa', $mes);
-
-        $entradas = [];
-        $saidas = [];
-
-        foreach ($data['rows']['td'] as $valor) {
-            if (in_array($valor[0], $data['rows']['th']['entradas'])) {
-                $entradas[] = $valor;
-            }
-            if (in_array($valor[0], $data['rows']['th']['saidas'])) {
-                $saidas[] = $valor;
-            }
-        }
-        if ($entradas == null) {
-            $entradas = [[]];
-        }
-        if ($saidas == null) {
-            $saidas = [[]];
-        }
-        array_unshift($entradas, $data['header']);
-        array_unshift($entradas[0], 'contas');
-
-        array_push($entradas[0], 'total');
-
-        array_push($entradas, $data['total']['entradas']);
-        array_unshift($entradas[array_key_last($entradas)], 'Entradas');
-
-        array_push($saidas, $data['total']['saidas']);
-        array_unshift($saidas[array_key_last($saidas)], 'Saidas');
-
-        array_push($saidas, $data['total']['entradas-saidas']);
-        array_unshift($saidas[array_key_last($saidas)], 'Entradas - Saidas');
-
-        $serialize = ['entradas', 'saidas'];
-
-        $this->setResponse($this->getResponse()->withDownload('Gerencial.csv'));
-        $this->set(compact('entradas', 'saidas'));
-        $this->viewBuilder()
-            ->setClassName('CsvView.Csv')
-            ->setOptions([
-                'serialize' => $serialize,
-            ]);
-    }
-
-    public function exportRelatorioFluxoCx()
-    {
-        $dia = ['yyyy-MM-dd', '+1 days'];
-        $data = $this->getRelatorio('PREVISTO', 'data_vencimento', $dia);
-        $entradas = [];
-        $saidas = [];
-
-        foreach ($data['rows']['td'] as $valor) {
-            if (in_array($valor[0], $data['rows']['th']['entradas'])) {
-                $entradas[] = $valor;
-            }
-            if (in_array($valor[0], $data['rows']['th']['saidas'])) {
-                $saidas[] = $valor;
-            }
-        }
-        if ($entradas == null) {
-            $entradas = [[]];
-        }
-        if ($saidas == null) {
-            $saidas = [[]];
-        }
-        array_unshift($entradas, $data['header']);
-        array_unshift($entradas[0], 'contas');
-        array_push($entradas[0], 'total');
-
-        array_push($entradas, $data['total']['entradas']);
-        array_unshift($entradas[array_key_last($entradas)], 'Entradas');
-
-        array_push($saidas, $data['total']['saidas']);
-        array_unshift($saidas[array_key_last($saidas)], 'Saidas');
-
-        array_push($saidas, $data['total']['entradas-saidas']);
-        array_unshift($saidas[array_key_last($saidas)], 'Entradas - Saidas');
-
-        array_push($saidas, $data['total']['inicial']);
-        array_unshift($saidas[array_key_last($saidas)], 'Inicial');
-
-        array_push($saidas, $data['total']['final']);
-        array_unshift($saidas[array_key_last($saidas)], 'Final');
-
-
-        $serialize = ['entradas', 'saidas'];
-
-        $this->setResponse($this->getResponse()->withDownload('Fluxo De Caixa.csv'));
-        $this->set(compact('entradas', 'saidas'));
-        $this->viewBuilder()
-            ->setClassName('CsvView.Csv')
-            ->setOptions([
-                'serialize' => $serialize,
-            ]);
-    }
 
 
 
     public function fluxodecaixa()
     {
-        // if($this->request->is('post')){
-        // debug($this->request->getData());exit;
-        // }
-        // $show = $this->getFluxoDeCaixa($this->request->getData())[0];
-        // $obj = $this->getFluxoDeCaixa($this->request->getData())[1];
-        // $request = $this->getFluxoDeCaixa($this->request->getData())[2];
-        // // debug($obj);exit;
-        // $this->set(compact('obj', 'show'));
+
     }
 
 
@@ -477,70 +366,10 @@ class RelatoriosController extends AppController
     }
 
 
-    public function exportFluxoDeCaixa($request = null)
-    {
-        $data = $this->getFluxoDeCaixa(explode(",", $request))[1];
-        $entradas = [];
-        $saidas = [];
-
-        foreach ($data['rows']['td'] as $valor) {
-            if (in_array($valor[0], $data['rows']['th']['entradas'])) {
-                $entradas[] = $valor;
-            }
-            if (in_array($valor[0], $data['rows']['th']['saidas'])) {
-                $saidas[] = $valor;
-            }
-        }
-        if ($entradas == null) {
-            $entradas = [[]];
-        }
-        if ($saidas == null) {
-            $saidas = [[]];
-        }
-        array_unshift($entradas, $data['header']);
-        array_unshift($entradas[0], 'contas');
-        array_push($entradas[0], 'total');
-
-        array_push($entradas, $data['total']['entradas']);
-        array_unshift($entradas[array_key_last($entradas)], 'Entradas');
-
-        array_push($saidas, $data['total']['saidas']);
-        array_unshift($saidas[array_key_last($saidas)], 'Saidas');
-
-        array_push($saidas, $data['total']['entradas-saidas']);
-        array_unshift($saidas[array_key_last($saidas)], 'Entradas - Saidas');
-
-        array_push($saidas, $data['total']['inicial']);
-        array_unshift($saidas[array_key_last($saidas)], 'Inicial');
-
-        array_push($saidas, $data['total']['final']);
-        array_unshift($saidas[array_key_last($saidas)], 'Final');
-
-
-        $serialize = ['entradas', 'saidas'];
-
-        $this->setResponse($this->getResponse()->withDownload('Fluxo De Caixa.csv'));
-        $this->set(compact('entradas', 'saidas'));
-        $this->viewBuilder()
-            ->setClassName('CsvView.Csv')
-            ->setOptions([
-                'serialize' => $serialize,
-            ]);
-    }
-
+   
     public function gerencial()
     {
-        // $show = null;
-        // if ($this->request->is('post')) {
-        //     $show = $this->getGerencial($this->request->getData())[0];
-        //     $obj = $this->getGerencial($this->request->getData())[1];
-        //     $request = $this->getGerencial($this->request->getData())[2];
-        //     $this->set(compact('obj', 'show', 'request'));
-        // }
-
-        // $mes = ['yyyy-MM', '+1 months'];
-        // $gerencial = $this->getRelatorio('REALIZADO', 'data_baixa', $mes);
-        // $this->set(compact('gerencial', 'show'));
+      
     }
 
     public function getGerencial()
@@ -667,48 +496,5 @@ class RelatoriosController extends AppController
         }
     }
 
-    public function exportGerencial($request = null)
-    {
-        $data = $this->getGerencial(explode(",", $request))[1];
-        $entradas = [];
-        $saidas = [];
-
-        foreach ($data['rows']['td'] as $valor) {
-            if (in_array($valor[0], $data['rows']['th']['entradas'])) {
-                $entradas[] = $valor;
-            }
-            if (in_array($valor[0], $data['rows']['th']['saidas'])) {
-                $saidas[] = $valor;
-            }
-        }
-        if ($entradas == null) {
-            $entradas = [[]];
-        }
-        if ($saidas == null) {
-            $saidas = [[]];
-        }
-        array_unshift($entradas, $data['header']);
-        array_unshift($entradas[0], 'contas');
-
-        array_push($entradas[0], 'total');
-
-        array_push($entradas, $data['total']['entradas']);
-        array_unshift($entradas[array_key_last($entradas)], 'Entradas');
-
-        array_push($saidas, $data['total']['saidas']);
-        array_unshift($saidas[array_key_last($saidas)], 'Saidas');
-
-        array_push($saidas, $data['total']['entradas-saidas']);
-        array_unshift($saidas[array_key_last($saidas)], 'Entradas - Saidas');
-
-        $serialize = ['entradas', 'saidas'];
-
-        $this->setResponse($this->getResponse()->withDownload('Gerencial.csv'));
-        $this->set(compact('entradas', 'saidas'));
-        $this->viewBuilder()
-            ->setClassName('CsvView.Csv')
-            ->setOptions([
-                'serialize' => $serialize,
-            ]);
-    }
+   
 }

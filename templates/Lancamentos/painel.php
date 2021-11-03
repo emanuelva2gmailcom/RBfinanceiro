@@ -26,13 +26,13 @@
         }
 
         @media (max-width: 620px) {
-    .card {
-      position: absolute;
-      margin-top: 970px;
-      min-width: 90%;
-    }
+            .card {
+                position: absolute;
+                margin-top: 970px;
+                min-width: 90%;
+            }
 
-  }
+        }
     </style>
 </head>
 
@@ -43,7 +43,6 @@
                 <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
                 <div class="col-md-6">
                     <?= $this->Form->control('Mês', ['class' => 'form-control mes', 'type' => 'month',]); ?>
-                    <!-- /.form-group -->
                     <!-- /.form-group -->
                 </div>
                 <div class="col-md-4">
@@ -85,10 +84,15 @@
         function show(data) {
 
             $('#example').DataTable({
-                "columns" : [
-                    {title : 'Grupo do Fluxo de Caixa'},
-                    {title : 'Conta do Fluxo de Caixa'},
-                    {title : 'Valor'},
+                "columns": [{
+                        title: 'Grupo do Fluxo de Caixa'
+                    },
+                    {
+                        title: 'Conta do Fluxo de Caixa'
+                    },
+                    {
+                        title: 'Valor'
+                    },
                 ],
                 "columnDefs": [{
                     "defaultContent": "-",

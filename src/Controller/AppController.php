@@ -57,6 +57,7 @@ class AppController extends Controller
         endforeach;
         return false;
     }
+    
     public function caixaaberto2()
     {
         $this->loadModel('Caixas');
@@ -70,6 +71,7 @@ class AppController extends Controller
         endforeach;
         return false;
     }
+
     public function getrenovado()
     {
         $renovados = [];
