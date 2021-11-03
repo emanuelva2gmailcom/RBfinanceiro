@@ -61,8 +61,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       height: auto;
       text-align: center;
       padding: 30px;
-      background-color: #59CBFF;
-      color: #2E2E2F;
+      background-color: #F7E7CE;
+      color: #7A3E26;
       justify-content: center;
 
     }
@@ -83,11 +83,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <style>
     .main-header {
-      background-color: #59CBFF;
+      background-color: #F7E7CE;
     }
 
     .main-sidebar {
-      background-color: #2E2E2F;
+      background-color: #7A3E26;
+    }
+
+    .control-sidebar {
+      background-color: #7A3E26;
     }
 
     .content-header {
@@ -95,18 +99,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
 
     .content {
-      background-color: #DBDBDB;
+      background-color: #FFFFFF;
     }
 
-    .main-footer {
-      background-color: #6AA4B0;
-    }
+
 
     a {
       color: #2E2E2F;
     }
 
-    
+
   /* @media (max-width : 620px) {
     .footer {
       position: absolute;
@@ -120,7 +122,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   } */
 </style>
 
-  
+
 
 
 </head>
@@ -169,7 +171,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark" id="cu">
+    <aside class="control-sidebar" id="cu">
       <!-- Control sidebar content goes here -->
       <?= $this->element('aside/main') ?>
     </aside>

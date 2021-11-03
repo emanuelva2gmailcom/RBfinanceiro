@@ -1,5 +1,11 @@
 <?php use Cake\Core\Configure; ?>
 
+<style>
+  a{
+    color: #7A3E26;
+  }
+</style>
+
 <!-- To the right -->
 
 <!-- Default to the left -->

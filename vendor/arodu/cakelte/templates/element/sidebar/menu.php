@@ -21,7 +21,7 @@
 </script>
 
 
-<li class="nav-item" style="color: #59CBFF;">
+<li class="nav-item" style="color: #F7E7CE;">
   <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link " style="color: #59CBFF; z-index: 2000">
     <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
       <input type="checkbox" class="custom-control-input" id="customSwitch3" disabled>
@@ -55,11 +55,11 @@ function caixa(is)
 
 
 
-<li class="nav-item" style="color: #59CBFF;">
+<li class="nav-item" style="color: #F7E7CE;">
 
-  <a href="<?php echo '/caixas/abrir/'; ?>" class="caixa nav-link" style="color: #59CBFF;" >
+  <a href="<?php echo '/caixas/abrir/'; ?>" class="caixa nav-link" style="color: #F7E7CE;" >
 
-<i class="nav-icon fas fa-power-off" style="color: #59CBFF;"></i>
+<i class="nav-icon fas fa-power-off" style="color: #F7E7CE;"></i>
 
     <p id="caixa">
 
@@ -71,9 +71,9 @@ function caixa(is)
 
 </li>
 
-<li class="nav-item" style="color: #59CBFF;">
-<a href="/relatorios/#" class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-home" style="color: #59CBFF;"></i>
+<li class="nav-item" style="color: #F7E7CE;">
+<a href="/relatorios/#" class="nav-link" style="color: #F7E7CE;">
+    <i class="nav-icon fas fa-home" style="color: #F7E7CE;"></i>
     <p>
       Home
     </p>
@@ -81,9 +81,9 @@ function caixa(is)
 </li>
 
 
-<li class="nav-item has-treeview " style="color: #59CBFF;">
-  <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-rocket" style="color: #59CBFF;"></i>
+<li class="nav-item has-treeview " style="color: #F7E7CE;">
+  <a class="nav-link" style="color: #F7E7CE;">
+    <i class="nav-icon fas fa-rocket" style="color: #F7E7CE;"></i>
     <p>
       Lançamentos
       <i class="right far fa-caret-square-left"></i>
@@ -105,9 +105,9 @@ function caixa(is)
 </ul>
 </li>
 
-<li class="nav-item has-treeview " style="color: #59CBFF;">
-  <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-boxes" style="color: #59CBFF;"></i>
+<li class="nav-item has-treeview " style="color: #F7E7CE;">
+  <a class="nav-link" style="color: #F7E7CE;">
+    <i class="nav-icon fas fa-boxes" style="color: #F7E7CE;"></i>
     <p>
       Caixas
       <i class="right far fa-caret-square-left"></i>
@@ -144,9 +144,9 @@ function caixa(is)
   </ul>
 </li>
 
-<li class="nav-item has-treeview " style="color: #59CBFF;">
-  <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-file-invoice-dollar" style="color: #59CBFF;"></i>
+<li class="nav-item has-treeview " style="color: #F7E7CE;">
+  <a class="nav-link" style="color: #F7E7CE;">
+    <i class="nav-icon fas fa-file-invoice-dollar" style="color: #F7E7CE;"></i>
     <p>
       Plano de Contas
       <i class="right far fa-caret-square-left"></i>
@@ -198,9 +198,9 @@ function caixa(is)
   </ul>
 </li>
 
-<li class="nav-item has-treeview " style="color: #59CBFF;">
-  <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-user-tie" style="color: #59CBFF;"></i>
+<li class="nav-item has-treeview " style="color: #F7E7CE;">
+  <a class="nav-link" style="color: #F7E7CE;">
+    <i class="nav-icon fas fa-user-tie" style="color: #F7E7CE;"></i>
     <p>
       Fornecedores
       <i class="right far fa-caret-square-left"></i>
@@ -222,9 +222,9 @@ function caixa(is)
   </ul>
 </li>
 
-<li class="nav-item has-treeview " style="color: #59CBFF;">
-  <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-user" style="color: #59CBFF;"></i>
+<li class="nav-item has-treeview " style="color: #F7E7CE;">
+  <a class="nav-link" style="color: #F7E7CE;">
+    <i class="nav-icon fas fa-user" style="color: #F7E7CE;"></i>
     <p>
       Clientes
       <i class="right far fa-caret-square-left"></i>
@@ -246,9 +246,9 @@ function caixa(is)
   </ul>
 </li>
 
-<li class="nav-item has-treeview " style="color: #59CBFF;">
-  <a class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon fas fa-clipboard-list" style="color: #59CBFF;"></i>
+<li class="nav-item has-treeview " style="color: #F7E7CE;">
+  <a class="nav-link" style="color: #F7E7CE;">
+    <i class="nav-icon fas fa-clipboard-list" style="color: #F7E7CE;"></i>
     <p>
       Relatórios
       <i class="right far fa-caret-square-left"></i>
@@ -276,9 +276,9 @@ function caixa(is)
   </ul>
 </li>
 
-<li class="nav-item" style="color: #59CBFF;">
-  <a href="/lancamentos/painel" class="nav-link" style="color: #59CBFF;">
-    <i class="nav-icon far fa-chart-bar" style="color: #59CBFF;"></i>
+<li class="nav-item" style="color: #F7E7CE;">
+  <a href="/lancamentos/painel" class="nav-link" style="color: #F7E7CE;">
+    <i class="nav-icon far fa-chart-bar" style="color: #F7E7CE;"></i>
     <p>
       Painel
     </p>
