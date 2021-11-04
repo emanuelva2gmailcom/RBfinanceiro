@@ -43,11 +43,12 @@ try {
 function caixa(is)
 {
   if(is == true){
-    console.log(is);
-    $('.caixa').addClass('bg-red')
+    $('.caixa').css({backgroundColor: "#CF6856", color: "#F7E7CE"})
+    $('.fa-power-off').css({color: "#F7E7CE"})
     document.getElementById('caixa').innerHTML = 'Fechar Caixa'
   }else{
-    $('.caixa').addClass('bg-green')
+    $('.caixa').css({backgroundColor: "#F7E7CE", color: "#CF6856"})
+    $('.fa-power-off').css({color: "#CF6856"})
     document.getElementById('caixa').innerHTML = 'Abrir Caixa'
   }
 }
@@ -127,15 +128,15 @@ function caixa(is)
         <i class="right far fa-caret-square-left"></i>
       </a>
       <ul class="nav nav-treeview" id="it">
-    <li class="nav-item" style="color: #B5BDB7;">
-      <a href="/tipopagamentos/add" class="nav-link" style="color: #B5BDB7;; ">
-        <i class="fas fa-dollar-sign nav-icon" style="color: #B5BDB7;"></i>
+    <li class="nav-item" style="color: #E4E4E2;">
+      <a href="/tipopagamentos/add" class="nav-link" style="color: #E4E4E2;; ">
+        <i class="fas fa-dollar-sign nav-icon" style="color: #E4E4E2;"></i>
         <p>Adicionar</p>
       </a>
     </li>
-    <li class="nav-item" style="color: #B5BDB7;">
-      <a href="/tipopagamentos/index" class="nav-link" style="color: #B5BDB7;; ">
-        <i class="fas fa-wallet nav-icon" style="color: #B5BDB7;"></i>
+    <li class="nav-item" style="color: #E4E4E2;">
+      <a href="/tipopagamentos/index" class="nav-link" style="color: #E4E4E2;; ">
+        <i class="fas fa-wallet nav-icon" style="color: #E4E4E2;"></i>
         <p>Disponiveis</p>
       </a>
     </li>
@@ -160,15 +161,15 @@ function caixa(is)
         <i class="right far fa-caret-square-left"></i>
       </a>
         <ul class="nav nav-treeview" id="it">
-        <li class="nav-item" style="color: #B5BDB7;">
-          <a href="/fluxocontas/add" class="nav-link" style="color: #B5BDB7;; ">
-        <i class="fas fa-donate nav-icon" style="color: #B5BDB7;"></i>
+        <li class="nav-item" style="color: #E4E4E2;">
+          <a href="/fluxocontas/add" class="nav-link" style="color: #E4E4E2;; ">
+        <i class="fas fa-donate nav-icon" style="color: #E4E4E2;"></i>
         <p>Adicionar</p>
       </a>
     </li>
-    <li class="nav-item" style="color: #B5BDB7;">
-      <a href="/fluxocontas/index" class="nav-link" style="color: #B5BDB7;; ">
-        <i class="fas fa-hand-holding-usd nav-icon" style="color: #B5BDB7;"></i>
+    <li class="nav-item" style="color: #E4E4E2;">
+      <a href="/fluxocontas/index" class="nav-link" style="color: #E4E4E2;; ">
+        <i class="fas fa-hand-holding-usd nav-icon" style="color: #E4E4E2;"></i>
         <p>Disponíveis</p>
       </a>
     </li>
@@ -181,15 +182,15 @@ function caixa(is)
         <i class="right far fa-caret-square-left"></i>
       </a>
         <ul class="nav nav-treeview" id="it">
-    <li class="nav-item" style="color: #B5BDB7;">
-      <a href="/fluxosubgrupos/add" class="nav-link" style="color: #B5BDB7;; ">
-        <i class="fas fa-user-plus nav-icon" style="color: #B5BDB7;"></i>
+    <li class="nav-item" style="color: #E4E4E2;">
+      <a href="/fluxosubgrupos/add" class="nav-link" style="color: #E4E4E2;; ">
+        <i class="fas fa-user-plus nav-icon" style="color: #E4E4E2;"></i>
         <p>Adicionar</p>
       </a>
     </li>
-    <li class="nav-item" style="color: #B5BDB7;">
-      <a href="/fluxosubgrupos/index" class="nav-link" style="color: #B5BDB7;; ">
-        <i class="fas fa-users nav-icon" style="color: #B5BDB7;"></i>
+    <li class="nav-item" style="color: #E4E4E2;">
+      <a href="/fluxosubgrupos/index" class="nav-link" style="color: #E4E4E2;; ">
+        <i class="fas fa-users nav-icon" style="color: #E4E4E2;"></i>
       <p>Disponíveis</p>
       </a>
     </li>

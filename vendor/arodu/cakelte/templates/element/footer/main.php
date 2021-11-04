@@ -2,7 +2,7 @@
 
 <style>
   a{
-    color: #7A3E26;
+    color: #CF6856;
   }
 </style>
 

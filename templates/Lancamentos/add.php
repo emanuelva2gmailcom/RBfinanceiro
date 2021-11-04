@@ -48,10 +48,32 @@
     }
     .grupo{
       text-transform: uppercase;
-}   
+}
 
 .entradas,.saidas{
     text-transform: capitalize;
+}
+
+.can{
+    background-color: white;
+    color: #CF6856;
+}
+
+.can:hover{
+    background-color: white;
+    color: #CF6856;
+}
+
+.btn-secondary{
+    background-color: #F7E7CE;
+    color: #7A3E26;
+    border: #F7E7CE 1px solid;
+}
+
+.btn-secondary:hover{
+    background-color: #F7E7CE;
+    color: #7A3E26;
+    border: #F7E7CE 1px solid;
 }
 </style>
 
@@ -61,7 +83,7 @@
 <?= $this->Html->script('bs-stepper.min.js'); ?>
 <div class="container p-5" style="width: 60%;min-width:80%;">
     <div id="stepper1" class="bs-stepper card">
-        <div class="bs-stepper-header bg-info" style="margin: 0px;">
+        <div class="bs-stepper-header" style="margin: 0px; background-color: #F7E7CE;">
             <div class="step" data-target="#test-l-1">
                 <button type="button" class="btn step-trigger">
                     <span class="bs-stepper-circle">1</span>
@@ -86,14 +108,14 @@
                 </button>
             </div>
         </div>
-        <div class="bs-stepper-content bg-white" style="padding: 20px;">
+        <div class="bs-stepper-content" style="padding: 20px; background-color: #7A3E26;">
             <?= $this->Form->create($lancamento, ['type' => 'file']) ?>
-            <div id="test-l-1" class="content bg-white">
-                <div class="panel-body text-info">
+            <div id="test-l-1" class="content" style="background-color: #7A3E26; color: #F7E7CE">
+                <div class="panel-body">
                     <div class="form-group ">
                         <?= $this->Form->label('Tipo') ?>
                         <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control tipo', 'empty' => 'SELECIONE']); ?>
-                        <span class="span text-red"></span>
+                        <span class="span" style="color: #CF6856"></span>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->control('descricao', ['label' => 'Descrição', 'placeholder' => 'Descrição'], ['class' => 'form-control']); ?>
@@ -103,13 +125,13 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <div style="background-color: green; color: white;" id="proximo" class="btn" onclick="stepper1.next()">Próximo</div>
+                    <div style="background-color: #CF6856; color: white;" id="proximo" class="btn" onclick="stepper1.next()">Próximo</div>
 
                 </div>
             </div>
 
-            <div id="test-l-2" class="content bg-white">
-                <div class="panel-body text-info">
+            <div id="test-l-2" class="content" style="background-color: #7A3E26; color: #F7E7CE">
+                <div class="panel-body">
                     <div class="form-group">
                         <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão', 'placeholder' => 'dd/mm/yyyy'], ['class' => 'border border-success text-info form-control poxa']); ?>
                     </div>
@@ -121,16 +143,16 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <div style="background-color: green; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
-                    <div style="background-color: green; color: white;" class="btn" onclick="stepper1.next()">Próximo</div>
+                    <div style="background-color: #CF6856; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
+                    <div style="background-color: #CF6856; color: white;" class="btn" onclick="stepper1.next()">Próximo</div>
                 </div>
             </div>
-            <div id="test-l-3" class="content bg-white">
-                <div class="panel-body text-info">
+            <div id="test-l-3" class="content" style="background-color: #7A3E26; color: #F7E7CE">
+                <div class="panel-body">
 
                     <div class="form-group">
                         <?= $this->Form->control('grupo', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']) ?>
-                        <span class="s-grupo text-red"></span>
+                        <span class="s-grupo" style="color: #CF6856"></span>
                     </div>
 
                     <!-- <div class="form-group tudo">
@@ -175,12 +197,12 @@
 
                 </div>
                 <div class="d-flex justify-content-between">
-                    <div style="background-color: green; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
-                    <div style="background-color: green; color: white;" class="btn" id="teste" onclick="stepper1.next()">Próximo</div>
+                    <div style="background-color: #CF6856; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
+                    <div style="background-color: #CF6856; color: white;" class="btn" id="teste" onclick="stepper1.next()">Próximo</div>
                 </div>
             </div>
-            <div id="test-l-4" class="content bg-white">
-                <div class="panel-body text-info">
+            <div id="test-l-4" class="content" style="background-color: #7A3E26; color: #F7E7CE">
+                <div class="panel-body">
                     <div class="fornecedor form-group">
                         <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
                     </div>
@@ -193,10 +215,10 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <div>
-                        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn text-white btn-info']) ?>
+                        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'can btn']) ?>
                     </div>
                     <div>
-                        <div style="background-color: green; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
+                        <div style="background-color: #CF6856; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
                         <?= $this->Form->button(__('Salvar', ['class' => 'btn pull-right']), ['confirm' => 'Quer mesmo salvar esse lançamento?']) ?>
                     </div>
                 </div>

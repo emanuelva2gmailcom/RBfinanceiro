@@ -78,10 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     p {
       font-family: helvetica;
     }
-  </style>
 
-
-  <style>
     .main-header {
       background-color: #F7E7CE;
     }
@@ -106,6 +103,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     a {
       color: #2E2E2F;
+    }
+
+    .alert-danger{
+      background-color: #CF6856;
+      border: #CF6856 2px solid;
+      color: white;
+    }
+
+    .alert-success{
+      background-color: #7A3E26;
+      border: #7A3E26 2px solid;
+      color: white;
     }
 
 

@@ -22,141 +22,208 @@
 
 <style>
     .tr1 a {
-        color: #029BE1;
+        color: #7A3E26;
     }
 
     .nm a {
-        color: green;
+        color: #7A3E26;
     }
 
     .dataTables_info{
-        color: green;
+        color: #CF6856;
     }
 
     .dataTables_empty{
-        color: #17a2b8;
+        color: #7A3E26;
     }
 
     .dataTables_filter input:focus {
-      color: #17a2b8;
-      border: green solid 2px;
+      color: #7A3E26;
+      border: #CF6856 solid 2px;
 
     }
     .dataTables_filter input{
-      color: #17a2b8;
-      border: green solid 2px;
+      color: #7A3E26;
+      border: #CF6856 solid 2px;
 
     }
 
     .dataTables_filter label{
-      color: #17a2b8;
+      color: #7A3E26;
 
     }
 
     .but {
-        background-color: #EFCC00;
-        color: white;
-        border: 1px solid #EFCC00;
+        background-color: #FFFFFF;
+        color: #7A3E26;
+        border: 1px solid #7A3E26;
         opacity: 0.7;
     }
 
     .but:hover {
-        background-color: white;
-        color: #EFCC00;
-        border: 1px solid #EFCC00;
+        background-color: #7A3E26;
+        color: #FFFFFF;
+        border: 1px solid #FFFFFF;
         opacity: 0.7;
     }
 
     .buttons-copy {
-        background-color: #17a2b8;
-        color: white;
-        border: 1px solid #17a2b8;
+        background-color: #FFFFFF;
+        color: #7A3E26;
+        border: 1px solid #7A3E26;
         opacity: 0.7;
     }
 
     .buttons-copy:hover {
-        background-color: white;
-        color: #17a2b8;
-        border: 1px solid #17a2b8;
+        background-color: #7A3E26;
+        color: #FFFFFF;
+        border: 1px solid #FFFFFF;
         opacity: 0.7;
     }
 
     .buttons-print {
-        background-color: #0099CC;
-        color: white;
-        border: 1px solid #0099CC;
+        background-color: #FFFFFF;
+        color: #7A3E26;
+        border: 1px solid #7A3E26;
         opacity: 0.7;
     }
 
     .buttons-print:hover {
-        background-color: white;
-        color: #0099CC;
-        border: 1px solid #0099CC;
+        background-color: #7A3E26;
+        color: #FFFFFF;
+        border: 1px solid #FFFFFF;
         opacity: 0.7;
     }
 
     .buttons-csv {
-        background-color: green;
-        color: white;
-        border: 1px solid green;
+        background-color: #FFFFFF;
+        color: #7A3E26;
+        border: 1px solid #7A3E26;
         opacity: 0.7;
     }
 
     .buttons-csv:hover {
-        background-color: white;
-        color: green;
-        border: 1px solid green;
+       background-color: #7A3E26;
+        color: #FFFFFF;
+        border: 1px solid #FFFFFF;
         opacity: 0.7;
     }
 
     .buttons-excel {
-        background-color: #006400;
-        color: white;
-        border: 1px solid #006400;
+        background-color: #FFFFFF;
+        color: #7A3E26;
+        border: 1px solid #7A3E26;
         opacity: 0.7;
     }
 
     .buttons-excel:hover {
-        background-color: white;
-        color: #006400;
-        border: 1px solid #006400;
+        background-color: #7A3E26;
+        color: #FFFFFF;
+        border: 1px solid #FFFFFF;
         opacity: 0.7;
     }
 
     .buttons-pdf {
-        background-color: #4b4b4b;
-        color: white;
-        border: 1px solid #4b4b4b;
+        background-color: #FFFFFF;
+        color: #7A3E26;
+        border: 1px solid #7A3E26;
         opacity: 0.7;
     }
 
     .buttons-pdf:hover {
-        background-color: white;
-        color: #4b4b4b;
-        border: 1px solid #4b4b4b;
+        background-color: #7A3E26;
+        color: #FFFFFF;
+        border: 1px solid #FFFFFF;
         opacity: 0.7;
     }
 
     .buttons-collection {
-        background-color: black;
-        color: white;
-        border: 1px solid black;
+        background-color: #FFFFFF;
+        color: #7A3E26;
+        border: 1px solid #7A3E26;
         opacity: 0.7;
     }
 
     .buttons-collection:hover {
-        background-color: white;
-        color: black;
-        border: 1px solid black;
+        background-color: #7A3E26;
+        color: #FFFFFF;
+        border: 1px solid #FFFFFF;
         opacity: 0.7;
     }
 
+    .vis:hover {
+        background-color: #FFFFFF;
+        color: #7A3E26;
+        border: 1px solid #7A3E26;
+        opacity: 0.9;
+
+    }
+
+    .vis {
+        background-color: #7A3E26;
+        color: #FFFFFF;
+        border: 1px solid #FFFFFF;
+        opacity: 0.9;
+
+    }
+
+    .edi:hover {
+        background-color: #FFFFFF;
+        color: #7A3E26;
+        border: 1px solid #7A3E26;
+        opacity: 0.8;
+
+    }
+
+    .edi {
+        background-color: #7A3E26;
+        color: #FFFFFF;
+        border: 1px solid #FFFFFF;
+        opacity: 0.8;
+
+    }
+
+    .del:hover {
+        background-color: #FFFFFF;
+        color: #CF6856;
+        border: 1px solid #CF6856;
+        opacity: 0.9;
+
+    }
+
+    .del {
+        background-color: #CF6856;
+        color: #FFFFFF;
+        border: 1px solid #FFFFFF;
+        opacity: 0.9;
+
+    }
+
+    /* li .page-link{
+        background-color: #F7E7CE;
+        color: #7A3E26;
+        border: #7A3E26 1px solid;
+    }
+
+    li .active .page-link{
+        background-color: #F7E7CE;
+        color: #7A3E26;
+        border: #7A3E26 1px solid;
+    }
+
+    li .disabled .page-link{
+        background-color: #F7E7CE;
+        color: #7A3E26;
+        border: #7A3E26 1px solid;
+    } */
+
+
     li{
-        color: #17a2b8;
+        color: #7A3E26;
     }
 
     li a{
-        color: #17a2b8;
+        color: #7A3E26;
     }
 
     .nl{
@@ -170,7 +237,7 @@
     <div class="card-body">
         <table id="example1" class="table table-bordered table-striped">
             <thead class="nm">
-                <tr style="color: green;">
+                <tr style="color: #CF6856;">
 
                     <th><?= __('Tipo') ?></th>
                     <th><?= __('Descrição') ?></th>
@@ -189,7 +256,7 @@
                 <?php foreach ($lancamentos as $lancamento) :
                     // debug($lancamento->id_lancamento);
                     ?>
-                        <tr style="color: #029BE1;">
+                        <tr style="color: #7A3E26;">
                             <td><?= h($lancamento->tipo) ?></td>
                             <td><?= h($lancamento->descricao) ?></td>
                             <td><?= $this->Number->format($lancamento->valor) ?></td>
@@ -212,9 +279,9 @@
                                     <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd', 'UTC') < $now) && ($lancamento->data_baixa == null)) { ?>
                                         <?= $this->Html->link(__('Renovar'), ['controller' => 'Lancamentos', 'action' => 'renovar', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-secondary ']) ?>
                                     <?php } ?>
-                                    <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-info ', 'escape' => false]) ?>
-                                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-success ', 'escape' => false]) ?>
-                                    <?= $this->Html->link(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger ', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
+                                    <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'vis btn btn-xs', 'escape' => false]) ?>
+                                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'edi btn btn-xs', 'escape' => false]) ?>
+                                    <?= $this->Html->link(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'del btn btn-xs', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
                                 </div>
 
                             </td>

@@ -1,7 +1,41 @@
 <?php $this->layout = "CakeLte.login" ?>
 
+<style>
+
+    .btn{
+
+background-color: #CF6856;
+
+color: #F7E7CE;
+
+border: 1px solid #CF6856;
+
+}
+
+.btn:hover{
+
+background-color: #F7E7CE;
+
+color: #CF6856;
+
+border: 1px solid #CF6856;
+
+}
+
+.btn:focus{
+
+background-color: #CF6856;
+
+color: #F7E7CE;
+
+border: 1px solid #CF6856;
+
+}
+
+</style>
+
 <div class="card" style="border-radius: 20px;">
-	<div class="card-body register-card-body bg-info" style="border-radius: 20px;">
+	<div class="card-body register-card-body" style="border-radius: 20px;background-color: #F7E7CE; color: #7A3E26;">
 		<?php echo $this->element('Usermgmt.ajax_validation', ['formId' => 'registerForm', 'submitButtonId' => 'registerSubmitBtn']); ?>
 		<?php echo $this->Form->create($userEntity, ['id' => 'registerForm', 'novalidate' => true]); ?>
 
@@ -19,7 +53,7 @@
 			'label' => false,
 			'placeholder' => __('Username'),
 			'class' => 'form-control',
-			'append' => '<i class="text-white fas fa-user"></i>'
+			'append' => '<i class=" fas fa-user" style="color: #CF6856;"></i>'
 		]); ?>
 
 		<?= $this->Form->control('Users.first_name', [
@@ -27,7 +61,7 @@
 			'placeholder' => __('Nome'),
 			'label' => false,
 			'class' => 'form-control',
-			'append' => '<i class="text-white fas fa-user"></i>'
+			'append' => '<i class=" fas fa-user" style="color: #CF6856;"></i>'
 		]); ?>
 
 		<?= $this->Form->control('Users.last_name', [
@@ -35,7 +69,7 @@
 			'placeholder' => __('Sobrenome'),
 			'label' => false,
 			'class' => 'form-control',
-			'append' => '<i class="text-white fas fa-user"></i>'
+			'append' => '<i class=" fas fa-user" style="color: #CF6856;"></i>'
 		]); ?>
 
 
@@ -44,7 +78,7 @@
 			'label' => false,
 			'placeholder' => __('Email'),
 			'class' => 'form-control',
-			'append' => '<i class="text-white fas fa-envelope"></i>'
+			'append' => '<i class=" fas fa-envelope" style="color: #CF6856;"></i>'
 		]); ?>
 
 
@@ -53,7 +87,7 @@
 			'label' => false,
 			'placeholder' => __('Senha'),
 			'class' => 'form-control',
-			'append' => '<i class="text-white fas fa-lock"></i>'
+			'append' => '<i class=" fas fa-lock" style="color: #CF6856;"></i>'
 		]) ?>
 
 		<?= $this->Form->control('Users.cpassword', [
@@ -61,7 +95,7 @@
 			'label' => false,
 			'class' => 'form-control',
 			'placeholder' => __('Confirmar senha'),
-			'append' => '<i class="text-white fas fa-lock"></i>'
+			'append' => '<i class=" fas fa-lock" style="color: #CF6856;"></i>'
 		]) ?>
 
 			<div>
@@ -73,8 +107,8 @@
 				]) ?>
 			</div>
 			<div class="d-flex justify-content-between">
-			    <?php echo $this->Html->link(__('Voltar', true), ['controller' => 'Users', 'action' => 'login', 'plugin' => 'Usermgmt'], ['class' => 'btn btn-light text-info btn-sm']); ?>
-				<?= $this->Form->Submit(__('Registrar'), ['class' => 'btn btn-light text-info btn-sm', 'id' => 'registerSubmitBtn']); ?>
+			    <?php echo $this->Html->link(__('Voltar', true), ['controller' => 'Users', 'action' => 'login', 'plugin' => 'Usermgmt'], ['class' => 'btn btn-sm']); ?>
+				<?= $this->Form->Submit(__('Registrar'), ['class' => 'btn btn-sm', 'id' => 'registerSubmitBtn']); ?>
 			</div>
 
 		<?= $this->Form->end() ?>
