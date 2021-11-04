@@ -74,7 +74,6 @@ class CaixasController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            debug($this->request->getData());
             $caixa = $this->Caixas->patchEntity($caixa, $this->request->getData());
             if ($this->Caixas->save($caixa)) {
                 $this->Flash->success(__('The caixa has been saved.'));
