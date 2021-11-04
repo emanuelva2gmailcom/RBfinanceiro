@@ -336,9 +336,8 @@ class LancamentosController extends AppController
         $fluxocontas = $this->Lancamentos->Fluxocontas->find('list', ['limit' => 200]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
-        $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
         $lancamentos = $this->Lancamentos->find('list', ['limit' => 200]);
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'lancamentos'));
+        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'lancamentos'));
     }
 
     /**
