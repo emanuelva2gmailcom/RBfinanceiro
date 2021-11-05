@@ -22,6 +22,7 @@
     <meta name="theme-color" content="#7952b3">
 
 
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -37,16 +38,17 @@
             }
         }
 
-        img{
+        .indH{
             border-radius: 70px;
+            max-width: 100%;
         }
 
-       .tes img{
+       /* .test img{
             width: 125px;
             height: 125px;
             margin-top: 5%;
 
-        }
+        } */
 
 
 </style>
@@ -82,7 +84,7 @@
                 <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px #7A3E26;">
                 <div class="card-header bg-white" style="border-radius: 20px 20px 0px 0px ;">
                     <div class="m-auto h-75 w-75">
-                        <?= $this->Html->image('fct.jpg') ?>
+                        <?= $this->Html->image('fct.jpg', ['class' => 'indH']) ?>
                     </div>
                 </div>
                 <div class="card-body d-flex flex-column justify-content-end" style="background-color: #7A3E26;">
@@ -98,7 +100,7 @@
               <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px #7A3E26;">
               <div class="card-header bg-white" style="border-radius: 20px 20px 0px 0px ;">
                     <div class="m-auto h-75 w-75">
-                        <?= $this->Html->image('cgt.jpg') ?>
+                        <?= $this->Html->image('cgt.jpg', ['class' => 'indH']) ?>
                     </div>
                 </div>
                 <div class="card-body d-flex flex-column justify-content-end" style="background-color: #7A3E26;">
@@ -114,7 +116,7 @@
               <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px #7A3E26;">
               <div class="card-header bg-white" style="border-radius: 20px 20px 0px 0px ;">
                     <div class="m-auto h-75 w-75">
-                        <?= $this->Html->image('cdt.jpg') ?>
+                        <?= $this->Html->image('cdt.jpg', ['class' => 'indH']) ?>
                     </div>
                 </div>
                 <div class="card-body d-flex flex-column justify-content-end" style="background-color: #7A3E26;">
