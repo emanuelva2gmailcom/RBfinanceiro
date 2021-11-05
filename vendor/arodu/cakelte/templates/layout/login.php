@@ -21,23 +21,18 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
   <?= $this->Html->css('CakeLte.style') ?>
+  <?= $this->Html->css('default') ?>
 
   <?= $this->fetch('css') ?>
-  <style>
-    img{
-      max-width: 90%;
-      padding-bottom: 0%;
 
-    }
-  </style>
 </head>
 
 <body class="hold-transition login-page">
-  <div class="login-box" style="margin-top: 0%;">
+  <div class="login-box">
 
     <div class="login-logo">
     <a href="<?= $this->Url->build('/') ?>" class="brand-link">
-        <?= $this->Html->image('logo2.png') ?>
+        <?= $this->Html->image('logo2.png', ['class' => 'imgL2']) ?>
       </a>
     </div>
     <!-- /.login-logo -->

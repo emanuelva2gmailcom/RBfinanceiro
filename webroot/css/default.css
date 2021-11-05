@@ -1,0 +1,334 @@
+/* Elementos do Arodu:
+
+         1. Aside*/
+
+            .asM a{
+                margin-left: 2%;
+                color: #F7E7CE;
+            }
+
+            .asM li{
+                margin-bottom: 5%;
+                list-style: none;
+            }
+
+            .asM i{
+                color:#F7E7CE;
+            }
+
+         /* 2. Content */
+
+            .content {
+                background-color: #ffffff;
+                padding: 0%;
+                margin: 0%;
+                min-height:150vh;
+            }
+
+      /* 3. Footer */
+
+            .fooM a{
+                color: #CF6856;
+            }
+
+            footer {
+                height: auto;
+                text-align: center;
+                padding: 30px;
+                background-color: #f7e7ce;
+                color: #7a3e26;
+                justify-content: center;
+            }
+
+     /* 4. Header */
+
+            .heaM i{
+                color: #CF6856;
+            }
+
+            .main-header {
+                background-color: #f7e7ce;
+            }
+
+     /* 5. Sidebar */
+
+            .sidME .prim{
+                color: #F7E7CE;
+            }
+
+            .sidME .seg{
+                color: #FFFFFF;
+            }
+
+            .sidME .terc{
+                color: #E4E4E2;
+            }
+
+            .info a{
+                color: #F7E7CE;
+              }
+
+            .info a:hover{
+                color: #CF6856;
+              }
+
+            .user-panel{
+                color:  #E1E7E0;
+                overflow: auto;
+            }
+
+            .main-sidebar {
+                background-color: #7a3e26;
+            }
+
+            .control-sidebar {
+                background-color: #7a3e26;
+            }
+
+            .imgS {
+                max-width: 100%;
+            }
+
+     /* 6. Layout 2 */
+
+            .alert-danger {
+                background-color: #cf6856;
+                border: #cf6856 2px solid;
+                color: white;
+            }
+
+            .alert-success {
+                background-color: #7a3e26;
+                border: #7a3e26 2px solid;
+                color: white;
+            }
+
+            .imgL2{
+                max-width: 90%;
+                padding-bottom: 0%;
+
+              }
+
+            .login-box{
+                margin-top: 0%;
+            }
+
+/* Elementos do Projeto:
+
+        1. ADDs:*/
+
+     /* 2. Edits:*/
+
+     /* 3. Indexes: */
+
+     /* 4. Views: */
+
+     /* 5. Painel */
+
+
+
+
+a {
+    color: #2e2e2f;
+}
+
+
+
+.tr1 a {
+    color: #7a3e26;
+}
+
+.nm a {
+    color: #7a3e26;
+}
+
+.dataTables_info {
+    color: #cf6856;
+}
+
+.dataTables_empty {
+    color: #7a3e26;
+}
+
+.dataTables_filter input:focus {
+    color: #7a3e26;
+    border: #cf6856 solid 2px;
+}
+.dataTables_filter input {
+    color: #7a3e26;
+    border: #cf6856 solid 2px;
+}
+
+.dataTables_filter label {
+    color: #7a3e26;
+}
+
+.but {
+    background-color: #ffffff;
+    color: #7a3e26;
+    border: 1px solid #7a3e26;
+    opacity: 0.7;
+}
+
+.but:hover {
+    background-color: #7a3e26;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    opacity: 0.7;
+}
+
+.buttons-copy {
+    background-color: #ffffff;
+    color: #7a3e26;
+    border: 1px solid #7a3e26;
+    opacity: 0.7;
+}
+
+.buttons-copy:hover {
+    background-color: #7a3e26;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    opacity: 0.7;
+}
+
+.buttons-print {
+    background-color: #ffffff;
+    color: #7a3e26;
+    border: 1px solid #7a3e26;
+    opacity: 0.7;
+}
+
+.buttons-print:hover {
+    background-color: #7a3e26;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    opacity: 0.7;
+}
+
+.buttons-csv {
+    background-color: #ffffff;
+    color: #7a3e26;
+    border: 1px solid #7a3e26;
+    opacity: 0.7;
+}
+
+.buttons-csv:hover {
+    background-color: #7a3e26;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    opacity: 0.7;
+}
+
+.buttons-excel {
+    background-color: #ffffff;
+    color: #7a3e26;
+    border: 1px solid #7a3e26;
+    opacity: 0.7;
+}
+
+.buttons-excel:hover {
+    background-color: #7a3e26;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    opacity: 0.7;
+}
+
+.buttons-pdf {
+    background-color: #ffffff;
+    color: #7a3e26;
+    border: 1px solid #7a3e26;
+    opacity: 0.7;
+}
+
+.buttons-pdf:hover {
+    background-color: #7a3e26;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    opacity: 0.7;
+}
+
+.buttons-collection {
+    background-color: #ffffff;
+    color: #7a3e26;
+    border: 1px solid #7a3e26;
+    opacity: 0.7;
+}
+
+.buttons-collection:hover {
+    background-color: #7a3e26;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    opacity: 0.7;
+}
+
+.vis:hover {
+    background-color: #ffffff;
+    color: #7a3e26;
+    border: 1px solid #7a3e26;
+    opacity: 0.9;
+}
+
+.vis {
+    background-color: #7a3e26;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    opacity: 0.9;
+}
+
+.edi:hover {
+    background-color: #ffffff;
+    color: #7a3e26;
+    border: 1px solid #7a3e26;
+    opacity: 0.8;
+}
+
+.edi {
+    background-color: #7a3e26;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    opacity: 0.8;
+}
+
+.del:hover {
+    background-color: #ffffff;
+    color: #cf6856;
+    border: 1px solid #cf6856;
+    opacity: 0.9;
+}
+
+.del {
+    background-color: #cf6856;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    opacity: 0.9;
+}
+
+/* li .page-link{
+        background-color: #F7E7CE;
+        color: #7A3E26;
+        border: #7A3E26 1px solid;
+    }
+
+    li .active .page-link{
+        background-color: #F7E7CE;
+        color: #7A3E26;
+        border: #7A3E26 1px solid;
+    }
+
+    li .disabled .page-link{
+        background-color: #F7E7CE;
+        color: #7A3E26;
+        border: #7A3E26 1px solid;
+    } */
+
+/* li{
+        color: #7A3E26;
+    }
+
+    li a{
+        color: #7A3E26;
+    }
+
+    .nl{
+        float: left;
+    } */
