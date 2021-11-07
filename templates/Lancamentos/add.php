@@ -183,6 +183,12 @@
             </div>
             <div id="test-l-4" class="content bg-white">
                 <div class="panel-body text-info">
+                    <div class="form-group">
+                        <?= $this->Form->control('dregrupo_id', ['options' => $dregrupos, 'empty' => 'SELECIONE']); ?>
+                    </div>
+                    <div class="form-group">
+                        <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => 'SELECIONE']); ?>
+                    </div>
                     <div class="fornecedor form-group">
                         <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
                     </div>
@@ -224,9 +230,9 @@
                 animation: true
             })
             var stepper4 = new Stepper(document.querySelector('#stepper4'))
-            </script>
+        </script>
 
-</div>
+    </div>
 </div>
 
 
@@ -237,7 +243,7 @@
             $('#teste').removeAttr('onclick')
             $('.todos').prop('disabled', true);
         }
-    
+
         $('#teste').click(function() {
             if ($grupo == 0) {
                 $('.s-grupo').text('Campo Obrigatório')
@@ -291,7 +297,7 @@
         }
 
     });
-    
+
     $('.grupo').ready(function() {
         $grupo = $('.grupo').val();
         grupo($grupo)
@@ -354,6 +360,4 @@
             $('.baixa').removeClass('d-none');
         }
     })
-
-
 </script>

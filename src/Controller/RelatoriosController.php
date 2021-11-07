@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Entity\Lancamento;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\Http\Client;
@@ -107,7 +108,27 @@ class RelatoriosController extends AppController
 
     public function dre()
     {
-    }
+        $this->loadModel('Lancamentos');
+        $lancamentos = $this->Lancamentos->find('all', [
+            'contain' => ['Drecontas' => 'Dregrupos'],
+            'conditions' => ['dreconta_id IS NOT '  => null]
+        ]);
+        $drecontas = $this->Lancamentos->Drecontas->find('all');
+        $cont = [];
+        foreach ($lancamentos as $lancamento) {
+            foreach ($drecontas as $conta) {
+                // if ($lancamento->dreconta_id == $conta->id_dreconta) {
+                //     debug($conta);
+                //     $cont[] = $conta->id_dreconta;
+                // }
+
+            }
+            $cont[] = $lancamento;
+            // debug($lancamento->dreconta_id);
+        }
+        debug($cont);
+        exit;
+    }   
 
     public function total_before($data = null, $lancamentos = null, $namedata = null)
     {
@@ -206,27 +227,26 @@ class RelatoriosController extends AppController
         endforeach;
         $show = true;
         array_push($obj['total']['entradas'], array_sum($obj['total']['entradas']));
-            array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
-            foreach ($obj['total']['entradas'] as $i => $t) :
-                if ($i != array_key_last($obj['total']['entradas'])) {
-                    array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
+        array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
+        foreach ($obj['total']['entradas'] as $i => $t) :
+            if ($i != array_key_last($obj['total']['entradas'])) {
+                array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
+            }
+        endforeach;
+        foreach ($obj['total']['entradas-saidas'] as $i => $es) :
+            array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
+            if ($i != array_key_last($obj['total']['entradas-saidas'])) {
+                if ($i == count($obj['total']['entradas-saidas']) - 1) {
+                    break;
                 }
-            endforeach;
-            foreach ($obj['total']['entradas-saidas'] as $i => $es) :
-                array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
-                if ($i != array_key_last($obj['total']['entradas-saidas'])) {
-                    if ($i == count($obj['total']['entradas-saidas']) - 1) {
-                        break;
-                    }
-                    array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
-                }
-            endforeach;
+                array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
+            }
+        endforeach;
         return $obj;
     }
 
     public function index()
     {
-
     }
 
 
@@ -234,7 +254,6 @@ class RelatoriosController extends AppController
 
     public function fluxodecaixa()
     {
-
     }
 
 
@@ -366,10 +385,9 @@ class RelatoriosController extends AppController
     }
 
 
-   
+
     public function gerencial()
     {
-      
     }
 
     public function getGerencial()
@@ -495,6 +513,4 @@ class RelatoriosController extends AppController
             return $this->response;
         }
     }
-
-   
 }

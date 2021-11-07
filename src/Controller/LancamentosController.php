@@ -183,9 +183,9 @@ class LancamentosController extends AppController
             'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
         ];
         $this->loadModel('Comprovantes');
-
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
+            // debug($this->request->getData());exit;
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
             if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
                 $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
@@ -267,9 +267,10 @@ class LancamentosController extends AppController
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
+        $dregrupos = $this->Lancamentos->Drecontas->Dregrupos->find('list', ['limit' => 200]);
         $Grupos = $this->Lancamentos->Fluxocontas->Fluxosubgrupos->Fluxogrupos->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
-        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'drecontas', 'grupos', 'Grupos', 'entradas', 'saidas', 'todos'));
+        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'drecontas','dregrupos', 'grupos', 'Grupos', 'entradas', 'saidas', 'todos'));
     }
 
     public function renovar($id = null)
