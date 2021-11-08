@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Model\Entity\Lancamento;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\Http\Client;
 use Cake\Http\Client\Request as ClientRequest;
 use Cake\Event\EventInterface;
 use Cake\Core\Configure;
-use DebugKit\DebugTimer;
 
 class RelatoriosController extends AppController
 {
@@ -19,7 +17,7 @@ class RelatoriosController extends AppController
     {
         parent::beforeFilter($event);
 
-        $this->FormProtection->setConfig('unlockedActions', ['getGerencial', 'getFluxoDeCaixa']);
+        $this->FormProtection->setConfig('unlockedActions', ['getGerencial', 'getFluxoDeCaixa', 'dreAPI']);
     }
 
     public function caixadiario()
@@ -96,7 +94,6 @@ class RelatoriosController extends AppController
             $ini->modify($periodo[1]);
             $ini->day == $fim->day ? array_push($resposta, $ini->i18nFormat($periodo[0])) : '';
         }
-
         return $resposta;
     }
 
@@ -109,10 +106,8 @@ class RelatoriosController extends AppController
         return $resposta;
     }
 
-    public function getDre($tipo = null, $date = null, $periodo = null) 
+    public function getDre($date = null, $periodo = null) 
     {
-        $periodo = ['yyyy-MM-dd', '+1 days'];
-        $date = 'data_vencimento';
         $renovados = $this->getrenovado();
         $obj = [
             'header' => [],
@@ -133,8 +128,9 @@ class RelatoriosController extends AppController
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
         $comeco = FrozenTime::now()
-                        ->day(1)
-                        ->subMonth(1);
+        ->day(1)
+        ->subMonth(1);
+        debug($lancamentos);
         foreach ($lancamentos as $lancamento) :
             if ($lancamento->$date->i18nFormat($periodo[0]) >= $comeco->i18nFormat($periodo[0])) {
                 $final = $lancamento->$date->i18nFormat($periodo[0]);
@@ -143,47 +139,50 @@ class RelatoriosController extends AppController
         $final = $comeco;
         $final = $final->day(cal_days_in_month(CAL_GREGORIAN, $comeco->month, $comeco->year))->i18nFormat($periodo[0]);
         $obj['header'] = $this->array_date($comeco->i18nFormat($periodo[0]), $final, $periodo);
-        $obj['total']['inicial'] = [$this->total_before($comeco->i18nFormat($periodo[0]), $lancamentos, $date)];
         $contas = [];
         $result = [];
         
         foreach ($lancamentos as $lancamento) :
             if (in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])) {
                 if ($lancamento->dreconta->dregrupo->grupo == 'receita') {
-                    array_push($obj['rows']['th']['receita'], $lancamento->fluxoconta->conta);
+                    array_push($obj['rows']['th']['receita'], $lancamento->dreconta->conta);
                 } else if ($lancamento->dreconta->dregrupo->grupo == 'fixo') {
-                    array_push($obj['rows']['th']['fixo'], $lancamento->fluxoconta->conta);
+                    array_push($obj['rows']['th']['fixo'], $lancamento->dreconta->conta);
                 } else if ($lancamento->dreconta->dregrupo->grupo == 'variavel') {
-                    array_push($obj['rows']['th']['variavel'], $lancamento->fluxoconta->conta);
+                    array_push($obj['rows']['th']['variavel'], $lancamento->dreconta->conta);
                 }
                 if (!in_array($lancamento->dreconta->conta, $contas)) {
                     array_push($contas, $lancamento->dreconta->conta);
                 }
             }
         endforeach;
-        debug($contas);exit;
+        
         
         foreach ($obj['header'] as $data) :
             $obj['total']['receitas'][$data] = 0;
             $obj['total']['fixos'][$data] = 0;
             $obj['total']['variaveis'][$data] = 0;
         endforeach;
-
+        debug($obj['header']);exit;
         foreach ($contas as $conta) :
             $result = [];
             foreach ($obj['header'] as $data) :
                 $valor = 0;
                 foreach ($lancamentos as $lancamento) :
-                    if (($lancamento->dreconta->dregrupo->grupo == 'receita') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    if (($lancamento->dreconta->dregrupo->grupo == 'receita') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval($lancamento->valor);
-                    } else if (($lancamento->dreconta->dregrupo->grupo == 'receita') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    } else if (($lancamento->dreconta->dregrupo->grupo == 'fixo') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                        $valor += intval('-' . $lancamento->valor);
+                    }  else if (($lancamento->dreconta->dregrupo->grupo == 'variaveis') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
                     }
                 endforeach;
-                if (in_array($conta, $obj['rows']['th']['entradas'])) {
-                    $obj['total']['entradas'][$data] += $valor;
-                } else if (in_array($conta, $obj['rows']['th']['saidas'])) {
-                    $obj['total']['saidas'][$data] += $valor;
+                if (in_array($conta, $obj['rows']['th']['receita'])) {
+                    $obj['total']['receitas'][$data] += $valor;
+                } else if (in_array($conta, $obj['rows']['th']['fixo'])) {
+                    $obj['total']['fixos'][$data] += $valor;
+                } else if (in_array($conta, $obj['rows']['th']['variavel'])) {
+                    $obj['total']['variaveis'][$data] += $valor;
                 }
                 array_push($result, $valor);
             endforeach;
@@ -192,54 +191,28 @@ class RelatoriosController extends AppController
             array_push($result, $this->array_soma($result, 1));
             array_push($obj['rows']['td'], $result);
         endforeach;
-        $show = true;
-        array_push($obj['total']['entradas'], array_sum($obj['total']['entradas']));
-            array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
-            foreach ($obj['total']['entradas'] as $i => $t) :
-                if ($i != array_key_last($obj['total']['entradas'])) {
-                    array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
-                }
-            endforeach;
-            foreach ($obj['total']['entradas-saidas'] as $i => $es) :
-                array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
-                if ($i != array_key_last($obj['total']['entradas-saidas'])) {
-                    if ($i == count($obj['total']['entradas-saidas']) - 1) {
-                        break;
-                    }
-                    array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
-                }
-            endforeach;
+        // debug($obj);exit;
         return $obj;
+    }
+
+    public function dreAPI()
+    {
+        if ($this->request->is('get')) {
+            $mes = ['yyyy-MM', '+1 months'];
+            $obj = $this->getDre('data_vencimento', $mes);
+            $obj['total']['receitas'] = array_values($obj['total']['receitas']);
+            $obj['total']['fixos'] = array_values($obj['total']['fixos']);
+            $obj['total']['variaveis'] = array_values($obj['total']['variaveis']);
+            $this->response = $this->response->withType('application/json')
+                ->withStringBody(json_encode([true, $obj, null]));
+            return $this->response;
+        }
     }
 
     public function dre()
     {
-        $obj = [
-            'header' => ['DRE'],
-            'rows' => [
-                'th' => [
-                    'Faturamento' => [],
-                    '( - ) Custos Variáveis' => [],
-                    '(=) Margem de Contribuição (1-2)' => [],
-                    ' ( - ) Custos Fixos' => [],
-                    '(=) Resultado Líquido ' => []
-                ],
-                'td' => []
-            ],
-        ];
-        $this->loadModel('Lancamentos');
-        $lancamentos = $this->Lancamentos->find('all', [
-            'contain' => ['Drecontas' => ['Dregrupos']],
-            'conditions' => ['Lancamentos.dreconta_id IS NOT' => null]
-        ]);
-        foreach ($lancamentos as $lancamento) {
-            debug($lancamento);
-        }
-        // debug($obj);
-        exit;
+
     }
-
-
 
     public function total_before($data = null, $lancamentos = null, $namedata = null)
     {
@@ -338,27 +311,27 @@ class RelatoriosController extends AppController
         endforeach;
         $show = true;
         array_push($obj['total']['entradas'], array_sum($obj['total']['entradas']));
-        array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
-        foreach ($obj['total']['entradas'] as $i => $t) :
-            if ($i != array_key_last($obj['total']['entradas'])) {
-                array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
-            }
-        endforeach;
-        foreach ($obj['total']['entradas-saidas'] as $i => $es) :
-            array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
-            if ($i != array_key_last($obj['total']['entradas-saidas'])) {
-                if ($i == count($obj['total']['entradas-saidas']) - 1) {
-                    break;
+            array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
+            foreach ($obj['total']['entradas'] as $i => $t) :
+                if ($i != array_key_last($obj['total']['entradas'])) {
+                    array_push($obj['total']['entradas-saidas'], $t + $obj['total']['saidas'][$i]);
                 }
-                array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
-            }
-        endforeach;
-
+            endforeach;
+            foreach ($obj['total']['entradas-saidas'] as $i => $es) :
+                array_push($obj['total']['final'], $es + $obj['total']['inicial'][$i]);
+                if ($i != array_key_last($obj['total']['entradas-saidas'])) {
+                    if ($i == count($obj['total']['entradas-saidas']) - 1) {
+                        break;
+                    }
+                    array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
+                }
+            endforeach;
         return $obj;
     }
 
     public function index()
     {
+
     }
 
 
@@ -366,6 +339,7 @@ class RelatoriosController extends AppController
 
     public function fluxodecaixa()
     {
+
     }
 
 
@@ -497,9 +471,10 @@ class RelatoriosController extends AppController
     }
 
 
-
+   
     public function gerencial()
     {
+      
     }
 
     public function getGerencial()
@@ -625,4 +600,6 @@ class RelatoriosController extends AppController
             return $this->response;
         }
     }
+
+   
 }
