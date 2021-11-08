@@ -20,220 +20,11 @@
     }
 </script>
 
-<style>
-
-a {
-    color: #2e2e2f;
-}
-
-
-
-.tr1 a {
-    color: #7a3e26;
-}
-
-.nm a {
-    color: #7a3e26;
-}
-
-.dataTables_info {
-    color: #cf6856;
-}
-
-.dataTables_empty {
-    color: #7a3e26;
-}
-
-.dataTables_filter input:focus {
-    color: #7a3e26;
-    border: #cf6856 solid 2px;
-}
-.dataTables_filter input {
-    color: #7a3e26;
-    border: #cf6856 solid 2px;
-}
-
-.dataTables_filter label {
-    color: #7a3e26;
-}
-
-.but {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
-
-.but:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
-
-.buttons-copy {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
-
-.buttons-copy:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
-
-.buttons-print {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
-
-.buttons-print:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
-
-.buttons-csv {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
-
-.buttons-csv:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
-
-.buttons-excel {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
-
-.buttons-excel:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
-
-.buttons-pdf {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
-
-.buttons-pdf:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
-
-.buttons-collection {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
-
-.buttons-collection:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
-
-.vis:hover {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.9;
-}
-
-.vis {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.9;
-}
-
-.edi:hover {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.8;
-}
-
-.edi {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.8;
-}
-
-.del:hover {
-    background-color: #ffffff;
-    color: #cf6856;
-    border: 1px solid #cf6856;
-    opacity: 0.9;
-}
-
-.del {
-    background-color: #cf6856;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.9;
-}
-
-/* li .page-link{
-        background-color: #F7E7CE;
-        color: #7A3E26;
-        border: #7A3E26 1px solid;
-    }
-
-    li .active .page-link{
-        background-color: #F7E7CE;
-        color: #7A3E26;
-        border: #7A3E26 1px solid;
-    }
-
-    li .disabled .page-link{
-        background-color: #F7E7CE;
-        color: #7A3E26;
-        border: #7A3E26 1px solid;
-    } */
-
-li{
-        color: #7A3E26;
-    }
-
-    li a{
-        color: #7A3E26;
-    }
-
-    .nl{
-        float: left;
-    }
-
-</style>
-
 <div class="card">
     <div class="card-body">
         <table id="example1" class="table table-bordered table-striped">
-            <thead class="nm">
-                <tr style="color: #CF6856;">
+            <thead class="theINDEX">
+                <tr>
 
                     <th><?= __('Tipo') ?></th>
                     <th><?= __('Descrição') ?></th>
@@ -248,12 +39,12 @@ li{
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="tboINDEX">
                 <?php foreach ($lancamentos as $lancamento) :
                     // debug($lancamento->id_lancamento);
                     ?>
-                        <tr style="color: #7A3E26;">
-                            <td><?= h($lancamento->tipo) ?></td>
+                        <tr>
+                            <td ><?= h($lancamento->tipo) ?></td>
                             <td><?= h($lancamento->descricao) ?></td>
                             <td><?= $this->Number->format($lancamento->valor) ?></td>
                             <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
@@ -264,9 +55,9 @@ li{
                             <?php } ?>
                             <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
 
-                            <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
-                            <td class="tr1"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
-                            <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
+                            <td class="tdINDEX"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
+                            <td class="tdINDEX"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
+                            <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
                             <td class="actions">
                                 <div class="btn-group">
                                     <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
@@ -281,6 +72,7 @@ li{
                                 </div>
 
                             </td>
+                        </tr>
 
 
                     <?php endforeach; ?>
@@ -353,7 +145,7 @@ li{
             buttons: [{
 
               text: 'Adicionar',
-              className: 'but',
+              className: 'addINDEX',
               action: function(){
                   window.location.href = '/lancamentos/add'
               }
