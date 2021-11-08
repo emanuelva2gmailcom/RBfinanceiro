@@ -18,7 +18,7 @@
 
          /* 2. Content */
 
-            .content {
+            .conte {
                 background-color: #ffffff;
                 padding: 0%;
                 margin: 0%;
@@ -115,220 +115,216 @@
 
 /* Elementos do Projeto:
 
-        1. ADDs:*/
+        1. ADDs & Edits:*/
 
-     /* 2. Edits:*/
+            .carADD{
+                border-radius: 20px; width: 80%
+            }
 
-     /* 3. Indexes: */
+            .carbADD{
+                border-radius: 20px 20px 0px 0px ;
+            }
 
-     /* 4. Views: */
+            .carfADD{
+                border-radius: 0px 0px 20px 20px;
+            }
 
-     /* 5. Painel */
+            .btnADD {
+                background-color: green;
+                color: white;
+                border: 1px solid green;
+            }
 
+            .btnADD:hover {
+                background-color: white;
+                color: green;
+                border: 1px solid green;
+            }
 
+            .btnADD:focus {
+                background-color: green;
+                color: white;
+                border: 1px solid green;
+            }
 
+            .carfADD .btn-secondary{
+                background-color: green;
+                color: white;
+                border: 1px solid green;
+            }
 
-a {
-    color: #2e2e2f;
-}
+            .carfADD .btn-secondary:hover {
+                background-color: white;
+                color: green;
+                border: 1px solid green;
+            }
 
+            .carfADD .btn-secondary:focus {
+                background-color: green;
+                color: white;
+                border: 1px solid green;
+            }
 
+            @media (max-width: 620px) {
+                .carADD {
+                position: absolute;
+                margin-left: -77px;
+                min-width: 90%;
+                }
 
-.tr1 a {
-    color: #7a3e26;
-}
+            }
 
-.nm a {
-    color: #7a3e26;
-}
+     /* 1.1 ADD de Lançamenos:*/
+            @media (max-width: 620px) {
+                .carlADD {
+                    position: absolute;
+                    margin-left: -77px;
+                    min-width: 90%;
+                }
 
-.dataTables_info {
-    color: #cf6856;
-}
+                .tipo {
 
-.dataTables_empty {
-    color: #7a3e26;
-}
+                    min-width: 275px;
+                }
 
-.dataTables_filter input:focus {
-    color: #7a3e26;
-    border: #cf6856 solid 2px;
-}
-.dataTables_filter input {
-    color: #7a3e26;
-    border: #cf6856 solid 2px;
-}
+                .linADD {
+                    min-width: 2px;
+                    min-height: 2px;
+                    margin: 0px;
+                }
+            }
 
-.dataTables_filter label {
-    color: #7a3e26;
-}
+            @media (max-width: 370px) {
 
-.but {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
+                .linADD {
+                    display: none;
 
-.but:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
+                }
 
-.buttons-copy {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
+                .bshADD {
+                    display: flex;
+                    justify-content: space-between;
+                }
 
-.buttons-copy:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
+                .dataADD, .grupo {
+                    width: 275px;
+                }
 
-.buttons-print {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
+            }
 
-.buttons-print:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
+            .grupo{
+                text-transform: uppercase;
+            }
 
-.buttons-csv {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
+            .s-grupo{
+                color: #CF6856
+            }
 
-.buttons-csv:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
+            .entradas,.saidas{
+                text-transform: capitalize;
+            }
 
-.buttons-excel {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
+            .contADD{
+                width: 60%;
+                min-width:80%;
+            }
 
-.buttons-excel:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
+            .bshADD{
+                margin: 0px; background-color: #F7E7CE;
+            }
 
-.buttons-pdf {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
+            .bscADD{
+            padding: 20px;
+            background-color: #7A3E26;
+            }
 
-.buttons-pdf:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
+            .bscC{
+                background-color: #7A3E26;
+                color: #F7E7CE
+            }
 
-.buttons-collection {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.7;
-}
+            .nextADD{
+                background-color: #CF6856;
+                color: white;
+            }
 
-.buttons-collection:hover {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
-}
+            .canADD{
+                background-color: white;
+                color: #CF6856;
+            }
 
-.vis:hover {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.9;
-}
+            .canADD:hover{
+                background-color: white;
+                color: #CF6856;
+            }
 
-.vis {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.9;
-}
+            .fooADD .btn-secondary{
+                background-color: #F7E7CE;
+                color: #7A3E26;
+                border: #F7E7CE 1px solid;
+            }
 
-.edi:hover {
-    background-color: #ffffff;
-    color: #7a3e26;
-    border: 1px solid #7a3e26;
-    opacity: 0.8;
-}
+            .fooADD .btn-secondary:hover{
+                background-color: #F7E7CE;
+                color: #7A3E26;
+                border: #F7E7CE 1px solid;
+            }
 
-.edi {
-    background-color: #7a3e26;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.8;
-}
+     /* 2. Indexes: */
 
-.del:hover {
-    background-color: #ffffff;
-    color: #cf6856;
-    border: 1px solid #cf6856;
-    opacity: 0.9;
-}
+     /* 2.1 Home: */
 
-.del {
-    background-color: #cf6856;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    opacity: 0.9;
-}
+          /* .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
 
-/* li .page-link{
-        background-color: #F7E7CE;
-        color: #7A3E26;
-        border: #7A3E26 1px solid;
-    }
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        } */
 
-    li .active .page-link{
-        background-color: #F7E7CE;
-        color: #7A3E26;
-        border: #7A3E26 1px solid;
-    }
+        .indH{
+            border-radius: 70px;
+            max-width: 100%;
+        }
 
-    li .disabled .page-link{
-        background-color: #F7E7CE;
-        color: #7A3E26;
-        border: #7A3E26 1px solid;
-    } */
+        .carH{
+            border-radius: 20px;
+            border: solid 2px #7A3E26;
+        }
 
-/* li{
-        color: #7A3E26;
-    }
+        .carhH{
+            border-radius: 20px 20px 0px 0px ;
+        }
 
-    li a{
-        color: #7A3E26;
-    }
+        .carbH{
+            background-color: #7A3E26;
+        }
 
-    .nl{
-        float: left;
-    } */
+        .carttH{
+            width: 50%;
+            margin-left: 25%;
+            color: #F7E7CE;
+        }
+
+        .cartH{
+            color: #F7E7CE;font-size: 14px;
+        }
+
+        .carfH{
+            border-radius: 0px 0px 14px 14px;
+            background-color: #7A3E26;
+        }
+        .carfH p,i{
+            color: #F7E7CE;
+        }
+
+     /* 3. Views: */
+
+     /* 4. Painel */
+
