@@ -18,7 +18,7 @@
         document.getElementById('real').style.display = 'none';
         document.getElementById('prev').style.display = 'block';
     }
-</script>
+</script> t
 
 <div class="card">
     <div class="card-body">

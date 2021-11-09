@@ -2,43 +2,11 @@
 
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
-    <style>
-        .btn {
-            background-color: white;
-            color: #17a2b8;
-            border: 1px solid white;
-        }
-
-        .btn:hover {
-            background-color: #17a2b8;
-            color: white;
-            border: 1px solid white;
-        }
-
-        .btn:focus {
-            background-color: white;
-            color: #17a2b8;
-            border: 1px solid white;
-        }
-
-        .month label {
-            color: white;
-        }
-
-        @media (max-width: 620px) {
-    .card {
-      position: absolute;
-      margin-top: 970px;
-      min-width: 90%;
-    }
-
-  }
-    </style>
 </head>
 
 <body>
     <div class="container-fluid d-flex align-items-center justify-content-center p-5">
-        <div class="card container bg-info" style="border-radius: 20px;">
+        <div class="carPAI card container bg-info">
             <div class="card-body">
                 <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
                 <div class="col-md-6">
@@ -47,22 +15,22 @@
                     <!-- /.form-group -->
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
-                        <label style="color: white;">Tipo</label>
+                    <div class="fgPAI form-group">
+                        <label>Tipo</label>
                         <?= $this->Form->select('tipo', ['REALIZADO' => 'Realizado', 'PREVISTO' => 'Previsto'], ['class' => 'form-control tipo mb-3', 'id' => 'card']); ?>
                     </div>
 
                 </div>
                 <!-- /.col -->
                 <div class="col-md-2">
-                    <div class="form-group">
-                        <label style="color: white;">Enviar</label>
-                        <?= $this->Form->button(__('Calcular'), ['class' => 'form-control']) ?>
+                    <div class="fgPAI form-group">
+                        <label>Enviar</label>
+                        <?= $this->Form->button(__('Calcular'), ['class' => 'btnADD form-control']) ?>
                     </div>
                 </div>
                 <!-- /.col -->
                 <?= $this->Form->end() ?>
-                <canvas class="bg-white mb-3 p-2" id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; border-radius: 20px;"></canvas>
+                <canvas class="bg-white mb-3 p-2" id="donutChart" ></canvas>
                 <div class="table table-responsive">
 
                     <table class="table text-nowrap" id="example">
