@@ -106,6 +106,11 @@ class RelatoriosController extends AppController
         return $resposta;
     }
 
+    public function postDre()
+    {
+        
+    }
+
     public function getDre($date = null, $periodo = null) 
     {
         $renovados = $this->getrenovado();
@@ -130,18 +135,11 @@ class RelatoriosController extends AppController
         $comeco = FrozenTime::now()
         ->day(1)
         ->subMonth(1);
-        debug($lancamentos);
-        foreach ($lancamentos as $lancamento) :
-            if ($lancamento->$date->i18nFormat($periodo[0]) >= $comeco->i18nFormat($periodo[0])) {
-                $final = $lancamento->$date->i18nFormat($periodo[0]);
-            }
-        endforeach;
-        $final = $comeco;
-        $final = $final->day(cal_days_in_month(CAL_GREGORIAN, $comeco->month, $comeco->year))->i18nFormat($periodo[0]);
-        $obj['header'] = $this->array_date($comeco->i18nFormat($periodo[0]), $final, $periodo);
+        // $final = $comeco;
+        // $final = $final->day(cal_days_in_month(CAL_GREGORIAN, $comeco->month, $comeco->year))->i18nFormat($periodo[0]);
+        array_push($obj['header'], $comeco->i18nFormat($periodo[0]));
         $contas = [];
         $result = [];
-        
         foreach ($lancamentos as $lancamento) :
             if (in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])) {
                 if ($lancamento->dreconta->dregrupo->grupo == 'receita') {
@@ -160,10 +158,12 @@ class RelatoriosController extends AppController
         
         foreach ($obj['header'] as $data) :
             $obj['total']['receitas'][$data] = 0;
+            $obj['total']['contribuicao'][$data] = 0;
             $obj['total']['fixos'][$data] = 0;
             $obj['total']['variaveis'][$data] = 0;
+            $obj['total']['liquido'][$data] = 0;
         endforeach;
-        debug($obj['header']);exit;
+        
         foreach ($contas as $conta) :
             $result = [];
             foreach ($obj['header'] as $data) :
@@ -179,18 +179,29 @@ class RelatoriosController extends AppController
                 endforeach;
                 if (in_array($conta, $obj['rows']['th']['receita'])) {
                     $obj['total']['receitas'][$data] += $valor;
+                    $obj['total']['contribuicao'][$data] += $valor;
+                    $obj['total']['liquido'][$data] += $valor;
                 } else if (in_array($conta, $obj['rows']['th']['fixo'])) {
                     $obj['total']['fixos'][$data] += $valor;
+                    $obj['total']['liquido'][$data] += $valor;
                 } else if (in_array($conta, $obj['rows']['th']['variavel'])) {
                     $obj['total']['variaveis'][$data] += $valor;
+                    $obj['total']['contribuicao'][$data] += $valor;
+                    $obj['total']['liquido'][$data] += $valor;
                 }
                 array_push($result, $valor);
             endforeach;
+            
 
             array_unshift($result, $conta);
-            array_push($result, $this->array_soma($result, 1));
+            // array_push($result, $this->array_soma($result, 1));
             array_push($obj['rows']['td'], $result);
         endforeach;
+        $obj['total']['receitas'] = array_values($obj['total']['receitas']);
+        $obj['total']['fixos'] = array_values($obj['total']['fixos']);
+        $obj['total']['contribuicao'] = array_values($obj['total']['contribuicao']);
+        $obj['total']['liquido'] = array_values($obj['total']['liquido']);
+        $obj['total']['variaveis'] = array_values($obj['total']['variaveis']);
         // debug($obj);exit;
         return $obj;
     }
@@ -200,9 +211,7 @@ class RelatoriosController extends AppController
         if ($this->request->is('get')) {
             $mes = ['yyyy-MM', '+1 months'];
             $obj = $this->getDre('data_vencimento', $mes);
-            $obj['total']['receitas'] = array_values($obj['total']['receitas']);
-            $obj['total']['fixos'] = array_values($obj['total']['fixos']);
-            $obj['total']['variaveis'] = array_values($obj['total']['variaveis']);
+            
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([true, $obj, null]));
             return $this->response;

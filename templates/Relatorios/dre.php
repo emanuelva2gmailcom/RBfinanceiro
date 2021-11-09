@@ -159,6 +159,9 @@
             </tbody>
         </table>
     </div>
+    <div class="card" id="kk">
+
+    </div>
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -172,7 +175,7 @@
         console.log(data)
         response = []
         data.total.receitas.push(data.total.receitas[0])
-        data.total.receitas[0] = 'Faturamento'
+        data.total.receitas[0] = '1 - Faturamento'
         $($('#example').DataTable().row.add(data.total.receitas).draw()
             .node()).addClass('bg-info');
         // response.push(data.total.entradas)
@@ -184,7 +187,7 @@
             }
         })
         data.total.variaveis.push(data.total.variaveis[0])
-        data.total.variaveis[0] = 'Custos Variáveis'
+        data.total.variaveis[0] = '2 - Custos Variáveis'
         $($('#example').DataTable().row.add(data.total.variaveis).draw()
             .node()).addClass('bg-info');
         data.rows.td.map(function(d) {
@@ -193,9 +196,13 @@
                     .node()).addClass('text-danger');
             }
         })
+        data.total.contribuicao.push(data.total.contribuicao[0])
+        data.total.contribuicao[0] = '3 - (=) Margem de Contribuição (1 - 2)'
+        $($('#example').DataTable().row.add(data.total.contribuicao).draw()
+            .node()).addClass('bg-info');
 
         data.total.fixos.push(data.total.fixos[0])
-        data.total.fixos[0] = 'Custos Fixos'
+        data.total.fixos[0] = '4 - Custos Fixos'
         $($('#example').DataTable().row.add(data.total.fixos).draw()
             .node()).addClass('bg-info');
         data.rows.td.map(function(d) {
@@ -204,6 +211,11 @@
                     .node()).addClass('text-danger');
             }
         })
+        data.total.liquido.push(data.total.liquido[0])
+
+        data.total.liquido[0] = '5 - Resultado Liquido (3 - 4)'
+        $($('#example').DataTable().row.add(data.total.liquido).draw()
+            .node()).addClass('bg-info');
 
     }
 
