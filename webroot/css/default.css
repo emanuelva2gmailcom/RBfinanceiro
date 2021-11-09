@@ -511,9 +511,29 @@
 
      /* 2.2.1 Caixa Diário: */
 
-     /* 2.2.2 Fluxo de Caixa: */
+            .carCD{
+                border: green solid 2px;
+                border-radius: 20px;
+            }
 
-     /* 2.2.3 Caixa Gerencial: */
+            .carhCD a{
+                font-size: 30px;
+                color:green;
+            }
+
+            @media (max-width: 620px) {
+                .carCD {
+                   position: absolute;
+                   margin-top: 80%;
+                   min-width: 90%;
+                }
+            }
+
+     /* 2.2.2 Fluxo de Caixa & Caixa Gerencial: */
+
+            .sorting_disabled {
+               color: green;
+            }
 
      /* 3. Views: */
 

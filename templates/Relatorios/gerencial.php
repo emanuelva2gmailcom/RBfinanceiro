@@ -7,129 +7,6 @@
  */
 ?>
 
-<style>
-    .tr1 a {
-        color: #029BE1;
-    }
-
-    .nm a {
-        color: green;
-    }
-
-    .sorting_disabled {
-        color: green;
-    }
-
-    .dataTables_info {
-        color: green;
-    }
-
-    .dataTables_empty {
-        color: #17a2b8;
-    }
-
-    .dataTables_filter input:focus {
-        color: #17a2b8;
-        border: green solid 2px;
-
-    }
-
-    .dataTables_filter input {
-        color: #17a2b8;
-        border: green solid 2px;
-
-    }
-
-    .dataTables_filter label {
-        color: #17a2b8;
-
-    }
-
-    .buttons-copy {
-        background-color: #17a2b8;
-        color: white;
-        border: 1px solid #17a2b8;
-        opacity: 0.7;
-    }
-
-    .buttons-copy:hover {
-        background-color: white;
-        color: #17a2b8;
-        border: 1px solid #17a2b8;
-        opacity: 0.7;
-    }
-
-    .buttons-print {
-        background-color: #0099CC;
-        color: white;
-        border: 1px solid #0099CC;
-        opacity: 0.7;
-    }
-
-    .buttons-print:hover {
-        background-color: white;
-        color: #0099CC;
-        border: 1px solid #0099CC;
-        opacity: 0.7;
-    }
-
-    .buttons-csv {
-        background-color: green;
-        color: white;
-        border: 1px solid green;
-        opacity: 0.7;
-    }
-
-    .buttons-csv:hover {
-        background-color: white;
-        color: green;
-        border: 1px solid green;
-        opacity: 0.7;
-    }
-
-    .buttons-excel {
-        background-color: #006400;
-        color: white;
-        border: 1px solid #006400;
-        opacity: 0.7;
-    }
-
-    .buttons-excel:hover {
-        background-color: white;
-        color: #006400;
-        border: 1px solid #006400;
-        opacity: 0.7;
-    }
-
-    .buttons-pdf {
-        background-color: #4b4b4b;
-        color: white;
-        border: 1px solid #4b4b4b;
-        opacity: 0.7;
-    }
-
-    .buttons-pdf:hover {
-        background-color: white;
-        color: #4b4b4b;
-        border: 1px solid #4b4b4b;
-        opacity: 0.7;
-    }
-
-    .buttons-collection {
-        background-color: black;
-        color: white;
-        border: 1px solid black;
-        opacity: 0.7;
-    }
-
-    .buttons-collection:hover {
-        background-color: white;
-        color: black;
-        border: 1px solid black;
-        opacity: 0.7;
-    }
-</style>
-
 <div class="card">
     <div class="card-header">
         <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
@@ -151,10 +28,10 @@
     </div>
     <div class="card-2 card-body table-responsive">
         <table id="example" class="table table-sm table-bordered table-striped" style="width: 100%;">
-        <thead class="text-green">
+        <thead class="theINDEX">
 
             </thead>
-            <tbody class="text-info">
+            <tbody class="tboINDEX">
 
             </tbody>
         </table>
