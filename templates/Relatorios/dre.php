@@ -134,14 +134,14 @@
     <div class="card-header">
         <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
         <div class="col-md-3">
-            <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control text-white']); ?>
-        </div>
-        <div class="col-md-3">
-            <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'date'], ['class' => 'la form-control']); ?>
-        </div>
-        <div class="col-md-3">
             <label>Período</label>
-            <?= $this->Form->select(2, ['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'periodo form-control select2bs4']); ?>
+            <?= $this->Form->select(2, ['ano' => 'ANO', 'mes' => 'MÊS'], ['class' => 'periodo form-control select2bs4']); ?>
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control float-right" id="reservation">
+        </div>
+        <div class="col-md-3">
+            <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'month'], ['class' => 'la form-control']); ?>
         </div>
         <div class="col-md-3">
             <label>Enviar</label>
@@ -170,6 +170,8 @@
     $('.select2bs4').select2({
         theme: 'bootstrap4'
     })
+
+    $('#reservation').daterangepicker()
 
     function datase(data) {
         console.log(data)
