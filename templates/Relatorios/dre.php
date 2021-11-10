@@ -135,14 +135,9 @@
         <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
         <div class="col-md-3">
             <label>Período</label>
-            <?= $this->Form->select(2, ['ano' => 'ANO', 'mes' => 'MÊS'], ['class' => 'periodo form-control select2bs4']); ?>
+            <?= $this->Form->select(2, [ 'mes' => 'MÊS','trimestre' => 'TRIMESTRE','ano' => 'ANO'], ['class' => 'periodo form-control select2bs4']); ?>
         </div>
-        <div class="col-md-3">
-            <input type="text" class="form-control float-right" id="reservation">
-        </div>
-        <div class="col-md-3">
-            <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'month'], ['class' => 'la form-control']); ?>
-        </div>
+
         <div class="col-md-3">
             <label>Enviar</label>
             <?= $this->Form->button(__('Enviar'), ['class' => 'form-control']) ?>
@@ -302,7 +297,7 @@
             $comeco = $("#0").val()
             $final = $("#1").val()
             $periodo = $(".periodo").val()
-            console.log([$comeco, $final, $periodo])
+            // console.log([$comeco, $final, $periodo])
             try {
                 const response = axios.post('/relatorios/getGerencial/', [$comeco, $final, $periodo], {
                     headers: {
