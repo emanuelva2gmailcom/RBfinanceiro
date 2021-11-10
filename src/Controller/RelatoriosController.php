@@ -84,7 +84,7 @@ class RelatoriosController extends AppController
             ]);
     }
 
-    public function array_date($ini = null, $fim = null, $periodo = null, $dias = null)
+    public function array_date($ini = null, $fim = null, $periodo = null)
     {
         $resposta = [];
         $ini = new Time($ini, 'UTC');
@@ -92,7 +92,7 @@ class RelatoriosController extends AppController
         while ($ini <= $fim) {
             array_push($resposta, $ini->i18nFormat($periodo[0]));
             $ini->modify($periodo[1]);
-            $ini->day == $fim->day ? array_push($resposta, $ini->i18nFormat($periodo[0])) : '';
+            // $ini->i18nFormat($periodo[0]) == $fim->i18nFormat($periodo[0]) ? array_push($resposta, $ini->i18nFormat($periodo[0])) : '';
         }
         return $resposta;
     }
@@ -106,19 +106,40 @@ class RelatoriosController extends AppController
         return $resposta;
     }
 
-    public function postDre($request, $date = null, $periodo = null)
+    public function postDre($request = null, $date = 'data_vencimento')
     {
+        $request = ['2021-9', '2021-11', 'mes'];
+        $request[0] = new Time($request[0], 'UTC');
+        $request[1] = new Time($request[1], 'UTC');
+        $mes = ['yyyy-MM', '+1 months'];
+        $ano = ['yyyy', '+1 years'];
+        $periodo = null;
+        switch ($request[2]) {
+            case 'mes':
+                $periodo = $mes;
+                break;
+            case 'ano':
+                $periodo = $ano;
+                break;
+        }
         $renovados = $this->getrenovado();
         $obj = [
             'header' => [],
             'rows' => [
                 'th' => [
                     'receita' => [],
-                    'variaveis' => [],
+                    'variavel' => [],
                     'fixo' => []
                 ],
                 'td' => []
             ],
+            'total' => [
+                'receitas' => [0],
+                'contribuicao' => [0],
+                'fixos' => [0],
+                'variaveis' => [0],
+                'liquido' => [0],
+            ]
         ];
         $this->loadModel('Lancamentos');
         $this->loadModel('Drecontas');
@@ -127,14 +148,17 @@ class RelatoriosController extends AppController
             'conditions' => [$renovados['simple']]
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
-        $comeco = FrozenTime::now()
-            ->day(1)
-            ->subMonth(1);
-        array_push($obj['header'], $comeco->i18nFormat($periodo[0]));
+        if($request[0] == $request[1]) {
+            array_push($obj['header'], $request[0]->i18nFormat($periodo[0]));
+        } else {
+            $obj['header'] = $this->array_date($request[0], $request[1], $periodo);
+        }
+        
         $contas = [];
         $result = [];
         foreach ($lancamentos as $lancamento) :
             if (in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])) {
+                
                 if ($lancamento->dreconta->dregrupo->grupo == 'receita') {
                     array_push($obj['rows']['th']['receita'], $lancamento->dreconta->conta);
                 } else if ($lancamento->dreconta->dregrupo->grupo == 'fixo') {
@@ -149,16 +173,17 @@ class RelatoriosController extends AppController
         endforeach;
 
 
-        foreach ($obj['header'] as $data) :
-            $obj['total']['receitas'][$data] = 0;
-            $obj['total']['contribuicao'][$data] = 0;
-            $obj['total']['fixos'][$data] = 0;
-            $obj['total']['variaveis'][$data] = 0;
-            $obj['total']['liquido'][$data] = 0;
-        endforeach;
+        // foreach ($obj['header'] as $data) :
+        //     $obj['total']['receitas'][$data] = 0;
+        //     $obj['total']['contribuicao'][$data] = 0;
+        //     $obj['total']['fixos'][$data] = 0;
+        //     $obj['total']['variaveis'][$data] = 0;
+        //     $obj['total']['liquido'][$data] = 0;
+        // endforeach;
 
         foreach ($contas as $conta) :
-            $result = [];
+            $result = 0;
+            
             foreach ($obj['header'] as $data) :
                 $valor = 0;
                 foreach ($lancamentos as $lancamento) :
@@ -171,31 +196,32 @@ class RelatoriosController extends AppController
                     }
                 endforeach;
                 if (in_array($conta, $obj['rows']['th']['receita'])) {
-                    $obj['total']['receitas'][$data] += $valor;
-                    $obj['total']['contribuicao'][$data] += $valor;
-                    $obj['total']['liquido'][$data] += $valor;
+                    $obj['total']['receitas'][0] += $valor;
+                    $obj['total']['contribuicao'][0] += $valor;
+                    $obj['total']['liquido'][0] += $valor;
                 } else if (in_array($conta, $obj['rows']['th']['fixo'])) {
-                    $obj['total']['fixos'][$data] += $valor;
-                    $obj['total']['liquido'][$data] += $valor;
+                    $obj['total']['fixos'][0] += $valor;
+                    $obj['total']['liquido'][0] += $valor;
                 } else if (in_array($conta, $obj['rows']['th']['variavel'])) {
-                    $obj['total']['variaveis'][$data] += $valor;
-                    $obj['total']['contribuicao'][$data] += $valor;
-                    $obj['total']['liquido'][$data] += $valor;
+                    $obj['total']['variaveis'][0] += $valor;
+                    $obj['total']['contribuicao'][0] += $valor;
+                    $obj['total']['liquido'][0] += $valor;
                 }
-                array_push($result, $valor);
+                // array_push($result, $valor);
+                $result += $valor;
             endforeach;
-
-
-            array_unshift($result, $conta);
-
-            array_push($obj['rows']['td'], $result);
+            
+            // array_unshift($result, $conta);
+            
+            array_push($obj['rows']['td'], [$conta, $result]);
         endforeach;
-        $obj['total']['receitas'] = array_values($obj['total']['receitas']);
-        $obj['total']['fixos'] = array_values($obj['total']['fixos']);
-        $obj['total']['contribuicao'] = array_values($obj['total']['contribuicao']);
-        $obj['total']['liquido'] = array_values($obj['total']['liquido']);
-        $obj['total']['variaveis'] = array_values($obj['total']['variaveis']);
-
+        // debug($obj);exit;
+        // $obj['total']['receitas'] = array_values($obj['total']['receitas']);
+        // $obj['total']['fixos'] = array_values($obj['total']['fixos']);
+        // $obj['total']['contribuicao'] = array_values($obj['total']['contribuicao']);
+        // $obj['total']['liquido'] = array_values($obj['total']['liquido']);
+        // $obj['total']['variaveis'] = array_values($obj['total']['variaveis']);
+        
         return $obj;
     }
 
@@ -207,7 +233,7 @@ class RelatoriosController extends AppController
             'rows' => [
                 'th' => [
                     'receita' => [],
-                    'variaveis' => [],
+                    'variavel' => [],
                     'fixo' => []
                 ],
                 'td' => []
@@ -296,9 +322,15 @@ class RelatoriosController extends AppController
 
     public function dreAPI()
     {
+        $mes = ['yyyy-MM', '+1 months'];
         if ($this->request->is('get')) {
-            $mes = ['yyyy-MM', '+1 months'];
             $obj = $this->getDre('data_vencimento', $mes);
+            $this->response = $this->response->withType('application/json')
+                ->withStringBody(json_encode([true, $obj, null]));
+            return $this->response;
+        } else if ($this->request->is('post')) {
+            $request = $this->request->getData();
+            $obj = $this->postDre($request,'data_vencimento');
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([true, $obj, null]));
             return $this->response;
@@ -428,13 +460,9 @@ class RelatoriosController extends AppController
     {
     }
 
-
-
-
     public function fluxodecaixa()
     {
     }
-
 
     public function getFluxoDeCaixa()
     {
@@ -562,8 +590,6 @@ class RelatoriosController extends AppController
             return $this->response;
         }
     }
-
-
 
     public function gerencial()
     {

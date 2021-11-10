@@ -135,7 +135,13 @@
         <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
         <div class="col-md-3">
             <label>Período</label>
-            <?= $this->Form->select(2, [ 'mes' => 'MÊS','trimestre' => 'TRIMESTRE','ano' => 'ANO'], ['class' => 'periodo form-control select2bs4']); ?>
+            <?= $this->Form->select(2, [ 'mes' => 'MÊS','ano' => 'ANO'], ['class' => 'periodo form-control select2bs4']); ?>
+        </div>
+        <div class="col-md-3">
+            <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'month'], ['class' => 'form-control text-white']); ?>
+        </div>
+        <div class="col-md-3">
+            <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'month'], ['class' => 'la form-control']); ?>
         </div>
 
         <div class="col-md-3">
@@ -154,7 +160,7 @@
             </tbody>
         </table>
     </div>
-    <div class="card" id="kk">
+    <div class="card" id="teste">
 
     </div>
 
@@ -299,11 +305,13 @@
             $periodo = $(".periodo").val()
             // console.log([$comeco, $final, $periodo])
             try {
-                const response = axios.post('/relatorios/getGerencial/', [$comeco, $final, $periodo], {
+                const response = axios.post('/relatorios/dreAPI/', [$comeco, $final, $periodo], {
                     headers: {
                         "X-CSRF-Token": csrf
                     }
                 }).then(function(response) { // handle success
+                    console.log(response.data)
+                    // document.getElementById('teste').innerHTML = response.data
                     $("#example").DataTable().destroy();
                     $("#example").empty()
                     formatador(response.data[1])
