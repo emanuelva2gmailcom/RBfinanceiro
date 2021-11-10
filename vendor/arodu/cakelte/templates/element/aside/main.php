@@ -1,4 +1,4 @@
-<div class="asM p-3" >
+<div class="asideMain p-3" >
   <li class="nav-item d-sm-block">
     <i class="nav-icon fas fa-tools"></i>
     <?= $this->Html->link(__('Configurações'), ['controller' => 'users','action' => 'dashboard', 'plugin' => 'Usermgmt']) ?>

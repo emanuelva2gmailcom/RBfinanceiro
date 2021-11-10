@@ -32,7 +32,7 @@
 
     <div class="login-logo">
     <a href="<?= $this->Url->build('/') ?>" class="brand-link">
-        <?= $this->Html->image('logo2.png', ['class' => 'imgL2']) ?>
+        <?= $this->Html->image('logo2.png', ['class' => 'imgLogin']) ?>
       </a>
     </div>
     <!-- /.login-logo -->

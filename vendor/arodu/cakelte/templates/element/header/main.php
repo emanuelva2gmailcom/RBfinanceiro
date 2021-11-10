@@ -6,7 +6,7 @@
 
 <!-- Left navbar links -->
 <ul class="navbar-nav" onblur="fechar() ">
-      <li class="heaM nav-item">
+      <li class="headerMain nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button" onclick="fechar()">
         <i class="fas fa-bars"></i></a>
       </li>
@@ -25,7 +25,7 @@
        <!-- SEARCH FORM -->
        <?php echo $this->element('header/search') ?>
 
-      <li class="heaM nav-item" >
+      <li class="headerMain nav-item" >
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
         <i class="fas fa-th-large"></i></a>
       </li>
