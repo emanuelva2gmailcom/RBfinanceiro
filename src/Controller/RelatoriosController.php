@@ -148,17 +148,17 @@ class RelatoriosController extends AppController
             'conditions' => [$renovados['simple']]
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
-        if($request[0] == $request[1]) {
+        if ($request[0] == $request[1]) {
             array_push($obj['header'], $request[0]->i18nFormat($periodo[0]));
         } else {
             $obj['header'] = $this->array_date($request[0], $request[1], $periodo);
         }
-        
+
         $contas = [];
         $result = [];
         foreach ($lancamentos as $lancamento) :
             if (in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])) {
-                
+
                 if ($lancamento->dreconta->dregrupo->grupo == 'receita') {
                     array_push($obj['rows']['th']['receita'], $lancamento->dreconta->conta);
                 } else if ($lancamento->dreconta->dregrupo->grupo == 'fixo') {
@@ -183,7 +183,7 @@ class RelatoriosController extends AppController
 
         foreach ($contas as $conta) :
             $result = 0;
-            
+
             foreach ($obj['header'] as $data) :
                 $valor = 0;
                 foreach ($lancamentos as $lancamento) :
@@ -210,9 +210,9 @@ class RelatoriosController extends AppController
                 // array_push($result, $valor);
                 $result += $valor;
             endforeach;
-            
+
             // array_unshift($result, $conta);
-            
+
             array_push($obj['rows']['td'], [$conta, $result]);
         endforeach;
         // debug($obj);exit;
@@ -221,7 +221,7 @@ class RelatoriosController extends AppController
         // $obj['total']['contribuicao'] = array_values($obj['total']['contribuicao']);
         // $obj['total']['liquido'] = array_values($obj['total']['liquido']);
         // $obj['total']['variaveis'] = array_values($obj['total']['variaveis']);
-        
+
         return $obj;
     }
 
@@ -268,7 +268,6 @@ class RelatoriosController extends AppController
             }
         endforeach;
 
-
         foreach ($obj['header'] as $data) :
             $obj['total']['receitas'][$data] = 0;
             $obj['total']['contribuicao'][$data] = 0;
@@ -281,18 +280,16 @@ class RelatoriosController extends AppController
             $result = [];
             foreach ($obj['header'] as $data) :
                 $valor = 0;
-
                 foreach ($lancamentos as $lancamento) :
                     if (($lancamento->dreconta->dregrupo->grupo == 'receita') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval($lancamento->valor);
                     } else if (($lancamento->dreconta->dregrupo->grupo == 'fixo') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
-                    } else if (($lancamento->dreconta->dregrupo->grupo == 'variaveis') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    } else if (($lancamento->dreconta->dregrupo->grupo == 'variavel') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
                     }
                 endforeach;
-                $obj['rows']['th']['variaveis'] = ['teste', 'opa'];
-     
+
                 if (in_array($conta, $obj['rows']['th']['receita'])) {
                     $obj['total']['receitas'][$data] += $valor;
                     $obj['total']['contribuicao'][$data] += $valor;
@@ -300,23 +297,44 @@ class RelatoriosController extends AppController
                 } else if (in_array($conta, $obj['rows']['th']['fixo'])) {
                     $obj['total']['fixos'][$data] += $valor;
                     $obj['total']['liquido'][$data] += $valor;
-                } else if (in_array($conta, $obj['rows']['th']['variaveis'])) {
+                } else if (in_array($conta, $obj['rows']['th']['variavel'])) {
                     $obj['total']['variaveis'][$data] += $valor;
                     $obj['total']['contribuicao'][$data] += $valor;
                     $obj['total']['liquido'][$data] += $valor;
                 }
                 array_push($result, $valor);
             endforeach;
-
+            foreach ($contas as $conta) :
+                $cento = [];
+                if (in_array($conta, $obj['rows']['th']['receita'])) {
+                    $cento[] = ($valor * 100) / $obj['total']['receitas'][$data];
+                    $cento[] = ($valor * 100) /  $obj['total']['contribuicao'][$data];
+                    $cento[] = ($valor * 100) / $obj['total']['liquido'][$data];
+                } else if (in_array($conta, $obj['rows']['th']['fixo'])) {
+                    $cento[] = ($valor * 100) / $obj['total']['fixos'][$data];
+                    $cento[] = ($valor * 100) / $obj['total']['liquido'][$data];
+                } else if (in_array($conta, $obj['rows']['th']['variavel'])) {
+                    $cento[] = ($valor * 100) /  $obj['total']['variaveis'][$data];
+                    $cento[] = ($valor * 100) / $obj['total']['contribuicao'][$data];
+                    $cento[] = ($valor * 100) / $obj['total']['liquido'][$data];
+                }
+                foreach ($cento as $c) {
+                    debug($c);
+                    array_push($result, $c);
+                }
+            endforeach;
             array_unshift($result, $conta);
-
             array_push($obj['rows']['td'], $result);
         endforeach;
+        debug($result);
+        // exit;
         $obj['total']['receitas'] = array_values($obj['total']['receitas']);
         $obj['total']['fixos'] = array_values($obj['total']['fixos']);
         $obj['total']['contribuicao'] = array_values($obj['total']['contribuicao']);
         $obj['total']['liquido'] = array_values($obj['total']['liquido']);
         $obj['total']['variaveis'] = array_values($obj['total']['variaveis']);
+        // debug($obj);
+        // exit;
         return $obj;
     }
 
@@ -330,7 +348,7 @@ class RelatoriosController extends AppController
             return $this->response;
         } else if ($this->request->is('post')) {
             $request = $this->request->getData();
-            $obj = $this->postDre($request,'data_vencimento');
+            $obj = $this->postDre($request, 'data_vencimento');
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([true, $obj, null]));
             return $this->response;
