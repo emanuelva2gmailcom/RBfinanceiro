@@ -108,7 +108,7 @@ class RelatoriosController extends AppController
 
     public function postDre($request = null, $date = 'data_vencimento')
     {
-        $request = ['2021-9', '2021-11', 'mes'];
+        // $request = ['2021-9', '2021-11', 'mes'];
         $request[0] = new Time($request[0], 'UTC');
         $request[1] = new Time($request[1], 'UTC');
         $mes = ['yyyy-MM', '+1 months'];
@@ -139,6 +139,17 @@ class RelatoriosController extends AppController
                 'fixos' => [0],
                 'variaveis' => [0],
                 'liquido' => [0],
+            ]
+        ];
+        $response = [
+            'header' => [],
+            'body' => [],
+            'total' => [
+                'receitas' => [],
+                'contribuicao' => [],
+                'fixos' => [],
+                'variaveis' => [],
+                'liquido' => [],
             ]
         ];
         $this->loadModel('Lancamentos');
@@ -172,14 +183,126 @@ class RelatoriosController extends AppController
             }
         endforeach;
 
+        foreach ($contas as $conta) :
+            $result = 0;
+            
+            foreach ($obj['header'] as $data) :
+                $valor = 0;
+                foreach ($lancamentos as $lancamento) :
+                    if (($lancamento->dreconta->dregrupo->grupo == 'receita') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                        $valor += intval($lancamento->valor);
+                    } else if (($lancamento->dreconta->dregrupo->grupo == 'fixo') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                        $valor += intval('-' . $lancamento->valor);
+                    } else if (($lancamento->dreconta->dregrupo->grupo == 'variaveis') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                        $valor += intval('-' . $lancamento->valor);
+                    }
+                endforeach;
+                if (in_array($conta, $obj['rows']['th']['receita'])) {
+                    $obj['total']['receitas'][0] += $valor;
+                    $obj['total']['contribuicao'][0] += $valor;
+                    $obj['total']['liquido'][0] += $valor;
+                } else if (in_array($conta, $obj['rows']['th']['fixo'])) {
+                    $obj['total']['fixos'][0] += $valor;
+                    $obj['total']['liquido'][0] += $valor;
+                } else if (in_array($conta, $obj['rows']['th']['variavel'])) {
+                    $obj['total']['variaveis'][0] += $valor;
+                    $obj['total']['contribuicao'][0] += $valor;
+                    $obj['total']['liquido'][0] += $valor;
+                }
+                $result += $valor;
+            endforeach;
+            
+            array_push($obj['rows']['td'], [$conta, $result]);
+        endforeach;
+        $response['header'] = ['DRE' ,$request[0]->i18nFormat('MM/yyyy').' - '.$request[1]->i18nFormat('MM/yyyy')];
+        array_unshift($obj['total']['receitas'], '1 - Faturamento');
+        array_push($response['total']['receitas'], $obj['total']['receitas']);
+        array_unshift($obj['total']['variaveis'], '2 - Custos Variáveis');
+        array_push($response['total']['variaveis'], $obj['total']['variaveis']);
+        array_unshift($obj['total']['contribuicao'], '3 - (=) Margem de Contribuição (1 - 2)');
+        array_push($response['total']['contribuicao'], $obj['total']['contribuicao']);
+        array_unshift($obj['total']['fixos'], '4 - Custos Fixos');
+        array_push($response['total']['fixos'], $obj['total']['fixos']);
+        array_unshift($obj['total']['liquido'], '5 - Resultado Liquido (3 - 4)');
+        array_push($response['total']['liquido'], $obj['total']['liquido']);
+        foreach($obj['rows']['td'] as $row){
+            if(in_array($row[0], $obj['rows']['th']['receita'])){
+                array_push($response['total']['receitas'], $row);
+            } else if(in_array($row[0], $obj['rows']['th']['variavel'])){
+                array_push($response['total']['variaveis'], $row);
+            } else if(in_array($row[0], $obj['rows']['th']['fixo'])){
+                array_push($response['total']['fixos'], $row);
+            }
+        }
+        $response['body'] = array_merge($response['total']['receitas'], $response['total']['variaveis'], $response['total']['fixos']);
 
-        // foreach ($obj['header'] as $data) :
-        //     $obj['total']['receitas'][$data] = 0;
-        //     $obj['total']['contribuicao'][$data] = 0;
-        //     $obj['total']['fixos'][$data] = 0;
-        //     $obj['total']['variaveis'][$data] = 0;
-        //     $obj['total']['liquido'][$data] = 0;
-        // endforeach;
+        // debug($response);
+        // exit;
+
+        
+        return $response;
+    }
+
+    public function getDre($date = null, $periodo = null)
+    {
+        $renovados = $this->getrenovado();
+        $obj = [
+            'header' => [],
+            'rows' => [
+                'th' => [
+                    'receita' => [],
+                    'variavel' => [],
+                    'fixo' => []
+                ],
+                'td' => []
+            ],
+            'total' => [
+                'receitas' => [0],
+                'contribuicao' => [0],
+                'fixos' => [0],
+                'variaveis' => [0],
+                'liquido' => [0],
+            ]
+        ];
+        $response = [
+            'header' => [],
+            'body' => [],
+            'total' => [
+                'receitas' => [],
+                'contribuicao' => [],
+                'fixos' => [],
+                'variaveis' => [],
+                'liquido' => [],
+            ]
+        ];
+        $this->loadModel('Lancamentos');
+        $this->loadModel('Drecontas');
+        $this->paginate = [
+            'contain' => ['Drecontas' => ['Dregrupos'], 'Fornecedores', 'Clientes'],
+            'conditions' => [$renovados['simple']]
+        ];
+        $lancamentos = $this->paginate($this->Lancamentos);
+        $comeco = FrozenTime::now()
+            ->day(1)
+            ->subMonth(1);
+        array_push($obj['header'], $comeco->i18nFormat($periodo[0]));
+        $contas = [];
+        $result = [];
+        foreach ($lancamentos as $lancamento) :
+            if (in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])) {
+                
+                if ($lancamento->dreconta->dregrupo->grupo == 'receita') {
+                    array_push($obj['rows']['th']['receita'], $lancamento->dreconta->conta);
+                } else if ($lancamento->dreconta->dregrupo->grupo == 'fixo') {
+                    array_push($obj['rows']['th']['fixo'], $lancamento->dreconta->conta);
+                } else if ($lancamento->dreconta->dregrupo->grupo == 'variavel') {
+                    array_push($obj['rows']['th']['variavel'], $lancamento->dreconta->conta);
+                }
+                if (!in_array($lancamento->dreconta->conta, $contas)) {
+                    array_push($contas, $lancamento->dreconta->conta);
+                }
+            }
+        endforeach;
 
         foreach ($contas as $conta) :
             $result = 0;
@@ -207,117 +330,38 @@ class RelatoriosController extends AppController
                     $obj['total']['contribuicao'][0] += $valor;
                     $obj['total']['liquido'][0] += $valor;
                 }
-                // array_push($result, $valor);
                 $result += $valor;
             endforeach;
             
-            // array_unshift($result, $conta);
-            
             array_push($obj['rows']['td'], [$conta, $result]);
         endforeach;
-        // debug($obj);exit;
-        // $obj['total']['receitas'] = array_values($obj['total']['receitas']);
-        // $obj['total']['fixos'] = array_values($obj['total']['fixos']);
-        // $obj['total']['contribuicao'] = array_values($obj['total']['contribuicao']);
-        // $obj['total']['liquido'] = array_values($obj['total']['liquido']);
-        // $obj['total']['variaveis'] = array_values($obj['total']['variaveis']);
-        
-        return $obj;
-    }
-
-    public function getDre($date = null, $periodo = null)
-    {
-        $renovados = $this->getrenovado();
-        $obj = [
-            'header' => [],
-            'rows' => [
-                'th' => [
-                    'receita' => [],
-                    'variavel' => [],
-                    'fixo' => []
-                ],
-                'td' => []
-            ],
-        ];
-        $this->loadModel('Lancamentos');
-        $this->loadModel('Drecontas');
-        $this->paginate = [
-            'contain' => ['Drecontas' => ['Dregrupos'], 'Fornecedores', 'Clientes'],
-            'conditions' => [$renovados['simple']]
-        ];
-        $lancamentos = $this->paginate($this->Lancamentos);
-        $comeco = FrozenTime::now()
-            ->day(1)
-            ->subMonth(1);
-        array_push($obj['header'], $comeco->i18nFormat($periodo[0]));
-        $contas = [];
-        $result = [];
-
-        foreach ($lancamentos as $lancamento) :
-            if (in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])) {
-                if ($lancamento->dreconta->dregrupo->grupo == 'receita') {
-                    array_push($obj['rows']['th']['receita'], $lancamento->dreconta->conta);
-                } else if ($lancamento->dreconta->dregrupo->grupo == 'fixo') {
-                    array_push($obj['rows']['th']['fixo'], $lancamento->dreconta->conta);
-                } else if ($lancamento->dreconta->dregrupo->grupo == 'variavel') {
-                    array_push($obj['rows']['th']['variavel'], $lancamento->dreconta->conta);
-                }
-                if (!in_array($lancamento->dreconta->conta, $contas)) {
-                    array_push($contas, $lancamento->dreconta->conta);
-                }
+        $response['header'] = ['DRE' ,$comeco->i18nFormat('MM/yyyy')];
+        array_unshift($obj['total']['receitas'], '1 - Faturamento');
+        array_push($response['total']['receitas'], $obj['total']['receitas']);
+        array_unshift($obj['total']['variaveis'], '2 - Custos Variáveis');
+        array_push($response['total']['variaveis'], $obj['total']['variaveis']);
+        array_unshift($obj['total']['contribuicao'], '3 - (=) Margem de Contribuição (1 - 2)');
+        array_push($response['total']['contribuicao'], $obj['total']['contribuicao']);
+        array_unshift($obj['total']['fixos'], '4 - Custos Fixos');
+        array_push($response['total']['fixos'], $obj['total']['fixos']);
+        array_unshift($obj['total']['liquido'], '5 - Resultado Liquido (3 - 4)');
+        array_push($response['total']['liquido'], $obj['total']['liquido']);
+        foreach($obj['rows']['td'] as $row){
+            if(in_array($row[0], $obj['rows']['th']['receita'])){
+                array_push($response['total']['receitas'], $row);
+            } else if(in_array($row[0], $obj['rows']['th']['variavel'])){
+                array_push($response['total']['variaveis'], $row);
+            } else if(in_array($row[0], $obj['rows']['th']['fixo'])){
+                array_push($response['total']['fixos'], $row);
             }
-        endforeach;
+        }
+        $response['body'] = array_merge($response['total']['receitas'], $response['total']['variaveis'], $response['total']['fixos']);
 
+        // debug($response);
+        // exit;
 
-        foreach ($obj['header'] as $data) :
-            $obj['total']['receitas'][$data] = 0;
-            $obj['total']['contribuicao'][$data] = 0;
-            $obj['total']['fixos'][$data] = 0;
-            $obj['total']['variaveis'][$data] = 0;
-            $obj['total']['liquido'][$data] = 0;
-        endforeach;
-        foreach ($contas as $conta) :
-
-            $result = [];
-            foreach ($obj['header'] as $data) :
-                $valor = 0;
-
-                foreach ($lancamentos as $lancamento) :
-                    if (($lancamento->dreconta->dregrupo->grupo == 'receita') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
-                        $valor += intval($lancamento->valor);
-                    } else if (($lancamento->dreconta->dregrupo->grupo == 'fixo') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
-                        $valor += intval('-' . $lancamento->valor);
-                    } else if (($lancamento->dreconta->dregrupo->grupo == 'variaveis') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
-                        $valor += intval('-' . $lancamento->valor);
-                    }
-                endforeach;
-                $obj['rows']['th']['variaveis'] = ['teste', 'opa'];
-     
-                if (in_array($conta, $obj['rows']['th']['receita'])) {
-                    $obj['total']['receitas'][$data] += $valor;
-                    $obj['total']['contribuicao'][$data] += $valor;
-                    $obj['total']['liquido'][$data] += $valor;
-                } else if (in_array($conta, $obj['rows']['th']['fixo'])) {
-                    $obj['total']['fixos'][$data] += $valor;
-                    $obj['total']['liquido'][$data] += $valor;
-                } else if (in_array($conta, $obj['rows']['th']['variaveis'])) {
-                    $obj['total']['variaveis'][$data] += $valor;
-                    $obj['total']['contribuicao'][$data] += $valor;
-                    $obj['total']['liquido'][$data] += $valor;
-                }
-                array_push($result, $valor);
-            endforeach;
-
-            array_unshift($result, $conta);
-
-            array_push($obj['rows']['td'], $result);
-        endforeach;
-        $obj['total']['receitas'] = array_values($obj['total']['receitas']);
-        $obj['total']['fixos'] = array_values($obj['total']['fixos']);
-        $obj['total']['contribuicao'] = array_values($obj['total']['contribuicao']);
-        $obj['total']['liquido'] = array_values($obj['total']['liquido']);
-        $obj['total']['variaveis'] = array_values($obj['total']['variaveis']);
-        return $obj;
+        
+        return $response;
     }
 
     public function dreAPI()
