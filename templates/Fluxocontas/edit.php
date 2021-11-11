@@ -9,8 +9,8 @@
 
 <div class="container d-flex justify-content-center">
 
-<div class="carADD card card-danger m-5">
-    <div class="carbADD card-body bg-info">
+<div class="cardADD card card-danger m-5">
+    <div class="cardbodyADD card-body">
   <?= $this->Form->create($fluxoconta) ?>
 
   <?= $this->Form->control('conta', ['label' => 'Conta'], ['class' => 'form-control']); ?>
@@ -21,7 +21,7 @@
 
   </div>
 
-  <div class="carfADD card-footer bg-white d-flex">
+  <div class="carfooterADD card-footer d-flex">
       <div class="mr-auto p-2">
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btnADD btn-default']) ?>
       </div>

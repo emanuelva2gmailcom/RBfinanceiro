@@ -8,9 +8,9 @@
 
 <div class=" container">
   <div class="views container-fluid d-flex align-items-center justify-content-center">
-    <div class="carVIEW card card-1 card-outline container bg-white ">
+    <div class="cardVIEW card card-1 card-outline container bg-white ">
 
-      <div class="carhVIEW card-header d-sm-flex">
+      <div class="cardheaderVIEW card-header d-sm-flex">
         <h2 class="card-title"><?= h($lancamento->id_lancamento) ?></h2>
       </div>
       <div class="card-body table-responsive p-0">
@@ -77,8 +77,8 @@
           </tr>
         </table>
       </div>
-      <div class="carfVIEW card-footer bg-white">
-        <div class="carfVIEW2 d-flex bd-highlight mb-3">
+      <div class="cardfooterVIEW card-footer bg-white">
+        <div class="cardfooterVIEW2 d-flex bd-highlight mb-3">
           <?= $this->Form->postLink(
             __('Deletar'),
             ['action' => 'delete',  $lancamento->id_lancamento],
@@ -95,9 +95,9 @@
     <div class="row card-2  card-outline container">
       <div class="col-12">
         <!-- Custom Tabs -->
-        <div class="carVIEW2 card" >
+        <div class="cardVIEW2 card" >
           <div class="card-header d-flex p-0">
-            <h3 class="carttVIEW card-title p-3" >Histórico do lançamento</h3>
+            <h3 class="cardtitleVIEW card-title p-3" >Histórico do lançamento</h3>
             <ul class="nav nav-pills ml-auto p-2" id="tab_header">
               <li class="nav-item"><a class="btn vis btn-sm active" href="#inicio" data-toggle="tab">Começo</a></li>
               <?php foreach ($lancamento->lancamentos as $l) : ?>
@@ -107,7 +107,7 @@
           </div><!-- /.card-header -->
           <div class="card-body">
             <div class="tab-content">
-              <div class="tab-pane text-info active" id="inicio">
+              <div class="tab-pane cardtitleVIEW active" id="inicio">
                 Clique nos numerais acima para ver os lançamentos anteriores a esse
               </div>
               <?php foreach ($lancamento->lancamentos as $l) : ?>
@@ -125,10 +125,10 @@
 
   <div class="container-fluid d-flex align-items-center justify-content-center views">
 
-    <div  class="relVIEW related card-3 related-caixaregistros view card container bg-white">
+    <div  class="relacionadosVIEW related card-3 related-caixaregistros view card container bg-white">
 
-      <div class="relhVIEW card-header d-sm-flex">
-        <h3 class="carttVIEW card-title"><?= __('Relacionados') ?></h3>
+      <div class="relacionadosheaderVIEW card-header d-sm-flex">
+        <h3 class="cardtitleVIEW card-title"><?= __('Relacionados') ?></h3>
       </div>
       <div class="card-body table-responsive p-0">
         <table class="theINDEX tboINDEX table table-hover text-nowrap">
@@ -167,10 +167,10 @@
 
   <div class="container-fluid d-flex align-items-center justify-content-center views">
 
-    <div class="relVIEW related card-4 related-caixaregistros view card container bg-white">
+    <div class="relacionadosVIEW related card-4 related-caixaregistros view card container bg-white">
 
-      <div class="relhVIEW card-header d-sm-flex">
-        <h3 class="carttVIEW card-title"><?= __('Relacionados') ?></h3>
+      <div class="relacionadosheaderVIEW card-header d-sm-flex">
+        <h3 class="cardtitleVIEW card-title"><?= __('Relacionados') ?></h3>
       </div>
       <div class="card-body table-responsive p-0">
         <table class="table theINDEX tboINDEX table-hover text-nowrap">

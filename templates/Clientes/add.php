@@ -10,8 +10,8 @@
 
 <div class="container d-flex justify-content-center">
 
-  <div class="carADD card card-danger m-5">
-    <div class="carbADD card-body bg-info">
+  <div class="cardADD card card-danger m-5">
+    <div class="cardbodyADD card-body">
       <?= $this->Form->create($cliente) ?>
 
       <?= $this->Form->control('nome', ['label' => 'Nome'], ['class' => 'form-control']); ?>
@@ -23,7 +23,7 @@
 
     </div>
 
-    <div class="carfADD card-footer bg-white d-flex">
+    <div class="cardfooterADD card-footer d-flex">
       <div class="mr-auto p-2">
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btnADD btn btn-default']) ?>
       </div>

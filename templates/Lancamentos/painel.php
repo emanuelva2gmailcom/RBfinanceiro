@@ -6,7 +6,7 @@
 
 <body>
     <div class="container-fluid d-flex align-items-center justify-content-center p-5">
-        <div class="carPAI card container bg-info">
+        <div class="cardPAINEL card container ">
             <div class="card-body">
                 <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
                 <div class="col-md-6">
@@ -15,7 +15,7 @@
                     <!-- /.form-group -->
                 </div>
                 <div class="col-md-4">
-                    <div class="fgPAI form-group">
+                    <div class="formgroupPAINEL form-group">
                         <label>Tipo</label>
                         <?= $this->Form->select('tipo', ['REALIZADO' => 'Realizado', 'PREVISTO' => 'Previsto'], ['class' => 'form-control tipo mb-3', 'id' => 'card']); ?>
                     </div>
@@ -23,7 +23,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-md-2">
-                    <div class="fgPAI form-group">
+                    <div class="formgroupPAINEL form-group">
                         <label>Enviar</label>
                         <?= $this->Form->button(__('Calcular'), ['class' => 'btnADD form-control']) ?>
                     </div>
@@ -104,7 +104,7 @@
             ],
             datasets: [{
                 data: [],
-                backgroundColor: ['#00a65a', '#DC4731', '#79A9F5']
+                backgroundColor: ['#047076', '#10564F', '#DBEBED']
 
             }]
         }

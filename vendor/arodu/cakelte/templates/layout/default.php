@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <aside class="main-sidebar sidebar-secondary elevation-4">
       <!-- Brand Logo -->
       <a href="<?= $this->Url->build('/') ?>" class="brand-link bg-white">
-        <?= $this->Html->image('logo2.png', ['class' => 'imgSidebar']) ?>
+        <?= $this->Html->image('sclogo2.png', ['class' => 'imgSidebar']) ?>
       </a>
 
       <!-- Sidebar -->

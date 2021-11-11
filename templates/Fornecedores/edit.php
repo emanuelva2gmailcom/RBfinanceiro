@@ -10,8 +10,8 @@
 
 <div class="container d-flex justify-content-center">
 
-<div class="carADD card card-danger m-5" style="border-radius: 20px; width: 80%">
-    <div class="carbADD card-body bg-info" style="border-radius: 20px 20px 0px 0px ;">
+<div class="cardADD card card-danger m-5">
+    <div class="cardbodyADD card-body">
   <?= $this->Form->create($fornecedore) ?>
 
   <?= $this->Form->control('nome', ['label' => 'Nome'], ['class' => 'form-control']); ?>
@@ -24,7 +24,7 @@
 
   </div>
 
-  <div class="carfADD card-footer bg-white d-flex" style="border-radius: 0px 0px 20px 20px;">
+  <div class="cardfooterADD card-footer bg-white d-flex">
       <div class="mr-auto p-2">
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btnADD btn-default']) ?>
       </div>

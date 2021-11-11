@@ -4,7 +4,7 @@
 
             .asideMain a{
                 margin-left: 2%;
-                color: #F7E7CE;
+                color: #DBEBED;
             }
 
             .asideMain li{
@@ -13,7 +13,7 @@
             }
 
             .asideMain i{
-                color:#F7E7CE;
+                color:#DBEBED;
             }
 
          /* 2. Content */
@@ -28,15 +28,15 @@
       /* 3. Footer */
 
             .footerMain a{
-                color: #CF6856;
+                color: #047076;
             }
 
             footer {
                 height: auto;
                 text-align: center;
                 padding: 30px;
-                background-color: #f7e7ce;
-                color: #7a3e26;
+                background-color: #DBEBED;
+                color: #10564F;
                 justify-content: center;
             }
 
@@ -67,11 +67,11 @@
             }
 
             .info a{
-                color: #F7E7CE;
+                color: #DBEBED;
               }
 
             .info a:hover{
-                color: #CF6856;
+                color: #047076;
               }
 
             .user-panel{
@@ -89,6 +89,7 @@
 
             .imgSidebar {
                 max-width: 100%;
+
             }
 
      /* 6. Layout 2 */
@@ -119,56 +120,61 @@
 
         1. ADDs & Edits:*/
 
-            .carADD{
-                border-radius: 20px; width: 80%
+            .cardADD{
+                border-radius: 20px;
+                width: 80%;
+
             }
 
-            .carbADD{
+            .cardbodyADD{
                 border-radius: 20px 20px 0px 0px ;
+                background-color: #10564F;
+                color: #DBEBED;
             }
 
-            .carfADD{
+            .cardfooterADD{
                 border-radius: 0px 0px 20px 20px;
+                background-color: #DBEBED;
             }
 
             .btnADD {
-                background-color: green;
+                background-color: #047076;
                 color: white;
-                border: 1px solid green;
+                border: 1px solid #047076;
             }
 
             .btnADD:hover {
                 background-color: white;
-                color: green;
-                border: 1px solid green;
+                color: #047076;
+                border: 1px solid #047076;
             }
 
             .btnADD:focus {
-                background-color: green;
+                background-color: #047076;
                 color: white;
-                border: 1px solid green;
+                border: 1px solid #047076;
             }
 
-            .carfADD .btn-secondary{
-                background-color: green;
+            .cardfooterADD .btn-secondary{
+                background-color: #047076;
                 color: white;
-                border: 1px solid green;
+                border: 1px solid #047076;
             }
 
-            .carfADD .btn-secondary:hover {
+            .cardfooterADD .btn-secondary:hover {
                 background-color: white;
-                color: green;
-                border: 1px solid green;
+                color: #047076;
+                border: 1px solid #047076;
             }
 
-            .carfADD .btn-secondary:focus {
-                background-color: green;
+            .cardfooterADD .btn-secondary:focus {
+                background-color: #047076;
                 color: white;
-                border: 1px solid green;
+                border: 1px solid #047076;
             }
 
             @media (max-width: 620px) {
-                .carADD {
+                .cardADD {
                 position: absolute;
                 margin-left: -77px;
                 min-width: 90%;
@@ -179,7 +185,7 @@
      /* 1.1 ADD de Lançamentos:*/
 
             @media (max-width: 620px) {
-                .carlADD {
+                .cardlancADD {
                     position: absolute;
                     margin-left: -77px;
                     min-width: 90%;
@@ -190,7 +196,7 @@
                     min-width: 275px;
                 }
 
-                .linADD {
+                .lineADD {
                     min-width: 2px;
                     min-height: 2px;
                     margin: 0px;
@@ -199,12 +205,12 @@
 
             @media (max-width: 370px) {
 
-                .linADD {
+                .lineADD {
                     display: none;
 
                 }
 
-                .bshADD {
+                .bsstepperheaderADD {
                     display: flex;
                     justify-content: space-between;
                 }
@@ -220,57 +226,57 @@
             }
 
             .s-grupo{
-                color: #CF6856
+                color: #DBEBED
             }
 
             .entradas,.saidas{
                 text-transform: capitalize;
             }
 
-            .contADD{
+            .containerADD{
                 width: 60%;
                 min-width:80%;
             }
 
-            .bshADD{
-                margin: 0px; background-color: #F7E7CE;
+            .bsstepperheaderADD{
+                margin: 0px; background-color: #DBEBED;
             }
 
-            .bscADD{
+            .bssteppercontentADD{
             padding: 20px;
-            background-color: #7A3E26;
+            background-color: #10564F;
             }
 
-            .bscC{
-                background-color: #7A3E26;
-                color: #F7E7CE
+            .bssteppercontentContent{
+                background-color: #10564F;
+                color: #DBEBED
             }
 
-            .nextADD{
-                background-color: #CF6856;
-                color: white;
+            .prox-antADD{
+                background-color: #047076;
+                color: #DBEBED;
             }
 
-            .canADD{
-                background-color: white;
-                color: #CF6856;
+            .cancelarADD{
+                background-color: #DBEBED;
+                color: #047076;
             }
 
-            .canADD:hover{
-                background-color: white;
-                color: #CF6856;
+            .cancelarADD:hover{
+                background-color: #DBEBED;
+                color: #047076;
             }
 
-            .fooADD .btn-secondary{
-                background-color: #F7E7CE;
-                color: #7A3E26;
-                border: #F7E7CE 1px solid;
+            .footerADD .btn-secondary{
+                background-color: #DBEBED;
+                color: #10564F;
+                border: #DBEBED 1px solid;
             }
 
-            .fooADD .btn-secondary:hover{
-                background-color: #F7E7CE;
-                color: #7A3E26;
-                border: #F7E7CE 1px solid;
+            .footerADD .btn-secondary:hover{
+                background-color: #DBEBED;
+                color: #10564F;
+                border: #DBEBED 1px solid;
             }
 
      /* 2. Indexes: */
@@ -449,11 +455,11 @@
             }
 
             .child li{
-                color: #7A3E26;
+                color: #10564F;
             }
 
             .child li a{
-                color: #7A3E26;
+                color: #10564F;
             }
 
 
@@ -498,11 +504,11 @@
             .carttH{
                 width: 50%;
                 margin-left: 25%;
-                color: #FFFFFF;
+                color: #DBEBED;
             }
 
             .cartH{
-                color: #FFFFFF;font-size: 14px;
+                color: #DBEBED;font-size: 14px;
             }
 
             .carfH{
@@ -512,25 +518,25 @@
 ;
             }
             .carfH p,i{
-                color: #FFFFFF;
+                color: #DBEBED;
             }
 
      /* 2.2 Relatorios: */
 
      /* 2.2.1 Caixa Diário: */
 
-            .carCD{
-                border: green solid 2px;
+            .cardCaixaDiario{
+                border: #047076 solid 2px;
                 border-radius: 20px;
             }
 
-            .carhCD a{
-                font-size: 30px;
-                color:green;
+            .cardheaderCaixaDiario i{
+                font-size: 25px;
+                color:#10564F;
             }
 
             @media (max-width: 620px) {
-                .carCD {
+                .cardCaixaDiario {
                    position: absolute;
                    margin-top: 80%;
                    min-width: 90%;
@@ -540,44 +546,44 @@
      /* 2.2.2 Fluxo de Caixa & Caixa Gerencial: */
 
             .sorting_disabled {
-               color: green;
+               color: #047076;
             }
 
      /* 3. Views: */
 
-            .carVIEW{
-                border: green solid 2px;
+            .cardVIEW{
+                border: #047076 solid 2px;
                 border-radius: 20px;
             }
 
-            .carVIEW2{
-                border: green solid 2px;
+            .cardVIEW2{
+                border: #047076 solid 2px;
                 border-radius: 20px;
             }
 
-            .carhVIEW{
+            .cardheaderVIEW{
                 padding-top: 50px;
-                color: green;
+                color: #10564F;
             }
 
-            .carfVIEW{
+            .cardfooterVIEW{
                 border-radius: 20px;
             }
 
-            .carfVIEW2{
+            .cardfooterVIEW2{
                 padding-top: 20px;
             }
 
-            .carttVIEW{
-                color: green;
+            .cardtitleVIEW{
+                color: #10564F;
             }
 
-            .relVIEW{
-                border: green solid 2px;
+            .relacionadosVIEW{
+                border: #047076 solid 2px;
                 border-radius: 20px;
             }
 
-            .relhVIEW{
+            .relacionadosheaderVIEW{
                 padding-top: 50px;
             }
 
@@ -594,12 +600,21 @@
 
      /* 4. Painel */
 
-            .fgPAI{
-                color: white;
+            .formgroupPAINEL{
+                color: #DBEBED;
             }
 
-            .carPAI{
+            .cardPAINEL{
                 border-radius: 20px;
+                background-color: #DBEBED;
+            }
+
+            .sorting, .sorting_asc{
+                color: #047076;
+            }
+
+            .odd, .even{
+                color: #10564F;
             }
 
             #donutChart{
@@ -611,11 +626,11 @@
             }
 
             .month label {
-                color: white;
+                color: #DBEBED;
             }
 
             @media (max-width: 620px) {
-                .carPAI {
+                .cardPAINEL {
                     position: absolute;
                     margin-top: 970px;
                     min-width: 90%;

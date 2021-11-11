@@ -12,9 +12,9 @@ $this->assign('title', __('Fluxoconta'));
 
 <div class="container-fluid d-flex align-items-center justify-content-center views">
 
-  <div class="carVIEW card card-outline container bg-white ">
+  <div class="cardVIEW card card-outline container bg-white ">
 
-    <div class="carhVIEW card-header d-sm-flex">
+    <div class="cardheaderVIEW card-header d-sm-flex">
       <h2 class="card-title"><?= h($fluxoconta->conta) ?></h2>
     </div>
     <div class="card-body table-responsive p-0">
@@ -47,8 +47,8 @@ $this->assign('title', __('Fluxoconta'));
 
       </table>
     </div>
-    <div class="carfVIEW card-footer bg-white">
-      <div class="carfVIEW2 d-flex mr-auto justify-content-around">
+    <div class="cardfooterVIEW card-footer bg-white">
+      <div class="cardfooterVIEW2 d-flex mr-auto justify-content-around">
         <?= $this->Form->postLink(
 
           __('Deletar'),
@@ -66,10 +66,10 @@ $this->assign('title', __('Fluxoconta'));
 
 <div class="container-fluid d-flex align-items-center justify-content-center views">
 
-  <div class="relVIEW related related-caixaregistros view card container bg-white">
+  <div class="relacionadosVIEW related related-caixaregistros view card container bg-white">
 
-    <div class="relhVIEW card-header d-sm-flex">
-      <h3 class="carttVIEW card-title"><?= __('Relacionados') ?></h3>
+    <div class="relacionadosheaderVIEW card-header d-sm-flex">
+      <h3 class="cardtitleVIEW card-title"><?= __('Relacionados') ?></h3>
     </div>
     <div class="card-body table-responsive p-0">
       <table class="table theINDEX tboINDEX table-hover text-nowrap">

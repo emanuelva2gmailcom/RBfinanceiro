@@ -1,15 +1,15 @@
 
 
 <div  class="container-fluid d-flex align-items-center justify-content-center p-5">
-<div class="carCD card card-outline container  p-5 "  >
+<div class="cardCaixaDiario card card-outline container  p-5 "  >
 
-    <div class="carhCD card-header" >
+    <div class="cardheaderCaixaDiario card-header" >
     <a href="/relatorios/exportCaixaDiario"><i class="fas fa-file-excel"></i></a>
     <div class="card-tools">
         <div class="input-group input-group-sm">
-        <input type="text" name="table_search" class="border border-info form-control float-right" placeholder="Pesquisar">
+        <input type="text" name="table_search" class="border form-control float-right" placeholder="Pesquisar">
         <div class="input-group-append">
-            <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
+            <button type="submit" class="btn"><i class="fas fa-search"></i></button>
         </div>
         </div>
     </div>
