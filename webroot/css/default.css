@@ -479,51 +479,82 @@
                 }
             } */
 
-            .indH{
+            .indexHOME{
                 border-radius: 70px;
                 max-width: 100%;
             }
 
-            .carH{
+            .cardHOME{
                 border-radius: 20px;
                 border: solid 2px #047076
 
 ;
             }
 
-            .carhH{
+            .cardheaderHOME{
                 border-radius: 20px 20px 0px 0px ;
             }
 
-            .carbH{
+            .cardbodyHOME{
                 background-color: #047076
 
 ;
             }
 
-            .carttH{
+            .cardtitleHOME{
                 width: 50%;
                 margin-left: 25%;
                 color: #DBEBED;
             }
 
-            .cartH{
-                color: #DBEBED;font-size: 14px;
+            .cardtextHOME{
+                color: #DBEBED;
+                font-size: 14px;
             }
 
-            .carfH{
+            .cardfooterHOME{
                 border-radius: 0px 0px 14px 14px;
                 background-color: #047076
 
 ;
             }
-            .carfH p,i{
+            .cardfooterHOME p,i{
                 color: #DBEBED;
             }
 
-     /* 2.2 Relatorios: */
+     /* 2.2 Login & Registro: */
 
-     /* 2.2.1 Caixa Diário: */
+            .cardLOGIN{
+                margin-top: 0%;
+                border-radius: 20px;
+            }
+
+            .cardbodyLOGIN{
+                border-radius: 20px;
+                background-color: #DBEBED;
+                color: #10564F;
+            }
+
+            .cardbodyLOGIN i{
+               color: #047076;
+            }
+
+            .cardbodyLOGIN a{
+                color: #10564F;
+            }
+
+            .cardbodyLOGIN a:hover{
+                color: #047076;
+            }
+
+            .voltarREGISTRO a{
+               color: white;
+            }
+
+
+     /* 2.3 Relatorios: */
+
+     /* 2.3.1 Caixa Diário: */
 
             .cardCaixaDiario{
                 border: #047076 solid 2px;
@@ -543,7 +574,7 @@
                 }
             }
 
-     /* 2.2.2 Fluxo de Caixa & Caixa Gerencial: */
+     /* 2.3.2 Fluxo de Caixa & Caixa Gerencial: */
 
             .sorting_disabled {
                color: #047076;
