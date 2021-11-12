@@ -71,7 +71,7 @@
           </tr>
           <tr>
             <th style="color: green;"><?= __('Dreconta') ?></th>
-            <td class="tr1"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->dreconta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
+            <td class="tr1"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
           </tr>
           <tr>
             <th style="color: green;"><?= __('Id Lancamento') ?></th>
