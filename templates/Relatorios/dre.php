@@ -135,7 +135,13 @@
         <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
         <div class="col-md-3">
             <label>Período</label>
-            <?= $this->Form->select(2, [ 'mes' => 'MÊS','trimestre' => 'TRIMESTRE','ano' => 'ANO'], ['class' => 'periodo form-control select2bs4']); ?>
+            <?= $this->Form->select(2, [ 'mes' => 'MÊS','ano' => 'ANO'], ['class' => 'periodo form-control select2bs4']); ?>
+        </div>
+        <div class="col-md-3">
+            <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'month'], ['class' => 'form-control text-white']); ?>
+        </div>
+        <div class="col-md-3">
+            <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'month'], ['class' => 'la form-control']); ?>
         </div>
 
         <div class="col-md-3">
@@ -154,7 +160,7 @@
             </tbody>
         </table>
     </div>
-    <div class="card" id="kk">
+    <div class="card" id="teste">
 
     </div>
 
@@ -170,56 +176,94 @@
 
     function datase(data) {
         console.log(data)
-        response = []
-        data.total.receitas.push(data.total.receitas[0])
-        data.total.receitas[0] = '1 - Faturamento'
-        $($('#example').DataTable().row.add(data.total.receitas).draw()
-            .node()).addClass('bg-info');
-        // response.push(data.total.entradas)
-        data.rows.td.map(function(d) {
-            if (data.rows.th['receita'].includes(d[0])) {
-                // response.push(d)
-                $($('#example').DataTable().row.add(d).draw()
-                    .node()).addClass('text-success');
+        // response = []
+        // data.total.receitas.push(data.total.receitas[0])
+        // data.total.receitas[0] = '1 - Faturamento'
+        // $($('#example').DataTable().row.add(data.total.receitas).draw()
+        //     .node()).addClass('bg-info');
+        data.total.receitas.map((row, index) => {
+            if(index == 0){
+                $($('#example').DataTable().row.add(row).draw()
+                    .node()).addClass('bg-info');
+            } else {
+                $($('#example').DataTable().row.add(row).draw()
+                .node()).addClass('text-success');
             }
         })
-        data.total.variaveis.push(data.total.variaveis[0])
-        data.total.variaveis[0] = '2 - Custos Variáveis'
-        $($('#example').DataTable().row.add(data.total.variaveis).draw()
-            .node()).addClass('bg-info');
-        data.rows.td.map(function(d) {
-            if (data.rows.th['variaveis'].includes(d[0])) {
-                $($('#example').DataTable().row.add(d).draw()
+        data.total.variaveis.map((row, index) => {
+            if(index == 0){
+                $($('#example').DataTable().row.add(row).draw()
+                    .node()).addClass('bg-info');
+            } else {
+                $($('#example').DataTable().row.add(row).draw()
                     .node()).addClass('text-danger');
             }
         })
-        data.total.contribuicao.push(data.total.contribuicao[0])
-        data.total.contribuicao[0] = '3 - (=) Margem de Contribuição (1 - 2)'
-        $($('#example').DataTable().row.add(data.total.contribuicao).draw()
-            .node()).addClass('bg-info');
-
-        data.total.fixos.push(data.total.fixos[0])
-        data.total.fixos[0] = '4 - Custos Fixos'
-        $($('#example').DataTable().row.add(data.total.fixos).draw()
-            .node()).addClass('bg-info');
-        data.rows.td.map(function(d) {
-            if (data.rows.th['fixo'].includes(d[0])) {
-                $($('#example').DataTable().row.add(d).draw()
+        data.total.contribuicao.map((row, index) => {
+            if(index == 0){
+                $($('#example').DataTable().row.add(row).draw()
+                    .node()).addClass('bg-info');
+            }
+        })
+        data.total.fixos.map((row, index) => {
+            if(index == 0){
+                $($('#example').DataTable().row.add(row).draw()
+                    .node()).addClass('bg-info');
+            } else {
+                $($('#example').DataTable().row.add(row).draw()
                     .node()).addClass('text-danger');
             }
         })
-        data.total.liquido.push(data.total.liquido[0])
+        data.total.liquido.map((row, index) => {
+            if(index == 0){
+                $($('#example').DataTable().row.add(row).draw()
+                    .node()).addClass('bg-info');
+            }
+        })
+        // data.rows.td.map(function(d) {
+        //     if (data.rows.th['receita'].includes(d[0])) {
+        //         // response.push(d)
+        //         $($('#example').DataTable().row.add(d).draw()
+        //             .node()).addClass('text-success');
+        //     }
+        // })
+        // data.total.variaveis.push(data.total.variaveis[0])
+        // data.total.variaveis[0] = '2 - Custos Variáveis'
+        // $($('#example').DataTable().row.add(data.total.variaveis).draw()
+        //     .node()).addClass('bg-info');
+        // data.rows.td.map(function(d) {
+        //     if (data.rows.th['variaveis'].includes(d[0])) {
+        //         $($('#example').DataTable().row.add(d).draw()
+        //             .node()).addClass('text-danger');
+        //     }
+        // })
+        // data.total.contribuicao.push(data.total.contribuicao[0])
+        // data.total.contribuicao[0] = '3 - (=) Margem de Contribuição (1 - 2)'
+        // $($('#example').DataTable().row.add(data.total.contribuicao).draw()
+        //     .node()).addClass('bg-info');
 
-        data.total.liquido[0] = '5 - Resultado Liquido (3 - 4)'
-        $($('#example').DataTable().row.add(data.total.liquido).draw()
-            .node()).addClass('bg-info');
+        // data.total.fixos.push(data.total.fixos[0])
+        // data.total.fixos[0] = '4 - Custos Fixos'
+        // $($('#example').DataTable().row.add(data.total.fixos).draw()
+        //     .node()).addClass('bg-info');
+        // data.rows.td.map(function(d) {
+        //     if (data.rows.th['fixo'].includes(d[0])) {
+        //         $($('#example').DataTable().row.add(d).draw()
+        //             .node()).addClass('text-danger');
+        //     }
+        // })
+        // data.total.liquido.push(data.total.liquido[0])
+
+        // data.total.liquido[0] = '5 - Resultado Liquido (3 - 4)'
+        // $($('#example').DataTable().row.add(data.total.liquido).draw()
+        //     .node()).addClass('bg-info');
 
     }
 
 
     function formatador(data) {
-        data['header'].unshift('DRE')
-        data['header'].push('%')
+        // data['header'].unshift('DRE')
+        // data['header'].push('%')
         columns = []
         //    inner = ''
         data['header'].map(function(dat, key) {
@@ -227,13 +271,11 @@
                 columns.push({
                     title: dat,
                     data: key,
-                    width: "150px"
                 })
             } else {
                 columns.push({
                     title: dat,
                     data: key,
-                    width: "100px"
                 })
             }
         })
@@ -244,7 +286,6 @@
             "columnDefs": [{
                 "defaultContent": "-",
                 "targets": "_all",
-
             }],
             "paging": true,
             "lengthChange": false,
@@ -299,11 +340,13 @@
             $periodo = $(".periodo").val()
             // console.log([$comeco, $final, $periodo])
             try {
-                const response = axios.post('/relatorios/getGerencial/', [$comeco, $final, $periodo], {
+                const response = axios.post('/relatorios/dreAPI/', [$comeco, $final, $periodo], {
                     headers: {
                         "X-CSRF-Token": csrf
                     }
                 }).then(function(response) { // handle success
+                    console.log(response.data)
+                    // document.getElementById('teste').innerHTML = response.data
                     $("#example").DataTable().destroy();
                     $("#example").empty()
                     formatador(response.data[1])
