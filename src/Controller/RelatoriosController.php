@@ -193,7 +193,7 @@ class RelatoriosController extends AppController
                         $valor += intval($lancamento->valor);
                     } else if (($lancamento->dreconta->dregrupo->grupo == 'fixo') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
-                    } else if (($lancamento->dreconta->dregrupo->grupo == 'variaveis') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    } else if (($lancamento->dreconta->dregrupo->grupo == 'variavel') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
                     }
                 endforeach;
@@ -214,7 +214,7 @@ class RelatoriosController extends AppController
             
             array_push($obj['rows']['td'], [$conta, $result]);
         endforeach;
-        $response['header'] = ['DRE' ,$request[0]->i18nFormat('MM/yyyy').' - '.$request[1]->i18nFormat('MM/yyyy')];
+        $response['header'] = ['DRE' ,$request[0]->i18nFormat('MM/yyyy').' - '.$request[1]->i18nFormat('MM/yyyy'),'%'];
         array_unshift($obj['total']['receitas'], '1 - Faturamento');
         array_push($response['total']['receitas'], $obj['total']['receitas']);
         array_unshift($obj['total']['variaveis'], '2 - Custos Variáveis');
@@ -234,6 +234,29 @@ class RelatoriosController extends AppController
                 array_push($response['total']['fixos'], $row);
             }
         }
+
+        $receitasTotal = $response['total']['receitas'][0][1];
+        foreach ($response['total']['receitas'] as $key => $receita) {
+            array_push($response['total']['receitas'][$key], (number_format(($receita[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        }
+
+        foreach ($response['total']['variaveis'] as $key => $variavel) {
+            array_push($response['total']['variaveis'][$key], (number_format(($variavel[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        }
+
+
+        foreach ($response['total']['fixos'] as $key => $fixo) {
+            array_push($response['total']['fixos'][$key], (number_format(($fixo[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        }
+
+        foreach ($response['total']['contribuicao'] as $key => $contribuicao) {
+            array_push($response['total']['contribuicao'][$key], (number_format(($contribuicao[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        }
+
+        foreach ($response['total']['liquido'] as $key => $liquido) {
+            array_push($response['total']['liquido'][$key], (number_format(($liquido[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        }
+
         $response['body'] = array_merge($response['total']['receitas'], $response['total']['variaveis'], $response['total']['fixos']);
 
         // debug($response);
@@ -314,7 +337,7 @@ class RelatoriosController extends AppController
                         $valor += intval($lancamento->valor);
                     } else if (($lancamento->dreconta->dregrupo->grupo == 'fixo') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
-                    } else if (($lancamento->dreconta->dregrupo->grupo == 'variaveis') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    } else if (($lancamento->dreconta->dregrupo->grupo == 'variavel') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
                     }
                 endforeach;
@@ -335,7 +358,7 @@ class RelatoriosController extends AppController
             
             array_push($obj['rows']['td'], [$conta, $result]);
         endforeach;
-        $response['header'] = ['DRE' ,$comeco->i18nFormat('MM/yyyy')];
+        $response['header'] = ['DRE', $comeco->i18nFormat('MM/yyyy'), '%'];
         array_unshift($obj['total']['receitas'], '1 - Faturamento');
         array_push($response['total']['receitas'], $obj['total']['receitas']);
         array_unshift($obj['total']['variaveis'], '2 - Custos Variáveis');
@@ -355,10 +378,31 @@ class RelatoriosController extends AppController
                 array_push($response['total']['fixos'], $row);
             }
         }
+        $receitasTotal = $response['total']['receitas'][0][1];
+        foreach ($response['total']['receitas'] as $key => $receita) {
+            array_push($response['total']['receitas'][$key], (number_format(($receita[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        }
+
+        foreach ($response['total']['variaveis'] as $key => $variavel) {
+            array_push($response['total']['variaveis'][$key], (number_format(($variavel[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        }
+
+
+        foreach ($response['total']['fixos'] as $key => $fixo) {
+            array_push($response['total']['fixos'][$key], (number_format(($fixo[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        }
+
+        foreach ($response['total']['contribuicao'] as $key => $contribuicao) {
+            array_push($response['total']['contribuicao'][$key], (number_format(($contribuicao[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        }
+
+        foreach ($response['total']['liquido'] as $key => $liquido) {
+            array_push($response['total']['liquido'][$key], (number_format(($liquido[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        }
+
         $response['body'] = array_merge($response['total']['receitas'], $response['total']['variaveis'], $response['total']['fixos']);
 
-        // debug($response);
-        // exit;
+      
 
         
         return $response;
