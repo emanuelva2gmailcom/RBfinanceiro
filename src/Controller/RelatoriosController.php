@@ -92,7 +92,7 @@ class RelatoriosController extends AppController
         while ($ini <= $fim) {
             array_push($resposta, $ini->i18nFormat($periodo[0]));
             $ini->modify($periodo[1]);
-            $ini->i18nFormat($periodo[0]) == $fim->i18nFormat($periodo[0]) ? array_push($resposta, $ini->i18nFormat($periodo[0])) : '';
+            // $ini->i18nFormat($periodo[0]) == $fim->i18nFormat($periodo[0]) ? array_push($resposta, $ini->i18nFormat($periodo[0])) : '';
         }
         return $resposta;
     }
@@ -108,7 +108,7 @@ class RelatoriosController extends AppController
 
     public function postDre($request = null, $date = 'data_vencimento')
     {
-        // $request = ['2021-9', '2021-11', 'mes'];
+        $request = ['2021-9', '2021-11', 'mes'];
         $request[0] = new Time($request[0], 'UTC');
         $request[1] = new Time($request[1], 'UTC');
         $mes = ['yyyy-MM', '+1 months'];
@@ -219,10 +219,22 @@ class RelatoriosController extends AppController
                 array_push($result, $valor);
                 // $result += $valor;
             endforeach;
-            
+            array_push($result ,array_sum($result));
             array_push($obj['rows']['td'], array_merge([$conta], $result));
         endforeach;
-        $response['header'] = array_merge(['DRE'] ,$obj['header']);
+        
+        $obj['total']['receitas'] = array_values($obj['total']['receitas']);
+        $obj['total']['variaveis'] = array_values($obj['total']['variaveis']);
+        $obj['total']['contribuicao'] = array_values($obj['total']['contribuicao']);
+        $obj['total']['fixos'] = array_values($obj['total']['fixos']);
+        $obj['total']['liquido'] = array_values($obj['total']['liquido']);
+        
+        array_push($obj['total']['receitas'], array_sum($obj['total']['receitas']));
+        array_push($obj['total']['variaveis'], array_sum($obj['total']['variaveis']));
+        array_push($obj['total']['contribuicao'], array_sum($obj['total']['contribuicao']));
+        array_push($obj['total']['fixos'], array_sum($obj['total']['fixos']));
+        array_push($obj['total']['liquido'], array_sum($obj['total']['liquido']));
+
         array_unshift($obj['total']['receitas'], '1 - Faturamento');
         array_push($response['total']['receitas'], $obj['total']['receitas']);
         array_unshift($obj['total']['variaveis'], '2 - Custos Variáveis');
@@ -233,6 +245,7 @@ class RelatoriosController extends AppController
         array_push($response['total']['fixos'], $obj['total']['fixos']);
         array_unshift($obj['total']['liquido'], '5 - Resultado Liquido (3 - 4)');
         array_push($response['total']['liquido'], $obj['total']['liquido']);
+
         foreach($obj['rows']['td'] as $row){
             if(in_array($row[0], $obj['rows']['th']['receita'])){
                 array_push($response['total']['receitas'], $row);
@@ -243,7 +256,25 @@ class RelatoriosController extends AppController
             }
         }
 
-        // $receitasTotal = $response['total']['receitas'][0][1];
+        $receitasTotal = $response['total']['receitas'][0][array_key_last($response['total']['receitas'][0])];
+        foreach($response['total'] as $index => $array){
+            foreach ($response['total'][$index] as $key => $value) {
+                // debug($value);exit;
+                $indexTotal = $response['total'][$index][0][array_key_last($response['total'][$index][0]) - 1];
+                if($key == 0){
+                    array_push($response['total'][$index][$key], (number_format(($value[array_key_last($value)] / $receitasTotal) * 100, 2, '.', ' ') . ' %'));
+                } else {
+                    array_push($response['total'][$index][$key], (number_format(($value[array_key_last($value)] / $indexTotal) * 100, 2, '.', ' ') . ' %'));
+                }
+            }
+        }
+
+        
+        $response['header'] = array_merge(['DRE'] ,$obj['header'], ['TOTAL'], ['%']);
+        
+        // debug($response);
+        // exit;
+        // $receitasTotal = $response['total']['receitas'][0];
         // foreach ($response['total']['receitas'] as $key => $receita) {
         //     array_push($response['total']['receitas'][$key], (number_format(($receita[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
         // }
@@ -265,14 +296,16 @@ class RelatoriosController extends AppController
         //     array_push($response['total']['liquido'][$key], (number_format(($liquido[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
         // }
 
-        $response['total']['receitas'][0] = array_values($response['total']['receitas'][0]);
-        $response['total']['variaveis'][0] = array_values($response['total']['variaveis'][0]);
-        $response['total']['contribuicao'][0] = array_values($response['total']['contribuicao'][0]);
-        $response['total']['fixos'][0] = array_values($response['total']['fixos'][0]);
-        $response['total']['liquido'][0] = array_values($response['total']['liquido'][0]);
+        
+        
 
-        // debug($response);
-        // exit;
+        
+
+        
+
+        
+
+        
         return $response;
     }
 
@@ -393,27 +426,27 @@ class RelatoriosController extends AppController
                 array_push($response['total']['fixos'], $row);
             }
         }
-        $receitasTotal = $response['total']['receitas'][0][1];
-        foreach ($response['total']['receitas'] as $key => $receita) {
-            array_push($response['total']['receitas'][$key], (number_format(($receita[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
-        }
+        // $receitasTotal = $response['total']['receitas'][0][1];
+        // foreach ($response['total']['receitas'] as $key => $receita) {
+        //     array_push($response['total']['receitas'][$key], (number_format(($receita[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        // }
 
-        foreach ($response['total']['variaveis'] as $key => $variavel) {
-            array_push($response['total']['variaveis'][$key], (number_format(($variavel[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
-        }
+        // foreach ($response['total']['variaveis'] as $key => $variavel) {
+        //     array_push($response['total']['variaveis'][$key], (number_format(($variavel[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        // }
 
 
-        foreach ($response['total']['fixos'] as $key => $fixo) {
-            array_push($response['total']['fixos'][$key], (number_format(($fixo[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
-        }
+        // foreach ($response['total']['fixos'] as $key => $fixo) {
+        //     array_push($response['total']['fixos'][$key], (number_format(($fixo[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        // }
 
-        foreach ($response['total']['contribuicao'] as $key => $contribuicao) {
-            array_push($response['total']['contribuicao'][$key], (number_format(($contribuicao[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
-        }
+        // foreach ($response['total']['contribuicao'] as $key => $contribuicao) {
+        //     array_push($response['total']['contribuicao'][$key], (number_format(($contribuicao[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        // }
 
-        foreach ($response['total']['liquido'] as $key => $liquido) {
-            array_push($response['total']['liquido'][$key], (number_format(($liquido[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
-        }
+        // foreach ($response['total']['liquido'] as $key => $liquido) {
+        //     array_push($response['total']['liquido'][$key], (number_format(($liquido[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
+        // }
         $response['total']['receitas'][0] = array_values($response['total']['receitas'][0]);
         $response['total']['variaveis'][0] = array_values($response['total']['variaveis'][0]);
         $response['total']['contribuicao'][0] = array_values($response['total']['contribuicao'][0]);
