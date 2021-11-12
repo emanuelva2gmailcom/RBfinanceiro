@@ -2,49 +2,8 @@
 
 <?php $this->layout = "CakeLte.login" ?>
 
-<style>
-	a{
-		color: #7A3E26;
-	}
-
-    a:hover{
-        color: #CF6856;
-    }
-
-    .btn{
-
-background-color: #CF6856;
-
-color: #F7E7CE;
-
-border: 1px solid #CF6856;
-
-}
-
-.btn:hover{
-
-background-color: #F7E7CE;
-
-color: #CF6856;
-
-border: 1px solid #CF6856;
-
-}
-
-.btn:focus{
-
-background-color: #CF6856;
-
-color: #F7E7CE;
-
-border: 1px solid #CF6856;
-
-}
-
-</style>
-
-<div class="card" style="margin-top: 0%; border-radius: 20px;">
-	<div class="card-body login-card-body" style="border-radius: 20px; background-color: #F7E7CE; color: #7A3E26;">
+<div class="cardLOGIN card">
+	<div class="cardbodyLOGIN card-body login-card-body">
 
 
 		<?= $this->Form->create() ?>
@@ -54,14 +13,14 @@ border: 1px solid #CF6856;
 				'label'=>false,
 				'placeholder'=>__('Digite seu email / username'),
 				'class'=>'form-control',
-				'append' => '<i class="fas fa-user" style="color: #CF6856;"></i>'
+				'append' => '<i class="fas fa-user"></i>'
 			]);?>
 
 			<?= $this->Form->control('Users.password', [
 				'type'=>'password', 'label'=>false,
 				'placeholder'=>__('Digite sua senha'),
 				'class'=>'form-control',
-				'append' => '<i class="fas fa-lock" style="color: #CF6856;"></i>'
+				'append' => '<i class="fas fa-lock"></i>'
 			]);?>
 
 		<?php
@@ -95,7 +54,7 @@ border: 1px solid #CF6856;
 			<?php }; ?>
 			<!-- /.col -->
 			<div class="col-4">
-				<?= $this->Form->Submit(__('Entrar'), ['type'=>'submit', 'class'=>'btn ml-auto', 'id'=>'loginSubmitBtn']);?><br>
+				<?= $this->Form->Submit(__('Entrar'), ['type'=>'submit', 'class'=>'btnADD btn ml-auto', 'id'=>'loginSubmitBtn']);?><br>
 			</div>
 		</div>
 		<!-- /.col -->
