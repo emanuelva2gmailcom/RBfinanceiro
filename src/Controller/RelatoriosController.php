@@ -92,7 +92,7 @@ class RelatoriosController extends AppController
         while ($ini <= $fim) {
             array_push($resposta, $ini->i18nFormat($periodo[0]));
             $ini->modify($periodo[1]);
-            // $ini->i18nFormat($periodo[0]) == $fim->i18nFormat($periodo[0]) ? array_push($resposta, $ini->i18nFormat($periodo[0])) : '';
+            $ini->i18nFormat($periodo[0]) == $fim->i18nFormat($periodo[0]) ? array_push($resposta, $ini->i18nFormat($periodo[0])) : '';
         }
         return $resposta;
     }
@@ -134,11 +134,11 @@ class RelatoriosController extends AppController
                 'td' => []
             ],
             'total' => [
-                'receitas' => [0],
-                'contribuicao' => [0],
-                'fixos' => [0],
-                'variaveis' => [0],
-                'liquido' => [0],
+                'receitas' => [],
+                'contribuicao' => [],
+                'fixos' => [],
+                'variaveis' => [],
+                'liquido' => [],
             ]
         ];
         $response = [
@@ -182,9 +182,15 @@ class RelatoriosController extends AppController
                 }
             }
         endforeach;
-
+        foreach ($obj['header'] as $data) :
+            $obj['total']['receitas'][$data] = 0;
+            $obj['total']['contribuicao'][$data] = 0;
+            $obj['total']['fixos'][$data] = 0;
+            $obj['total']['variaveis'][$data] = 0;
+            $obj['total']['liquido'][$data] = 0;
+        endforeach;
         foreach ($contas as $conta) :
-            $result = 0;
+            $result = [];
             
             foreach ($obj['header'] as $data) :
                 $valor = 0;
@@ -199,23 +205,24 @@ class RelatoriosController extends AppController
                 
                 endforeach;
                 if (in_array($conta, $obj['rows']['th']['receita'])) {
-                    $obj['total']['receitas'][0] += $valor;
-                    $obj['total']['contribuicao'][0] += $valor;
-                    $obj['total']['liquido'][0] += $valor;
+                    $obj['total']['receitas'][$data] += $valor;
+                    $obj['total']['contribuicao'][$data] += $valor;
+                    $obj['total']['liquido'][$data] += $valor;
                 } else if (in_array($conta, $obj['rows']['th']['fixo'])) {
-                    $obj['total']['fixos'][0] += $valor;
-                    $obj['total']['liquido'][0] += $valor;
+                    $obj['total']['fixos'][$data] += $valor;
+                    $obj['total']['liquido'][$data] += $valor;
                 } else if (in_array($conta, $obj['rows']['th']['variavel'])) {
-                    $obj['total']['variaveis'][0] += $valor;
-                    $obj['total']['contribuicao'][0] += $valor;
-                    $obj['total']['liquido'][0] += $valor;
+                    $obj['total']['variaveis'][$data] += $valor;
+                    $obj['total']['contribuicao'][$data] += $valor;
+                    $obj['total']['liquido'][$data] += $valor;
                 }
-                $result += $valor;
+                array_push($result, $valor);
+                // $result += $valor;
             endforeach;
             
-            array_push($obj['rows']['td'], [$conta, $result]);
+            array_push($obj['rows']['td'], array_merge([$conta], $result));
         endforeach;
-        $response['header'] = ['DRE' ,$request[0]->i18nFormat('MM/yyyy').' - '.$request[1]->i18nFormat('MM/yyyy')];
+        $response['header'] = array_merge(['DRE'] ,$obj['header']);
         array_unshift($obj['total']['receitas'], '1 - Faturamento');
         array_push($response['total']['receitas'], $obj['total']['receitas']);
         array_unshift($obj['total']['variaveis'], '2 - Custos Variáveis');
@@ -258,9 +265,14 @@ class RelatoriosController extends AppController
         //     array_push($response['total']['liquido'][$key], (number_format(($liquido[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
         // }
 
-        $response['body'] = array_merge($response['total']['receitas'], $response['total']['variaveis'], $response['total']['fixos']);
+        $response['total']['receitas'][0] = array_values($response['total']['receitas'][0]);
+        $response['total']['variaveis'][0] = array_values($response['total']['variaveis'][0]);
+        $response['total']['contribuicao'][0] = array_values($response['total']['contribuicao'][0]);
+        $response['total']['fixos'][0] = array_values($response['total']['fixos'][0]);
+        $response['total']['liquido'][0] = array_values($response['total']['liquido'][0]);
 
-        
+        // debug($response);
+        // exit;
         return $response;
     }
 
@@ -323,6 +335,13 @@ class RelatoriosController extends AppController
                 }
             }
         endforeach;
+        // foreach ($obj['header'] as $data) :
+        //     $obj['total']['receitas'][$data] = 0;
+        //     $obj['total']['contribuicao'][$data] = 0;
+        //     $obj['total']['fixos'][$data] = 0;
+        //     $obj['total']['variaveis'][$data] = 0;
+        //     $obj['total']['liquido'][$data] = 0;
+        // endforeach;
         foreach ($contas as $conta) :
             $result = 0;
             
@@ -395,12 +414,15 @@ class RelatoriosController extends AppController
         foreach ($response['total']['liquido'] as $key => $liquido) {
             array_push($response['total']['liquido'][$key], (number_format(($liquido[1] * 100) / $receitasTotal, 2, '.', ' ') . ' %'));
         }
-
-        $response['body'] = array_merge($response['total']['receitas'], $response['total']['variaveis'], $response['total']['fixos']);
-
+        $response['total']['receitas'][0] = array_values($response['total']['receitas'][0]);
+        $response['total']['variaveis'][0] = array_values($response['total']['variaveis'][0]);
+        $response['total']['contribuicao'][0] = array_values($response['total']['contribuicao'][0]);
+        $response['total']['fixos'][0] = array_values($response['total']['fixos'][0]);
+        $response['total']['liquido'][0] = array_values($response['total']['liquido'][0]);
       
 
         // debug($response);
+        // exit;
         return $response;
     }
 
