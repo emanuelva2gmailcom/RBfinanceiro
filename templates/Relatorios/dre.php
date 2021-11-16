@@ -160,9 +160,6 @@
             </tbody>
         </table>
     </div>
-    <div class="card" id="teste">
-
-    </div>
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -175,7 +172,6 @@
     $('#reservation').daterangepicker()
 
     function datase(data) {
-        console.log(data)
         data.total.receitas.map((row, index) => {
             if(index == 0){
                 $($('#example').DataTable().row.add(row).draw()
@@ -300,8 +296,6 @@
                         "X-CSRF-Token": csrf
                     }
                 }).then(function(response) { // handle success
-                    console.log(response.data)
-                    document.getElementById('teste').innerHTML = response.data 
                     $("#example").DataTable().destroy();
                     $("#example").empty()
                     formatador(response.data[1])
@@ -312,8 +306,6 @@
         })
         try {
             const response = axios.get('/relatorios/dreAPI/').then(function(response) { // handle success
-                console.log(response.data)
-                
                 formatador(response.data[1])
             })
         } catch (error) {
