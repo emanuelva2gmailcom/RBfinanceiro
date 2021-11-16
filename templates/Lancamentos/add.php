@@ -184,11 +184,61 @@
             <div id="test-l-4" class="content bg-white">
                 <div class="panel-body text-info">
                     <div class="form-group">
-                        <?= $this->Form->control('dregrupo_id', ['options' => $dregrupos, 'empty' => 'SELECIONE']); ?>
+                        <?= $this->Form->control('dregrupo_id', ['options' => $dregrupos, 'empty' => 'SELECIONE', 'class' => 'dregrupo']); ?>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => 'SELECIONE']); ?>
+                    </div> -->
+
+                    <div class="form-group select">
+                        <label for="" class="tudo">Conta</label>
+                        <select name="" class="tudo form-control" id="">
+                            <option>SELECIONE</option>
+                            <?php
+                            foreach ($receitas as $r => $receita) :
+                            ?>
+                                <option value=<?= $r ?>><?= $receita ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
+
+                    <div class="form-group select">
+                        <label for="" class="variaveis d-none">Conta</label>
+                        <select name="" class="variaveis form-control d-none" id="">
+                            <option>SELECIONE</option>
+                            <?php
+                            foreach ($variaveis as $v => $variavel) :
+                            ?>
+                                <option value=<?= $v ?>><?= $variavel ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group select">
+                        <label for="" class="fixos d-none">Conta</label>
+                        <select name="" class="fixos form-control d-none" id="">
+                            <option>SELECIONE</option>
+                            <?php
+                            foreach ($fixos as $f => $fixo) :
+                            ?>
+                                <option value=<?= $f ?>><?= $fixo ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group select">
+                        <label for="" class="receitas d-none">Conta</label>
+                        <select name="" class="receitas form-control d-none" id="">
+                            <option>SELECIONE</option>
+                            <?php
+                            foreach ($receitas as $r => $receita) :
+                            ?>
+                                <option value=<?= $r ?>><?= $receita ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
                     <div class="fornecedor form-group">
                         <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
                     </div>
@@ -358,6 +408,49 @@
         } else {
             $(".file").removeClass('d-none');
             $('.baixa').removeClass('d-none');
+        }
+    })
+
+    $('.dregrupo').change(function() {
+        $dregrupo = $(".dregrupo option:selected").text();
+        if ($dregrupo == 'variavel') {
+            $('.variaveis').removeClass('d-none');
+            $('.receitas').addClass('d-none');
+            $('.fixos').addClass('d-none');
+            $('.tudo').addClass('d-none');
+            $('.variaveis').attr('id', 'dreconta_id').attr('name', 'dreconta_id')
+            $('.fixos').attr('id', '').attr('name', '')
+            $('.receitas').attr('id', '').attr('name', '')
+        } else if ($dregrupo == 'fixo') {
+            $('.fixos').removeClass('d-none');
+            $('.receitas').addClass('d-none');
+            $('.variaveis').addClass('d-none');
+            $('.tudo').addClass('d-none');
+            $('.fixos').attr('id', 'dreconta_id').attr('name', 'dreconta_id')
+            $('.receitas').attr('id', '').attr('name', '')
+            $('.variaveis').attr('id', '').attr('name', '')
+        } else if ($dregrupo == 'receita') {
+            $('.receitas').removeClass('d-none');
+            $('.fixos').addClass('d-none');
+            $('.variaveis').addClass('d-none');
+            $('.tudo').addClass('d-none');
+            $('.receitas').attr('id', 'dreconta_id').attr('name', 'dreconta_id')
+            $('.fixos').attr('id', '').attr('name', '')
+            $('.variaveis').attr('id', '').attr('name', '')
+
+        } else {
+            $('.tudo').removeClass('d-none');
+            $('.fixos').addClass('d-none');
+            $('.receitas').addClass('d-none');
+            $('.variaveis').addClass('d-none');
+
+        }
+    })
+
+    $('.dregrupo').ready(function() {
+        $dregrupo = $(".dregrupo option:selected").text();
+        if ($dregrupo == 'SELECIONE') {
+            $('.tudo').prop('disabled', true);
         }
     })
 </script>
