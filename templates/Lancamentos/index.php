@@ -29,27 +29,28 @@
         color: green;
     }
 
-    .dataTables_info{
+    .dataTables_info {
         color: green;
     }
 
-    .dataTables_empty{
+    .dataTables_empty {
         color: #17a2b8;
     }
 
     .dataTables_filter input:focus {
-      color: #17a2b8;
-      border: green solid 2px;
-
-    }
-    .dataTables_filter input{
-      color: #17a2b8;
-      border: green solid 2px;
+        color: #17a2b8;
+        border: green solid 2px;
 
     }
 
-    .dataTables_filter label{
-      color: #17a2b8;
+    .dataTables_filter input {
+        color: #17a2b8;
+        border: green solid 2px;
+
+    }
+
+    .dataTables_filter label {
+        color: #17a2b8;
 
     }
 
@@ -151,19 +152,17 @@
         opacity: 0.7;
     }
 
-    li{
+    li {
         color: #17a2b8;
     }
 
-    li a{
+    li a {
         color: #17a2b8;
     }
 
-    .nl{
+    .nl {
         float: left;
     }
-
-
 </style>
 
 <div class="card">
@@ -187,44 +186,47 @@
 
             <tbody>
                 <?php foreach ($lancamentos as $lancamento) :
-            
-                    ?>
-                        <tr style="color: #029BE1;">
-                            <td><?= h($lancamento->tipo) ?></td>
-                            <td><?= h($lancamento->descricao) ?></td>
-                            <td><?= $this->Number->format($lancamento->valor) ?></td>
-                            <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-                            <?php if (empty($lancamento->data_baixa)) { ?>
-                                <td><?= h($lancamento->data_baixa) ?></td>
-                            <?php } else { ?>
-                                <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-                            <?php } ?>
-                            <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
 
-                            <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
-                            <td class="tr1"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
-                            <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
-                            <td class="actions">
-                                <div class="btn-group">
-                                    <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
-                                        <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-dark ']) ?>
-                                    <?php } ?>
-                                    <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd', 'UTC') < $now) && ($lancamento->data_baixa == null)) { ?>
-                                        <?= $this->Html->link(__('Renovar'), ['controller' => 'Lancamentos', 'action' => 'renovar', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-secondary ']) ?>
-                                    <?php } ?>
-                                    <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-info ', 'escape' => false]) ?>
-                                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-success ', 'escape' => false]) ?>
-                                    <?= $this->Html->link(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger ', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
-                                </div>
+                ?>
+                    <tr style="color: #029BE1;">
+                        <td><?= h($lancamento->tipo) ?></td>
+                        <td><?= h($lancamento->descricao) ?></td>
+                        <td><?= $this->Number->format($lancamento->valor) ?></td>
+                        <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                        <?php if (empty($lancamento->data_baixa)) { ?>
+                            <td><?= h($lancamento->data_baixa) ?></td>
+                        <?php } else { ?>
+                            <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                        <?php } ?>
+                        <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
 
-                            </td>
+                        <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
+                        <td class="tr1"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
+                        <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
+                        <td class="actions">
+                            <div class="btn-group">
+                                <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
+                                    <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-dark ']) ?>
+                                <?php } ?>
+                                <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd', 'UTC') < $now) && ($lancamento->data_baixa == null)) { ?>
+                                    <?= $this->Html->link(__('Renovar'), ['controller' => 'Lancamentos', 'action' => 'renovar', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-secondary ']) ?>
+                                <?php } ?>
+                                <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-info ', 'escape' => false]) ?>
+                                <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-success ', 'escape' => false]) ?>
+                                <?= $this->Html->link(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger ', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
+                            </div>
+
+                        </td>
 
 
                     <?php endforeach; ?>
             </tbody>
 
         </table>
+        <table class="teste"></table>
 
+
+        </table>
     </div>
 </div>
 
@@ -236,19 +238,19 @@
             "lengthChange": false,
             "autoWidth": false,
             "language": {
-                "emptyTable":     "Nenhum registro disponível na tabela",
-                "zeroRecords":    "Nenhum registro encontrado",
+                "emptyTable": "Nenhum registro disponível na tabela",
+                "zeroRecords": "Nenhum registro encontrado",
                 "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
-                "infoEmpty":      "Mostrando 0 de 0 dos 0 lançamentos",
-                "infoFiltered":   "(filtrado do total de _MAX_ lançamentos)",
+                "infoEmpty": "Mostrando 0 de 0 dos 0 lançamentos",
+                "infoFiltered": "(filtrado do total de _MAX_ lançamentos)",
                 "search": "Procurar:",
                 "paginate": {
-                    "first":      "Primeiro",
-                    "last":       "Último",
-                    "next":       "Próximo",
-                    "previous":   "Anterior"
-    },
-             },
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                },
+            },
 
             columns: [{
                     data: 'Tipo'
@@ -289,14 +291,14 @@
             ],
             buttons: [{
 
-              text: 'Adicionar',
-              className: 'but',
-              action: function(){
-                  window.location.href = '/lancamentos/add'
-              }
+                    text: 'Adicionar',
+                    className: 'but',
+                    action: function() {
+                        window.location.href = '/lancamentos/add'
+                    }
 
-            },
-            {
+                },
+                {
                     extend: 'copyHtml5',
                     text: 'Copiar',
 
@@ -335,11 +337,11 @@
                     }
                 },
                 {
-              extend: 'collection',
-              text: 'Mostrar Colunas',
-              buttons: [ 'columnsVisibility' ],
-              visibility: true
-            },
+                    extend: 'collection',
+                    text: 'Mostrar Colunas',
+                    buttons: ['columnsVisibility'],
+                    visibility: true
+                },
             ]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
