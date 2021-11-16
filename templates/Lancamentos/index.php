@@ -342,6 +342,24 @@
                     buttons: ['columnsVisibility'],
                     visibility: true
                 },
+                {
+                    text: 'Calcular',
+                    action: function() {
+                        // body: function(data, row, column, node) {
+                        // Strip $ from salary column to make it numeric
+                        //     return column === 5 ?
+                        //         data.replace(/[$,]/g, '') :
+                        //         data;
+                        // }
+                        valores = document.querySelectorAll("table tr td");
+
+                        for (i = 0; i < valores.length; i++) {
+                            console.log(valores['Valor']);
+                            // document.getElementById('teste').innerHTML = valores[i];
+                        }
+                        // var valores = 0;
+                    }
+                }
             ]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
