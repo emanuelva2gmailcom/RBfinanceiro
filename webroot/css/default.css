@@ -293,6 +293,40 @@
                 color: #10564F;
             }
 
+            .dt-button{
+                color: #10564F;
+                opacity: 0.7
+            }
+
+            .dropdown-menu .active{
+                background-color: #10564F;
+                color: #FFFFFF;
+            }
+
+            .pagination .disabled .page-link{
+                border: 2px solid #DBEBED;
+                background-color: #FFFFFF;
+                color: #10564F;
+            }
+
+            .pagination .page-item .page-link{
+                border: 2px solid #DBEBED;
+                background-color: #FFFFFF;
+                color: #10564F;
+            }
+
+            .pagination .page-item .page-link:hover{
+                border: 2px solid #10564F;
+                background-color: #10564F;
+                color:#DBEBED;
+            }
+
+            .pagination .active .page-link{
+                border: 2px solid #10564F;
+                background-color: #10564F;
+                color:#DBEBED;
+            }
+
             .dataTables_info {
                 color: #047076;
             }
@@ -413,45 +447,45 @@
             }
 
             .vis:hover {
-                background-color: #ffffff;
-                color: #10564F;
-                border: 1px solid #10564F;
-                opacity: 0.9;
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
             }
 
             .vis {
-                background-color: #10564F;
-                color: #ffffff;
-                border: 1px solid #ffffff;
-                opacity: 0.9;
-            }
-
-            .edi:hover {
                 background-color: #ffffff;
                 color: #10564F;
                 border: 1px solid #10564F;
-                opacity: 0.8;
+                opacity: 0.7;
             }
 
-            .edi {
+            .edi:hover {
                 background-color: #10564F;
                 color: #ffffff;
                 border: 1px solid #ffffff;
-                opacity: 0.8;
+                opacity: 0.7;
+            }
+
+            .edi {
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
             }
 
             .del:hover {
-                background-color: #ffffff;
-                color: #047076;
-                border: 1px solid #047076;
-                opacity: 0.9;
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
             }
 
             .del {
-                background-color: #047076;
-                color: #ffffff;
-                border: 1px solid #ffffff;
-                opacity: 0.9;
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
             }
 
             .child li{
