@@ -1,0 +1,708 @@
+/* Elementos do Arodu:
+
+         1. Aside*/
+
+            .asideMain a{
+                margin-left: 2%;
+                color: #DBEBED;
+            }
+
+            .asideMain li{
+                margin-bottom: 5%;
+                list-style: none;
+            }
+
+            .asideMain i{
+                color:#DBEBED;
+            }
+
+         /* 2. Content */
+
+            .conte {
+                background-color: #FFFFFF;
+                padding: 0%;
+                margin: 0%;
+                min-height:150vh;
+            }
+
+      /* 3. Footer */
+
+            .footerMain a{
+                color: #047076;
+            }
+
+            footer {
+                height: auto;
+                text-align: center;
+                padding: 30px;
+                background-color: #DBEBED;
+                color: #10564F;
+                justify-content: center;
+            }
+
+     /* 4. Header */
+
+            .headerMain i{
+                color: #10564F;
+            }
+
+            .main-header {
+                background-color:
+                #DBEBED;
+            }
+
+     /* 5. Sidebar */
+
+            .sidebarMenu .primeiro{
+                color:
+                #DBEBED;
+            }
+
+            .sidebarMenu .segundo{
+                color: #FFFFFF;
+            }
+
+            .sidebarMenu .terceiro{
+                color: #E4E4E2;
+            }
+
+            .info a{
+                color: #DBEBED;
+              }
+
+            .info a:hover{
+                color: #047076;
+              }
+
+            .user-panel{
+                color:  #E1E7E0;
+                overflow: auto;
+            }
+
+            .main-sidebar {
+                background-color: #10564F;
+            }
+
+            .control-sidebar {
+                background-color: #10564F;
+            }
+
+            .imgSidebar {
+                max-width: 100%;
+
+            }
+
+     /* 6. Layout 2 */
+
+            .alert-danger {
+                background-color: #047076;
+                border: #047076 2px solid;
+                color: white;
+            }
+
+            .alert-success {
+                background-color: #10564F;
+                border: #10564F 2px solid;
+                color: white;
+            }
+
+            .imgLogin{
+                max-width: 90%;
+                padding-bottom: 0%;
+
+              }
+
+            .login-box{
+                margin-top: 0%;
+            }
+
+/* Elementos do Projeto:
+
+        1. ADDs & Edits:*/
+
+            .cardADD{
+                border-radius: 20px;
+                width: 80%;
+
+            }
+
+            .cardbodyADD{
+                border-radius: 20px 20px 0px 0px ;
+                background-color: #10564F;
+                color: #DBEBED;
+            }
+
+            .cardfooterADD{
+                border-radius: 0px 0px 20px 20px;
+                background-color: #DBEBED;
+            }
+
+            .btnADD {
+                background-color: #047076;
+                color: white;
+                border: 1px solid #047076;
+            }
+
+            .btnADD:hover {
+                background-color: white;
+                color: #047076;
+                border: 1px solid #047076;
+            }
+
+            .btnADD:focus {
+                background-color: #047076;
+                color: white;
+                border: 1px solid #047076;
+            }
+
+            .cardfooterADD .btn-secondary{
+                background-color: #047076;
+                color: white;
+                border: 1px solid #047076;
+            }
+
+            .cardfooterADD .btn-secondary:hover {
+                background-color: white;
+                color: #047076;
+                border: 1px solid #047076;
+            }
+
+            .cardfooterADD .btn-secondary:focus {
+                background-color: #047076;
+                color: white;
+                border: 1px solid #047076;
+            }
+
+            @media (max-width: 620px) {
+                .cardADD {
+                position: absolute;
+                margin-left: -77px;
+                min-width: 90%;
+                }
+
+            }
+
+     /* 1.1 ADD de Lançamentos:*/
+
+            @media (max-width: 620px) {
+                .cardlancADD {
+                    position: absolute;
+                    margin-left: -77px;
+                    min-width: 90%;
+                }
+
+                .tipo {
+
+                    min-width: 275px;
+                }
+
+                .lineADD {
+                    min-width: 2px;
+                    min-height: 2px;
+                    margin: 0px;
+                }
+            }
+
+            @media (max-width: 370px) {
+
+                .lineADD {
+                    display: none;
+
+                }
+
+                .bsstepperheaderADD {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .dataADD, .grupo {
+                    width: 275px;
+                }
+
+            }
+
+            .grupo{
+                text-transform: uppercase;
+            }
+
+            .s-grupo{
+                color: #DBEBED
+            }
+
+            .entradas,.saidas{
+                text-transform: capitalize;
+            }
+
+            .containerADD{
+                width: 60%;
+                min-width:80%;
+            }
+
+            .bsstepperheaderADD{
+                margin: 0px; background-color: #DBEBED;
+            }
+
+            .bssteppercontentADD{
+            padding: 20px;
+            background-color: #10564F;
+            }
+
+            .bssteppercontentContent{
+                background-color: #10564F;
+                color: #DBEBED
+            }
+
+            .prox-antADD{
+                background-color: #047076;
+                color: #DBEBED;
+            }
+
+            .cancelarADD{
+                background-color: #DBEBED;
+                color: #047076;
+            }
+
+            .cancelarADD:hover{
+                background-color: #DBEBED;
+                color: #047076;
+            }
+
+            .footerADD .btn-secondary{
+                background-color: #DBEBED;
+                color: #10564F;
+                border: #DBEBED 1px solid;
+            }
+
+            .footerADD .btn-secondary:hover{
+                background-color: #DBEBED;
+                color: #10564F;
+                border: #DBEBED 1px solid;
+            }
+
+     /* 2. Indexes: */
+
+            .tdINDEX a {
+                color: #10564F;
+            }
+
+            .theINDEX tr{
+                color: #047076;
+            }
+
+            .tboINDEX{
+                color: #10564F;
+            }
+
+            .dt-button{
+                color: #10564F;
+                opacity: 0.7
+            }
+
+            .dropdown-menu .active{
+                background-color: #10564F;
+                color: #FFFFFF;
+            }
+
+            .pagination .disabled .page-link{
+                border: 2px solid #DBEBED;
+                background-color: #FFFFFF;
+                color: #10564F;
+            }
+
+            .pagination .page-item .page-link{
+                border: 2px solid #DBEBED;
+                background-color: #FFFFFF;
+                color: #10564F;
+            }
+
+            .pagination .page-item .page-link:hover{
+                border: 2px solid #10564F;
+                background-color: #10564F;
+                color:#DBEBED;
+            }
+
+            .pagination .active .page-link{
+                border: 2px solid #10564F;
+                background-color: #10564F;
+                color:#DBEBED;
+            }
+
+            .dataTables_info {
+                color: #047076;
+            }
+
+            .dataTables_empty {
+                color: #10564F;
+            }
+
+            .dataTables_filter input:focus {
+                color: #10564F;
+                border: #047076 solid 2px;
+            }
+            .dataTables_filter input {
+                color: #10564F;
+                border: #047076 solid 2px;
+            }
+
+            .dataTables_filter label {
+                color: #10564F;
+            }
+
+            .addINDEX {
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
+            }
+
+            .addINDEX:hover {
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
+            }
+
+            .buttons-copy {
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
+            }
+
+            .buttons-copy:hover {
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
+            }
+
+            .buttons-print {
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
+            }
+
+            .buttons-print:hover {
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
+            }
+
+            .buttons-csv {
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
+            }
+
+            .buttons-csv:hover {
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
+            }
+
+            .buttons-excel {
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
+            }
+
+            .buttons-excel:hover {
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
+            }
+
+            .buttons-pdf {
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
+            }
+
+            .buttons-pdf:hover {
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
+            }
+
+            .buttons-collection {
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
+            }
+
+            .buttons-collection:hover {
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
+            }
+
+            .vis:hover {
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
+            }
+
+            .vis {
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
+            }
+
+            .edi:hover {
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
+            }
+
+            .edi {
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
+            }
+
+            .del:hover {
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
+            }
+
+            .del {
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
+            }
+
+            .child li{
+                color: #10564F;
+            }
+
+            .child li a{
+                color: #10564F;
+            }
+
+
+     /* 2.1 Home: */
+
+            /* .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+            }
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
+                }
+            } */
+
+            .indexHOME{
+                border-radius: 70px;
+                max-width: 100%;
+            }
+
+            .cardHOME{
+                border-radius: 20px;
+                border: solid 2px #047076
+
+;
+            }
+
+            .cardheaderHOME{
+                border-radius: 20px 20px 0px 0px ;
+            }
+
+            .cardbodyHOME{
+                background-color: #047076
+
+;
+            }
+
+            .cardtitleHOME{
+                width: 50%;
+                margin-left: 25%;
+                color: #DBEBED;
+            }
+
+            .cardtextHOME{
+                color: #DBEBED;
+                font-size: 14px;
+            }
+
+            .cardfooterHOME{
+                border-radius: 0px 0px 14px 14px;
+                background-color: #047076
+
+;
+            }
+            .cardfooterHOME p,i{
+                color: #DBEBED;
+            }
+
+     /* 2.2 Login & Registro: */
+
+            .cardLOGIN{
+                margin-top: 0%;
+                border-radius: 20px;
+            }
+
+            .cardbodyLOGIN{
+                border-radius: 20px;
+                background-color: #DBEBED;
+                color: #10564F;
+            }
+
+            .cardbodyLOGIN i{
+               color: #047076;
+            }
+
+            .cardbodyLOGIN a{
+                color: #10564F;
+            }
+
+            .cardbodyLOGIN a:hover{
+                color: #047076;
+            }
+
+            .voltarREGISTRO a{
+               color: white;
+            }
+
+
+     /* 2.3 Relatorios: */
+
+     /* 2.3.1 Caixa Diário: */
+
+            .cardCaixaDiario{
+                border: #047076 solid 2px;
+                border-radius: 20px;
+            }
+
+            .cardheaderCaixaDiario i{
+                font-size: 25px;
+                color:#10564F;
+            }
+
+            @media (max-width: 620px) {
+                .cardCaixaDiario {
+                   position: absolute;
+                   margin-top: 80%;
+                   min-width: 90%;
+                }
+            }
+
+     /* 2.3.2 Fluxo de Caixa & Caixa Gerencial: */
+
+            .sorting_disabled {
+               color: #047076;
+            }
+
+            .relatorioFC{
+                color: white;
+            }
+
+     /* 3. Views: */
+
+            .cardVIEW{
+                border: #047076 solid 2px;
+                border-radius: 20px;
+            }
+
+            .cardVIEW2{
+                border: #047076 solid 2px;
+                border-radius: 20px;
+            }
+
+            .cardheaderVIEW{
+                padding-top: 50px;
+                color: #10564F;
+            }
+
+            .cardfooterVIEW{
+                border-radius: 20px;
+            }
+
+            .cardfooterVIEW2{
+                padding-top: 20px;
+            }
+
+            .cardtitleVIEW{
+                color: #10564F;
+            }
+
+            .relacionadosVIEW{
+                border: #047076 solid 2px;
+                border-radius: 20px;
+            }
+
+            .relacionadosheaderVIEW{
+                padding-top: 50px;
+            }
+
+            .views{
+                padding: 50px 50px 50px 50px ;
+            }
+
+            @media (max-width: 620px) {
+                .views{
+                   padding: 0px;
+                   padding-top: 50px;
+                }
+            }
+
+     /* 4. Painel */
+
+            .formgroupPAINEL{
+                color: #10564F;
+            }
+
+            .cardPAINEL{
+                border-radius: 20px;
+                background-color: #DBEBED;
+            }
+
+            .sorting, .sorting_asc{
+                color: #047076;
+            }
+
+            .odd, .even{
+                color: #10564F;
+            }
+
+            #donutChart{
+                min-height: 250px;
+                height: 250px;
+                max-height: 250px;
+                max-width: 100%;
+                border-radius: 20px;
+            }
+
+            .month label {
+                color: #10564F;
+            }
+
+            @media (max-width: 620px) {
+                .cardPAINEL {
+                    position: absolute;
+                    margin-top: 970px;
+                    min-width: 90%;
+                }
+            }
+

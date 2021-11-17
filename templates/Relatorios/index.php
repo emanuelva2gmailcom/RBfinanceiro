@@ -21,37 +21,6 @@
     <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
     <meta name="theme-color" content="#7952b3">
 
-
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        img{
-            border-radius: 70px;
-        }
-
-       .tes img{
-            width: 125px;
-            height: 125px;
-            margin-top: 5%;
-
-        }
-
-
-</style>
-
-
     <script>
         function realizado() {
             document.getElementById('real').style.display = 'block';
@@ -70,57 +39,55 @@
 </head>
 
 <body>
-
-
          <div class="position-relative overflow-hidden p-3 p-md-5 text-center" >
             <div class="container-fluid vh-50 m-0 py-5 justify-content-center">
 
             <div class="row">
               <div class="col-md-12 col-lg-6 col-xl-4">
-                <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px green;">
-                <div class="card-header bg-white" style="border-radius: 20px 20px 0px 0px ;">
+                <div class="cardHOME card mb-2 ">
+                <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-75 w-75">
-                        <?= $this->Html->image('fct.jpg') ?>
+                        <?= $this->Html->image('fct.jpg', ['class' => 'indexHOME']) ?>
                     </div>
                 </div>
-                <div class="card-body bg-white d-flex flex-column justify-content-end" style="border-radius: 20px;">
-                    <h5 class="card-title text-info" style="width: 50%;margin-left: 25%;">Fluxo de Caixa</h5>
-                    <p class="card-text pb-2 pt-1" style="color:green;font-size: 14px;">Aqui você visualiza os registros das entradas <br> e saídas da empresa</p>
+                <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
+                    <h5 class="cardtitleHOME card-title">Fluxo de Caixa</h5>
+                    <p class="cardtextHOME card-text pb-2 pt-1">Aqui você visualiza os registros das entradas <br> e saídas da empresa</p>
                 </div>
-                <div class="card-footer bg-white" style="border-radius: 0px 0px 20px 20px;">
-                   <a href="/relatorios/fluxodecaixa"> <p class="text-info"> Visualizar <i class="fas fa-arrow-circle-right" class="text-info"></i></p></a>
+                <div class="cardfooterHOME card-footer">
+                   <a href="/relatorios/fluxodecaixa"> <p> Visualizar <i class="fas fa-arrow-circle-right"></i></p></a>
                 </div>
                 </div>
               </div>
               <div class="col-md-12 col-lg-6 col-xl-4">
-              <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px green;">
-              <div class="card-header bg-white" style="border-radius: 20px 20px 0px 0px ;">
+              <div class="cardHOME card mb-2 ">
+              <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-75 w-75">
-                        <?= $this->Html->image('cgt.jpg') ?>
+                        <?= $this->Html->image('cgt.jpg', ['class' => 'indexHOME']) ?>
                     </div>
                 </div>
-                <div class="card-body bg-white d-flex flex-column justify-content-end" style="border-radius: 20px;">
-                    <h5 class="card-title text-info" style="width: 50%;margin-left: 25%;">Caixa Gerencial</h5>
-                    <p class="card-text pb-2 pt-1" style="color:green;font-size: 14px;">Aqui você verifica o controle de seu <br> fluxo de caixa</p>
+                <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
+                    <h5 class="cardtitleHOME card-title">Caixa Gerencial</h5>
+                    <p class="cardtextHOME card-text pb-2 pt-1">Aqui você verifica o controle de seu <br> fluxo de caixa</p>
                 </div>
-                <div class="card-footer bg-white" style="border-radius: 0px 0px 20px 20px;">
-                <a href="/relatorios/gerencial"> <p class="text-info"> Verificar <i class="fas fa-arrow-circle-right" class="text-info"></i></p></a>
+                <div class="cardfooterHOME card-footer">
+                <a href="/relatorios/gerencial"> <p> Verificar <i class="fas fa-arrow-circle-right"></i></p></a>
                 </div>
                 </div>
               </div>
               <div class="col-md-12 col-lg-6 col-xl-4">
-              <div class="test card mb-2 " style="border-radius: 20px;border: solid 2px green;">
-              <div class="card-header bg-white" style="border-radius: 20px 20px 0px 0px ;">
+              <div class="cardHOME card mb-2 ">
+              <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-75 w-75">
-                        <?= $this->Html->image('cdt.jpg') ?>
+                        <?= $this->Html->image('cdt.jpg', ['class' => 'indexHOME']) ?>
                     </div>
                 </div>
-                <div class="card-body bg-white d-flex flex-column justify-content-end" style="border-radius: 20px;">
-                    <h5 class="card-title text-info" style="width: 50%;margin-left: 25%;">Caixa Diário</h5>
-                    <p class="card-text pb-2 pt-1" style="color:green;font-size: 14px;">Aqui você irá direto para o acompanhamento diário das entradas <br> e saídas de acordo com sua abertura de atividades até seu fechamento</p>
+                <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
+                    <h5 class="cardtitleHOME card-title">Caixa Diário</h5>
+                    <p class="cardtextHOME card-text pb-2 pt-1">Aqui você irá direto para o acompanhamento diário das entradas <br> e saídas de acordo com sua abertura de atividades até seu fechamento</p>
                 </div>
-                <div class="card-footer bg-white" style="border-radius: 0px 0px 20px 20px;">
-                <a href="/relatorios/caixadiario"> <p class="text-info"> Acompanhar <i class="fas fa-arrow-circle-right" class="text-info"></i></p></a>
+                <div class="cardfooterHOME card-footer">
+                <a href="/relatorios/caixadiario"> <p> Acompanhar <i class="fas fa-arrow-circle-right"></i></p></a>
                 </div>
                 </div>
           </div>
