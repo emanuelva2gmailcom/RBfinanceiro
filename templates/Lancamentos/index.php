@@ -181,6 +181,7 @@
                     <th><?= __('Fornecedor') ?></th>
                     <th><?= __('Cliente') ?></th>
                     <th><?= __('Ações') ?></th>
+                    <!-- <th>Total</th> -->
                 </tr>
             </thead>
 
@@ -218,15 +219,27 @@
                             </div>
 
                         </td>
-
+                        <!-- <td>oooo</td> -->
+                        <?php endforeach; ?>
                     </tr>
-
-                <?php endforeach; ?>
+                    <tr>
+                        <td>dsdd</td>
+                    </tr>
             </tbody>
-            <tr>
-                <th colspan="2" style="text-align:right"><?= __('TOTAL:') ?></th>
-                <td id="total"></td>
-            </tr>
+
+                <tr>
+                    <th colspan="2" style="text-align:right">TOTAL</th>
+                    <td id="total"></td>
+                    <td>rfg</td>
+                    <td>gdfg</td>
+                    <td>gdgfd</td>
+                    <td>gffgd</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+    
+         
 
         </table>
 
@@ -282,7 +295,6 @@
                 {
                     data: 'Cliente'
                 },
-
                 {
                     data: 'Ações',
                     render: function(data, type, row) {
@@ -290,7 +302,11 @@
                             null :
                             data;
                     }
+                },{
+                    data: 'Total'
                 }
+            
+               
             ],
             buttons: [{
 
@@ -307,7 +323,7 @@
 
                     exportOptions: {
                         orthogonal: 'export',
-                        
+
                         columns: function(column, data, node) {
                             console.log(data[0]);
                             if (column > 7) {
