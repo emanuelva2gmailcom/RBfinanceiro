@@ -580,6 +580,10 @@
                color: #047076;
             }
 
+            .relatorioFC{
+                color: white;
+            }
+
      /* 3. Views: */
 
             .cardVIEW{
@@ -632,7 +636,7 @@
      /* 4. Painel */
 
             .formgroupPAINEL{
-                color: #DBEBED;
+                color: #10564F;
             }
 
             .cardPAINEL{
@@ -657,7 +661,7 @@
             }
 
             .month label {
-                color: #DBEBED;
+                color: #10564F;
             }
 
             @media (max-width: 620px) {
