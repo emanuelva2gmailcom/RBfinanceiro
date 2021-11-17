@@ -188,7 +188,7 @@
                 <?php foreach ($lancamentos as $lancamento) :
 
                 ?>
-                    <tr style="color: #029BE1;">
+                    <tr style="color: #029BE1;" id="ops">
                         <td><?= h($lancamento->tipo) ?></td>
                         <td><?= h($lancamento->descricao) ?></td>
                         <td><?= $this->Number->format($lancamento->valor) ?></td>
@@ -220,13 +220,16 @@
 
 
                     <?php endforeach; ?>
+                
             </tbody>
+            <!-- <tr> -->
+            <!-- <th colspan="2" style="text-align:right">TOTAL:</th> -->
+            <!-- <td id="total"></td> -->
+            <!-- </tr> -->
+
 
         </table>
-        <table class="teste"></table>
 
-
-        </table>
     </div>
 </div>
 
@@ -287,7 +290,7 @@
                             null :
                             data;
                     }
-                }
+                },
             ],
             buttons: [{
 
@@ -345,21 +348,24 @@
                 {
                     text: 'Calcular',
                     action: function() {
-                        // body: function(data, row, column, node) {
-                        // Strip $ from salary column to make it numeric
-                        //     return column === 5 ?
-                        //         data.replace(/[$,]/g, '') :
-                        //         data;
-                        // }
-                        valores = document.querySelectorAll("table tr td");
+                        var Tabela = document.getElementById("example1");
+                        var Trs = Tabela.getElementsByTagName("tr");
 
-                        for (i = 0; i < valores.length; i++) {
-                            console.log(valores['Valor']);
-                            // document.getElementById('teste').innerHTML = valores[i];
+                        var valor = 0;
+                        var valorTotal = 0;
+                        for (var i = 1; i < Trs.length; i++) {
+
+                            valor = Trs[i]['children'][2]['outerText'].replace(',', '')
+                            valorTotal += Number(valor)
+
                         }
-                        // var valores = 0;
+
+                        // document.getElementById('total').innerHTML = 'valorTotal';
+
+
                     }
-                }
+
+                },
             ]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
