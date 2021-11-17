@@ -10,19 +10,19 @@
 <div class="card">
     <div class="card-header">
         <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
-        <div class="col-md-3">
-            <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control text-white']); ?>
+        <div class="formgroupPAINEL col-md-3">
+            <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
         </div>
-        <div class="col-md-3">
-            <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'date'], ['class' => 'la form-control']); ?>
+        <div class="formgroupPAINEL col-md-3">
+            <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
         </div>
-        <div class="col-md-3">
+        <div class="formgroupPAINEL col-md-3">
             <label>Período</label>
             <?= $this->Form->select(2, ['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'periodo form-control select2bs4']); ?>
         </div>
-        <div class="col-md-3">
+        <div class="formgroupPAINEL col-md-3">
             <label>Enviar</label>
-            <?= $this->Form->button(__('Enviar'), ['class' => 'form-control']) ?>
+            <?= $this->Form->button(__('Enviar'), ['class' => 'btnADD form-control']) ?>
         </div>
         <?= $this->Form->end() ?>
     </div>
@@ -50,7 +50,7 @@
         data.total.entradas.push(data.total.entradas[0])
         data.total.entradas[0] = 'Entradas:'
         $($('#example').DataTable().row.add(data.total.entradas).draw()
-            .node()).addClass('bg-info');
+            .node()).addClass('relatorioFC');
         // response.push(data.total.entradas)
         data.rows.td.map(function(d) {
             if (data.rows.th['entradas'].includes(d[0])) {
@@ -62,7 +62,7 @@
         data.total.saidas.push(data.total.saidas[0])
         data.total.saidas[0] = 'Saidas:'
         $($('#example').DataTable().row.add(data.total.saidas).draw()
-            .node()).addClass('bg-info');
+            .node()).addClass('relatorioFC');
         data.rows.td.map(function(d) {
             if (data.rows.th['saidas'].includes(d[0])) {
                 $($('#example').DataTable().row.add(d).draw()
@@ -73,11 +73,11 @@
         data.total.inicial.unshift('Saldo Inicial')
         data.total.final.unshift('Saldo Final')
         $($('#example').DataTable().row.add(data.total['entradas-saidas']).draw()
-            .node()).addClass('bg-info');
+            .node()).addClass('relatorioFC');
         $($('#example').DataTable().row.add(data.total.inicial).draw()
-            .node()).addClass('bg-info');
+            .node()).addClass('relatorioFC');
         $($('#example').DataTable().row.add(data.total.final).draw()
-            .node()).addClass('bg-info');
+            .node()).addClass('relatorioFC');
     }
 
 
