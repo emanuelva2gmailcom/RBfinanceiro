@@ -274,12 +274,18 @@ function caixa(is)
         <p class="segundo">Fluxo de Caixa</p>
       </a>
     </li>
+    <li class="nav-item">
+      <a href="/relatorios/dre" class="segundo nav-link">
+        <i class="segundo far fa-chart-bar nav-icon"></i>
+        <p class="segundo">DRE</p>
+      </a>
+    </li>
   </ul>
 </li>
 
 <li class="sidebarMenu nav-item">
   <a href="/lancamentos/painel" class="primeiro nav-link">
-    <i class="primeiro nav-icon far fa-chart-bar"></i>
+    <i class="primeiro nav-icon fas fa-chart-pie"></i>
     <p class="primeiro">
       Painel
     </p>
