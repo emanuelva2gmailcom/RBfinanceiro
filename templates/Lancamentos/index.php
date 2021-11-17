@@ -188,10 +188,11 @@
                 <?php foreach ($lancamentos as $lancamento) :
 
                 ?>
-                    <tr style="color: #029BE1;" id="ops">
+                    <tr style="color: #029BE1;" class="ops">
                         <td><?= h($lancamento->tipo) ?></td>
                         <td><?= h($lancamento->descricao) ?></td>
-                        <td><?= $this->Number->format($lancamento->valor) ?></td>
+                        <td><?= h($lancamento->valor) ?> </td>
+
                         <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <?php if (empty($lancamento->data_baixa)) { ?>
                             <td><?= h($lancamento->data_baixa) ?></td>
@@ -220,13 +221,12 @@
 
 
                     <?php endforeach; ?>
-                
+                    </tr>
             </tbody>
-            <!-- <tr> -->
-            <!-- <th colspan="2" style="text-align:right">TOTAL:</th> -->
-            <!-- <td id="total"></td> -->
-            <!-- </tr> -->
-
+            <tr>
+                <th colspan="2" style="text-align:right"><?= __('TOTAL:') ?></th>
+                <td id="total"></td>
+            </tr>
 
         </table>
 
@@ -290,7 +290,7 @@
                             null :
                             data;
                     }
-                },
+                }
             ],
             buttons: [{
 
@@ -349,18 +349,18 @@
                     text: 'Calcular',
                     action: function() {
                         var Tabela = document.getElementById("example1");
-                        var Trs = Tabela.getElementsByTagName("tr");
+                        var Trs = Tabela.getElementsByClassName("ops");
 
                         var valor = 0;
                         var valorTotal = 0;
                         for (var i = 1; i < Trs.length; i++) {
-
-                            valor = Trs[i]['children'][2]['outerText'].replace(',', '')
-                            valorTotal += Number(valor)
-
+                            
+                            valor = Trs[i]['children'][2]['outerText'].replace('R$', '')
+                            console.log(parseInt(valor))
+                            valorTotal += parseFloat(valor)
+                            
                         }
-
-                        // document.getElementById('total').innerHTML = 'valorTotal';
+                        document.getElementById('total').innerHTML = valorTotal.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 
 
                     }
