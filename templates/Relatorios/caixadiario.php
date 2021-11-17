@@ -1,24 +1,15 @@
-<style>
-    @media (max-width: 620px) {
-    .card {
-      position: absolute;
-      margin-top: 80%;
-      min-width: 90%;
-    }
 
-  }
-</style>
 
 <div  class="container-fluid d-flex align-items-center justify-content-center p-5">
-<div class="card card-outline container  p-5 " style="border: green solid 2px; border-radius: 20px;" >
+<div class="cardCaixaDiario card card-outline container  p-5 "  >
 
-    <div class="card-header" >
-    <a href="/relatorios/exportCaixaDiario" style="font-size: 30px;color:green;"><i class="fas fa-file-excel"></i></a>
+    <div class="cardheaderCaixaDiario card-header" >
+    <a href="/relatorios/exportCaixaDiario"><i class="fas fa-file-excel"></i></a>
     <div class="card-tools">
         <div class="input-group input-group-sm">
-        <input type="text" name="table_search" class="border border-info form-control float-right" placeholder="Pesquisar">
+        <input type="text" name="table_search" class="border form-control float-right" placeholder="Pesquisar">
         <div class="input-group-append">
-            <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
+            <button type="submit" class="btn"><i class="fas fa-search"></i></button>
         </div>
         </div>
     </div>
@@ -27,11 +18,11 @@
     <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
 
-        <thead style="color: green;">
+        <thead class="theINDEX">
             <?= $this->Html->tableHeaders(
                 ['Valor','Conta', 'Fornecedor', 'Cliente', 'Descrição'])?>
         </thead>
-        <tbody>
+        <tbody class="tboINDEX">
             <?php foreach($arrays as $array):?>
                       <tr>
                     <?php if($array[0]<0){?>
@@ -41,10 +32,10 @@
                         <?php }else{ ?>
                             <td class="text-info"><?= $array[0] ?></td>
                 <?php } ?>
-                   <td class="text-info"> <?= $array[1] ?></td>
-                   <td class="text-info"> <?= $array[2] ?></td>
-                   <td class="text-info"> <?= $array[3] ?></td>
-                   <td class="text-info"> <?= $array[4] ?></td>
+                   <td> <?= $array[1] ?></td>
+                   <td> <?= $array[2] ?></td>
+                   <td> <?= $array[3] ?></td>
+                   <td> <?= $array[4] ?></td>
                 </tr>
                 <?php endforeach; ?>
         </tbody>

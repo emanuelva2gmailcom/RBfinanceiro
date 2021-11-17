@@ -54,77 +54,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
   <?= $this->Html->css('CakeLte.style') ?>
+  <?= $this->Html->css('default') ?>
 
   <?= $this->element('layout/css') ?>
 
   <?= $this->fetch('css') ?>
-
-  <style>
-    footer {
-      height: auto;
-      text-align: center;
-      padding: 30px;
-      background-color: #59CBFF;
-      color: #2E2E2F;
-      justify-content: center;
-
-    }
-
-    img {
-      max-width: 100%;
-    }
-
-    .titulo {
-      font-family: Tahoma;
-    }
-
-    p {
-      font-family: helvetica;
-    }
-  </style>
-
-
-  <style>
-    .main-header {
-      background-color: #59CBFF;
-    }
-
-    .main-sidebar {
-      background-color: #2E2E2F;
-    }
-
-    .content-header {
-      background-color: #2F6D80;
-    }
-
-    .content {
-      background-color: #DBDBDB;
-    }
-
-    .main-footer {
-      background-color: #6AA4B0;
-    }
-
-    a {
-      color: #2E2E2F;
-    }
-
-    
-  /* @media (max-width : 620px) {
-    .footer {
-      position: absolute;
-     margin-top: 800px;
-      min-width: 80%;
-      background-color: gainsboro;
-    }
-    body{
-      background-color: #DBDBDB;
-    }
-  } */
-</style>
-
-  
-
 
 </head>
 
@@ -132,20 +66,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="wrapper">
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-info">
+    <nav class="main-header navbar navbar-expand">
       <?= $this->element('header/main') ?>
     </nav>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-secondary elevation-4" style="color: #ACD9FF;">
+    <aside class="main-sidebar sidebar-secondary elevation-4">
       <!-- Brand Logo -->
       <a href="<?= $this->Url->build('/') ?>" class="brand-link bg-white">
-        <?= $this->Html->image('logo2.png') ?>
+        <?= $this->Html->image('sclogo2.png', ['class' => 'imgSidebar']) ?>
       </a>
 
       <!-- Sidebar -->
-      <div class="sidebar text-info teste">
+      <div class="sidebar">
         <?= $this->element('sidebar/main') ?>
       </div>
       <!-- /.sidebar -->
@@ -159,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.content-header -->
 
       <!-- Main content -->
-      <div class="content" style="padding: 0%; margin: 0%; min-height:150vh;">
+      <div class="conte content">
 
         <!-- Main content -->
 
@@ -172,7 +106,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark" id="cu">
+    <aside class="control-sidebar">
       <!-- Control sidebar content goes here -->
       <?= $this->element('aside/main') ?>
     </aside>
