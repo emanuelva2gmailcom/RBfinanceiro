@@ -79,7 +79,10 @@
             </tbody>
 
         </table>
+        <table class="teste"></table>
 
+
+        </table>
     </div>
 </div>
 
@@ -91,19 +94,19 @@
             "lengthChange": false,
             "autoWidth": false,
             "language": {
-                "emptyTable":     "Nenhum registro disponível na tabela",
-                "zeroRecords":    "Nenhum registro encontrado",
+                "emptyTable": "Nenhum registro disponível na tabela",
+                "zeroRecords": "Nenhum registro encontrado",
                 "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
-                "infoEmpty":      "Mostrando 0 de 0 dos 0 lançamentos",
-                "infoFiltered":   "(filtrado do total de _MAX_ lançamentos)",
+                "infoEmpty": "Mostrando 0 de 0 dos 0 lançamentos",
+                "infoFiltered": "(filtrado do total de _MAX_ lançamentos)",
                 "search": "Procurar:",
                 "paginate": {
-                    "first":      "Primeiro",
-                    "last":       "Último",
-                    "next":       "Próximo",
-                    "previous":   "Anterior"
-    },
-             },
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                },
+            },
 
             columns: [{
                     data: 'Tipo'
@@ -150,8 +153,8 @@
                   window.location.href = '/lancamentos/add'
               }
 
-            },
-            {
+                },
+                {
                     extend: 'copyHtml5',
                     text: 'Copiar',
 
@@ -190,11 +193,11 @@
                     }
                 },
                 {
-              extend: 'collection',
-              text: 'Mostrar Colunas',
-              buttons: [ 'columnsVisibility' ],
-              visibility: true
-            },
+                    extend: 'collection',
+                    text: 'Mostrar Colunas',
+                    buttons: ['columnsVisibility'],
+                    visibility: true
+                },
             ]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });

@@ -35,6 +35,10 @@
             <th><?= __('Cliente') ?></th>
             <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
           </tr>
+          <tr>
+            <th><?= __('Dreconta') ?></th>
+            <td class="tdINDEX"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
+          </tr>
           <!-- <tr>
             <th><?= __('Dreconta') ?></th>
             <td class="tdINDEX"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->dreconta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>

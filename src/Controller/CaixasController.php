@@ -135,22 +135,6 @@ class CaixasController extends AppController
         }
     }
 
-    public function caixaaberto()
-    {
-        $this->loadModel('Caixas');
-        $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
-        $caixas = $this->Caixas->find('all');
-        foreach ($caixas as $caixa) :
-            debug($caixa);
-            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
-                return $caixa->id_caixa;
-                return $caixa->is_aberto;
-            }
-        endforeach;
-        exit;
-        return false;
-    }
-
     public function getCaixaaberto()
     {
         $resposta = null;
@@ -177,36 +161,5 @@ class CaixasController extends AppController
             ->withStringBody(json_encode($resposta));
         return $this->response;
     }
-
-
-    public function caixaaberto2()
-    {
-        $this->loadModel('Caixas');
-        $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
-        $caixas = $this->paginate($this->Caixas);
-        foreach ($caixas as $caixa) :
-            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
-                return $caixa->is_aberto;
-            }
-                
-        endforeach;
-        return false;
-    }
-
-    public function getAberto()
-    {
-        $this->response = $this->response;
-        $this->response = $this->response
-            ->withHeader('Access-Control-Allow-Origin','*')
-            ->withHeader('Access-Control-Allow-Methods', '*')
-            ->withHeader('Access-Control-Allow-Credentials', 'true')
-            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With')
-            ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
-            ->withHeader('Access-Control-Allow-Type', 'application/json');
-        $this->response = $this->response->withType('application/json')
-            ->withStringBody(json_encode($this->caixaaberto2()));
-        return $this->response;
-    }
-
 
 }

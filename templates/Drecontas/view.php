@@ -72,7 +72,7 @@ $this->assign('title', __('Dreconta') );?>
           <th><?= __('Descrição') ?></th>
           <th><?= __('Valor') ?></th>
           <th><?= __('Data Emissão') ?></th>
-          <th><?= __('Data Baixa') ?></th>
+       
           <th><?= __('Data Vencimento') ?></th>
           <th><?= __('Created') ?></th>
           <th><?= __('Modified') ?></th>
@@ -97,7 +97,7 @@ $this->assign('title', __('Dreconta') );?>
             <td><?= h($lancamentos->descricao) ?></td>
             <td><?= h($lancamentos->valor) ?></td>
             <td><?= h($lancamentos->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-            <td><?= h($lancamentos->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+    
             <td><?= h($lancamentos->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td><?= h($lancamentos->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <td><?= h($lancamentos->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>

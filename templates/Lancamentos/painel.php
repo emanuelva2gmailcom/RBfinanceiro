@@ -12,7 +12,6 @@
                 <div class="col-md-6">
                     <?= $this->Form->control('Mês', ['class' => 'form-control mes', 'type' => 'month',]); ?>
                     <!-- /.form-group -->
-                    <!-- /.form-group -->
                 </div>
                 <div class="col-md-4">
                     <div class="formgroupPAINEL form-group">
@@ -53,10 +52,15 @@
         function show(data) {
 
             $('#example').DataTable({
-                "columns" : [
-                    {title : 'Grupo do Fluxo de Caixa'},
-                    {title : 'Conta do Fluxo de Caixa'},
-                    {title : 'Valor'},
+                "columns": [{
+                        title: 'Grupo do Fluxo de Caixa'
+                    },
+                    {
+                        title: 'Conta do Fluxo de Caixa'
+                    },
+                    {
+                        title: 'Valor'
+                    },
                 ],
                 "columnDefs": [{
                     "defaultContent": "-",

@@ -20,7 +20,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- ChartJS -->
   <?= $this->Html->script('CakeLte./AdminLTE/plugins/chart.js/Chart.js') ?>
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/chart.js/Chart.css') ?>
-
+  <!-- DatePicker -->
+  <?= $this->Html->css('CakeLte./AdminLTE/plugins/daterangepicker/daterangepicker.css') ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/daterangepicker/daterangepicker.js'); ?>
+  <?= $this->Html->script('CakeLte./AdminLTE/plugins/moment/moment.min.js'); ?>
   <!-- Tabledate -->
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>
   <?= $this->Html->css('CakeLte./AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') ?>
