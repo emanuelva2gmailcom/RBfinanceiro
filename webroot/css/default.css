@@ -304,19 +304,25 @@
             }
 
             .pagination .disabled .page-link{
-                border: 1px solid #DBEBED;
-                background-color: #DBEBED;
+                border: 2px solid #DBEBED;
+                background-color: #FFFFFF;
                 color: #10564F;
             }
 
             .pagination .page-item .page-link{
-                border: 1px solid #DBEBED;
-                background-color: #DBEBED;
+                border: 2px solid #DBEBED;
+                background-color: #FFFFFF;
                 color: #10564F;
             }
 
+            .pagination .page-item .page-link:hover{
+                border: 2px solid #10564F;
+                background-color: #10564F;
+                color:#DBEBED;
+            }
+
             .pagination .active .page-link{
-                border: 1px solid #10564F;
+                border: 2px solid #10564F;
                 background-color: #10564F;
                 color:#DBEBED;
             }
