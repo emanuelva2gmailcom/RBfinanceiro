@@ -44,49 +44,49 @@
 
             <div class="row">
               <div class="col-md-12 col-lg-6 col-xl-4">
-                <div class="carH card mb-2 ">
-                <div class="carhH card-header bg-white">
+                <div class="cardHOME card mb-2 ">
+                <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-75 w-75">
-                        <?= $this->Html->image('fct.jpg', ['class' => 'indH']) ?>
+                        <?= $this->Html->image('fct.jpg', ['class' => 'indexHOME']) ?>
                     </div>
                 </div>
-                <div class="carbH card-body d-flex flex-column justify-content-end">
-                    <h5 class="carttH card-title">Fluxo de Caixa</h5>
-                    <p class="cartH card-text pb-2 pt-1">Aqui você visualiza os registros das entradas <br> e saídas da empresa</p>
+                <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
+                    <h5 class="cardtitleHOME card-title">Fluxo de Caixa</h5>
+                    <p class="cardtextHOME card-text pb-2 pt-1">Aqui você visualiza os registros das entradas <br> e saídas da empresa</p>
                 </div>
-                <div class="carfH card-footer">
+                <div class="cardfooterHOME card-footer">
                    <a href="/relatorios/fluxodecaixa"> <p> Visualizar <i class="fas fa-arrow-circle-right"></i></p></a>
                 </div>
                 </div>
               </div>
               <div class="col-md-12 col-lg-6 col-xl-4">
-              <div class="carH card mb-2 ">
-              <div class="carhH card-header bg-white">
+              <div class="cardHOME card mb-2 ">
+              <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-75 w-75">
-                        <?= $this->Html->image('cgt.jpg', ['class' => 'indH']) ?>
+                        <?= $this->Html->image('cgt.jpg', ['class' => 'indexHOME']) ?>
                     </div>
                 </div>
-                <div class="carbH card-body d-flex flex-column justify-content-end">
-                    <h5 class="carttH card-title">Caixa Gerencial</h5>
-                    <p class="cartH card-text pb-2 pt-1">Aqui você verifica o controle de seu <br> fluxo de caixa</p>
+                <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
+                    <h5 class="cardtitleHOME card-title">Caixa Gerencial</h5>
+                    <p class="cardtextHOME card-text pb-2 pt-1">Aqui você verifica o controle de seu <br> fluxo de caixa</p>
                 </div>
-                <div class="carfH card-footer">
+                <div class="cardfooterHOME card-footer">
                 <a href="/relatorios/gerencial"> <p> Verificar <i class="fas fa-arrow-circle-right"></i></p></a>
                 </div>
                 </div>
               </div>
               <div class="col-md-12 col-lg-6 col-xl-4">
-              <div class="carH card mb-2 ">
-              <div class="carhH card-header bg-white">
+              <div class="cardHOME card mb-2 ">
+              <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-75 w-75">
-                        <?= $this->Html->image('cdt.jpg', ['class' => 'indH']) ?>
+                        <?= $this->Html->image('cdt.jpg', ['class' => 'indexHOME']) ?>
                     </div>
                 </div>
-                <div class="carbH card-body d-flex flex-column justify-content-end">
-                    <h5 class="carttH card-title">Caixa Diário</h5>
-                    <p class="cartH card-text pb-2 pt-1">Aqui você irá direto para o acompanhamento diário das entradas <br> e saídas de acordo com sua abertura de atividades até seu fechamento</p>
+                <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
+                    <h5 class="cardtitleHOME card-title">Caixa Diário</h5>
+                    <p class="cardtextHOME card-text pb-2 pt-1">Aqui você irá direto para o acompanhamento diário das entradas <br> e saídas de acordo com sua abertura de atividades até seu fechamento</p>
                 </div>
-                <div class="carfH card-footer">
+                <div class="cardfooterHOME card-footer">
                 <a href="/relatorios/caixadiario"> <p> Acompanhar <i class="fas fa-arrow-circle-right"></i></p></a>
                 </div>
                 </div>
