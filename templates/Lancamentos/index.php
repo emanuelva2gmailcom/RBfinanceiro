@@ -219,9 +219,9 @@
 
                         </td>
 
-
-                    <?php endforeach; ?>
                     </tr>
+
+                <?php endforeach; ?>
             </tbody>
             <tr>
                 <th colspan="2" style="text-align:right"><?= __('TOTAL:') ?></th>
@@ -307,7 +307,9 @@
 
                     exportOptions: {
                         orthogonal: 'export',
+                        
                         columns: function(column, data, node) {
+                            console.log(data[0]);
                             if (column > 7) {
                                 return false;
                             }
@@ -353,14 +355,18 @@
 
                         var valor = 0;
                         var valorTotal = 0;
-                        for (var i = 1; i < Trs.length; i++) {
-                            
+                        for (var i = 0; i < Trs.length; i++) {
+
                             valor = Trs[i]['children'][2]['outerText'].replace('R$', '')
-                            console.log(parseInt(valor))
-                            valorTotal += parseFloat(valor)
-                            
+                            valor = valor.replace('.', '')
+                            valor = valor.replace(',', '.')
+                            valorTotal += Number(valor)
+
                         }
-                        document.getElementById('total').innerHTML = valorTotal.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+                        document.getElementById('total').innerHTML = valorTotal.toLocaleString('pt-br', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        });
 
 
                     }
