@@ -303,7 +303,13 @@
                 color: #FFFFFF;
             }
 
-            .pagination .page-item,.disabled .page-link{
+            .pagination .disabled .page-link{
+                border: 1px solid #DBEBED;
+                background-color: #DBEBED;
+                color: #10564F;
+            }
+
+            .pagination .page-item .page-link{
                 border: 1px solid #DBEBED;
                 background-color: #DBEBED;
                 color: #10564F;
