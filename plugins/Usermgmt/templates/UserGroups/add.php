@@ -1,15 +1,15 @@
-<div class="card">
-	<div class="card-header text-white bg-dark">
-		<span class="card-title">
+<div class="cardPAINEL card mt-2">
+	<div class="cardheaderDASH card-header">
+		<span class="text-white card-title">
 			<?php echo __('Adicionar Grupo de Usuários');?>
 		</span>
 		
 		<span class="card-title float-right">
-			<?php echo $this->Html->link(__('Voltar', true), ['action'=>'index'], ['class'=>'btn btn-secondary btn-sm']);?>
+			<?php echo $this->Html->link(__('Voltar', true), ['action'=>'index'], ['class'=>'btn cancelarADD btn-sm']);?>
 		</span>
 	</div>
 	
-	<div class="card-body">
+	<div class="cardbodyDASH card-body">
 		<?php echo $this->element('Usermgmt.ajax_validation', ['formId'=>'addUserGroupForm', 'submitButtonId'=>'addUserGroupSubmitBtn']);?>
 		<?php echo $this->Form->create($userGroupEntity, ['id'=>'addUserGroupForm', 'novalidate'=>true]);?>
 
@@ -44,7 +44,7 @@
 
 		<div class="row form-group border-top pt-3">
 			<div class="col">
-				<?php echo $this->Form->Submit(__('Salvar'), ['class'=>'btn btn-primary', 'id'=>'addUserGroupSubmitBtn']);?>
+				<?php echo $this->Form->Submit(__('Salvar'), ['class'=>'btn btnADD', 'id'=>'addUserGroupSubmitBtn']);?>
 			</div>
 		</div>
 		

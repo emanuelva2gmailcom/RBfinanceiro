@@ -1,11 +1,11 @@
-<div class="card">
-	<div class="card-header text-white bg-dark">
-		<span class="card-title">
-			<?php echo __('Matriz de permissões do grupo pai'); ?>
+<div class="cardPAINEL card mt-2">
+	<div class="cardheaderDASH card-header">
+		<span class="text-white card-title">
+			<?php echo __('Matriz de permissões do Grupo Pai'); ?>
 		</span>
 
 		<span class="card-title float-right">
-			<?php echo "<a id='permissionOptions' href='javascript:void(0)' class='btn btn-secondary btn-sm'>Choose Options</a>"; ?>
+			<?php echo "<a id='permissionOptions' href='javascript:void(0)' class='btn cancelarADD btn-sm'>Escolher Opções</a>"; ?>
 		</span>
 
 		<span class="card-title float-right mr-2">
@@ -13,7 +13,7 @@
 		</span>
 	</div>
 
-	<div class="card-body p-2">
+	<div class="cardbodyDASH card-body p-2">
 		<div>
 			<?php echo $this->Html->link(__('Verifique as alterações de permissão'), ['controller' => 'UserGroupPermissions', 'action' => 'printPermissionChanges', 'plugin' => 'Usermgmt'], ['class' => 'btn btn-primary btn-sm']); ?>
 			<br /><br />

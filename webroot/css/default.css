@@ -226,7 +226,7 @@
             }
 
             .s-grupo{
-                color: #DBEBED
+                color: #dc3545;
             }
 
             .entradas,.saidas{
@@ -620,7 +620,42 @@
 
      /* 2.4 Dashboard vulgo Configurações: */
 
+            .cardheaderDASH{
+                border-radius: 20px 20px 0px 0px;
+                background-color: #047076;
+            }   
             
+            .cardbodyDASH{
+                color: #10564F;
+            }
+
+            .cardbodyDASH2{
+                color: #10564F;
+            }
+
+            .cardbodyDASH2 a{
+                color: #10564F;
+            }
+
+            .cardbodyDASH .btn-primary{
+                background-color: #047076;
+                border: #DBEBED 1px solid;
+            }
+
+            .cardbodyDASH .btn-danger{
+                background-color: #10564F;
+                border: #DBEBED 1px solid;
+            }
+
+            .cardbodyDASH2 .btn-primary{
+                background-color: #047076;
+                border: #DBEBED 1px solid;
+            }
+
+            .cardbodyDASH2 .btn-danger{
+                background-color: #10564F;
+                border: #DBEBED 1px solid;
+            }
 
      /* 3. Views: */
 

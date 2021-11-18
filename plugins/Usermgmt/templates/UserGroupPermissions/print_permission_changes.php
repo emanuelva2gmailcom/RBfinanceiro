@@ -1,11 +1,11 @@
-<div class="card">
-	<div class="card-header text-white bg-dark">
-		<span class="card-title">
-			<?php echo __('Permission Changes');?>
+<div class="cardPAINEL card mt-2">
+	<div class="cardheaderDASH card-header ">
+		<span class="text-white card-title">
+			<?php echo __('Mudar permissões');?>
 		</span>
 	</div>
 
-	<div class="card-body p-2">
+	<div class="cardbodyDASH card-body p-2">
 		<h5><?php echo __('Controllers Not Added in Permission');?></h5>
 
 		<table class="table table-striped table-bordered table-sm table-hover">
