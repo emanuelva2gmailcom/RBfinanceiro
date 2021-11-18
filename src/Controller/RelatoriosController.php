@@ -408,20 +408,16 @@ class RelatoriosController extends AppController
             }
         }
         $response['header'] = array_merge(['DRE'] ,$obj['header'], ['TOTAL'], ['%']);
-
+        
         $receitasTotal = $response['total']['receitas'][0][array_key_last($response['total']['receitas'][0])];
-
+        
         if($receitasTotal != 0) {
             foreach($response['total'] as $index => $array){
                 foreach ($array as $key => $value) {
-                    $indexTotal = $value[array_key_last($value)];
-                    if($key == 0){
-                        array_push($response['total'][$index][$key], (number_format(($value[array_key_last($value)] / $receitasTotal) * 100, 2, '.', ' ') . ' %'));
-                    } else {
-                        array_push($response['total'][$index][$key], (number_format(($value[array_key_last($value)] / $indexTotal) * 100, 2, '.', ' ') . ' %'));
-                    }
+                    array_push($response['total'][$index][$key], (number_format(($value[array_key_last($value)] / $receitasTotal) * 100, 2, '.', ' ') . ' %'));
                 }
             }
+        
         }
         
         return $response;
