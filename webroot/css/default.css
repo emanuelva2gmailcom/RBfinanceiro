@@ -322,7 +322,7 @@
             }
 
             .pagination .active .page-link{
-                border: 2px solid #10564F;
+                border: 2px solid #DBEBED;
                 background-color: #10564F;
                 color:#DBEBED;
             }
