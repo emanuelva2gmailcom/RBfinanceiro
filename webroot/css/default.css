@@ -226,7 +226,7 @@
             }
 
             .s-grupo{
-                color: #DBEBED
+                color: #dc3545;
             }
 
             .entradas,.saidas{
@@ -322,7 +322,7 @@
             }
 
             .pagination .active .page-link{
-                border: 2px solid #10564F;
+                border: 2px solid #DBEBED;
                 background-color: #10564F;
                 color:#DBEBED;
             }
@@ -543,12 +543,11 @@
 
             .cardtextHOME{
                 color: #DBEBED;
-                font-size: 14px;
             }
 
             .cardfooterHOME{
                 border-radius: 0px 0px 14px 14px;
-                background-color: #047076
+                background-color: #047076;
 
 ;
             }
@@ -616,6 +615,45 @@
 
             .relatorioFC{
                 color: white;
+            }
+
+     /* 2.4 Dashboard vulgo Configurações: */
+
+            .cardheaderDASH{
+                border-radius: 20px 20px 0px 0px;
+                background-color: #047076;
+            }   
+            
+            .cardbodyDASH{
+                color: #10564F;
+            }
+
+            .cardbodyDASH2{
+                color: #10564F;
+            }
+
+            .cardbodyDASH2 a{
+                color: #10564F;
+            }
+
+            .cardbodyDASH .btn-primary{
+                background-color: #047076;
+                border: #DBEBED 1px solid;
+            }
+
+            .cardbodyDASH .btn-danger{
+                background-color: #10564F;
+                border: #DBEBED 1px solid;
+            }
+
+            .cardbodyDASH2 .btn-primary{
+                background-color: #047076;
+                border: #DBEBED 1px solid;
+            }
+
+            .cardbodyDASH2 .btn-danger{
+                background-color: #10564F;
+                border: #DBEBED 1px solid;
             }
 
      /* 3. Views: */

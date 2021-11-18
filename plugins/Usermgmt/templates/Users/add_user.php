@@ -1,15 +1,15 @@
-<div class="card">
-	<div class="card-header text-white bg-dark">
-		<span class="card-title">
+<div class="cardPAINEL card mt-2">
+	<div class="cardheaderDASH card-header">
+		<span class="text-white card-title">
 			<?php echo __('Adicionar Usuário');?>
 		</span>
 
 		<span class="card-title float-right">
-			<?php echo $this->Html->link(__('Voltar', true), ['action'=>'index'], ['class'=>'btn btn-secondary btn-sm']);?>
+			<?php echo $this->Html->link(__('Voltar', true), ['action'=>'index'], ['class'=>'btn cancelarADD btn-sm']);?>
 		</span>
 	</div>
 
-	<div class="card-body">
+	<div class="cardbodyDASH card-body">
 		<?php echo $this->element('Usermgmt.ajax_validation', ['formId'=>'addUserForm', 'submitButtonId'=>'addUserSubmitBtn']);?>
 		<?php echo $this->Form->create($userEntity, ['id'=>'addUserForm']);?>
 
@@ -64,7 +64,7 @@
 
 		<div class="row form-group border-top pt-3">
 			<div class="col">
-				<?php echo $this->Form->Submit(__('Adicionar Usuário'), ['class'=>'btn btn-primary', 'id'=>'addUserSubmitBtn']);?>
+				<?php echo $this->Form->Submit(__('Adicionar Usuário'), ['class'=>'btn btnADD', 'id'=>'addUserSubmitBtn']);?>
 			</div>
 		</div>
 

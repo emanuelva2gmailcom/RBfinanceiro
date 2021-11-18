@@ -1,11 +1,11 @@
-<div class="card">
-	<div class="card-header text-white bg-dark">
-		<span class="card-title">
+<div class="cardPAINEL card mt-2">
+	<div class="cardheaderDASH card-header">
+		<span class="text-white card-title">
 			<?php echo __('Usuários online');?>
 		</span>
 	</div>
 
-	<div class="card-body p-0">
+	<div class="cardbodyDASH card-body p-0">
 		<?php echo $this->element('Usermgmt.all_online_users');?>
 	</div>
 </div>

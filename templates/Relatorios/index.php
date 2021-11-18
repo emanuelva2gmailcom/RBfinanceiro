@@ -42,9 +42,10 @@
          <div class="position-relative overflow-hidden p-3 p-md-5 text-center" >
             <div class="container-fluid vh-50 m-0 py-5 justify-content-center">
 
+            <div class="card-deck">
             <div class="row">
               <div class="col-md-12 col-lg-6 col-xl-4">
-                <div class="cardHOME card mb-2 ">
+                <div class="cardHOME card mb-2">
                 <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-75 w-75">
                         <?= $this->Html->image('fct.jpg', ['class' => 'indexHOME']) ?>
@@ -92,6 +93,7 @@
                 </div>
           </div>
         </div>
+            </div>
                 <!-- <ul class="row nav nav-pills">
                     <li class="col-4 nav-item">
                         <div class="d-flex justify-content-center">
