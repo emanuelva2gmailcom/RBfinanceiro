@@ -526,7 +526,11 @@
             }
 
             .cardheaderHOME{
-                border-radius: 20px 20px 0px 0px;
+                border-radius: 20px;
+            }
+
+            .cardheaderHOME:hover .cardtitleHOME{
+                display: block;
             }
 
             .cardbodyHOME{
@@ -534,10 +538,15 @@
                 border-radius: 0px 0px 16px 16px;
             }
 
+            .cardbodyHOME:hover h5{
+                display: block;
+            }
+
             .cardtitleHOME{
                 width: 60%;
                 margin-left: 20%;
                 color: #DBEBED;
+                display: none;
             }
 
             .cardtextHOME{
