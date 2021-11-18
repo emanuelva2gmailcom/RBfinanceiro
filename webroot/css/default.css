@@ -543,12 +543,11 @@
 
             .cardtextHOME{
                 color: #DBEBED;
-                font-size: 14px;
             }
 
             .cardfooterHOME{
                 border-radius: 0px 0px 14px 14px;
-                background-color: #047076
+                background-color: #047076;
 
 ;
             }
