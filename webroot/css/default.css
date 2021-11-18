@@ -526,18 +526,17 @@
             }
 
             .cardheaderHOME{
-                border-radius: 20px 20px 0px 0px ;
+                border-radius: 20px 20px 0px 0px;
             }
 
             .cardbodyHOME{
-                background-color: #047076
-
-;
+                background-color: #047076;
+                border-radius: 0px 0px 16px 16px;
             }
 
             .cardtitleHOME{
-                width: 50%;
-                margin-left: 25%;
+                width: 60%;
+                margin-left: 20%;
                 color: #DBEBED;
             }
 
