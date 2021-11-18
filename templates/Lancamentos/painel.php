@@ -90,7 +90,6 @@
                 }
             });
             var t = $('#example').DataTable()
-            console.log(data[0])
             t.clear()
             t.rows.add(data[0])
             t.draw()
