@@ -1,5 +1,5 @@
 <div class="card">
-	<div class="card-header text-white bg-dark">
+	<div class="card-header">
 		<!-- <span class="card-title">
 			<?php echo __('Dashboard');?>
 		</span> -->
