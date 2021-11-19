@@ -446,6 +446,20 @@
                 opacity: 0.7;
             }
 
+            .calcularINDEX .btn-secondary{
+                background-color: #ffffff;
+                color: #10564F;
+                border: 1px solid #10564F;
+                opacity: 0.7;
+            }
+
+            .calcularINDEX .btn-secondary:hover {
+                background-color: #10564F;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                opacity: 0.7;
+            }
+
             .vis:hover {
                 background-color: #10564F;
                 color: #ffffff;
@@ -622,8 +636,8 @@
             .cardheaderDASH{
                 border-radius: 20px 20px 0px 0px;
                 background-color: #047076;
-            }   
-            
+            }
+
             .cardbodyDASH{
                 color: #10564F;
             }
