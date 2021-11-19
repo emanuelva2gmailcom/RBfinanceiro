@@ -27,8 +27,8 @@
                 <tr>
 
                     <th><?= __('Tipo') ?></th>
-                    <th><?= __('Descrição') ?></th>
                     <th><?= __('Valor') ?></th>
+                    <th><?= __('Descrição') ?></th>
                     <th><?= __('Data de Emissão') ?></th>
                     <th><?= __('Data de Baixa') ?></th>
                     <th><?= __('Data de Vencimento') ?></th>
@@ -41,12 +41,12 @@
 
             <tbody class="tboINDEX">
                 <?php foreach ($lancamentos as $lancamento) :
-                  
+
                 ?>
                     <tr class="ops">
                         <td><?= h($lancamento->tipo) ?></td>
-                        <td><?= h($lancamento->descricao) ?></td>
                         <td><?= h('R$ ' . $lancamento->valor) ?></td>
+                        <td><?= h($lancamento->descricao) ?></td>
                         <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <?php if (empty($lancamento->data_baixa)) { ?>
                             <td><?= h($lancamento->data_baixa) ?></td>
@@ -54,7 +54,6 @@
                             <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <?php } ?>
                         <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-
                         <td class="tdINDEX"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
                         <td class="tdINDEX"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
                         <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
@@ -72,18 +71,25 @@
                             </div>
 
                         </td>
-                    </tr>
 
-                <?php endforeach; ?>
-                </tr>
+                    <?php endforeach; ?>
+                    </tr>
             </tbody>
 
-            <tr>
-                <th colspan="2" style="text-align:right">TOTAL</th>
-                <td id="total"></td>
-            </tr>
-
-
+            <tfoot>
+                <tr>
+                    <th class="thTotal"></th>
+                    <td id="total"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
 
         </table>
 
@@ -139,6 +145,7 @@
                 {
                     data: 'Cliente'
                 },
+
                 {
                     data: 'Ações',
                     render: function(data, type, row) {
@@ -146,14 +153,12 @@
                             null :
                             data;
                     }
-                }
+                },
+
+
 
             ],
-            column: [{
-                    data: 'Total'
-                }
-
-            ],
+            dom: 'Bfrtip',
             buttons: [{
 
                     text: 'Adicionar',
@@ -161,34 +166,47 @@
                     action: function() {
                         window.location.href = '/lancamentos/add'
                     }
-
                 },
                 {
                     extend: 'copyHtml5',
                     text: 'Copiar',
-
+                    title: " ",
                     exportOptions: {
                         orthogonal: 'export',
 
                         columns: function(column, data, node) {
+
                             if (column > 7) {
                                 return false;
                             }
                             return true;
                         },
-                    }
-                }, "print", "csvHtml5",
+                    },
+                    footer: true
+                },
+                {
+                    extend: "print",
+                    title: " ",
+                    footer: true
+                },
+                {
+                    extend: "csvHtml5",
+                    title: "Lançamento",
+                    footer: true
+                },
                 {
                     extend: 'excelHtml5',
                     exportOptions: {
-                        orthogonal: 'export',
+                        orthogonal: 'teste',
                         columns: function(column, data, node) {
                             if (column > 7) {
                                 return false;
                             }
                             return true;
                         },
-                    }
+                    },
+                    title: "Lançamento",
+                    footer: true
                 },
                 {
                     extend: 'pdfHtml5',
@@ -200,7 +218,9 @@
                             }
                             return true;
                         },
-                    }
+                    },
+                    title: "Lançamento",
+                    footer: true
                 },
                 {
                     extend: 'collection',
@@ -217,7 +237,7 @@
                         var valor = 0;
                         var valorTotal = 0;
                         for (var i = 0; i < Trs.length; i++) {
-                            valor = Trs[i]['children'][2]['outerText'].replace('R$', '')
+                            valor = Trs[i]['children'][1]['outerText'].replace('R$', '')
                             // valor = valor.replace('.', '')
                             // valor = valor.replace(',', '.')
                             // valor = Trs[i]['children'][2]['outerText']
@@ -225,6 +245,7 @@
                             valorTotal += Number(valor)
 
                         }
+                        document.getElementsByClassName('thTotal')[0].innerHTML = 'TOTAL'
                         document.getElementById('total').innerHTML = valorTotal.toLocaleString('pt-br', {
                             style: 'currency',
                             currency: 'BRL'
