@@ -186,12 +186,12 @@
                 },
                 {
                     extend: "print",
-                    title: " ",
+                    title: "Lançamentos",
                     footer: true
                 },
                 {
                     extend: "csvHtml5",
-                    title: "Lançamento",
+                    title: "Lançamentos",
                     footer: true
                 },
                 {
