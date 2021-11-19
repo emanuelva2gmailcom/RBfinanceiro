@@ -35,61 +35,65 @@
         }
     </script>
 
-
 </head>
 
 <body>
          <div class="position-relative overflow-hidden p-3 p-md-5 text-center" >
+
+            <h1 class="tituloINDEX">Seja Bem-Vindo</h1>
+            <h4 class="tituloINDEX2">Logo abaixo se encontra as direções para encaminho até seus relatórios:</h4>
+
             <div class="container-fluid vh-50 m-0 py-5 justify-content-center">
+
 
             <div class="card-deck">
             <div class="row">
               <div class="col-md-12 col-lg-6 col-xl-4">
                 <div class="cardHOME card mb-2">
                 <div class="cardheaderHOME card-header bg-white">
-                    <div class="m-auto h-75 w-75">
+                    <div class="m-auto h-100 w-100">
                         <?= $this->Html->image('fct.jpg', ['class' => 'indexHOME']) ?>
+                        <h5 class="cardtitleHOME card-title">Fluxo de Caixa</h5>
+                        <p class="cardtextHOME card-text pb-2 pt-1">Aqui você visualiza os registros das entradas e saídas da empresa</p>
+                        <a href="/relatorios/fluxodecaixa"> <p class="linkHOME"> Visualizar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
                     </div>
                 </div>
-                <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
-                    <h5 class="cardtitleHOME card-title">Fluxo de Caixa</h5>
-                    <p class="cardtextHOME card-text pb-2 pt-1">Aqui você visualiza os registros das entradas <br> e saídas da empresa</p>
+                <!-- <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
                 </div>
                 <div class="cardfooterHOME card-footer">
-                   <a href="/relatorios/fluxodecaixa"> <p> Visualizar <i class="fas fa-arrow-circle-right"></i></p></a>
-                </div>
+                </div> -->
                 </div>
               </div>
               <div class="col-md-12 col-lg-6 col-xl-4">
               <div class="cardHOME card mb-2 ">
               <div class="cardheaderHOME card-header bg-white">
-                    <div class="m-auto h-75 w-75">
+                    <div class="m-auto h-100 w-100">
                         <?= $this->Html->image('cgt.jpg', ['class' => 'indexHOME']) ?>
+                        <h5 class="cardtitleHOME card-title">Caixa Gerencial</h5>
+                        <p class="cardtextHOME card-text pb-2 pt-1">Aqui você verifica o controle de seu fluxo de caixa</p>
+                        <a href="/relatorios/gerencial"> <p class="linkHOME"> Verificar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
                     </div>
                 </div>
-                <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
-                    <h5 class="cardtitleHOME card-title">Caixa Gerencial</h5>
-                    <p class="cardtextHOME card-text pb-2 pt-1">Aqui você verifica o controle de seu <br> fluxo de caixa</p>
+           <!-- <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
                 </div>
                 <div class="cardfooterHOME card-footer">
-                <a href="/relatorios/gerencial"> <p> Verificar <i class="fas fa-arrow-circle-right"></i></p></a>
-                </div>
+                </div> -->
                 </div>
               </div>
               <div class="col-md-12 col-lg-6 col-xl-4">
               <div class="cardHOME card mb-2 ">
               <div class="cardheaderHOME card-header bg-white">
-                    <div class="m-auto h-75 w-75">
+                    <div class="m-auto h-100 w-100">
                         <?= $this->Html->image('cdt.jpg', ['class' => 'indexHOME']) ?>
+                        <h5 class="cardtitleHOME card-title">Caixa Diário</h5>
+                        <p class="cardtextHOME card-text pb-2 pt-1">Aqui você irá direto para o acompanhamento diário das entradas e saídas de acordo com sua abertura de atividades até seu fechamento</p>
+                        <a href="/relatorios/caixadiario"> <p class="linkHOME"> Acompanhar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
                     </div>
                 </div>
-                <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
-                    <h5 class="cardtitleHOME card-title">Caixa Diário</h5>
-                    <p class="cardtextHOME card-text pb-2 pt-1">Aqui você irá direto para o acompanhamento diário das entradas <br> e saídas de acordo com sua abertura de atividades até seu fechamento</p>
+                <!-- <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
                 </div>
                 <div class="cardfooterHOME card-footer">
-                <a href="/relatorios/caixadiario"> <p> Acompanhar <i class="fas fa-arrow-circle-right"></i></p></a>
-                </div>
+                </div> -->
                 </div>
           </div>
         </div>
