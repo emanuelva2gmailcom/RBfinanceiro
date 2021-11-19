@@ -61,7 +61,9 @@ class LancamentosController extends AppController
 
         return $totals;
     }
-
+    public function teste()
+    {
+    }
     public function getTablePainel()
     {
         $renovados = $this->getrenovado();
@@ -100,7 +102,7 @@ class LancamentosController extends AppController
             ]);
             foreach ($contas as $c) :
                 $valor = 0;
-                foreach ($lancamentos as $l) : 
+                foreach ($lancamentos as $l) :
                     if ($l->$date->i18nFormat('yyyy-MM') == $request[1]) {
                         switch ($c->fluxosubgrupo->fluxogrupo->grupo) {
                             case 'entrada':
@@ -120,11 +122,11 @@ class LancamentosController extends AppController
                 $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
                 array_push($obj, [$c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
             endforeach;
-            
+
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([$obj, $total, $totals]));
             return $this->response;
-        } else if($this->request->is('get')) {
+        } else if ($this->request->is('get')) {
             $obj = [];
             $total = 0;
             $this->loadModel('Fluxocontas');
@@ -157,7 +159,6 @@ class LancamentosController extends AppController
                 ->withStringBody(json_encode([$obj, $total, $totals]));
             return $this->response;
         }
-        
     }
 
     public function painel()
@@ -240,7 +241,7 @@ class LancamentosController extends AppController
             if ($name == '') {
                 $name = null;
             }
-            
+
             $comprovantes->nome_arquivo = $nome;
             if (($this->Lancamentos->save($lancamento))) {
                 $comprovantes->lancamento_id = $lancamento->id_lancamento;
@@ -302,7 +303,7 @@ class LancamentosController extends AppController
             'contain' => ['Dregrupos'],
             'conditions' => ['Dregrupos.grupo' => 'variavel'],
         ]);
-      
+
         $fixos = $this->Lancamentos->Drecontas->find('list', [
             'contain' => ['Dregrupos'],
             'conditions' => ['Dregrupos.grupo' => 'fixo'],
@@ -318,7 +319,7 @@ class LancamentosController extends AppController
         $dregrupos = $this->Lancamentos->Drecontas->Dregrupos->find('list', ['limit' => 200]);
         $Grupos = $this->Lancamentos->Fluxocontas->Fluxosubgrupos->Fluxogrupos->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
-        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'drecontas','dregrupos', 'grupos', 'Grupos', 'entradas', 'saidas', 'todos','variaveis','fixos','receitas'));
+        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'drecontas', 'dregrupos', 'grupos', 'Grupos', 'entradas', 'saidas', 'todos', 'variaveis', 'fixos', 'receitas'));
     }
 
     public function renovar($id = null)
@@ -343,7 +344,7 @@ class LancamentosController extends AppController
             $lancamento2->cliente_id = $lancamento->cliente_id;
             $lancamento2->lancamento_id = $lancamento->id_lancamento;
             $lancamento2->dreconta_id = $lancamento->dreconta_id;
-        
+
 
             if ($this->Lancamentos->save($lancamento2)) {
                 $this->Flash->success(__('Lançamento editado com sucesso.'));
