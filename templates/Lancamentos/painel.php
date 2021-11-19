@@ -5,7 +5,7 @@
 </head>
 
 <body>
-    <div class="container-fluid d-flex align-items-center justify-content-center p-5">
+    <div class="container-fluid d-flex align-items-center justify-content-center p-3">
         <div class="cardPAINEL card container ">
             <div class="card-body">
                 <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
