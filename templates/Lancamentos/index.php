@@ -97,12 +97,29 @@
         </table>
 
     </div>
-    <div class="card-body">
-        <div class="chart">
-            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <!-- <h4 class="modal-title" id="myModalLabel">Modal title</h4> -->
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="chart">
+                            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
         </div>
     </div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -269,7 +286,7 @@
                 },
                 {
                     text: 'Gráfico',
-                    action: function() {
+                    action: function(e, node, config) {
                         var Tabela = document.getElementById("example1");
                         var Trs = Tabela.getElementsByClassName("ops");
                         var valor = [];
@@ -326,13 +343,14 @@
                         }
 
                         new Chart(barChartCanvas, {
-                            type: 'bar',
-                            data: barChartData,
-                            options: barChartOptions
-                        })
+                                type: 'bar',
+                                data: barChartData,
+                                options: barChartOptions
+                            }),
+                            $('#myModal').modal('show')
 
                     }
-                }
+                },
             ]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
