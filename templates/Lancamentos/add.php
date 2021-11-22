@@ -38,6 +38,12 @@
                     <span class="bs-stepper-circle">4</span>
                 </button>
             </div>
+            <div class="lineADD line"></div>
+            <div class="step" data-target="#test-l-5">
+                <button type="button" class="btn step-trigger">
+                    <span class="bs-stepper-circle">5</span>
+                </button>
+            </div>
         </div>
         <div class="bssteppercontentADD bs-stepper-content">
             <?= $this->Form->create($lancamento, ['type' => 'file']) ?>
@@ -133,7 +139,7 @@
                 </div>
             </div>
             <div id="test-l-4" class="bssteppercontentContent content">
-                <div class="panel-body">
+            <div class="panel-body">
                     <div class="form-group">
                         <?= $this->Form->control('dregrupo_id', ['options' => $dregrupos, 'empty' => 'SELECIONE', 'class' => 'dregrupo']); ?>
                     </div>
@@ -189,7 +195,14 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
+                    <div class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
+                </div>
+            </div>
+            <div id="test-l-5" class="bssteppercontentContent content">
+                <div class="panel-body">
                     <div class="fornecedor form-group">
                         <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
                     </div>

@@ -1,6 +1,6 @@
 <div id="updateUsersIndex">
-	<?php echo $this->Search->searchForm('Users', ['legend'=>false, 'updateDivId'=>'updateUsersIndex']);?>
-	<?php echo $this->element('Usermgmt.paginator', ['updateDivId'=>'updateUsersIndex']);?>
+	<?php echo $this->Search->searchForm('Users', ['legend'=>false, 'updateDivId'=>'updateUsersIndex', 'class'=>'btnADD']);?>
+	<?php echo $this->element('Usermgmt.paginator', ['updateDivId'=>'updateUsersIndex', 'class'=>'btnADD']);?>
 	
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-sm table-hover">
@@ -69,7 +69,7 @@
 							
 							echo "<td>";
 								echo "<div class='dropdown'>";
-									echo "<button class='btn btn-dark btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>".__('Ações')."</button>";
+									echo "<button class='btn btnADD btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>".__('Ações')."</button>";
 									
 									echo "<div class='dropdown-menu dropdown-menu-right'>";
 										echo $this->Html->link(__('Exibir Usuário'), ['controller'=>'Users', 'action'=>'viewUser', $row['id'], '?'=>['page'=>$this->UserAuth->getPageNumber()]], ['escape'=>false, 'class'=>'dropdown-item']);

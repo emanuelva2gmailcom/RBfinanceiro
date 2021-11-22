@@ -1,15 +1,15 @@
-<div class="card">
-	<div class="card-header text-white bg-dark">
-		<span class="card-title">
-			<?php echo __('Add Signature');?>
+<div class="cardPAINEL card mt-2">
+	<div class="cardheaderDASH card-header">
+		<span class="text-white card-title">
+			<?php echo __('Adicionar Assinatura');?>
 		</span>
 
 		<span class="card-title float-right">
-			<?php echo $this->Html->link(__('Back', true), ['action'=>'index'], ['class'=>'btn btn-secondary btn-sm']);?>
+			<?php echo $this->Html->link(__('Voltar', true), ['action'=>'index'], ['class'=>'btn cancelarADD btn-sm']);?>
 		</span>
 	</div>
 
-	<div class="card-body">
+	<div class="cardbodyDASH card-body">
 		<?php echo $this->element('Usermgmt.ajax_validation', ['formId'=>'addSignatureForm', 'submitButtonId'=>'addSignatureSubmitBtn']);?>
 		<?php echo $this->Form->create($userEmailSignatureEntity, ['id'=>'addSignatureForm']);?>
 
@@ -35,7 +35,7 @@
 
 		<div class="row form-group border-top pt-3">
 			<div class="col">
-				<?php echo $this->Form->Submit(__('Add Signature'), ['class'=>'btn btn-primary', 'id'=>'addSignatureSubmitBtn']);?>
+				<?php echo $this->Form->Submit(__('Adicionar Assinatura'), ['class'=>'btn btnADD', 'id'=>'addSignatureSubmitBtn']);?>
 			</div>
 		</div>
 

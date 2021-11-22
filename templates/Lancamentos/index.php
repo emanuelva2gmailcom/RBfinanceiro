@@ -24,7 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 </head>
 <div class="card">
-    <div class="card-body">
+    <div class="calcularINDEX card-body">
         <table id="example1" class="table table-bordered table-striped">
             <thead class="theINDEX">
                 <tr>
@@ -79,10 +79,10 @@
                     </tr>
             </tbody>
 
-            <tfoot>
+            <tfoot class="theINDEX">
                 <tr>
                     <th class="thTotal"></th>
-                    <td id="total"></td>
+                    <td class="tboINDEX" id="total"></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -274,7 +274,7 @@
                             valorTotal += Number(valor)
 
                         }
-                        document.getElementsByClassName('thTotal')[0].innerHTML = 'TOTAL'
+                        document.getElementsByClassName('thTotal')[0].innerHTML = 'Total'
                         document.getElementById('total').innerHTML = valorTotal.toLocaleString('pt-br', {
                             style: 'currency',
                             currency: 'BRL'

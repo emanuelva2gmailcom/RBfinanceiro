@@ -1,11 +1,11 @@
-<div class="card">
-	<div class="card-header text-white bg-dark">
-		<span class="card-title">
-			<?php echo __('Sub Group Permissions Matrix');?>
+<div class="cardPAINEL card mt-2">
+	<div class="cardheaderDASH card-header">
+		<span class="text-white card-title">
+			<?php echo __('Permissões de SubGrupos Matriz');?>
 		</span>
 
 		<span class="card-title float-right">
-			<?php echo "<a id='permissionOptions' href='javascript:void(0)' class='btn btn-secondary btn-sm'>Choose Options</a>";?>
+			<?php echo "<a id='permissionOptions' href='javascript:void(0)' class='btn cancelarADD btn-sm'>Escolher Opções</a>";?>
 		</span>
 
 		<span class="card-title float-right mr-2">
@@ -13,7 +13,7 @@
 		</span>
 	</div>
 
-	<div class="card-body p-2">
+	<div class="cardbodyDASH card-body p-2">
 		<div>
 			<?php echo $this->Html->image(SITE_URL.'usermgmt/img/approve.png', ['alt'=>__('Yes')]);?> = <?php echo __("The sub group has permission of controller's action");?><br/><?php echo $this->Html->image(SITE_URL.'usermgmt/img/remove.png', ['alt'=>__('No')]);?> = <?php echo __("The sub group has not permission of controller's action");?><br/><span style="color:green">(<?php echo __('inherit');?>)</span> = <?php echo __('Permission inherited from parent group');?>
 		</div>

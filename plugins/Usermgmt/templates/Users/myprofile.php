@@ -1,15 +1,15 @@
-<div class="card">
-	<div class="card-header text-white bg-dark">
-		<span class="card-title">
+<div class="cardPAINEL card mt-2">
+	<div class="cardheaderDASH card-header">
+		<span class="text-white card-title">
 			<?php echo __('Meu Perfil');?>
 		</span>
 
 		<span class="card-title float-right">
-			<?php echo $this->Html->link(__('Editar', true), ['action'=>'editProfile'], ['class'=>'btn btn-secondary btn-sm']);?>
+			<?php echo $this->Html->link(__('Editar', true), ['action'=>'editProfile'], ['class'=>'btn cancelarADD btn-sm']);?>
 		</span>
 	</div>
 
-	<div class="card-body">
+	<div class="cardbodyDASH card-body">
 		<div class="d-inline-block">
 			<table class="table-sm" style="width:auto">
 				<tbody>

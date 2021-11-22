@@ -1,15 +1,15 @@
-<div class="card">
-	<div class="card-header text-white bg-dark">
-		<span class="card-title">
+<div class="cardPAINEL card mt-2">
+	<div class="cardheaderDASH card-header">
+		<span class="text-white card-title">
 			<?php echo __('Adicionar Vários Usuários');?>
 		</span>
 
 		<span class="card-title float-right">
-			<?php echo $this->Html->link(__('Voltar', true), ['action'=>'index'], ['class'=>'btn btn-secondary btn-sm']);?>
+			<?php echo $this->Html->link(__('Voltar', true), ['action'=>'index'], ['class'=>'btn cancelarADD btn-sm']);?>
 		</span>
 	</div>
 
-	<div class="card-body">
+	<div class="cardbodyDASH card-body">
 		<?php echo $this->Form->create(null, ['novalidate'=>true, 'type'=>'file']);?>
 
 		<div class="form-row align-items-center">
@@ -22,7 +22,7 @@
 			</div>
 
 			<div class="col-auto">
-				<?php echo $this->Form->Submit(__('Envio'), ['class'=>'btn btn-primary btn-sm', 'style'=>'margin-bottom:0']);?>
+				<?php echo $this->Form->Submit(__('Envio'), ['class'=>'btn btnADD btn-sm', 'style'=>'margin-bottom:0']);?>
 			</div>
 		</div>
 
