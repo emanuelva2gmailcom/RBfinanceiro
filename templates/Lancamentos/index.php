@@ -109,7 +109,7 @@
                 <div class="modal-body">
                     <div class="card-body">
                         <div class="chart">
-                            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;pointer-events: none;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -128,65 +128,65 @@
     $(function() {
         var printCounter = 0;
         $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "language": {
-                "emptyTable": "Nenhum registro disponível na tabela",
-                "zeroRecords": "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
-                "infoEmpty": "Mostrando 0 de 0 dos 0 lançamentos",
-                "infoFiltered": "(filtrado do total de _MAX_ lançamentos)",
-                "search": "Procurar:",
-                "paginate": {
-                    "first": "Primeiro",
-                    "last": "Último",
-                    "next": "Próximo",
-                    "previous": "Anterior"
-                },
-            },
-
-            columns: [{
-                    data: 'Tipo'
-                },
-                {
-                    data: 'Descricao'
-                },
-                {
-                    data: 'Valor'
-                },
-                {
-                    data: 'Data de Emissão'
-                },
-                {
-                    data: 'Data de Baixa'
-                },
-                {
-                    data: 'Data de Vencimento'
-                },
-                {
-                    data: 'Fluxoconta'
-                },
-                {
-                    data: 'Fornecedor'
-                },
-                {
-                    data: 'Cliente'
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "language": {
+                    "emptyTable": "Nenhum registro disponível na tabela",
+                    "zeroRecords": "Nenhum registro encontrado",
+                    "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
+                    "infoEmpty": "Mostrando 0 de 0 dos 0 lançamentos",
+                    "infoFiltered": "(filtrado do total de _MAX_ lançamentos)",
+                    "search": "Procurar:",
+                    "paginate": {
+                        "first": "Primeiro",
+                        "last": "Último",
+                        "next": "Próximo",
+                        "previous": "Anterior"
+                    },
                 },
 
-                {
-                    data: 'Ações',
-                    render: function(data, type, row) {
-                        return type === 'export' ?
-                            null :
-                            data;
-                    }
-                },
+                columns: [{
+                        data: 'Tipo'
+                    },
+                    {
+                        data: 'Descricao'
+                    },
+                    {
+                        data: 'Valor'
+                    },
+                    {
+                        data: 'Data de Emissão'
+                    },
+                    {
+                        data: 'Data de Baixa'
+                    },
+                    {
+                        data: 'Data de Vencimento'
+                    },
+                    {
+                        data: 'Fluxoconta'
+                    },
+                    {
+                        data: 'Fornecedor'
+                    },
+                    {
+                        data: 'Cliente'
+                    },
+
+                    {
+                        data: 'Ações',
+                        render: function(data, type, row) {
+                            return type === 'export' ?
+                                null :
+                                data;
+                        }
+                    },
 
 
 
-            ],
-
+                ],
+               
             dom: 'Bfrtip',
             buttons: [{
 
@@ -355,7 +355,7 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
 
-
+        
 
     });
 </script>
