@@ -20,6 +20,9 @@
     }
 </script>
 
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+</head>
 <div class="card">
     <div class="card-body">
         <table id="example1" class="table table-bordered table-striped">
@@ -94,11 +97,19 @@
         </table>
 
     </div>
+    <div class="card-body">
+        <div class="chart">
+            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+        </div>
+    </div>
+
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script>
     $(function() {
+        var printCounter = 0;
         $("#example1").DataTable({
             "responsive": true,
             "lengthChange": false,
@@ -158,6 +169,7 @@
 
 
             ],
+
             dom: 'Bfrtip',
             buttons: [{
 
@@ -187,7 +199,7 @@
                 {
                     extend: "print",
                     title: "Lançamentos",
-                    footer: true
+                    footer: true,
                 },
                 {
                     extend: "csvHtml5",
@@ -220,7 +232,8 @@
                         },
                     },
                     title: "Lançamento",
-                    footer: true
+                    footer: true,
+
                 },
                 {
                     extend: 'collection',
@@ -241,7 +254,6 @@
                             // valor = valor.replace('.', '')
                             // valor = valor.replace(',', '.')
                             // valor = Trs[i]['children'][2]['outerText']
-                            console.log(valor)
                             valorTotal += Number(valor)
 
                         }
@@ -255,7 +267,77 @@
                     }
 
                 },
+                {
+                    text: 'Gráfico',
+                    action: function() {
+                        var Tabela = document.getElementById("example1");
+                        var Trs = Tabela.getElementsByClassName("ops");
+                        var valor = [];
+                        var Head = []
+                        month = new Array("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
+
+                        for (var i = 0; i < Trs.length; i++) {
+                            valor.push(Trs[i]['children'][1]['outerText'].replace('R$', ''))
+                            Head.push(month[Trs[i]['children'][5]['outerText'].split('-')[1].replace(/^0+/, '')])
+
+                        }
+
+                        var areaChartData = {
+                            labels: Head,
+                            datasets: [{
+                                label: 'Saidas',
+                                backgroundColor: 'rgba(60,141,188,0.9)',
+                                borderColor: 'rgba(60,141,188,0.8)',
+                                pointRadius: false,
+                                pointColor: '#3b8bba',
+                                pointStrokeColor: 'rgba(60,141,188,1)',
+                                pointHighlightFill: '#fff',
+                                pointHighlightStroke: 'rgba(60,141,188,1)',
+                                data: valor
+                            }, ]
+                        }
+
+                        var areaChartOptions = {
+                            maintainAspectRatio: false,
+                            responsive: true,
+                            legend: {
+                                display: false
+                            },
+                            scales: {
+                                xAxes: [{
+                                    gridLines: {
+                                        display: false,
+                                    }
+                                }],
+                                yAxes: [{
+                                    gridLines: {
+                                        display: false,
+                                    }
+                                }]
+                            }
+                        }
+                        var barChartCanvas = $('#barChart').get(0).getContext('2d')
+                        var barChartData = $.extend(true, {}, areaChartData)
+
+                        var barChartOptions = {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            datasetFill: false
+                        }
+
+                        new Chart(barChartCanvas, {
+                            type: 'bar',
+                            data: barChartData,
+                            options: barChartOptions
+                        })
+
+                    }
+                }
             ]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+
+
+
     });
 </script>
