@@ -539,32 +539,52 @@
 
             .cardHOME{
                 border-radius: 20px;
-                border: solid 2px #047076
-
-;
+                border: solid 2px #047076;
             }
 
             .cardheaderHOME{
-                border-radius: 20px 20px 0px 0px ;
+                border-radius: 20px;
             }
 
-            .cardbodyHOME{
-                background-color: #047076
-
-;
+            .cardheaderHOME:hover .cardtextHOME{
+                display: block;
             }
+
+            /* .cardbodyHOME{
+                background-color: #047076;
+            } */
 
             .cardtitleHOME{
-                width: 50%;
-                margin-left: 25%;
-                color: #DBEBED;
+                width: 60%;
+                margin-left: 20%;
+                color: #047076;
+                border-bottom: 2px solid #047076;
             }
 
             .cardtextHOME{
-                color: #DBEBED;
+                color: #10564F;
+                display: none;
             }
 
-            .cardfooterHOME{
+            .linkHOME{
+                color: #047076;
+            }
+
+            .tituloINDEX{
+                color: #10564F;
+                font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+                border: #047076 1px solid;
+                border-radius: 20px;
+            }
+
+            .tituloINDEX2{
+                color: #047076;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                text-decoration: underline;
+                margin-top: 3%;
+            }
+
+            /* .cardfooterHOME{
                 border-radius: 0px 0px 14px 14px;
                 background-color: #047076;
 
@@ -572,7 +592,9 @@
             }
             .cardfooterHOME p,i{
                 color: #DBEBED;
-            }
+            } */
+
+
 
      /* 2.2 Login & Registro: */
 
