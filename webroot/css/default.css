@@ -286,6 +286,18 @@
 
      /* 2. Indexes: */
 
+            #myModal .modal-header{
+                background-color: #DBEBED;
+            }
+
+            #myModal .modal-body{
+                background-color: #10564F;
+            }
+
+            #myModal .modal-footer{
+                background-color: #DBEBED;
+            }
+
             .tdINDEX a {
                 color: #10564F;
             }

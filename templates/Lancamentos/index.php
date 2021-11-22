@@ -303,8 +303,7 @@
                             labels: Head,
                             datasets: [{
                                 label: 'Saidas',
-                                backgroundColor: 'rgba(60,141,188,0.9)',
-                                borderColor: 'rgba(60,141,188,0.8)',
+                                backgroundColor: '#047076',
                                 pointRadius: false,
                                 pointColor: '#3b8bba',
                                 pointStrokeColor: 'rgba(60,141,188,1)',
