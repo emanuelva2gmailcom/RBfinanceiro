@@ -38,12 +38,6 @@
                     <span class="bs-stepper-circle">4</span>
                 </button>
             </div>
-            <div class="lineADD line"></div>
-            <div class="step" data-target="#test-l-5">
-                <button type="button" class="btn step-trigger">
-                    <span class="bs-stepper-circle">5</span>
-                </button>
-            </div>
         </div>
         <div class="bssteppercontentADD bs-stepper-content">
             <?= $this->Form->create($lancamento, ['type' => 'file']) ?>
@@ -87,50 +81,6 @@
             <div id="test-l-3" class="bssteppercontentContent content">
                 <div class="panel-body">
 
-                    <div class="form-group">
-                        <?= $this->Form->control('grupo', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']) ?>
-                        <span class="s-grupo"></span>
-                    </div>
-
-                    <!-- <div class="form-group tudo">
-                          <?= $this->Form->control('fluxoconta_id', ['options' => $tudo, 'empty' => 'SELECIONE', 'class' => 'conta']); ?>
-                      </div> -->
-                    <div class="form-group select">
-                        <label for="" class="l-todos">Conta</label>
-                        <select name="" class="todos form-control" id="">
-                            <option value="0">SELECIONE</option>
-                            <?php
-                            foreach ($todos as $t => $todo) :
-                            ?>
-                                <option value=<?= $t ?>><?= $todo ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group select">
-                        <label for="" class="l-entradas d-none">Conta</label>
-                        <select name="" class="entradas form-control d-none" id="">
-                            <option>SELECIONE</option>
-                            <?php
-                            foreach ($entradas as $i => $entrada) :
-                            ?>
-                                <option value=<?= $i ?>><?= $entrada ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-
-                    <div class="form-group select ">
-                        <label for="" class="l-saidas d-none">Conta</label>
-                        <select name="" class="saidas form-control d-none" id="">
-                            <option>SELECIONE</option>
-                            <?php
-                            foreach ($saidas as $o => $saida) :
-                            ?>
-                                <option value=<?= $o ?>><?= $saida ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
 
                 </div>
                 <div class="d-flex justify-content-between">
@@ -138,70 +88,8 @@
                     <div class="prox-antADD btn" id="teste" onclick="stepper1.next()">Próximo</div>
                 </div>
             </div>
+            
             <div id="test-l-4" class="bssteppercontentContent content">
-            <div class="panel-body">
-                    <div class="form-group">
-                        <?= $this->Form->control('dregrupo_id', ['options' => $dregrupos, 'empty' => 'SELECIONE', 'class' => 'dregrupo']); ?>
-                    </div>
-                    <!-- <div class="form-group">
-                        <?= $this->Form->control('dreconta_id', ['options' => $drecontas, 'empty' => 'SELECIONE']); ?>
-                    </div> -->
-
-                    <div class="form-group select">
-                        <label for="" class="tudo">Conta</label>
-                        <select name="" class="tudo form-control" id="">
-                            <option>SELECIONE</option>
-                            <?php
-                            foreach ($receitas as $r => $receita) :
-                            ?>
-                                <option value=<?= $r ?>><?= $receita ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group select">
-                        <label for="" class="variaveis d-none">Conta</label>
-                        <select name="" class="variaveis form-control d-none" id="">
-                            <option>SELECIONE</option>
-                            <?php
-                            foreach ($variaveis as $v => $variavel) :
-                            ?>
-                                <option value=<?= $v ?>><?= $variavel ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-
-                    <div class="form-group select">
-                        <label for="" class="fixos d-none">Conta</label>
-                        <select name="" class="fixos form-control d-none" id="">
-                            <option>SELECIONE</option>
-                            <?php
-                            foreach ($fixos as $f => $fixo) :
-                            ?>
-                                <option value=<?= $f ?>><?= $fixo ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group select">
-                        <label for="" class="receitas d-none">Conta</label>
-                        <select name="" class="receitas form-control d-none" id="">
-                            <option>SELECIONE</option>
-                            <?php
-                            foreach ($receitas as $r => $receita) :
-                            ?>
-                                <option value=<?= $r ?>><?= $receita ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
-                    <div class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
-                </div>
-            </div>
-            <div id="test-l-5" class="bssteppercontentContent content">
                 <div class="panel-body">
                     <div class="fornecedor form-group">
                         <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
@@ -255,16 +143,16 @@
         $grupo = $grupo;
         if ($grupo == 0) {
             $('#teste').removeAttr('onclick')
-            $('.todos').prop('disabled', true);
+            // $('.todos').prop('disabled', true);
         }
 
-        $('#teste').click(function() {
-            if ($grupo == 0) {
-                $('.s-grupo').text('Campo Obrigatório')
-            } else {
-                $('.s-grupo').text(' ')
-            }
-        })
+        // $('#teste').click(function() {
+        //     if ($grupo == 0) {
+        //         $('.s-grupo').text('Campo Obrigatório')
+        //     } else {
+        //         $('.s-grupo').text(' ')
+        //     }
+        // })
     }
 
     $('.grupo').change(function() {

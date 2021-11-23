@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
 /**
  * Lancamentos Model
  *
- * @property \App\Model\Table\FluxocontasTable&\Cake\ORM\Association\BelongsTo $Fluxocontas
+ * @property \App\Model\Table\SubcontasTable&\Cake\ORM\Association\BelongsTo $Subcontas
  * @property \App\Model\Table\FornecedoresTable&\Cake\ORM\Association\BelongsTo $Fornecedores
  * @property \App\Model\Table\ClientesTable&\Cake\ORM\Association\BelongsTo $Clientes
  * @property \App\Model\Table\LancamentosTable&\Cake\ORM\Association\BelongsTo $Lancamentos
@@ -54,7 +54,7 @@ class LancamentosTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Fluxocontas', [
+        $this->belongsTo('Subcontas', [
             'foreignKey' => 'fluxoconta_id',
         ]);
         $this->belongsTo('Fornecedores', [
@@ -128,11 +128,11 @@ class LancamentosTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['fluxoconta_id'], 'Fluxocontas'), ['errorField' => 'fluxoconta_id']);
+        $rules->add($rules->existsIn(['subconta_id'], 'Subcontas'), ['errorField' => 'subconta_id']);
         $rules->add($rules->existsIn(['fornecedor_id'], 'Fornecedores'), ['errorField' => 'fornecedor_id']);
         $rules->add($rules->existsIn(['cliente_id'], 'Clientes'), ['errorField' => 'cliente_id']);
         $rules->add($rules->existsIn(['lancamento_id'], 'Lancamentos'), ['errorField' => 'lancamento_id']);
-        $rules->add($rules->existsIn(['dreconta_id'], 'Drecontas'), ['errorField' => 'dreconta_id']);
+        // $rules->add($rules->existsIn(['dreconta_id'], 'Drecontas'), ['errorField' => 'dreconta_id']);
 
         return $rules;
     }
