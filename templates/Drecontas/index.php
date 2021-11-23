@@ -38,7 +38,7 @@
           <tr>
             <td><?= h($dreconta->conta) ?></td>
             <td><?= h($dreconta->descricao) ?></td>
-            <td><?= $dreconta->has('dregrupo') ? $this->Html->link($dreconta->dregrupo->id_dregrupo, ['controller' => 'Dregrupos', 'action' => 'view', $dreconta->dregrupo->id_dregrupo]) : '' ?></td>
+            <td><?= $dreconta->has('dregrupo') ? $this->Html->link($dreconta->dregrupo->grupo, ['controller' => 'Dregrupos', 'action' => 'view', $dreconta->dregrupo->id_dregrupo]) : '' ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $dreconta->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
               <?= $this->Html->link(__('Editar'), ['action' => 'edit', $dreconta->id_dreconta], ['class'=>'btn btn-xs btn-outline-primary', 'escape'=>false]) ?>
