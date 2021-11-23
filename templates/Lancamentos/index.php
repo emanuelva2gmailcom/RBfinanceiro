@@ -299,6 +299,7 @@
 
                         }
 
+
                         var areaChartData = {
                             labels: Head,
                             datasets: [{
