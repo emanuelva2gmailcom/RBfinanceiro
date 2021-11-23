@@ -52,9 +52,9 @@
       "language": {
                 "emptyTable":     "Nenhum registro disponível na tabela",
                 "zeroRecords":    "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ contas",
-                "infoEmpty":      "Mostrando 0 de 0 dos 0 contas",
-                "infoFiltered":   "(filtrado do total de _MAX_ contas)",
+                "info": "Mostrando _END_ de _MAX_ contas",
+                "infoEmpty": "Mostrando 0 de 0 contas",
+                "infoFiltered": "",
                 "search": "Procurar:",
                 "paginate": {
                     "first":      "Primeiro",

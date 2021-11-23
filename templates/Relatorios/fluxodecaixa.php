@@ -79,7 +79,7 @@
 
 
     function formatador(data) {
-        data['header'].unshift('Index')
+        data['header'].unshift('')
         data['header'].push('Total')
         columns = []
         //    inner = ''
@@ -116,9 +116,9 @@
             "language": {
                 "emptyTable": "Nenhum registro disponível na tabela",
                 "zeroRecords": "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ fluxos de caixas",
-                "infoEmpty": "Mostrando 0 de 0 dos 0 fluxos de caixas",
-                "infoFiltered": "(filtrado do total de _MAX_ fluxos de caixas)",
+                "info": "Mostrando _END_ de _MAX_ fluxo de caixas",
+                "infoEmpty": "Mostrando 0 de 0 fluxo de caixas",
+                "infoFiltered": "",
                 "search": "Procurar:",
                 "paginate": {
                     "first": "Primeiro",

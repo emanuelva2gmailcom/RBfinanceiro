@@ -52,9 +52,9 @@
       "language": {
                 "emptyTable":     "Nenhum registro disponível na tabela",
                 "zeroRecords":    "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ subgrupos",
-                "infoEmpty":      "Mostrando 0 de 0 dos 0 subgrupos",
-                "infoFiltered":   "(filtrado do total de _MAX_ subgrupos)",
+                "info": "Mostrando _END_ de _MAX_ Subgrupos",
+                "infoEmpty": "Mostrando 0 de 0 Subgrupos",
+                "infoFiltered": "",
                 "search": "Procurar:",
                 "paginate": {
                     "first":      "Primeiro",

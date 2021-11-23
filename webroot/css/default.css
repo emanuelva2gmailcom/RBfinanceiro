@@ -137,6 +137,10 @@
                 color: #DBEBED;
             }
 
+            .cardbodyADD .form-control{
+                text-transform: capitalize;
+            }
+
             .cardfooterADD{
                 border-radius: 0px 0px 20px 20px;
                 background-color: #DBEBED;
@@ -255,6 +259,10 @@
             .bssteppercontentContent{
                 background-color: #10564F;
                 color: #DBEBED
+            }
+
+            .bssteppercontentContent .form-control{
+                text-transform: capitalize;
             }
 
             .prox-antADD{

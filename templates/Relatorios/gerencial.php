@@ -120,9 +120,9 @@
             "language": {
                 "emptyTable": "Nenhum registro disponível na tabela",
                 "zeroRecords": "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ caixas gerenciais",
-                "infoEmpty": "Mostrando 0 de 0 dos 0 caixas gerenciais",
-                "infoFiltered": "(filtrado do total de _MAX_ caixas gerenciais)",
+                "info": "Mostrando _END_ de _MAX_ caixas gerenciais",
+                "infoEmpty": "Mostrando 0 de 0 caixas gerenciais",
+                "infoFiltered": "",
                 "search": "Procurar:",
                 "paginate": {
                     "first": "Primeiro",

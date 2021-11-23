@@ -41,7 +41,7 @@
          <div class="position-relative overflow-hidden p-3 p-md-5 text-center" >
 
             <h1 class="tituloINDEX">Seja Bem-Vindo</h1>
-            <h4 class="tituloINDEX2">Logo abaixo se encontra as direções para encaminho até seus relatórios:</h4>
+            <h4 class="tituloINDEX2">Abaixo encontram-se os direcionamentos para os relatórios:</h4>
 
             <div class="container-fluid vh-50 m-0 py-5 justify-content-center">
 
@@ -70,7 +70,7 @@
                     <div class="m-auto h-100 w-100">
                         <?= $this->Html->image('cgt.jpg', ['class' => 'indexHOME']) ?>
                         <h5 class="cardtitleHOME card-title">Caixa Gerencial</h5>
-                        <p class="cardtextHOME card-text pb-2 pt-1">Aqui você verifica o controle de seu fluxo de caixa</p>
+                        <p class="cardtextHOME card-text pb-2 pt-1">Aqui você verifica o controle do fluxo de caixa da sua empresa</p>
                         <a href="/relatorios/gerencial"> <p class="linkHOME"> Verificar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     <div class="m-auto h-100 w-100">
                         <?= $this->Html->image('cdt.jpg', ['class' => 'indexHOME']) ?>
                         <h5 class="cardtitleHOME card-title">Caixa Diário</h5>
-                        <p class="cardtextHOME card-text pb-2 pt-1">Aqui você irá direto para o acompanhamento diário das entradas e saídas de acordo com sua abertura de atividades até seu fechamento</p>
+                        <p class="cardtextHOME card-text pb-2 pt-1">Aqui você acompanhará as entradas e saídas desde a abertura de atividades do caixa até o seu fechamento</p>
                         <a href="/relatorios/caixadiario"> <p class="linkHOME"> Acompanhar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
                     </div>
                 </div>

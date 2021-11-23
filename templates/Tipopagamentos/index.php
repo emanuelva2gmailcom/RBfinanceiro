@@ -48,9 +48,9 @@
       "language": {
                 "emptyTable":     "Nenhum registro disponível na tabela",
                 "zeroRecords":    "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ tipos de pagamento",
-                "infoEmpty":      "Mostrando 0 de 0 dos 0 tipos de pagamento",
-                "infoFiltered":   "(filtrado do total de _MAX_ tipos de pagamento)",
+                "info": "Mostrando _END_ de _MAX_ tipos de pagamentos",
+                "infoEmpty": "Mostrando 0 de 0 tipos de pagamentos",
+                "infoFiltered": "",
                 "search": "Procurar:",
                 "paginate": {
                     "first":      "Primeiro",

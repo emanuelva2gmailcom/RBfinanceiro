@@ -51,15 +51,23 @@
     <script>
       $(function() {
         $("#example1").DataTable({
-          "responsive": true,
-          "lengthChange": false,
-          "autoWidth": false,
+            "columnDefs": [{
+                "defaultContent": "-",
+                "targets": "_all",
+            }],
+            "paging": true,
+            "lengthChange": false,
+            "pageLength": 100,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "scrollX": true,
           "language": {
                 "emptyTable":     "Nenhum registro disponível na tabela",
                 "zeroRecords":    "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ fornecedores",
-                "infoEmpty":      "Mostrando 0 de 0 dos 0 fornecedores",
-                "infoFiltered":   "(filtrado do total de _MAX_ fornecedores)",
+                "info": "Mostrando _END_ de _MAX_ fornecedores",
+                "infoEmpty": "Mostrando 0 de 0 fornecedores",
+                "infoFiltered": "",
                 "search": "Procurar:",
                 "paginate": {
                     "first":      "Primeiro",
@@ -69,25 +77,32 @@
     },
 },
           columns: [{
-              data: 'Nome'
+              data: 'Nome',
+              width: "150px"
             },
             {
-              data: 'CNPJ'
+              data: 'CNPJ',
+              width: "200px"
             },
             {
-              data: 'Responsável'
+              data: 'Responsável',
+              width: "200px"
             },
             {
-              data: 'Endereço'
+              data: 'Endereço',
+              width: "200px"
             },
             {
-              data: 'E-mail'
+              data: 'E-mail',
+              width: "200px"
             },
             {
-              data: 'Telefone'
+              data: 'Telefone',
+              width: "200px"
             },
             {
-              data: 'Is_Pendente'
+              data: 'Is_Pendente',
+              width: "100px"
             },
             {
               data: 'Ações',

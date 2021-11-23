@@ -25,7 +25,6 @@
         <table id="example1" class="table table-bordered table-striped">
             <thead class="theINDEX">
                 <tr>
-
                     <th><?= __('Tipo') ?></th>
                     <th><?= __('Valor') ?></th>
                     <th><?= __('Descrição') ?></th>
@@ -100,15 +99,23 @@
 <script>
     $(function() {
         $("#example1").DataTable({
-            "responsive": true,
+            "columnDefs": [{
+                "defaultContent": "-",
+                "targets": "_all",
+            }],
+            "paging": true,
             "lengthChange": false,
-            "autoWidth": false,
+            "pageLength": 100,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "scrollX": true,
             "language": {
                 "emptyTable": "Nenhum registro disponível na tabela",
                 "zeroRecords": "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
-                "infoEmpty": "Mostrando 0 de 0 dos 0 lançamentos",
-                "infoFiltered": "(filtrado do total de _MAX_ lançamentos)",
+                "info": "Mostrando _END_ de _MAX_ lançamentos",
+                "infoEmpty": "Mostrando 0 de 0 lançamentos",
+                "infoFiltered": "",
                 "search": "Procurar:",
                 "paginate": {
                     "first": "Primeiro",
@@ -119,35 +126,45 @@
             },
 
             columns: [{
-                    data: 'Tipo'
+                    data: 'Tipo',
+                    width: "100px"
                 },
                 {
-                    data: 'Descricao'
+                    data: 'Valor',
+                    width: "100px"
                 },
                 {
-                    data: 'Valor'
+                    data: 'Descricao',
+                    width: "150px"
                 },
                 {
-                    data: 'Data de Emissão'
+                    data: 'Data de Emissão',
+                    width: "120px"
                 },
                 {
-                    data: 'Data de Baixa'
+                    data: 'Data de Baixa',
+                    width: "100px"
                 },
                 {
-                    data: 'Data de Vencimento'
+                    data: 'Data de Vencimento',
+                    width: "150px"
                 },
                 {
-                    data: 'Fluxoconta'
+                    data: 'Fluxoconta',
+                    width: "80px"
                 },
                 {
-                    data: 'Fornecedor'
+                    data: 'Fornecedor',
+                    width: "80px"
                 },
                 {
-                    data: 'Cliente'
+                    data: 'Cliente',
+                    width: "80px"
                 },
 
                 {
                     data: 'Ações',
+                    width: "250px",
                     render: function(data, type, row) {
                         return type === 'export' ?
                             null :
