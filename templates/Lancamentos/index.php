@@ -296,7 +296,6 @@
                         for (var i = 0; i < Trs.length; i++) {
                             valor.push(Trs[i]['children'][1]['outerText'].replace('R$', ''))
                             Head.push(month[Trs[i]['children'][5]['outerText'].split('-')[1].replace(/^0+/, '')])
-
                         }
 
 
