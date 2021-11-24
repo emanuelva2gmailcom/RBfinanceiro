@@ -31,7 +31,7 @@ class RelatoriosController extends AppController
         $renovados = $this->getrenovado();
         $this->loadModel('Lancamentos');
         $lancamentos = $this->Lancamentos->find('all', [
-            'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
+            'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
             'conditions' => ['data_baixa is not' => null], $renovados['simple']
         ]);
 
@@ -39,7 +39,7 @@ class RelatoriosController extends AppController
         $arrays = [];
         foreach ($lancamentos as $lancamento) :
             $teste =  FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
-            $grupo = $lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo;
+            $grupo = $lancamento->subconta->conta->subgrupo->grupo->grupo;
             if (($lancamento->data_baixa->i18nFormat('yyyy-MM-dd') == $teste)) {
                 if ($grupo == 'entrada') {
                     $lancamento->valor = '+' . $lancamento->valor;
@@ -50,7 +50,7 @@ class RelatoriosController extends AppController
                 if ($lancamento->tipo == 'REALIZADO') {
                     array_push($arrays, [
                         $lancamento->valor,
-                        $lancamento->fluxoconta ? $lancamento->fluxoconta->conta : ' ',
+                        $lancamento->subconta ? $lancamento->subconta->subconta : ' ',
                         $lancamento->fornecedore ? $lancamento->fornecedore->nome : ' ',
                         $lancamento->cliente ? $lancamento->cliente->nome : ' ',
                         $lancamento->descricao,
@@ -69,7 +69,7 @@ class RelatoriosController extends AppController
         $data = $this->getCaixaDiario();
         $this->loadModel('Lancamentos');
         $this->paginate = [
-            'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
+            'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
             'conditions' => ['data_baixa is not' => null], $renovados['simple']
         ];
 
@@ -171,15 +171,15 @@ class RelatoriosController extends AppController
         foreach ($lancamentos as $lancamento) :
             if (in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])) {
 
-                if ($lancamento->dreconta->dregrupo->grupo == 'receita') {
-                    array_push($obj['rows']['th']['receita'], $lancamento->dreconta->conta);
-                } else if ($lancamento->dreconta->dregrupo->grupo == 'fixo') {
-                    array_push($obj['rows']['th']['fixo'], $lancamento->dreconta->conta);
-                } else if ($lancamento->dreconta->dregrupo->grupo == 'variavel') {
-                    array_push($obj['rows']['th']['variavel'], $lancamento->dreconta->conta);
+                if ($lancamento->subconta->conta->subgrupo->subgrupo == 'receita') {
+                    array_push($obj['rows']['th']['receita'], $lancamento->subconta->conta->conta);
+                } else if ($lancamento->subconta->conta->subgrupo->subgrupo == 'fixo') {
+                    array_push($obj['rows']['th']['fixo'], $lancamento->subconta->conta->conta);
+                } else if ($lancamento->subconta->conta->subgrupo->subgrupo == 'variavel') {
+                    array_push($obj['rows']['th']['variavel'], $lancamento->subconta->conta->conta);
                 }
-                if (!in_array($lancamento->dreconta->conta, $contas)) {
-                    array_push($contas, $lancamento->dreconta->conta);
+                if (!in_array($lancamento->subconta->conta->conta, $contas)) {
+                    array_push($contas, $lancamento->subconta->conta->conta);
                 }
             }
         endforeach;
@@ -196,11 +196,11 @@ class RelatoriosController extends AppController
             foreach ($obj['header'] as $data) :
                 $valor = 0;
                 foreach ($lancamentos as $lancamento) :
-                    if (($lancamento->dreconta->dregrupo->grupo == 'receita') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    if (($lancamento->subconta->conta->subgrupo->subgrupo == 'receita') && ($lancamento->subconta->conta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval($lancamento->valor);
-                    } else if (($lancamento->dreconta->dregrupo->grupo == 'fixo') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    } else if (($lancamento->subconta->conta->subgrupo->subgrupo == 'fixo') && ($lancamento->subconta->conta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
-                    } else if (($lancamento->dreconta->dregrupo->grupo == 'variavel') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    } else if (($lancamento->subconta->conta->subgrupo->subgrupo == 'variavel') && ($lancamento->subconta->conta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
                     }
 
@@ -255,16 +255,15 @@ class RelatoriosController extends AppController
                 array_push($response['total']['fixos'], $row);
             }
         }
-        $response['header'] = array_merge(['DRE'] ,$obj['header'], ['TOTAL'], ['%']);
+        $response['header'] = array_merge(['DRE'], $obj['header'], ['TOTAL'], ['%']);
 
         $receitasTotal = $response['total']['receitas'][0][array_key_last($response['total']['receitas'][0])];
 
-        if($receitasTotal != 0) {
-            foreach($response['total'] as $index => $array){
+        if ($receitasTotal != 0) {
+            foreach ($response['total'] as $index => $array) {
                 foreach ($array as $key => $value) {
-               
-                        array_push($response['total'][$index][$key], (number_format(($value[array_key_last($value)] / $receitasTotal) * 100, 2, '.', ' ') . ' %'));
-                    
+
+                    array_push($response['total'][$index][$key], (number_format(($value[array_key_last($value)] / $receitasTotal) * 100, 2, '.', ' ') . ' %'));
                 }
             }
         }
@@ -304,10 +303,10 @@ class RelatoriosController extends AppController
             ]
         ];
         $this->loadModel('Lancamentos');
-        $this->loadModel('Drecontas');
+        $this->loadModel('Subgrupos');
         $lancamentos = $this->paginate($this->Lancamentos);
         $lancamentos = $this->Lancamentos->find('all', [
-            'contain' => ['Drecontas' => ['Dregrupos'], 'Fornecedores', 'Clientes'],
+            'contain' => ['Subcontas' => [ 'Contas' => ['Subgrupos' => ['Grupos']]], 'Fornecedores', 'Clientes'],
             'conditions' => [$renovados['simple']]
         ]);
         $comeco = FrozenTime::now()
@@ -319,16 +318,15 @@ class RelatoriosController extends AppController
         $result = [];
         foreach ($lancamentos as $lancamento) :
             if (in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])) {
-
-                if ($lancamento->dreconta->dregrupo->grupo == 'receita') {
-                    array_push($obj['rows']['th']['receita'], $lancamento->dreconta->conta);
-                } else if ($lancamento->dreconta->dregrupo->grupo == 'fixo') {
-                    array_push($obj['rows']['th']['fixo'], $lancamento->dreconta->conta);
-                } else if ($lancamento->dreconta->dregrupo->grupo == 'variavel') {
-                    array_push($obj['rows']['th']['variavel'], $lancamento->dreconta->conta);
+                if ($lancamento->subconta->conta->subgrupo->subgrupo == 'Receitas') {
+                    array_push($obj['rows']['th']['receita'], $lancamento->subconta->conta->conta);
+                } else if ($lancamento->subconta->conta->subgrupo->subgrupo == 'Gastos Fixos') {
+                    array_push($obj['rows']['th']['fixo'], $lancamento->subconta->conta->conta);
+                } else if ($lancamento->subconta->conta->subgrupo->subgrupo == 'Gastos Variáveis') {
+                    array_push($obj['rows']['th']['variavel'], $lancamento->subconta->conta->conta);
                 }
-                if (!in_array($lancamento->dreconta->conta, $contas)) {
-                    array_push($contas, $lancamento->dreconta->conta);
+                if (!in_array($lancamento->subconta->conta->conta, $contas)) {
+                    array_push($contas, $lancamento->subconta->conta->conta);
                 }
             }
         endforeach;
@@ -341,18 +339,18 @@ class RelatoriosController extends AppController
         endforeach;
         foreach ($contas as $conta) :
             $result = [];
-            
+
             foreach ($obj['header'] as $data) :
                 $valor = 0;
                 foreach ($lancamentos as $lancamento) :
-                    if (($lancamento->dreconta->dregrupo->grupo == 'receita') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    if (($lancamento->subconta->conta->subgrupo->subgrupo == 'Receitas') && ($lancamento->subconta->conta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval($lancamento->valor);
-                    } else if (($lancamento->dreconta->dregrupo->grupo == 'fixo') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    } else if (($lancamento->subconta->conta->subgrupo->subgrupo == 'Gastos Fixos') && ($lancamento->subconta->conta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
-                    } else if (($lancamento->dreconta->dregrupo->grupo == 'variavel') && ($lancamento->dreconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    } else if (($lancamento->subconta->conta->subgrupo->subgrupo == 'Gastos Variáveis') && ($lancamento->subconta->conta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
                     }
-                
+
                 endforeach;
                 if (in_array($conta, $obj['rows']['th']['receita'])) {
                     $obj['total']['receitas'][$data] += $valor;
@@ -368,16 +366,16 @@ class RelatoriosController extends AppController
                 }
                 array_push($result, $valor);
             endforeach;
-            array_push($result ,array_sum($result));
+            array_push($result, array_sum($result));
             array_push($obj['rows']['td'], array_merge([$conta], $result));
         endforeach;
-        
+
         $obj['total']['receitas'] = array_values($obj['total']['receitas']);
         $obj['total']['variaveis'] = array_values($obj['total']['variaveis']);
         $obj['total']['contribuicao'] = array_values($obj['total']['contribuicao']);
         $obj['total']['fixos'] = array_values($obj['total']['fixos']);
         $obj['total']['liquido'] = array_values($obj['total']['liquido']);
-        
+
         array_push($obj['total']['receitas'], array_sum($obj['total']['receitas']));
         array_push($obj['total']['variaveis'], array_sum($obj['total']['variaveis']));
         array_push($obj['total']['contribuicao'], array_sum($obj['total']['contribuicao']));
@@ -395,8 +393,8 @@ class RelatoriosController extends AppController
         array_unshift($obj['total']['liquido'], '5 - Resultado Liquido (3 - 4)');
         array_push($response['total']['liquido'], $obj['total']['liquido']);
 
-        foreach($obj['rows']['td'] as $row){
-            if(in_array($row[0], $obj['rows']['th']['receita'])){
+        foreach ($obj['rows']['td'] as $row) {
+            if (in_array($row[0], $obj['rows']['th']['receita'])) {
                 array_push($response['total']['receitas'], $row);
             } else if (in_array($row[0], $obj['rows']['th']['variavel'])) {
                 array_push($response['total']['variaveis'], $row);
@@ -404,19 +402,17 @@ class RelatoriosController extends AppController
                 array_push($response['total']['fixos'], $row);
             }
         }
-        $response['header'] = array_merge(['DRE'] ,$obj['header'], ['TOTAL'], ['%']);
-        
+        $response['header'] = array_merge(['DRE'], $obj['header'], ['TOTAL'], ['%']);
+
         $receitasTotal = $response['total']['receitas'][0][array_key_last($response['total']['receitas'][0])];
-        
-        if($receitasTotal != 0) {
-            foreach($response['total'] as $index => $array){
+
+        if ($receitasTotal != 0) {
+            foreach ($response['total'] as $index => $array) {
                 foreach ($array as $key => $value) {
                     array_push($response['total'][$index][$key], (number_format(($value[array_key_last($value)] / $receitasTotal) * 100, 2, '.', ' ') . ' %'));
                 }
             }
-        
         }
-        
         return $response;
     }
 
@@ -447,9 +443,9 @@ class RelatoriosController extends AppController
         $date = new Time($data, 'UTC');
         $data = $date->modify('-1 days');
         foreach ($lancamentos as $l) :
-            if ($l->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada' && $data->i18nFormat('yyyy-MM-dd') == $l->$namedata->i18nFormat('yyyy-MM-dd')) {
+            if ($l->subconta->conta->subgrupo->grupo->grupo == 'entrada' && $data->i18nFormat('yyyy-MM-dd') == $l->$namedata->i18nFormat('yyyy-MM-dd')) {
                 $valor += $l->valor;
-            } else if ($l->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida' && $data->i18nFormat('yyyy-MM-dd') == $l->$namedata->i18nFormat('yyyy-MM-dd')) {
+            } else if ($l->subconta->conta->subgrupo->grupo->grupo == 'saida' && $data->i18nFormat('yyyy-MM-dd') == $l->$namedata->i18nFormat('yyyy-MM-dd')) {
                 $valor -= $l->valor;
             }
         endforeach;
@@ -477,9 +473,9 @@ class RelatoriosController extends AppController
             ]
         ];
         $this->loadModel('Lancamentos');
-        $this->loadModel('Fluxocontas');
+        $this->loadModel('Subcontas');
         $this->paginate = [
-            'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
+            'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
             'conditions' => ['tipo' => $tipo, $renovados['simple']]
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
@@ -497,13 +493,13 @@ class RelatoriosController extends AppController
 
         foreach ($lancamentos as $lancamento) :
             if (in_array($lancamento->$date->i18nFormat($periodo[0]), $obj['header'])) {
-                if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') {
-                    array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
-                } else if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') {
-                    array_push($obj['rows']['th']['saidas'], $lancamento->fluxoconta->conta);
+                if ($lancamento->subconta->conta->subgrupo->grupo->grupo == 'entrada') {
+                    array_push($obj['rows']['th']['entradas'], $lancamento->subconta->subconta);
+                } else if ($lancamento->subconta->conta->subgrupo->grupo->grupo == 'saida') {
+                    array_push($obj['rows']['th']['saidas'], $lancamento->subconta->subconta);
                 }
-                if (!in_array($lancamento->fluxoconta->conta, $contas)) {
-                    array_push($contas, $lancamento->fluxoconta->conta);
+                if (!in_array($lancamento->subconta->subconta, $contas)) {
+                    array_push($contas, $lancamento->subconta->subconta);
                 }
             }
         endforeach;
@@ -518,9 +514,9 @@ class RelatoriosController extends AppController
             foreach ($obj['header'] as $data) :
                 $valor = 0;
                 foreach ($lancamentos as $lancamento) :
-                    if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    if (($lancamento->subconta->conta->subgrupo->grupo->grupo == 'entrada') && ($lancamento->subconta->subconta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval($lancamento->valor);
-                    } else if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
+                    } else if (($lancamento->subconta->conta->subgrupo->grupo->grupo == 'saida') && ($lancamento->subconta->subconta == $conta) && ($data == $lancamento->$date->i18nFormat($periodo[0]))) {
                         $valor += intval('-' . $lancamento->valor);
                     }
                 endforeach;
@@ -613,9 +609,9 @@ class RelatoriosController extends AppController
             }
             $obj['header'] = $this->array_date($request[0], $request[1], $periodo);
             $this->loadModel('Lancamentos');
-            $this->loadModel('Fluxocontas');
+            $this->loadModel('Subcontas');
             $lancamentos = $this->Lancamentos->find('all', [
-                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
+                'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
                 'conditions' => ['tipo' => 'PREVISTO', $renovados['simple']]
             ]);
             $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_vencimento')];
@@ -627,13 +623,13 @@ class RelatoriosController extends AppController
                     $testes[] = $lancamento->lancamento_id;
                 }
                 if (in_array($lancamento->data_vencimento->i18nFormat($periodo[0]), $obj['header'])) {
-                    if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') {
-                        array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
-                    } else if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') {
-                        array_push($obj['rows']['th']['saidas'], $lancamento->fluxoconta->conta);
+                    if ($lancamento->subconta->conta->subgrupo->grupo->grupo == 'entrada') {
+                        array_push($obj['rows']['th']['entradas'], $lancamento->conta->conta);
+                    } else if ($lancamento->subconta->conta->subgrupo->grupo->grupo == 'saida') {
+                        array_push($obj['rows']['th']['saidas'], $lancamento->conta->conta);
                     }
-                    if (!in_array($lancamento->fluxoconta->conta, $contas)) {
-                        array_push($contas, $lancamento->fluxoconta->conta);
+                    if (!in_array($lancamento->conta->conta, $contas)) {
+                        array_push($contas, $lancamento->conta->conta);
                     }
                 }
             endforeach;
@@ -648,9 +644,9 @@ class RelatoriosController extends AppController
                 foreach ($obj['header'] as $data) :
                     $valor = 0;
                     foreach ($lancamentos as $lancamento) :
-                        if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))) {
+                        if (($lancamento->subconta->conta->subgrupo->grupo->grupo == 'entrada') && ($lancamento->conta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))) {
                             $valor += intval($lancamento->valor);
-                        } else if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))) {
+                        } else if (($lancamento->subconta->conta->subgrupo->grupo->grupo == 'saida') && ($lancamento->conta->conta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))) {
                             $valor += intval('-' . $lancamento->valor);
                         }
                     endforeach;
@@ -744,9 +740,9 @@ class RelatoriosController extends AppController
             }
             $obj['header'] = $this->array_date($request[0], $request[1], $periodo);
             $this->loadModel('Lancamentos');
-            $this->loadModel('Fluxocontas');
+            $this->loadModel('Subcontas');
             $lancamentos = $this->Lancamentos->find('all', [
-                'contain' => ['Fluxocontas' => ['Fluxosubgrupos' => ['Fluxogrupos']], 'Fornecedores', 'Clientes'],
+                'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
                 'conditions' => ['tipo' => 'REALIZADO', $renovados['simple']]
             ]);
             $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_baixa')];
@@ -755,13 +751,13 @@ class RelatoriosController extends AppController
 
             foreach ($lancamentos as $lancamento) :
                 if (in_array($lancamento->data_baixa->i18nFormat($periodo[0]), $obj['header'])) {
-                    if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') {
-                        array_push($obj['rows']['th']['entradas'], $lancamento->fluxoconta->conta);
-                    } else if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') {
-                        array_push($obj['rows']['th']['saidas'], $lancamento->fluxoconta->conta);
+                    if ($lancamento->subconta->conta->subgrupo->grupo->grupo == 'entrada') {
+                        array_push($obj['rows']['th']['entradas'], $lancamento->conta->conta);
+                    } else if ($lancamento->subconta->conta->subgrupo->grupo->grupo == 'saida') {
+                        array_push($obj['rows']['th']['saidas'], $lancamento->conta->conta);
                     }
-                    if (!in_array($lancamento->fluxoconta->conta, $contas)) {
-                        array_push($contas, $lancamento->fluxoconta->conta);
+                    if (!in_array($lancamento->conta->conta, $contas)) {
+                        array_push($contas, $lancamento->conta->conta);
                     }
                 }
             endforeach;
@@ -776,9 +772,9 @@ class RelatoriosController extends AppController
                 foreach ($obj['header'] as $data) :
                     $valor = 0;
                     foreach ($lancamentos as $lancamento) :
-                        if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_baixa->i18nFormat($periodo[0]))) {
+                        if (($lancamento->subconta->conta->subgrupo->grupo->grupo == 'entrada') && ($lancamento->conta->conta == $conta) && ($data == $lancamento->data_baixa->i18nFormat($periodo[0]))) {
                             $valor += intval($lancamento->valor);
-                        } else if (($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'saida') && ($lancamento->fluxoconta->conta == $conta) && ($data == $lancamento->data_baixa->i18nFormat($periodo[0]))) {
+                        } else if (($lancamento->subconta->conta->subgrupo->grupo->grupo == 'saida') && ($lancamento->conta->conta == $conta) && ($data == $lancamento->data_baixa->i18nFormat($periodo[0]))) {
                             $valor += intval('-' . $lancamento->valor);
                         }
                     endforeach;

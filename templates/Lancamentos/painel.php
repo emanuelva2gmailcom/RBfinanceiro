@@ -53,7 +53,7 @@
 
             $('#example').DataTable({
                 "columns": [{
-                        title: 'Grupo do Fluxo de Caixa'
+                        title: 'Grupo do F'
                     },
                     {
                         title: 'Conta do Fluxo de Caixa'

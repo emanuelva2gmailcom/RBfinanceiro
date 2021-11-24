@@ -1,34 +1,3 @@
-<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-  try {
-    const response = axios.get('/caixas/getCaixaaberto/').then(function(response) { // handle success
-      caixa(response.data)
-    })
-  } catch (error) {
-    console.error(error);
-  }
-
-  function caixa(is) {
-    if (is == true) {
-      console.log(is);
-      document.getElementById('customSwitch3').checked = true;
-
-    } else {
-      document.getElementById('customSwitch3').checked = false;
-
-    }
-  }
-</script>
-
-
-<li class="nav-item">
-  <a href="<?php echo '/caixas/abrir/' . $now; ?>" class="caixa nav-link " style="color: #59CBFF; z-index: 2000">
-    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-      <input type="checkbox" class="custom-control-input" id="customSwitch3" disabled>
-      <label class="custom-control-label" for="customSwitch3" style="color: #59CBFF;">Abrir </label>
-    </div>
-  </a>
-</li> -->
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
@@ -162,13 +131,13 @@ function caixa(is)
       </a>
         <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="/fluxocontas/add" class="terceiro nav-link">
+          <a href="/subcontas/add" class="terceiro nav-link">
         <i class="terceiro fas fa-donate nav-icon"></i>
         <p class="terceiro">Adicionar</p>
       </a>
     </li>
     <li class="nav-item">
-      <a href="/fluxocontas/index" class="terceiro nav-link">
+      <a href="/subcontas/index" class="terceiro nav-link">
         <i class="terceiro fas fa-hand-holding-usd nav-icon"></i>
         <p class="terceiro">Disponíveis</p>
       </a>
@@ -183,13 +152,13 @@ function caixa(is)
       </a>
         <ul class="nav nav-treeview">
     <li class="nav-item">
-      <a href="/fluxosubgrupos/add" class="terceiro nav-link">
+      <a href="/subgrupos/add" class="terceiro nav-link">
         <i class="terceiro fas fa-user-plus nav-icon"></i>
         <p class="terceiro">Adicionar</p>
       </a>
     </li>
     <li class="nav-item">
-      <a href="/fluxosubgrupos/index" class="terceiro nav-link">
+      <a href="/subgrupos/index" class="terceiro nav-link">
         <i class="terceiro fas fa-users nav-icon"></i>
       <p class="terceiro">Disponíveis</p>
       </a>

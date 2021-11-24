@@ -81,14 +81,14 @@ class LancamentosController extends AppController
                     $query = "tipo = 'REALIZADO'";
                     break;
 
-                case 'PREVISTO':
+                    case 'PREVISTO':
                     $date = 'data_vencimento';
                     $query = "tipo = 'PREVISTO'";
                     break;
 
                 default:
-                    $request[2] = 'created';
-                    break;
+                $request[2] = 'created';
+                break;
             }
             $request[1] = new Time($request[1], 'UTC');
             $request[1] = $request[1]->i18nFormat('yyyy-MM');
@@ -110,21 +110,21 @@ class LancamentosController extends AppController
                                 $totals['entrada'] += $l->valor;
                                 $totals['total'] += $l->valor;
                                 break;
-
-                            case 'saida':
-                                $valor -= $l->valor;
-                                $totals['saida'] -= $l->valor;
-                                $totals['total'] -= $l->valor;
-                                break;
-                        }
+                                
+                                case 'saida':
+                                    $valor -= $l->valor;
+                                    $totals['saida'] -= $l->valor;
+                                    $totals['total'] -= $l->valor;
+                                    break;
+                                }
                     }
                 endforeach;
                 $c->conta->subgrupo->grupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
-                array_push($obj, [$c->conta->subgrupo->grupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
+                array_push($obj, [$c->conta->subgrupo->grupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->subconta, $valor]);
             endforeach;
-
+            
             $this->response = $this->response->withType('application/json')
-                ->withStringBody(json_encode([$obj, $total, $totals]));
+            ->withStringBody(json_encode([$obj, $total, $totals]));
             return $this->response;
         } else if ($this->request->is('get')) {
             $obj = [];
@@ -153,8 +153,10 @@ class LancamentosController extends AppController
                     }
                 endforeach;
                 $c->conta->subgrupo->grupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
-                array_push($obj, [$c->conta->subgrupo->grupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
+                array_push($obj, [$c->conta->subgrupo->grupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->subconta, $valor]);
             endforeach;
+            // debug($obj);
+            // exit;
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([$obj, $total, $totals]));
             return $this->response;
@@ -214,16 +216,16 @@ class LancamentosController extends AppController
 
     public function add()
     {
-
+        
         $this->loadModel('Comprovantes');
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
-            $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
+            $lancamento = $this->Lancamentos->patchEntity($lancamento,$this->request->getData());
             if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
                 $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
                 return $this->redirect(['action' => 'add']);
             }
-
+            
             $image = $this->request->getData('Comprovante');
             $name = $image->getClientFilename();
             $tipo = explode('.', $name);
@@ -231,14 +233,14 @@ class LancamentosController extends AppController
             $tipo = end($tipo);
             $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
             if ($name)
-                $image->moveTo($targetpath);
+            $image->moveTo($targetpath);
             $comprovantes = $this->Comprovantes->newEmptyEntity();
             $comprovantes->img = $name;
             $comprovantes->tipo = $tipo;
             if ($name == '') {
                 $name = null;
             }
-
+            
             $comprovantes->nome_arquivo = $nome;
             if (($this->Lancamentos->save($lancamento))) {
                 $comprovantes->lancamento_id = $lancamento->id_lancamento;
@@ -312,11 +314,11 @@ class LancamentosController extends AppController
         // ]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
-        // $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
+        $subcontas = $this->Lancamentos->Subcontas->find('list', ['limit' => 200]);
         // $dregrupos = $this->Lancamentos->Drecontas->Dregrupos->find('list', ['limit' => 200]);
         $Grupos = $this->Lancamentos->Subcontas->Contas->Subgrupos->Grupos->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
-        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'Grupos', 'entradas', 'saidas', 'todos'));
+        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos', 'entradas', 'saidas', 'todos'));
     }
 
     public function renovar($id = null)
@@ -340,7 +342,7 @@ class LancamentosController extends AppController
             $lancamento2->fornecedor_id = $lancamento->fornecedor_id;
             $lancamento2->cliente_id = $lancamento->cliente_id;
             $lancamento2->lancamento_id = $lancamento->id_lancamento;
-          
+
             if ($this->Lancamentos->save($lancamento2)) {
                 $this->Flash->success(__('Lançamento editado com sucesso.'));
 
@@ -381,7 +383,7 @@ class LancamentosController extends AppController
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $lancamentos = $this->Lancamentos->find('list', ['limit' => 200]);
-        $this->set(compact('lancamento', 'subcon$subcontas', 'fornecedores', 'clientes', 'lancamentos'));
+        $this->set(compact('lancamento', 'subcontas', 'fornecedores', 'clientes', 'lancamentos'));
     }
 
     /**

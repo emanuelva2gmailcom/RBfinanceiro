@@ -21,7 +21,7 @@
    <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão'], ['class' => 'form-control']); ?>
    <?= $this->Form->control('data_baixa', ['label' => 'Data de Baixa'], ['class' => 'form-control']); ?>
    <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento'], ['class' => 'form-control']); ?>
-   <?= $this->Form->control('fluxoconta_id', ['label' => 'Conta'], ['options' => $fluxocontas, 'empty' => true], ['class' => 'form-control']); ?>
+   <?= $this->Form->control('subconta_id', ['label' => 'Conta'], ['options' => $subcontas, 'empty' => true], ['class' => 'form-control']); ?>
    <?= $this->Form->control('fornecedor_id', ['label' => 'Fornecedor'], ['options' => $fornecedores, 'empty' => true], ['class' => 'form-control']); ?>
    <?= $this->Form->control('cliente_id', ['label' => 'Cliente'], ['options' => $clientes, 'empty' => true], ['class' => 'form-control']); ?>
    <?= $this->Form->control('lancamento_id', ['label' => 'Lançamento'], ['options' => $lancamentos, 'empty' => true], ['class' => 'form-control']); ?>

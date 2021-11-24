@@ -43,7 +43,7 @@ class SubgruposTable extends Table
         parent::initialize($config);
 
         $this->setTable('subgrupos');
-        $this->setDisplayField('id_subgrupo');
+        $this->setDisplayField('subgrupo');
         $this->setPrimaryKey('id_subgrupo');
 
         $this->addBehavior('Timestamp');

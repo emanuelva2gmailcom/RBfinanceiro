@@ -72,6 +72,9 @@
                     <div class="form-group">
                         <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento', 'placeholder' => 'Data de Vencimento'], ['class' => 'border form-control dataADD']); ?>
                     </div>
+                    <div class="form-group competencia">
+                        <?= $this->Form->control('data_competencia', ['label' => 'Data de Competência', 'placeholder' => 'Data de Competência'], ['class' => 'border form-control dataADD']); ?>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
@@ -80,15 +83,19 @@
             </div>
             <div id="test-l-3" class="bssteppercontentContent content">
                 <div class="panel-body">
-
-
+                    <div class="form-group">
+                        <?= $this->Form->control('grupo_id', ['options' => $Grupos, 'empty' => 'SELECIONE']); ?>
+                    </div>
+                    <div class="form-group">
+                        <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE']); ?>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
                     <div class="prox-antADD btn" id="teste" onclick="stepper1.next()">Próximo</div>
                 </div>
             </div>
-            
+
             <div id="test-l-4" class="bssteppercontentContent content">
                 <div class="panel-body">
                     <div class="fornecedor form-group">

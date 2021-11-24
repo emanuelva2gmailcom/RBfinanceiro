@@ -43,7 +43,7 @@ class SubcontasTable extends Table
         parent::initialize($config);
 
         $this->setTable('subcontas');
-        $this->setDisplayField('id_subconta');
+        $this->setDisplayField('subconta');
         $this->setPrimaryKey('id_subconta');
 
         $this->addBehavior('Timestamp');

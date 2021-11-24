@@ -43,7 +43,7 @@ class ContasTable extends Table
         parent::initialize($config);
 
         $this->setTable('contas');
-        $this->setDisplayField('id_conta');
+        $this->setDisplayField('conta');
         $this->setPrimaryKey('id_conta');
 
         $this->addBehavior('Timestamp');

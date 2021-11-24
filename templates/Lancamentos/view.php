@@ -25,7 +25,7 @@
           </tr>
           <tr>
             <th> <?= __('Conta') ?></th>
-            <td class="tdINDEX"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td>
+            <td class="tdINDEX"><?= $lancamento->has('subconta') ? $this->Html->link($lancamento->subconta->subconta, ['controller' => 'Subcontas', 'action' => 'view', $lancamento->subconta->subconta]) : '' ?></td>
           </tr>
           <tr>
             <th><?= __('Fornecedor') ?></th>
@@ -35,14 +35,7 @@
             <th><?= __('Cliente') ?></th>
             <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
           </tr>
-          <tr>
-            <th><?= __('Dreconta') ?></th>
-            <td class="tdINDEX"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->conta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
-          </tr>
-          <!-- <tr>
-            <th><?= __('Dreconta') ?></th>
-            <td class="tdINDEX"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->dreconta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
-          </tr> -->
+  
           <tr>
             <th><?= __('Lançamento') ?></th>
             <td><?= $this->Number->format($lancamento->id_lancamento) ?></td>
@@ -70,6 +63,10 @@
           <tr>
             <th><?= __('Data de Vencimento') ?></th>
             <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+          </tr>
+          <tr>
+            <th><?= __('Data de Competência') ?></th>
+            <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
           </tr>
           <tr>
             <th><?= __('Criado') ?></th>

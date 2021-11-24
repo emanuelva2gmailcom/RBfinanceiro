@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -15,7 +16,6 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\FornecedoresTable&\Cake\ORM\Association\BelongsTo $Fornecedores
  * @property \App\Model\Table\ClientesTable&\Cake\ORM\Association\BelongsTo $Clientes
  * @property \App\Model\Table\LancamentosTable&\Cake\ORM\Association\BelongsTo $Lancamentos
- * @property \App\Model\Table\DrecontasTable&\Cake\ORM\Association\BelongsTo $Drecontas
  * @property \App\Model\Table\CaixaregistrosTable&\Cake\ORM\Association\HasMany $Caixaregistros
  * @property \App\Model\Table\ComprovantesTable&\Cake\ORM\Association\HasMany $Comprovantes
  * @property \App\Model\Table\LancamentosTable&\Cake\ORM\Association\HasMany $Lancamentos
@@ -55,7 +55,7 @@ class LancamentosTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Subcontas', [
-            'foreignKey' => 'fluxoconta_id',
+            'foreignKey' => 'subconta_id',
         ]);
         $this->belongsTo('Fornecedores', [
             'foreignKey' => 'fornecedor_id',
@@ -66,9 +66,6 @@ class LancamentosTable extends Table
         $this->belongsTo('Lancamentos', [
             'foreignKey' => 'lancamento_id',
         ]);
-        $this->belongsTo('Drecontas', [
-            'foreignKey' => 'dreconta_id',
-        ]);
         $this->hasMany('Caixaregistros', [
             'foreignKey' => 'lancamento_id',
         ]);
@@ -76,6 +73,12 @@ class LancamentosTable extends Table
             'foreignKey' => 'lancamento_id',
         ]);
         $this->hasMany('Lancamentos', [
+            'foreignKey' => 'lancamento_id',
+        ]);
+        $this->belongsTo('Subgrupos', [
+            'foreignKey' => 'subgrupo_id',
+        ]);
+        $this->hasMany('Notifications', [
             'foreignKey' => 'lancamento_id',
         ]);
     }
@@ -101,7 +104,7 @@ class LancamentosTable extends Table
             ->allowEmptyString('descricao');
 
         $validator
-            ->decimal('valor')
+            ->numeric('valor')
             ->allowEmptyString('valor');
 
         $validator
@@ -109,12 +112,20 @@ class LancamentosTable extends Table
             ->allowEmptyDateTime('data_emissao');
 
         $validator
-            ->dateTime('data_baixa')
-            ->allowEmptyDateTime('data_baixa');
-
-        $validator
             ->dateTime('data_vencimento')
             ->allowEmptyDateTime('data_vencimento');
+
+        $validator
+            ->date('data_competencia')
+            ->allowEmptyDate('data_competencia');
+
+        $validator
+            ->integer('parcela')
+            ->allowEmptyString('parcela');
+
+        $validator
+            ->dateTime('data_baixa')
+            ->allowEmptyDateTime('data_baixa');
 
         return $validator;
     }
@@ -132,7 +143,6 @@ class LancamentosTable extends Table
         $rules->add($rules->existsIn(['fornecedor_id'], 'Fornecedores'), ['errorField' => 'fornecedor_id']);
         $rules->add($rules->existsIn(['cliente_id'], 'Clientes'), ['errorField' => 'cliente_id']);
         $rules->add($rules->existsIn(['lancamento_id'], 'Lancamentos'), ['errorField' => 'lancamento_id']);
-        // $rules->add($rules->existsIn(['dreconta_id'], 'Drecontas'), ['errorField' => 'dreconta_id']);
 
         return $rules;
     }

@@ -47,6 +47,7 @@
 
     function datase(data) {
         response = []
+        console.log(data)
         data.total.entradas.push(data.total.entradas[0])
         data.total.entradas[0] = 'Entradas:'
         $($('#example').DataTable().row.add(data.total.entradas).draw()

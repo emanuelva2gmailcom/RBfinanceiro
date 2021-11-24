@@ -33,6 +33,7 @@
                     <th><?= __('Valor') ?></th>
                     <th><?= __('Descrição') ?></th>
                     <th><?= __('Data de Emissão') ?></th>
+                    <th><?= __('Data de Competência') ?></th>
                     <th><?= __('Data de Baixa') ?></th>
                     <th><?= __('Data de Vencimento') ?></th>
                     <th><?= __('Conta') ?></th>
@@ -51,13 +52,14 @@
                         <td><?= h('R$ ' . $lancamento->valor) ?></td>
                         <td><?= h($lancamento->descricao) ?></td>
                         <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                        <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <?php if (empty($lancamento->data_baixa)) { ?>
                             <td><?= h($lancamento->data_baixa) ?></td>
                         <?php } else { ?>
                             <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <?php } ?>
                         <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-                        <td class="tdINDEX"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
+                        <td class="tdINDEX"><?= $lancamento->has('subconta') ? $this->Html->link($lancamento->subconta->subconta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->subconta->subconta]) : '' ?></td>
                         <td class="tdINDEX"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
                         <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
                         <td class="actions">
