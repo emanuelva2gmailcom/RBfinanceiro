@@ -30,6 +30,8 @@ class LancamentosTableTest extends TestCase
         'app.Clientes',
         'app.Caixaregistros',
         'app.Comprovantes',
+        'app.Subgrupos',
+        'app.Notifications',
     ];
 
     /**

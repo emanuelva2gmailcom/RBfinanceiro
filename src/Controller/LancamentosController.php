@@ -110,7 +110,7 @@ class LancamentosController extends AppController
                                 $totals['entrada'] += $l->valor;
                                 $totals['total'] += $l->valor;
                                 break;
-                                
+
                                 case 'saida':
                                     $valor -= $l->valor;
                                     $totals['saida'] -= $l->valor;
@@ -122,7 +122,7 @@ class LancamentosController extends AppController
                 $c->conta->subgrupo->grupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
                 array_push($obj, [$c->conta->subgrupo->grupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->subconta, $valor]);
             endforeach;
-            
+
             $this->response = $this->response->withType('application/json')
             ->withStringBody(json_encode([$obj, $total, $totals]));
             return $this->response;
@@ -173,7 +173,7 @@ class LancamentosController extends AppController
 
         $lancamentos = $this->paginate($this->Lancamentos);
         $lancamentos = $this->Lancamentos->find('all', ['conditions' => [$renovados['simple']], 'contain' => ['Subcontas', 'Fornecedores', 'Clientes']]);
-
+        debug($this->Salas->get(13,  ['contain' => ['Enderecos']]));exit;
         $now = FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
 
         $this->set(compact('lancamentos', 'now'));
@@ -216,16 +216,18 @@ class LancamentosController extends AppController
 
     public function add()
     {
-        
+
         $this->loadModel('Comprovantes');
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
             $lancamento = $this->Lancamentos->patchEntity($lancamento,$this->request->getData());
+
+            $lancamento->parcela == null ? $lancamento->parcela = 1 : '';
             if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
                 $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
                 return $this->redirect(['action' => 'add']);
             }
-            
+
             $image = $this->request->getData('Comprovante');
             $name = $image->getClientFilename();
             $tipo = explode('.', $name);
@@ -240,7 +242,7 @@ class LancamentosController extends AppController
             if ($name == '') {
                 $name = null;
             }
-            
+
             $comprovantes->nome_arquivo = $nome;
             if (($this->Lancamentos->save($lancamento))) {
                 $comprovantes->lancamento_id = $lancamento->id_lancamento;

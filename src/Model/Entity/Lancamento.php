@@ -12,8 +12,8 @@ use Cake\ORM\Entity;
  * @property string|null $tipo
  * @property string|null $descricao
  * @property float|null $valor
- * @property \Cake\I18n\FrozenTime|null $data_emissao
- * @property \Cake\I18n\FrozenTime|null $data_vencimento
+ * @property \Cake\I18n\FrozenDate|null $data_emissao
+ * @property \Cake\I18n\FrozenDate|null $data_vencimento
  * @property \Cake\I18n\FrozenDate|null $data_competencia
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
@@ -22,7 +22,7 @@ use Cake\ORM\Entity;
  * @property int|null $cliente_id
  * @property int|null $lancamento_id
  * @property int|null $parcela
- * @property \Cake\I18n\FrozenTime|null $data_baixa
+ * @property \Cake\I18n\FrozenDate|null $data_baixa
  *
  * @property \App\Model\Entity\Subconta $subconta
  * @property \App\Model\Entity\Fornecedore $fornecedore
@@ -30,6 +30,8 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Lancamento[] $lancamentos
  * @property \App\Model\Entity\Caixaregistro[] $caixaregistros
  * @property \App\Model\Entity\Comprovante[] $comprovantes
+ * @property \App\Model\Entity\Subgrupo $subgrupo
+ * @property \App\Model\Entity\Notification[] $notifications
  */
 class Lancamento extends Entity
 {
@@ -63,5 +65,7 @@ class Lancamento extends Entity
         'lancamentos' => true,
         'caixaregistros' => true,
         'comprovantes' => true,
+        'subgrupo' => true,
+        'notifications' => true,
     ];
 }

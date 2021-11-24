@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -19,6 +18,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\CaixaregistrosTable&\Cake\ORM\Association\HasMany $Caixaregistros
  * @property \App\Model\Table\ComprovantesTable&\Cake\ORM\Association\HasMany $Comprovantes
  * @property \App\Model\Table\LancamentosTable&\Cake\ORM\Association\HasMany $Lancamentos
+ * @property \App\Model\Table\NotificationsTable&\Cake\ORM\Association\HasMany $Notifications
  *
  * @method \App\Model\Entity\Lancamento newEmptyEntity()
  * @method \App\Model\Entity\Lancamento newEntity(array $data, array $options = [])
@@ -75,9 +75,6 @@ class LancamentosTable extends Table
         $this->hasMany('Lancamentos', [
             'foreignKey' => 'lancamento_id',
         ]);
-        $this->belongsTo('Subgrupos', [
-            'foreignKey' => 'subgrupo_id',
-        ]);
         $this->hasMany('Notifications', [
             'foreignKey' => 'lancamento_id',
         ]);
@@ -108,12 +105,12 @@ class LancamentosTable extends Table
             ->allowEmptyString('valor');
 
         $validator
-            ->dateTime('data_emissao')
-            ->allowEmptyDateTime('data_emissao');
+            ->date('data_emissao')
+            ->allowEmptyDate('data_emissao');
 
         $validator
-            ->dateTime('data_vencimento')
-            ->allowEmptyDateTime('data_vencimento');
+            ->date('data_vencimento')
+            ->allowEmptyDate('data_vencimento');
 
         $validator
             ->date('data_competencia')
@@ -124,8 +121,8 @@ class LancamentosTable extends Table
             ->allowEmptyString('parcela');
 
         $validator
-            ->dateTime('data_baixa')
-            ->allowEmptyDateTime('data_baixa');
+            ->date('data_baixa')
+            ->allowEmptyDate('data_baixa');
 
         return $validator;
     }

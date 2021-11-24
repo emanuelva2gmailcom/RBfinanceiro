@@ -33,11 +33,6 @@ $this->assign('breadcrumb',
 
   <div class="card-footer d-flex">
     <div class="">
-      <?= $this->Form->postLink(
-          __('Delete'),
-          ['action' => 'delete', $subgrupo->id_subgrupo],
-          ['confirm' => __('Are you sure you want to delete # {0}?', $subgrupo->id_subgrupo), 'class' => 'btn btn-danger']
-      ) ?>
     </div>
     <div class="ml-auto">
       <?= $this->Form->button(__('Save')) ?>

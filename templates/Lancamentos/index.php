@@ -31,6 +31,7 @@
 
                     <th><?= __('Tipo') ?></th>
                     <th><?= __('Valor') ?></th>
+                    <th><?= __('Parcela') ?></th>
                     <th><?= __('Descrição') ?></th>
                     <th><?= __('Data de Emissão') ?></th>
                     <th><?= __('Data de Competência') ?></th>
@@ -50,6 +51,7 @@
                     <tr class="ops">
                         <td><?= h($lancamento->tipo) ?></td>
                         <td><?= h('R$ ' . $lancamento->valor) ?></td>
+                        <td><?= h($lancamento->parcela. 'x') ?></td>
                         <td><?= h($lancamento->descricao) ?></td>
                         <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
@@ -152,13 +154,19 @@
                         data: 'Tipo'
                     },
                     {
-                        data: 'Descricao'
-                    },
-                    {
                         data: 'Valor'
                     },
                     {
+                        data: 'Parcela'
+                    },
+                    {
+                        data: 'Descricao'
+                    },
+                    {
                         data: 'Data de Emissão'
+                    },
+                    {
+                        data: 'Data de Competência'
                     },
                     {
                         data: 'Data de Baixa'
@@ -188,7 +196,7 @@
 
 
                 ],
-               
+
             dom: 'Bfrtip',
             buttons: [{
 
@@ -356,7 +364,7 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
 
-        
+
 
     });
 </script>

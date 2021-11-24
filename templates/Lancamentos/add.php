@@ -54,6 +54,9 @@
                     <div class="form-group">
                         <?= $this->Form->control('valor', ['label' => 'Valor', 'placeholder' => 'Valor'], ['class' => 'border form-control']); ?>
                     </div>
+                    <div class="form-group">
+                        <?= $this->Form->control('parcela', ['label' => 'Parcela', 'placeholder' => 'Parcela'], ['class' => 'border form-control']); ?>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-end">
                     <div id="proximo" class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>

@@ -44,7 +44,7 @@
 
     function datase(data) {
         response = []
-        data.total.entradas.push(data.total.entradas[0])
+        // data.total.entradas.push(data.total.entradas[0])
         data.total.entradas[0] = 'Entradas:'
         $($('#example').DataTable().row.add(data.total.entradas).draw()
             .node()).addClass('relatorioFC');
@@ -56,7 +56,7 @@
                     .node()).addClass('text-success');
             }
         })
-        data.total.saidas.push(data.total.saidas[0])
+        // data.total.saidas.push(data.total.saidas[0])
         data.total.saidas[0] = 'Saidas:'
         $($('#example').DataTable().row.add(data.total.saidas).draw()
             .node()).addClass('relatorioFC');
