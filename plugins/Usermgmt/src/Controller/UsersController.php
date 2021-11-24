@@ -94,7 +94,7 @@ class UsersController extends UsermgmtAppController
 				'UserActivities' => [
 					'type' => 'text',
 					'label' => 'Pesquisar',
-					'tagline' => 'Search by name, email, ip address',
+					'tagline' => 'Pesquise por nome, nome de usuário, e-mail',
 					'condition' => 'multiple',
 					'searchFields' => ['Users.first_name', 'Users.last_name', 'Users.email', 'UserActivities.ip_address'],
 					'inputOptions' => ['style' => 'width:200px;']

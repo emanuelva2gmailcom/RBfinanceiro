@@ -15,7 +15,7 @@
 
 	<div class="cardbodyDASH card-body p-2">
 		<div>
-			<?php echo $this->Html->image(SITE_URL.'usermgmt/img/approve.png', ['alt'=>__('Yes')]);?> = <?php echo __("The sub group has permission of controller's action");?><br/><?php echo $this->Html->image(SITE_URL.'usermgmt/img/remove.png', ['alt'=>__('No')]);?> = <?php echo __("The sub group has not permission of controller's action");?><br/><span style="color:green">(<?php echo __('inherit');?>)</span> = <?php echo __('Permission inherited from parent group');?>
+			<?php echo $this->Html->image(SITE_URL.'usermgmt/img/approve.png', ['alt'=>__('Yes')]);?> = <?php echo __("O Subgrupo tem permissão de ação do controlador");?><br/><?php echo $this->Html->image(SITE_URL.'usermgmt/img/remove.png', ['alt'=>__('No')]);?> = <?php echo __("O Subgrupo não tem permissão de ação do controlador");?><br/><span style="color:green">(<?php echo __('inherit');?>)</span> = <?php echo __('Permissão herdada pelo grupo parente');?>
 		</div>
 
 		<br/>
@@ -108,7 +108,7 @@
 			</div>
 
 			<div class="d-inline-block align-top">
-				<?php echo $this->Form->Submit(__('Get Permissions'), ['class'=>'btn btn-primary']);?>
+				<?php echo $this->Form->Submit(__('Obtenha permissões'), ['class'=>'btn btn-primary']);?>
 			</div>
 
 			<?php echo $this->Form->end();?>

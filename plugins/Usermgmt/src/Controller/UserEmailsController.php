@@ -42,8 +42,8 @@ class UserEmailsController extends UsermgmtAppController
 			'Usermgmt.UserEmails' => [
 				'UserEmails' => [
 					'type' => 'text',
-					'label' => 'Search',
-					'tagline' => 'Search by from name, email, subject, message',
+					'label' => 'Procurar',
+					'tagline' => 'Procure pelo nome, e-mail, assunto, mensagem',
 					'condition' => 'multiple',
 					'searchBreak' => true,
 					'matchAllWords' => true,

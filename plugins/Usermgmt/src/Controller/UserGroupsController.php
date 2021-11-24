@@ -40,15 +40,15 @@ class UserGroupsController extends UsermgmtAppController
 			'Usermgmt.UserGroups' => [
 				'UserGroups' => [
 					'type' => 'text',
-					'label' => 'Search',
-					'tagline' => 'Search by group name, description',
+					'label' => 'Procurar',
+					'tagline' => 'Procure pelo nome do grupo, descrição',
 					'condition' => 'multiple',
 					'searchFields' => ['UserGroups.name', 'UserGroups.description'],
 					'inputOptions' => ['style' => 'width:200px;']
 				],
 				'UserGroups.is_registration_allowed' => [
 					'type' => 'select',
-					'label' => 'Registration Allowed',
+					'label' => 'Registro Permitido',
 					'options' => ['' => 'Select', '1' => 'Yes', '0' => 'No']
 				]
 			]
