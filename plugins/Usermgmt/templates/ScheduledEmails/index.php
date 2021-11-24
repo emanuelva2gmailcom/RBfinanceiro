@@ -1,4 +1,4 @@
-<div class="cardPAINEl card mt-2">
+<div class="cardPAINEL card mt-2">
 	<div class="cardheaderDASH card-header">
 		<span class="text-white card-title">
 			<?php echo __('E-mails agendados');?>
