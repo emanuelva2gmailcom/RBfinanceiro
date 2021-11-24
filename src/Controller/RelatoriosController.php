@@ -621,8 +621,8 @@ class RelatoriosController extends AppController
             $contas = [];
             $result = [];
             foreach ($lancamentos as $lancamento) :
+                $date = $lancamento->data_vencimento->addmonth(1);
                 for($i = $lancamento->parcela; $i >= 1; $i--) {
-                    $date = $lancamento->data_vencimento->addmonth(1);
                     array_push($alllancamentos, [
                         'valor' => $lancamento->valor / $lancamento->parcela,
                         'date' => $date->addmonth($i - 1)->i18nFormat($periodo[0]),
