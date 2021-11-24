@@ -173,7 +173,6 @@ class LancamentosController extends AppController
 
         $lancamentos = $this->paginate($this->Lancamentos);
         $lancamentos = $this->Lancamentos->find('all', ['conditions' => [$renovados['simple']], 'contain' => ['Subcontas', 'Fornecedores', 'Clientes']]);
-        debug($this->Salas->get(13,  ['contain' => ['Enderecos']]));exit;
         $now = FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
 
         $this->set(compact('lancamentos', 'now'));
