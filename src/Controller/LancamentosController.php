@@ -215,13 +215,10 @@ class LancamentosController extends AppController
 
     public function add()
     {
-
         $this->loadModel('Comprovantes');
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
-            $lancamento = $this->Lancamentos->patchEntity($lancamento,$this->request->getData());
 
-            $lancamento->parcela == null ? $lancamento->parcela = 1 : '';
             if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
                 $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
                 return $this->redirect(['action' => 'add']);
@@ -243,8 +240,32 @@ class LancamentosController extends AppController
             }
 
             $comprovantes->nome_arquivo = $nome;
-            if (($this->Lancamentos->save($lancamento))) {
-                $comprovantes->lancamento_id = $lancamento->id_lancamento;
+
+            $request = $this->request->getData();
+            $request['parcela'] == null ? $lancamento->parcela = 1 : '';
+            $lancamento = $this->Lancamentos->patchEntity($lancamento, $request);
+            if($request['parcela'] > 1 && $request['parcela'] !== null && $request['tipo'] == 'PREVISTO'){
+                $request['valor'] = $request['valor']/$request['parcela'];
+                $request['parcela'] = intval($request['parcela']);
+                for(intval($request['parcela']); $request['parcela'] >= 1; $request['parcela']--){
+                    $parcela = $this->Lancamentos->newEntity($request);
+                    $parcela->data_vencimento = $parcela->data_vencimento->addMonth($request['parcela']);
+                    if (($this->Lancamentos->save($parcela))) {
+                        $comprovantes->lancamento_id = $lancamento->id_lancamento;
+                        // debug([$parcela, $request]);
+                    } else{
+                        $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
+                        return $this->redirect(['action' => 'add']);
+                    }
+                }
+                // exit;
+            } else {
+                if (($this->Lancamentos->save($lancamento))) {
+                    $comprovantes->lancamento_id = $lancamento->id_lancamento;
+                } else{
+                    $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
+                    return $this->redirect(['action' => 'add']);
+                }
             }
             if ($lancamento->tipo == 'REALIZADO') {
                 if ($name != null) {
