@@ -45,7 +45,7 @@
     function datase(data) {
         response = []
         // data.total.entradas.push(data.total.entradas[0])
-        data.total.entradas[0] = 'Entradas:'
+        data.total['entradas'].unshift('Entradas:')
         $($('#example').DataTable().row.add(data.total.entradas).draw()
             .node()).addClass('relatorioFC');
         // response.push(data.total.entradas)
@@ -57,7 +57,7 @@
             }
         })
         // data.total.saidas.push(data.total.saidas[0])
-        data.total.saidas[0] = 'Saidas:'
+        data.total['saidas'].unshift('Saidas:')
         $($('#example').DataTable().row.add(data.total.saidas).draw()
             .node()).addClass('relatorioFC');
         data.rows.td.map(function(d) {
@@ -163,6 +163,7 @@
                         "X-CSRF-Token": csrf
                     }
                 }).then(function(response) { // handle success
+                    console.log(response.data)
                     $("#example").DataTable().destroy();
                     $("#example").empty()
                     formatador(response.data[1])
@@ -173,6 +174,7 @@
         })
         try {
             const response = axios.get('/relatorios/getFluxoDeCaixa/').then(function(response) { // handle success
+                console.log(response.data)
                 formatador(response.data[1])
             })
         } catch (error) {

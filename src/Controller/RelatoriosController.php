@@ -563,7 +563,7 @@ class RelatoriosController extends AppController
 
     public function getFluxoDeCaixa()
     {
-        // $request = ['2021-11-12', '2021-12-30', 'mes'];
+        // $request = ['2021-11-12', '2022-01-12', 'mes'];
         $show = false;
         if ($this->request->is('get')) {
             $dia = ['yyyy-MM-dd', '+1 days'];
@@ -594,7 +594,6 @@ class RelatoriosController extends AppController
                     'final' => []
                 ]
             ];
-            $alllancamentos = [];
             $dia = ['yyyy-MM-dd', '+1 days'];
             $mes = ['yyyy-MM', '+1 months'];
             $ano = ['yyyy', '+1 years'];
@@ -620,25 +619,16 @@ class RelatoriosController extends AppController
             $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_vencimento')];
             $contas = [];
             $result = [];
+
             foreach ($lancamentos as $lancamento) :
-                $date = $lancamento->data_vencimento->addmonth(1);
-                for($i = $lancamento->parcela; $i >= 1; $i--) {
-                    array_push($alllancamentos, [
-                        'valor' => $lancamento->valor / $lancamento->parcela,
-                        'date' => $date->addmonth($i - 1)->i18nFormat($periodo[0]),
-                        'subconta' => $lancamento->subconta,
-                    ]);
-                }
-            endforeach;
-            foreach ($alllancamentos as $lancamento) :
-                if (in_array($lancamento['date'], $obj['header'])) {
-                    if ($lancamento['subconta']->conta->subgrupo->grupo->grupo == 'entrada') {
-                        array_push($obj['rows']['th']['entradas'], $lancamento['subconta']->subconta);
-                    } else if ($lancamento['subconta']->conta->subgrupo->grupo->grupo == 'saida') {
-                        array_push($obj['rows']['th']['saidas'], $lancamento['subconta']->subconta);
+                if (in_array($lancamento->data_vencimento->i18nFormat($periodo[0]), $obj['header'])) {
+                    if ($lancamento->subconta->conta->subgrupo->grupo->grupo == 'entrada') {
+                        array_push($obj['rows']['th']['entradas'], $lancamento->subconta->subconta);
+                    } else if ($lancamento->subconta->conta->subgrupo->grupo->grupo == 'saida') {
+                        array_push($obj['rows']['th']['saidas'], $lancamento->subconta->subconta);
                     }
-                    if (!in_array($lancamento['subconta']->subconta, $contas)) {
-                        array_push($contas, $lancamento['subconta']->subconta);
+                    if (!in_array($lancamento->subconta->subconta, $contas)) {
+                        array_push($contas, $lancamento->subconta->subconta);
                     }
                 }
             endforeach;
@@ -648,16 +638,15 @@ class RelatoriosController extends AppController
                 $obj['total']['entradas'][$data] = 0;
                 $obj['total']['saidas'][$data] = 0;
             endforeach;
-
             foreach ($contas as $conta) :
                 $result = [];
                 foreach ($obj['header'] as $data) :
                     $valor = 0;
-                    foreach ($alllancamentos as $lancamento) :
-                        if (($lancamento['subconta']->conta->subgrupo->grupo->grupo == 'entrada') && ($lancamento['subconta']->subconta == $conta) && ($data == $lancamento['date'])) {
-                            $valor += intval($lancamento['valor']);
-                        } else if (($lancamento['subconta']->conta->subgrupo->grupo->grupo == 'saida') && ($lancamento['subconta']->subconta == $conta) && ($data == $lancamento['date'])) {
-                            $valor += intval('-' . $lancamento['valor']);
+                    foreach ($lancamentos as $lancamento) :
+                        if (($lancamento->subconta->conta->subgrupo->grupo->grupo == 'entrada') && ($lancamento->subconta->subconta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))) {
+                            $valor += intval($lancamento->valor);
+                        } else if (($lancamento->subconta->conta->subgrupo->grupo->grupo == 'saida') && ($lancamento->subconta->subconta == $conta) && ($data == $lancamento->data_vencimento->i18nFormat($periodo[0]))) {
+                            $valor += intval('-' . $lancamento->valor);
                         }
                     endforeach;
                     if (in_array($conta, $obj['rows']['th']['entradas'])) {
