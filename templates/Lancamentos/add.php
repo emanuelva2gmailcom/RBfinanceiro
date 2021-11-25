@@ -45,21 +45,22 @@
                 <div class="panel-body">
                     <div class="form-group ">
                         <?= $this->Form->label('Tipo') ?>
-                        <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control tipo', 'empty' => 'SELECIONE']); ?>
-                        <span class="s-grupo span"></span>
+                        <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control tipo', 'empty' => 'SELECIONE', 'class' => 'tipo']); ?>
+                        <span class="tipo-span"></span>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->control('descricao', ['label' => 'Descrição', 'placeholder' => 'Descrição'], ['class' => 'form-control']); ?>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->control('valor', ['label' => 'Valor', 'placeholder' => 'Valor'], ['class' => 'border form-control']); ?>
+                        <span class="Campo-Obrigatorio"></span>
                     </div>
                     <div class="form-group">
-                        <?= $this->Form->control('parcela', ['label' => 'Parcela', 'placeholder' => 'Parcela'], ['class' => 'border form-control']); ?>
+                        <?= $this->Form->control('parcela', ['label' => 'Parcela', 'placeholder' => 'Parcela'], ['class' => 'border form-control'], ['id' => 'valor']); ?>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <div id="proximo" class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
+                    <div id="Card1-Proximo" class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
 
                 </div>
             </div>
@@ -69,7 +70,7 @@
                     <div class="form-group">
                         <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão', 'placeholder' => 'dd/mm/yyyy'], ['class' => 'border form-control dataADD']); ?>
                     </div>
-                    <div class="form-group baixa">
+                    <div class="form-group data-baixa">
                         <?= $this->Form->control('data_baixa', ['label' => 'Data de Baixa', 'placeholder' => 'Data de Baixa'], ['class' => 'border form-control dataADD']); ?>
                     </div>
                     <div class="form-group">
@@ -149,170 +150,57 @@
 
 
 <script>
-    function grupo($grupo) {
-        $grupo = $grupo;
-        if ($grupo == 0) {
-            $('#teste').removeAttr('onclick')
-            // $('.todos').prop('disabled', true);
-        }
+    // $('.tipo').ready(function() {
+    //     $tipo = $('.tipo').val();
+    //     $('#Card1-Proximo').click(function() {
+    //         if ($tipo == '') {
+    //             $('.tipo-span').text('Campo Obrigatório');
+    //         }
+    //     })
+    //     $('#Card1-Proximo').removeAttr('onclick')
 
-        // $('#teste').click(function() {
-        //     if ($grupo == 0) {
-        //         $('.s-grupo').text('Campo Obrigatório')
-        //     } else {
-        //         $('.s-grupo').text(' ')
-        //     }
-        // })
-    }
+    // })
+    // $('.tipo').change(function() {
+    //     $tipo = $('.tipo').val();
+    //     try {
+    //         const response = axios.get('/caixas/getCaixaaberto').then(function(response) {
+    //             if ((response.data !== true) && ($tipo !== 'PREVISTO')) {
+    //                 if ($tipo == '') {
+    //                     $('.tipo-span').text(' ');
+    //                     $('.tipo-span').text('Campo Obrigatóriot');
+    //                     $('#Card1-Proximo').removeAttr('onclick')
+    //                 } else {
+    //                     $('.tipo-span').text('Caixa Fechado');
+    //                     $('#Card1-Proximo').removeAttr('onclick')
+    //                 }
 
-    $('.grupo').change(function() {
-        $grupo = $(".grupo option:selected").text();
+    //             } else {
+    //                 $('.tipo-span').text(' ');
+    //                 $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+    //             }
+    //             if (response.data == true) {
+    //                 if ($tipo == '') {
+    //                     $('.tipo-span').text('Campo Obrigatórioss');
+    //                     $('#Card1-Proximo').removeAttr('onclick')
+    //                 } else {
+    //                     $('.tipo-span').text(' ');
+    //                     $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+    //                 }
+    //             }
 
-        if ($grupo == 'saida') {
-            $('.entradas').addClass('d-none')
-            $('.l-entradas').addClass('d-none')
+    //         })
+    //     } catch (error) {
+    //         console.log(error);
 
-            $('.todos').addClass('d-none')
-            $('.l-todos').addClass('d-none')
-
-            $('.saidas').removeClass('d-none')
-            $('.l-saidas').removeClass('d-none')
-            $('.saidas').attr('id', 'fluxoconta-id').attr('name', 'fluxoconta_id')
-
-            $('#teste').attr('onclick', 'stepper1.next()')
-            $('.s-grupo').text(' ')
-
-        } else if ($grupo == 'entrada') {
-            $('.saidas').addClass('d-none')
-            $('.l-saidas').addClass('d-none')
-
-            $('.todos').addClass('d-none')
-            $('.l-todos').addClass('d-none')
-
-            $('.entradas').removeClass('d-none')
-            $('.l-entradas').removeClass('d-none')
-            $('.entradas').attr('id', 'fluxoconta-id').attr('name', 'fluxoconta_id')
-
-            $('#teste').attr('onclick', 'stepper1.next()')
-            $('.s-grupo').text(' ')
-        } else {
-            $('.saidas').addClass('d-none');
-            $('.l-saidas').addClass('d-none')
-
-            $('.entradas').addClass('d-none');
-            $('.l-entradas').addClass('d-none')
-
-            $('.todos').removeClass('d-none');
-            $('.l-todos').removeClass('d-none')
+    //     }
+    //     if ($tipo == "PREVISTO") {
+    //         $(".file").addClass('d-none');
+    //         $('.data-baixa').addClass('d-none');
+    //     } else {
+    //         $(".file").removeClass('d-none');
+    //         $('.data-baixa').removeClass('d-none');
+    //     }
+    // })
 
 
-        }
-
-    });
-
-    $('.grupo').ready(function() {
-        $grupo = $('.grupo').val();
-        grupo($grupo)
-    })
-
-    $('.grupo').change(function() {
-        $grupo = $('.grupo').val();
-        grupo($grupo)
-    })
-
-    $('.entradas').change(function() {
-        $tipo = $(".entradas option:selected").text();
-        if ($tipo.indexOf('Cliente') != -1) {
-            $('.cliente').removeClass('d-none')
-            $('.fornecedor').addClass('d-none');
-
-        } else {
-            $('.cliente').addClass('d-none');
-            $('.fornecedor').addClass('d-none');
-        }
-
-    });
-
-
-    $('.saidas').change(function() {
-        $tipo = $(".saidas option:selected").text();
-
-        if ($tipo.indexOf('Fornecedor') != -1) {
-
-            $('.cliente').addClass('d-none')
-            $('.fornecedor').removeClass('d-none');
-
-        } else {
-            $('.cliente').addClass('d-none');
-            $('.fornecedor').addClass('d-none');
-        }
-    });
-
-
-    $('.tipo').change(function() {
-        $tipo = $('.tipo').val();
-        try {
-            const response = axios.get('/caixas/getCaixaaberto').then(function(response) {
-                if ((response.data !== true) && ($tipo !== 'PREVISTO')) {
-                    $('.span').text('Caixa Fechado');
-                    $('#proximo').removeAttr('onclick')
-                } else {
-                    $('.span').text(' ');
-                    $('#proximo').attr('onclick', 'stepper1.next()');
-                }
-            })
-        } catch (error) {
-            console.log(error);
-        }
-        if ($tipo == "PREVISTO") {
-            $(".file").addClass('d-none');
-            $('.baixa').addClass('d-none');
-        } else {
-            $(".file").removeClass('d-none');
-            $('.baixa').removeClass('d-none');
-        }
-    })
-
-    $('.dregrupo').change(function() {
-        $dregrupo = $(".dregrupo option:selected").text();
-        if ($dregrupo == 'variavel') {
-            $('.variaveis').removeClass('d-none');
-            $('.receitas').addClass('d-none');
-            $('.fixos').addClass('d-none');
-            $('.tudo').addClass('d-none');
-            $('.variaveis').attr('id', 'dreconta_id').attr('name', 'dreconta_id')
-            $('.fixos').attr('id', '').attr('name', '')
-            $('.receitas').attr('id', '').attr('name', '')
-        } else if ($dregrupo == 'fixo') {
-            $('.fixos').removeClass('d-none');
-            $('.receitas').addClass('d-none');
-            $('.variaveis').addClass('d-none');
-            $('.tudo').addClass('d-none');
-            $('.fixos').attr('id', 'dreconta_id').attr('name', 'dreconta_id')
-            $('.receitas').attr('id', '').attr('name', '')
-            $('.variaveis').attr('id', '').attr('name', '')
-        } else if ($dregrupo == 'receita') {
-            $('.receitas').removeClass('d-none');
-            $('.fixos').addClass('d-none');
-            $('.variaveis').addClass('d-none');
-            $('.tudo').addClass('d-none');
-            $('.receitas').attr('id', 'dreconta_id').attr('name', 'dreconta_id')
-            $('.fixos').attr('id', '').attr('name', '')
-            $('.variaveis').attr('id', '').attr('name', '')
-
-        } else {
-            $('.tudo').removeClass('d-none');
-            $('.fixos').addClass('d-none');
-            $('.receitas').addClass('d-none');
-            $('.variaveis').addClass('d-none');
-
-        }
-    })
-
-    $('.dregrupo').ready(function() {
-        $dregrupo = $(".dregrupo option:selected").text();
-        if ($dregrupo == 'SELECIONE') {
-            $('.tudo').prop('disabled', true);
-        }
-    })
 </script>
