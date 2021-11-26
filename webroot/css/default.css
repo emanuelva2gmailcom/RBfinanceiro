@@ -61,11 +61,13 @@
             .sidebarMenu .segundo{
                 background-color: #FFFFFF;
                 color: #046076;
+                border-radius: 10px;
             }
 
             .sidebarMenu .terceiro{
                 background-color: #046076;
                 color: #FFFFFF;
+                border-radius: 10px;
             }
 
             .info a{

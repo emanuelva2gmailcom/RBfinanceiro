@@ -12,11 +12,11 @@ try {
 function caixa(is)
 {
   if(is == true){
-    $('.caixa').css({backgroundColor: "#046076", color: "#FFFFFF"})
+    $('.caixa').css({backgroundColor: "#046076", color: "#FFFFFF", borderRadius: "10px"})
     $('.fa-power-off').css({color: "#FFFFFF"})
     document.getElementById('caixa').innerHTML = 'Fechar Caixa'
   }else{
-    $('.caixa').css({backgroundColor: "#FFFFFF", color: "#046076"})
+    $('.caixa').css({backgroundColor: "#FFFFFF", color: "#046076", borderRadius: "10px"})
     $('.fa-power-off').css({color: "#046076"})
     document.getElementById('caixa').innerHTML = 'Abrir Caixa'
   }
