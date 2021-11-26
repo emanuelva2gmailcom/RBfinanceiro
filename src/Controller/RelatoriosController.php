@@ -453,7 +453,7 @@ class RelatoriosController extends AppController
         return $valor;
     }
 
-    public function getRelatorio($tipo = null, $date = null, $periodo = null)
+    public function getRelatorio($tipo = "PREVISTO", $date = 'data_vencimento', $periodo = ['yyyy-MM', '+1 months'])
     {
         $renovados = $this->getrenovado();
         $obj = [
@@ -481,12 +481,14 @@ class RelatoriosController extends AppController
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
         $comeco = FrozenTime::now()->i18nFormat($periodo[0]);
-        $final = null;
+        $final = $comeco;
         foreach ($lancamentos as $lancamento) :
-            if ($lancamento->$date->i18nFormat($periodo[0]) >= $comeco) {
+            // debug([$lancamento->$date->i18nFormat($periodo[0]) >= $comeco, $lancamento->$date->i18nFormat($periodo[0]), $final]);
+            if ($lancamento->$date->i18nFormat($periodo[0]) >= $final) {
                 $final = $lancamento->$date->i18nFormat($periodo[0]);
             }
         endforeach;
+        // debug([$comeco, $final]);exit;
         $obj['header'] = $this->array_date($comeco, $final, $periodo);
         $obj['total']['inicial'] = [$this->total_before($comeco, $lancamentos, $date)];
         $contas = [];
@@ -567,7 +569,8 @@ class RelatoriosController extends AppController
         $show = false;
         if ($this->request->is('get')) {
             $dia = ['yyyy-MM-dd', '+1 days'];
-            $obj = $this->getRelatorio('PREVISTO', 'data_vencimento', $dia);
+            $mes = ['yyyy-MM', '+1 months'];
+            $obj = $this->getRelatorio('PREVISTO', 'data_vencimento', $mes);
             $obj['total']['entradas'] = array_values($obj['total']['entradas']);
             $obj['total']['saidas'] = array_values($obj['total']['saidas']);
             $this->response = $this->response->withType('application/json')
