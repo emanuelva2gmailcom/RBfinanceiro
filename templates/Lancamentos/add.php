@@ -71,15 +71,15 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão', 'placeholder' => 'dd/mm/yyyy'], ['class' => 'border form-control dataADD']); ?>
-                        <span class="Campo-Obrigatorio0"></span></span>
+                        <span class="Campo-Obrigatorio00"></span></span>
                     </div>
                     <div class="form-group data-baixa">
                         <?= $this->Form->control('data_baixa', ['label' => 'Data de Baixa', 'placeholder' => 'Data de Baixa'], ['class' => 'border form-control dataADD']); ?>
-                        <span class="Campo-Obrigatorio1"></span></span>
+                        <span id='previsto'></span></span>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento', 'placeholder' => 'Data de Vencimento'], ['class' => 'border form-control dataADD']); ?>
-                        <span class="Campo-Obrigatorio2"></span></span>
+                        <span class="Campo-Obrigatorio02"></span></span>
                     </div>
                     <div class="form-group competencia">
                         <?= $this->Form->control('data_competencia', ['label' => 'Data de Competência', 'placeholder' => 'Data de Competência'], ['class' => 'border form-control dataADD']); ?>
@@ -94,10 +94,11 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <?= $this->Form->control('grupo_id', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']); ?>
-                        <span class="s-grupo"></span>
+                        <span class="Campo-Obrigatorio10"></span>
                     </div>
                     <div class="form-group">
-                        <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE', ['class' => 'subconta']]); ?>
+                        <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE']); ?>
+                        <span class="Campo-Obrigatorio11"></span>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -157,7 +158,9 @@
 
 <script>
     // $('document').ready(function() {
+    //     $('#Card1-Proximo').removeAttr('onclick')
     //     $('#Card2-Proximo').removeAttr('onclick')
+    //     $('#Card3-Proximo').removeAttr('onclick')
     // })
     //---------------- Código de Barramento do Primeiro STEP----------------------
     // >>>>>>>>>>Campo TIPO<<<<<<<<<<<<<<<<<<
@@ -207,19 +210,22 @@
     //     if ($tipo == "PREVISTO") {
     //         $(".file").addClass('d-none');
     //         $('.data-baixa').addClass('d-none');
+    //         $('#previsto').addClass('Campo-Obrigatorio01')
     //     } else {
     //         $(".file").removeClass('d-none');
     //         $('.data-baixa').removeClass('d-none');
+    //         $('#previsto').removeClass('Campo-Obrigatorio01')
     //     }
     // })
 
+
     // // >>>>>>>>>>Campos VALOR e PARCELA<<<<<<<<<<<<<<<<<<
+
     // $('#Card1-Proximo').click(function() {
     //     var inputs = [$('#valor').val(), $('#parcela').val()];
     //     inputs.forEach(function(input, index) {
     //         if (input == "") {
     //             $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
-    //             $('#Card1-Proximo').removeAttr('onclick')
     //         } else {
     //             $('.Campo-Obrigatorio' + index).text(' ');
     //             $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
@@ -241,17 +247,15 @@
 
     //---------------- Código de Barramento do Segundo STEP----------------------
     // >>>>>>>>>>Campos de  DATAS<<<<<<<<<<<<<<<<<<
-    // $('document').ready(function() {
-    //     $('#Card2-Proximo').removeAttr('onclick')
-    // })
+
     // $('#Card2-Proximo').click(function() {
     //     var inputs = [$('#data-emissao').val(), $('#data-baixa').val(), $('#data-vencimento').val()];
     //     inputs.forEach(function(input, index) {
     //         if (input == "") {
-    //             $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
+    //             $('.Campo-Obrigatorio0' + index).text('Campo Obrigatório');
     //             $('#Card2-Proximo').removeAttr('onclick')
     //         } else {
-    //             $('.Campo-Obrigatorio' + index).text(' ');
+    //             $('.Campo-Obrigatorio0' + index).text(' ');
     //             $('#Card2-Proximo').attr('onclick', 'stepper1.next()');
     //         }
     //     });
@@ -285,31 +289,34 @@
     // });
 
     //---------------- Código de Barramento do Terceiro STEP----------------------
-    // >>>>>>>>>>Campos de  GRUPO e Conta<<<<<<<<<<<<<<<<<<
-    // function grupo(grupos) {
-    //     var grupos = grupos;
-    //     if (grupos == 0) {
-    //         $('Card3-Proximo').removeAttr('onclick')
-    //         // $('.todos').prop('disabled', true);
-    //     }
+    // >>>>>>>>>>Campos de  GRUPO e CONTA<<<<<<<<<<<<<<<<<<
 
-    //     $('Card3-Proximo').click(function() {
-    //         if (grupos == 0) {
-    //             $('.s-grupo').text('Campo Obrigatório')
+    // $('#Card3-Proximo').click(function() {
+    //     var inputs = [$("#grupo-id option:selected").text(), $("#subconta-id option:selected").text()];
+    //     inputs.forEach(function(input, index) {
+    //         if (input == "SELECIONE") {
+    //             $('.Campo-Obrigatorio1' + index).text('Campo Obrigatório');
     //         } else {
-    //             $('.s-grupo').text(' ')
+    //             $('.Campo-Obrigatorio1' + index).text(' ');
     //         }
-    //     })
+    //     });
+    // })
+
+    // var cont = 0;
+
+    // function campo(span, index) {
+    //     if (span > 0) {
+    //         cont++;
+    //         $('.Campo-Obrigatorio1' + index).text(' ');
+    //     }
+    //     if (cont > 1 && span > 0) {
+    //         $('#Card3-Proximo').attr('onclick', 'stepper1.next()');
+    //     }
     // }
-
-    // $('.grupo').ready(function() {
-    //     var grupos = $('.grupo').val();
-    //     // alert(grupo)
-    //     grupo(grupos)
-    // })
-
-    // $('.grupo').change(function() {
-    //     var grupos = $('.grupo').val();
-    //     grupo(grupos)
-    // })
+    // $('#grupo-id').change(function() {
+    //     campo(this.value, 0)
+    // });
+    // $('#subconta-id').change(function() {
+    //     campo(this.value, 1)
+    // });
 </script>
