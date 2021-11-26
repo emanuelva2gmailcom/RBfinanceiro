@@ -663,7 +663,7 @@
                 }
             }
 
-     /* 2.3.2 Fluxo de Caixa & Caixa Gerencial: */
+     /* 2.3.2 Fluxo de Caixa & Caixa Gerencial & DRE: */
 
             .sorting_disabled {
                color: #047076;
@@ -671,6 +671,10 @@
 
             .relatorioFC{
                 color: white;
+            }
+
+            .cardRELATORIOS .dataTables_paginate{
+                display: none;
             }
 
      /* 2.4 Dashboard vulgo Configurações: */

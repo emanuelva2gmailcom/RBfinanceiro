@@ -6,7 +6,7 @@
  */
 ?>
 
-<div class="card">
+<div class="card cardRELATORIOS">
     <div class="card-header">
         <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
         <div class="formgroupPAINEL col-md-3">
@@ -116,9 +116,9 @@
             "language": {
                 "emptyTable": "Nenhum registro disponível na tabela",
                 "zeroRecords": "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ fluxos de caixas",
-                "infoEmpty": "Mostrando 0 de 0 dos 0 fluxos de caixas",
-                "infoFiltered": "(filtrado do total de _MAX_ fluxos de caixas)",
+                "info": " ",
+                "infoEmpty": " ",
+                "infoFiltered": " ",
                 "search": "Procurar:",
                 "paginate": {
                     "first": "Primeiro",

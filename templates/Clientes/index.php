@@ -55,9 +55,9 @@
       "language": {
                 "emptyTable":     "Nenhum registro disponível na tabela",
                 "zeroRecords":    "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ clientes",
-                "infoEmpty":      "Mostrando 0 de 0 dos 0 clientes",
-                "infoFiltered":   "(filtrado do total de _MAX_ clientes)",
+                "info": "Mostrando _END_ de _MAX_ clientes",
+                "infoEmpty":      "Mostrando 0 de 0 clientes",
+                "infoFiltered":   " ",
                 "search": "Procurar:",
                 "paginate": {
                     "first":      "Primeiro",

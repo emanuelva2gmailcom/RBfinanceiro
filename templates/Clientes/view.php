@@ -81,21 +81,22 @@ $this->assign('title', __('Cliente'));
     <div class="card-body table-responsive p-0">
       <table class="table theINDEX tboINDEX table-hover text-nowrap">
         <tr>
-          <th><?= __('N° do Lançamento') ?></th>
+          <th><?= __('Nº do Lancamento') ?></th>
           <th><?= __('Tipo') ?></th>
-          <th><?= __('Descrição') ?></th>
           <th><?= __('Valor') ?></th>
+          <th><?= __('Parcela') ?></th>
+          <th><?= __('Descrição') ?></th>
           <th><?= __('Data de Emissão') ?></th>
+          <th><?= __('Data de Competência') ?></th>
           <th><?= __('Data de Baixa') ?></th>
           <th><?= __('Data de Vencimento') ?></th>
           <th><?= __('Criado') ?></th>
           <th><?= __('Modificado') ?></th>
-          <th><?= __('Conta') ?></th>
+          <th><?= __('Subconta') ?></th>
           <th><?= __('Fornecedor') ?></th>
           <th><?= __('Cliente') ?></th>
           <th><?= __('Lançamento') ?></th>
-          <!-- <th><?= __('Dreconta Id') ?></th> -->
-          <th class="actions"><?= __('Ações') ?></th>
+          <th><?= __('Ações') ?></th>
         </tr>
         <?php if (empty($lancamento->lancamentos)) { ?>
           <tr>
@@ -106,24 +107,37 @@ $this->assign('title', __('Cliente'));
         <?php } else { ?>
           <?php foreach ($lancamento->lancamentos as $lancamentos) : ?>
             <tr>
-              <td><?= h($lancamentos->id_lancamento) ?></td>
-              <td><?= h($lancamentos->tipo) ?></td>
-              <td><?= h($lancamentos->descricao) ?></td>
-              <td><?= h($lancamentos->valor) ?></td>
-              <td><?= h($lancamentos->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-              <?php if (empty($lancamento->data_baixa)) { ?>
+            <td><?= h($lancamentos->id_lancamento) ?></td>
+            <td><?= h($lancamentos->tipo) ?></td>
+            <td><?= h('R$ ' . $lancamento->valor) ?></td>
+            <td><?= h($lancamento->parcela. 'x') ?></td>
+            <td><?= h($lancamentos->descricao) ?></td>
+            <?php if (empty($lancamento->data_emissao)) { ?>
+                <td><?= h($lancamento->data_emissao) ?></td>
+            <?php } else { ?>
+                <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <?php } ?>
+            <?php if (empty($lancamento->data_competencia)) { ?>
+                <td><?= h($lancamento->data_competencia) ?></td>
+            <?php } else { ?>
+                <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <?php } ?>
+            <?php if (empty($lancamento->data_baixa)) { ?>
                 <td><?= h($lancamento->data_baixa) ?></td>
-              <?php } else { ?>
+            <?php } else { ?>
                 <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-              <?php } ?>
-              <td><?= h($lancamentos->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-              <td><?= h($lancamentos->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-              <td><?= h($lancamentos->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-              <td><?= h($lancamentos->fluxoconta_id) ?></td>
-              <td><?= h($lancamentos->fornecedor_id) ?></td>
-              <td><?= h($lancamentos->cliente_id) ?></td>
-              <td><?= h($lancamentos->lancamento_id) ?></td>
-              <td><?= h($lancamentos->dreconta_id) ?></td>
+            <?php } ?>
+            <?php if (empty($lancamento->data_vencimento)) { ?>
+                <td><?= h($lancamento->data_vencimento) ?></td>
+            <?php } else { ?>
+                <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <?php } ?>
+            <td><?= h($lancamentos->created) ?></td>
+            <td><?= h($lancamentos->modified) ?></td>
+            <td class="tdINDEX"><?= $lancamento->has('subconta') ? $this->Html->link($lancamento->subconta->subconta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->subconta->subconta]) : '' ?></td>
+            <td class="tdINDEX"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
+            <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
+            <td><?= h($lancamentos->lancamento_id) ?></td>
               <td class="actions">
                 <?= $this->Html->link(__('Visualizar'), ['controller' => 'Lancamentos', 'action' => 'view', $lancamentos->id_lancamento], ['class' => 'btn vis btn-xs btn-outline-info']) ?>
                 <?= $this->Html->link(__('Editar'), ['controller' => 'Lancamentos', 'action' => 'edit', $lancamentos->id_lancamento], ['class' => 'btn edi btn-xs btn-outline-success']) ?>

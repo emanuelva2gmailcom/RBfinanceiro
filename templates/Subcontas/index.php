@@ -49,9 +49,9 @@
       "language": {
                 "emptyTable":     "Nenhum registro disponível na tabela",
                 "zeroRecords":    "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ subcontas",
-                "infoEmpty":      "Mostrando 0 de 0 dos 0 subcontas",
-                "infoFiltered":   "(filtrado do total de _MAX_ subcontas)",
+                "info": "Mostrando _END_ de _MAX_ subcontas",
+                "infoEmpty":      "Mostrando 0 de 0 subcontas",
+                "infoFiltered":   " ",
                 "search": "Procurar:",
                 "paginate": {
                     "first":      "Primeiro",

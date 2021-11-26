@@ -138,9 +138,9 @@
                 "language": {
                     "emptyTable": "Nenhum registro disponível na tabela",
                     "zeroRecords": "Nenhum registro encontrado",
-                    "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
-                    "infoEmpty": "Mostrando 0 de 0 dos 0 lançamentos",
-                    "infoFiltered": "(filtrado do total de _MAX_ lançamentos)",
+                    "info": "Mostrando _END_ de _MAX_ lançamentos",
+                "infoEmpty":      "Mostrando 0 de 0 lançamentos",
+                "infoFiltered":   " ",
                     "search": "Procurar:",
                     "paginate": {
                         "first": "Primeiro",
