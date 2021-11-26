@@ -7,43 +7,27 @@
 
 <?php $this->assign('title', __('Edit Subconta') ); ?>
 
-<?php
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Subcontas' => ['action'=>'index'],
-      'View' => ['action'=>'view', $subconta->id_subconta],
-      'Edit',
-    ]
-  ])
-);
-?>
+<div class="container d-flex justify-content-center">
 
-
-<div class="card card-primary card-outline">
+  <div class="cardADD card card-danger m-5">
+    <div class="cardbodyADD card-body">
   <?= $this->Form->create($subconta) ?>
-  <div class="card-body">
-    <?php
-      echo $this->Form->control('subconta');
-      echo $this->Form->control('descricao');
-      echo $this->Form->control('conta_id', ['options' => $contas, 'empty' => true]);
-    ?>
+
+     <?= $this->Form->control('subconta', ['label' => 'Subconta'], ['class' => 'form-control']); ?>
+     <?= $this->Form->control('descricao', ['label' => 'Descrição'], ['class' => 'form-control']); ?>
+     <?= $this->Form->control('conta_id', ['label' => 'Conta'], ['class' => 'form-control'], ['options' => $contas, 'empty' => true]); ?>
+
   </div>
 
-  <div class="card-footer d-flex">
-    <div class="">
-      <?= $this->Form->postLink(
-          __('Delete'),
-          ['action' => 'delete', $subconta->id_subconta],
-          ['confirm' => __('Are you sure you want to delete # {0}?', $subconta->id_subconta), 'class' => 'btn btn-danger']
-      ) ?>
+  <div class="cardfooterADD card-footer d-flex">
+      <div class="mr-auto p-2">
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btnADD btn btn-default']) ?>
+      </div>
+      <div class="p-2">
+        <?= $this->Form->button(__('Salvar')) ?>
+      </div>
     </div>
-    <div class="ml-auto">
-      <?= $this->Form->button(__('Save')) ?>
-      <?= $this->Html->link(__('Cancel'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
-    </div>
-  </div>
 
-  <?= $this->Form->end() ?>
+    <?= $this->Form->end() ?>
+  </div>
 </div>

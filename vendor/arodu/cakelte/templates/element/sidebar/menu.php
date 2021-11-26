@@ -131,13 +131,13 @@ function caixa(is)
       </a>
         <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="/subcontas/add" class="terceiro nav-link">
+          <a href="/contas/add" class="terceiro nav-link">
         <i class="terceiro fas fa-donate nav-icon"></i>
         <p class="terceiro">Adicionar</p>
       </a>
     </li>
     <li class="nav-item">
-      <a href="/subcontas/index" class="terceiro nav-link">
+      <a href="/contas/index" class="terceiro nav-link">
         <i class="terceiro fas fa-hand-holding-usd nav-icon"></i>
         <p class="terceiro">Disponíveis</p>
       </a>
@@ -147,18 +147,18 @@ function caixa(is)
     <li class="nav-item">
       <a class="segundo nav-link">
         <i class="segundo fas fa-user-friends nav-icon"></i>
-        <p class="segundo">Subgrupos</p>
+        <p class="segundo">Subcontas</p>
         <i class="segundo right far fa-caret-square-left"></i>
       </a>
         <ul class="nav nav-treeview">
     <li class="nav-item">
-      <a href="/subgrupos/add" class="terceiro nav-link">
+      <a href="/subcontas/add" class="terceiro nav-link">
         <i class="terceiro fas fa-user-plus nav-icon"></i>
         <p class="terceiro">Adicionar</p>
       </a>
     </li>
     <li class="nav-item">
-      <a href="/subgrupos/index" class="terceiro nav-link">
+      <a href="/subcontas/index" class="terceiro nav-link">
         <i class="terceiro fas fa-users nav-icon"></i>
       <p class="terceiro">Disponíveis</p>
       </a>
