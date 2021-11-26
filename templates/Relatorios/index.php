@@ -48,7 +48,7 @@
 
             <div class="card-deck">
             <div class="row">
-              <!-- <div class="col-md-12 col-lg-6 col-xl-4">
+              <div class="col-md-12 col-lg-6 col-xl-4">
                 <div class="cardHOME card mb-2">
                 <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-100 w-100">
@@ -57,7 +57,7 @@
                         <p class="cardtextHOME card-text pb-2 pt-1">Aqui você visualiza os registros das entradas e saídas da empresa</p>
                         <a href="/relatorios/fluxodecaixa"> <p class="linkHOME"> Visualizar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
                     </div>
-                </div> -->
+                </div>
                 <!-- <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
                 </div>
                 <div class="cardfooterHOME card-footer">
