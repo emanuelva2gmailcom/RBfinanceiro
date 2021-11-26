@@ -25,12 +25,13 @@ class LancamentosTableTest extends TestCase
      */
     protected $fixtures = [
         'app.Lancamentos',
-        'app.Fluxocontas',
+        'app.Subcontas',
         'app.Fornecedores',
         'app.Clientes',
-        'app.Drecontas',
         'app.Caixaregistros',
         'app.Comprovantes',
+        'app.Subgrupos',
+        'app.Notifications',
     ];
 
     /**

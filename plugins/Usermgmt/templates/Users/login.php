@@ -2,14 +2,8 @@
 
 <?php $this->layout = "CakeLte.login" ?>
 
-<style>
-	a{
-		color: white;
-	}
-</style>
-
-<div class="card" style="margin-top: 0%; border-radius: 20px;">
-	<div class="card-body login-card-body bg-info text-white" style="border-radius: 20px;">
+<div class="cardLOGIN card">
+	<div class="cardbodyLOGIN card-body login-card-body">
 
 
 		<?= $this->Form->create() ?>
@@ -19,14 +13,14 @@
 				'label'=>false,
 				'placeholder'=>__('Digite seu email / username'),
 				'class'=>'form-control',
-				'append' => '<i class="fas fa-user" style="color: white;"></i>'
+				'append' => '<i class="fas fa-user"></i>'
 			]);?>
 
 			<?= $this->Form->control('Users.password', [
 				'type'=>'password', 'label'=>false,
 				'placeholder'=>__('Digite sua senha'),
 				'class'=>'form-control',
-				'append' => '<i class="fas fa-lock" style="color: white;"></i>'
+				'append' => '<i class="fas fa-lock"></i>'
 			]);?>
 
 		<?php
@@ -60,7 +54,7 @@
 			<?php }; ?>
 			<!-- /.col -->
 			<div class="col-4">
-				<?= $this->Form->Submit(__('Entrar'), ['type'=>'submit', 'class'=>'btn btn-light text-info  ml-auto', 'id'=>'loginSubmitBtn']);?><br>
+				<?= $this->Form->Submit(__('Entrar'), ['type'=>'submit', 'class'=>'btnADD btn ml-auto', 'id'=>'loginSubmitBtn']);?><br>
 			</div>
 		</div>
 		<!-- /.col -->

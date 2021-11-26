@@ -7,154 +7,31 @@
  */
 ?>
 
-<style>
-    .tr1 a {
-        color: #029BE1;
-    }
-
-    .nm a {
-        color: green;
-    }
-
-    .sorting_disabled {
-        color: green;
-    }
-
-    .dataTables_info {
-        color: green;
-    }
-
-    .dataTables_empty {
-        color: #17a2b8;
-    }
-
-    .dataTables_filter input:focus {
-        color: #17a2b8;
-        border: green solid 2px;
-
-    }
-
-    .dataTables_filter input {
-        color: #17a2b8;
-        border: green solid 2px;
-
-    }
-
-    .dataTables_filter label {
-        color: #17a2b8;
-
-    }
-
-    .buttons-copy {
-        background-color: #17a2b8;
-        color: white;
-        border: 1px solid #17a2b8;
-        opacity: 0.7;
-    }
-
-    .buttons-copy:hover {
-        background-color: white;
-        color: #17a2b8;
-        border: 1px solid #17a2b8;
-        opacity: 0.7;
-    }
-
-    .buttons-print {
-        background-color: #0099CC;
-        color: white;
-        border: 1px solid #0099CC;
-        opacity: 0.7;
-    }
-
-    .buttons-print:hover {
-        background-color: white;
-        color: #0099CC;
-        border: 1px solid #0099CC;
-        opacity: 0.7;
-    }
-
-    .buttons-csv {
-        background-color: green;
-        color: white;
-        border: 1px solid green;
-        opacity: 0.7;
-    }
-
-    .buttons-csv:hover {
-        background-color: white;
-        color: green;
-        border: 1px solid green;
-        opacity: 0.7;
-    }
-
-    .buttons-excel {
-        background-color: #006400;
-        color: white;
-        border: 1px solid #006400;
-        opacity: 0.7;
-    }
-
-    .buttons-excel:hover {
-        background-color: white;
-        color: #006400;
-        border: 1px solid #006400;
-        opacity: 0.7;
-    }
-
-    .buttons-pdf {
-        background-color: #4b4b4b;
-        color: white;
-        border: 1px solid #4b4b4b;
-        opacity: 0.7;
-    }
-
-    .buttons-pdf:hover {
-        background-color: white;
-        color: #4b4b4b;
-        border: 1px solid #4b4b4b;
-        opacity: 0.7;
-    }
-
-    .buttons-collection {
-        background-color: black;
-        color: white;
-        border: 1px solid black;
-        opacity: 0.7;
-    }
-
-    .buttons-collection:hover {
-        background-color: white;
-        color: black;
-        border: 1px solid black;
-        opacity: 0.7;
-    }
-</style>
-
 <div class="card">
     <div class="card-header">
         <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
-        <div class="col-md-3">
-            <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control text-white']); ?>
+        <div class="formgroupPAINEL col-md-3">
+            <?= $this->Form->control(0, ['label' => 'Começo', 'type' => 'date'], ['class' => 'form-control']); ?>
         </div>
-        <div class="col-md-3">
-            <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'date'], ['class' => 'la form-control']); ?>
+        <div class="formgroupPAINEL col-md-3">
+            <?= $this->Form->control(1, ['label' => 'Final', 'type' => 'date'], ['class' => 'form-control']); ?>
         </div>
-        <div class="col-md-3">
+        <div class="formgroupPAINEL col-md-3">
             <label>Período</label>
             <?= $this->Form->select(2, ['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'periodo form-control select2bs4']); ?>
         </div>
-        <div class="col-md-3">
+        <div class="formgroupPAINEL col-md-3">
             <label>Enviar</label>
-            <?= $this->Form->button(__('Enviar'), ['class' => 'form-control']) ?>
+            <?= $this->Form->button(__('Enviar'), ['class' => 'btnADD form-control']) ?>
         </div>
         <?= $this->Form->end() ?>
     </div>
     <div class="card-2 card-body table-responsive">
-        <table id="example" class="table table-sm table-bordered table-striped" style="width: 100%;">
-        <thead class="text-green">
+        <table id="example" class="table table-sm table-bordered table-striped">
+        <thead class="theINDEX">
 
             </thead>
-            <tbody class="text-info">
+            <tbody class="tboINDEX">
 
             </tbody>
         </table>
@@ -170,10 +47,11 @@
 
     function datase(data) {
         response = []
+        console.log(data)
         data.total.entradas.push(data.total.entradas[0])
         data.total.entradas[0] = 'Entradas:'
         $($('#example').DataTable().row.add(data.total.entradas).draw()
-            .node()).addClass('bg-info');
+            .node()).addClass('relatorioFC');
         // response.push(data.total.entradas)
         data.rows.td.map(function(d) {
             if (data.rows.th['entradas'].includes(d[0])) {
@@ -185,7 +63,7 @@
         data.total.saidas.push(data.total.saidas[0])
         data.total.saidas[0] = 'Saidas:'
         $($('#example').DataTable().row.add(data.total.saidas).draw()
-            .node()).addClass('bg-info');
+            .node()).addClass('relatorioFC');
         data.rows.td.map(function(d) {
             if (data.rows.th['saidas'].includes(d[0])) {
                 $($('#example').DataTable().row.add(d).draw()
@@ -196,11 +74,11 @@
         data.total.inicial.unshift('Saldo Inicial')
         data.total.final.unshift('Saldo Final')
         $($('#example').DataTable().row.add(data.total['entradas-saidas']).draw()
-            .node()).addClass('bg-info');
+            .node()).addClass('relatorioFC');
         $($('#example').DataTable().row.add(data.total.inicial).draw()
-            .node()).addClass('bg-info');
+            .node()).addClass('relatorioFC');
         $($('#example').DataTable().row.add(data.total.final).draw()
-            .node()).addClass('bg-info');
+            .node()).addClass('relatorioFC');
     }
 
 

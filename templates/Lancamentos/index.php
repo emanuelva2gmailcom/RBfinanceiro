@@ -20,162 +20,21 @@
     }
 </script>
 
-<style>
-    .tr1 a {
-        color: #029BE1;
-    }
-
-    .nm a {
-        color: green;
-    }
-
-    .dataTables_info{
-        color: green;
-    }
-
-    .dataTables_empty{
-        color: #17a2b8;
-    }
-
-    .dataTables_filter input:focus {
-      color: #17a2b8;
-      border: green solid 2px;
-
-    }
-    .dataTables_filter input{
-      color: #17a2b8;
-      border: green solid 2px;
-
-    }
-
-    .dataTables_filter label{
-      color: #17a2b8;
-
-    }
-
-    .but {
-        background-color: #EFCC00;
-        color: white;
-        border: 1px solid #EFCC00;
-        opacity: 0.7;
-    }
-
-    .but:hover {
-        background-color: white;
-        color: #EFCC00;
-        border: 1px solid #EFCC00;
-        opacity: 0.7;
-    }
-
-    .buttons-copy {
-        background-color: #17a2b8;
-        color: white;
-        border: 1px solid #17a2b8;
-        opacity: 0.7;
-    }
-
-    .buttons-copy:hover {
-        background-color: white;
-        color: #17a2b8;
-        border: 1px solid #17a2b8;
-        opacity: 0.7;
-    }
-
-    .buttons-print {
-        background-color: #0099CC;
-        color: white;
-        border: 1px solid #0099CC;
-        opacity: 0.7;
-    }
-
-    .buttons-print:hover {
-        background-color: white;
-        color: #0099CC;
-        border: 1px solid #0099CC;
-        opacity: 0.7;
-    }
-
-    .buttons-csv {
-        background-color: green;
-        color: white;
-        border: 1px solid green;
-        opacity: 0.7;
-    }
-
-    .buttons-csv:hover {
-        background-color: white;
-        color: green;
-        border: 1px solid green;
-        opacity: 0.7;
-    }
-
-    .buttons-excel {
-        background-color: #006400;
-        color: white;
-        border: 1px solid #006400;
-        opacity: 0.7;
-    }
-
-    .buttons-excel:hover {
-        background-color: white;
-        color: #006400;
-        border: 1px solid #006400;
-        opacity: 0.7;
-    }
-
-    .buttons-pdf {
-        background-color: #4b4b4b;
-        color: white;
-        border: 1px solid #4b4b4b;
-        opacity: 0.7;
-    }
-
-    .buttons-pdf:hover {
-        background-color: white;
-        color: #4b4b4b;
-        border: 1px solid #4b4b4b;
-        opacity: 0.7;
-    }
-
-    .buttons-collection {
-        background-color: black;
-        color: white;
-        border: 1px solid black;
-        opacity: 0.7;
-    }
-
-    .buttons-collection:hover {
-        background-color: white;
-        color: black;
-        border: 1px solid black;
-        opacity: 0.7;
-    }
-
-    li{
-        color: #17a2b8;
-    }
-
-    li a{
-        color: #17a2b8;
-    }
-
-    .nl{
-        float: left;
-    }
-
-
-</style>
-
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+</head>
 <div class="card">
-    <div class="card-body">
+    <div class="calcularINDEX card-body">
         <table id="example1" class="table table-bordered table-striped">
-            <thead class="nm">
-                <tr style="color: green;">
+            <thead class="theINDEX">
+                <tr>
 
                     <th><?= __('Tipo') ?></th>
-                    <th><?= __('Descrição') ?></th>
                     <th><?= __('Valor') ?></th>
+                    <th><?= __('Parcela') ?></th>
+                    <th><?= __('Descrição') ?></th>
                     <th><?= __('Data de Emissão') ?></th>
+                    <th><?= __('Data de Competência') ?></th>
                     <th><?= __('Data de Baixa') ?></th>
                     <th><?= __('Data de Vencimento') ?></th>
                     <th><?= __('Conta') ?></th>
@@ -185,142 +44,208 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="tboINDEX">
                 <?php foreach ($lancamentos as $lancamento) :
-            
-                    ?>
-                        <tr style="color: #029BE1;">
-                            <td><?= h($lancamento->tipo) ?></td>
-                            <td><?= h($lancamento->descricao) ?></td>
-                            <td><?= $this->Number->format($lancamento->valor) ?></td>
-                            <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-                            <?php if (empty($lancamento->data_baixa)) { ?>
-                                <td><?= h($lancamento->data_baixa) ?></td>
-                            <?php } else { ?>
-                                <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-                            <?php } ?>
-                            <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
 
-                            <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fluxoconta->conta]) : '' ?></td>
-                            <td class="tr1"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
-                            <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
-                            <td class="actions">
-                                <div class="btn-group">
-                                    <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
-                                        <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-dark ']) ?>
-                                    <?php } ?>
-                                    <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd', 'UTC') < $now) && ($lancamento->data_baixa == null)) { ?>
-                                        <?= $this->Html->link(__('Renovar'), ['controller' => 'Lancamentos', 'action' => 'renovar', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-secondary ']) ?>
-                                    <?php } ?>
-                                    <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-info ', 'escape' => false]) ?>
-                                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-success ', 'escape' => false]) ?>
-                                    <?= $this->Html->link(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'btn btn-xs btn-outline-danger ', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
-                                </div>
+                ?>
+                    <tr class="ops">
+                        <td><?= h($lancamento->tipo) ?></td>
+                        <td><?= h('R$ ' . $lancamento->valor) ?></td>
+                        <td><?= h($lancamento->parcela. 'x') ?></td>
+                        <td><?= h($lancamento->descricao) ?></td>
+                        <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                        <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                        <?php if (empty($lancamento->data_baixa)) { ?>
+                            <td><?= h($lancamento->data_baixa) ?></td>
+                        <?php } else { ?>
+                            <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                        <?php } ?>
+                        <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                        <td class="tdINDEX"><?= $lancamento->has('subconta') ? $this->Html->link($lancamento->subconta->subconta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->subconta->subconta]) : '' ?></td>
+                        <td class="tdINDEX"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
+                        <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
+                        <td class="actions">
+                            <div class="btn-group">
+                                <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
+                                    <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'vis btn btn-xs ']) ?>
+                                <?php } ?>
+                                <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd', 'UTC') < $now) && ($lancamento->data_baixa == null)) { ?>
+                                    <?= $this->Html->link(__('Renovar'), ['controller' => 'Lancamentos', 'action' => 'renovar', $lancamento->id_lancamento], ['class' => 'edi btn btn-xs ']) ?>
+                                <?php } ?>
+                                <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'vis btn btn-xs', 'escape' => false]) ?>
+                                <?= $this->Html->link(__('Editar'), ['action' => 'edit', $lancamento->id_lancamento], ['class' => 'edi btn btn-xs', 'escape' => false]) ?>
+                                <?= $this->Html->link(__('Deletar'), ['action' => 'delete', $lancamento->id_lancamento], ['class' => 'del btn btn-xs', 'escape' => false, 'confirm' => __('Você quer mesmo deletar {0}?', $lancamento->tipo)]) ?>
+                            </div>
 
-                            </td>
-
+                        </td>
 
                     <?php endforeach; ?>
+                    </tr>
             </tbody>
+
+            <tfoot class="theINDEX">
+                <tr>
+                    <th class="thTotal"></th>
+                    <td class="tboINDEX" id="total"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
 
         </table>
 
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <!-- <h4 class="modal-title" id="myModalLabel">Modal title</h4> -->
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="chart">
+                            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;pointer-events: none;"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script>
     $(function() {
+        var printCounter = 0;
         $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "language": {
-                "emptyTable":     "Nenhum registro disponível na tabela",
-                "zeroRecords":    "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
-                "infoEmpty":      "Mostrando 0 de 0 dos 0 lançamentos",
-                "infoFiltered":   "(filtrado do total de _MAX_ lançamentos)",
-                "search": "Procurar:",
-                "paginate": {
-                    "first":      "Primeiro",
-                    "last":       "Último",
-                    "next":       "Próximo",
-                    "previous":   "Anterior"
-    },
-             },
-
-            columns: [{
-                    data: 'Tipo'
-                },
-                {
-                    data: 'Descricao'
-                },
-                {
-                    data: 'Valor'
-                },
-                {
-                    data: 'Data de Emissão'
-                },
-                {
-                    data: 'Data de Baixa'
-                },
-                {
-                    data: 'Data de Vencimento'
-                },
-                {
-                    data: 'Fluxoconta'
-                },
-                {
-                    data: 'Fornecedor'
-                },
-                {
-                    data: 'Cliente'
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "language": {
+                    "emptyTable": "Nenhum registro disponível na tabela",
+                    "zeroRecords": "Nenhum registro encontrado",
+                    "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
+                    "infoEmpty": "Mostrando 0 de 0 dos 0 lançamentos",
+                    "infoFiltered": "(filtrado do total de _MAX_ lançamentos)",
+                    "search": "Procurar:",
+                    "paginate": {
+                        "first": "Primeiro",
+                        "last": "Último",
+                        "next": "Próximo",
+                        "previous": "Anterior"
+                    },
                 },
 
-                {
-                    data: 'Ações',
-                    render: function(data, type, row) {
-                        return type === 'export' ?
-                            null :
-                            data;
-                    }
-                }
-            ],
+                columns: [{
+                        data: 'Tipo'
+                    },
+                    {
+                        data: 'Valor'
+                    },
+                    {
+                        data: 'Parcela'
+                    },
+                    {
+                        data: 'Descricao'
+                    },
+                    {
+                        data: 'Data de Emissão'
+                    },
+                    {
+                        data: 'Data de Competência'
+                    },
+                    {
+                        data: 'Data de Baixa'
+                    },
+                    {
+                        data: 'Data de Vencimento'
+                    },
+                    {
+                        data: 'Fluxoconta'
+                    },
+                    {
+                        data: 'Fornecedor'
+                    },
+                    {
+                        data: 'Cliente'
+                    },
+
+                    {
+                        data: 'Ações',
+                        render: function(data, type, row) {
+                            return type === 'export' ?
+                                null :
+                                data;
+                        }
+                    },
+
+
+
+                ],
+
+            dom: 'Bfrtip',
             buttons: [{
 
-              text: 'Adicionar',
-              className: 'but',
-              action: function(){
-                  window.location.href = '/lancamentos/add'
-              }
-
-            },
-            {
+                    text: 'Adicionar',
+                    className: 'addINDEX',
+                    action: function() {
+                        window.location.href = '/lancamentos/add'
+                    }
+                },
+                {
                     extend: 'copyHtml5',
                     text: 'Copiar',
-
+                    title: " ",
                     exportOptions: {
                         orthogonal: 'export',
+
                         columns: function(column, data, node) {
+
                             if (column > 7) {
                                 return false;
                             }
                             return true;
                         },
-                    }
-                }, "print", "csvHtml5",
+                    },
+                    footer: true
+                },
+                {
+                    extend: "print",
+                    title: "Lançamentos",
+                    footer: true,
+                },
+                {
+                    extend: "csvHtml5",
+                    title: "Lançamentos",
+                    footer: true
+                },
                 {
                     extend: 'excelHtml5',
                     exportOptions: {
-                        orthogonal: 'export',
+                        orthogonal: 'teste',
                         columns: function(column, data, node) {
                             if (column > 7) {
                                 return false;
                             }
                             return true;
                         },
-                    }
+                    },
+                    title: "Lançamento",
+                    footer: true
                 },
                 {
                     extend: 'pdfHtml5',
@@ -332,15 +257,114 @@
                             }
                             return true;
                         },
-                    }
+                    },
+                    title: "Lançamento",
+                    footer: true,
+
                 },
                 {
-              extend: 'collection',
-              text: 'Mostrar Colunas',
-              buttons: [ 'columnsVisibility' ],
-              visibility: true
-            },
+                    extend: 'collection',
+                    text: 'Mostrar Colunas',
+                    buttons: ['columnsVisibility'],
+                    visibility: true
+                },
+                {
+                    text: 'Calcular',
+                    action: function() {
+                        var Tabela = document.getElementById("example1");
+                        var Trs = Tabela.getElementsByClassName("ops");
+
+                        var valor = 0;
+                        var valorTotal = 0;
+                        for (var i = 0; i < Trs.length; i++) {
+                            valor = Trs[i]['children'][1]['outerText'].replace('R$', '')
+                            // valor = valor.replace('.', '')
+                            // valor = valor.replace(',', '.')
+                            // valor = Trs[i]['children'][2]['outerText']
+                            valorTotal += Number(valor)
+
+                        }
+                        document.getElementsByClassName('thTotal')[0].innerHTML = 'Total'
+                        document.getElementById('total').innerHTML = valorTotal.toLocaleString('pt-br', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        });
+
+
+                    }
+
+                },
+                {
+                    text: 'Gráfico',
+                    action: function(e, node, config) {
+                        var Tabela = document.getElementById("example1");
+                        var Trs = Tabela.getElementsByClassName("ops");
+                        var valor = [];
+                        var Head = []
+                        month = new Array("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
+
+                        for (var i = 0; i < Trs.length; i++) {
+                            valor.push(Trs[i]['children'][1]['outerText'].replace('R$', ''))
+                            Head.push(month[Trs[i]['children'][5]['outerText'].split('-')[1].replace(/^0+/, '')])
+                        }
+
+
+                        var areaChartData = {
+                            labels: Head,
+                            datasets: [{
+                                label: 'Saidas',
+                                backgroundColor: '#047076',
+                                pointRadius: false,
+                                pointColor: '#3b8bba',
+                                pointStrokeColor: 'rgba(60,141,188,1)',
+                                pointHighlightFill: '#fff',
+                                pointHighlightStroke: 'rgba(60,141,188,1)',
+                                data: valor
+                            }, ]
+                        }
+
+                        var areaChartOptions = {
+                            maintainAspectRatio: false,
+                            responsive: true,
+                            legend: {
+                                display: false
+                            },
+                            scales: {
+                                xAxes: [{
+                                    gridLines: {
+                                        display: false,
+                                    }
+                                }],
+                                yAxes: [{
+                                    gridLines: {
+                                        display: false,
+                                    }
+                                }]
+                            }
+                        }
+                        var barChartCanvas = $('#barChart').get(0).getContext('2d')
+                        var barChartData = $.extend(true, {}, areaChartData)
+
+                        var barChartOptions = {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            datasetFill: false
+                        }
+
+                        new Chart(barChartCanvas, {
+                                type: 'bar',
+                                data: barChartData,
+                                options: barChartOptions
+                            }),
+                            $('#myModal').modal('show')
+
+                    }
+                },
             ]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+
+
+
     });
 </script>

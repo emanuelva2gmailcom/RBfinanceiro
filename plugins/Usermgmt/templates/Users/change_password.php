@@ -1,11 +1,11 @@
-<div class="card">
-	<div class="card-header text-white bg-dark">
-		<span class="card-title">
+<div class="cardPAINEL card mt-2">
+	<div class="cardheaderDASH card-header">
+		<span class="text-white card-title">
 			<?php echo __('Mudar Senha');?>
 		</span>
 	</div>
 
-	<div class="card-body">
+	<div class="cardbodyDASH card-body">
 		<?php echo $this->Form->create($userEntity, ['novalidate'=>true]);?>
 
 		<?php
@@ -35,7 +35,7 @@
 
 		<div class="row form-group border-top pt-3">
 			<div class="col">
-				<?php echo $this->Form->Submit(__('Mudar Senha'), ['class'=>'btn btn-primary', 'id'=>'changePasswordSubmitBtn']);?>
+				<?php echo $this->Form->Submit(__('Mudar Senha'), ['class'=>'btn btnADD', 'id'=>'changePasswordSubmitBtn']);?>
 			</div>
 		</div>
 

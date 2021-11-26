@@ -82,6 +82,6 @@
 	
 	<?php
 	if(!empty($userGroups)) {
-		echo $this->element('Usermgmt.pagination', ['paginationText'=>__('Number of Groups')]);
+		echo $this->element('Usermgmt.pagination', ['paginationText'=>__('Número de Grupos')]);
 	}?>
 </div>

@@ -6,120 +6,87 @@
  */
 ?>
 
-<style>
-  .del {
-    margin-right: 82%;
-  }
-
-  .del {
-    margin-right: 78%;
-  }
-
-  .edi {
-    margin-right: 2%;
-  }
-
-  .tr1 a {
-    color: #029BE1;
-  }
-
-  .tr1 a {
-    color: #029BE1;
-  }
-  
-  .views{
-   padding: 50px 50px 50px 50px ;
-  }
-  @media (max-width: 620px) {
-    .views{
-   padding: 0px;
-   padding-top: 50px;
-  }
-
-    
-  }
-</style>
-
-<div class="x-tudo container">
+<div class=" container">
   <div class="views container-fluid d-flex align-items-center justify-content-center">
-    <div style="border: green solid 2px; border-radius: 20px;" class="card card-1 card-outline container bg-white ">
+    <div class="cardVIEW card card-1 card-outline container bg-white ">
 
-      <div class="card-header d-sm-flex" style="padding-top: 50px; color: green;">
+      <div class="cardheaderVIEW card-header d-sm-flex">
         <h2 class="card-title"><?= h($lancamento->id_lancamento) ?></h2>
       </div>
       <div class="card-body table-responsive p-0">
-        <table class="table table-hover text-nowrap">
+        <table class="theINDEX tboINDEX table table-hover text-nowrap">
           <tr>
-            <th style="color: green;"><?= __('Tipo') ?></th>
-            <td class="text-info"><?= h($lancamento->tipo) ?></td>
+            <th><?= __('Tipo') ?></th>
+            <td><?= h($lancamento->tipo) ?></td>
           </tr>
           <tr>
-            <th style="color: green;"><?= __('Descricao') ?></th>
-            <td class="text-info"><?= h($lancamento->descricao) ?></td>
+            <th><?= __('Descrição') ?></th>
+            <td><?= h($lancamento->descricao) ?></td>
           </tr>
           <tr>
-            <th style="color: green;"> <?= __('Fluxoconta') ?></th>
-            <td class="tr1"><?= $lancamento->has('fluxoconta') ? $this->Html->link($lancamento->fluxoconta->conta, ['controller' => 'Fluxocontas', 'action' => 'view', $lancamento->fluxoconta->conta]) : '' ?></td>
+            <th> <?= __('Conta') ?></th>
+            <td class="tdINDEX"><?= $lancamento->has('subconta') ? $this->Html->link($lancamento->subconta->subconta, ['controller' => 'Subcontas', 'action' => 'view', $lancamento->subconta->subconta]) : '' ?></td>
           </tr>
           <tr>
-            <th style="color: green;"><?= __('Fornecedor') ?></th>
-            <td class="tr1"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->fornecedor, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->fornecedor]) : '' ?></td>
+            <th><?= __('Fornecedor') ?></th>
+            <td class="tdINDEX"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->fornecedor, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->fornecedor]) : '' ?></td>
           </tr>
           <tr>
-            <th style="color: green;"><?= __('Cliente') ?></th>
-            <td class="tr1"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
+            <th><?= __('Cliente') ?></th>
+            <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
+          </tr>
+  
+          <tr>
+            <th><?= __('Lançamento') ?></th>
+            <td><?= $this->Number->format($lancamento->id_lancamento) ?></td>
           </tr>
           <tr>
-            <th style="color: green;"><?= __('Dreconta') ?></th>
-            <td class="tr1"><?= $lancamento->has('dreconta') ? $this->Html->link($lancamento->dreconta->dreconta, ['controller' => 'Drecontas', 'action' => 'view', $lancamento->dreconta->conta]) : '' ?></td>
+            <th><?= __('Valor') ?></th>
+            <td><?= $this->Number->format($lancamento->valor) ?></td>
           </tr>
           <tr>
-            <th style="color: green;"><?= __('Id Lancamento') ?></th>
-            <td class="text-info"><?= $this->Number->format($lancamento->id_lancamento) ?></td>
+            <th><?= __('Lançamento') ?></th>
+            <td><?= $this->Number->format($lancamento->lancamento_id) ?></td>
           </tr>
           <tr>
-            <th style="color: green;"><?= __('Valor') ?></th>
-            <td class="text-info"><?= $this->Number->format($lancamento->valor) ?></td>
+            <th><?= __('Data de Emissão') ?></th>
+            <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
           </tr>
           <tr>
-            <th style="color: green;"><?= __('Lancamento Id') ?></th>
-            <td class="text-info"><?= $this->Number->format($lancamento->lancamento_id) ?></td>
-          </tr>
-          <tr>
-            <th style="color: green;"><?= __('Data Emissao') ?></th>
-            <td class="text-info"><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-          </tr>
-          <tr>
-            <th style="color: green;"><?= __('Data Baixa') ?></th>
+            <th><?= __('Data de Baixa') ?></th>
             <?php if (empty($lancamento->data_baixa)) { ?>
-              <td class="text-info"><?= h($lancamento->data_baixa) ?></td>
+              <td><?= h($lancamento->data_baixa) ?></td>
             <?php } else { ?>
-              <td class="text-info"><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+              <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <?php } ?>
           </tr>
           <tr>
-            <th style="color: green;"><?= __('Data Vencimento') ?></th>
-            <td class="text-info"><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <th><?= __('Data de Vencimento') ?></th>
+            <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
           </tr>
           <tr>
-            <th style="color: green;"><?= __('Created') ?></th>
-            <td class="text-info"><?= h($lancamento->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <th><?= __('Data de Competência') ?></th>
+            <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
           </tr>
           <tr>
-            <th style="color: green;"><?= __('Modified') ?></th>
-            <td class="text-info"><?= h($lancamento->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <th><?= __('Criado') ?></th>
+            <td><?= h($lancamento->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+          </tr>
+          <tr>
+            <th><?= __('Modificado') ?></th>
+            <td><?= h($lancamento->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
           </tr>
         </table>
       </div>
-      <div class="card-footer bg-white" style="border-radius: 20px;">
-        <div style="padding-top: 20px;" class="d-flex bd-highlight mb-3">
+      <div class="cardfooterVIEW card-footer bg-white">
+        <div class="cardfooterVIEW2 d-flex bd-highlight mb-3">
           <?= $this->Form->postLink(
             __('Deletar'),
             ['action' => 'delete',  $lancamento->id_lancamento],
             ['confirm' => __('Você quer mesmo deletar?',  $lancamento->id_lancamento), 'class' => 'del btn btn-sm btn-outline-danger mr-auto p-2 bd-highlight']
           ) ?>
           <?= $this->Html->link(__('Editar'), ['action' => 'edit',  $lancamento->id_lancamento], ['class' => 'edi btn btn-sm btn-outline-success p-2 bd-highlight']) ?>
-          <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-sm btn-outline-info p-2 bd-highligh']) ?>
+          <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'vis btn btn-sm btn-outline-info p-2 bd-highligh']) ?>
         </div>
       </div>
     </div>
@@ -129,11 +96,11 @@
     <div class="row card-2  card-outline container">
       <div class="col-12">
         <!-- Custom Tabs -->
-        <div class="card" style="border: green solid 2px; border-radius: 20px;" >
+        <div class="cardVIEW2 card" >
           <div class="card-header d-flex p-0">
-            <h3 class="card-title p-3" style="color: green;">Histórico do lançamento</h3>
+            <h3 class="cardtitleVIEW card-title p-3" >Histórico do lançamento</h3>
             <ul class="nav nav-pills ml-auto p-2" id="tab_header">
-              <li class="nav-item"><a class="btn btn-info btn-sm active" href="#inicio" data-toggle="tab">Começo</a></li>
+              <li class="nav-item"><a class="btn vis btn-sm active" href="#inicio" data-toggle="tab">Começo</a></li>
               <?php foreach ($lancamento->lancamentos as $l) : ?>
                 <li class="nav-item"><a class="btn btn-info btn-sm" href="#tab_<?= $l->id_lancamento ?>" data-toggle="tab"><?= $l->id_lancamento ?></a></li>
               <?php endforeach ?>
@@ -141,7 +108,7 @@
           </div><!-- /.card-header -->
           <div class="card-body">
             <div class="tab-content">
-              <div class="tab-pane text-info active" id="inicio">
+              <div class="tab-pane cardtitleVIEW active" id="inicio">
                 Clique nos numerais acima para ver os lançamentos anteriores a esse
               </div>
               <?php foreach ($lancamento->lancamentos as $l) : ?>
@@ -159,41 +126,37 @@
 
   <div class="container-fluid d-flex align-items-center justify-content-center views">
 
-    <div style="border: green solid 2px; border-radius: 20px;" class="related card-3 related-caixaregistros view card container bg-white">
+    <div  class="relacionadosVIEW related card-3 related-caixaregistros view card container bg-white">
 
-      <div class="card-header d-sm-flex" style="padding-top: 50px;">
-        <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-        <!-- <div class="card-toolbox">
-      <?= $this->Html->link(__('Novo'), ['controller' => 'Caixaregistros', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
-      <?= $this->Html->link(__('Todos '), ['controller' => 'Caixaregistros', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
-    </div> -->
+      <div class="relacionadosheaderVIEW card-header d-sm-flex">
+        <h3 class="cardtitleVIEW card-title"><?= __('Relacionados') ?></h3>
       </div>
       <div class="card-body table-responsive p-0">
-        <table class="table table-hover text-nowrap">
-          <tr style="color: green;">
-            <th><?= __('Id Caixaregistro') ?></th>
-            <th><?= __('Caixa Id') ?></th>
-            <th><?= __('Tipopagamento Id') ?></th>
-            <th><?= __('Lancamento Id') ?></th>
+        <table class="theINDEX tboINDEX table table-hover text-nowrap">
+          <tr>
+            <th><?= __('Nº de Registro de Caixa') ?></th>
+            <th><?= __('Caixa') ?></th>
+            <th><?= __('Tipo de Pagamento') ?></th>
+            <th><?= __('Lançamento') ?></th>
             <th class="actions"><?= __('Ações') ?></th>
           </tr>
           <?php if (empty($lancamento->caixaregistros)) { ?>
             <tr>
-              <td colspan="5" class="text-info">
+              <td colspan="5">
                 Não Encontrado!
               </td>
             </tr>
           <?php } else { ?>
             <?php foreach ($lancamento->caixaregistros as $caixaregistros) : ?>
               <tr>
-                <td class="text-info"><?= h($caixaregistros->id_caixaregistro) ?></td>
-                <td class="text-info"><?= h($caixaregistros->caixa_id) ?></td>
-                <td class="text-info"><?= h($caixaregistros->tipopagamento_id) ?></td>
-                <td class="text-info"><?= h($caixaregistros->lancamento_id) ?></td>
+                <td><?= h($caixaregistros->id_caixaregistro) ?></td>
+                <td><?= h($caixaregistros->caixa_id) ?></td>
+                <td><?= h($caixaregistros->tipopagamento_id) ?></td>
+                <td><?= h($caixaregistros->lancamento_id) ?></td>
                 <td class="actions">
-                  <?= $this->Html->link(__('Visualizar'), ['controller' => 'Caixaregistros', 'action' => 'view', $caixaregistros->id_caixaregistro], ['class' => 'btn btn-xs btn-outline-info']) ?>
-                  <?= $this->Html->link(__('Editar'), ['controller' => 'Caixaregistros', 'action' => 'edit', $caixaregistros->id_caixaregistro], ['class' => 'btn btn-xs btn-outline-success']) ?>
-                  <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Caixaregistros', 'action' => 'delete', $caixaregistros->id_caixaregistro], ['class' => 'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $caixaregistros->id_caixaregistro)]) ?>
+                  <?= $this->Html->link(__('Visualizar'), ['controller' => 'Caixaregistros', 'action' => 'view', $caixaregistros->id_caixaregistro], ['class' => 'btn vis btn-xs btn-outline-info']) ?>
+                  <?= $this->Html->link(__('Editar'), ['controller' => 'Caixaregistros', 'action' => 'edit', $caixaregistros->id_caixaregistro], ['class' => 'btn edi btn-xs btn-outline-success']) ?>
+                  <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Caixaregistros', 'action' => 'delete', $caixaregistros->id_caixaregistro], ['class' => 'btn del btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $caixaregistros->id_caixaregistro)]) ?>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -205,45 +168,41 @@
 
   <div class="container-fluid d-flex align-items-center justify-content-center views">
 
-    <div style="border: green solid 2px; border-radius: 20px;" class="related card-4 related-caixaregistros view card container bg-white">
+    <div class="relacionadosVIEW related card-4 related-caixaregistros view card container bg-white">
 
-      <div class="card-header d-sm-flex" style="padding-top: 50px;">
-        <h3 class="card-title" style="color: green;"><?= __('Relacionados') ?></h3>
-        <!-- <div class="card-toolbox">
-      <?= $this->Html->link(__('Novo'), ['controller' => 'Comprovantes', 'action' => 'add'], ['class' => 'btn btn-info btn-sm']) ?>
-      <?= $this->Html->link(__('Todos '), ['controller' => 'Comprovantes', 'action' => 'index'], ['class' => 'btn btn-info btn-sm']) ?>
-    </div> -->
+      <div class="relacionadosheaderVIEW card-header d-sm-flex">
+        <h3 class="cardtitleVIEW card-title"><?= __('Relacionados') ?></h3>
       </div>
       <div class="card-body table-responsive p-0">
-        <table class="table table-hover text-nowrap">
-          <tr style="color: green;">
-            <th><?= __('Id Comprovante') ?></th>
-            <th><?= __('Nome Arquivo') ?></th>
+        <table class="table theINDEX tboINDEX table-hover text-nowrap">
+          <tr>
+            <th><?= __('Nº de Comprovante') ?></th>
+            <th><?= __('Nome de Arquivo') ?></th>
             <th><?= __('Tipo') ?></th>
-            <th><?= __('Lancamento Id') ?></th>
-            <th><?= __('Created') ?></th>
-            <th><?= __('Modified') ?></th>
+            <th><?= __('Lançamento') ?></th>
+            <th><?= __('Criado') ?></th>
+            <th><?= __('Modificado') ?></th>
             <th class="actions"><?= __('Ações') ?></th>
           </tr>
           <?php if (empty($lancamento->comprovantes)) { ?>
             <tr>
-              <td colspan="7" class="text-info">
+              <td colspan="7">
                 Não Encontrado!
               </td>
             </tr>
           <?php } else { ?>
             <?php foreach ($lancamento->comprovantes as $comprovantes) : ?>
               <tr>
-                <td class="text-info"><?= h($comprovantes->id_comprovante) ?></td>
-                <td class="text-info"><?= h($comprovantes->nome_arquivo) ?></td>
-                <td class="text-info"><?= h($comprovantes->tipo) ?></td>
-                <td class="text-info"><?= h($comprovantes->lancamento_id) ?></td>
-                <td class="text-info"><?= h($comprovantes->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-                <td class="text-info"><?= h($comprovantes->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                <td><?= h($comprovantes->id_comprovante) ?></td>
+                <td><?= h($comprovantes->nome_arquivo) ?></td>
+                <td><?= h($comprovantes->tipo) ?></td>
+                <td><?= h($comprovantes->lancamento_id) ?></td>
+                <td><?= h($comprovantes->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                <td><?= h($comprovantes->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                 <td class="actions">
-                  <?= $this->Html->link(__('Visualizar'), ['controller' => 'Comprovantes', 'action' => 'view', $comprovantes->id_comprovante], ['class' => 'btn btn-xs btn-outline-info']) ?>
-                  <?= $this->Html->link(__('Editar'), ['controller' => 'Comprovantes', 'action' => 'edit', $comprovantes->id_comprovante], ['class' => 'btn btn-xs btn-outline-success']) ?>
-                  <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Comprovantes', 'action' => 'delete', $comprovantes->id_comprovante], ['class' => 'btn btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $comprovantes->nome_arquivo)]) ?>
+                  <?= $this->Html->link(__('Visualizar'), ['controller' => 'Comprovantes', 'action' => 'view', $comprovantes->id_comprovante], ['class' => 'btn vis btn-xs btn-outline-info']) ?>
+                  <?= $this->Html->link(__('Editar'), ['controller' => 'Comprovantes', 'action' => 'edit', $comprovantes->id_comprovante], ['class' => 'btn edi btn-xs btn-outline-success']) ?>
+                  <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Comprovantes', 'action' => 'delete', $comprovantes->id_comprovante], ['class' => 'btn del btn-xs btn-outline-danger', 'confirm' => __('Você quer mesmo deletar {0}?', $comprovantes->nome_arquivo)]) ?>
                 </td>
               </tr>
             <?php endforeach; ?>

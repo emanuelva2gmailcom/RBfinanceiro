@@ -77,6 +77,6 @@
 
 	<?php
 	if(!empty($users)) {
-		echo $this->element('Usermgmt.pagination', ['paginationText'=>__('Number of Online Users')]);
+		echo $this->element('Usermgmt.pagination', ['paginationText'=>__('Numero de Usuários Online')]);
 	}?>
 </div>

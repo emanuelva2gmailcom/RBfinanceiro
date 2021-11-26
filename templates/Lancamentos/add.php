@@ -8,181 +8,106 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-<style>
-    @media (max-width: 620px) {
-        .card {
-            position: absolute;
-            margin-left: -77px;
-            min-width: 90%;
-        }
-
-        .tipo {
-
-            min-width: 275px;
-        }
-
-        .line {
-            min-width: 2px;
-            min-height: 2px;
-            margin: 0px;
-        }
-    }
-
-    @media (max-width: 370px) {
-
-        .line {
-            display: none;
-
-        }
-
-        .bs-stepper-header {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .poxa,
-        .grupo {
-            width: 275px;
-        }
-
-    }
-
-    .grupo {
-        text-transform: uppercase;
-    }
-
-    .entradas,
-    .saidas {
-        text-transform: capitalize;
-    }
-</style>
-
 <?php $this->assign('title', __('Adicionar Lançamento')); ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <?= $this->Html->css('bs-stepper.min.css'); ?>
 <?= $this->Html->script('bs-stepper.min.js'); ?>
-<div class="container p-5" style="width: 60%;min-width:80%;">
-    <div id="stepper1" class="bs-stepper card">
-        <div class="bs-stepper-header bg-info" style="margin: 0px;">
+<div class="containerADD container p-5">
+    <div id="stepper1" class="cardlancADD bs-stepper card">
+        <div class="bsstepperheaderADD bs-stepper-header">
             <div class="step" data-target="#test-l-1">
                 <button type="button" class="btn step-trigger">
                     <span class="bs-stepper-circle">1</span>
                 </button>
             </div>
-            <div class="line"></div>
+            <div class="lineADD line"></div>
             <div class="step" data-target="#test-l-2">
                 <button type="button" class="btn step-trigger">
                     <span class="bs-stepper-circle">2</span>
                 </button>
             </div>
-            <div class="line"></div>
+            <div class="lineADD line"></div>
             <div class="step" data-target="#test-l-3">
                 <button type="button" class="btn step-trigger">
                     <span class="bs-stepper-circle">3</span>
                 </button>
             </div>
-            <div class="line"></div>
+            <div class="lineADD line"></div>
             <div class="step" data-target="#test-l-4">
                 <button type="button" class="btn step-trigger">
                     <span class="bs-stepper-circle">4</span>
                 </button>
             </div>
         </div>
-        <div class="bs-stepper-content bg-white" style="padding: 20px;">
+        <div class="bssteppercontentADD bs-stepper-content">
             <?= $this->Form->create($lancamento, ['type' => 'file']) ?>
-            <div id="test-l-1" class="content bg-white">
-                <div class="panel-body text-info">
+            <div id="test-l-1" class="bssteppercontentContent content">
+                <div class="panel-body">
                     <div class="form-group ">
                         <?= $this->Form->label('Tipo') ?>
-                        <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control tipo', 'empty' => 'SELECIONE']); ?>
-                        <span class="span text-red"></span>
+                        <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control', 'empty' => 'SELECIONE', 'class' => 'tipo']); ?>
+                        <span class="tipo-span"></span>
+                        <span class="Campo-Obrigatorio"></span>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->control('descricao', ['label' => 'Descrição', 'placeholder' => 'Descrição'], ['class' => 'form-control']); ?>
                     </div>
                     <div class="form-group">
-                        <?= $this->Form->control('valor', ['label' => 'Valor', 'placeholder' => 'Valor'], ['class' => 'border border-success text-info form-control']); ?>
+                        <?= $this->Form->control('valor', ['label' => 'Valor', 'placeholder' => 'Valor'], ['class' => 'border form-control']); ?>
+                        <span class="Campo-Obrigatorio0"></span></span>
+                    </div>
+                    <div class="form-group">
+                        <?= $this->Form->control('parcela', ['label' => 'Parcela', 'placeholder' => 'Parcela'], ['class' => 'border form-control']); ?>
+                        <span class="Campo-Obrigatorio1"></span>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <div style="background-color: green; color: white;" id="proximo" class="btn" onclick="stepper1.next()">Próximo</div>
+                    <div id="Card1-Proximo" class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
 
                 </div>
             </div>
 
-            <div id="test-l-2" class="content bg-white">
-                <div class="panel-body text-info">
+            <div id="test-l-2" class="bssteppercontentContent content">
+                <div class="panel-body">
                     <div class="form-group">
-                        <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão', 'placeholder' => 'dd/mm/yyyy'], ['class' => 'border border-success text-info form-control poxa']); ?>
+                        <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão', 'placeholder' => 'dd/mm/yyyy'], ['class' => 'border form-control dataADD']); ?>
+                        <span class="Campo-Obrigatorio0"></span></span>
                     </div>
-                    <div class="form-group baixa">
-                        <?= $this->Form->control('data_baixa', ['label' => 'Data de Baixa', 'placeholder' => 'Data de Baixa'], ['class' => 'border border-success text-info form-control poxa']); ?>
+                    <div class="form-group data-baixa">
+                        <?= $this->Form->control('data_baixa', ['label' => 'Data de Baixa', 'placeholder' => 'Data de Baixa'], ['class' => 'border form-control dataADD']); ?>
+                        <span class="Campo-Obrigatorio1"></span></span>
                     </div>
                     <div class="form-group">
-                        <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento', 'placeholder' => 'Data de Vecimento'], ['class' => 'border border-success text-info form-control poxa']); ?>
+                        <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento', 'placeholder' => 'Data de Vencimento'], ['class' => 'border form-control dataADD']); ?>
+                        <span class="Campo-Obrigatorio2"></span></span>
+                    </div>
+                    <div class="form-group competencia">
+                        <?= $this->Form->control('data_competencia', ['label' => 'Data de Competência', 'placeholder' => 'Data de Competência'], ['class' => 'border form-control dataADD']); ?>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <div style="background-color: green; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
-                    <div style="background-color: green; color: white;" class="btn" onclick="stepper1.next()">Próximo</div>
+                    <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
+                    <div id="Card2-Proximo" class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
                 </div>
             </div>
-            <div id="test-l-3" class="content bg-white">
-                <div class="panel-body text-info">
-
+            <div id="test-l-3" class="bssteppercontentContent content">
+                <div class="panel-body">
                     <div class="form-group">
-                        <?= $this->Form->control('grupo', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']) ?>
-                        <span class="s-grupo text-red"></span>
+                        <?= $this->Form->control('grupo_id', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']); ?>
+                        <span class="s-grupo"></span>
                     </div>
-
-                    <!-- <div class="form-group tudo">
-                          <?= $this->Form->control('fluxoconta_id', ['options' => $tudo, 'empty' => 'SELECIONE', 'class' => 'conta']); ?>
-                      </div> -->
-                    <div class="form-group select">
-                        <label for="" class="l-todos">Conta</label>
-                        <select name="" class="todos form-control" id="">
-                            <option value="0">SELECIONE</option>
-                            <?php
-                            foreach ($todos as $t => $todo) :
-                            ?>
-                                <option value=<?= $t ?>><?= $todo ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <div class="form-group">
+                        <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE', ['class' => 'subconta']]); ?>
                     </div>
-
-                    <div class="form-group select">
-                        <label for="" class="l-entradas d-none">Conta</label>
-                        <select name="" class="entradas form-control d-none" id="">
-                            <option>SELECIONE</option>
-                            <?php
-                            foreach ($entradas as $i => $entrada) :
-                            ?>
-                                <option value=<?= $i ?>><?= $entrada ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-
-                    <div class="form-group select ">
-                        <label for="" class="l-saidas d-none">Conta</label>
-                        <select name="" class="saidas form-control d-none" id="">
-                            <option>SELECIONE</option>
-                            <?php
-                            foreach ($saidas as $o => $saida) :
-                            ?>
-                                <option value=<?= $o ?>><?= $saida ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
                 </div>
                 <div class="d-flex justify-content-between">
-                    <div style="background-color: green; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
-                    <div style="background-color: green; color: white;" class="btn" id="teste" onclick="stepper1.next()">Próximo</div>
+                    <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
+                    <div id="Card3-Proximo" class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
                 </div>
             </div>
-            <div id="test-l-4" class="content bg-white">
-                <div class="panel-body text-info">
+
+            <div id="test-l-4" class="bssteppercontentContent content">
+                <div class="panel-body">
                     <div class="fornecedor form-group">
                         <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
                     </div>
@@ -193,12 +118,12 @@
                         <?= $this->Form->control('Comprovante', ['type' => 'file'], ['class' => 'file']); ?>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="footerADD d-flex justify-content-between">
                     <div>
-                        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn text-white btn-info']) ?>
+                        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'cancelarADD btn']) ?>
                     </div>
                     <div>
-                        <div style="background-color: green; color: white;" class="btn" onclick="stepper1.previous()">Voltar</div>
+                        <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
                         <?= $this->Form->button(__('Salvar', ['class' => 'btn pull-right']), ['confirm' => 'Quer mesmo salvar esse lançamento?']) ?>
                     </div>
                 </div>
@@ -224,136 +149,167 @@
                 animation: true
             })
             var stepper4 = new Stepper(document.querySelector('#stepper4'))
-            </script>
+        </script>
 
-</div>
+    </div>
 </div>
 
 
 <script>
-    function grupo($grupo) {
-        $grupo = $grupo;
-        if ($grupo == 0) {
-            $('#teste').removeAttr('onclick')
-            $('.todos').prop('disabled', true);
-        }
-    
-        $('#teste').click(function() {
-            if ($grupo == 0) {
-                $('.s-grupo').text('Campo Obrigatório')
-            } else {
-                $('.s-grupo').text(' ')
-            }
-        })
-    }
+    // $('document').ready(function() {
+    //     $('#Card2-Proximo').removeAttr('onclick')
+    // })
+    //---------------- Código de Barramento do Primeiro STEP----------------------
+    // >>>>>>>>>>Campo TIPO<<<<<<<<<<<<<<<<<<
+    // $('.tipo').ready(function() {
+    //     $tipo = $('.tipo').val();
+    //     $('#Card1-Proximo').click(function() {
+    //         if ($tipo == '') {
+    //             $('.tipo-span').text('Campo Obrigatório');
+    //         }
+    //     })
+    //     $('#Card1-Proximo').removeAttr('onclick')
 
-    $('.grupo').change(function() {
-        $grupo = $(".grupo option:selected").text();
+    // })
+    // $('.tipo').change(function() {
+    //     $tipo = $('.tipo').val();
+    //     try {
+    //         const response = axios.get('/caixas/getCaixaaberto').then(function(response) {
+    //             if ((response.data !== true) && ($tipo !== 'PREVISTO')) {
+    //                 if ($tipo == '') {
+    //                     $('.tipo-span').text(' ');
+    //                     $('.tipo-span').text('Campo Obrigatório');
+    //                     $('#Card1-Proximo').removeAttr('onclick')
+    //                 } else {
+    //                     $('.tipo-span').text('Caixa Fechado');
+    //                     $('#Card1-Proximo').removeAttr('onclick')
+    //                 }
 
-        if ($grupo == 'saida') {
-            $('.entradas').addClass('d-none')
-            $('.l-entradas').addClass('d-none')
+    //             } else {
+    //                 $('.tipo-span').text(' ');
+    //                 $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+    //             }
+    //             if (response.data == true) {
+    //                 if ($tipo == '') {
+    //                     $('.tipo-span').text('Campo Obrigatório');
+    //                     $('#Card1-Proximo').removeAttr('onclick')
+    //                 } else {
+    //                     $('.tipo-span').text(' ');
+    //                     $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+    //                 }
+    //             }
 
-            $('.todos').addClass('d-none')
-            $('.l-todos').addClass('d-none')
+    //         })
+    //     } catch (error) {
+    //         console.log(error);
 
-            $('.saidas').removeClass('d-none')
-            $('.l-saidas').removeClass('d-none')
-            $('.saidas').attr('id', 'fluxoconta-id').attr('name', 'fluxoconta_id')
+    //     }
+    //     if ($tipo == "PREVISTO") {
+    //         $(".file").addClass('d-none');
+    //         $('.data-baixa').addClass('d-none');
+    //     } else {
+    //         $(".file").removeClass('d-none');
+    //         $('.data-baixa').removeClass('d-none');
+    //     }
+    // })
 
-            $('#teste').attr('onclick', 'stepper1.next()')
-            $('.s-grupo').text(' ')
+    // // >>>>>>>>>>Campos VALOR e PARCELA<<<<<<<<<<<<<<<<<<
+    // $('#Card1-Proximo').click(function() {
+    //     var inputs = [$('#valor').val(), $('#parcela').val()];
+    //     inputs.forEach(function(input, index) {
+    //         if (input == "") {
+    //             $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
+    //             $('#Card1-Proximo').removeAttr('onclick')
+    //         } else {
+    //             $('.Campo-Obrigatorio' + index).text(' ');
+    //             $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+    //         }
+    //     });
 
-        } else if ($grupo == 'entrada') {
-            $('.saidas').addClass('d-none')
-            $('.l-saidas').addClass('d-none')
+    // })
+    // $('#valor').keyup(function() {
+    //     if (this.value.length >= 1) {
+    //         $('.Campo-Obrigatorio0').text(' ');
+    //     }
+    // });
+    // $('#parcela').keyup(function() {
+    //     if (this.value.length >= 1) {
+    //         $('.Campo-Obrigatorio1').text(' ');
 
-            $('.todos').addClass('d-none')
-            $('.l-todos').addClass('d-none')
+    //     }
+    // });
 
-            $('.entradas').removeClass('d-none')
-            $('.l-entradas').removeClass('d-none')
-            $('.entradas').attr('id', 'fluxoconta-id').attr('name', 'fluxoconta_id')
+    //---------------- Código de Barramento do Segundo STEP----------------------
+    // >>>>>>>>>>Campos de  DATAS<<<<<<<<<<<<<<<<<<
+    // $('document').ready(function() {
+    //     $('#Card2-Proximo').removeAttr('onclick')
+    // })
+    // $('#Card2-Proximo').click(function() {
+    //     var inputs = [$('#data-emissao').val(), $('#data-baixa').val(), $('#data-vencimento').val()];
+    //     inputs.forEach(function(input, index) {
+    //         if (input == "") {
+    //             $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
+    //             $('#Card2-Proximo').removeAttr('onclick')
+    //         } else {
+    //             $('.Campo-Obrigatorio' + index).text(' ');
+    //             $('#Card2-Proximo').attr('onclick', 'stepper1.next()');
+    //         }
+    //     });
+    // })
 
-            $('#teste').attr('onclick', 'stepper1.next()')
-            $('.s-grupo').text(' ')
-        } else {
-            $('.saidas').addClass('d-none');
-            $('.l-saidas').addClass('d-none')
+    // function data(span, index) {
+    //     if (span.length >= 0) {
+    //         $('.Campo-Obrigatorio' + index).text(' ');
+    //     }
+    // }
+    // $('#data-emissao').keyup(function() {
+    //     data(this.value, 0)
 
-            $('.entradas').addClass('d-none');
-            $('.l-entradas').addClass('d-none')
+    // });
+    // $('#data-emissao').change(function() {
+    //     data(this.value, 0)
 
-            $('.todos').removeClass('d-none');
-            $('.l-todos').removeClass('d-none')
+    // });
+    // $('#data-baixa').keyup(function() {
+    //     data(this.value, 1)
+    // });
+    // $('#data-baixa').change(function() {
+    //     data(this.value, 1)
+    // });
 
+    // $('#data-vencimento').keyup(function() {
+    //     data(this.value, 2)
+    // });
+    // $('#data-vncimento').change(function() {
+    //     data(this.value, 2)
+    // });
 
-        }
+    //---------------- Código de Barramento do Terceiro STEP----------------------
+    // >>>>>>>>>>Campos de  GRUPO e Conta<<<<<<<<<<<<<<<<<<
+    // function grupo(grupos) {
+    //     var grupos = grupos;
+    //     if (grupos == 0) {
+    //         $('Card3-Proximo').removeAttr('onclick')
+    //         // $('.todos').prop('disabled', true);
+    //     }
 
-    });
-    
-    $('.grupo').ready(function() {
-        $grupo = $('.grupo').val();
-        grupo($grupo)
-    })
+    //     $('Card3-Proximo').click(function() {
+    //         if (grupos == 0) {
+    //             $('.s-grupo').text('Campo Obrigatório')
+    //         } else {
+    //             $('.s-grupo').text(' ')
+    //         }
+    //     })
+    // }
 
-    $('.grupo').change(function() {
-        $grupo = $('.grupo').val();
-        grupo($grupo)
-    })
+    // $('.grupo').ready(function() {
+    //     var grupos = $('.grupo').val();
+    //     // alert(grupo)
+    //     grupo(grupos)
+    // })
 
-    $('.entradas').change(function() {
-        $tipo = $(".entradas option:selected").text();
-        if ($tipo.indexOf('Cliente') != -1) {
-            $('.cliente').removeClass('d-none')
-            $('.fornecedor').addClass('d-none');
-
-        } else {
-            $('.cliente').addClass('d-none');
-            $('.fornecedor').addClass('d-none');
-        }
-
-    });
-
-
-    $('.saidas').change(function() {
-        $tipo = $(".saidas option:selected").text();
-
-        if ($tipo.indexOf('Fornecedor') != -1) {
-
-            $('.cliente').addClass('d-none')
-            $('.fornecedor').removeClass('d-none');
-
-        } else {
-            $('.cliente').addClass('d-none');
-            $('.fornecedor').addClass('d-none');
-        }
-    });
-
-
-    $('.tipo').change(function() {
-        $tipo = $('.tipo').val();
-        try {
-            const response = axios.get('/caixas/getCaixaaberto').then(function(response) {
-                if ((response.data !== true) && ($tipo !== 'PREVISTO')) {
-                    $('.span').text('Caixa Fechado');
-                    $('#proximo').removeAttr('onclick')
-                } else {
-                    $('.span').text(' ');
-                    $('#proximo').attr('onclick', 'stepper1.next()');
-                }
-            })
-        } catch (error) {
-            console.log(error);
-        }
-        if ($tipo == "PREVISTO") {
-            $(".file").addClass('d-none');
-            $('.baixa').addClass('d-none');
-        } else {
-            $(".file").removeClass('d-none');
-            $('.baixa').removeClass('d-none');
-        }
-    })
-
-
+    // $('.grupo').change(function() {
+    //     var grupos = $('.grupo').val();
+    //     grupo(grupos)
+    // })
 </script>

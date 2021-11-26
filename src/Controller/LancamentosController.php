@@ -50,7 +50,7 @@ class LancamentosController extends AppController
             'total' => 0
         ];
         foreach ($lancamentos as $lancamento) :
-            if ($lancamento->fluxoconta->fluxosubgrupo->fluxogrupo->grupo == 'entrada') {
+            if ($lancamento->subconta->conta->subgrupo->grupo == 'entrada') {
                 $totals['entrada']['total'] += $lancamento->valor;
                 $totals['total'] += $lancamento->valor;
             } else {
@@ -61,7 +61,9 @@ class LancamentosController extends AppController
 
         return $totals;
     }
-
+    public function teste()
+    {
+    }
     public function getTablePainel()
     {
         $renovados = $this->getrenovado();
@@ -75,50 +77,86 @@ class LancamentosController extends AppController
             $request = $this->request->getData();
             switch ($request[0]) {
                 case 'REALIZADO':
+                    $date = 'data_baixa';
                     $query = "tipo = 'REALIZADO'";
                     break;
 
-                case 'PREVISTO':
+                    case 'PREVISTO':
+                    $date = 'data_vencimento';
                     $query = "tipo = 'PREVISTO'";
                     break;
 
                 default:
-                    # code...
-                    break;
+                $request[2] = 'created';
+                break;
             }
             $request[1] = new Time($request[1], 'UTC');
+            $request[1] = $request[1]->i18nFormat('yyyy-MM');
             $obj = [];
             $total = 0;
-            $this->loadModel('Fluxocontas');
-            $contas = $this->Fluxocontas->find('all', ['contain' => ['Fluxosubgrupos' => ['Fluxogrupos']]]);
+            $this->loadModel('Subcontas');
+            $subcontas = $this->Subcontas->find('all', ['contain' => ['Contas' => ['Subgrupos' => ['Grupos']]]]);
             $lancamentos = $this->Lancamentos->find('all', [
-                'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas'],
+                'contain' => ['Subcontas', 'Fornecedores', 'Clientes'],
                 'conditions' => [$query . $renovados['and']]
             ]);
-            foreach ($contas as $c) :
+            foreach ($subcontas as $c) :
                 $valor = 0;
                 foreach ($lancamentos as $l) :
-
-                    if ($c->conta == $l->fluxoconta->conta && $l->created->i18nFormat('yyyy-MM') == $request[1]->i18nFormat('yyyy-MM')) {
-                        $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $valor += $l->valor : $valor -= $l->valor;
-                        switch ($c->fluxosubgrupo->fluxogrupo->grupo) {
+                    if ($l->$date->i18nFormat('yyyy-MM') == $request[1]) {
+                        switch ($c->conta->subgrupo->grupo->grupo) {
                             case 'entrada':
-                                # code...
+                                $valor += $l->valor;
                                 $totals['entrada'] += $l->valor;
                                 $totals['total'] += $l->valor;
                                 break;
 
-                            case 'saida':
-                                # code...
-                                $totals['saida'] -= $l->valor;
-                                $totals['total'] -= $l->valor;
-                                break;
-                        }
+                                case 'saida':
+                                    $valor -= $l->valor;
+                                    $totals['saida'] -= $l->valor;
+                                    $totals['total'] -= $l->valor;
+                                    break;
+                                }
                     }
                 endforeach;
-                $c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
-                array_push($obj, [$c->fluxosubgrupo->fluxogrupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->conta, $valor]);
+                $c->conta->subgrupo->grupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
+                array_push($obj, [$c->conta->subgrupo->grupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->subconta, $valor]);
             endforeach;
+
+            $this->response = $this->response->withType('application/json')
+            ->withStringBody(json_encode([$obj, $total, $totals]));
+            return $this->response;
+        } else if ($this->request->is('get')) {
+            $obj = [];
+            $total = 0;
+            $this->loadModel('Subcontas');
+            $subcontas = $this->Subcontas->find('all', ['contain' => ['Contas' => ['Subgrupos' => ['Grupos']]]]);
+            $lancamentos = $this->Lancamentos->find('all', [
+                'contain' => ['Subcontas', 'Fornecedores', 'Clientes'],
+                'conditions' => [$query . $renovados['and']]
+            ]);
+            foreach ($subcontas as $c) :
+                $valor = 0;
+                foreach ($lancamentos as $l) :
+                    switch ($c->conta->subgrupo->grupo->grupo) {
+                        case 'entrada':
+                            $valor += $l->valor;
+                            $totals['entrada'] += $l->valor;
+                            $totals['total'] += $l->valor;
+                            break;
+
+                        case 'saida':
+                            $valor -= $l->valor;
+                            $totals['saida'] -= $l->valor;
+                            $totals['total'] -= $l->valor;
+                            break;
+                    }
+                endforeach;
+                $c->conta->subgrupo->grupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
+                array_push($obj, [$c->conta->subgrupo->grupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->subconta, $valor]);
+            endforeach;
+            // debug($obj);
+            // exit;
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([$obj, $total, $totals]));
             return $this->response;
@@ -134,8 +172,7 @@ class LancamentosController extends AppController
         $renovados = $this->getrenovado();
 
         $lancamentos = $this->paginate($this->Lancamentos);
-        $lancamentos = $this->Lancamentos->find('all', ['conditions' => [$renovados['simple']], 'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas']]);
-
+        $lancamentos = $this->Lancamentos->find('all', ['conditions' => [$renovados['simple']], 'contain' => ['Subcontas', 'Fornecedores', 'Clientes']]);
         $now = FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
 
         $this->set(compact('lancamentos', 'now'));
@@ -152,17 +189,17 @@ class LancamentosController extends AppController
     public function view($id = null)
     {
         $lancamento = $this->Lancamentos->get($id, [
-            'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas', 'Lancamentos', 'Caixaregistros', 'Comprovantes'],
+            'contain' => ['Subcontas', 'Fornecedores', 'Clientes', 'Lancamentos', 'Caixaregistros', 'Comprovantes'],
         ]);
         if ($lancamento->lancamento_id != null) {
 
             $lancamento->lancamentos = $this->Lancamentos->get($lancamento->lancamento_id, [
-                'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas', 'Caixaregistros', 'Comprovantes'],
+                'contain' => ['Subcontas', 'Fornecedores', 'Clientes', 'Caixaregistros', 'Comprovantes'],
             ]);
             $lancamento->lancamentos = [];
             for ($id = $lancamento->lancamento_id; $id != null; $id) {
                 array_push($lancamento->lancamentos, $this->Lancamentos->get($id, [
-                    'contain' => ['Fluxocontas', 'Fornecedores', 'Clientes', 'Drecontas', 'Caixaregistros', 'Comprovantes'],
+                    'contain' => ['Subcontas', 'Fornecedores', 'Clientes', 'Caixaregistros', 'Comprovantes'],
                 ]));
                 $id = $lancamento->lancamentos[array_key_last($lancamento->lancamentos)]->lancamento_id;
             }
@@ -178,15 +215,10 @@ class LancamentosController extends AppController
 
     public function add()
     {
-
-        $this->paginate = [
-            'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
-        ];
         $this->loadModel('Comprovantes');
-
         $lancamento = $this->Lancamentos->newEmptyEntity();
         if ($this->request->is('post')) {
-            $lancamento = $this->Lancamentos->patchEntity($lancamento, $this->request->getData());
+
             if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
                 $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
                 return $this->redirect(['action' => 'add']);
@@ -199,17 +231,41 @@ class LancamentosController extends AppController
             $tipo = end($tipo);
             $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
             if ($name)
-                $image->moveTo($targetpath);
+            $image->moveTo($targetpath);
             $comprovantes = $this->Comprovantes->newEmptyEntity();
             $comprovantes->img = $name;
             $comprovantes->tipo = $tipo;
             if ($name == '') {
                 $name = null;
             }
-            
+
             $comprovantes->nome_arquivo = $nome;
-            if (($this->Lancamentos->save($lancamento))) {
-                $comprovantes->lancamento_id = $lancamento->id_lancamento;
+
+            $request = $this->request->getData();
+            $request['parcela'] == null ? $lancamento->parcela = 1 : '';
+            $lancamento = $this->Lancamentos->patchEntity($lancamento, $request);
+            if($request['parcela'] > 1 && $request['parcela'] !== null && $request['tipo'] == 'PREVISTO'){
+                $request['valor'] = $request['valor']/$request['parcela'];
+                $request['parcela'] = intval($request['parcela']);
+                for(intval($request['parcela']); $request['parcela'] >= 1; $request['parcela']--){
+                    $parcela = $this->Lancamentos->newEntity($request);
+                    $parcela->data_vencimento = $parcela->data_vencimento->addMonth($request['parcela']);
+                    if (($this->Lancamentos->save($parcela))) {
+                        $comprovantes->lancamento_id = $lancamento->id_lancamento;
+                        // debug([$parcela, $request]);
+                    } else{
+                        $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
+                        return $this->redirect(['action' => 'add']);
+                    }
+                }
+                // exit;
+            } else {
+                if (($this->Lancamentos->save($lancamento))) {
+                    $comprovantes->lancamento_id = $lancamento->id_lancamento;
+                } else{
+                    $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
+                    return $this->redirect(['action' => 'add']);
+                }
             }
             if ($lancamento->tipo == 'REALIZADO') {
                 if ($name != null) {
@@ -229,47 +285,62 @@ class LancamentosController extends AppController
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
         }
 
-        $entradas = $this->Lancamentos->Fluxocontas->find('list', [
-            'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
-            'conditions' => ['Fluxogrupos.grupo' => 'entrada'],
-            'valueField' => function ($d) {
-                if ($d->fluxosubgrupo->subgrupo == 'Entrada') {
-                    return $d->conta;
-                }
-                return $d->fluxosubgrupo->fluxogrupo->grupo . ' de ' .
-                    $d->fluxosubgrupo->subgrupo . ' ' .
-                    $d->conta;
-            }
+        $entradas = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'conditions' => ['Grupos.grupo' => 'entrada'],
+            // 'valueField' => function ($d) {
+            //     if ($d->fluxosubgrupo->subgrupo == 'Entrada') {
+            //         return $d->conta;
+            //     }
+            //     return $d->conta->subgrupo->grupo->grupo . ' de ' .
+            //         $d->fluxosubgrupo->subgrupo . ' ' .
+            //         $d->conta;
+            // }
 
         ]);
 
-        $saidas = $this->Lancamentos->Fluxocontas->find('list', [
-            'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
-            'conditions' => ['Fluxogrupos.grupo' => 'saida'],
-            'valueField' => function ($d) {
-                if ($d->fluxosubgrupo->subgrupo == 'Saida') {
-                    return $d->conta;
-                }
-                return  $d->fluxosubgrupo->fluxogrupo->grupo . ' de ' .
-                    $d->fluxosubgrupo->subgrupo . ' ' .
-                    $d->conta;
-            }
+        $saidas = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'conditions' => ['Grupos.grupo' => 'saida'],
+            // 'valueField' => function ($d) {
+            //     if ($d->fluxosubgrupo->subgrupo == 'Saida') {
+            //         return $d->conta;
+            //     }
+            //     return  $d->conta->subgrupo->grupo->grupo . ' de ' .
+            //         $d->fluxosubgrupo->subgrupo . ' ' .
+            //         $d->conta;
+            // }
         ]);
-        $todos = $this->Lancamentos->Fluxocontas->find('list', [
-            'contain' => ['Fluxosubgrupos' => ['Fluxogrupos']],
-            'valueField' => function ($d) {
-                return  $d->fluxosubgrupo->fluxogrupo->grupo . ' de ' .
-                    $d->fluxosubgrupo->subgrupo . ' ' .
-                    $d->conta;
-            }
+        $todos = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            // 'valueField' => function ($d) {
+            //     return  $d->conta->subgrupo->grupo->grupo . ' de ' .
+            //         $d->fluxosubgrupo->subgrupo . ' ' .
+            //         $d->conta;
+            // }
         ]);
 
+        // $variaveis = $this->Lancamentos->Drecontas->find('list', [
+        //     'contain' => ['Dregrupos'],
+        //     'conditions' => ['Dregrupos.grupo' => 'variavel'],
+        // ]);
+
+        // $fixos = $this->Lancamentos->Drecontas->find('list', [
+        //     'contain' => ['Dregrupos'],
+        //     'conditions' => ['Dregrupos.grupo' => 'fixo'],
+        // ]);
+
+        // $receitas = $this->Lancamentos->Drecontas->find('list', [
+        //     'contain' => ['Dregrupos'],
+        //     'conditions' => ['Dregrupos.grupo' => 'receita'],
+        // ]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
-        $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
-        $Grupos = $this->Lancamentos->Fluxocontas->Fluxosubgrupos->Fluxogrupos->find('list', ['limit' => 200]);
+        $subcontas = $this->Lancamentos->Subcontas->find('list', ['limit' => 200]);
+        // $dregrupos = $this->Lancamentos->Drecontas->Dregrupos->find('list', ['limit' => 200]);
+        $Grupos = $this->Lancamentos->Subcontas->Contas->Subgrupos->Grupos->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
-        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'drecontas', 'grupos', 'Grupos', 'entradas', 'saidas', 'todos'));
+        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos', 'entradas', 'saidas', 'todos'));
     }
 
     public function renovar($id = null)
@@ -289,12 +360,10 @@ class LancamentosController extends AppController
             $lancamento2->data_vencimento = $this->request->getData()['data_vencimento'];
             $lancamento2->created = $lancamento->created;
             $lancamento2->modified = $lancamento->modified;
-            $lancamento2->fluxoconta_id = $lancamento->fluxoconta_id;
+            $lancamento2->subconta_id = $lancamento->subconta_id;
             $lancamento2->fornecedor_id = $lancamento->fornecedor_id;
             $lancamento2->cliente_id = $lancamento->cliente_id;
             $lancamento2->lancamento_id = $lancamento->id_lancamento;
-            $lancamento2->dreconta_id = $lancamento->dreconta_id;
-        
 
             if ($this->Lancamentos->save($lancamento2)) {
                 $this->Flash->success(__('Lançamento editado com sucesso.'));
@@ -303,12 +372,11 @@ class LancamentosController extends AppController
             }
             $this->Flash->error(__('O Lançamento não foi editado, por favor tente novamente.'));
         }
-        $fluxocontas = $this->Lancamentos->Fluxocontas->find('list', ['limit' => 200]);
+        $subcontas = $this->Lancamentos->Subcontas->find('list', ['limit' => 200]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
-        $drecontas = $this->Lancamentos->Drecontas->find('list', ['limit' => 200]);
         $lancamentos = $this->Lancamentos->find('list', ['limit' => 200]);
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'drecontas', 'lancamentos'));
+        $this->set(compact('lancamento', 'subcontas', 'fornecedores', 'clientes', 'lancamentos'));
     }
 
     /**
@@ -333,11 +401,11 @@ class LancamentosController extends AppController
             }
             $this->Flash->error(__('O Lançamento não foi editado, por favor tente novamente.'));
         }
-        $fluxocontas = $this->Lancamentos->Fluxocontas->find('list', ['limit' => 200]);
+        $subcontas = $this->Lancamentos->Subcontas->find('list', ['limit' => 200]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $lancamentos = $this->Lancamentos->find('list', ['limit' => 200]);
-        $this->set(compact('lancamento', 'fluxocontas', 'fornecedores', 'clientes', 'lancamentos'));
+        $this->set(compact('lancamento', 'subcontas', 'fornecedores', 'clientes', 'lancamentos'));
     }
 
     /**
