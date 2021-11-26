@@ -59,11 +59,13 @@
             }
 
             .sidebarMenu .segundo{
-                color: #FFFFFF;
+                background-color: #FFFFFF;
+                color: #046076;
             }
 
             .sidebarMenu .terceiro{
-                color: #E4E4E2;
+                background-color: #046076;
+                color: #FFFFFF;
             }
 
             .info a{
