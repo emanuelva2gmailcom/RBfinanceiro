@@ -157,11 +157,13 @@
 
 
 <script>
-    // $('document').ready(function() {
+    // $('document').change(function() {
     //     $('#Card1-Proximo').removeAttr('onclick')
     //     $('#Card2-Proximo').removeAttr('onclick')
     //     $('#Card3-Proximo').removeAttr('onclick')
+    //     console.log('ee')
     // })
+
     //---------------- Código de Barramento do Primeiro STEP----------------------
     // >>>>>>>>>>Campo TIPO<<<<<<<<<<<<<<<<<<
     // $('.tipo').ready(function() {
@@ -171,9 +173,9 @@
     //             $('.tipo-span').text('Campo Obrigatório');
     //         }
     //     })
-    //     $('#Card1-Proximo').removeAttr('onclick')
-
     // })
+
+    // var teste = 0;
     // $('.tipo').change(function() {
     //     $tipo = $('.tipo').val();
     //     try {
@@ -182,23 +184,22 @@
     //                 if ($tipo == '') {
     //                     $('.tipo-span').text(' ');
     //                     $('.tipo-span').text('Campo Obrigatório');
-    //                     $('#Card1-Proximo').removeAttr('onclick')
     //                 } else {
     //                     $('.tipo-span').text('Caixa Fechado');
-    //                     $('#Card1-Proximo').removeAttr('onclick')
     //                 }
 
     //             } else {
     //                 $('.tipo-span').text(' ');
-    //                 $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+    //                 teste = 1;
+    //                 // $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
     //             }
     //             if (response.data == true) {
     //                 if ($tipo == '') {
     //                     $('.tipo-span').text('Campo Obrigatório');
-    //                     $('#Card1-Proximo').removeAttr('onclick')
+    //                     // $('#Card1-Proximo').removeAttr('onclick')
     //                 } else {
     //                     $('.tipo-span').text(' ');
-    //                     $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+    //                     // $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
     //                 }
     //             }
 
@@ -221,29 +222,44 @@
 
     // // >>>>>>>>>>Campos VALOR e PARCELA<<<<<<<<<<<<<<<<<<
 
+    // var teste = 0;
     // $('#Card1-Proximo').click(function() {
     //     var inputs = [$('#valor').val(), $('#parcela').val()];
+    //     console.log(teste)
     //     inputs.forEach(function(input, index) {
     //         if (input == "") {
     //             $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
     //         } else {
     //             $('.Campo-Obrigatorio' + index).text(' ');
-    //             $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+    //             // $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
     //         }
     //     });
+    // })
 
+    // $('document').load(function() {
+    //     console.log('teste')
+    //     if (($('.Campo-Obrigatorio').text()) == ' ' && ($('.Campo-Obrigatorio0').text()) == ' ' && ($('.Campo-Obrigatorio1').text() == ' ')) {
+    //         $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+    //     }
     // })
     // $('#valor').keyup(function() {
     //     if (this.value.length >= 1) {
     //         $('.Campo-Obrigatorio0').text(' ');
     //     }
+    //     teste = 1;
     // });
     // $('#parcela').keyup(function() {
     //     if (this.value.length >= 1) {
     //         $('.Campo-Obrigatorio1').text(' ');
 
     //     }
+    //     teste += 1;
     // });
+    // $('document').load(function() {
+    //     if (teste == 2) {
+    //         $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+    //     }
+    // })
 
     //---------------- Código de Barramento do Segundo STEP----------------------
     // >>>>>>>>>>Campos de  DATAS<<<<<<<<<<<<<<<<<<
@@ -253,9 +269,7 @@
     //     inputs.forEach(function(input, index) {
     //         if (input == "") {
     //             $('.Campo-Obrigatorio0' + index).text('Campo Obrigatório');
-    //             $('#Card2-Proximo').removeAttr('onclick')
     //         } else {
-    //             $('.Campo-Obrigatorio0' + index).text(' ');
     //             $('#Card2-Proximo').attr('onclick', 'stepper1.next()');
     //         }
     //     });
@@ -263,7 +277,7 @@
 
     // function data(span, index) {
     //     if (span.length >= 0) {
-    //         $('.Campo-Obrigatorio' + index).text(' ');
+    //         $('.Campo-Obrigatorio0' + index).text(' ');
     //     }
     // }
     // $('#data-emissao').keyup(function() {
@@ -284,7 +298,7 @@
     // $('#data-vencimento').keyup(function() {
     //     data(this.value, 2)
     // });
-    // $('#data-vncimento').change(function() {
+    // $('#data-vencimento').change(function() {
     //     data(this.value, 2)
     // });
 
