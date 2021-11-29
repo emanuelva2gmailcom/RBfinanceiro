@@ -51,21 +51,21 @@ $routes->scope('/', function (RouteBuilder $builder) {
      */
     $builder->connect('/home', ['controller' => 'Pages', 'action' => 'display', 'home']);
     $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-    // $builder->connect(
-    //     '/:controller/visualizar/:id',
-    //     ['action' => 'view'],
-    //     ['id' => '\d+', 'pass' => ['id']]
-    // );
-    // $builder->connect(
-    //     '/:controller/editar/:id',
-    //     ['action' => 'edit'],
-    //     ['id' => '\d+', 'pass' => ['id']]
-    // );
-    // $builder->connect(
-    //     '/:controller/deletar/:id',
-    //     ['action' => 'delete'],
-    //     ['id' => '\d+', 'pass' => ['id']]
-    // );
+    $builder->connect(
+        '/:controller/visualizar/:id',
+        ['action' => 'view'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+    $builder->connect(
+        '/:controller/editar/:id',
+        ['action' => 'edit'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+    $builder->connect(
+        '/:controller/deletar/:id',
+        ['action' => 'delete'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
      */

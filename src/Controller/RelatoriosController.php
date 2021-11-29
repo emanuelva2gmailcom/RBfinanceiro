@@ -26,12 +26,16 @@ class RelatoriosController extends AppController
         $this->getCaixaDiario();
     }
 
-    public function lancamentodiario()
+    public function relatoriodiario()
     {
         $renovados = $this->getrenovado();
-        $lancamentos = $this->loadModel('Lancamentos')->$this->Lancamentos->find('list', [
+        $this->loadModel('Lancamentos');
+        $lancamentos = $this->Lancamentos->find('list', [
             'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['data_baixa is not' => null, $renovados['simple'], 'created' =>  FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC')],
+            'conditions' => [
+                $renovados['simple'],
+                'DATE(lancamentos.created)' => FrozenTime::now()->i18nFormat('yyyy-MM-dd')
+            ],
             'valueField' => function($d) {
                 if ($d->subconta->conta->subgrupo->grupo->grupo == 'entrada') {
                     return [
@@ -52,7 +56,6 @@ class RelatoriosController extends AppController
                 }
             }
         ]);
-
         $this->set(compact('lancamentos'));
     }
 
@@ -62,7 +65,7 @@ class RelatoriosController extends AppController
         $this->loadModel('Lancamentos');
         $lancamentos = $this->Lancamentos->find('list', [
             'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['data_baixa is not' => null, $renovados['simple'], 'tipo' => 'REALIZADO', 'data_baixa' =>  FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC')],
+            'conditions' => ['data_baixa is not' => null, $renovados['simple'], 'tipo' => 'REALIZADO', 'data_baixa' =>  FrozenTime::now()],
             'valueField' => function($d) {
                 if ($d->subconta->conta->subgrupo->grupo->grupo == 'entrada') {
                     return [
@@ -81,9 +84,8 @@ class RelatoriosController extends AppController
                         $d->descricao,
                     ];
                 }
-            }
-        ]);
 
+            }]);
         $this->set(compact('lancamentos'));
         return $lancamentos;
     }
