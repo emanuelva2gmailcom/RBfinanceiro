@@ -34,7 +34,7 @@ class RelatoriosController extends AppController
             'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
             'conditions' => [
                 $renovados['simple'],
-                'DATE(lancamentos.created)' => FrozenTime::now()->i18nFormat('yyyy-MM-dd')
+                'DATE(lancamentos.created)' => FrozenTime::now()->i18nFormat('dd-MM-yyyy')
             ],
             'valueField' => function($d) {
                 if ($d->subconta->conta->subgrupo->grupo->grupo == 'entrada') {
@@ -472,9 +472,9 @@ class RelatoriosController extends AppController
         $date = new Time($data, 'UTC');
         $data = $date->modify('-1 days');
         foreach ($lancamentos as $l) :
-            if ($l->subconta->conta->subgrupo->grupo->grupo == 'entrada' && $data->i18nFormat('yyyy-MM-dd') == $l->$namedata->i18nFormat('yyyy-MM-dd')) {
+            if ($l->subconta->conta->subgrupo->grupo->grupo == 'entrada' && $data->i18nFormat('dd-MM-yyyy') == $l->$namedata->i18nFormat('dd-MM-yyyy')) {
                 $valor += $l->valor;
-            } else if ($l->subconta->conta->subgrupo->grupo->grupo == 'saida' && $data->i18nFormat('yyyy-MM-dd') == $l->$namedata->i18nFormat('yyyy-MM-dd')) {
+            } else if ($l->subconta->conta->subgrupo->grupo->grupo == 'saida' && $data->i18nFormat('dd-MM-yyyy') == $l->$namedata->i18nFormat('dd-MM-yyyy')) {
                 $valor -= $l->valor;
             }
         endforeach;
@@ -596,7 +596,7 @@ class RelatoriosController extends AppController
         // $request = ['2021-11-12', '2022-01-12', 'mes'];
         $show = false;
         if ($this->request->is('get')) {
-            $dia = ['yyyy-MM-dd', '+1 days'];
+            $dia = ['dd-MM-yyyy', '+1 days'];
             $mes = ['yyyy-MM', '+1 months'];
             $obj = $this->getRelatorio('PREVISTO', 'data_vencimento', $mes);
             $obj['total']['entradas'] = array_values($obj['total']['entradas']);
@@ -625,7 +625,7 @@ class RelatoriosController extends AppController
                     'final' => []
                 ]
             ];
-            $dia = ['yyyy-MM-dd', '+1 days'];
+            $dia = ['dd-MM-yyyy', '+1 days'];
             $mes = ['yyyy-MM', '+1 months'];
             $ano = ['yyyy', '+1 years'];
             $periodo = null;
@@ -755,7 +755,7 @@ class RelatoriosController extends AppController
                     'final' => []
                 ]
             ];
-            $dia = ['yyyy-MM-dd', '+1 days'];
+            $dia = ['dd-MM-yyyy', '+1 days'];
             $mes = ['yyyy-MM', '+1 months'];
             $ano = ['yyyy', '+1 years'];
             $periodo = null;

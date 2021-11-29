@@ -52,7 +52,7 @@ class NotificationsController extends AppController
         $notification = $this->Notifications->newEmptyEntity();
         if ($this->request->is('post')) {
             $notification = $this->Notifications->patchEntity($notification, $this->request->getData());
-            $notification->data->i18nFormat('yyyy-MM-dd');
+            $notification->data->i18nFormat('dd-MM-yyyy');
             if ($this->Notifications->save($notification)) {
                 $this->Flash->success(__('Notificação adicionada com sucesso.'));
 
@@ -113,10 +113,10 @@ class NotificationsController extends AppController
     {
         $notifications = $this->Notifications->find('all');
         foreach($notifications as $notification):
-        $notification->data = $notification->data->i18nFormat('yyyy-MM-dd');
+        $notification->data = $notification->data->i18nFormat('dd-MM-yyyy');
 
         endforeach;
-   
+
         $this->response = $this->response;
         $this->response = $this->response
             ->withHeader('Access-Control-Allow-Origin','*')
