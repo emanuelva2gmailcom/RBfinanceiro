@@ -5,6 +5,7 @@
     <div class="cardbodyADD card-body">
   <?= $this->Form->create($caixaregistro,['type' => 'file']) ?>
 
+    <?= $this->Form->control('competencia', ['label' => 'Data de competência', 'type' => 'date'], ['class' => 'form-control']); ?>
     <?= $this->Form->control('tipopagamento_id', ['label' => 'Tipo de Pagamento'], ['options' => $tipopagamentos], ['class' => 'form-control']); ?>
 
     <div class="form-group">
