@@ -523,6 +523,11 @@
                 }
             } */
 
+            .indexHOMEfc{
+                border-radius: 70px;
+                max-width: 97%;
+            }
+
             .indexHOME{
                 border-radius: 70px;
                 max-width: 100%;
