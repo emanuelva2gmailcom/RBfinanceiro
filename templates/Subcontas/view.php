@@ -92,34 +92,34 @@
         <tr>
             <td><?= h($lancamentos->id_lancamento) ?></td>
             <td><?= h($lancamentos->tipo) ?></td>
-            <td><?= h('R$ ' . $lancamento->valor) ?></td>
-            <td><?= h($lancamento->parcela. 'x') ?></td>
+            <td><?= h('R$ ' . $lancamentos->valor) ?></td>
+            <td><?= h($lancamentos->parcela. 'x') ?></td>
             <td><?= h($lancamentos->descricao) ?></td>
-            <?php if (empty($lancamento->data_emissao)) { ?>
-                <td><?= h($lancamento->data_emissao) ?></td>
+            <?php if (empty($lancamentos->data_emissao)) { ?>
+                <td><?= h($lancamentos->data_emissao) ?></td>
             <?php } else { ?>
-                <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                <td><?= h($lancamentos->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <?php } ?>
-            <?php if (empty($lancamento->data_competencia)) { ?>
-                <td><?= h($lancamento->data_competencia) ?></td>
+            <?php if (empty($lancamentos->data_competencia)) { ?>
+                <td><?= h($lancamentos->data_competencia) ?></td>
             <?php } else { ?>
-                <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                <td><?= h($lancamentos->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <?php } ?>
-            <?php if (empty($lancamento->data_baixa)) { ?>
-                <td><?= h($lancamento->data_baixa) ?></td>
+            <?php if (empty($lancamentos->data_baixa)) { ?>
+                <td><?= h($lancamentos->data_baixa) ?></td>
             <?php } else { ?>
-                <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                <td><?= h($lancamentos->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <?php } ?>
-            <?php if (empty($lancamento->data_vencimento)) { ?>
-                <td><?= h($lancamento->data_vencimento) ?></td>
+            <?php if (empty($lancamentos->data_vencimento)) { ?>
+                <td><?= h($lancamentos->data_vencimento) ?></td>
             <?php } else { ?>
-                <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                <td><?= h($lancamentos->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
             <?php } ?>
             <td><?= h($lancamentos->created) ?></td>
             <td><?= h($lancamentos->modified) ?></td>
-            <td class="tdINDEX"><?= $lancamento->has('subconta') ? $this->Html->link($lancamento->subconta->subconta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->subconta->subconta]) : '' ?></td>
-            <td class="tdINDEX"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
-            <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
+            <td class="tdINDEX"><?= $lancamentos->has('subconta') ? $this->Html->link($lancamento->subconta->subconta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->subconta->subconta]) : '' ?></td>
+            <td class="tdINDEX"><?= $lancamentos->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
+            <td class="tdINDEX"><?= $lancamentos->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
             <td><?= h($lancamentos->lancamento_id) ?></td>
             <td class="actions">
               <?= $this->Html->link(__('Visualizar'), ['controller' => 'Lancamentos', 'action' => 'view', $lancamentos->id_lancamento], ['class'=>'btn vis btn-xs btn-outline-primary']) ?>
