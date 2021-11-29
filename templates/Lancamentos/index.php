@@ -25,7 +25,7 @@
 </head>
 <div class="card">
     <div class="calcularINDEX card-body">
-        <table id="example1" class="table table-bordered table-striped">
+        <table id="example1" class="tableINDEX table table-bordered table-striped">
             <thead class="theINDEX">
                 <tr>
 
@@ -95,6 +95,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+
                 </tr>
             </tfoot>
 
@@ -154,7 +157,8 @@
                         data: 'Tipo'
                     },
                     {
-                        data: 'Valor'
+                        data: 'Valor',
+                        width: '100px'
                     },
                     {
                         data: 'Parcela'
