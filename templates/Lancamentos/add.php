@@ -163,19 +163,6 @@
         $('#Card3-Proximo').removeAttr('onclick')
     })
 
-    // FUNÇÂO AUXILIAR
-    function auxiliar() {
-        var tipo = $('.tipo').val();
-        var Parcela = $('#parcela').val();
-        var Valor = $('#valor').val();
-
-        if ((Parcela != '') && (Valor != '') && ($tipo == 'PREVISTO')) {
-            $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
-        } else {
-            $('#Card1-Proximo').removeAttr('onclick')
-        }
-    }
-    setInterval("auxiliar()", 1000)
     //---------------- Código de Barramento do Primeiro STEP----------------------
     // >>>>>>>>>>Campo TIPO<<<<<<<<<<<<<<<<<<
 
@@ -187,7 +174,7 @@
             }
         })
     })
-
+    var caixa = 0
     $('.tipo').change(function() {
         $tipo = $('.tipo').val();
         try {
@@ -205,6 +192,7 @@
                     $('.tipo-span').text(' ');
                 }
                 if (response.data == true) {
+                    caixa = true;
                     if ($tipo == '') {
                         $('.tipo-span').text('Campo Obrigatório');
                     } else {
@@ -229,6 +217,19 @@
     })
 
 
+    // FUNÇÂO AUXILIAR
+    function auxiliar() {
+        var tipo = $('.tipo').val();
+        var Parcela = $('#parcela').val();
+        var Valor = $('#valor').val();
+
+        if ((Parcela != '') && (Valor != '') && ($tipo == 'PREVISTO' || ($tipo == 'REALIZADO' && caixa == true))) {
+            $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+        } else {
+            $('#Card1-Proximo').removeAttr('onclick')
+        }
+    }
+    setInterval("auxiliar()", 1000)
     // >>>>>>>>>>Campos VALOR e PARCELA<<<<<<<<<<<<<<<<<<
 
     $('#Card1-Proximo').click(function() {
@@ -361,12 +362,12 @@
         var grupo = $("#grupo-id option:selected").text()
         var subconta = $("#subconta-id option:selected").text();
 
-            if ((grupo != "SELECIONE") && (subconta != "SELECIONE")) {
-                $('#Card3-Proximo').attr('onclick', 'stepper1.next()');
-            } else {
-                $('#Card3-Proximo').removeAttr('onclick')
+        if ((grupo != "SELECIONE") && (subconta != "SELECIONE")) {
+            $('#Card3-Proximo').attr('onclick', 'stepper1.next()');
+        } else {
+            $('#Card3-Proximo').removeAttr('onclick')
 
-            }
+        }
 
 
     }
