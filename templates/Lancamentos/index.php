@@ -51,7 +51,7 @@
                     <tr class="ops">
                         <td><?= h($lancamento->tipo) ?></td>
                         <td><?= h('R$ ' . $lancamento->valor) ?></td>
-                        <td><?= h($lancamento->parcela. 'x') ?></td>
+                        <td><?= h($lancamento->parcela . 'x') ?></td>
                         <td><?= h($lancamento->descricao) ?></td>
                         <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
@@ -104,6 +104,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -131,71 +132,73 @@
 <script>
     $(function() {
         var printCounter = 0;
-        $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "language": {
-                    "emptyTable": "Nenhum registro disponível na tabela",
-                    "zeroRecords": "Nenhum registro encontrado",
-                    "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
-                    "infoEmpty": "Mostrando 0 de 0 dos 0 lançamentos",
-                    "infoFiltered": "(filtrado do total de _MAX_ lançamentos)",
-                    "search": "Procurar:",
-                    "paginate": {
-                        "first": "Primeiro",
-                        "last": "Último",
-                        "next": "Próximo",
-                        "previous": "Anterior"
-                    },
+        var column = this;
+        console.log(column)
+        var teste = $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "language": {
+                "emptyTable": "Nenhum registro disponível na tabela",
+                "zeroRecords": "Nenhum registro encontrado",
+                "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
+                "infoEmpty": "Mostrando 0 de 0 dos 0 lançamentos",
+                "infoFiltered": "(filtrado do total de _MAX_ lançamentos)",
+                "search": "Procurar:",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                },
+            },
+
+            columns: [{
+                    data: 'Tipo'
+                },
+                {
+                    data: 'Valor'
+                },
+                {
+                    data: 'Parcela'
+                },
+                {
+                    data: 'Descricao'
+                },
+                {
+                    data: 'Data de Emissão'
+                },
+                {
+                    data: 'Data de Competência'
+                },
+                {
+                    data: 'Data de Baixa'
+                },
+                {
+                    data: 'Data de Vencimento'
+                },
+                {
+                    data: 'Fluxoconta'
+                },
+                {
+                    data: 'Fornecedor'
+                },
+                {
+                    data: 'Cliente'
                 },
 
-                columns: [{
-                        data: 'Tipo'
-                    },
-                    {
-                        data: 'Valor'
-                    },
-                    {
-                        data: 'Parcela'
-                    },
-                    {
-                        data: 'Descricao'
-                    },
-                    {
-                        data: 'Data de Emissão'
-                    },
-                    {
-                        data: 'Data de Competência'
-                    },
-                    {
-                        data: 'Data de Baixa'
-                    },
-                    {
-                        data: 'Data de Vencimento'
-                    },
-                    {
-                        data: 'Fluxoconta'
-                    },
-                    {
-                        data: 'Fornecedor'
-                    },
-                    {
-                        data: 'Cliente'
-                    },
-
-                    {
-                        data: 'Ações',
-                        render: function(data, type, row) {
-                            return type === 'export' ?
-                                null :
-                                data;
-                        }
-                    },
+                {
+                    data: 'Ações',
+                    render: function(data, type, row) {
+                        return type === 'export' ?
+                            null :
+                            data;
+                    }
+                },
 
 
 
-                ],
+            ],
 
             dom: 'Bfrtip',
             buttons: [{
@@ -360,11 +363,47 @@
 
                     }
                 },
+                {
+                    extend: 'collection',
+                    text: 'Tipo',
+                    buttons: [{
+                            text: 'REALIZADO',
+                            action: function() {
+                                this
+                                    .columns(0)
+                                    .search("REALIZADO")
+                                    .draw();
+                            }
+                        },
+                        {
+                            text: 'PREVISTO',
+                            action: function() {
+                                this
+                                    .columns(0)
+                                    .search("PREVISTO")
+                                    .draw();
+                            }
+                        },
+                        {
+                            text: 'TODOS',
+                            action: function() {
+                                this
+                                    .columns(0)
+                                    .search(" ")
+                                    .draw();
+                            }
+                        },
+                    ],
+                    visibility: true
+                },
             ]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
 
 
-
+        // teste
+        //     // .columns( '.status' )
+        //     .search('REALIZADO')
+        //     .draw();
     });
 </script>
