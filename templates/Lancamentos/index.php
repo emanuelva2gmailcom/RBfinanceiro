@@ -51,7 +51,7 @@
                     <tr class="ops">
                         <td><?= h($lancamento->tipo) ?></td>
                         <td><?= h('R$ ' . $lancamento->valor) ?></td>
-                        <td><?= h($lancamento->parcela . 'x') ?></td>
+                        <td><?= h($lancamento->parcela . '° Parcela') ?></td>
                         <td><?= h($lancamento->descricao) ?></td>
                         <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
