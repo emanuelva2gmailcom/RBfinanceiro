@@ -158,7 +158,7 @@
                     },
                     {
                         data: 'Valor',
-                        width: '100px'
+                        width: '75px'
                     },
                     {
                         data: 'Parcela'
@@ -179,7 +179,8 @@
                         data: 'Data de Vencimento'
                     },
                     {
-                        data: 'Fluxoconta'
+                        data: 'Fluxoconta',
+                        width: '150px'
                     },
                     {
                         data: 'Fornecedor'
@@ -317,7 +318,7 @@
                             labels: Head,
                             datasets: [{
                                 label: 'Saidas',
-                                backgroundColor: '#047076',
+                                backgroundColor: '#DBEBED',
                                 pointRadius: false,
                                 pointColor: '#3b8bba',
                                 pointStrokeColor: 'rgba(60,141,188,1)',
@@ -336,12 +337,12 @@
                             scales: {
                                 xAxes: [{
                                     gridLines: {
-                                        display: false,
+                                        display: false
                                     }
                                 }],
                                 yAxes: [{
                                     gridLines: {
-                                        display: false,
+                                        display: false
                                     }
                                 }]
                             }
