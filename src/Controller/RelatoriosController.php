@@ -26,40 +26,66 @@ class RelatoriosController extends AppController
         $this->getCaixaDiario();
     }
 
+    public function lancamentodiario()
+    {
+        $renovados = $this->getrenovado();
+        $lancamentos = $this->loadModel('Lancamentos')->$this->Lancamentos->find('list', [
+            'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
+            'conditions' => ['data_baixa is not' => null, $renovados['simple'], 'created' =>  FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC')],
+            'valueField' => function($d) {
+                if ($d->subconta->conta->subgrupo->grupo->grupo == 'entrada') {
+                    return [
+                        '+' . $d->valor,
+                        $d->subconta ? $d->subconta->subconta : ' ',
+                        $d->fornecedore ? $d->fornecedore->nome : ' ',
+                        $d->cliente ? $d->cliente->nome : ' ',
+                        $d->descricao,
+                    ];
+                }else {
+                    return [
+                        '-' . $d->valor,
+                        $d->subconta ? $d->subconta->subconta : ' ',
+                        $d->fornecedore ? $d->fornecedore->nome : ' ',
+                        $d->cliente ? $d->cliente->nome : ' ',
+                        $d->descricao,
+                    ];
+                }
+            }
+        ]);
+
+        $this->set(compact('lancamentos'));
+    }
+
     public function getCaixaDiario()
     {
         $renovados = $this->getrenovado();
         $this->loadModel('Lancamentos');
-        $lancamentos = $this->Lancamentos->find('all', [
+        $lancamentos = $this->Lancamentos->find('list', [
             'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['data_baixa is not' => null], $renovados['simple']
-        ]);
-
-
-        $arrays = [];
-        foreach ($lancamentos as $lancamento) :
-            $teste =  FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
-            $grupo = $lancamento->subconta->conta->subgrupo->grupo->grupo;
-            if (($lancamento->data_baixa->i18nFormat('yyyy-MM-dd') == $teste)) {
-                if ($grupo == 'entrada') {
-                    $lancamento->valor = '+' . $lancamento->valor;
-                } else {
-                    $lancamento->valor = '-' . $lancamento->valor;
-                }
-
-                if ($lancamento->tipo == 'REALIZADO') {
-                    array_push($arrays, [
-                        $lancamento->valor,
-                        $lancamento->subconta ? $lancamento->subconta->subconta : ' ',
-                        $lancamento->fornecedore ? $lancamento->fornecedore->nome : ' ',
-                        $lancamento->cliente ? $lancamento->cliente->nome : ' ',
-                        $lancamento->descricao,
-                    ]);
+            'conditions' => ['data_baixa is not' => null, $renovados['simple'], 'tipo' => 'REALIZADO', 'data_baixa' =>  FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC')],
+            'valueField' => function($d) {
+                if ($d->subconta->conta->subgrupo->grupo->grupo == 'entrada') {
+                    return [
+                        '+' . $d->valor,
+                        $d->subconta ? $d->subconta->subconta : ' ',
+                        $d->fornecedore ? $d->fornecedore->nome : ' ',
+                        $d->cliente ? $d->cliente->nome : ' ',
+                        $d->descricao,
+                    ];
+                }else {
+                    return [
+                        '-' . $d->valor,
+                        $d->subconta ? $d->subconta->subconta : ' ',
+                        $d->fornecedore ? $d->fornecedore->nome : ' ',
+                        $d->cliente ? $d->cliente->nome : ' ',
+                        $d->descricao,
+                    ];
                 }
             }
-        endforeach;
-        $this->set(compact('arrays'));
-        return $arrays;
+        ]);
+
+        $this->set(compact('lancamentos'));
+        return $lancamentos;
     }
 
 
@@ -453,7 +479,7 @@ class RelatoriosController extends AppController
         return $valor;
     }
 
-    public function getRelatorio($tipo = null, $date = null, $periodo = null)
+    public function getRelatorio($tipo = "PREVISTO", $date = 'data_vencimento', $periodo = ['yyyy-MM', '+1 months'])
     {
         $renovados = $this->getrenovado();
         $obj = [
@@ -481,12 +507,14 @@ class RelatoriosController extends AppController
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
         $comeco = FrozenTime::now()->i18nFormat($periodo[0]);
-        $final = null;
+        $final = $comeco;
         foreach ($lancamentos as $lancamento) :
-            if ($lancamento->$date->i18nFormat($periodo[0]) >= $comeco) {
+            // debug([$lancamento->$date->i18nFormat($periodo[0]) >= $comeco, $lancamento->$date->i18nFormat($periodo[0]), $final]);
+            if ($lancamento->$date->i18nFormat($periodo[0]) >= $final) {
                 $final = $lancamento->$date->i18nFormat($periodo[0]);
             }
         endforeach;
+        // debug([$comeco, $final]);exit;
         $obj['header'] = $this->array_date($comeco, $final, $periodo);
         $obj['total']['inicial'] = [$this->total_before($comeco, $lancamentos, $date)];
         $contas = [];
@@ -567,7 +595,8 @@ class RelatoriosController extends AppController
         $show = false;
         if ($this->request->is('get')) {
             $dia = ['yyyy-MM-dd', '+1 days'];
-            $obj = $this->getRelatorio('PREVISTO', 'data_vencimento', $dia);
+            $mes = ['yyyy-MM', '+1 months'];
+            $obj = $this->getRelatorio('PREVISTO', 'data_vencimento', $mes);
             $obj['total']['entradas'] = array_values($obj['total']['entradas']);
             $obj['total']['saidas'] = array_values($obj['total']['saidas']);
             $this->response = $this->response->withType('application/json')

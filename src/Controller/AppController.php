@@ -51,23 +51,8 @@ class AppController extends Controller
         $caixas = $this->Caixas->find('all');
         foreach ($caixas as $caixa) :
             if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
-                return $caixa->id_caixa;
-                return $caixa->is_aberto;
+                return [$caixa->id_caixa, $caixa->is_aberto];
             }
-        endforeach;
-        return false;
-    }
-    
-    public function caixaaberto2()
-    {
-        $this->loadModel('Caixas');
-        $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
-        $caixas = $this->Caixas->find('all');
-        foreach ($caixas as $caixa) :
-            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
-                return $caixa->is_aberto;
-            }
-
         endforeach;
         return false;
     }

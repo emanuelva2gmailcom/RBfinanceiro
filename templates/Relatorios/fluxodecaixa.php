@@ -17,7 +17,7 @@
         </div>
         <div class="formgroupPAINEL col-md-3">
             <label>Período</label>
-            <?= $this->Form->select(2, ['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'periodo form-control select2bs4']); ?>
+            <?= $this->Form->select(2, ['MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'periodo form-control select2bs4']); ?>
         </div>
         <div class="formgroupPAINEL col-md-3">
             <label>Enviar</label>

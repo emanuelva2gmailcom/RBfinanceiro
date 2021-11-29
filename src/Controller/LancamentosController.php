@@ -252,13 +252,11 @@ class LancamentosController extends AppController
                     $parcela->data_vencimento = $parcela->data_vencimento->addMonth($request['parcela']);
                     if (($this->Lancamentos->save($parcela))) {
                         $comprovantes->lancamento_id = $lancamento->id_lancamento;
-                        // debug([$parcela, $request]);
                     } else{
                         $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
                         return $this->redirect(['action' => 'add']);
                     }
                 }
-                // exit;
             } else {
                 if (($this->Lancamentos->save($lancamento))) {
                     $comprovantes->lancamento_id = $lancamento->id_lancamento;
@@ -271,15 +269,15 @@ class LancamentosController extends AppController
                 if ($name != null) {
                     if (($this->Comprovantes->save($comprovantes))) {
                         $this->Flash->success(__('Lançamento adicionado com sucesso'));
-                        return $this->redirect(['action' => 'index']);
+                        return $this->redirect(['action' => 'add']);
                     }
                 } else {
                     $this->Flash->success(__('Lançamento adicionado com sucesso'));
-                    return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'add']);
                 }
             } else {
                 $this->Flash->success(__('Lançamento adicionado com sucesso'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             }
 
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
@@ -417,12 +415,30 @@ class LancamentosController extends AppController
      */
     public function delete($id = null)
     {
+        $this->loadModel('Caixaregistros');
+        $this->loadModel('Comprovantes');
+        $registros = $this->Caixaregistros->find('all')->where(['lancamento_id' => $id])->toArray();
+        $comprovantes = $this->Comprovantes->find('all')->where(['lancamento_id' => $id])->toArray();
         $lancamento = $this->Lancamentos->get($id);
+        if(!empty($registros)  || !empty($comprovantes)){
+            foreach($registros as $registro):
+                if (!$this->Caixaregistros->delete($registro)) {
+                    $this->Flash->error(__('O Lançamento não foi deletado, por favor tente novamente.'));
+                }
+            endforeach;
+            foreach($comprovantes as $comprovante):
+                if (!$this->Comprovantes->delete($comprovante)) {
+                    $this->Flash->error(__('O Lançamento não foi deletado, por favor tente novamente.'));
+                }
+            endforeach;
+        }
         if ($this->Lancamentos->delete($lancamento)) {
             $this->Flash->success(__('Lançamento deletado com sucesso.'));
         } else {
             $this->Flash->error(__('O Lançamento não foi deletado, por favor tente novamente.'));
         }
+
+
 
         return $this->redirect(['action' => 'index']);
     }

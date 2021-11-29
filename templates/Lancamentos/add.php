@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-group">
                         <?= $this->Form->control('valor', ['label' => 'Valor', 'placeholder' => 'Valor'], ['class' => 'border form-control']); ?>
-                        <span class="Campo-Obrigatorio0"></span></span>
+                        <span class="Campo-Obrigatorio0"></span>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->control('parcela', ['label' => 'Parcela', 'placeholder' => 'Parcela'], ['class' => 'border form-control']); ?>
@@ -71,15 +71,15 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão', 'placeholder' => 'dd/mm/yyyy'], ['class' => 'border form-control dataADD']); ?>
-                        <span class="Campo-Obrigatorio0"></span></span>
+                        <span class="Campo-Obrigatorio00"></span>
                     </div>
                     <div class="form-group data-baixa">
                         <?= $this->Form->control('data_baixa', ['label' => 'Data de Baixa', 'placeholder' => 'Data de Baixa'], ['class' => 'border form-control dataADD']); ?>
-                        <span class="Campo-Obrigatorio1"></span></span>
+                        <span id='previsto'></span></span>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento', 'placeholder' => 'Data de Vencimento'], ['class' => 'border form-control dataADD']); ?>
-                        <span class="Campo-Obrigatorio2"></span></span>
+                        <span class="Campo-Obrigatorio02"></span>
                     </div>
                     <div class="form-group competencia">
                         <?= $this->Form->control('data_competencia', ['label' => 'Data de Competência', 'placeholder' => 'Data de Competência'], ['class' => 'border form-control dataADD']); ?>
@@ -94,10 +94,11 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <?= $this->Form->control('grupo_id', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']); ?>
-                        <span class="s-grupo"></span>
+                        <span class="Campo-Obrigatorio10"></span>
                     </div>
                     <div class="form-group">
-                        <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE', ['class' => 'subconta']]); ?>
+                        <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE']); ?>
+                        <span class="Campo-Obrigatorio11"></span>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -156,160 +157,219 @@
 
 
 <script>
-    // $('document').ready(function() {
-    //     $('#Card2-Proximo').removeAttr('onclick')
-    // })
+    $('document').ready(function() {
+        $('#Card1-Proximo').removeAttr('onclick')
+        $('#Card2-Proximo').removeAttr('onclick')
+        $('#Card3-Proximo').removeAttr('onclick')
+    })
+
     //---------------- Código de Barramento do Primeiro STEP----------------------
     // >>>>>>>>>>Campo TIPO<<<<<<<<<<<<<<<<<<
-    // $('.tipo').ready(function() {
-    //     $tipo = $('.tipo').val();
-    //     $('#Card1-Proximo').click(function() {
-    //         if ($tipo == '') {
-    //             $('.tipo-span').text('Campo Obrigatório');
-    //         }
-    //     })
-    //     $('#Card1-Proximo').removeAttr('onclick')
 
-    // })
-    // $('.tipo').change(function() {
-    //     $tipo = $('.tipo').val();
-    //     try {
-    //         const response = axios.get('/caixas/getCaixaaberto').then(function(response) {
-    //             if ((response.data !== true) && ($tipo !== 'PREVISTO')) {
-    //                 if ($tipo == '') {
-    //                     $('.tipo-span').text(' ');
-    //                     $('.tipo-span').text('Campo Obrigatório');
-    //                     $('#Card1-Proximo').removeAttr('onclick')
-    //                 } else {
-    //                     $('.tipo-span').text('Caixa Fechado');
-    //                     $('#Card1-Proximo').removeAttr('onclick')
-    //                 }
+    $('.tipo').ready(function() {
+        $tipo = $('.tipo').val();
+        $('#Card1-Proximo').click(function() {
+            if ($tipo == '') {
+                $('.tipo-span').text('Campo Obrigatório');
+            }
+        })
+    })
+    var caixa = 0
+    $('.tipo').change(function() {
+        $tipo = $('.tipo').val();
+        try {
+            const response = axios.get('/caixas/getCaixaaberto').then(function(response) {
+                if ((response.data !== true) && ($tipo !== 'PREVISTO')) {
+                    if ($tipo == '') {
+                        $('.tipo-span').text(' ');
+                        $('.tipo-span').text('Campo Obrigatório');
+                    } else {
+                        $('.tipo-span').text('Caixa Fechado');
+                        $('#Card1-Proximo').removeAttr('onclick')
+                    }
 
-    //             } else {
-    //                 $('.tipo-span').text(' ');
-    //                 $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
-    //             }
-    //             if (response.data == true) {
-    //                 if ($tipo == '') {
-    //                     $('.tipo-span').text('Campo Obrigatório');
-    //                     $('#Card1-Proximo').removeAttr('onclick')
-    //                 } else {
-    //                     $('.tipo-span').text(' ');
-    //                     $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
-    //                 }
-    //             }
+                } else {
+                    $('.tipo-span').text(' ');
+                }
+                if (response.data == true) {
+                    caixa = true;
+                    if ($tipo == '') {
+                        $('.tipo-span').text('Campo Obrigatório');
+                    } else {
+                        $('.tipo-span').text(' ');
+                    }
+                }
 
-    //         })
-    //     } catch (error) {
-    //         console.log(error);
+            })
+        } catch (error) {
+            console.log(error);
 
-    //     }
-    //     if ($tipo == "PREVISTO") {
-    //         $(".file").addClass('d-none');
-    //         $('.data-baixa').addClass('d-none');
-    //     } else {
-    //         $(".file").removeClass('d-none');
-    //         $('.data-baixa').removeClass('d-none');
-    //     }
-    // })
+        }
+        if ($tipo == "PREVISTO") {
+            $(".file").addClass('d-none');
+            $('.data-baixa').addClass('d-none');
+            $('#previsto').removeClass('Campo-Obrigatorio01')
+        } else {
+            $(".file").removeClass('d-none');
+            $('.data-baixa').removeClass('d-none');
+            $('#previsto').addClass('Campo-Obrigatorio01')
+        }
+    })
 
-    // // >>>>>>>>>>Campos VALOR e PARCELA<<<<<<<<<<<<<<<<<<
-    // $('#Card1-Proximo').click(function() {
-    //     var inputs = [$('#valor').val(), $('#parcela').val()];
-    //     inputs.forEach(function(input, index) {
-    //         if (input == "") {
-    //             $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
-    //             $('#Card1-Proximo').removeAttr('onclick')
-    //         } else {
-    //             $('.Campo-Obrigatorio' + index).text(' ');
-    //             $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
-    //         }
-    //     });
 
-    // })
-    // $('#valor').keyup(function() {
-    //     if (this.value.length >= 1) {
-    //         $('.Campo-Obrigatorio0').text(' ');
-    //     }
-    // });
-    // $('#parcela').keyup(function() {
-    //     if (this.value.length >= 1) {
-    //         $('.Campo-Obrigatorio1').text(' ');
+    // FUNÇÂO AUXILIAR
+    function auxiliar() {
+        var tipo = $('.tipo').val();
+        var Parcela = $('#parcela').val();
+        var Valor = $('#valor').val();
 
-    //     }
-    // });
+        if ((Parcela != '') && (Valor != '') && ($tipo == 'PREVISTO' || ($tipo == 'REALIZADO' && caixa == true))) {
+            $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+        } else {
+            $('#Card1-Proximo').removeAttr('onclick')
+        }
+    }
+    setInterval("auxiliar()", 1000)
+    // >>>>>>>>>>Campos VALOR e PARCELA<<<<<<<<<<<<<<<<<<
+
+    $('#Card1-Proximo').click(function() {
+        var inputs = [$('#valor').val(), $('#parcela').val()];
+        inputs.forEach(function(input, index) {
+            if (input == "") {
+                $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
+            } else {
+                $('.Campo-Obrigatorio' + index).text(' ');
+            }
+        });
+
+    })
+
+    $('#valor').keyup(function() {
+        if (this.value.length >= 1) {
+            $('.Campo-Obrigatorio0').text(' ');
+        }
+    });
+    $('#parcela').keyup(function() {
+        if (this.value.length >= 1) {
+            $('.Campo-Obrigatorio1').text(' ');
+
+        }
+    });
 
     //---------------- Código de Barramento do Segundo STEP----------------------
     // >>>>>>>>>>Campos de  DATAS<<<<<<<<<<<<<<<<<<
-    // $('document').ready(function() {
-    //     $('#Card2-Proximo').removeAttr('onclick')
-    // })
-    // $('#Card2-Proximo').click(function() {
-    //     var inputs = [$('#data-emissao').val(), $('#data-baixa').val(), $('#data-vencimento').val()];
-    //     inputs.forEach(function(input, index) {
-    //         if (input == "") {
-    //             $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
-    //             $('#Card2-Proximo').removeAttr('onclick')
-    //         } else {
-    //             $('.Campo-Obrigatorio' + index).text(' ');
-    //             $('#Card2-Proximo').attr('onclick', 'stepper1.next()');
-    //         }
-    //     });
-    // })
 
-    // function data(span, index) {
-    //     if (span.length >= 0) {
-    //         $('.Campo-Obrigatorio' + index).text(' ');
-    //     }
-    // }
-    // $('#data-emissao').keyup(function() {
-    //     data(this.value, 0)
+    $('#Card2-Proximo').click(function() {
+        var inputs = [$('#data-emissao').val(), $('#data-baixa').val(), $('#data-vencimento').val()];
+        inputs.forEach(function(input, index) {
+            if (input == "") {
+                $('.Campo-Obrigatorio0' + index).text('Campo Obrigatório');
 
-    // });
-    // $('#data-emissao').change(function() {
-    //     data(this.value, 0)
+            } else {
+                $('.Campo-Obrigatorio0' + index).text(' ');
+            }
+        });
+    })
 
-    // });
-    // $('#data-baixa').keyup(function() {
-    //     data(this.value, 1)
-    // });
-    // $('#data-baixa').change(function() {
-    //     data(this.value, 1)
-    // });
+    function data(span, index) {
+        if (span.length >= 0) {
+            $('.Campo-Obrigatorio0' + index).text(' ');
+        }
+    }
+    $('#data-emissao').keyup(function() {
+        data(this.value, 0)
 
-    // $('#data-vencimento').keyup(function() {
-    //     data(this.value, 2)
-    // });
-    // $('#data-vncimento').change(function() {
-    //     data(this.value, 2)
-    // });
+    });
+    $('#data-emissao').change(function() {
+        data(this.value, 0)
 
+    });
+    $('#data-baixa').keyup(function() {
+        data(this.value, 1)
+    });
+    $('#data-baixa').change(function() {
+        data(this.value, 1)
+    });
+
+    $('#data-vencimento').keyup(function() {
+        data(this.value, 2)
+    });
+    $('#data-vencimento').change(function() {
+        data(this.value, 2)
+    });
+
+    function auxiliar2() {
+        $tipo = $('.tipo').val();
+        if ($tipo == "PREVISTO") {
+            var dataEmissao = $('#data-emissao').val()
+            var dataVencimento = $('#data-vencimento').val()
+            if ((dataEmissao != "") && (dataVencimento != "")) {
+                $('#Card2-Proximo').attr('onclick', 'stepper1.next()');
+            } else {
+                $('#Card2-Proximo').removeAttr('onclick')
+
+            }
+
+
+        } else {
+            var dataEmissao = $('#data-emissao').val()
+            var dataBaixa = $('#data-baixa').val()
+            var dataVencimento = $('#data-vencimento').val()
+            if ((dataEmissao != "") && (dataBaixa != "") && (dataVencimento != "")) {
+                $('#Card2-Proximo').attr('onclick', 'stepper1.next()');
+            } else {
+                $('#Card2-Proximo').removeAttr('onclick')
+
+            }
+
+        }
+
+    }
+    setInterval("auxiliar2()", 1000)
     //---------------- Código de Barramento do Terceiro STEP----------------------
-    // >>>>>>>>>>Campos de  GRUPO e Conta<<<<<<<<<<<<<<<<<<
-    // function grupo(grupos) {
-    //     var grupos = grupos;
-    //     if (grupos == 0) {
-    //         $('Card3-Proximo').removeAttr('onclick')
-    //         // $('.todos').prop('disabled', true);
-    //     }
+    // >>>>>>>>>>Campos de  GRUPO e CONTA<<<<<<<<<<<<<<<<<<
 
-    //     $('Card3-Proximo').click(function() {
-    //         if (grupos == 0) {
-    //             $('.s-grupo').text('Campo Obrigatório')
-    //         } else {
-    //             $('.s-grupo').text(' ')
-    //         }
-    //     })
-    // }
+    $('#Card3-Proximo').click(function() {
+        var inputs = [$("#grupo-id option:selected").text(), $("#subconta-id option:selected").text()];
+        inputs.forEach(function(input, index) {
+            if (input == "SELECIONE") {
+                $('.Campo-Obrigatorio1' + index).text('Campo Obrigatório');
+            } else {
+                $('.Campo-Obrigatorio1' + index).text(' ');
+            }
+        });
+    })
 
-    // $('.grupo').ready(function() {
-    //     var grupos = $('.grupo').val();
-    //     // alert(grupo)
-    //     grupo(grupos)
-    // })
+    var cont = 0;
 
-    // $('.grupo').change(function() {
-    //     var grupos = $('.grupo').val();
-    //     grupo(grupos)
-    // })
+    function campo(span, index) {
+        if (span > 0) {
+            cont++;
+            $('.Campo-Obrigatorio1' + index).text(' ');
+        }
+        if (cont > 1 && span > 0) {
+            $('#Card3-Proximo').attr('onclick', 'stepper1.next()');
+        }
+    }
+    $('#grupo-id').change(function() {
+        campo(this.value, 0)
+    });
+    $('#subconta-id').change(function() {
+        campo(this.value, 1)
+    });
+
+    function auxiliar3() {
+        var grupo = $("#grupo-id option:selected").text()
+        var subconta = $("#subconta-id option:selected").text();
+
+        if ((grupo != "SELECIONE") && (subconta != "SELECIONE")) {
+            $('#Card3-Proximo').attr('onclick', 'stepper1.next()');
+        } else {
+            $('#Card3-Proximo').removeAttr('onclick')
+
+        }
+
+
+    }
+    setInterval("auxiliar3()", 1000)
 </script>

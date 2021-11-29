@@ -122,50 +122,55 @@ class CaixaregistrosController extends AppController
         $caixaregistro = $this->Caixaregistros->newEmptyEntity();
         if ($this->request->is('post')) {
             $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $this->request->getData());
-            $this->efetuarbaixa($id, $this->request->getData('tipopagamento_id'));
+            $this->efetuarbaixa($id, $this->request->getData());
         }
         $tipopagamentos = $this->Caixaregistros->Tipopagamentos->find('list', ['limit' => 200]);
         $this->set(compact('tipopagamentos', 'caixaregistro'));
     }
 
-    public function efetuarbaixa($id = null, $tipopagamento = null)
+    public function efetuarbaixa($id = null, $request = null)
     {
         $data = [
             'lancamento_id' => $id,
-            'tipopagamento_id' => $tipopagamento,
-            'caixa_id' => $this->caixaaberto(0)
+            'tipopagamento_id' => $request['tipopagamento_id'],
+            'caixa_id' => $this->caixaaberto()[0]
         ];
         $this->loadModel('Comprovantes');
         $comprovantes = $this->paginate($this->Comprovantes);
         $this->loadModel('Lancamentos');
         $lancamento = $this->Lancamentos->get($id);
+
         if ($lancamento->data_baixa !== null) {
             return $this->redirect(['controller' => 'lancamentos', 'action' => 'index']);
         }
-       
-        if ($lancamento->tipo !== 'REALIZADO' && ($this->caixaaberto2() == true)) {
-            $image = $this->request->getData('Comprovante');
+
+        if ($lancamento->tipo !== 'REALIZADO' && ($this->caixaaberto()[1] == true)) {
+            $comprovantes = $this->Comprovantes->newEmptyEntity();
+            $caixaregistro = $this->Caixaregistros->newEmptyEntity();
+
+            $image = $request['Comprovante'];
             $name = $image->getClientFilename();
             $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
-            if ($name)
-                $image->moveTo($targetpath);
-            $comprovantes = $this->Comprovantes->newEmptyEntity();
+            $image->moveTo($targetpath);
             $comprovantes->img = $name;
-            $this->Comprovantes->save($comprovantes);
-            $caixaregistro = $this->Caixaregistros->newEmptyEntity();
+            $comprovantes->lancamento_id = $lancamento->id_lancamento;
+
             $lancamento->data_baixa = FrozenTime::now();
             $lancamento->tipo = 'REALIZADO';
+            $lancamento->data_competencia = $request['competencia'];
+
             $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $data);
-            if (($this->Caixaregistros->save($caixaregistro)) && ($this->Lancamentos->save($lancamento))) {
+
+            if (($this->Caixaregistros->save($caixaregistro)) && ($this->Lancamentos->save($lancamento)) && ($this->Comprovantes->save($comprovantes))) {
                 $this->Flash->success(__('Caixa Registro adicionado com sucesso'));
 
                 return $this->redirect(['controller' => 'Lancamentos', 'action' => 'index']);
             }
             $this->Flash->error(__('Caixa Registro não foi adicionado, por favor tente novamente.'));
-            
+
         }
         $this->Flash->error(__('Caixa Fechado.'));
         return $this->redirect(['controller' => 'Lancamentos', 'action' => 'index']);
     }
-  
+
 }
