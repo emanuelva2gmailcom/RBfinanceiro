@@ -26,40 +26,66 @@ class RelatoriosController extends AppController
         $this->getCaixaDiario();
     }
 
+    public function lancamentodiario()
+    {
+        $renovados = $this->getrenovado();
+        $lancamentos = $this->loadModel('Lancamentos')->$this->Lancamentos->find('list', [
+            'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
+            'conditions' => ['data_baixa is not' => null, $renovados['simple'], 'created' =>  FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC')],
+            'valueField' => function($d) {
+                if ($d->subconta->conta->subgrupo->grupo->grupo == 'entrada') {
+                    return [
+                        '+' . $d->valor,
+                        $d->subconta ? $d->subconta->subconta : ' ',
+                        $d->fornecedore ? $d->fornecedore->nome : ' ',
+                        $d->cliente ? $d->cliente->nome : ' ',
+                        $d->descricao,
+                    ];
+                }else {
+                    return [
+                        '-' . $d->valor,
+                        $d->subconta ? $d->subconta->subconta : ' ',
+                        $d->fornecedore ? $d->fornecedore->nome : ' ',
+                        $d->cliente ? $d->cliente->nome : ' ',
+                        $d->descricao,
+                    ];
+                }
+            }
+        ]);
+
+        $this->set(compact('lancamentos'));
+    }
+
     public function getCaixaDiario()
     {
         $renovados = $this->getrenovado();
         $this->loadModel('Lancamentos');
-        $lancamentos = $this->Lancamentos->find('all', [
+        $lancamentos = $this->Lancamentos->find('list', [
             'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['data_baixa is not' => null], $renovados['simple']
-        ]);
-
-
-        $arrays = [];
-        foreach ($lancamentos as $lancamento) :
-            $teste =  FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC');
-            $grupo = $lancamento->subconta->conta->subgrupo->grupo->grupo;
-            if (($lancamento->data_baixa->i18nFormat('yyyy-MM-dd') == $teste)) {
-                if ($grupo == 'entrada') {
-                    $lancamento->valor = '+' . $lancamento->valor;
-                } else {
-                    $lancamento->valor = '-' . $lancamento->valor;
-                }
-
-                if ($lancamento->tipo == 'REALIZADO') {
-                    array_push($arrays, [
-                        $lancamento->valor,
-                        $lancamento->subconta ? $lancamento->subconta->subconta : ' ',
-                        $lancamento->fornecedore ? $lancamento->fornecedore->nome : ' ',
-                        $lancamento->cliente ? $lancamento->cliente->nome : ' ',
-                        $lancamento->descricao,
-                    ]);
+            'conditions' => ['data_baixa is not' => null, $renovados['simple'], 'tipo' => 'REALIZADO', 'data_baixa' =>  FrozenTime::now()->i18nFormat('yyyy-MM-dd', 'UTC')],
+            'valueField' => function($d) {
+                if ($d->subconta->conta->subgrupo->grupo->grupo == 'entrada') {
+                    return [
+                        '+' . $d->valor,
+                        $d->subconta ? $d->subconta->subconta : ' ',
+                        $d->fornecedore ? $d->fornecedore->nome : ' ',
+                        $d->cliente ? $d->cliente->nome : ' ',
+                        $d->descricao,
+                    ];
+                }else {
+                    return [
+                        '-' . $d->valor,
+                        $d->subconta ? $d->subconta->subconta : ' ',
+                        $d->fornecedore ? $d->fornecedore->nome : ' ',
+                        $d->cliente ? $d->cliente->nome : ' ',
+                        $d->descricao,
+                    ];
                 }
             }
-        endforeach;
-        $this->set(compact('arrays'));
-        return $arrays;
+        ]);
+
+        $this->set(compact('lancamentos'));
+        return $lancamentos;
     }
 
 

@@ -122,24 +122,24 @@ class CaixaregistrosController extends AppController
         $caixaregistro = $this->Caixaregistros->newEmptyEntity();
         if ($this->request->is('post')) {
             $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $this->request->getData());
-            $this->efetuarbaixa($id, $this->request->getData('tipopagamento_id'));
+            $this->efetuarbaixa($id, $this->request->getData());
         }
         $tipopagamentos = $this->Caixaregistros->Tipopagamentos->find('list', ['limit' => 200]);
         $this->set(compact('tipopagamentos', 'caixaregistro'));
     }
 
-    public function efetuarbaixa($id = null, $tipopagamento = null)
+    public function efetuarbaixa($id = null, $request = null)
     {
         $data = [
             'lancamento_id' => $id,
-            'tipopagamento_id' => $tipopagamento,
+            'tipopagamento_id' => $request['tipopagamento_id'],
             'caixa_id' => $this->caixaaberto()[0]
         ];
         $this->loadModel('Comprovantes');
         $comprovantes = $this->paginate($this->Comprovantes);
         $this->loadModel('Lancamentos');
         $lancamento = $this->Lancamentos->get($id);
-        
+
         if ($lancamento->data_baixa !== null) {
             return $this->redirect(['controller' => 'lancamentos', 'action' => 'index']);
         }
@@ -148,7 +148,7 @@ class CaixaregistrosController extends AppController
             $comprovantes = $this->Comprovantes->newEmptyEntity();
             $caixaregistro = $this->Caixaregistros->newEmptyEntity();
 
-            $image = $this->request->getData('Comprovante');
+            $image = $request['Comprovante'];
             $name = $image->getClientFilename();
             $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
             $image->moveTo($targetpath);
@@ -157,6 +157,7 @@ class CaixaregistrosController extends AppController
 
             $lancamento->data_baixa = FrozenTime::now();
             $lancamento->tipo = 'REALIZADO';
+            $lancamento->data_competencia = $request['competencia'];
 
             $caixaregistro = $this->Caixaregistros->patchEntity($caixaregistro, $data);
 
