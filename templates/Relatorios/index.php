@@ -52,7 +52,7 @@
                 <div class="cardHOME card mb-2">
                 <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-100 w-100">
-                        <?= $this->Html->image('fcN.jpg', ['class' => 'indexHOME']) ?>
+                        <?= $this->Html->image('cdN.png', ['class' => 'indexHOME']) ?>
                         <h5 class="cardtitleHOME card-title">Fluxo de Caixa</h5>
                         <p class="cardtextHOME card-text pb-2 pt-1">Aqui você visualiza os registros das entradas e saídas da empresa</p>
                         <a href="/relatorios/fluxodecaixa"> <p class="linkHOME"> Visualizar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
