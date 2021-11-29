@@ -20,7 +20,7 @@
 
         <thead class="theINDEX">
             <?= $this->Html->tableHeaders(
-                ['Valor','Conta', 'Fornecedor', 'Cliente', 'Descrição'])?>
+                ['Valor','Conta', 'Fornecedor', 'aCliente', 'Descrição'])?>
         </thead>
         <tbody class="tboINDEX">
             <?php foreach($lancamentos as $array):?>

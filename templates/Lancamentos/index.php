@@ -51,7 +51,7 @@
                     <tr class="ops">
                         <td><?= h($lancamento->tipo) ?></td>
                         <td><?= h('R$ ' . $lancamento->valor) ?></td>
-                        <td><?= h($lancamento->parcela. 'x') ?></td>
+                        <td><?= h($lancamento->parcela . 'x') ?></td>
                         <td><?= h($lancamento->descricao) ?></td>
                         <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
@@ -61,15 +61,15 @@
                             <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <?php } ?>
                         <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-                        <td class="tdINDEX"><?= $lancamento->has('subconta') ? $this->Html->link($lancamento->subconta->subconta, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->subconta->subconta]) : '' ?></td>
-                        <td class="tdINDEX"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->fornecedore->nome]) : '' ?></td>
-                        <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Lancamentos', 'action' => 'index', $lancamento->cliente->nome]) : '' ?></td>
+                        <td class="tdINDEX"><?= $lancamento->has('subconta') ? $this->Html->link($lancamento->subconta->subconta, ['controller' => 'Subcontas', 'action' => 'view', $lancamento->subconta->id_subconta]) : '' ?></td>
+                        <td class="tdINDEX"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->id_fornecedor]) : '' ?></td>
+                        <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->id_cliente]) : '' ?></td>
                         <td class="actions">
                             <div class="btn-group">
                                 <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
                                     <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'vis btn btn-xs ']) ?>
                                 <?php } ?>
-                                <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_vencimento->i18nFormat('yyyy-MM-dd', 'UTC') < $now) && ($lancamento->data_baixa == null)) { ?>
+                                <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC') < $now) && ($lancamento->data_baixa == null)) { ?>
                                     <?= $this->Html->link(__('Renovar'), ['controller' => 'Lancamentos', 'action' => 'renovar', $lancamento->id_lancamento], ['class' => 'edi btn btn-xs ']) ?>
                                 <?php } ?>
                                 <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'vis btn btn-xs', 'escape' => false]) ?>
@@ -107,6 +107,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -134,7 +135,9 @@
 <script>
     $(function() {
         var printCounter = 0;
-        $("#example1").DataTable({
+        var column = this;
+        console.log(column)
+        var teste = $("#example1").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
@@ -151,7 +154,7 @@
                         "next": "Próximo",
                         "previous": "Anterior"
                     },
-                },
+            },
 
                 columns: [{
                         data: 'Tipo'
@@ -189,18 +192,18 @@
                         data: 'Cliente'
                     },
 
-                    {
-                        data: 'Ações',
-                        render: function(data, type, row) {
-                            return type === 'export' ?
-                                null :
-                                data;
-                        }
-                    },
+                {
+                    data: 'Ações',
+                    render: function(data, type, row) {
+                        return type === 'export' ?
+                            null :
+                            data;
+                    }
+                },
 
 
 
-                ],
+            ],
 
             dom: 'Bfrtip',
             buttons: [{
@@ -365,11 +368,47 @@
 
                     }
                 },
+                {
+                    extend: 'collection',
+                    text: 'Tipo',
+                    buttons: [{
+                            text: 'REALIZADO',
+                            action: function() {
+                                this
+                                    .columns(0)
+                                    .search("REALIZADO")
+                                    .draw();
+                            }
+                        },
+                        {
+                            text: 'PREVISTO',
+                            action: function() {
+                                this
+                                    .columns(0)
+                                    .search("PREVISTO")
+                                    .draw();
+                            }
+                        },
+                        {
+                            text: 'TODOS',
+                            action: function() {
+                                this
+                                    .columns(0)
+                                    .search(" ")
+                                    .draw();
+                            }
+                        },
+                    ],
+                    visibility: true
+                },
             ]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
 
 
-
+        // teste
+        //     // .columns( '.status' )
+        //     .search('REALIZADO')
+        //     .draw();
     });
 </script>
