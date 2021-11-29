@@ -193,39 +193,12 @@
 
      /* 1.1 ADD de Lançamentos:*/
 
-            @media (max-width: 620px) {
+            @media (max-width: 520px) {
+
                 .cardlancADD {
                     position: absolute;
-                    margin-left: -77px;
+                    margin-left: -71px;
                     min-width: 90%;
-                }
-
-                .tipo {
-
-                    min-width: 275px;
-                }
-
-                .lineADD {
-                    min-width: 2px;
-                    min-height: 2px;
-                    margin: 0px;
-                }
-            }
-
-            @media (max-width: 370px) {
-
-                .lineADD {
-                    display: none;
-
-                }
-
-                .bsstepperheaderADD {
-                    display: flex;
-                    justify-content: space-between;
-                }
-
-                .dataADD, .grupo {
-                    width: 275px;
                 }
 
             }
@@ -248,15 +221,17 @@
             }
 
             .bsstepperheaderADD{
-                margin: 0px; background-color: #DBEBED;
+                margin: 0px;
+                background-color: #DBEBED;
             }
 
             .bssteppercontentADD{
-            padding: 20px;
+
             background-color: #10564F;
             }
 
             .bssteppercontentContent{
+                margin: 0;
                 background-color: #10564F;
                 color: #DBEBED
             }
