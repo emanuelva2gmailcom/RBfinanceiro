@@ -564,6 +564,9 @@
 
             .cardheaderHOME:hover .cardtextHOME{
                 display: block;
+                opacity: 1;
+                pointer-events: none;
+                max-height: 150px;
             }
 
             /* .cardbodyHOME{
@@ -579,7 +582,9 @@
 
             .cardtextHOME{
                 color: #10564F;
-                display: none;
+                opacity: 0;
+                transition: opacity .5s linear;
+                max-height: 0;
             }
 
             .linkHOME{
