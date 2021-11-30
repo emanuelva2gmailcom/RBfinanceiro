@@ -140,8 +140,8 @@ class RelatoriosController extends AppController
         // $request = ['2021-9', '2021-11', 'mes'];
         $request[0] = new Time($request[0], 'UTC');
         $request[1] = new Time($request[1], 'UTC');
-        $mes = ['yyyy-MM', '+1 months'];
-        $ano = ['yyyy', '+1 years'];
+        $mes = ['yyyy-MM', '+1 months','mes'];
+        $ano = ['yyyy', '+1 years', 'ano'];
         $periodo = null;
         switch ($request[2]) {
             case 'mes':
@@ -283,6 +283,7 @@ class RelatoriosController extends AppController
                 array_push($response['total']['fixos'], $row);
             }
         }
+        $obj['header'] = $this->formatterheader($obj['header'], $periodo[2]);
         $response['header'] = array_merge(['DRE'], $obj['header'], ['TOTAL'], ['%']);
 
         $receitasTotal = $response['total']['receitas'][0][array_key_last($response['total']['receitas'][0])];
@@ -431,6 +432,7 @@ class RelatoriosController extends AppController
                 array_push($response['total']['fixos'], $row);
             }
         }
+        $obj['header'] = $this->formatterheader($obj['header'], $periodo[2]);
         $response['header'] = array_merge(['DRE'], $obj['header'], ['TOTAL'], ['%']);
 
         $receitasTotal = $response['total']['receitas'][0][array_key_last($response['total']['receitas'][0])];
@@ -447,7 +449,7 @@ class RelatoriosController extends AppController
 
     public function dreAPI()
     {
-        $mes = ['yyyy-MM', '+1 months'];
+        $mes = ['yyyy-MM', '+1 months','mes'];
         if ($this->request->is('get')) {
             $obj = $this->getDre('data_competencia', $mes);
             $this->response = $this->response->withType('application/json')
@@ -481,7 +483,7 @@ class RelatoriosController extends AppController
         return $valor;
     }
 
-    public function getRelatorio($tipo = "PREVISTO", $date = 'data_vencimento', $periodo = ['yyyy-MM', '+1 months'])
+    public function getRelatorio($tipo = "PREVISTO", $date = 'data_vencimento', $periodo = ['yyyy-MM', '+1 months','mes'])
     {
         $renovados = $this->getrenovado();
         $obj = [
@@ -511,13 +513,12 @@ class RelatoriosController extends AppController
         $comeco = FrozenTime::now()->i18nFormat($periodo[0]);
         $final = $comeco;
         foreach ($lancamentos as $lancamento) :
-            // debug([$lancamento->$date->i18nFormat($periodo[0]) >= $comeco, $lancamento->$date->i18nFormat($periodo[0]), $final]);
             if ($lancamento->$date->i18nFormat($periodo[0]) >= $final) {
                 $final = $lancamento->$date->i18nFormat($periodo[0]);
             }
         endforeach;
-        // debug([$comeco, $final]);exit;
         $obj['header'] = $this->array_date($comeco, $final, $periodo);
+        // debug();exit;
         $obj['total']['inicial'] = [$this->total_before($comeco, $lancamentos, $date)];
         $contas = [];
         $result = [];
@@ -563,7 +564,6 @@ class RelatoriosController extends AppController
             array_push($result, $this->array_soma($result, 1));
             array_push($obj['rows']['td'], $result);
         endforeach;
-        $show = true;
         array_push($obj['total']['entradas'], array_sum($obj['total']['entradas']));
         array_push($obj['total']['saidas'], array_sum($obj['total']['saidas']));
         foreach ($obj['total']['entradas'] as $i => $t) :
@@ -580,6 +580,7 @@ class RelatoriosController extends AppController
                 array_push($obj['total']['inicial'], $obj['total']['final'][$i]);
             }
         endforeach;
+        $obj['header'] = $this->formatterheader($obj['header'], $periodo[2]);
         return $obj;
     }
 
@@ -596,8 +597,8 @@ class RelatoriosController extends AppController
         // $request = ['2021-11-12', '2022-01-12', 'mes'];
         $show = false;
         if ($this->request->is('get')) {
-            $dia = ['dd-MM-yyyy', '+1 days'];
-            $mes = ['yyyy-MM', '+1 months'];
+            $dia = ['dd-MM-yyyy', '+1 days', 'dia'];
+            $mes = ['yyyy-MM', '+1 months','mes'];
             $obj = $this->getRelatorio('PREVISTO', 'data_vencimento', $mes);
             $obj['total']['entradas'] = array_values($obj['total']['entradas']);
             $obj['total']['saidas'] = array_values($obj['total']['saidas']);
@@ -625,9 +626,9 @@ class RelatoriosController extends AppController
                     'final' => []
                 ]
             ];
-            $dia = ['dd-MM-yyyy', '+1 days'];
-            $mes = ['yyyy-MM', '+1 months'];
-            $ano = ['yyyy', '+1 years'];
+            $dia = ['dd-MM-yyyy', '+1 days', 'dia'];
+            $mes = ['yyyy-MM', '+1 months','mes'];
+            $ano = ['yyyy', '+1 years', 'ano'];
             $periodo = null;
             switch ($request[2]) {
                 case 'mes':
@@ -711,7 +712,9 @@ class RelatoriosController extends AppController
             endforeach;
             $obj['total']['entradas'] = array_values($obj['total']['entradas']);
             $obj['total']['saidas'] = array_values($obj['total']['saidas']);
-            // debug($obj);exit;
+
+            $obj['header'] = $this->formatterheader($obj['header'], $periodo[2]);
+
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([$show, $obj, $request]));
             return $this->response;
@@ -727,7 +730,7 @@ class RelatoriosController extends AppController
         // $request = ['2021-11-12', '2021-11-20', 'mes'];
         $show = false;
         if ($this->request->is('get')) {
-            $mes = ['yyyy-MM', '+1 months'];
+            $mes = ['yyyy-MM', '+1 months','mes'];
             $obj = $this->getRelatorio('REALIZADO', 'data_baixa', $mes);
             $obj['total']['entradas'] = array_values($obj['total']['entradas']);
             $obj['total']['saidas'] = array_values($obj['total']['saidas']);
@@ -755,9 +758,9 @@ class RelatoriosController extends AppController
                     'final' => []
                 ]
             ];
-            $dia = ['dd-MM-yyyy', '+1 days'];
-            $mes = ['yyyy-MM', '+1 months'];
-            $ano = ['yyyy', '+1 years'];
+            $dia = ['dd-MM-yyyy', '+1 days', 'dia'];
+            $mes = ['yyyy-MM', '+1 months','mes'];
+            $ano = ['yyyy', '+1 years', 'ano'];
             $periodo = null;
             switch ($request[2]) {
                 case 'mes':
@@ -841,6 +844,7 @@ class RelatoriosController extends AppController
             endforeach;
             $obj['total']['entradas'] = array_values($obj['total']['entradas']);
             $obj['total']['saidas'] = array_values($obj['total']['saidas']);
+            $obj['header'] = $this->formatterheader($obj['header'], $periodo[2]);
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([$show, $obj, $request]));
             return $this->response;
