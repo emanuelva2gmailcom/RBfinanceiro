@@ -7,35 +7,25 @@
 
 <?php $this->assign('title', __('Add Conta') ); ?>
 
-<?php
-$this->assign('breadcrumb',
-  $this->element('content/breadcrumb', [
-    'home' => true,
-    'breadcrumb' => [
-      'List Contas' => ['action'=>'index'],
-      'Add',
-    ]
-  ])
-);
-?>
+<div class="container d-flex justify-content-center">
 
-
-<div class="card card-primary card-outline">
+  <div class="cardADD card card-danger m-5">
+    <div class="cardbodyADD card-body">
   <?= $this->Form->create($conta) ?>
-  <div class="card-body">
-    <?php
-      echo $this->Form->control('conta');
-      echo $this->Form->control('descricao');
-      echo $this->Form->control('subgrupo_id', ['options' => $subgrupos, 'empty' => true]);
-    ?>
+      <?= $this->Form->control('conta', ['label' => 'Conta'], ['class' => 'form-control']); ?>
+      <?= $this->Form->control('descricao', ['label' => 'Descrição'], ['class' => 'form-control']); ?>
+      <?= $this->Form->control('subgrupo_id', ['label' => 'Subgrupo'], ['options' => $subgrupos, 'empty' => true], ['class' => 'form-control']); ?>
   </div>
 
-  <div class="card-footer d-flex">
-    <div class="ml-auto">
-      <?= $this->Form->button(__('Save')) ?>
-      <?= $this->Html->link(__('Cancel'), ['action'=>'index'], ['class'=>'btn btn-default']) ?>
+  <div class="cardfooterADD card-footer d-flex">
+      <div class="mr-auto p-2">
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btnADD btn btn-default']) ?>
+      </div>
+      <div class="p-2">
+        <?= $this->Form->button(__('Salvar')) ?>
+      </div>
     </div>
-  </div>
 
-  <?= $this->Form->end() ?>
+    <?= $this->Form->end() ?>
+  </div>
 </div>

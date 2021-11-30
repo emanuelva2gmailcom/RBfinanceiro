@@ -59,11 +59,15 @@
             }
 
             .sidebarMenu .segundo{
-                color: #FFFFFF;
+                background-color: #FFFFFF;
+                color: #046076;
+                border-radius: 10px;
             }
 
             .sidebarMenu .terceiro{
-                color: #E4E4E2;
+                background-color: #046076;
+                color: #FFFFFF;
+                border-radius: 10px;
             }
 
             .info a{
@@ -189,39 +193,12 @@
 
      /* 1.1 ADD de Lançamentos:*/
 
-            @media (max-width: 620px) {
+            @media (max-width: 520px) {
+
                 .cardlancADD {
                     position: absolute;
-                    margin-left: -77px;
+                    margin-left: -71px;
                     min-width: 90%;
-                }
-
-                .tipo {
-
-                    min-width: 275px;
-                }
-
-                .lineADD {
-                    min-width: 2px;
-                    min-height: 2px;
-                    margin: 0px;
-                }
-            }
-
-            @media (max-width: 370px) {
-
-                .lineADD {
-                    display: none;
-
-                }
-
-                .bsstepperheaderADD {
-                    display: flex;
-                    justify-content: space-between;
-                }
-
-                .dataADD, .grupo {
-                    width: 275px;
                 }
 
             }
@@ -244,15 +221,17 @@
             }
 
             .bsstepperheaderADD{
-                margin: 0px; background-color: #DBEBED;
+                margin: 0px;
+                background-color: #DBEBED;
             }
 
             .bssteppercontentADD{
-            padding: 20px;
+
             background-color: #10564F;
             }
 
             .bssteppercontentContent{
+                margin: 0;
                 background-color: #10564F;
                 color: #DBEBED
             }
@@ -287,15 +266,15 @@
      /* 2. Indexes: */
 
             #myModal .modal-header{
-                background-color: #DBEBED;
+                background-color: #047076;
             }
 
             #myModal .modal-body{
-                background-color: #10564F;
+                background-color: #FFFFFF;
             }
 
             #myModal .modal-footer{
-                background-color: #DBEBED;
+                background-color: #047076;
             }
 
             .tdINDEX a {
@@ -544,6 +523,11 @@
                 }
             } */
 
+            .indexHOMEfc{
+                border-radius: 70px;
+                max-width: 97%;
+            }
+
             .indexHOME{
                 border-radius: 70px;
                 max-width: 100%;
@@ -560,6 +544,9 @@
 
             .cardheaderHOME:hover .cardtextHOME{
                 display: block;
+                opacity: 1;
+                pointer-events: none;
+                max-height: 150px;
             }
 
             /* .cardbodyHOME{
@@ -575,7 +562,9 @@
 
             .cardtextHOME{
                 color: #10564F;
-                display: none;
+                opacity: 0;
+                transition: opacity .5s linear;
+                max-height: 0;
             }
 
             .linkHOME{
@@ -663,7 +652,7 @@
                 }
             }
 
-     /* 2.3.2 Fluxo de Caixa & Caixa Gerencial: */
+     /* 2.3.2 Fluxo de Caixa & Caixa Gerencial & DRE: */
 
             .sorting_disabled {
                color: #047076;
@@ -671,6 +660,10 @@
 
             .relatorioFC{
                 color: white;
+            }
+
+            .cardRELATORIOS .dataTables_paginate{
+                display: none;
             }
 
      /* 2.4 Dashboard vulgo Configurações: */

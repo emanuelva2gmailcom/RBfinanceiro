@@ -38,7 +38,7 @@ class SubcontasController extends AppController
         $subconta = $this->Subcontas->get($id, [
             'contain' => ['Contas', 'Lancamentos'],
         ]);
-
+        
         $this->set(compact('subconta'));
     }
 

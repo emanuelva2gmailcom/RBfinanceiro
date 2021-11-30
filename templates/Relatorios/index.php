@@ -52,7 +52,7 @@
                 <div class="cardHOME card mb-2">
                 <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-100 w-100">
-                        <?= $this->Html->image('fct.jpg', ['class' => 'indexHOME']) ?>
+                        <?= $this->Html->image('cdN.png', ['class' => 'indexHOMEfc']) ?>
                         <h5 class="cardtitleHOME card-title">Fluxo de Caixa</h5>
                         <p class="cardtextHOME card-text pb-2 pt-1">Aqui você visualiza os registros das entradas e saídas da empresa</p>
                         <a href="/relatorios/fluxodecaixa"> <p class="linkHOME"> Visualizar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
@@ -68,7 +68,7 @@
               <div class="cardHOME card mb-2 ">
               <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-100 w-100">
-                        <?= $this->Html->image('cgt.jpg', ['class' => 'indexHOME']) ?>
+                        <?= $this->Html->image('cgN.jpg', ['class' => 'indexHOME']) ?>
                         <h5 class="cardtitleHOME card-title">Caixa Gerencial</h5>
                         <p class="cardtextHOME card-text pb-2 pt-1">Aqui você verifica o controle de seu fluxo de caixa</p>
                         <a href="/relatorios/gerencial"> <p class="linkHOME"> Verificar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
@@ -84,7 +84,7 @@
               <div class="cardHOME card mb-2 ">
               <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-100 w-100">
-                        <?= $this->Html->image('cdt.jpg', ['class' => 'indexHOME']) ?>
+                        <?= $this->Html->image('fcN.jpg', ['class' => 'indexHOME']) ?>
                         <h5 class="cardtitleHOME card-title">Caixa Diário</h5>
                         <p class="cardtextHOME card-text pb-2 pt-1">Aqui você irá direto para o acompanhamento diário das entradas e saídas de acordo com sua abertura de atividades até seu fechamento</p>
                         <a href="/relatorios/caixadiario"> <p class="linkHOME"> Acompanhar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
@@ -151,21 +151,6 @@
                 </div> -->
             </div>
         </div>
-
-
-    <!-- <script>
-        function fc() {
-            $('.cai').removeClass('d-none');
-            $('.cai').removeClass('d-sm-block');
-            $('.ger').addClass('d-none');
-        }
-
-        function cg() {
-            $('.ger').removeClass('d-none');
-            $('.ger').removeClass('d-sm-block');
-            $('.cai').addClass('d-none');
-        }
-    </script> -->
 
     <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 

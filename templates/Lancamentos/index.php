@@ -25,7 +25,7 @@
 </head>
 <div class="card">
     <div class="calcularINDEX card-body">
-        <table id="example1" class="table table-bordered table-striped">
+        <table id="example1" class="tableINDEX table table-bordered table-striped">
             <thead class="theINDEX">
                 <tr>
 
@@ -51,7 +51,7 @@
                     <tr class="ops">
                         <td><?= h($lancamento->tipo) ?></td>
                         <td><?= h('R$ ' . $lancamento->valor) ?></td>
-                        <td><?= h($lancamento->parcela . 'x') ?></td>
+                        <td><?= h($lancamento->parcela . '° Parcela') ?></td>
                         <td><?= h($lancamento->descricao) ?></td>
                         <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
@@ -95,6 +95,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+
                 </tr>
             </tfoot>
 
@@ -135,57 +138,59 @@
         var column = this;
         console.log(column)
         var teste = $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "language": {
-                "emptyTable": "Nenhum registro disponível na tabela",
-                "zeroRecords": "Nenhum registro encontrado",
-                "info": "Mostrando _START_ de _END_ dos _TOTAL_ lançamentos",
-                "infoEmpty": "Mostrando 0 de 0 dos 0 lançamentos",
-                "infoFiltered": "(filtrado do total de _MAX_ lançamentos)",
-                "search": "Procurar:",
-                "paginate": {
-                    "first": "Primeiro",
-                    "last": "Último",
-                    "next": "Próximo",
-                    "previous": "Anterior"
-                },
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "language": {
+                    "emptyTable": "Nenhum registro disponível na tabela",
+                    "zeroRecords": "Nenhum registro encontrado",
+                    "info": "Mostrando _END_ de _MAX_ lançamentos",
+                "infoEmpty":      "Mostrando 0 de 0 lançamentos",
+                "infoFiltered":   " ",
+                    "search": "Procurar:",
+                    "paginate": {
+                        "first": "Primeiro",
+                        "last": "Último",
+                        "next": "Próximo",
+                        "previous": "Anterior"
+                    },
             },
 
-            columns: [{
-                    data: 'Tipo'
-                },
-                {
-                    data: 'Valor'
-                },
-                {
-                    data: 'Parcela'
-                },
-                {
-                    data: 'Descricao'
-                },
-                {
-                    data: 'Data de Emissão'
-                },
-                {
-                    data: 'Data de Competência'
-                },
-                {
-                    data: 'Data de Baixa'
-                },
-                {
-                    data: 'Data de Vencimento'
-                },
-                {
-                    data: 'Fluxoconta'
-                },
-                {
-                    data: 'Fornecedor'
-                },
-                {
-                    data: 'Cliente'
-                },
+                columns: [{
+                        data: 'Tipo'
+                    },
+                    {
+                        data: 'Valor',
+                        width: '75px'
+                    },
+                    {
+                        data: 'Parcela'
+                    },
+                    {
+                        data: 'Descricao'
+                    },
+                    {
+                        data: 'Data de Emissão'
+                    },
+                    {
+                        data: 'Data de Competência'
+                    },
+                    {
+                        data: 'Data de Baixa'
+                    },
+                    {
+                        data: 'Data de Vencimento'
+                    },
+                    {
+                        data: 'Fluxoconta',
+                        width: '150px'
+                    },
+                    {
+                        data: 'Fornecedor'
+                    },
+                    {
+                        data: 'Cliente'
+                    },
 
                 {
                     data: 'Ações',
@@ -316,7 +321,7 @@
                             labels: Head,
                             datasets: [{
                                 label: 'Saidas',
-                                backgroundColor: '#047076',
+                                backgroundColor: '#DBEBED',
                                 pointRadius: false,
                                 pointColor: '#3b8bba',
                                 pointStrokeColor: 'rgba(60,141,188,1)',
@@ -335,12 +340,12 @@
                             scales: {
                                 xAxes: [{
                                     gridLines: {
-                                        display: false,
+                                        display: false
                                     }
                                 }],
                                 yAxes: [{
                                     gridLines: {
-                                        display: false,
+                                        display: false
                                     }
                                 }]
                             }
