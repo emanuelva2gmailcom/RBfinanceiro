@@ -138,59 +138,59 @@
         var column = this;
         console.log(column)
         var teste = $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "language": {
-                    "emptyTable": "Nenhum registro disponível na tabela",
-                    "zeroRecords": "Nenhum registro encontrado",
-                    "info": "Mostrando _END_ de _MAX_ lançamentos",
-                "infoEmpty":      "Mostrando 0 de 0 lançamentos",
-                "infoFiltered":   " ",
-                    "search": "Procurar:",
-                    "paginate": {
-                        "first": "Primeiro",
-                        "last": "Último",
-                        "next": "Próximo",
-                        "previous": "Anterior"
-                    },
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "language": {
+                "emptyTable": "Nenhum registro disponível na tabela",
+                "zeroRecords": "Nenhum registro encontrado",
+                "info": "Mostrando _END_ de _MAX_ lançamentos",
+                "infoEmpty": "Mostrando 0 de 0 lançamentos",
+                "infoFiltered": " ",
+                "search": "Procurar:",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                },
             },
 
-                columns: [{
-                        data: 'Tipo'
-                    },
-                    {
-                        data: 'Valor',
-                        width: '75px'
-                    },
-                    {
-                        data: 'Parcela'
-                    },
-                    {
-                        data: 'Descricao'
-                    },
-                    {
-                        data: 'Data de Emissão'
-                    },
-                    {
-                        data: 'Data de Competência'
-                    },
-                    {
-                        data: 'Data de Baixa'
-                    },
-                    {
-                        data: 'Data de Vencimento'
-                    },
-                    {
-                        data: 'Fluxoconta',
-                        width: '150px'
-                    },
-                    {
-                        data: 'Fornecedor'
-                    },
-                    {
-                        data: 'Cliente'
-                    },
+            columns: [{
+                    data: 'Tipo'
+                },
+                {
+                    data: 'Valor',
+                    width: '75px'
+                },
+                {
+                    data: 'Parcela'
+                },
+                {
+                    data: 'Descricao'
+                },
+                {
+                    data: 'Data de Emissão'
+                },
+                {
+                    data: 'Data de Competência'
+                },
+                {
+                    data: 'Data de Baixa'
+                },
+                {
+                    data: 'Data de Vencimento'
+                },
+                {
+                    data: 'Fluxoconta',
+                    width: '150px'
+                },
+                {
+                    data: 'Fornecedor'
+                },
+                {
+                    data: 'Cliente'
+                },
 
                 {
                     data: 'Ações',
@@ -307,13 +307,14 @@
                     action: function(e, node, config) {
                         var Tabela = document.getElementById("example1");
                         var Trs = Tabela.getElementsByClassName("ops");
+                        console.log(Trs)
                         var valor = [];
                         var Head = []
-                        month = new Array("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
+                        month = new Array(" ", "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
 
                         for (var i = 0; i < Trs.length; i++) {
                             valor.push(Trs[i]['children'][1]['outerText'].replace('R$', ''))
-                            Head.push(month[Trs[i]['children'][5]['outerText'].split('-')[1].replace(/^0+/, '')])
+                            Head.push([month[Trs[i]['children'][7]['outerText'].split('-')[1].replace(/^0+/, '')] + ' / ' + Trs[i]['children'][7]['outerText'].split('-')[2]] + '  ')
                         }
 
 
