@@ -81,14 +81,14 @@ class LancamentosController extends AppController
                     $query = "tipo = 'REALIZADO'";
                     break;
 
-                    case 'PREVISTO':
+                case 'PREVISTO':
                     $date = 'data_vencimento';
                     $query = "tipo = 'PREVISTO'";
                     break;
 
                 default:
-                $request[2] = 'created';
-                break;
+                    $request[2] = 'created';
+                    break;
             }
             $request[1] = new Time($request[1], 'UTC');
             $request[1] = $request[1]->i18nFormat('yyyy-MM');
@@ -111,12 +111,12 @@ class LancamentosController extends AppController
                                 $totals['total'] += $l->valor;
                                 break;
 
-                                case 'saida':
-                                    $valor -= $l->valor;
-                                    $totals['saida'] -= $l->valor;
-                                    $totals['total'] -= $l->valor;
-                                    break;
-                                }
+                            case 'saida':
+                                $valor -= $l->valor;
+                                $totals['saida'] -= $l->valor;
+                                $totals['total'] -= $l->valor;
+                                break;
+                        }
                     }
                 endforeach;
                 $c->conta->subgrupo->grupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
@@ -124,7 +124,7 @@ class LancamentosController extends AppController
             endforeach;
 
             $this->response = $this->response->withType('application/json')
-            ->withStringBody(json_encode([$obj, $total, $totals]));
+                ->withStringBody(json_encode([$obj, $total, $totals]));
             return $this->response;
         } else if ($this->request->is('get')) {
             $obj = [];
@@ -231,7 +231,7 @@ class LancamentosController extends AppController
             $tipo = end($tipo);
             $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
             if ($name)
-            $image->moveTo($targetpath);
+                $image->moveTo($targetpath);
             $comprovantes = $this->Comprovantes->newEmptyEntity();
             $comprovantes->img = $name;
             $comprovantes->tipo = $tipo;
@@ -244,15 +244,15 @@ class LancamentosController extends AppController
             $request = $this->request->getData();
             $request['parcela'] == null ? $lancamento->parcela = 1 : '';
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $request);
-            if($request['parcela'] > 1 && $request['parcela'] !== null && $request['tipo'] == 'PREVISTO'){
-                $request['valor'] = $request['valor']/$request['parcela'];
+            if ($request['parcela'] > 1 && $request['parcela'] !== null && $request['tipo'] == 'PREVISTO') {
+                $request['valor'] = $request['valor'] / $request['parcela'];
                 $request['parcela'] = intval($request['parcela']);
-                for(intval($request['parcela']); $request['parcela'] >= 1; $request['parcela']--){
+                for (intval($request['parcela']); $request['parcela'] >= 1; $request['parcela']--) {
                     $parcela = $this->Lancamentos->newEntity($request);
                     $parcela->data_vencimento = $parcela->data_vencimento->addMonth($request['parcela']);
                     if (($this->Lancamentos->save($parcela))) {
                         $comprovantes->lancamento_id = $lancamento->id_lancamento;
-                    } else{
+                    } else {
                         $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
                         return $this->redirect(['action' => 'add']);
                     }
@@ -260,7 +260,7 @@ class LancamentosController extends AppController
             } else {
                 if (($this->Lancamentos->save($lancamento))) {
                     $comprovantes->lancamento_id = $lancamento->id_lancamento;
-                } else{
+                } else {
                     $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
                     return $this->redirect(['action' => 'add']);
                 }
@@ -269,15 +269,27 @@ class LancamentosController extends AppController
                 if ($name != null) {
                     if (($this->Comprovantes->save($comprovantes))) {
                         $this->Flash->success(__('Lançamento adicionado com sucesso'));
-                        return $this->redirect(['action' => 'add']);
                     }
                 } else {
-                    $this->Flash->success(__('Lançamento adicionado com sucesso'));
-                    return $this->redirect(['action' => 'add']);
+                    $this->Flash->success('The user has been saved', [
+                        'key' => 'positive',
+                        'clear' => true,
+                        'params' => [
+                            'name' => 'otacilio',
+                            'email' => '$user->email'
+                        ]
+                    ]);
+                    return $this->redirect(['action' => 'add', 'confirm' => 'Are you sure you want to delete the image?']);
                 }
             } else {
-                $this->Flash->success(__('Lançamento adicionado com sucesso'));
-                return $this->redirect(['action' => 'add']);
+                $this->Flash->success('The user has been saved', [
+                    'clear' => true,
+                    'params' => [
+                        'name' => 'otacilio',
+                        'email' => '$user->email'
+                    ]
+                ]);
+                return $this->redirect(['action' => 'add', 'confirm' => 'Are you sure you want to delete the image?']);
             }
 
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
@@ -340,7 +352,7 @@ class LancamentosController extends AppController
         $grupos = ['PREVISTO', 'REALIZADO'];
         $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos', 'entradas', 'saidas', 'todos'));
     }
-
+  
     public function renovar($id = null)
     {
         $lancamento = $this->Lancamentos->get($id, [
@@ -420,13 +432,13 @@ class LancamentosController extends AppController
         $registros = $this->Caixaregistros->find('all')->where(['lancamento_id' => $id])->toArray();
         $comprovantes = $this->Comprovantes->find('all')->where(['lancamento_id' => $id])->toArray();
         $lancamento = $this->Lancamentos->get($id);
-        if(!empty($registros)  || !empty($comprovantes)){
-            foreach($registros as $registro):
+        if (!empty($registros)  || !empty($comprovantes)) {
+            foreach ($registros as $registro) :
                 if (!$this->Caixaregistros->delete($registro)) {
                     $this->Flash->error(__('O Lançamento não foi deletado, por favor tente novamente.'));
                 }
             endforeach;
-            foreach($comprovantes as $comprovante):
+            foreach ($comprovantes as $comprovante) :
                 if (!$this->Comprovantes->delete($comprovante)) {
                     $this->Flash->error(__('O Lançamento não foi deletado, por favor tente novamente.'));
                 }
