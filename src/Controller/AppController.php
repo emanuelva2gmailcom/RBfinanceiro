@@ -94,11 +94,11 @@ class AppController extends Controller
             // debug('aaa');exit;
             switch ($periodo) {
                 case 'mes':
-                    array_push($resposta, $h->i18nFormat('MM/yyyy'));
+                    array_push($resposta, $h->i18nFormat('MMM/yyyy'));
                 break;
 
                 case 'dia':
-                    array_push($resposta, $h->i18nFormat('dd/MM/yyyy'));
+                    array_push($resposta, $h->i18nFormat('dd/MMM/yyyy'));
                 break;
 
                 case 'ano':
