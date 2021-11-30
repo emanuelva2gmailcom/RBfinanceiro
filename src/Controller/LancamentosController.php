@@ -340,27 +340,19 @@ class LancamentosController extends AppController
 
     public function renovar($id = null)
     {
+        $this->loadModel('Comprovantes');
         $lancamento = $this->Lancamentos->get($id, [
             'contain' => [],
         ]);
-        $this->loadModel('Comprovantes');
+        $renovado = $this->Lancamentos->newEmptyEntity();
         $comprovantes = $this->paginate($this->Comprovantes);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $lancamento2 = $this->Lancamentos->newEmptyEntity();
-            $lancamento2->tipo = $lancamento->tipo;
-            $lancamento2->descricao = $this->request->getData()['descricao'];
-            $lancamento2->valor = $this->request->getData()['valor'];
-            $lancamento2->data_emissao = $lancamento->data_emissao;
-            $lancamento2->data_baixa = $lancamento->data_baixa;
-            $lancamento2->data_vencimento = $this->request->getData()['data_vencimento'];
-            $lancamento2->created = $lancamento->created;
-            $lancamento2->modified = $lancamento->modified;
-            $lancamento2->subconta_id = $lancamento->subconta_id;
-            $lancamento2->fornecedor_id = $lancamento->fornecedor_id;
-            $lancamento2->cliente_id = $lancamento->cliente_id;
-            $lancamento2->lancamento_id = $lancamento->id_lancamento;
+            $lancamento = array_merge($lancamento->toArray(), $this->request->getData());
+            $this->Lancamentos->patchEntity($renovado, $lancamento);
 
-            if ($this->Lancamentos->save($lancamento2)) {
+            $renovado->lancamento_id = $lancamento['id_lancamento'];
+
+            if ($this->Lancamentos->save($renovado)) {
                 $this->Flash->success(__('Lançamento editado com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -370,8 +362,7 @@ class LancamentosController extends AppController
         $subcontas = $this->Lancamentos->Subcontas->find('list', ['limit' => 200]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
-        $lancamentos = $this->Lancamentos->find('list', ['limit' => 200]);
-        $this->set(compact('lancamento', 'subcontas', 'fornecedores', 'clientes', 'lancamentos'));
+        $this->set(compact('renovado', 'subcontas', 'fornecedores', 'clientes', 'lancamento'));
     }
 
     /**

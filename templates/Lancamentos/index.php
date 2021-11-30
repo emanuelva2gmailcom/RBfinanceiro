@@ -53,14 +53,14 @@
                         <td><?= h('R$ ' . $lancamento->valor) ?></td>
                         <td><?= h($lancamento->parcela . '° Parcela') ?></td>
                         <td><?= h($lancamento->descricao) ?></td>
-                        <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-                        <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                        <td><?= h($lancamento->data_emissao) ?></td>
+                        <td><?= h($lancamento->data_competencia) ?></td>
                         <?php if (empty($lancamento->data_baixa)) { ?>
                             <td><?= h($lancamento->data_baixa) ?></td>
                         <?php } else { ?>
                             <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
                         <?php } ?>
-                        <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                        <td><?= h($lancamento->data_vencimento) ?></td>
                         <td class="tdINDEX"><?= $lancamento->has('subconta') ? $this->Html->link($lancamento->subconta->subconta, ['controller' => 'Subcontas', 'action' => 'view', $lancamento->subconta->id_subconta]) : '' ?></td>
                         <td class="tdINDEX"><?= $lancamento->has('fornecedore') ? $this->Html->link($lancamento->fornecedore->nome, ['controller' => 'Fornecedores', 'action' => 'view', $lancamento->fornecedore->id_fornecedor]) : '' ?></td>
                         <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->nome, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->id_cliente]) : '' ?></td>
@@ -69,7 +69,7 @@
                                 <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_baixa == null)) { ?>
                                     <?= $this->Html->link(__('Dar baixa'), ['controller' => 'Caixaregistros', 'action' => 'darbaixa', $lancamento->id_lancamento], ['class' => 'vis btn btn-xs ']) ?>
                                 <?php } ?>
-                                <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC') < $now) && ($lancamento->data_baixa == null)) { ?>
+                                <?php if (($lancamento->tipo == "PREVISTO") && ($lancamento->data_vencimento < $now) && ($lancamento->data_baixa == null)) { ?>
                                     <?= $this->Html->link(__('Renovar'), ['controller' => 'Lancamentos', 'action' => 'renovar', $lancamento->id_lancamento], ['class' => 'edi btn btn-xs ']) ?>
                                 <?php } ?>
                                 <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $lancamento->id_lancamento], ['class' => 'vis btn btn-xs', 'escape' => false]) ?>

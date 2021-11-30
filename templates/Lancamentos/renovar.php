@@ -12,11 +12,11 @@
 
   <div class="cardADD card card-danger m-5">
     <div class="cardbodyADD card-body">
-    <?= $this->Form->create($lancamento) ?>
+    <?= $this->Form->create($renovado) ?>
 
-        <?= $this->Form->control('valor', ['label' => 'Valor'], ['class' => 'form-control']); ?>
-        <?= $this->Form->control('descricao', ['label' => 'Descrição'], ['class' => 'form-control']); ?>
-        <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento'], ['class' => 'form-control']); ?>
+        <?= $this->Form->control('valor', ['label' => 'Valor', 'value' => $lancamento->valor], ['class' => 'form-control']); ?>
+        <?= $this->Form->control('descricao', ['label' => 'Descrição', 'value' => $lancamento->descricao], ['class' => 'form-control']); ?>
+        <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento', 'value' => $lancamento->data_vencimento->i18nFormat('dd-MM-yyyy')], ['class' => 'form-control']); ?>
 
     </div>
 
