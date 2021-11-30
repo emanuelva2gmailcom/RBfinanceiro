@@ -85,4 +85,27 @@ class AppController extends Controller
         }
         return $resposta;
     }
+
+    public function formatterheader($header, $periodo)
+    {
+        $resposta = [];
+        foreach($header as $h){
+            $h = new FrozenTime($h, 'UTC');
+            // debug('aaa');exit;
+            switch ($periodo) {
+                case 'mes':
+                    array_push($resposta, $h->i18nFormat('MM/yyyy'));
+                break;
+
+                case 'dia':
+                    array_push($resposta, $h->i18nFormat('dd/MM/yyyy'));
+                break;
+
+                case 'ano':
+                    array_push($resposta, $h->i18nFormat('yyyy'));
+                break;
+            }
+        }
+        return $resposta;
+    }
 }

@@ -61,9 +61,6 @@ class LancamentosController extends AppController
 
         return $totals;
     }
-    public function teste()
-    {
-    }
     public function getTablePainel()
     {
         $renovados = $this->getrenovado();
