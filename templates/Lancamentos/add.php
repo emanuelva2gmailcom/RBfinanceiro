@@ -220,10 +220,9 @@
     // FUNÇÂO AUXILIAR
     function auxiliar() {
         var tipo = $('.tipo').val();
-        var Parcela = $('#parcela').val();
         var Valor = $('#valor').val();
 
-        if ((Parcela != '') && (Valor != '') && ($tipo == 'PREVISTO' || ($tipo == 'REALIZADO' && caixa == true))) {
+        if ((Valor != '') && ($tipo == 'PREVISTO' || ($tipo == 'REALIZADO' && caixa == true))) {
             $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
         } else {
             $('#Card1-Proximo').removeAttr('onclick')
@@ -233,7 +232,7 @@
     // >>>>>>>>>>Campos VALOR e PARCELA<<<<<<<<<<<<<<<<<<
 
     $('#Card1-Proximo').click(function() {
-        var inputs = [$('#valor').val(), $('#parcela').val()];
+        var inputs = [$('#valor').val()];
         inputs.forEach(function(input, index) {
             if (input == "") {
                 $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
@@ -247,12 +246,6 @@
     $('#valor').keyup(function() {
         if (this.value.length >= 1) {
             $('.Campo-Obrigatorio0').text(' ');
-        }
-    });
-    $('#parcela').keyup(function() {
-        if (this.value.length >= 1) {
-            $('.Campo-Obrigatorio1').text(' ');
-
         }
     });
 

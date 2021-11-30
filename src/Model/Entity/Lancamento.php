@@ -21,8 +21,8 @@ use Cake\ORM\Entity;
  * @property int|null $fornecedor_id
  * @property int|null $cliente_id
  * @property int|null $lancamento_id
- * @property int|null $parcela
  * @property \Cake\I18n\FrozenDate|null $data_baixa
+ * @property int|null $parcela
  *
  * @property \App\Model\Entity\Subconta $subconta
  * @property \App\Model\Entity\Fornecedore $fornecedore
@@ -30,7 +30,6 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Lancamento[] $lancamentos
  * @property \App\Model\Entity\Caixaregistro[] $caixaregistros
  * @property \App\Model\Entity\Comprovante[] $comprovantes
- * @property \App\Model\Entity\Subgrupo $subgrupo
  * @property \App\Model\Entity\Notification[] $notifications
  */
 class Lancamento extends Entity
@@ -57,15 +56,14 @@ class Lancamento extends Entity
         'fornecedor_id' => true,
         'cliente_id' => true,
         'lancamento_id' => true,
-        'parcela' => true,
         'data_baixa' => true,
+        'parcela' => true,
         'subconta' => true,
         'fornecedore' => true,
         'cliente' => true,
         'lancamentos' => true,
         'caixaregistros' => true,
         'comprovantes' => true,
-        'subgrupo' => true,
         'notifications' => true,
     ];
 }

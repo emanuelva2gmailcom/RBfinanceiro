@@ -117,12 +117,12 @@ class LancamentosTable extends Table
             ->allowEmptyDate('data_competencia');
 
         $validator
-            ->integer('parcela')
-            ->allowEmptyString('parcela');
-
-        $validator
             ->date('data_baixa')
             ->allowEmptyDate('data_baixa');
+
+        $validator
+            ->integer('parcela')
+            ->allowEmptyString('parcela');
 
         return $validator;
     }
