@@ -48,11 +48,11 @@
 
             <div class="card-deck">
             <div class="row">
-              <div class="col-md-12 col-lg-6 col-xl-4">
+              <div class="col-md-8 col-lg-6 col-xl-3">
                 <div class="cardHOME card mb-2">
                 <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-100 w-100">
-                        <?= $this->Html->image('cdN.png', ['class' => 'indexHOMEfc']) ?>
+                        <?= $this->Html->image('fluxocaixa.png', ['class' => 'indexHOMEfc']) ?>
                         <h5 class="cardtitleHOME card-title">Fluxo de Caixa</h5>
                         <p class="cardtextHOME card-text pb-2 pt-1">Aqui você visualiza os registros das entradas e saídas da empresa</p>
                         <a href="/relatorios/fluxodecaixa"> <p class="linkHOME"> Visualizar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
@@ -64,11 +64,11 @@
                 </div> -->
                 </div>
               </div>
-              <div class="col-md-12 col-lg-6 col-xl-4">
+              <div class="col-md-8 col-lg-6 col-xl-3">
               <div class="cardHOME card mb-2 ">
               <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-100 w-100">
-                        <?= $this->Html->image('cgN.jpg', ['class' => 'indexHOME']) ?>
+                        <?= $this->Html->image('caixagerencial.jpg', ['class' => 'indexHOME']) ?>
                         <h5 class="cardtitleHOME card-title">Caixa Gerencial</h5>
                         <p class="cardtextHOME card-text pb-2 pt-1">Aqui você verifica o controle de seu fluxo de caixa</p>
                         <a href="/relatorios/gerencial"> <p class="linkHOME"> Verificar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
@@ -80,11 +80,11 @@
                 </div> -->
                 </div>
               </div>
-              <div class="col-md-12 col-lg-6 col-xl-4">
+              <div class="col-md-8 col-lg-6 col-xl-3">
               <div class="cardHOME card mb-2 ">
               <div class="cardheaderHOME card-header bg-white">
                     <div class="m-auto h-100 w-100">
-                        <?= $this->Html->image('fcN.jpg', ['class' => 'indexHOME']) ?>
+                        <?= $this->Html->image('caixadiario.jpg', ['class' => 'indexHOME']) ?>
                         <h5 class="cardtitleHOME card-title">Caixa Diário</h5>
                         <p class="cardtextHOME card-text pb-2 pt-1">Aqui você irá direto para o acompanhamento diário das entradas e saídas de acordo com sua abertura de atividades até seu fechamento</p>
                         <a href="/relatorios/caixadiario"> <p class="linkHOME"> Acompanhar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
@@ -96,6 +96,22 @@
                 </div> -->
                 </div>
           </div>
+          <div class="col-md-8 col-lg-6 col-xl-3">
+              <div class="cardHOME card mb-2 ">
+              <div class="cardheaderHOME card-header bg-white">
+                    <div class="m-auto h-100 w-100">
+                        <?= $this->Html->image('dre.png', ['class' => 'indexHOMEdre']) ?>
+                        <h5 class="cardtitleHOME card-title">DRE</h5>
+                        <p class="cardtextHOME card-text pb-2 pt-1">Aqui você observa as operações de sua empresa em determinado período e o seu resultado apurado, avaliado em lucro ou prejuízo</p>
+                        <a href="/relatorios/dre"> <p class="linkHOME"> Observar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
+                    </div>
+                </div>
+           <!-- <div class="cardbodyHOME card-body d-flex flex-column justify-content-end">
+                </div>
+                <div class="cardfooterHOME card-footer">
+                </div> -->
+                </div>
+              </div>
         </div>
             </div>
                 <!-- <ul class="row nav nav-pills">
