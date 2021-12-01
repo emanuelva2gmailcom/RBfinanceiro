@@ -169,7 +169,15 @@ class LancamentosController extends AppController
         $renovados = $this->getrenovado();
 
         $lancamentos = $this->paginate($this->Lancamentos);
-        $lancamentos = $this->Lancamentos->find('all', ['conditions' => [$renovados['simple']], 'contain' => ['Subcontas', 'Fornecedores', 'Clientes']]);
+        $lancamentos = $this->Lancamentos->find('list', ['conditions' => [$renovados['simple']], 'contain' => ['Subcontas', 'Fornecedores', 'Clientes'],
+        'valueField' => function($d){
+            $d->data_vencimento !== null ? $d->data_vencimento = $d->data_vencimento->i18nFormat('dd/MM/yyyy') : '';
+            $d->data_emissao !== null ? $d->data_emissao = $d->data_emissao->i18nFormat('dd/MM/yyyy') : '';
+            $d->data_baixa !== null ? $d->data_baixa = $d->data_baixa->i18nFormat('dd/MM/yyyy') : '';
+            $d->data_competencia !== null ? $d->data_competencia = $d->data_competencia->i18nFormat('dd/MM/yyyy') : '';
+            return $d;
+        }]);
+        // debug($lancamentos->toArray());exit;
         $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
 
         $this->set(compact('lancamentos', 'now'));
@@ -349,7 +357,7 @@ class LancamentosController extends AppController
         $grupos = ['PREVISTO', 'REALIZADO'];
         $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos', 'entradas', 'saidas', 'todos'));
     }
-  
+
     public function renovar($id = null)
     {
         $this->loadModel('Comprovantes');
@@ -385,7 +393,7 @@ class LancamentosController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function teste(){
-        
+
     }
     public function edit($id = null)
     {

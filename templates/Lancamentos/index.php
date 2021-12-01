@@ -51,14 +51,14 @@
                     <tr class="ops">
                         <td><?= h($lancamento->tipo) ?></td>
                         <td><?= h('R$ ' . $lancamento->valor) ?></td>
-                        <td><?= h($lancamento->parcela . '° Parcela') ?></td>
+                        <td><?= h($lancamento->parcela !== null ? $lancamento->parcela . '° Parcela' : 'Nenhuma') ?></td>
                         <td><?= h($lancamento->descricao) ?></td>
                         <td><?= h($lancamento->data_emissao) ?></td>
                         <td><?= h($lancamento->data_competencia) ?></td>
                         <?php if (empty($lancamento->data_baixa)) { ?>
                             <td><?= h($lancamento->data_baixa) ?></td>
                         <?php } else { ?>
-                            <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                            <td><?= h($lancamento->data_baixa) ?></td>
                         <?php } ?>
                         <td><?= h($lancamento->data_vencimento) ?></td>
                         <td class="tdINDEX"><?= $lancamento->has('subconta') ? $this->Html->link($lancamento->subconta->subconta, ['controller' => 'Subcontas', 'action' => 'view', $lancamento->subconta->id_subconta]) : '' ?></td>
