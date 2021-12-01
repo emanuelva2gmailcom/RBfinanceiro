@@ -42,6 +42,8 @@ class Google_Service_Compute_Router extends Google_Collection
   {
     $this->bgp = $bgp;
   }
+
+
   /**
    * @return Google_Service_Compute_RouterBgp
    */

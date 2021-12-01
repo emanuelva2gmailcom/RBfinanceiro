@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Routes configuration.
  *
@@ -23,6 +24,7 @@
 
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
+use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
 /*
  * The default class to use for all routes
@@ -41,6 +43,7 @@ use Cake\Routing\RouteBuilder;
  * inconsistently cased URLs when used with `:plugin`, `:controller` and
  * `:action` markers.
  */
+
 /** @var \Cake\Routing\RouteBuilder $routes */
 $routes->setRouteClass(DashedRoute::class);
 $routes->scope('/', function (RouteBuilder $builder) {
@@ -71,6 +74,10 @@ $routes->scope('/', function (RouteBuilder $builder) {
      */
     $builder->connect('/pages/*', 'Pages::display');
 
+    $builder->connect('/Lancamentos/add', [
+        'controller' => 'Lancamentos',
+        'action' => 'add'
+    ]);
     /*
      * Connect catchall routes for all controllers.
      *
@@ -84,8 +91,11 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * You can remove these routes once you've connected the
      * routes you want in your application.
      */
+    $builder->setExtensions(['json', 'xml']);
     $builder->fallbacks();
 });
+
+    // Prior to 3.5.0 use `extensions()`
 
 /*
  * If you need a different set of middleware or none at all,

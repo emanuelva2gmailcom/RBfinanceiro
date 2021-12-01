@@ -9,6 +9,7 @@ use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\Event\EventInterface;
 use Cake\Core\Configure;
+use Cake\Event\Event;
 
 /**
  * Lancamentos Controller
@@ -18,16 +19,22 @@ use Cake\Core\Configure;
  */
 class LancamentosController extends AppController
 {
+    
+    // var $name = 'Widgets';
+    // var $helpers = array('Html', 'Ajax');
+    // var $components = array('RequestHandler');
     public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('FormProtection');
+        $this->loadComponent('RequestHandler');
     }
 
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface  $event)
     {
         parent::beforeFilter($event);
 
+        $this->Auth->allow('add');
         $this->FormProtection->setConfig('unlockedActions', ['post', 'getTablePainel']);
     }
     /**
@@ -349,7 +356,7 @@ class LancamentosController extends AppController
         $grupos = ['PREVISTO', 'REALIZADO'];
         $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos', 'entradas', 'saidas', 'todos'));
     }
-  
+
     public function renovar($id = null)
     {
         $this->loadModel('Comprovantes');
@@ -384,8 +391,8 @@ class LancamentosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function teste(){
-        
+    public function teste()
+    {
     }
     public function edit($id = null)
     {
