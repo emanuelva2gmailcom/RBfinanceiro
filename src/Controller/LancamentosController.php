@@ -9,6 +9,7 @@ use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\Event\EventInterface;
 use Cake\Core\Configure;
+use Cake\Event\Event;
 
 /**
  * Lancamentos Controller
@@ -18,17 +19,23 @@ use Cake\Core\Configure;
  */
 class LancamentosController extends AppController
 {
+
+    // var $name = 'Widgets';
+    // var $helpers = array('Html', 'Ajax');
+    // var $components = array('RequestHandler');
     public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('FormProtection');
+        $this->loadComponent('RequestHandler');
     }
 
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface  $event)
     {
         parent::beforeFilter($event);
 
-        $this->FormProtection->setConfig('unlockedActions', ['post', 'getTablePainel']);
+        $this->Auth->allow('add');
+        $this->FormProtection->setConfig('unlockedActions', ['post', 'getTablePainel','add']);
     }
     /**
      * Index method

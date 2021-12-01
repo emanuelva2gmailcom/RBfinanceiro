@@ -271,12 +271,6 @@
 
                 },
                 {
-                    extend: 'collection',
-                    text: 'Mostrar Colunas',
-                    buttons: ['columnsVisibility'],
-                    visibility: true
-                },
-                {
                     text: 'Calcular',
                     action: function() {
                         var Tabela = document.getElementById("example1");
@@ -314,7 +308,7 @@
 
                         for (var i = 0; i < Trs.length; i++) {
                             valor.push(Trs[i]['children'][1]['outerText'].replace('R$', ''))
-                            Head.push([month[Trs[i]['children'][7]['outerText'].split('-')[1].replace(/^0+/, '')] + ' / ' + Trs[i]['children'][7]['outerText'].split('-')[2]] + '  ')
+                            Head.push([month[Trs[i]['children'][7]['outerText'].split('/')[0].replace(/^0+/, '')] + ' / ' + Trs[i]['children'][7]['outerText'].split('/')[2]] + '  ')
                         }
 
 
@@ -371,7 +365,13 @@
                 },
                 {
                     extend: 'collection',
-                    text: 'Tipo',
+                    text: 'Filtragem de Colunas',
+                    buttons: ['columnsVisibility'],
+                    visibility: true
+                },
+                {
+                    extend: 'collection',
+                    text: 'Filtragem do Tipo',
                     buttons: [{
                             text: 'REALIZADO',
                             action: function() {
