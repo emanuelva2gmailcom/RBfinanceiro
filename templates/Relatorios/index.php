@@ -102,7 +102,7 @@
                     <div class="m-auto h-100 w-100">
                         <?= $this->Html->image('dre.png', ['class' => 'indexHOMEdre']) ?>
                         <h5 class="cardtitleHOME card-title">DRE</h5>
-                        <p class="cardtextHOME card-text pb-2 pt-1">Aqui você observa as operações de sua empresa em determinado período e o seu resultado apurado, avaliado em lucro ou prejuízo</p>
+                        <p class="cardtextHOME card-text pb-2 pt-1">Aqui você observa as operações da empresa em determinado período e o seu resultado apurado, avaliado em lucro ou prejuízo</p>
                         <a href="/relatorios/dre"> <p class="linkHOME"> Observar <i class="linkHOME fas fa-arrow-circle-right"></i></p></a>
                     </div>
                 </div>
