@@ -172,6 +172,22 @@
 
     </div>
 </div>
+<div class="modal fade" id="alertas" tabindex="-1" role="dialog" aria-labelledby="alertasLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php
 // echo $this->Html->link(
 //     "Del",
@@ -183,81 +199,51 @@
 
 <script>
     $('document').ready(function() {
-
-        // Al clicar ek submit
-        $('#testee').submit(function(event) {
-
-            // metes en una variable los datos de formulario,  ojo tiene que estar igual de como los llamaste para hacer el CRUD en cakephp
-            var formData = JSON.stringify({
-                'tipo': $('.tipo').val()
-            })
-            console.log(formData)
-            // process the form
+        // evento de "submit"
+        $("#testee ").click(function(e) {
+            // parar o envio para que possamos faze-lo manualmente.
+            e.preventDefault();
+            // captura o formulário
+            var form = $('.tipo');
+            console.log('tesatata')
+            // cria um FormData {Object}
+            var data = new FormData(form);
+            // processar
             $.ajax({
-                    type: 'POST', // define el tipo de metodo
-                    url: '/Lancamentos/add', // la url de tru controlador y acción
-                    data: formData, // el objeto
-                    dataType: 'json', // de tipo json
-                    encode: true
-                })
-                // usas una promesa de callback
-                .done(function(data) {
+                type: "POST",
+                url: "/Lancamentos/add", //acerte o caminho para seu script php
+                data: data,
+                processData: false, // impedir que o jQuery tranforma a "data" em querystring
+                contentType: false, // desabilitar o cabeçalho "Content-Type"
+                //cache: false, // desabilitar o "cache"
+                // manipular o sucesso da requisição
+            }).done(function(retorno) {
+                console.log(retorno);
+                retorno = parseInt(retorno);
 
-                    // y miras q se mandan bien los datos
-                    console.log(data);
 
-                    //
-                });
+                if (retorno == 1) {
+                    //alert("Formulário enviado com sucesso");
+                    alert('teste')
+                    $("#alertas").modal('show');
+                    console.log();
+                    $(':input', '#caixa')
+                        .not(':button, :submit, :reset, :hidden')
+                        .val('')
+                        .removeAttr('checked')
+                        .removeAttr('selected');
+                } else {
+                    //alert("erro ao enviar formulário");
+                    $("#myModalError").modal('show');
 
-            event.preventDefault();
+
+                }
+
+
+            });
         });
     });
 
-    // var dados = jQuery(this).serialize();
-    // $.ajax({
-    //     url: 'Lancamentos/add',
-    //     method: 'POST',
-    //     data: {
-    //         dados: dados,
-    //     },
-    //     success: function(data) {
-    //         $('#form').trigger("reset")
-    //     }
-
-    // })
-    // $("#teste").submit(function() {
-    //     var dados = jQuery(this).serialize();
-    //     $.ajax({
-    //         url: "/Lancamentos/adds",
-    //         data: {
-    //             dados: dados,
-    //         },
-    //         dataType: "json",
-    //         type: "POST",
-    //         success: function(data) {
-    //             // handler
-    //         }
-    //     });
-    //     event.preventDefault()
-    // });
-
-    // $('document').ready(function() {
-    //     event.preventDefault()
-    //     $(".btn-secondary").on('click', function() {
-    //         $.ajax({
-    //             url: 'vendas.php',
-    //             cache: false,
-    //             type: "POST",
-    //             success: function() {
-
-    //             }
-    //         })
-    //     });
-    // });
-    // $("#testee").click(function() {
-    //     $("#ajax_button").html("<a href='/admin/posts/delete/" + $(this).attr("data-id") + "' class='btn btn-danger btn-flat btn-lg'>Confirmar</a>");
-    //     $("#trigger").click();
-    // });
     // $("#testee").on('submit', function() {
     //     event.preventDefault()
     //     $("#ajax_button").html("<a href='#" + "' class='btn btn-danger btn-flat btn-lg'>Confirmar</a>");

@@ -35,7 +35,7 @@ class LancamentosController extends AppController
         parent::beforeFilter($event);
 
         $this->Auth->allow('add');
-        $this->FormProtection->setConfig('unlockedActions', ['post', 'getTablePainel']);
+        $this->FormProtection->setConfig('unlockedActions', ['post', 'getTablePainel','add']);
     }
     /**
      * Index method
