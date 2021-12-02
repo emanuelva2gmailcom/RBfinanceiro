@@ -20,7 +20,14 @@ class CaixasController extends AppController
      */
     public function index()
     {
-        $caixas = $this->paginate($this->Caixas);
+        $caixas = $this->Caixas->find('list', [
+            'valueField' => function($d){
+                $d->data_caixa !== null ? $d->data_caixa = $d->data_caixa->i18nFormat('dd/MM/yyyy') : '';
+                $d->created !== null ? $d->created = $d->created->i18nFormat('dd/MM/yyyy').' às '.$d->created->i18nFormat('hh:ss') : '';
+                $d->modified !== null ? $d->modified = $d->modified->i18nFormat('dd/MM/yyyy').' às '.$d->modified->i18nFormat('hh:ss') : '';
+                return $d;
+            }
+        ]);
 
         $this->set(compact('caixas'));
     }
@@ -34,9 +41,17 @@ class CaixasController extends AppController
      */
     public function view($id = null)
     {
-        $caixa = $this->Caixas->get($id, [
+        $caixa = $this->Caixas->find('list', [
             'contain' => ['Caixaregistros'],
-        ]);
+            'conditions' => ['id_caixa' => $id],
+            'valueField' => function($d){
+                $d->data_caixa !== null ? $d->data_caixa = $d->data_caixa->i18nFormat('dd/MM/yyyy') : '';
+                $d->created !== null ? $d->created = $d->created->i18nFormat('dd/MM/yyyy').' às '.$d->created->i18nFormat('hh:ss') : '';
+                $d->modified !== null ? $d->modified = $d->modified->i18nFormat('dd/MM/yyyy').' às '.$d->modified->i18nFormat('hh:ss') : '';
+                return $d;
+            }
+        ])->first();
+        // debug($caixa->toArray());exit;
 
         $this->set(compact('caixa'));
     }

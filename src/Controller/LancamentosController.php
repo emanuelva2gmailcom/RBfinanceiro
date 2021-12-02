@@ -98,8 +98,15 @@ class LancamentosController extends AppController
             $request[1] = $request[1]->i18nFormat('yyyy-MM');
             $obj = [];
             $total = 0;
-            $this->loadModel('Subcontas');
-            $subcontas = $this->Subcontas->find('all', ['contain' => ['Contas' => ['Subgrupos' => ['Grupos']]]]);
+            $subcontas = $this->Lancamentos->find(
+                'list',
+                [
+                    'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => ['Grupos']]]],
+                    'valueField' => function($d) {
+                        return $d->subconta;
+                    }
+                ]
+            );
             $lancamentos = $this->Lancamentos->find('all', [
                 'contain' => ['Subcontas', 'Fornecedores', 'Clientes'],
                 'conditions' => [$query . $renovados['and']]
@@ -133,37 +140,44 @@ class LancamentosController extends AppController
         } else if ($this->request->is('get')) {
             $obj = [];
             $total = 0;
-            $this->loadModel('Subcontas');
-            $subcontas = $this->Subcontas->find('all', ['contain' => ['Contas' => ['Subgrupos' => ['Grupos']]]]);
+            $subcontas = $this->Lancamentos->find(
+                'list',
+                [
+                    'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => ['Grupos']]]],
+                    'valueField' => function($d) {
+                        return $d->subconta;
+                    }
+                ]
+            );
             $lancamentos = $this->Lancamentos->find('all', [
                 'contain' => ['Subcontas', 'Fornecedores', 'Clientes'],
-                'conditions' => [$query . $renovados['and']]
+                'conditions' => [$query, $renovados['simple'], '']
             ]);
             foreach ($subcontas as $c) :
                 $valor = 0;
                 foreach ($lancamentos as $l) :
-                    switch ($c->conta->subgrupo->grupo->grupo) {
-                        case 'entrada':
-                            $valor += $l->valor;
-                            $totals['entrada'] += $l->valor;
-                            $totals['total'] += $l->valor;
-                            break;
+                    if($l->subconta->subconta == $c->subconta) {
+                        switch ($c->conta->subgrupo->grupo->grupo) {
+                            case 'entrada':
+                                $valor += $l->valor;
+                                $totals['entrada'] += $l->valor;
+                                $totals['total'] += $l->valor;
+                                break;
 
-                        case 'saida':
-                            $valor -= $l->valor;
-                            $totals['saida'] -= $l->valor;
-                            $totals['total'] -= $l->valor;
-                            break;
+                            case 'saida':
+                                $valor -= $l->valor;
+                                $totals['saida'] -= $l->valor;
+                                $totals['total'] -= $l->valor;
+                                break;
+                        }
                     }
                 endforeach;
                 $c->conta->subgrupo->grupo->grupo == 'entrada' ? $total += $valor : $total += $valor;
                 array_push($obj, [$c->conta->subgrupo->grupo->grupo == 'entrada' ? 'recebimento' : 'pagamento', $c->subconta, $valor]);
             endforeach;
-            // debug($obj);
-            // exit;
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([$obj, $total, $totals]));
-            return $this->response;
+            return $this->response; 
         }
     }
 
@@ -177,7 +191,8 @@ class LancamentosController extends AppController
 
         $lancamentos = $this->paginate($this->Lancamentos);
         $lancamentos = $this->Lancamentos->find('list', [
-            'conditions' => [$renovados['simple']], 'contain' => ['Subcontas', 'Fornecedores', 'Clientes'],
+            'conditions' => [$renovados['simple']],
+            'contain' => ['Subcontas', 'Fornecedores', 'Clientes'],
             'valueField' => function ($d) {
                 $d->data_vencimento !== null ? $d->data_vencimento = $d->data_vencimento->i18nFormat('dd/MM/yyyy') : '';
                 $d->data_emissao !== null ? $d->data_emissao = $d->data_emissao->i18nFormat('dd/MM/yyyy') : '';
@@ -186,7 +201,6 @@ class LancamentosController extends AppController
                 return $d;
             }
         ]);
-        // debug($lancamentos->toArray());exit;
         $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
 
         $this->set(compact('lancamentos', 'now'));
@@ -202,9 +216,19 @@ class LancamentosController extends AppController
      */
     public function view($id = null)
     {
-        $lancamento = $this->Lancamentos->get($id, [
+        $lancamento = $this->Lancamentos->find('list', [
+            'conditions' => ['id_lancamento' => $id],
             'contain' => ['Subcontas', 'Fornecedores', 'Clientes', 'Lancamentos', 'Caixaregistros', 'Comprovantes'],
-        ]);
+            'valueField' => function ($d) {
+                $d->data_vencimento !== null ? $d->data_vencimento = $d->data_vencimento->i18nFormat('dd/MM/yyyy') : '';
+                $d->data_emissao !== null ? $d->data_emissao = $d->data_emissao->i18nFormat('dd/MM/yyyy') : '';
+                $d->data_baixa !== null ? $d->data_baixa = $d->data_baixa->i18nFormat('dd/MM/yyyy') : '';
+                $d->data_competencia !== null ? $d->data_competencia = $d->data_competencia->i18nFormat('dd/MM/yyyy') : '';
+                $d->created !== null ? $d->created = $d->created->i18nFormat('dd/MM/yyyy').' às '.$d->created->i18nFormat('hh:ss') : '';
+                $d->modified !== null ? $d->modified = $d->modified->i18nFormat('dd/MM/yyyy').' às '.$d->modified->i18nFormat('hh:ss') : '';
+                return $d;
+            }
+        ])->first();
         if ($lancamento->lancamento_id != null) {
 
             $lancamento->lancamentos = $this->Lancamentos->get($lancamento->lancamento_id, [

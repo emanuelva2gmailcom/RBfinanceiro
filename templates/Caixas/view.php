@@ -29,11 +29,11 @@ $this->assign('title', __('Caixas')); ?>
         </tr>
         <tr>
           <th><?= __('Criado') ?></th>
-          <td><?= h($caixa->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+          <td><?= h($caixa->created) ?></td>
         </tr>
         <tr>
           <th><?= __('Modificado') ?></th>
-          <td><?= h($caixa->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+          <td><?= h($caixa->modified) ?></td>
         </tr>
         <tr>
           <th><?= __('Aberto') ?></th>

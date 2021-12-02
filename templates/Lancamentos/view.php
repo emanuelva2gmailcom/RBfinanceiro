@@ -35,7 +35,7 @@
             <th><?= __('Cliente') ?></th>
             <td class="tdINDEX"><?= $lancamento->has('cliente') ? $this->Html->link($lancamento->cliente->cliente, ['controller' => 'Clientes', 'action' => 'view', $lancamento->cliente->cliente]) : '' ?></td>
           </tr>
-  
+
           <tr>
             <th><?= __('Lançamento') ?></th>
             <td><?= $this->Number->format($lancamento->id_lancamento) ?></td>
@@ -50,31 +50,31 @@
           </tr>
           <tr>
             <th><?= __('Data de Emissão') ?></th>
-            <td><?= h($lancamento->data_emissao->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamento->data_emissao) ?></td>
           </tr>
           <tr>
             <th><?= __('Data de Baixa') ?></th>
             <?php if (empty($lancamento->data_baixa)) { ?>
               <td><?= h($lancamento->data_baixa) ?></td>
             <?php } else { ?>
-              <td><?= h($lancamento->data_baixa->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+              <td><?= h($lancamento->data_baixa) ?></td>
             <?php } ?>
           </tr>
           <tr>
             <th><?= __('Data de Vencimento') ?></th>
-            <td><?= h($lancamento->data_vencimento->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamento->data_vencimento) ?></td>
           </tr>
           <tr>
             <th><?= __('Data de Competência') ?></th>
-            <td><?= h($lancamento->data_competencia->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamento->data_competencia) ?></td>
           </tr>
           <tr>
             <th><?= __('Criado') ?></th>
-            <td><?= h($lancamento->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamento->created) ?></td>
           </tr>
           <tr>
             <th><?= __('Modificado') ?></th>
-            <td><?= h($lancamento->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+            <td><?= h($lancamento->modified) ?></td>
           </tr>
         </table>
       </div>
@@ -197,8 +197,8 @@
                 <td><?= h($comprovantes->nome_arquivo) ?></td>
                 <td><?= h($comprovantes->tipo) ?></td>
                 <td><?= h($comprovantes->lancamento_id) ?></td>
-                <td><?= h($comprovantes->created->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
-                <td><?= h($comprovantes->modified->i18nFormat('dd-MM-yyyy', 'UTC')) ?></td>
+                <td><?= h($comprovantes->created) ?></td>
+                <td><?= h($comprovantes->modified) ?></td>
                 <td class="actions">
                   <?= $this->Html->link(__('Visualizar'), ['controller' => 'Comprovantes', 'action' => 'view', $comprovantes->id_comprovante], ['class' => 'btn vis btn-xs btn-outline-info']) ?>
                   <?= $this->Html->link(__('Editar'), ['controller' => 'Comprovantes', 'action' => 'edit', $comprovantes->id_comprovante], ['class' => 'btn edi btn-xs btn-outline-success']) ?>

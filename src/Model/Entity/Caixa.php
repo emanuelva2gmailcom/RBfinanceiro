@@ -9,10 +9,10 @@ use Cake\ORM\Entity;
  * Caixa Entity
  *
  * @property int $id_caixa
- * @property int|null $data_caixa
  * @property bool|null $is_aberto
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
+ * @property \Cake\I18n\FrozenDate|null $data_caixa
  *
  * @property \App\Model\Entity\Caixaregistro[] $caixaregistros
  */
@@ -28,10 +28,10 @@ class Caixa extends Entity
      * @var array
      */
     protected $_accessible = [
-        'data_caixa' => true,
         'is_aberto' => true,
         'created' => true,
         'modified' => true,
+        'data_caixa' => true,
         'caixaregistros' => true,
     ];
 }

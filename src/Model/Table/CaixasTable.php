@@ -65,12 +65,12 @@ class CaixasTable extends Table
             ->allowEmptyString('id_caixa', null, 'create');
 
         $validator
-            ->integer('data_caixa')
-            ->allowEmptyString('data_caixa');
-
-        $validator
             ->boolean('is_aberto')
             ->allowEmptyString('is_aberto');
+
+        $validator
+            ->date('data_caixa')
+            ->allowEmptyDate('data_caixa');
 
         return $validator;
     }
