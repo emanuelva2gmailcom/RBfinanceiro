@@ -1,6 +1,3 @@
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button> -->
 
 <!-- Modal -->
 <style>
@@ -23,8 +20,8 @@
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"><a href="/Relatorios/index">Cancelar</a></button>
-                <button type="button" class="btn btn-primary"><a href="/Lancamentos/add">Novo Lançamento</a></button>
+                <button type="button" class="btn btn-secondary btn-lg"><a href="/Relatorios/index">Cancelar</a></button>
+                <button type="button" class="btn btn-primary btn-lg"><a href="/Lancamentos/add">Novo Lançamento</a></button>
             </div>
         </div>
     </div>

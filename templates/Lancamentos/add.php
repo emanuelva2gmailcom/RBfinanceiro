@@ -11,6 +11,10 @@
 <?php $this->assign('title', __('Adicionar Lançamento')); ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <?= $this->Html->css('bs-stepper.min.css'); ?>
+<!-- <div>
+    <button type="button" class="btn btn-primary btn-lg btn-block">Relatorio de gestao de caixa</button>
+    <button type="button" class="btn btn-secondary btn-lg btn-block">Relatorio de DRE</button>
+</div> -->
 <?= $this->Html->script('bs-stepper.min.js'); ?>
 <div class="containerADD container p-5">
     <div id="stepper1" class="cardlancADD bs-stepper card">
@@ -131,24 +135,6 @@
             </div>
             <?= $this->Form->end() ?>
         </div>
-        <a data-target="#ConfirmDelete" role="button" data-toggle="modal" id="trigger"></a>
-        <div class="modal fade" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Deletar Notícia</h4>
-                    </div>
-                    <div class="modal-body">
-                        Deseja realmente apagar este registro?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-flat pull-left btn-lg" data-dismiss="modal">Cancelar</button>
-                        <div id="ajax_button"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <script>
             var stepper1Node = document.querySelector('#stepper1')
             var stepper1 = new Stepper(document.querySelector('#stepper1'))
@@ -171,40 +157,99 @@
         </script>
 
     </div>
-</div>
-<div class="modal fade" id="alertas" tabindex="-1" role="dialog" aria-labelledby="alertasLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+
+
+    <!-- <div id="stepper1" class="cardlancADD bs-stepper card">
+        <div class="bsstepperheaderADD bs-stepper-header">
+            <div class="step" data-target="#test-l-1">
+                <button type="button" class="btn step-trigger">
+                    <span class="bs-stepper-circle">1</span>
                 </button>
             </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+            <div class="lineADD line"></div>
+            <div class="step" data-target="#test-l-2">
+                <button type="button" class="btn step-trigger">
+                    <span class="bs-stepper-circle">2</span>
+                </button>
             </div>
         </div>
-    </div>
+        <div class="bssteppercontentADD bs-stepper-content">
+            <?= $this->Form->create($lancamento, ['type' => 'file', 'id' => 'teste']) ?>
+            <div id="test-l-1" class="bssteppercontentContent content">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <?= $this->Form->control('descricao', ['label' => 'Descrição', 'placeholder' => 'Descrição', 'value' => 'descricao'], ['class' => 'form-control']); ?>
+                    </div>
+                    <div class="form-group">
+                        <?= $this->Form->control('valor', ['label' => 'Valor', 'placeholder' => 'Valor', 'value' => 200], ['class' => 'border form-control']); ?>
+                        <span class="Campo-Obrigatorio0"></span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group competencia">
+                            <?= $this->Form->control('data_competencia', ['label' => 'Data de Competência', 'placeholder' => 'Data de Competência', 'value' => '30/11/2021'], ['class' => 'border form-control dataADD']); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <div id="Card1-Proximo" class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
+                </div>
+            </div>
+
+            <div id="test-l-2" class="bssteppercontentContent content">
+                <div class="panel-body">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <?= $this->Form->control('grupo_id', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']); ?>
+                            <span class="Campo-Obrigatorio10"></span>
+                        </div>
+                        <div class="form-group">
+                            <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE']); ?>
+                            <span class="Campo-Obrigatorio11"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <?= $this->Form->control('Comprovante', ['type' => 'file'], ['class' => 'file']); ?>
+                    </div>
+                </div>
+                <div class="footerADD d-flex justify-content-between">
+                    <div>
+                        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'cancelarADD btn']) ?>
+                    </div>
+                    <div>
+                        <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
+                        <?= $this->Form->button(__('Salvar', ['class' => 'btn pull-right'], ['id' => 'bora'])) ?>
+                    </div>
+                </div>
+            </div>
+            <?= $this->Form->end() ?>
+        </div>
+        <script>
+            var stepper1Node = document.querySelector('#stepper1')
+            var stepper1 = new Stepper(document.querySelector('#stepper1'))
+
+            stepper1Node.addEventListener('show.bs-stepper', function(event) {
+                console.warn('show.bs-stepper', event)
+            })
+            stepper1Node.addEventListener('shown.bs-stepper', function(event) {
+                console.warn('shown.bs-stepper', event)
+            })
+
+            var stepper2 = new Stepper(document.querySelector('#stepper2'), {
+                linear: false,
+                animation: true
+            })
+            var stepper3 = new Stepper(document.querySelector('#stepper3'), {
+                animation: true
+            })
+            var stepper4 = new Stepper(document.querySelector('#stepper4'))
+        </script>
+
+    </div> -->
 </div>
-<?php
-// echo $this->Html->link(
-//     "Del",
-//     "#",
-//     array("class" => "btn btn-danger delete-btn btn-flat btn-sm")
-// );
-// 
-?>
+
+
 
 <script>
-  
-
-    // $("#teste").on('submit', function() {
-    //     event.preventDefault()
-    //     $("#ajax_button").html("<a href='#" + "' class='btn btn-danger btn-flat btn-lg'>Confirmar</a>");
-    //     $("#trigger").click();
-    // });
     // $('document').ready(function() {
     //     $('#Card1-Proximo').removeAttr('onclick')
     //     $('#Card2-Proximo').removeAttr('onclick')
