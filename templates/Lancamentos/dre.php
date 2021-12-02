@@ -53,16 +53,64 @@
                  <div class="panel-body">
                      <div class="form-group">
                          <?= $this->Form->control('grupo_id', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']); ?>
-                         <span class="Campo-Obrigatorio10"></span>
+                         <span class="Campo-Obrigatorio0"></span>
                      </div>
-                     <div class="form-group">
+
+                     <div class="form-group select">
+                         <label for="" class="variaveis d-none">Conta</label>
+                         <select name="" class="variaveis form-control d-none" id="subconta-id">
+                             <option>SELECIONE</option>
+                             <?php
+                                foreach ($variaveis as $v => $variavel) :
+                                ?>
+                                 <option value=<?= $v ?>><?= $variavel ?></option>
+                             <?php endforeach; ?>
+                         </select>
+                    
+                     </div>
+                     <div class="form-group select">
+                         <label for="" class="fixos d-none">Conta</label>
+                         <select name="" class="fixos form-control d-none" id="subconta-id">
+                             <option>SELECIONE</option>
+                             <?php
+                                foreach ($fixos as $f => $fixo) :
+                                ?>
+                                 <option value=<?= $f ?>><?= $fixo ?></option>
+                             <?php endforeach; ?>
+                         </select>
+                     </div>
+
+
+                 </div>
+                 <div class="form-group select">
+                     <label for="" class="receitas d-none">Conta</label>
+                     <select name="" class="receitas form-control d-none" id="subconta-id">
+                         <option>SELECIONE</option>
+                         <?php
+                            foreach ($receitas as $r => $receita) :
+                            ?>
+                             <option value=<?= $r ?>><?= $receita ?></option>
+                         <?php endforeach; ?>
+                     </select>
+                 </div>
+                 <div class="form-group select">
+                     <label for="" class="tudo">Conta</label>
+                     <select name="" class="tudo form-control" id="subconta-id">
+                         <option>SELECIONE</option>
+                         <?php
+                            foreach ($subcontas as $s => $subconta) :
+                            ?>
+                             <option value=<?= $s ?>><?= $subconta ?></option>
+                         <?php endforeach; ?>
+                     </select>
+                     <span class="Campo-Obrigatorio1"></span>
+                     <!-- <div class="form-group">
                          <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE']); ?>
-                         <span class="Campo-Obrigatorio11"></span>
-                     </div>
+                         <span class="Campo-Obrigatorio1"></span>
+                     </div> -->
                      <div class="form-group">
                          <?= $this->Form->control('Comprovante', ['type' => 'file'], ['class' => 'file']); ?>
                      </div>
-
                  </div>
                  <div class="footerADD d-flex justify-content-between">
                      <div>
@@ -70,7 +118,7 @@
                      </div>
                      <div>
                          <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
-                         <?= $this->Form->button(__('Salvar', ['class' => 'btn pull-right'], ['id' => 'bora'])) ?>
+                         <?= $this->Form->button(__('Salvar'), ['id' => 'bora']) ?>
                      </div>
                  </div>
              </div>
@@ -91,219 +139,92 @@
                  linear: false,
                  animation: true
              })
-          
          </script>
 
      </div>
  </div>
 
  <script>
-     // $('document').ready(function() {
-     //     $('#Card1-Proximo').removeAttr('onclick')
-     //     $('#Card2-Proximo').removeAttr('onclick')
-     //     $('#Card3-Proximo').removeAttr('onclick')
-     // })
+     $('document').ready(function() {
+         $('#Card1-Proximo').removeAttr('onclick')
+     })
 
+     $('form').submit(function() {
+         var inputs = [$("#grupo-id option:selected").text(), $("#subconta-id option:selected").text()];
+         inputs.forEach(function(input, index) {
+             if (input == "SELECIONE") {
+                 event.preventDefault();
+                 $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
+             } else {
+                 $(this).unbind('submit').submit()
+             }
+         });
+
+     })
+     $('#grupo-id').change(function() {
+         $('.Campo-Obrigatorio0').text(' ');
+         var grupo = $("#grupo-id option:selected").text()
+         if (grupo == 'Gastos Variáveis') {
+             $('.variaveis').removeClass('d-none')
+
+             $('.fixos').addClass('d-none')
+             $('.receitas').addClass('d-none')
+             $('.tudo').addClass('d-none')
+
+         } else if (grupo == 'Gastos Fixos') {
+             $('.fixos').removeClass('d-none')
+
+             $('.variaveis').addClass('d-none')
+             $('.receitas').addClass('d-none')
+             $('.tudo').addClass('d-none')
+         } else if (grupo == 'Receitas') {
+             $('.receitas').removeClass('d-none')
+
+             $('.variaveis').addClass('d-none')
+             $('.fixos').addClass('d-none')
+             $('.tudo').addClass('d-none')
+         } else {
+             $('.tudo').removeClass('d-none')
+
+             $('.variaveis').addClass('d-none')
+             $('.receitas').addClass('d-none')
+             $('.fixos').addClass('d-none')
+         }
+     })
+     $('#subconta-id').change(function() {
+         $('.Campo-Obrigatorio1').text(' ');
+     })
      //---------------- Código de Barramento do Primeiro STEP----------------------
-     // >>>>>>>>>>Campo TIPO<<<<<<<<<<<<<<<<<<
+     // >>>>>>>>>>Campos VALOR <<<<<<<<<<<<<<<<<<
 
-     // $('.tipo').ready(function() {
-     //     $tipo = $('.tipo').val();
-     //     $('#Card1-Proximo').click(function() {
-     //         if ($tipo == '') {
-     //             $('.tipo-span').text('Campo Obrigatório');
-     //         }
-     //     })
-     // })
-     // var caixa = 0
-     // $('.tipo').change(function() {
-     //     $tipo = $('.tipo').val();
-     //     try {
-     //         const response = axios.get('/caixas/getCaixaaberto').then(function(response) {
-     //             if ((response.data !== true) && ($tipo !== 'PREVISTO')) {
-     //                 if ($tipo == '') {
-     //                     $('.tipo-span').text(' ');
-     //                     $('.tipo-span').text('Campo Obrigatório');
-     //                 } else {
-     //                     $('.tipo-span').text('Caixa Fechado');
-     //                     $('#Card1-Proximo').removeAttr('onclick')
-     //                 }
+     //  FUNÇÂO AUXILIAR
+     function auxiliar() {
+         var Valor = $('#valor').val();
+         if (Valor != '') {
+             $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
+         } else {
+             $('#Card1-Proximo').removeAttr('onclick')
+         }
+     }
+     setInterval("auxiliar()", 1000)
+     $('document').load(function() {
+         auxiliar()
+     })
 
-     //             } else {
-     //                 $('.tipo-span').text(' ');
-     //             }
-     //             if (response.data == true) {
-     //                 caixa = true;
-     //                 if ($tipo == '') {
-     //                     $('.tipo-span').text('Campo Obrigatório');
-     //                 } else {
-     //                     $('.tipo-span').text(' ');
-     //                 }
-     //             }
-
-     //         })
-     //     } catch (error) {
-     //         console.log(error);
-
-     //     }
-     //     if ($tipo == "PREVISTO") {
-     //         $(".file").addClass('d-none');
-     //         $('.data-baixa').addClass('d-none');
-     //         $('#previsto').removeClass('Campo-Obrigatorio01')
-     //     } else {
-     //         $(".file").removeClass('d-none');
-     //         $('.data-baixa').removeClass('d-none');
-     //         $('#previsto').addClass('Campo-Obrigatorio01')
-     //     }
-     // })
+     $('#Card1-Proximo').click(function() {
+         var input = $('#valor').val();
+         if (input == "") {
+             $('.Campo-Obrigatorio').text('Campo Obrigatório');
+         } else {
+             $('.Campo-Obrigatorio').text(' ');
+         }
 
 
-     // FUNÇÂO AUXILIAR
-     // function auxiliar() {
-     //     var tipo = $('.tipo').val();
-     //     var Valor = $('#valor').val();
+     })
 
-     //     if ((Valor != '') && ($tipo == 'PREVISTO' || ($tipo == 'REALIZADO' && caixa == true))) {
-     //         $('#Card1-Proximo').attr('onclick', 'stepper1.next()');
-     //     } else {
-     //         $('#Card1-Proximo').removeAttr('onclick')
-     //     }
-     // }
-     // setInterval("auxiliar()", 1000)
-     // >>>>>>>>>>Campos VALOR e PARCELA<<<<<<<<<<<<<<<<<<
-
-     // $('#Card1-Proximo').click(function() {
-     //     var inputs = [$('#valor').val()];
-     //     inputs.forEach(function(input, index) {
-     //         if (input == "") {
-     //             $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
-     //         } else {
-     //             $('.Campo-Obrigatorio' + index).text(' ');
-     //         }
-     //     });
-
-     // })
-
-     // $('#valor').keyup(function() {
-     //     if (this.value.length >= 1) {
-     //         $('.Campo-Obrigatorio0').text(' ');
-     //     }
-     // });
-
-     //---------------- Código de Barramento do Segundo STEP----------------------
-     // >>>>>>>>>>Campos de  DATAS<<<<<<<<<<<<<<<<<<
-
-     // $('#Card2-Proximo').click(function() {
-     //     var inputs = [$('#data-emissao').val(), $('#data-baixa').val(), $('#data-vencimento').val()];
-     //     inputs.forEach(function(input, index) {
-     //         if (input == "") {
-     //             $('.Campo-Obrigatorio0' + index).text('Campo Obrigatório');
-
-     //         } else {
-     //             $('.Campo-Obrigatorio0' + index).text(' ');
-     //         }
-     //     });
-     // })
-
-     // function data(span, index) {
-     //     if (span.length >= 0) {
-     //         $('.Campo-Obrigatorio0' + index).text(' ');
-     //     }
-     // }
-     // $('#data-emissao').keyup(function() {
-     //     data(this.value, 0)
-
-     // });
-     // $('#data-emissao').change(function() {
-     //     data(this.value, 0)
-
-     // });
-     // $('#data-baixa').keyup(function() {
-     //     data(this.value, 1)
-     // });
-     // $('#data-baixa').change(function() {
-     //     data(this.value, 1)
-     // });
-
-     // $('#data-vencimento').keyup(function() {
-     //     data(this.value, 2)
-     // });
-     // $('#data-vencimento').change(function() {
-     //     data(this.value, 2)
-     // });
-
-     // function auxiliar2() {
-     //     $tipo = $('.tipo').val();
-     //     if ($tipo == "PREVISTO") {
-     //         var dataEmissao = $('#data-emissao').val()
-     //         var dataVencimento = $('#data-vencimento').val()
-     //         if ((dataEmissao != "") && (dataVencimento != "")) {
-     //             $('#Card2-Proximo').attr('onclick', 'stepper1.next()');
-     //         } else {
-     //             $('#Card2-Proximo').removeAttr('onclick')
-
-     //         }
-
-
-     //     } else {
-     //         var dataEmissao = $('#data-emissao').val()
-     //         var dataBaixa = $('#data-baixa').val()
-     //         var dataVencimento = $('#data-vencimento').val()
-     //         if ((dataEmissao != "") && (dataBaixa != "") && (dataVencimento != "")) {
-     //             $('#Card2-Proximo').attr('onclick', 'stepper1.next()');
-     //         } else {
-     //             $('#Card2-Proximo').removeAttr('onclick')
-
-     //         }
-
-     //     }
-
-     // }
-     // setInterval("auxiliar2()", 1000)
-     //---------------- Código de Barramento do Terceiro STEP----------------------
-     // >>>>>>>>>>Campos de  GRUPO e CONTA<<<<<<<<<<<<<<<<<<
-
-     // $('#Card3-Proximo').click(function() {
-     //     var inputs = [$("#grupo-id option:selected").text(), $("#subconta-id option:selected").text()];
-     //     inputs.forEach(function(input, index) {
-     //         if (input == "SELECIONE") {
-     //             $('.Campo-Obrigatorio1' + index).text('Campo Obrigatório');
-     //         } else {
-     //             $('.Campo-Obrigatorio1' + index).text(' ');
-     //         }
-     //     });
-     // })
-
-     // var cont = 0;
-
-     // function campo(span, index) {
-     //     if (span > 0) {
-     //         cont++;
-     //         $('.Campo-Obrigatorio1' + index).text(' ');
-     //     }
-     //     if (cont > 1 && span > 0) {
-     //         $('#Card3-Proximo').attr('onclick', 'stepper1.next()');
-     //     }
-     // }
-     // $('#grupo-id').change(function() {
-     //     campo(this.value, 0)
-     // });
-     // $('#subconta-id').change(function() {
-     //     campo(this.value, 1)
-     // });
-
-     // function auxiliar3() {
-     //     var grupo = $("#grupo-id option:selected").text()
-     //     var subconta = $("#subconta-id option:selected").text();
-
-     //     if ((grupo != "SELECIONE") && (subconta != "SELECIONE")) {
-     //         $('#Card3-Proximo').attr('onclick', 'stepper1.next()');
-     //     } else {
-     //         $('#Card3-Proximo').removeAttr('onclick')
-
-     //     }
-
-
-     // }
-     // setInterval("auxiliar3()", 1000)
+     $('#valor').keyup(function() {
+         if (this.value.length >= 1) {
+             $('.Campo-Obrigatorio0').text(' ');
+         }
+     });
  </script>

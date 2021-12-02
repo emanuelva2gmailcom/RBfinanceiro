@@ -211,7 +211,7 @@
                     text: 'Adicionar',
                     className: 'addINDEX',
                     action: function() {
-                        window.location.href = '/lancamentos/add'
+                        window.location.href = '/lancamentos/opcao'
                     }
                 },
                 {

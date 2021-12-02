@@ -106,7 +106,7 @@ class LancamentosController extends AppController
                 'list',
                 [
                     'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => ['Grupos']]]],
-                    'valueField' => function($d) {
+                    'valueField' => function ($d) {
                         return $d->subconta;
                     }
                 ]
@@ -148,7 +148,7 @@ class LancamentosController extends AppController
                 'list',
                 [
                     'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => ['Grupos']]]],
-                    'valueField' => function($d) {
+                    'valueField' => function ($d) {
                         return $d->subconta;
                     }
                 ]
@@ -160,7 +160,7 @@ class LancamentosController extends AppController
             foreach ($subcontas as $c) :
                 $valor = 0;
                 foreach ($lancamentos as $l) :
-                    if($l->subconta->subconta == $c->subconta) {
+                    if ($l->subconta->subconta == $c->subconta) {
                         switch ($c->conta->subgrupo->grupo->grupo) {
                             case 'entrada':
                                 $valor += $l->valor;
@@ -181,7 +181,7 @@ class LancamentosController extends AppController
             endforeach;
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([$obj, $total, $totals]));
-            return $this->response; 
+            return $this->response;
         }
     }
 
@@ -278,40 +278,6 @@ class LancamentosController extends AppController
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
         }
 
-        $entradas = $this->Lancamentos->Subcontas->find('list', [
-            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
-            'conditions' => ['Grupos.grupo' => 'entrada'],
-            // 'valueField' => function ($d) {
-            //     if ($d->fluxosubgrupo->subgrupo == 'Entrada') {
-            //         return $d->conta;
-            //     }
-            //     return $d->conta->subgrupo->grupo->grupo . ' de ' .
-            //         $d->fluxosubgrupo->subgrupo . ' ' .
-            //         $d->conta;
-            // }
-
-        ]);
-
-        $saidas = $this->Lancamentos->Subcontas->find('list', [
-            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
-            'conditions' => ['Grupos.grupo' => 'saida'],
-            // 'valueField' => function ($d) {
-            //     if ($d->fluxosubgrupo->subgrupo == 'Saida') {
-            //         return $d->conta;
-            //     }
-            //     return  $d->conta->subgrupo->grupo->grupo . ' de ' .
-            //         $d->fluxosubgrupo->subgrupo . ' ' .
-            //         $d->conta;
-            // }
-        ]);
-        $todos = $this->Lancamentos->Subcontas->find('list', [
-            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
-            // 'valueField' => function ($d) {
-            //     return  $d->conta->subgrupo->grupo->grupo . ' de ' .
-            //         $d->fluxosubgrupo->subgrupo . ' ' .
-            //         $d->conta;
-            // }
-        ]);
 
         // $variaveis = $this->Lancamentos->Drecontas->find('list', [
         //     'contain' => ['Dregrupos'],
@@ -327,6 +293,7 @@ class LancamentosController extends AppController
         //     'contain' => ['Dregrupos'],
         //     'conditions' => ['Dregrupos.grupo' => 'receita'],
         // ]);
+
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $subcontas = $this->Lancamentos->Subcontas->find('list', ['limit' => 200]);
@@ -390,62 +357,29 @@ class LancamentosController extends AppController
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
         }
 
-        $entradas = $this->Lancamentos->Subcontas->find('list', [
-            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
-            'conditions' => ['Grupos.grupo' => 'entrada'],
-            // 'valueField' => function ($d) {
-            //     if ($d->fluxosubgrupo->subgrupo == 'Entrada') {
-            //         return $d->conta;
-            //     }
-            //     return $d->conta->subgrupo->grupo->grupo . ' de ' .
-            //         $d->fluxosubgrupo->subgrupo . ' ' .
-            //         $d->conta;
-            // }
 
+        $variaveis = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'conditions' => ['Subgrupos.subgrupo' => 'Gastos Variáveis'],
         ]);
 
-        $saidas = $this->Lancamentos->Subcontas->find('list', [
-            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
-            'conditions' => ['Grupos.grupo' => 'saida'],
-            // 'valueField' => function ($d) {
-            //     if ($d->fluxosubgrupo->subgrupo == 'Saida') {
-            //         return $d->conta;
-            //     }
-            //     return  $d->conta->subgrupo->grupo->grupo . ' de ' .
-            //         $d->fluxosubgrupo->subgrupo . ' ' .
-            //         $d->conta;
-            // }
-        ]);
-        $todos = $this->Lancamentos->Subcontas->find('list', [
-            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
-            // 'valueField' => function ($d) {
-            //     return  $d->conta->subgrupo->grupo->grupo . ' de ' .
-            //         $d->fluxosubgrupo->subgrupo . ' ' .
-            //         $d->conta;
-            // }
+        $fixos = $this->Lancamentos->Subcontas->find('list', [
+             'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'conditions' => ['Subgrupos.subgrupo' => 'Gastos Fixos'],
         ]);
 
-        // $variaveis = $this->Lancamentos->Drecontas->find('list', [
-        //     'contain' => ['Dregrupos'],
-        //     'conditions' => ['Dregrupos.grupo' => 'variavel'],
-        // ]);
+        $receitas = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'conditions' => ['Subgrupos.subgrupo' => 'Receitas'],
+        ]);
 
-        // $fixos = $this->Lancamentos->Drecontas->find('list', [
-        //     'contain' => ['Dregrupos'],
-        //     'conditions' => ['Dregrupos.grupo' => 'fixo'],
-        // ]);
-
-        // $receitas = $this->Lancamentos->Drecontas->find('list', [
-        //     'contain' => ['Dregrupos'],
-        //     'conditions' => ['Dregrupos.grupo' => 'receita'],
-        // ]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $subcontas = $this->Lancamentos->Subcontas->find('list', ['limit' => 200]);
         // $dregrupos = $this->Lancamentos->Drecontas->Dregrupos->find('list', ['limit' => 200]);
-        $Grupos = $this->Lancamentos->Subcontas->Contas->Subgrupos->Grupos->find('list', ['limit' => 200]);
+        $Grupos = $this->Lancamentos->Subcontas->Contas->Subgrupos->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
-        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos', 'entradas', 'saidas', 'todos'));
+        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos','variaveis','fixos','receitas'));
     }
 
     /**
@@ -465,8 +399,8 @@ class LancamentosController extends AppController
                 $d->data_emissao !== null ? $d->data_emissao = $d->data_emissao->i18nFormat('dd/MM/yyyy') : '';
                 $d->data_baixa !== null ? $d->data_baixa = $d->data_baixa->i18nFormat('dd/MM/yyyy') : '';
                 $d->data_competencia !== null ? $d->data_competencia = $d->data_competencia->i18nFormat('dd/MM/yyyy') : '';
-                $d->created !== null ? $d->created = $d->created->i18nFormat('dd/MM/yyyy').' às '.$d->created->i18nFormat('hh:ss') : '';
-                $d->modified !== null ? $d->modified = $d->modified->i18nFormat('dd/MM/yyyy').' às '.$d->modified->i18nFormat('hh:ss') : '';
+                $d->created !== null ? $d->created = $d->created->i18nFormat('dd/MM/yyyy') . ' às ' . $d->created->i18nFormat('hh:ss') : '';
+                $d->modified !== null ? $d->modified = $d->modified->i18nFormat('dd/MM/yyyy') . ' às ' . $d->modified->i18nFormat('hh:ss') : '';
                 return $d;
             }
         ])->first();
