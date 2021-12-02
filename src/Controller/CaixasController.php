@@ -51,7 +51,6 @@ class CaixasController extends AppController
                 return $d;
             }
         ])->first();
-        // debug($caixa->toArray());exit;
 
         $this->set(compact('caixa'));
     }
@@ -123,19 +122,15 @@ class CaixasController extends AppController
 
     public function abrir()
     {
-        $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
+        $now = FrozenTime::now();
         $caixas = $this->paginate($this->Caixas);
-        $data = [
-            'is_aberto' => '1',
-            'data_caixa' => $now
-        ];
         foreach ($caixas as $caixa) :
-            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
+            if (($now->i18nFormat('dd-MM-yyyy', 'UTC') == $caixa->data_caixa->i18nFormat('dd-MM-yyyy', 'UTC')) && ($caixa->is_aberto == true)) {
                 $caixa = $this->Caixas->patchEntity($caixa, ['is_aberto' => false]);
                 $this->Caixas->save($caixa);
                 $this->Flash->error(__('Caixa fechado.'));
                 return $this->redirect($this->referer());
-            } else if (($now == $caixa->data_caixa) && ($caixa->is_aberto == false)) {
+            } else if (($now->i18nFormat('dd-MM-yyyy', 'UTC') == $caixa->data_caixa->i18nFormat('dd-MM-yyyy', 'UTC')) && ($caixa->is_aberto == false)) {
                 $this->Flash->error(__('Caixa já fechado.'));
                 return $this->redirect($this->referer());
             }
@@ -157,24 +152,15 @@ class CaixasController extends AppController
         $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
         $caixas = $this->Caixas->find('all');
         foreach ($caixas as $caixa) :
-            if (($now == $caixa->data_caixa) && ($caixa->is_aberto == true)) {
+            if (($now == $caixa->data_caixa->i18nFormat('dd-MM-yyyy', 'UTC')) && ($caixa->is_aberto == true)) {
                 $resposta = $caixa->is_aberto;
             }
         endforeach;
         if($resposta == null){
             $resposta = false;
         }
-        $this->response = $this->response;
-        $this->response = $this->response
-            ->withHeader('Access-Control-Allow-Origin','*')
-            ->withHeader('Access-Control-Allow-Methods', '*')
-            ->withHeader('Access-Control-Allow-Credentials', 'true')
-            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With')
-            ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
-            ->withHeader('Access-Control-Allow-Type', 'application/json');
-        $this->response = $this->response->withType('application/json')
-            ->withStringBody(json_encode($resposta));
-        return $this->response;
+        return $this->response->withType('application/json')
+        ->withStringBody(json_encode($resposta));
     }
 
 }
