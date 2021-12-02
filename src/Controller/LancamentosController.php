@@ -42,6 +42,10 @@ class LancamentosController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
+    public function opcao()
+    {
+    }
+
     public function getPainel($lancamentos)
     {
 
@@ -191,7 +195,244 @@ class LancamentosController extends AppController
 
         $this->set(compact('lancamentos', 'now'));
     }
+    public function caixa()
+    {
+        $this->loadModel('Comprovantes');
+        $lancamento = $this->Lancamentos->newEmptyEntity();
+        if ($this->request->is('post')) {
 
+            if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
+                $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
+                return $this->redirect(['action' => 'add']);
+            }
+
+            $image = $this->request->getData('Comprovante');
+            $name = $image->getClientFilename();
+            $tipo = explode('.', $name);
+            $nome = $tipo[0];
+            $tipo = end($tipo);
+            $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
+            if ($name)
+                $image->moveTo($targetpath);
+            $comprovantes = $this->Comprovantes->newEmptyEntity();
+            $comprovantes->img = $name;
+            $comprovantes->tipo = $tipo;
+            if ($name == '') {
+                $name = null;
+            }
+
+            $comprovantes->nome_arquivo = $nome;
+
+            $request = $this->request->getData();
+            $request['parcela'] == null ? $lancamento->parcela = 1 : '';
+            $lancamento = $this->Lancamentos->patchEntity($lancamento, $request);
+            if ($request['parcela'] > 1 && $request['parcela'] !== null && $request['tipo'] == 'PREVISTO') {
+                $request['valor'] = $request['valor'] / $request['parcela'];
+                $request['parcela'] = intval($request['parcela']);
+                for (intval($request['parcela']); $request['parcela'] >= 1; $request['parcela']--) {
+                    $parcela = $this->Lancamentos->newEntity($request);
+                    $parcela->data_vencimento = $parcela->data_vencimento->addMonth($request['parcela']);
+                    if (($this->Lancamentos->save($parcela))) {
+                        $comprovantes->lancamento_id = $lancamento->id_lancamento;
+                    } else {
+                        $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
+                        return $this->redirect(['action' => 'add']);
+                    }
+                }
+            } else {
+                if (($this->Lancamentos->save($lancamento))) {
+                    $comprovantes->lancamento_id = $lancamento->id_lancamento;
+                } else {
+                    $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
+                    return $this->redirect(['action' => 'add']);
+                }
+            }
+            if ($lancamento->tipo == 'REALIZADO') {
+                if ($name != null) {
+                    if (($this->Comprovantes->save($comprovantes))) {
+                        $this->Flash->success(__('Lançamento adicionado com sucesso'));
+                    }
+                } else {
+
+                    return $this->redirect(['action' => 'modal']);
+                }
+            } else {
+
+                return $this->redirect(['action' => 'modal']);
+            }
+
+            $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
+        }
+
+        $entradas = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'conditions' => ['Grupos.grupo' => 'entrada'],
+            // 'valueField' => function ($d) {
+            //     if ($d->fluxosubgrupo->subgrupo == 'Entrada') {
+            //         return $d->conta;
+            //     }
+            //     return $d->conta->subgrupo->grupo->grupo . ' de ' .
+            //         $d->fluxosubgrupo->subgrupo . ' ' .
+            //         $d->conta;
+            // }
+
+        ]);
+
+        $saidas = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'conditions' => ['Grupos.grupo' => 'saida'],
+            // 'valueField' => function ($d) {
+            //     if ($d->fluxosubgrupo->subgrupo == 'Saida') {
+            //         return $d->conta;
+            //     }
+            //     return  $d->conta->subgrupo->grupo->grupo . ' de ' .
+            //         $d->fluxosubgrupo->subgrupo . ' ' .
+            //         $d->conta;
+            // }
+        ]);
+        $todos = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            // 'valueField' => function ($d) {
+            //     return  $d->conta->subgrupo->grupo->grupo . ' de ' .
+            //         $d->fluxosubgrupo->subgrupo . ' ' .
+            //         $d->conta;
+            // }
+        ]);
+
+        // $variaveis = $this->Lancamentos->Drecontas->find('list', [
+        //     'contain' => ['Dregrupos'],
+        //     'conditions' => ['Dregrupos.grupo' => 'variavel'],
+        // ]);
+
+        // $fixos = $this->Lancamentos->Drecontas->find('list', [
+        //     'contain' => ['Dregrupos'],
+        //     'conditions' => ['Dregrupos.grupo' => 'fixo'],
+        // ]);
+
+        // $receitas = $this->Lancamentos->Drecontas->find('list', [
+        //     'contain' => ['Dregrupos'],
+        //     'conditions' => ['Dregrupos.grupo' => 'receita'],
+        // ]);
+        $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
+        $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
+        $subcontas = $this->Lancamentos->Subcontas->find('list', ['limit' => 200]);
+        // $dregrupos = $this->Lancamentos->Drecontas->Dregrupos->find('list', ['limit' => 200]);
+        $Grupos = $this->Lancamentos->Subcontas->Contas->Subgrupos->Grupos->find('list', ['limit' => 200]);
+        $grupos = ['PREVISTO', 'REALIZADO'];
+        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos', 'entradas', 'saidas', 'todos'));
+    }
+    public function dre()
+    {
+        $this->loadModel('Comprovantes');
+        $lancamento = $this->Lancamentos->newEmptyEntity();
+        if ($this->request->is('post')) {
+
+            if (($lancamento->tipo == 'REALIZADO') && !($this->caixaaberto())) {
+                $this->Flash->error(__('Não pode ser criado pois o caixa está fechado.'));
+                return $this->redirect(['action' => 'add']);
+            }
+
+            $image = $this->request->getData('Comprovante');
+            $name = $image->getClientFilename();
+            $tipo = explode('.', $name);
+            $nome = $tipo[0];
+            $tipo = end($tipo);
+            $targetpath = WWW_ROOT . 'img/uploads/' . DS . $name;
+            if ($name)
+                $image->moveTo($targetpath);
+            $comprovantes = $this->Comprovantes->newEmptyEntity();
+            $comprovantes->img = $name;
+            $comprovantes->tipo = $tipo;
+            if ($name == '') {
+                $name = null;
+            }
+
+            $comprovantes->nome_arquivo = $nome;
+
+            $request = $this->request->getData();
+            $lancamento = $this->Lancamentos->patchEntity($lancamento, $request);
+
+            if (($this->Lancamentos->save($lancamento))) {
+                $comprovantes->lancamento_id = $lancamento->id_lancamento;
+            } else {
+                $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
+                return $this->redirect(['action' => 'add']);
+            }
+
+            if ($lancamento->tipo == 'REALIZADO') {
+                if ($name != null) {
+                    if (($this->Comprovantes->save($comprovantes))) {
+                        $this->Flash->success(__('Lançamento adicionado com sucesso'));
+                    }
+                } else {
+
+                    return $this->redirect(['action' => 'modal']);
+                }
+            } else {
+
+                return $this->redirect(['action' => 'modal']);
+            }
+
+            $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
+        }
+
+        $entradas = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'conditions' => ['Grupos.grupo' => 'entrada'],
+            // 'valueField' => function ($d) {
+            //     if ($d->fluxosubgrupo->subgrupo == 'Entrada') {
+            //         return $d->conta;
+            //     }
+            //     return $d->conta->subgrupo->grupo->grupo . ' de ' .
+            //         $d->fluxosubgrupo->subgrupo . ' ' .
+            //         $d->conta;
+            // }
+
+        ]);
+
+        $saidas = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'conditions' => ['Grupos.grupo' => 'saida'],
+            // 'valueField' => function ($d) {
+            //     if ($d->fluxosubgrupo->subgrupo == 'Saida') {
+            //         return $d->conta;
+            //     }
+            //     return  $d->conta->subgrupo->grupo->grupo . ' de ' .
+            //         $d->fluxosubgrupo->subgrupo . ' ' .
+            //         $d->conta;
+            // }
+        ]);
+        $todos = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            // 'valueField' => function ($d) {
+            //     return  $d->conta->subgrupo->grupo->grupo . ' de ' .
+            //         $d->fluxosubgrupo->subgrupo . ' ' .
+            //         $d->conta;
+            // }
+        ]);
+
+        // $variaveis = $this->Lancamentos->Drecontas->find('list', [
+        //     'contain' => ['Dregrupos'],
+        //     'conditions' => ['Dregrupos.grupo' => 'variavel'],
+        // ]);
+
+        // $fixos = $this->Lancamentos->Drecontas->find('list', [
+        //     'contain' => ['Dregrupos'],
+        //     'conditions' => ['Dregrupos.grupo' => 'fixo'],
+        // ]);
+
+        // $receitas = $this->Lancamentos->Drecontas->find('list', [
+        //     'contain' => ['Dregrupos'],
+        //     'conditions' => ['Dregrupos.grupo' => 'receita'],
+        // ]);
+        $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
+        $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
+        $subcontas = $this->Lancamentos->Subcontas->find('list', ['limit' => 200]);
+        // $dregrupos = $this->Lancamentos->Drecontas->Dregrupos->find('list', ['limit' => 200]);
+        $Grupos = $this->Lancamentos->Subcontas->Contas->Subgrupos->Grupos->find('list', ['limit' => 200]);
+        $grupos = ['PREVISTO', 'REALIZADO'];
+        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos', 'entradas', 'saidas', 'todos'));
+    }
 
     /**
      * View method
@@ -220,7 +461,6 @@ class LancamentosController extends AppController
         }
         $this->set(compact('lancamento'));
     }
-
     /**
      * Add method
      *

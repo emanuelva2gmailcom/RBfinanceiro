@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /**
  * @var \App\View\AppView $this
@@ -11,11 +11,8 @@
 <?php $this->assign('title', __('Adicionar Lançamento')); ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <?= $this->Html->css('bs-stepper.min.css'); ?>
-<!-- <div>
-    <button type="button" class="btn btn-primary btn-lg btn-block">Relatorio de gestao de caixa</button>
-    <button type="button" class="btn btn-secondary btn-lg btn-block">Relatorio de DRE</button>
-</div> -->
-<!-- <?= $this->Html->script('bs-stepper.min.js'); ?>
+
+<?= $this->Html->script('bs-stepper.min.js'); ?>
 <div class="containerADD container p-5">
     <div id="stepper1" class="cardlancADD bs-stepper card">
         <div class="bsstepperheaderADD bs-stepper-header">
@@ -157,7 +154,7 @@
         </script>
 
     </div>
-</div> -->
+</div>
 
 
 
@@ -370,4 +367,4 @@
 
     // }
     // setInterval("auxiliar3()", 1000)
-</script>
+</script> -->

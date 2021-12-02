@@ -21,7 +21,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-lg"><a href="/Relatorios/index">Cancelar</a></button>
-                <button type="button" class="btn btn-primary btn-lg"><a href="/Lancamentos/add">Novo Lançamento</a></button>
+                <button type="button" class="btn btn-primary btn-lg"><a href="/Lancamentos/opcao">Novo Lançamento</a></button>
             </div>
         </div>
     </div>
