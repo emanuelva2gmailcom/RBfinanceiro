@@ -14,7 +14,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn botaoMODAL btn-sm"><a href="/Relatorios/index">Cancelar</a></button>
-                <button type="button" class="btn botaoMODAL btn-sm"><a href="/Lancamentos/add">Novo Lançamento</a></button>
+                <button type="button" class="btn botaoMODAL btn-sm"><a href="/Lancamentos/opcao">Novo Lançamento</a></button>
             </div>
         </div>
     </div>
