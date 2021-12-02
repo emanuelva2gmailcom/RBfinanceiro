@@ -35,7 +35,7 @@ class LancamentosController extends AppController
         parent::beforeFilter($event);
 
         $this->Auth->allow('add');
-        $this->FormProtection->setConfig('unlockedActions', ['post', 'getTablePainel','add']);
+        $this->FormProtection->setConfig('unlockedActions', ['post', 'getTablePainel', 'add']);
     }
     /**
      * Index method
@@ -176,14 +176,16 @@ class LancamentosController extends AppController
         $renovados = $this->getrenovado();
 
         $lancamentos = $this->paginate($this->Lancamentos);
-        $lancamentos = $this->Lancamentos->find('list', ['conditions' => [$renovados['simple']], 'contain' => ['Subcontas', 'Fornecedores', 'Clientes'],
-        'valueField' => function($d){
-            $d->data_vencimento !== null ? $d->data_vencimento = $d->data_vencimento->i18nFormat('dd/MM/yyyy') : '';
-            $d->data_emissao !== null ? $d->data_emissao = $d->data_emissao->i18nFormat('dd/MM/yyyy') : '';
-            $d->data_baixa !== null ? $d->data_baixa = $d->data_baixa->i18nFormat('dd/MM/yyyy') : '';
-            $d->data_competencia !== null ? $d->data_competencia = $d->data_competencia->i18nFormat('dd/MM/yyyy') : '';
-            return $d;
-        }]);
+        $lancamentos = $this->Lancamentos->find('list', [
+            'conditions' => [$renovados['simple']], 'contain' => ['Subcontas', 'Fornecedores', 'Clientes'],
+            'valueField' => function ($d) {
+                $d->data_vencimento !== null ? $d->data_vencimento = $d->data_vencimento->i18nFormat('dd/MM/yyyy') : '';
+                $d->data_emissao !== null ? $d->data_emissao = $d->data_emissao->i18nFormat('dd/MM/yyyy') : '';
+                $d->data_baixa !== null ? $d->data_baixa = $d->data_baixa->i18nFormat('dd/MM/yyyy') : '';
+                $d->data_competencia !== null ? $d->data_competencia = $d->data_competencia->i18nFormat('dd/MM/yyyy') : '';
+                return $d;
+            }
+        ]);
         // debug($lancamentos->toArray());exit;
         $now = FrozenTime::now()->i18nFormat('dd-MM-yyyy', 'UTC');
 
@@ -224,7 +226,9 @@ class LancamentosController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-
+    public function modal()
+    {
+    }
     public function add()
     {
         $this->loadModel('Comprovantes');
@@ -283,25 +287,12 @@ class LancamentosController extends AppController
                         $this->Flash->success(__('Lançamento adicionado com sucesso'));
                     }
                 } else {
-                    $this->Flash->success('The user has been saved', [
-                        'key' => 'positive',
-                        'clear' => true,
-                        'params' => [
-                            'name' => 'otacilio',
-                            'email' => '$user->email'
-                        ]
-                    ]);
-                    return $this->redirect(['action' => 'add', 'confirm' => 'Are you sure you want to delete the image?']);
+
+                    return $this->redirect(['action' => 'modal']);
                 }
             } else {
-                $this->Flash->success('The user has been saved', [
-                    'clear' => true,
-                    'params' => [
-                        'name' => 'otacilio',
-                        'email' => '$user->email'
-                    ]
-                ]);
-                return $this->redirect(['action' => 'add', 'confirm' => 'Are you sure you want to delete the image?']);
+
+                return $this->redirect(['action' => 'modal']);
             }
 
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
@@ -399,8 +390,8 @@ class LancamentosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function teste(){
-
+    public function teste()
+    {
     }
     public function edit($id = null)
     {
