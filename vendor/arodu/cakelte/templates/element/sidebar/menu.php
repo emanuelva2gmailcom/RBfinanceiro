@@ -61,7 +61,7 @@ function caixa(is)
   </a>
   <ul class="nav nav-treeview">
     <li class="nav-item">
-      <a href="/lancamentos/add" class="segundo nav-link">
+      <a href="/lancamentos/opcao" class="segundo nav-link">
       <i class="segundo fas fa-check nav-icon"></i>
       <p class="segundo">Novo Lançamento</p>
     </a>

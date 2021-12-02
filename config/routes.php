@@ -69,6 +69,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
         ['action' => 'delete'],
         ['id' => '\d+', 'pass' => ['id']]
     );
+
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
      */
@@ -91,7 +92,6 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * You can remove these routes once you've connected the
      * routes you want in your application.
      */
-    $builder->setExtensions(['json', 'xml']);
     $builder->fallbacks();
 });
 
