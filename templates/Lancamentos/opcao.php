@@ -15,13 +15,13 @@
 
 
 <body>
-    <div class="container-fluid d-flex align-items-center justify-content-center p-5">
-      <div class="cardCaixaDiario card card-outline container p-5">
+    <div class="container-fluid d-flex align-items-center justify-content-center p-4">
+      <div class="cardOPTION card card-outline container p-4">
         <div class="perguntaLANCAMENTO mb-5 justify-content-center d-flex">
             <h2>O que deseja fazer agora?</h2>
         </div>
         <div class="justify-content-around">
-            <a href="/Relatorios/index" class=" mr-5">
+            <a href="/Relatorios/index" class="ml-4 mr-5">
                 <button type="button" class="btn btn-lg botaoMODAL">Cancelar lançamento</button>
             </a>
             <a href="/Lancamentos/caixa" class="ml-4 mr-4">
