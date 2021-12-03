@@ -331,6 +331,7 @@ class LancamentosController extends AppController
             $comprovantes->nome_arquivo = $nome;
 
             $request = $this->request->getData();
+            $request['tipo'] = 'DRE';
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $request);
 
             if (($this->Lancamentos->save($lancamento))) {
