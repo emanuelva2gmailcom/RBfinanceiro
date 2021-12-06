@@ -208,7 +208,7 @@
              }
          })
      })
-     var caixa = 0
+
      $('.tipo').change(function() {
          $tipo = $('.tipo').val();
          try {
