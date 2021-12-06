@@ -1,9 +1,3 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Conta $conta
- */
-?>
 
 <?php $this->assign('title', __('Add Conta') ); ?>
 
