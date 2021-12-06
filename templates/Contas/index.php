@@ -25,7 +25,7 @@
             <td><?= $this->Number->format($conta->id_conta) ?></td>
             <td><?= h($conta->conta) ?></td>
             <td><?= h($conta->descricao) ?></td>
-            <td class="tdINDEX"><?= $conta->has('subgrupo') ? $this->Html->link($conta->subgrupo->id_subgrupo, ['action' => '#', $conta->subgrupo->id_subgrupo]) : '' ?></td>
+            <td class="tdINDEX"><?= $conta->has('subgrupo') ? $this->Html->link($conta->subgrupo->subgrupo, ['action' => '#', $conta->subgrupo->id_subgrupo]) : '' ?></td>
             <td class="actions">
             <div class="btn-group">
                 <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $conta->id_conta], ['class'=>'btn vis btn-xs btn-outline-primary', 'escape'=>false]) ?>

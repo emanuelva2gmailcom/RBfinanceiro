@@ -27,7 +27,7 @@
         <?= $this->Form->end() ?>
     </div>
     <div class="card-2 card-body table-responsive">
-        <table id="example" class="table table-sm table-bordered table-striped">
+        <table id="example" class="table table-sm table-bordered table-striped w-100">
         <thead class="theINDEX">
 
             </thead>
