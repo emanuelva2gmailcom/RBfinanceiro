@@ -14,8 +14,6 @@
     <div class="cardbodyADD card-body">
   <?= $this->Form->create($lancamento) ?>
 
-   <?= $this->Form->label('Tipo'); ?>
-   <?= $this->Form->select('tipo', ['PREVISTO' => 'PREVISTO', 'REALIZADO' => 'REALIZADO'], ['class' => 'form-control']); ?>
    <?= $this->Form->control('descricao', ['label' => 'Descrição'], ['class' => 'form-control']); ?>
    <?= $this->Form->control('valor', ['label' => 'Valor'], ['class' => 'form-control']); ?>
    <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão'], ['class' => 'form-control']); ?>

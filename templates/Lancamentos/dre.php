@@ -28,6 +28,12 @@
                      <span class="bs-stepper-circle">2</span>
                  </button>
              </div>
+             <div class="lineADD line"></div>
+             <div class="step" data-target="#test-l-3">
+                 <button type="button" class="btn step-trigger">
+                     <span class="bs-stepper-circle">3</span>
+                 </button>
+             </div>
          </div>
          <div class="bssteppercontentADD bs-stepper-content">
              <?= $this->Form->create($lancamento, ['type' => 'file', 'id' => 'teste']) ?>
@@ -41,15 +47,36 @@
                          <?= $this->Form->control('valor', ['label' => 'Valor', 'placeholder' => 'Valor', 'value' => 200], ['class' => 'border form-control']); ?>
                          <span class="Campo-Obrigatorio0"></span>
                      </div>
-                     <div class="form-group competencia">
-                         <?= $this->Form->control('data_competencia', ['label' => 'Data de Competência', 'placeholder' => 'Data de Competência', 'value' => '30/11/2021'], ['class' => 'border form-control dataADD']); ?>
-                     </div>
                  </div>
                  <div class="d-flex justify-content-end">
                      <div id="Card1-Proximo" class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
                  </div>
              </div>
              <div id="test-l-2" class="bssteppercontentContent content">
+                 <div class="panel-body">
+                     <div class="form-group">
+                         <?= $this->Form->control('data_emissao', ['label' => 'Data de Emissão', 'placeholder' => 'dd/mm/yyyy', 'value' => '30/11/2021'], ['class' => 'border form-control dataADD']); ?>
+                         <span class="Campo-Obrigatorio000"></span>
+                     </div>
+                     <div class="form-group data-baixa">
+                         <?= $this->Form->control('data_baixa', ['label' => 'Data de Baixa', 'placeholder' => 'Data de Baixa', 'value' => '30/11/2021'], ['class' => 'border form-control dataADD']); ?>
+                         <span class='Campo-Obrigatorio001'></span></span>
+                     </div>
+                     <div class="form-group">
+                         <?= $this->Form->control('data_competencia', ['label' => 'Data de Competência', 'placeholder' => 'Data de Competencia', 'value' => '30/11/2021'], ['class' => 'border form-control dataADD']); ?>
+                         <span class="Campo-Obrigatorio002"></span>
+                     </div>
+                     <div class="form-group">
+                         <?= $this->Form->control('data_vencimento', ['label' => 'Data de Vencimento', 'placeholder' => 'Data de Vencimento', 'value' => '30/11/2021'], ['class' => 'border form-control dataADD']); ?>
+                         <span class="Campo-Obrigatorio003"></span>
+                     </div>
+                 </div>
+                 <div class="d-flex justify-content-between">
+                     <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
+                     <div id="Card2-Proximo" class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
+                 </div>
+             </div>
+             <div id="test-l-3" class="bssteppercontentContent content">
                  <div class="panel-body">
                      <div class="form-group">
                          <?= $this->Form->control('grupo_id', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']); ?>
@@ -148,6 +175,7 @@
  <script>
      $('document').ready(function() {
          $('#Card1-Proximo').removeAttr('onclick')
+         $('#Card2-Proximo').removeAttr('onclick')
      })
 
      $('form').submit(function() {
@@ -243,17 +271,14 @@
              $('#Card1-Proximo').removeAttr('onclick')
          }
      }
-     setInterval("auxiliar()", 1000)
-     $('document').load(function() {
-         auxiliar()
-     })
+     setInterval("auxiliar()", 100)
 
      $('#Card1-Proximo').click(function() {
          var input = $('#valor').val();
          if (input == "") {
-             $('.Campo-Obrigatorio').text('Campo Obrigatório');
+             $('.Campo-Obrigatorio0').text('Campo Obrigatório');
          } else {
-             $('.Campo-Obrigatorio').text(' ');
+             $('.Campo-Obrigatorio0').text(' ');
          }
 
 
@@ -264,4 +289,68 @@
              $('.Campo-Obrigatorio0').text(' ');
          }
      });
+     //---------------- Código de Barramento do Segundo STEP----------------------
+     // >>>>>>>>>>Campos de  DATAS<<<<<<<<<<<<<<<<<<
+
+     $('#Card2-Proximo').click(function() {
+         var inputs = [$('#data-emissao').val(), $('#data-baixa').val(), $('#data-competencia').val(), $('#data-vencimento').val()];
+         inputs.forEach(function(input, index) {
+             if (input == "") {
+                 $('.Campo-Obrigatorio00' + index).text('Campo Obrigatório');
+
+             } else {
+                 $('.Campo-Obrigatorio00' + index).text(' ');
+             }
+         });
+     })
+
+     function data(span, index) {
+         if (span.length >= 0) {
+             $('.Campo-Obrigatorio00' + index).text(' ');
+         }
+     }
+     $('#data-emissao').keyup(function() {
+         data(this.value, 0)
+
+     });
+     $('#data-emissao').change(function() {
+         data(this.value, 0)
+
+     });
+     $('#data-baixa').keyup(function() {
+         data(this.value, 1)
+     });
+     $('#data-baixa').change(function() {
+         data(this.value, 1)
+     });
+
+     $('#data-competencia').keyup(function() {
+         data(this.value, 2)
+     });
+     $('#data-competencia').change(function() {
+         data(this.value, 2)
+     });
+
+     $('#data-vencimento').keyup(function() {
+         data(this.value, 3)
+     });
+     $('#data-vencimento').change(function() {
+         data(this.value, 3)
+     });
+
+     // FUNÇÂO AUXILIAR
+
+     function auxiliar2() {
+         var dataEmissao = $('#data-emissao').val()
+         var dataBaixa = $('#data-baixa').val()
+         var dataCompetencia = $('#data-competencia').val()
+         var dataVencimento = $('#data-vencimento').val()
+         if ((dataEmissao != "") && (dataBaixa != "") && (dataCompetencia != "") && (dataVencimento != "")) {
+             $('#Card2-Proximo').attr('onclick', 'stepper1.next()');
+         } else {
+             $('#Card2-Proximo').removeAttr('onclick')
+
+         }
+     }
+     setInterval("auxiliar2()", 100)
  </script>

@@ -302,35 +302,69 @@
                         var Tabela = document.getElementById("example1");
                         var Trs = Tabela.getElementsByClassName("ops");
                         console.log(Trs)
-                        var valor = [];
+                        var valorRealizado = 0;
+                        var valorPrevisto = 0;
+                        var valorDRE = 0;
                         var Head = []
                         month = new Array(" ", "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
 
                         for (var i = 0; i < Trs.length; i++) {
-                            valor.push(Trs[i]['children'][1]['outerText'].replace('R$', ''))
-                            Head.push([month[Trs[i]['children'][7]['outerText'].split('/')[0].replace(/^0+/, '')] + ' / ' + Trs[i]['children'][7]['outerText'].split('/')[2]] + '  ')
-                        }
+                            if (Trs[i]['children'][0]['outerText'] == 'REALIZADO') {
+                                valorRealizado += Number(Trs[i]['children'][1]['outerText'].replace('R$', ''))
+                            } else if (Trs[i]['children'][0]['outerText'] == 'PREVISTO') {
+                                valorPrevisto += Number(Trs[i]['children'][1]['outerText'].replace('R$', ''))
+                            } else {
+                                valorDRE += Number(Trs[i]['children'][1]['outerText'].replace('R$', ''))
+                            }
+                            Head.push([month[Trs[i]['children'][7]['outerText'].split('/')[1].replace(/^0+/, '')] + ' / ' + Trs[i]['children'][7]['outerText'].split('/')[2]] + '  ')
 
+                        }
 
                         var areaChartData = {
                             labels: Head,
                             datasets: [{
-                                label: 'Saidas',
-                                backgroundColor: '#DBEBED',
-                                pointRadius: false,
-                                pointColor: '#3b8bba',
-                                pointStrokeColor: 'rgba(60,141,188,1)',
-                                pointHighlightFill: '#fff',
-                                pointHighlightStroke: 'rgba(60,141,188,1)',
-                                data: valor
-                            }, ]
+
+                                    label: 'Realizado',
+                                    backgroundColor: '#DBEBED',
+                                    pointRadius: false,
+                                    pointColor: '#3b8bba',
+                                    pointStrokeColor: 'rgba(60,141,188,1)',
+                                    pointHighlightFill: '#fff',
+                                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                                    data: [valorRealizado]
+                                },
+                                {
+
+                                    label: 'Previsto',
+                                    backgroundColor: 'rgba(210, 214, 222, 1)',
+                                    borderColor: 'rgba(210, 214, 222, 1)',
+                                    pointRadius: false,
+                                    pointColor: 'rgba(210, 214, 222, 1)',
+                                    pointStrokeColor: '#c1c7d1',
+                                    pointHighlightFill: '#fff',
+                                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                                    data: [valorPrevisto]
+                                },
+                                {
+
+                                    label: 'DRE',
+                                    backgroundColor: 'red',
+                                    borderColor: 'rgba(210, 214, 222, 1)',
+                                    pointRadius: false,
+                                    pointColor: 'rgba(210, 214, 222, 1)',
+                                    pointStrokeColor: '#c1c7d1',
+                                    pointHighlightFill: '#fff',
+                                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                                    data: [valorDRE]
+                                },
+                            ],
                         }
 
                         var areaChartOptions = {
                             maintainAspectRatio: false,
                             responsive: true,
                             legend: {
-                                display: false
+                                display: false,
                             },
                             scales: {
                                 xAxes: [{
@@ -343,7 +377,7 @@
                                         display: false
                                     }
                                 }]
-                            }
+                            },
                         }
                         var barChartCanvas = $('#barChart').get(0).getContext('2d')
                         var barChartData = $.extend(true, {}, areaChartData)
@@ -351,13 +385,23 @@
                         var barChartOptions = {
                             responsive: true,
                             maintainAspectRatio: false,
-                            datasetFill: false
+                            datasetFill: false,
                         }
 
                         new Chart(barChartCanvas, {
                                 type: 'bar',
                                 data: barChartData,
-                                options: barChartOptions
+                                options: {
+                                    barChartOptions,
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                    }
+                                },
+
                             }),
                             $('#myModal').modal('show')
 
@@ -387,6 +431,15 @@
                                 this
                                     .columns(0)
                                     .search("PREVISTO")
+                                    .draw();
+                            }
+                        },
+                        {
+                            text: 'DRE',
+                            action: function() {
+                                this
+                                    .columns(0)
+                                    .search("DRE")
                                     .draw();
                             }
                         },
