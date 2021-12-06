@@ -285,7 +285,7 @@ class LancamentosController extends AppController
         ]);
         $saidas = $this->Lancamentos->Subcontas->find('list', [
             'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
-            'conditions' => ['Grupos.grupo' => 'saida'],
+            'conditions' => ['Grupos.grupo' => 'saida', 'id_subconta IS NOT' => 10],
         ]);
         $subcontas = $this->Lancamentos->Subcontas->Contas->Subgrupos->Grupos->find('list', ['limit' => 200]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
