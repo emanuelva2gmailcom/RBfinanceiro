@@ -142,10 +142,10 @@
 
              <div id="test-l-4" class="bssteppercontentContent content">
                  <div class="panel-body">
-                     <div class="fornecedor form-group">
+                     <div class="fornecedor form-group fornecedor">
                          <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
                      </div>
-                     <div class="cliente form-group">
+                     <div class="cliente form-group cliente">
                          <?= $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => 'SELECIONE']); ?>
                      </div>
                      <div class="form-group">
@@ -370,6 +370,8 @@
 
              $('.entradas').addClass('d-none')
              $('.tudo').addClass('d-none')
+             $('.fornecedor').removeClass('d-none')
+             $('.cliente').addClass('d-none')
 
              $('.saidas').attr('id', 'subconta_id').attr('name', 'subconta_id')
 
@@ -378,6 +380,9 @@
 
              $('.saidas').addClass('d-none')
              $('.tudo').addClass('d-none')
+             $('.cliente').removeClass('d-none')
+             $('.fornecedor').addClass('d-none')
+
              $('.entradas').attr('id', 'subconta_id').attr('name', 'subconta_id')
          } else {
              $('.tudo').removeClass('d-none')
@@ -410,7 +415,6 @@
          }
      })
 
-     var cont = 0;
      // FUNÇÂO AUXILIAR
 
 

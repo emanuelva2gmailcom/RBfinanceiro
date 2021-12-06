@@ -34,6 +34,12 @@
                      <span class="bs-stepper-circle">3</span>
                  </button>
              </div>
+             <div class="lineADD line"></div>
+             <div class="step" data-target="#test-l-4">
+                 <button type="button" class="btn step-trigger">
+                     <span class="bs-stepper-circle">4</span>
+                 </button>
+             </div>
          </div>
          <div class="bssteppercontentADD bs-stepper-content">
              <?= $this->Form->create($lancamento, ['type' => 'file', 'id' => 'teste']) ?>
@@ -136,6 +142,20 @@
                          <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE']); ?>
                          <span class="Campo-Obrigatorio1"></span>
                      </div> -->
+                 </div>
+                 <div class="d-flex justify-content-between">
+                     <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
+                     <div id="Card3-Proximo" class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
+                 </div>
+             </div>
+             <div id="test-l-4" class="bssteppercontentContent content">
+                 <div class="panel-body">
+                     <div class="fornecedor form-group fornecedor">
+                         <?= $this->Form->control('fornecedor_id', ['options' => $fornecedores, 'empty' => 'SELECIONE']); ?>
+                     </div>
+                     <div class="cliente form-group cliente">
+                         <?= $this->Form->control('cliente_id', ['options' => $clientes, 'empty' => 'SELECIONE']); ?>
+                     </div>
                      <div class="form-group">
                          <?= $this->Form->control('Comprovante', ['type' => 'file'], ['class' => 'file']); ?>
                      </div>
@@ -146,7 +166,7 @@
                      </div>
                      <div>
                          <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
-                         <?= $this->Form->button(__('Salvar'), ['id' => 'bora']) ?>
+                         <?= $this->Form->button(__('Salvar', ['class' => 'btn pull-right'], ['id' => 'bora'])) ?>
                      </div>
                  </div>
              </div>
@@ -176,36 +196,10 @@
      $('document').ready(function() {
          $('#Card1-Proximo').removeAttr('onclick')
          $('#Card2-Proximo').removeAttr('onclick')
+         $('#Card3-Proximo').removeAttr('onclick')
      })
 
-     $('form').submit(function() {
-         var inputs = [
-             [$(".variaveis option:selected").text(), $('.variaveis').is(":hidden")],
-             [$(".fixos option:selected").text(), $('.fixos').is(":hidden")],
-             [$(".receitas option:selected").text(), $('.receitas').is(":hidden")]
-         ];
-         var grupo = $("#grupo-id option:selected").text();
-         var cont = 0;
-         inputs.forEach(function(input, index) {
-             if (input[0] == "SELECIONE") {
-                 cont++
-                 if (input[0] == "SELECIONE" && input[1] == false) {
-                     $('.Campo-Obrigatorio0' + index).text('Campo Obrigatório')
 
-                 }
-             }
-         });
-         if (grupo == 'SELECIONE') {
-             $('.CampoGrupo').text('Campo Obrigatório')
-         }
-         if (cont < 3 && grupo != 'SELECIONE') {
-             $(this).unbind('submit').submit()
-
-         } else {
-             event.preventDefault();
-         }
-
-     })
 
      function conta(index) {
          $('.Campo-Obrigatorio0' + index).text(' ')
@@ -232,6 +226,8 @@
              $('.fixos').addClass('d-none')
              $('.receitas').addClass('d-none')
              $('.tudo').addClass('d-none')
+             $('.fornecedor').removeClass('d-none')
+             $('.cliente').addClass('d-none')
 
              $('.variaveis').attr('id', 'subconta_id').attr('name', 'subconta_id')
 
@@ -241,6 +237,9 @@
              $('.variaveis').addClass('d-none')
              $('.receitas').addClass('d-none')
              $('.tudo').addClass('d-none')
+             $('.fornecedor').removeClass('d-none')
+             $('.cliente').addClass('d-none')
+
              $('.fixos').attr('id', 'subconta_id').attr('name', 'subconta_id')
          } else if (grupo == 'Receitas') {
              $('.receitas').removeClass('d-none')
@@ -248,6 +247,8 @@
              $('.variaveis').addClass('d-none')
              $('.fixos').addClass('d-none')
              $('.tudo').addClass('d-none')
+             $('.cliente').removeClass('d-none')
+             $('.fornecedor').addClass('d-none')
 
              $('.receitas').attr('id', 'subconta_id').attr('name', 'subconta_id')
 
@@ -353,4 +354,73 @@
          }
      }
      setInterval("auxiliar2()", 100)
+
+
+     $('#Card3-Proximo').click(function() {
+         console.log('tyrt')
+         var inputs = [
+             [$(".variaveis option:selected").text(), $('.variaveis').is(":hidden")],
+             [$(".fixos option:selected").text(), $('.fixos').is(":hidden")],
+             [$(".receitas option:selected").text(), $('.receitas').is(":hidden")]
+         ];
+         var grupo = $("#grupo-id option:selected").text();
+         var cont = 0;
+         inputs.forEach(function(input, index) {
+             if (input[0] == "SELECIONE") {
+                 cont++
+                 if (input[0] == "SELECIONE" && input[1] == false) {
+                     $('#Card3-Proximo').removeAttr('onclick')
+                     $('.Campo-Obrigatorio0' + index).text('Campo Obrigatório')
+
+                 }
+             }
+         });
+         if (grupo == 'SELECIONE') {
+             $('.CampoGrupo').text('Campo Obrigatório')
+         }
+     })
+     $('#grupo-id').change(function() {
+         console.log(this.value)
+         if (this.value != ' ') {
+             $('.Campo-Obrigatorio10').text(' ');
+         }
+     });
+
+
+     function conta(index) {
+         $('.Campo-Obrigatorio0' + index).text(' ')
+     }
+     $('.variaveis').change(function() {
+         conta(0)
+     })
+     $('.fixos').change(function() {
+         conta(1)
+     })
+     $('.receitas').change(function() {
+         conta(2)
+     })
+
+     function auxiliar3() {
+         var inputs = [
+             [$(".variaveis option:selected").text(), $('.variaveis').is(":hidden")],
+             [$(".fixos option:selected").text(), $('.fixos').is(":hidden")],
+             [$(".receitas option:selected").text(), $('.receitas').is(":hidden")]
+         ];
+         var grupo = $("#grupo-id option:selected").text();
+         var cont = 0;
+         inputs.forEach(function(input, index) {
+             if (input[0] == "SELECIONE") {
+                 cont++
+             }
+         });
+
+         if (cont < 3 && grupo != 'SELECIONE') {
+             $('#Card3-Proximo').attr('onclick', 'stepper1.next()');
+
+         } else {
+             $('#Card3-Proximo').removeAttr('onclick')
+         }
+
+     }
+     setInterval("auxiliar3()", 1000)
  </script>
