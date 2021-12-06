@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Karla&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 /* Elementos do Arodu:
 
          1. Aside*/
@@ -359,14 +360,20 @@
 
             .tdINDEX a {
                 color: #10564F;
+                /* font-family: 'Karla', sans-serif; */
+                font-family: 'Itim', cursive;
             }
 
             .theINDEX tr{
                 color: #047076;
+                /* font-family: 'Karla', sans-serif; */
+                font-family: 'Itim', cursive;
             }
 
             .tboINDEX{
                 color: #10564F;
+                /* font-family: 'Karla', sans-serif; */
+                font-family: 'Itim', cursive;
             }
 
             .dt-button{
