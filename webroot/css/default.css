@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+
 /* Elementos do Arodu:
 
          1. Aside*/
@@ -53,9 +55,29 @@
 
      /* 5. Sidebar */
 
+            #caixa{
+                font-family: 'Roboto Slab', serif;
+                font-size: 14px;
+            }
+
             .sidebarMenu .primeiro{
                 color:
                 #DBEBED;
+            }
+
+            .sidebarMenu .primeiro p{
+                font-family: 'Roboto Slab', serif;
+                font-size: 14px;
+            }
+
+            .sidebarMenu .segundo p{
+                font-family: 'Roboto Slab', serif;
+                font-size: 13px;
+            }
+
+            .sidebarMenu .terceiro p{
+                font-family: 'Roboto Slab', serif;
+                font-size: 12px;
             }
 
             .sidebarMenu .segundo{
