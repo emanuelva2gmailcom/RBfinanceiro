@@ -436,7 +436,6 @@
          conta(1)
      })
 
-
      function auxiliar3() {
          var inputs = [
              [$(".entradas option:selected").text(), $('.entradas').is(":hidden")],

@@ -406,6 +406,7 @@
              [$(".fixos option:selected").text(), $('.fixos').is(":hidden")],
              [$(".receitas option:selected").text(), $('.receitas').is(":hidden")]
          ];
+         
          var grupo = $("#grupo-id option:selected").text();
          var cont = 0;
          inputs.forEach(function(input, index) {
