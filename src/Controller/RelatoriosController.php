@@ -118,7 +118,7 @@ class RelatoriosController extends AppController
         $resposta = [];
         $ini = new Time($ini, 'UTC');
         $fim = new Time($fim, 'UTC');
-        while ($ini <= $fim) {
+        while ($ini->i18nFormat($periodo[0]) <= $fim->i18nFormat($periodo[0])) {
             array_push($resposta, $ini->i18nFormat($periodo[0]));
             $ini->modify($periodo[1]);
             // $ini->i18nFormat($periodo[0]) == $fim->i18nFormat($periodo[0]) ? array_push($resposta, $ini->i18nFormat($periodo[0])) : '';
@@ -186,7 +186,7 @@ class RelatoriosController extends AppController
         $lancamentos = $this->paginate($this->Lancamentos);
         $lancamentos = $this->Lancamentos->find('all', [
             'contain' => ['Subcontas' => [ 'Contas' => ['Subgrupos' => ['Grupos']]], 'Fornecedores', 'Clientes'],
-            'conditions' => [$renovados['simple']]
+            'conditions' => [$renovados['simple'], 'data_competencia IS NOT' => null]
         ]);
         if ($request[0] == $request[1]) {
             array_push($obj['header'], $request[0]->i18nFormat($periodo[0]));
@@ -337,7 +337,7 @@ class RelatoriosController extends AppController
         $lancamentos = $this->paginate($this->Lancamentos);
         $lancamentos = $this->Lancamentos->find('all', [
             'contain' => ['Subcontas' => [ 'Contas' => ['Subgrupos' => ['Grupos']]], 'Fornecedores', 'Clientes'],
-            'conditions' => [$renovados['simple']]
+            'conditions' => [$renovados['simple'], 'data_competencia IS NOT' => null]
         ]);
         $comeco = FrozenTime::now()
             ->day(1)
@@ -507,17 +507,38 @@ class RelatoriosController extends AppController
         $this->loadModel('Subcontas');
         $this->paginate = [
             'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
-            'conditions' => ['tipo' => $tipo, $renovados['simple']]
+            'conditions' => ['tipo' => $tipo, $renovados['simple'], $date.' IS NOT' => null]
         ];
         $lancamentos = $this->paginate($this->Lancamentos);
-        $comeco = FrozenTime::now();
-        $final = $comeco;
+
+        switch ($tipo) {
+            case 'REALIZADO':
+                $comeco = FrozenTime::now()->subMonth(1);
+                $final = $comeco;
+                $obj['header'] = $this->array_date($final, $comeco, $periodo);
+                foreach ($lancamentos as $lancamento) :
+                    if ($lancamento->$date <= $final) {
+                        $final = $lancamento->$date;
+                    }
+                endforeach;
+                break;
+
+            case 'PREVISTO':
+                $comeco = FrozenTime::now();
+                $final = $comeco;
+                $obj['header'] = $this->array_date($comeco, $final, $periodo);
+                foreach ($lancamentos as $lancamento) :
+                    if ($lancamento->$date >= $final) {
+                        $final = $lancamento->$date;
+                    }
+                endforeach;
+                break;
+        }
         foreach ($lancamentos as $lancamento) :
             if ($lancamento->$date <= $final) {
                 $final = $lancamento->$date;
             }
         endforeach;
-        $tipo == 'REALIZADO' ? $obj['header'] = $this->array_date($final, $comeco, $periodo) : $obj['header'] = $this->array_date($comeco, $final, $periodo);
         // debug([
         //     $comeco->i18nFormat($periodo[0]),
         //     $final->i18nFormat($periodo[0]),
@@ -598,7 +619,7 @@ class RelatoriosController extends AppController
 
     public function getFluxoDeCaixa()
     {
-        // $request = ['2021-11-12', '2022-01-12', 'mes'];
+        // $request = ['2021-11-12', '2022-01-11', 'mes'];
         $show = false;
         if ($this->request->is('get')) {
             $dia = ['dd-MM-yyyy', '+1 days', 'dia'];
@@ -646,6 +667,7 @@ class RelatoriosController extends AppController
                     break;
             }
             $obj['header'] = $this->array_date($request[0], $request[1], $periodo);
+
             $this->loadModel('Lancamentos');
             $this->loadModel('Subcontas');
             $lancamentos = $this->Lancamentos->find('all', [
@@ -668,7 +690,7 @@ class RelatoriosController extends AppController
                     }
                 }
             endforeach;
-            // debug($alllancamentos);exit;
+
 
             foreach ($obj['header'] as $data) :
                 $obj['total']['entradas'][$data] = 0;
@@ -718,7 +740,7 @@ class RelatoriosController extends AppController
             $obj['total']['saidas'] = array_values($obj['total']['saidas']);
 
             $obj['header'] = $this->formatterheader($obj['header'], $periodo[2]);
-
+            // debug([$obj, $request]);exit;
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([$show, $obj, $request]));
             return $this->response;
@@ -731,7 +753,7 @@ class RelatoriosController extends AppController
 
     public function getGerencial()
     {
-        // $request = ['2021-11-12', '2021-11-20', 'mes'];
+        // $request = ['2021-11-12', '2022-02-12', 'mes'];
         $show = false;
         if ($this->request->is('get')) {
             $mes = ['yyyy-MM', '+1 months','mes'];
@@ -778,11 +800,12 @@ class RelatoriosController extends AppController
                     break;
             }
             $obj['header'] = $this->array_date($request[0], $request[1], $periodo);
+
             $this->loadModel('Lancamentos');
             $this->loadModel('Subcontas');
             $lancamentos = $this->Lancamentos->find('all', [
                 'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
-                'conditions' => ['tipo' => 'REALIZADO', $renovados['simple']]
+                'conditions' => ['tipo' => 'REALIZADO', $renovados['simple'], 'data_baixa IS NOT' => null]
             ]);
             $obj['total']['inicial'] = [$this->total_before($request[0], $lancamentos, 'data_baixa')];
             $contas = [];
@@ -849,6 +872,7 @@ class RelatoriosController extends AppController
             $obj['total']['entradas'] = array_values($obj['total']['entradas']);
             $obj['total']['saidas'] = array_values($obj['total']['saidas']);
             $obj['header'] = $this->formatterheader($obj['header'], $periodo[2]);
+            // debug([$obj['header'], $request]);exit;
             $this->response = $this->response->withType('application/json')
                 ->withStringBody(json_encode([$show, $obj, $request]));
             return $this->response;

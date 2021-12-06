@@ -279,28 +279,21 @@ class LancamentosController extends AppController
         }
 
 
-        // $variaveis = $this->Lancamentos->Drecontas->find('list', [
-        //     'contain' => ['Dregrupos'],
-        //     'conditions' => ['Dregrupos.grupo' => 'variavel'],
-        // ]);
-
-        // $fixos = $this->Lancamentos->Drecontas->find('list', [
-        //     'contain' => ['Dregrupos'],
-        //     'conditions' => ['Dregrupos.grupo' => 'fixo'],
-        // ]);
-
-        // $receitas = $this->Lancamentos->Drecontas->find('list', [
-        //     'contain' => ['Dregrupos'],
-        //     'conditions' => ['Dregrupos.grupo' => 'receita'],
-        // ]);
-
+        $entradas = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'conditions' => ['Grupos.grupo' => 'entrada'],
+        ]);
+        $saidas = $this->Lancamentos->Subcontas->find('list', [
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'conditions' => ['Grupos.grupo' => 'saida'],
+        ]);
+        $subcontas = $this->Lancamentos->Subcontas->Contas->Subgrupos->Grupos->find('list', ['limit' => 200]);
         $fornecedores = $this->Lancamentos->Fornecedores->find('list', ['limit' => 200]);
         $clientes = $this->Lancamentos->Clientes->find('list', ['limit' => 200]);
         $subcontas = $this->Lancamentos->Subcontas->find('list', ['limit' => 200]);
-        // $dregrupos = $this->Lancamentos->Drecontas->Dregrupos->find('list', ['limit' => 200]);
         $Grupos = $this->Lancamentos->Subcontas->Contas->Subgrupos->Grupos->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
-        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos', 'entradas', 'saidas', 'todos'));
+        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos', 'entradas', 'saidas', 'subcontas'));
     }
     public function dre()
     {
@@ -331,6 +324,7 @@ class LancamentosController extends AppController
             $comprovantes->nome_arquivo = $nome;
 
             $request = $this->request->getData();
+            $request['tipo'] = 'DRE';
             $lancamento = $this->Lancamentos->patchEntity($lancamento, $request);
 
             if (($this->Lancamentos->save($lancamento))) {
@@ -340,17 +334,13 @@ class LancamentosController extends AppController
                 return $this->redirect(['action' => 'add']);
             }
 
-            if ($lancamento->tipo == 'REALIZADO') {
-                if ($name != null) {
-                    if (($this->Comprovantes->save($comprovantes))) {
-                        $this->Flash->success(__('Lançamento adicionado com sucesso'));
-                    }
-                } else {
-
+            if ($name != null) {
+                if (($this->Comprovantes->save($comprovantes))) {
+                    $this->Flash->success(__('Lançamento adicionado com sucesso'));
                     return $this->redirect(['action' => 'modal']);
                 }
             } else {
-
+                $this->Flash->success(__('Lançamento adicionado com sucesso'));
                 return $this->redirect(['action' => 'modal']);
             }
 
@@ -364,7 +354,7 @@ class LancamentosController extends AppController
         ]);
 
         $fixos = $this->Lancamentos->Subcontas->find('list', [
-             'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
+            'contain' => ['Contas' => ['Subgrupos' => ['Grupos']]],
             'conditions' => ['Subgrupos.subgrupo' => 'Gastos Fixos'],
         ]);
 
@@ -379,7 +369,7 @@ class LancamentosController extends AppController
         // $dregrupos = $this->Lancamentos->Drecontas->Dregrupos->find('list', ['limit' => 200]);
         $Grupos = $this->Lancamentos->Subcontas->Contas->Subgrupos->find('list', ['limit' => 200]);
         $grupos = ['PREVISTO', 'REALIZADO'];
-        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos','variaveis','fixos','receitas'));
+        $this->set(compact('lancamento', 'fornecedores', 'clientes', 'grupos', 'subcontas', 'Grupos', 'variaveis', 'fixos', 'receitas'));
     }
 
     /**

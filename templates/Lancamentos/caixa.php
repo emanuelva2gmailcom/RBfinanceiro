@@ -94,11 +94,46 @@
                          <?= $this->Form->control('grupo_id', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']); ?>
                          <span class="Campo-Obrigatorio10"></span>
                      </div>
-                     <div class="form-group">
-                         <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE']); ?>
-                         <span class="Campo-Obrigatorio11"></span>
+                     <div class="form-group select">
+                         <label for="" class="entradas d-none">Conta</label>
+                         <select name="" class="entradas form-control d-none" id="">
+                             <option>SELECIONE</option>
+                             <?php
+                                foreach ($entradas as $e => $entrada) :
+                                ?>
+                                 <option value=<?= $e ?>><?= $entrada ?></option>
+                             <?php endforeach; ?>
+                         </select>
+                         <span class="Campo-Obrigatorio00"></span>
+                     </div>
+                     <div class="form-group select">
+                         <label for="" class="saidas d-none">Conta</label>
+                         <select name="" class="saidas form-control d-none" id="">
+                             <option>SELECIONE</option>
+                             <?php
+                                foreach ($saidas as $s => $saida) :
+                                ?>
+                                 <option value=<?= $s ?>><?= $saida ?></option>
+                             <?php endforeach; ?>
+                         </select>
+                         <span class="Campo-Obrigatorio01"></span>
+                     </div>
+                     <div class="form-group select">
+                         <label for="" class="tudo">Conta</label>
+                         <select name="" class="tudo form-control" id="">
+                             <option>SELECIONE</option>
+                             <?php
+                                foreach ($subcontas as $s => $subconta) :
+                                ?>
+                                 <option value=<?= $s ?>><?= $subconta ?></option>
+                             <?php endforeach; ?>
+                         </select>
                      </div>
                  </div>
+                 <!-- <div class="form-group">
+                  <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE']); ?>
+                         <span class="Campo-Obrigatorio1"></span>
+                     </div> -->
                  <div class="d-flex justify-content-between">
                      <div class="prox-antADD btn" onclick="stepper1.previous()">Voltar</div>
                      <div id="Card3-Proximo" class="prox-antADD btn" onclick="stepper1.next()">Próximo</div>
@@ -323,48 +358,101 @@
      //---------------- Código de Barramento do Terceiro STEP----------------------
      // >>>>>>>>>>Campos de  GRUPO e CONTA<<<<<<<<<<<<<<<<<<
 
-     $('#Card3-Proximo').click(function() {
-         var inputs = [$("#grupo-id option:selected").text(), $("#subconta-id option:selected").text()];
+     $('#grupo-id').change(function() {
+         $('.CampoGrupo').text(' ');
+         var inputs = [$(".entradas option:selected").text(), $(".saidas option:selected").text()];
          inputs.forEach(function(input, index) {
-             if (input == "SELECIONE") {
-                 $('.Campo-Obrigatorio1' + index).text('Campo Obrigatório');
-             } else {
-                 $('.Campo-Obrigatorio1' + index).text(' ');
+             $('.Campo-Obrigatorio0' + index).text(' ')
+         })
+         var grupo = $("#grupo-id option:selected").text()
+         if (grupo == 'saida') {
+             $('.saidas').removeClass('d-none')
+
+             $('.entradas').addClass('d-none')
+             $('.tudo').addClass('d-none')
+
+             $('.saidas').attr('id', 'subconta_id').attr('name', 'subconta_id')
+
+         } else if (grupo == 'entrada') {
+             $('.entradas').removeClass('d-none')
+
+             $('.saidas').addClass('d-none')
+             $('.tudo').addClass('d-none')
+             $('.entradas').attr('id', 'subconta_id').attr('name', 'subconta_id')
+         } else {
+             $('.tudo').removeClass('d-none')
+
+             $('.saidas').addClass('d-none')
+             $('.entradas').addClass('d-none')
+         }
+     })
+
+     $('#Card3-Proximo').click(function() {
+
+         var inputs = [
+             [$(".entradas option:selected").text(), $('.entradas').is(":hidden")],
+             [$(".saidas option:selected").text(), $('.saidas').is(":hidden")],
+         ];
+         var grupo = $("#grupo-id option:selected").text();
+         var cont = 0;
+         inputs.forEach(function(input, index) {
+             if (input[0] == "SELECIONE") {
+                 cont++
+                 if (input[0] == "SELECIONE" && input[1] == false) {
+                     $('#Card3-Proximo').removeAttr('onclick')
+                     $('.Campo-Obrigatorio0' + index).text('Campo Obrigatório')
+
+                 }
              }
          });
+         if (grupo == 'SELECIONE') {
+             $('.Campo-Obrigatorio10').text('Campo Obrigatório')
+         }
      })
 
      var cont = 0;
      // FUNÇÂO AUXILIAR
 
-     function campo(span, index) {
-         if (span > 0) {
-             cont++;
-             $('.Campo-Obrigatorio1' + index).text(' ');
-         }
-         if (cont > 1 && span > 0) {
-             $('#Card3-Proximo').attr('onclick', 'stepper1.next()');
-         }
-     }
+
      $('#grupo-id').change(function() {
-         campo(this.value, 0)
+         console.log(this.value)
+         if (this.value != ' ') {
+             $('.Campo-Obrigatorio10').text(' ');
+         }
      });
-     $('#subconta-id').change(function() {
-         campo(this.value, 1)
-     });
+
+
+     function conta(index) {
+         $('.Campo-Obrigatorio0' + index).text(' ')
+     }
+     $('.entradas').change(function() {
+         conta(0)
+     })
+     $('.saidas').change(function() {
+         conta(1)
+     })
+
 
      function auxiliar3() {
-         var grupo = $("#grupo-id option:selected").text()
-         var subconta = $("#subconta-id option:selected").text();
+         var inputs = [
+             [$(".entradas option:selected").text(), $('.entradas').is(":hidden")],
+             [$(".saidas option:selected").text(), $('.saidas').is(":hidden")],
+         ];
+         var grupo = $("#grupo-id option:selected").text();
+         var cont = 0;
+         inputs.forEach(function(input, index) {
+             if (input[0] == "SELECIONE") {
+                 cont++
+             }
+         });
 
-         if ((grupo != "SELECIONE") && (subconta != "SELECIONE")) {
+         if (cont < 2 && grupo != 'SELECIONE') {
              $('#Card3-Proximo').attr('onclick', 'stepper1.next()');
+
          } else {
              $('#Card3-Proximo').removeAttr('onclick')
-
          }
-
 
      }
      setInterval("auxiliar3()", 1000)
- </script> -->
+ </script>

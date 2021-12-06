@@ -6,7 +6,7 @@
  */
 ?>
 
-<div class="card cardRELATORIOS">
+<div class="card cardRELATORIOS" id="teste">
     <div class="card-header">
         <?= $this->Form->create([], ['id' => 'form', 'class' => 'row']) ?>
         <div class="formgroupPAINEL col-md-3">
@@ -17,7 +17,7 @@
         </div>
         <div class="formgroupPAINEL col-md-3">
             <label>Período</label>
-            <?= $this->Form->select(2, ['MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'periodo form-control select2bs4']); ?>
+            <?= $this->Form->select(2, ['mes' => 'MÊS', 'ano' => 'ANO', 'dia' => 'DIA'], ['class' => 'periodo form-control select2bs4']); ?>
         </div>
         <div class="formgroupPAINEL col-md-3">
             <label>Enviar</label>
@@ -164,6 +164,7 @@
                     }
                 }).then(function(response) { // handle success
                     console.log(response.data)
+                    // document.getElementById('teste').innerHTML = response.data
                     $("#example").DataTable().destroy();
                     $("#example").empty()
                     formatador(response.data[1])

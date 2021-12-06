@@ -88,24 +88,22 @@ class AppController extends Controller
 
     public function formatterheader($header, $periodo)
     {
-        $resposta = [];
-        foreach($header as $h){
+        foreach($header as $i => $h){
             $h = new FrozenTime($h, 'UTC');
-            // debug('aaa');exit;
             switch ($periodo) {
                 case 'mes':
-                    array_push($resposta, $h->i18nFormat('MMM/yyyy'));
+                    $header[$i] = $h->i18nFormat('MMM/yyyy');
                 break;
 
                 case 'dia':
-                    array_push($resposta, $h->i18nFormat('dd/MMM/yyyy'));
+                    $header[$i] = $h->i18nFormat('dd/MMM/yyyy');
                 break;
 
                 case 'ano':
-                    array_push($resposta, $h->i18nFormat('yyyy'));
+                    $header[$i] = $h->i18nFormat('yyyy');
                 break;
             }
         }
-        return $resposta;
+        return $header;
     }
 }

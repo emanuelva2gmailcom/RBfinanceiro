@@ -53,12 +53,12 @@
                  <div class="panel-body">
                      <div class="form-group">
                          <?= $this->Form->control('grupo_id', ['options' => $Grupos, 'empty' => 'SELECIONE', 'class' => 'grupo']); ?>
-                         <span class="Campo-Obrigatorio0"></span>
+                         <span class="CampoGrupo"></span>
                      </div>
 
                      <div class="form-group select">
                          <label for="" class="variaveis d-none">Conta</label>
-                         <select name="" class="variaveis form-control d-none" id="subconta-id">
+                         <select name="" class="variaveis form-control d-none" id="">
                              <option>SELECIONE</option>
                              <?php
                                 foreach ($variaveis as $v => $variavel) :
@@ -66,11 +66,11 @@
                                  <option value=<?= $v ?>><?= $variavel ?></option>
                              <?php endforeach; ?>
                          </select>
-                    
+                         <span class="variaveis Campo-Obrigatorio00"></span>
                      </div>
                      <div class="form-group select">
                          <label for="" class="fixos d-none">Conta</label>
-                         <select name="" class="fixos form-control d-none" id="subconta-id">
+                         <select name="" class="fixos form-control d-none" id="">
                              <option>SELECIONE</option>
                              <?php
                                 foreach ($fixos as $f => $fixo) :
@@ -78,13 +78,13 @@
                                  <option value=<?= $f ?>><?= $fixo ?></option>
                              <?php endforeach; ?>
                          </select>
+                         <span class="fixos Campo-Obrigatorio01"></span>
                      </div>
-
 
                  </div>
                  <div class="form-group select">
                      <label for="" class="receitas d-none">Conta</label>
-                     <select name="" class="receitas form-control d-none" id="subconta-id">
+                     <select name="" class="receitas form-control d-none" id="">
                          <option>SELECIONE</option>
                          <?php
                             foreach ($receitas as $r => $receita) :
@@ -92,10 +92,11 @@
                              <option value=<?= $r ?>><?= $receita ?></option>
                          <?php endforeach; ?>
                      </select>
+                     <span class="receitas Campo-Obrigatorio02"></span>
                  </div>
                  <div class="form-group select">
                      <label for="" class="tudo">Conta</label>
-                     <select name="" class="tudo form-control" id="subconta-id">
+                     <select name="" class="tudo form-control" id="">
                          <option>SELECIONE</option>
                          <?php
                             foreach ($subcontas as $s => $subconta) :
@@ -103,7 +104,7 @@
                              <option value=<?= $s ?>><?= $subconta ?></option>
                          <?php endforeach; ?>
                      </select>
-                     <span class="Campo-Obrigatorio1"></span>
+                     <!-- <span class="tudo Campo-Obrigatorio03"></span> -->
                      <!-- <div class="form-group">
                          <?= $this->Form->control('subconta_id', ['options' => $subcontas, 'empty' => 'SELECIONE']); ?>
                          <span class="Campo-Obrigatorio1"></span>
@@ -150,19 +151,52 @@
      })
 
      $('form').submit(function() {
-         var inputs = [$("#grupo-id option:selected").text(), $("#subconta-id option:selected").text()];
+         var inputs = [
+             [$(".variaveis option:selected").text(), $('.variaveis').is(":hidden")],
+             [$(".fixos option:selected").text(), $('.fixos').is(":hidden")],
+             [$(".receitas option:selected").text(), $('.receitas').is(":hidden")]
+         ];
+         var grupo = $("#grupo-id option:selected").text();
+         var cont = 0;
          inputs.forEach(function(input, index) {
-             if (input == "SELECIONE") {
-                 event.preventDefault();
-                 $('.Campo-Obrigatorio' + index).text('Campo Obrigatório');
-             } else {
-                 $(this).unbind('submit').submit()
+             if (input[0] == "SELECIONE") {
+                 cont++
+                 if (input[0] == "SELECIONE" && input[1] == false) {
+                     $('.Campo-Obrigatorio0' + index).text('Campo Obrigatório')
+
+                 }
              }
          });
+         if (grupo == 'SELECIONE') {
+             $('.CampoGrupo').text('Campo Obrigatório')
+         }
+         if (cont < 3 && grupo != 'SELECIONE') {
+             $(this).unbind('submit').submit()
+
+         } else {
+             event.preventDefault();
+         }
 
      })
+
+     function conta(index) {
+         $('.Campo-Obrigatorio0' + index).text(' ')
+     }
+     $('.variaveis').change(function() {
+         conta(0)
+     })
+     $('.fixos').change(function() {
+         conta(1)
+     })
+     $('.receitas').change(function() {
+         conta(2)
+     })
      $('#grupo-id').change(function() {
-         $('.Campo-Obrigatorio0').text(' ');
+         $('.CampoGrupo').text(' ');
+         var inputs = [$(".variaveis option:selected").text(), $(".fixos option:selected").text(), $(".receitas option:selected").text()];
+         inputs.forEach(function(input, index) {
+             $('.Campo-Obrigatorio0' + index).text(' ')
+         })
          var grupo = $("#grupo-id option:selected").text()
          if (grupo == 'Gastos Variáveis') {
              $('.variaveis').removeClass('d-none')
@@ -171,18 +205,24 @@
              $('.receitas').addClass('d-none')
              $('.tudo').addClass('d-none')
 
+             $('.variaveis').attr('id', 'subconta_id').attr('name', 'subconta_id')
+
          } else if (grupo == 'Gastos Fixos') {
              $('.fixos').removeClass('d-none')
 
              $('.variaveis').addClass('d-none')
              $('.receitas').addClass('d-none')
              $('.tudo').addClass('d-none')
+             $('.fixos').attr('id', 'subconta_id').attr('name', 'subconta_id')
          } else if (grupo == 'Receitas') {
              $('.receitas').removeClass('d-none')
 
              $('.variaveis').addClass('d-none')
              $('.fixos').addClass('d-none')
              $('.tudo').addClass('d-none')
+
+             $('.receitas').attr('id', 'subconta_id').attr('name', 'subconta_id')
+
          } else {
              $('.tudo').removeClass('d-none')
 
@@ -190,9 +230,6 @@
              $('.receitas').addClass('d-none')
              $('.fixos').addClass('d-none')
          }
-     })
-     $('#subconta-id').change(function() {
-         $('.Campo-Obrigatorio1').text(' ');
      })
      //---------------- Código de Barramento do Primeiro STEP----------------------
      // >>>>>>>>>>Campos VALOR <<<<<<<<<<<<<<<<<<
