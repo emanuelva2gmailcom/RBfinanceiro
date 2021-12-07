@@ -505,11 +505,10 @@ class RelatoriosController extends AppController
         ];
         $this->loadModel('Lancamentos');
         $this->loadModel('Subcontas');
-        $this->paginate = [
+        $lancamentos = $this->Lancamentos->find('all', [
             'contain' => ['Subcontas' => ['Contas' => ['Subgrupos' => 'Grupos']], 'Fornecedores', 'Clientes'],
             'conditions' => ['tipo' => $tipo, $renovados['simple'], $date.' IS NOT' => null]
-        ];
-        $lancamentos = $this->paginate($this->Lancamentos);
+        ]);
 
         switch ($tipo) {
             case 'REALIZADO':
@@ -619,7 +618,7 @@ class RelatoriosController extends AppController
 
     public function getFluxoDeCaixa()
     {
-        // $request = ['2021-11-12', '2022-01-11', 'mes'];
+        $request = ['2021-11-12', '2022-03-11', 'mes'];
         $show = false;
         if ($this->request->is('get')) {
             $dia = ['dd-MM-yyyy', '+1 days', 'dia'];

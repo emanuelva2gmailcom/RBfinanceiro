@@ -44,19 +44,15 @@
 
     function datase(data) {
         response = []
-        // data.total.entradas.push(data.total.entradas[0])
         data.total['entradas'].unshift('Entradas:')
         $($('#example').DataTable().row.add(data.total.entradas).draw()
             .node()).addClass('relatorioFC');
-        // response.push(data.total.entradas)
         data.rows.td.map(function(d) {
             if (data.rows.th['entradas'].includes(d[0])) {
-                // response.push(d)
                 $($('#example').DataTable().row.add(d).draw()
                     .node()).addClass('text-success');
             }
         })
-        // data.total.saidas.push(data.total.saidas[0])
         data.total['saidas'].unshift('Saidas:')
         $($('#example').DataTable().row.add(data.total.saidas).draw()
             .node()).addClass('relatorioFC');
@@ -156,7 +152,7 @@
             $comeco = $("#0").val()
             $final = $("#1").val()
             $periodo = $(".periodo").val()
-            console.log([$comeco, $final, $periodo])
+            // console.log([$comeco, $final, $periodo])
             try {
                 const response = axios.post('/relatorios/getFluxoDeCaixa/', [$comeco, $final, $periodo], {
                     headers: {
@@ -175,29 +171,13 @@
         })
         try {
             const response = axios.get('/relatorios/getFluxoDeCaixa/').then(function(response) { // handle success
-                console.log(response.data)
+                // console.log(response.data)
                 formatador(response.data[1])
             })
         } catch (error) {
             console.error(error);
         }
 
-        // $(".table").DataTable({
-        //     "paging": true,
-        //     "lengthChange": false,
-        //     "searching": true,
-        //     "ordering": false,
-        //     "info": true,
-        //     "autoWidth": false,
-        //     "responsive": true,
-        //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');;
-        // $("").DataTable({
-        //     "ordering": false,
-        //     "autoWidth": false,
-        //     "responsive": true,
-        //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        // }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');;
     });
 </script>
 
