@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Karla&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
 /* Elementos do Arodu:
 
          1. Aside*/
@@ -53,9 +57,29 @@
 
      /* 5. Sidebar */
 
+            #caixa{
+                font-family: 'Roboto Slab', serif;
+                font-size: 14px;
+            }
+
             .sidebarMenu .primeiro{
                 color:
                 #DBEBED;
+            }
+
+            .sidebarMenu .primeiro p{
+                font-family: 'Roboto Slab', serif;
+                font-size: 14px;
+            }
+
+            .sidebarMenu .segundo p{
+                font-family: 'Roboto Slab', serif;
+                font-size: 13px;
+            }
+
+            .sidebarMenu .terceiro p{
+                font-family: 'Roboto Slab', serif;
+                font-size: 12px;
             }
 
             .sidebarMenu .segundo{
@@ -337,14 +361,20 @@
 
             .tdINDEX a {
                 color: #10564F;
+                /* font-family: 'Karla', sans-serif; */
+                font-family: 'Itim', cursive;
             }
 
             .theINDEX tr{
                 color: #047076;
+                /* font-family: 'Karla', sans-serif; */
+                font-family: 'Itim', cursive;
             }
 
             .tboINDEX{
                 color: #10564F;
+                /* font-family: 'Karla', sans-serif; */
+                font-family: 'Itim', cursive;
             }
 
             .dt-button{
@@ -695,20 +725,47 @@
 
      /* 2.3 Relatorios: */
 
-     /* 2.3.1 Caixa Diário: */
+     /* 2.3.1 Caixa Diário & Relatorio Diario: */
+
+            .theCaixaDiario tr{
+                color: #DBEBED;
+            }
+
+            .tboCaixaDiario{
+                color: #DBEBED;
+            }
 
             .cardCaixaDiario{
-                border: #047076 solid 2px;
+                border: #DBEBED solid 2px;
                 border-radius: 20px;
+                background-color: #047076;
             }
 
             .cardheaderCaixaDiario i{
                 font-size: 25px;
-                color:#10564F;
+                color:#DBEBED;
             }
 
             @media (max-width: 620px) {
                 .cardCaixaDiario {
+                   position: absolute;
+                   margin-top: 80%;
+                   min-width: 90%;
+                }
+            }
+
+            .cardRelatorioDiario{
+                border: #047076 solid 2px;
+                border-radius: 20px;
+            }
+
+            .cardheaderRelatorioDiario i{
+                font-size: 25px;
+                color:#047076;
+            }
+
+            @media (max-width: 620px) {
+                .cardRelatorioDiario {
                    position: absolute;
                    margin-top: 80%;
                    min-width: 90%;

@@ -25,7 +25,7 @@
             <td><?= $this->Number->format($subconta->id_subconta) ?></td>
             <td><?= h($subconta->subconta) ?></td>
             <td><?= h($subconta->descricao) ?></td>
-            <td class="tdINDEX"><?= $subconta->has('conta') ? $this->Html->link($subconta->conta->id_conta, ['controller' => 'Contas', 'action' => 'view', $subconta->conta->id_conta]) : '' ?></td>
+            <td class="tdINDEX"><?= $subconta->has('conta') ? $this->Html->link($subconta->conta->conta, ['controller' => 'Contas', 'action' => 'view', $subconta->conta->id_conta]) : '' ?></td>
             <td class="actions">
             <div class="btn-group">
                 <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $subconta->id_subconta], ['class'=>'btn vis btn-xs btn-outline-primary', 'escape'=>false]) ?>

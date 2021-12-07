@@ -20,19 +20,27 @@
         <div class="perguntaLANCAMENTO mb-5 justify-content-center d-flex">
             <h2>O que deseja fazer agora?</h2>
         </div>
-        <div class="justify-content-around">
-            <a href="/Relatorios/index" class="ml-4 mr-5">
-                <button type="button" class="btn btn-lg botaoMODAL">Cancelar lançamento</button>
-            </a>
-            <a href="/Lancamentos/caixa" class="ml-4 mr-4">
-                <button type="button" class="btn btn-lg botaoMODAL">Relatorio de Caixa</button>
-            </a>
-            <a href="/Lancamentos/dre" class="ml-5 mr-4">
-                <button type="button" class="btn btn-lg botaoMODAL">Relatorio de Dre</button>
-            </a>
-            <a href="/Lancamentos/index" class="ml-5">
-                <button type="button" class="btn btn-lg botaoMODAL">Visualizar Lançamentos</button>
-            </a>
+        <div class="justify-content-center d-flex row">
+            <div class="col-lg-2">
+                <a href="/Relatorios/index">
+                    <button type="button" class="btn btn-lg botaoMODAL">Voltar para a Home</button>
+                </a>
+            </div>
+            <div class="col-lg-2">
+                <a href="/Lancamentos/caixa">
+                    <button type="button" class="btn btn-lg botaoMODAL">Relatório de Gestão de Caixa</button>
+                </a>
+            </div>
+            <div class="col-lg-2">
+                <a href="/Lancamentos/dre">
+                    <button type="button" class="btn btn-lg botaoMODAL">Relatório de DRE</button>
+                </a>
+            </div>
+            <div class="col-lg-2">
+                <a href="/Lancamentos/index">
+                    <button type="button" class="btn btn-lg botaoMODAL">Visualizar Lançamentos</button>
+                </a>
+            </div>
         </div>
       </div>
     </div>

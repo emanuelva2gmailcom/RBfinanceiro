@@ -1,9 +1,9 @@
 
 
 <div  class="container-fluid d-flex align-items-center justify-content-center p-5">
-<div class="cardCaixaDiario card card-outline container  p-5 "  >
+<div class="cardRelatorioDiario card card-outline container  p-5 "  >
 
-    <div class="cardheaderCaixaDiario card-header" >
+    <div class="cardheaderRelatorioDiario card-header" >
     <a href="/relatorios/exportCaixaDiario"><i class="fas fa-file-excel"></i></a>
     <div class="card-tools">
         <div class="input-group input-group-sm">
