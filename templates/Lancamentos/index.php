@@ -308,7 +308,7 @@
                         var Head = [];
                         var month = new Array(" ", "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
                         var result = []
-                        var teste = 0
+
                         for (var i = 0; i < Trs.length; i++) {
                             // console.log(Trs[i]['children'][7]['outerText'].split('/')[1] + ' / ' + Trs[i]['children'][7]['outerText'].split('/')[2])
                             if (Trs[i]['children'][0]['outerText'] == 'REALIZADO') {
@@ -317,10 +317,8 @@
                             } else if (Trs[i]['children'][0]['outerText'] == 'PREVISTO') {
                                 valorPrevisto += Number(Trs[i]['children'][1]['outerText'].replace('R$', ''))
                             } else if (Trs[i]['children'][0]['outerText'] == 'DRE') {
-
-                                teste = Number(Trs[i]['children'][1]['outerText'].replace('R$', ''))
                                 result[Trs[i]['children'][7]['outerText'].split('/')[1] + '/' + Trs[i]['children'][7]['outerText'].split('/')[2]] += Number(Trs[i]['children'][1]['outerText'].replace('R$', ''))
-                                console.log(result)
+                                
                             }
                             Head.push([month[Trs[i]['children'][7]['outerText'].split('/')[1].replace(/^0+/, '')] + ' / ' + Trs[i]['children'][7]['outerText'].split('/')[2]] + '  ')
 
@@ -328,6 +326,7 @@
 
 
                         // console.log(result)
+                        console.log(result)
 
                         Head = Head.filter((mes, i) => Head.indexOf(mes) === i);
 
