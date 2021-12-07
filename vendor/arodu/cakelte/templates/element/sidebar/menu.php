@@ -226,6 +226,12 @@ function caixa(is)
   </a>
   <ul class="nav nav-treeview">
     <li class="nav-item">
+      <a href="/relatorios/relatoriodiario" class="segundo nav-link">
+        <i class="segundo fas fa-file-invoice-dollar nav-icon"></i>
+        <p class="segundo">Relatório Diário</p>
+      </a>
+    </li>
+    <li class="nav-item">
       <a href="/relatorios/caixadiario" class="segundo nav-link">
         <i class="segundo fas fa-cash-register nav-icon"></i>
         <p class="segundo">Caixa Diário</p>
