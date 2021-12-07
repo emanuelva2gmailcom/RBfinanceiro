@@ -18,11 +18,11 @@
     <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
 
-        <thead class="theINDEX">
+        <thead class="theCaixaDiario">
             <?= $this->Html->tableHeaders(
                 ['Valor','Conta', 'Fornecedor', 'Cliente', 'Descrição'])?>
         </thead>
-        <tbody class="tboINDEX">
+        <tbody class="tboCaixaDiario">
             <?php foreach($lancamentos as $array):?>
                       <tr>
                     <?php if($array[0]<0){?>
