@@ -15,7 +15,7 @@
     <button type="button" class="btn btn-primary btn-lg btn-block">Relatorio de gestao de caixa</button>
     <button type="button" class="btn btn-secondary btn-lg btn-block">Relatorio de DRE</button>
 </div> -->
-<!-- <?= $this->Html->script('bs-stepper.min.js') ?>
+<!-- <?= $this->Html->script('bs-stepper.min.js'); ?>
 <div class="containerADD container p-5">
     <div id="stepper1" class="cardlancADD bs-stepper card">
         <div class="bsstepperheaderADD bs-stepper-header">
