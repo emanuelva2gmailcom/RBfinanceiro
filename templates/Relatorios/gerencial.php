@@ -47,21 +47,16 @@
 
     function datase(data) {
         response = []
-        console.log(data)
-        data.total.entradas.push(data.total.entradas[0])
-        data.total.entradas[0] = 'Entradas:'
+        data.total['entradas'].unshift('Entradas:')
         $($('#example').DataTable().row.add(data.total.entradas).draw()
             .node()).addClass('relatorioFC');
-        // response.push(data.total.entradas)
         data.rows.td.map(function(d) {
             if (data.rows.th['entradas'].includes(d[0])) {
-                // response.push(d)
                 $($('#example').DataTable().row.add(d).draw()
                     .node()).addClass('text-success');
             }
         })
-        data.total.saidas.push(data.total.saidas[0])
-        data.total.saidas[0] = 'Saidas:'
+        data.total['saidas'].unshift('Saidas:')
         $($('#example').DataTable().row.add(data.total.saidas).draw()
             .node()).addClass('relatorioFC');
         data.rows.td.map(function(d) {
@@ -86,7 +81,6 @@
         data['header'].unshift('Index')
         data['header'].push('Total')
         columns = []
-        //    inner = ''
         data['header'].map(function(dat, key) {
             if (key == 0) {
                 columns.push({
@@ -139,9 +133,9 @@
               exportOptions: {
                 orthogonal: 'export',
                 columns: function(column, data, node) {
-                  if (column > 7) {
-                    return false;
-                  }
+                //   if (column > 7) {
+                //     return false;
+                //   }
                   return true;
                 },
               }
@@ -162,7 +156,6 @@
             $comeco = $("#0").val()
             $final = $("#1").val()
             $periodo = $(".periodo").val()
-            console.log([$comeco, $final, $periodo])
             try {
                 const response = axios.post('/relatorios/getGerencial/', [$comeco, $final, $periodo], {
                     headers: {
@@ -185,21 +178,5 @@
             console.error(error);
         }
 
-        // $(".table").DataTable({
-        //     "paging": true,
-        //     "lengthChange": false,
-        //     "searching": true,
-        //     "ordering": false,
-        //     "info": true,
-        //     "autoWidth": false,
-        //     "responsive": true,
-        //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');;
-        // $("").DataTable({
-        //     "ordering": false,
-        //     "autoWidth": false,
-        //     "responsive": true,
-        //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        // }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');;
     });
 </script>

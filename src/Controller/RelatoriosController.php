@@ -121,7 +121,6 @@ class RelatoriosController extends AppController
         while ($ini->i18nFormat($periodo[0]) <= $fim->i18nFormat($periodo[0])) {
             array_push($resposta, $ini->i18nFormat($periodo[0]));
             $ini->modify($periodo[1]);
-            // $ini->i18nFormat($periodo[0]) == $fim->i18nFormat($periodo[0]) ? array_push($resposta, $ini->i18nFormat($periodo[0])) : '';
         }
         return $resposta;
     }
@@ -514,7 +513,7 @@ class RelatoriosController extends AppController
             case 'REALIZADO':
                 $comeco = FrozenTime::now()->subMonth(1);
                 $final = $comeco;
-                $obj['header'] = $this->array_date($final, $comeco, $periodo);
+                $obj['header'] = $this->array_date($comeco->i18nFormat($periodo[0]), $final->i18nFormat($periodo[0]), $periodo);
                 foreach ($lancamentos as $lancamento) :
                     if ($lancamento->$date <= $final) {
                         $final = $lancamento->$date;
@@ -525,7 +524,7 @@ class RelatoriosController extends AppController
             case 'PREVISTO':
                 $comeco = FrozenTime::now();
                 $final = $comeco;
-                $obj['header'] = $this->array_date($comeco, $final, $periodo);
+                $obj['header'] = $this->array_date($comeco->i18nFormat($periodo[0]), $final->i18nFormat($periodo[0]), $periodo);
                 foreach ($lancamentos as $lancamento) :
                     if ($lancamento->$date >= $final) {
                         $final = $lancamento->$date;
@@ -618,7 +617,7 @@ class RelatoriosController extends AppController
 
     public function getFluxoDeCaixa()
     {
-        $request = ['2021-11-12', '2022-03-11', 'mes'];
+        // $request = ['2021-11-30', '2022-03-30', 'mes'];
         $show = false;
         if ($this->request->is('get')) {
             $dia = ['dd-MM-yyyy', '+1 days', 'dia'];
@@ -654,6 +653,8 @@ class RelatoriosController extends AppController
             $mes = ['yyyy-MM', '+1 months','mes'];
             $ano = ['yyyy', '+1 years', 'ano'];
             $periodo = null;
+            $inicio = new Time($request[0], 'UTC');
+            $final = new Time($request[1], 'UTC');
             switch ($request[2]) {
                 case 'mes':
                     $periodo = $mes;
@@ -665,7 +666,7 @@ class RelatoriosController extends AppController
                     $periodo = $dia;
                     break;
             }
-            $obj['header'] = $this->array_date($request[0], $request[1], $periodo);
+            $obj['header'] = $this->array_date($inicio->i18nFormat($periodo[0]), $final->i18nFormat($periodo[0]), $periodo);
 
             $this->loadModel('Lancamentos');
             $this->loadModel('Subcontas');
@@ -786,6 +787,8 @@ class RelatoriosController extends AppController
             $dia = ['dd-MM-yyyy', '+1 days', 'dia'];
             $mes = ['yyyy-MM', '+1 months','mes'];
             $ano = ['yyyy', '+1 years', 'ano'];
+            $inicio = new Time($request[0], 'UTC');
+            $final = new Time($request[1], 'UTC');
             $periodo = null;
             switch ($request[2]) {
                 case 'mes':
@@ -798,7 +801,7 @@ class RelatoriosController extends AppController
                     $periodo = $dia;
                     break;
             }
-            $obj['header'] = $this->array_date($request[0], $request[1], $periodo);
+            $obj['header'] = $this->array_date($inicio->i18nFormat($periodo[0]), $final->i18nFormat($periodo[0]), $periodo);
 
             $this->loadModel('Lancamentos');
             $this->loadModel('Subcontas');

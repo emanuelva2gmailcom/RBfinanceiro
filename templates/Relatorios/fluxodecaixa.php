@@ -78,7 +78,6 @@
         data['header'].unshift('Index')
         data['header'].push('Total')
         columns = []
-        //    inner = ''
         data['header'].map(function(dat, key) {
             if (key == 0) {
                 columns.push({
@@ -130,9 +129,9 @@
               exportOptions: {
                 orthogonal: 'export',
                 columns: function(column, data, node) {
-                  if (column > 7) {
-                    return false;
-                  }
+                //   if (column > 7) {
+                //     return false;
+                //   }
                   return true;
                 },
               }
@@ -152,7 +151,6 @@
             $comeco = $("#0").val()
             $final = $("#1").val()
             $periodo = $(".periodo").val()
-            // console.log([$comeco, $final, $periodo])
             try {
                 const response = axios.post('/relatorios/getFluxoDeCaixa/', [$comeco, $final, $periodo], {
                     headers: {
