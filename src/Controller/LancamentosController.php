@@ -247,32 +247,27 @@ class LancamentosController extends AppController
                     $parcela = $this->Lancamentos->newEntity($request);
                     $parcela->data_vencimento = $parcela->data_vencimento->addMonth($request['parcela']);
                     if (($this->Lancamentos->save($parcela))) {
-                        $comprovantes->lancamento_id = $lancamento->id_lancamento;
+                        // $comprovantes->lancamento_id = $lancamento->id_lancamento;
                     } else {
                         $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
                         return $this->redirect(['action' => 'add']);
                     }
                 }
             } else {
-                if (($this->Lancamentos->save($lancamento))) {
-                    $comprovantes->lancamento_id = $lancamento->id_lancamento;
-                } else {
-                    $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
-                    return $this->redirect(['action' => 'add']);
-                }
-            }
-            if ($lancamento->tipo == 'REALIZADO') {
-                if ($name != null) {
-                    if (($this->Comprovantes->save($comprovantes))) {
-                        $this->Flash->success(__('Lançamento adicionado com sucesso'));
+                if ($lancamento->tipo == 'REALIZADO') {
+                    if (($this->Lancamentos->save($lancamento))) {
+                        $comprovantes->lancamento_id = $lancamento->id_lancamento;
+                        if ($name != null) {
+                            if (($this->Comprovantes->save($comprovantes))) {
+                                $this->Flash->success(__('Lançamento adicionado com sucesso'));
+                                return $this->redirect(['action' => 'modal']);
+                            }
+                        }
                     }
-                } else {
-
-                    return $this->redirect(['action' => 'modal']);
-                }
-            } else {
-
-                return $this->redirect(['action' => 'modal']);
+                    } else {
+                        $this->Flash->error(__('Ocorreu um erro ao criar as parcelas'));
+                        return $this->redirect(['action' => 'add']);
+                    }
             }
 
             $this->Flash->error(__('Lançamento não foi adicionado, por favor tente novamente.'));
